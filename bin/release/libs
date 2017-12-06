@@ -1,0 +1,61 @@
+/**
+ * Created by billy on 2016/11/30.
+ */
+var WEB_CONFIG = {
+	mode: ["debug", "testData"], //工作模式
+
+	path: {
+		domain: "{$host}",
+		assets: "{$domain}/assets",
+		data: "{$assets}/data",
+		images: "{$assets}/images"
+	},
+
+	url: {
+		domain: "",
+		server: "",
+		adminPage: ""
+	},
+
+	http: {
+		method: "post",
+		credentials:true,
+		req: {
+			result: {
+				name: "code",
+				type: "number",
+				success: 0
+			},
+			data: {
+				name: "data"
+			},
+			error: {
+				name: "code",
+				type: "number"
+			},
+			errorMsg: {
+				name: "msg",
+				type: "string"
+			}
+		}
+	},
+
+	file: {
+
+		staticData: "{$data}/staticData_502251033012128.data",
+
+	},
+
+	net: {
+		timeout: 5000
+	},
+
+	param: {
+		defaultLang: "cn",
+		loginExpires: 10 * 60,
+		auditRoleId: 5
+	}
+
+}
+
+var production = Object.create(null);
