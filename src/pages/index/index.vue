@@ -1,6 +1,5 @@
 <template>
 	<div class="wrap-page">
-		this is index page
 	</div>
 </template>
 
