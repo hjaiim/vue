@@ -1,5 +1,6 @@
 <template>
 	<div class="wrap-page">
+		<div class="header-wrap"></div>
 	</div>
 </template>
 
