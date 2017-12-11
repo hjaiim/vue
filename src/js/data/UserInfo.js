@@ -1,12 +1,20 @@
 /**
  * Created by billy on 2016/12/19.
  */
-var _id = "";  				// 用户Id
-var _account = "";    		//账号
-var _name = ""; 			//用户名
-var _pass = "";    		    //密码
-var _rights = [];    		//权限
-var _tel = "";      		//手机号
+
+var _id = "";
+var _token = "";
+var _username = "";
+var _phone = "";
+var _avatar = "";
+var _rightList = "";
+var _company = "";
+var _department = "";
+var _position = "";
+var _contact = "";
+var _email = "";
+var _isVerifyed = "";
+var _desc = "";
 
 export default class UserInfo {
 	constructor()
@@ -20,7 +28,7 @@ export default class UserInfo {
 	update($dObj)
 	{
 		$dObj.hasOwnProperty('id') && (_id = $dObj.id);
-		$dObj.hasOwnProperty('name') && (_name = $dObj.name);
+		$dObj.hasOwnProperty('username') && (_name = $dObj.username);
 		$dObj.hasOwnProperty('account') && (_account = $dObj.account);
 		$dObj.hasOwnProperty('pass') && (_pass = $dObj.pass);
 		$dObj.hasOwnProperty('rights') && (_rights = JSON.parse($dObj.rights));
@@ -47,10 +55,6 @@ export default class UserInfo {
 		return _pass;
 	}
 
-	set pass($data){
-		_pass = $data
-	}
-
 	get rights()
 	{
 		return _rights;
@@ -67,7 +71,7 @@ export default class UserInfo {
 		_account = "";
 		_name = "";
 		_pass = "";
-		_rights =[];
+		_rights = [];
 		_tel = "";
 	}
 }
