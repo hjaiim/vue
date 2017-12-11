@@ -20,9 +20,10 @@
 	  width: 350px;
 	  height: 24px;
 	  padding: 6px 0;
+	  font-size:14px;
 	  @include borderRadius(4px);
 	  &:focus {
-		border: 1px solid #a5a5a5;
+		border: 1px solid #999999;
 	  }
 	}
 	.input-wrap {
