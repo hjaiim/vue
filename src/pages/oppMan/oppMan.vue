@@ -20,9 +20,5 @@
 
 </script>
 <style type="text/css" lang="sass" rel="stylesheet/css">
-	div{
-		font-size:200px;
-		color: #000000;
-	}
 
 </style>

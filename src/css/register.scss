@@ -1,0 +1,88 @@
+.inner-register {
+  padding: 40px 0;
+  .register-tit {
+	font-size: 18px;
+	margin: 0 auto;
+	color: #000000;
+	text-align: center;
+	height: 30px;
+  }
+  .register-form {
+	p {
+	  height: 40px;
+	  line-height: 40px;
+	  color: #666666;
+	  font-size: 14px;
+	}
+	input {
+	  display: block;
+	  text-indent: 1em;
+	  width: 350px;
+	  height: 24px;
+	  padding: 6px 0;
+	  font-size:14px;
+	  @include borderRadius(4px);
+	  &:focus {
+		border: 1px solid #999999;
+	  }
+	}
+	.input-wrap {
+	  overflow: hidden;
+	  input {
+		float: left;
+		height: 24px;
+		padding: 6px 0;
+		width: 250px;
+	  }
+	  .send-btn {
+		height: 38px;
+		line-height: 38px;
+		text-align: center;
+		width: 70px;
+		background: #333333;
+		@include borderRadius(4px);
+		&:hover {
+		  background: #000000;
+		}
+	  }
+
+	}
+  }
+  .sure-btn {
+	margin: 25px auto 0;
+	width: 272px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	letter-spacing: 5px;
+	background: #01aaef;
+	color: #ffffff;
+	@include borderRadius(5px);
+	font-size: 16px;
+	&:hover {
+	  background: #0582b5;
+	}
+  }
+  .action-wrap {
+	width: 200px;
+	overflow: hidden;
+	margin: 25px auto 0;
+	span {
+	  height: 38px;
+	  line-height: 38px;
+	  text-align: center;
+	  width: 70px;
+	  background: #333333;
+	  @include borderRadius(4px);
+	  &:hover {
+		background: #000000;
+	  }
+	}
+	.register-btn {
+	  background: #01aaef;
+	  &:hover {
+		background: #0582b5;
+	  }
+	}
+  }
+}
