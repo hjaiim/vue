@@ -10,7 +10,7 @@
 		},
 		data(){
 			return {
-				g: g,
+				g: g
 
 			}
 		},
@@ -21,6 +21,18 @@
 			init(){
 
 			},
+			update()
+			{
+
+			},
+			render()
+			{
+
+			},
+			destroy()
+			{
+
+			}
 
 		}
 	}
