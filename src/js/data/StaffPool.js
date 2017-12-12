@@ -1,12 +1,63 @@
-/**
- * Created by Administrator on 2017/12/11.
- */
+var _list = [], _hash = {};
 export default class StaffPool {
 	constructor()
 	{
 
 	}
+
+	update($list)
+	{
+		if (!Array.isArray($list))
+		{
+			return;
+		}
+
+		for (var item of $list)
+		{
+			this.add(item);
+		}
+
+	}
+
+	add($item)
+	{
+		var itemData = createData($item);
+		if (!_hash[itemData.id])
+		{
+			_hash[itemData.id] = itemData;
+			_list.push(itemData);
+		}
+	}
+
+	remove($id)
+	{
+		if (_hash[$id])
+		{
+			var index = _list.indexOf(_hash[$id]);
+			if (index >= 0)
+			{
+				_list.splice(index, 1);
+			}
+		}
+	}
+
+	getDataById($id)
+	{
+		return _hash[$id]
+	}
+
+	get list()
+	{
+		return _list;
+	}
+
+	removeAll()
+	{
+		_list = [];
+		_hash = {};
+	}
 }
+
 
 function createData($dObj)
 {

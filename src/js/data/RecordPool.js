@@ -1,23 +1,18 @@
-/**
- * Created by Administrator on 2017/12/11.
- */
 var _list = [], _hash = {};
-var _total = 0, _totalPage = 1;
-export default class MessagePool {
+export default class RecordPool {
 	constructor()
 	{
 
 	}
 
-	update($dObj)
+	update($list)
 	{
-		if (!$dObj)
+		if (!Array.isArray($list))
 		{
 			return;
 		}
-		$dObj.hasOwnProperty("total") && (_total = $dObj.total);
-		$dObj.hasOwnProperty("totalPage") && (_totalPage = $dObj.totalPage);
-		for (var item of $dObj.data)
+
+		for (var item of $list)
 		{
 			this.add(item);
 		}
@@ -31,6 +26,7 @@ export default class MessagePool {
 		{
 			_hash[itemData.id] = itemData;
 			_list.push(itemData);
+			g.data.businessPool.addRecord(itemData.businessId, itemData);
 		}
 	}
 
@@ -42,6 +38,7 @@ export default class MessagePool {
 			if (index >= 0)
 			{
 				_list.splice(index, 1);
+				g.data.businessPool.removeRecord(itemData.businessId, itemData);
 			}
 		}
 	}
@@ -67,14 +64,15 @@ function createData($dObj)
 {
 	var d = {};
 	d.id = 0;
-	d.title = "";
-	d.source = "";
+	d.type = "";
+	d.formData = "";
+	d.attachList = [];
 	d.createTime = "";
-	d.desc = "";
+	d.isCurrAudit = "";
+	d.currAuditType = "";
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
-
 }
 
 function updateData($dObj)

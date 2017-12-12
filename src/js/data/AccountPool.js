@@ -6,6 +6,40 @@ export default class AccountPool {
 	{
 
 	}
+
+	update($dObj)
+	{
+		if (!$dObj)
+		{
+			return;
+		}
+
+	}
+
+	add()
+	{
+
+	}
+
+	remove()
+	{
+
+	}
+
+	getDataById()
+	{
+
+	}
+
+	get list()
+	{
+
+	}
+
+	removeAll()
+	{
+
+	}
 }
 
 function createData($dObj)
@@ -27,5 +61,12 @@ function createData($dObj)
 
 function updateData($dObj)
 {
-	$dObj.hasOwnProperty("id") && (this.id = $dObj.id)
+	$dObj.hasOwnProperty("id") && (this.id = $dObj.id);
+	$dObj.hasOwnProperty("id") && (this.name = $dObj.id);
+	$dObj.hasOwnProperty("id") && (this.company = $dObj.id);
+	$dObj.hasOwnProperty("id") && (this.department = $dObj.id);
+	$dObj.hasOwnProperty("id") && (this.position = $dObj.id);
+	$dObj.hasOwnProperty("id") && (this.dutyName = $dObj.id);
+	$dObj.hasOwnProperty("id") && (this.dutyType = $dObj.id);
+	$dObj.hasOwnProperty("id") && (this.role = $dObj.id);
 }

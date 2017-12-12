@@ -1,8 +1,7 @@
 /**
  * Created by Administrator on 2017/12/11.
  */
-var _list = [], _hash = {};
-export default class StaticRightPool {
+export default class DutyPool {
 	constructor()
 	{
 
@@ -29,6 +28,7 @@ export default class StaticRightPool {
 		{
 			_hash[itemData.id] = itemData;
 			_list.push(itemData);
+			g.data.departmentPool.addDuty(itemData.parentId, itemData).addDuty(itemData.parentId, itemData);
 		}
 	}
 
@@ -40,6 +40,7 @@ export default class StaticRightPool {
 			if (index >= 0)
 			{
 				_list.splice(index, 1);
+				g.data.departmentPool.removeDuty(itemData.parentId, itemData)
 			}
 		}
 	}
@@ -58,6 +59,8 @@ export default class StaticRightPool {
 	{
 		_list = [];
 		_hash = {};
+		_total = 0;
+		_totalPage = 1;
 	}
 }
 
@@ -65,19 +68,20 @@ function createData($dObj)
 {
 	var d = {};
 	d.id = 0;
-	d.parentId = 0;
 	d.name = "";
-	d.children = [];
+	d.parentId = 0;
+	d.companyId = 0;
+	d.creatorId = 0;
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
-
 }
 
 function updateData($dObj)
 {
-	$dObj.hasOwnProperty("id") && (this.id = $dObj.id);
-	$dObj.hasOwnProperty("parentId") && (this.parentId = $dObj.parentId);
-	$dObj.hasOwnProperty("name") && (this.name = $dObj.name);
-	$dObj.hasOwnProperty("children") && (this.children = $dObj.children);
+	$dObj.hasOwnProperty("dutyId") && (this.id = $dObj.dutyId);
+	$dObj.hasOwnProperty("dutyName") && (this.name = $dObj.dutyName);
+	$dObj.hasOwnProperty("companyId") && (this.companyId = $dObj.companyId);
+	$dObj.hasOwnProperty("departmentId") && (this.parentId = $dObj.departmentId);
+	$dObj.hasOwnProperty("creatorId") && (this.creatorId = $dObj.creatorId);
 }
