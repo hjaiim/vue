@@ -30,7 +30,6 @@ export var searchAccountPool = new AccountPool();
 export var searchBusinessPool = new BusinessPool();
 export var staffPool = new StaffPool();
 export var searchRolePool = new RolePool();
-
 export function initStaticData()
 {
 	var staticData = g.data.staticData;

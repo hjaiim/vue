@@ -205,7 +205,6 @@ canvas {
 html, body, h1, h2, h3, h4, h5, h6, div, dl, dt, dd, ul, ol, li, p, blockquote, pre, hr, figure, table, caption, th, td, form, fieldset, legend, input, button, textarea, menu {
   margin: 0;
   padding: 0;
-  color: #ffffff;
   -webkit-font-smoothing: antialiased;
 
 }
@@ -275,8 +274,9 @@ del, ins, u, s, a, a:hover {
 
 body, textarea, input, button, select, keygen, legend {
   font-size: 12px;
-  font-family: Microsoft YaHei, PingFang SC, Helvetica Neue, Helvetica, Arial, Hiragino Sans GB, Microsoft Yahei, \\5FAE\8F6F\96C5\9ED1, STHeiti, sans-serif
+  font-family: PingFang SC, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, Hiragino Sans GB, Microsoft Yahei, SimHei, \\5FAE\8F6F\96C5\9ED1, STHeiti, sans-serif
 }
-*{
-   -webkit-tap-highlight-color:rgba(0,0,0,0);
- }
+
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
