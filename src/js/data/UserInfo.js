@@ -2,19 +2,23 @@
  * Created by billy on 2016/12/19.
  */
 
-var _id = "";
-var _token = "";
+var _id = 0;
 var _username = "";
+var _name = "";
 var _phone = "";
-var _avatar = "";
-var _rightList = "";
-var _company = "";
-var _department = "";
-var _position = "";
+var _roleId = 0;
 var _contact = "";
 var _email = "";
-var _isVerifyed = "";
-var _desc = "";
+var _avatar = "";
+var _rightList = [];
+var _department = 0;
+var _company = 0;
+var _duty = 0;
+var _isVerified = false;
+var _remark = 0;
+var _idCartFront = "";
+var _idCartBack = "";
+var _workCard = "";
 
 export default class UserInfo {
 	constructor()
@@ -27,12 +31,23 @@ export default class UserInfo {
 	 */
 	update($dObj)
 	{
-		$dObj.hasOwnProperty('id') && (_id = $dObj.id);
-		$dObj.hasOwnProperty('username') && (_name = $dObj.username);
-		$dObj.hasOwnProperty('account') && (_account = $dObj.account);
-		$dObj.hasOwnProperty('pass') && (_pass = $dObj.pass);
-		$dObj.hasOwnProperty('rights') && (_rights = JSON.parse($dObj.rights));
-		$dObj.hasOwnProperty('tel') && (_tel = $dObj.tel);
+		$dObj.hasOwnProperty('userId') && (_id = $dObj.userId);
+		$dObj.hasOwnProperty('logon') && (_username = $dObj.logon);
+		$dObj.hasOwnProperty('name') && (_name = $dObj.name);
+		$dObj.hasOwnProperty('mobile') && (_phone = $dObj.mobile);
+		$dObj.hasOwnProperty('roleId') && (_roleId = $dObj.roleId);
+		$dObj.hasOwnProperty('telphone') && (_contact = $dObj.telphone);
+		$dObj.hasOwnProperty('email') && (_email = $dObj.email);
+		$dObj.hasOwnProperty('avatar') && (_avatar = $dObj.avatar);
+		$dObj.hasOwnProperty('permissionList') && (_rightList = $dObj.permissionList);
+		$dObj.hasOwnProperty('departmentId') && (_department = $dObj.departmentId);
+		$dObj.hasOwnProperty('companyId') && (_company = $dObj.companyId);
+		$dObj.hasOwnProperty('dutyId') && (_duty = $dObj.dutyId);
+		$dObj.hasOwnProperty('authStatus') && (_isVerified = $dObj.authStatus);
+		$dObj.hasOwnProperty('remark') && (_remark = $dObj.remark);
+		$dObj.hasOwnProperty('idcardImagA') && (_idCartFront = $dObj.idcardImagA);
+		$dObj.hasOwnProperty('idcardImagB') && (_idCartBack = $dObj.idcardImagB);
+		$dObj.hasOwnProperty('workCardImag') && (_workCard = $dObj.workCardImag);
 	}
 
 	get id()
@@ -40,38 +55,104 @@ export default class UserInfo {
 		return _id;
 	}
 
+	get username()
+	{
+		return _username;
+	}
+
 	get name()
 	{
 		return _name;
 	}
 
-	get account()
+	get phone()
 	{
-		return _account;
+		return _phone;
 	}
 
-	get pass()
+	get roleId()
 	{
-		return _pass;
+		return _roleId;
 	}
 
-	get rights()
+	get contact()
 	{
-		return _rights;
+		return _contact;
 	}
 
-	get tel()
+	get email()
 	{
-		return _tel;
+		return _email;
+	}
+
+	get avatar()
+	{
+		return _avatar;
+	}
+
+	get rightList()
+	{
+		return _rightList;
+	}
+
+	get department()
+	{
+		return _department;
+	}
+
+	get company()
+	{
+		return _company;
+	}
+
+	get duty()
+	{
+		return _duty;
+	}
+
+	get isVerified()
+	{
+		return _isVerified;
+	}
+
+	get remark()
+	{
+		return _remark;
+	}
+
+	get idCardFront()
+	{
+		return _idCartFront;
+	}
+
+	get _idCartBack()
+	{
+		return _idCartBack;
+	}
+
+	get workCard()
+	{
+		return _workCard;
 	}
 
 	removeAll()
 	{
-		_id = "";
-		_account = "";
+		_id = 0;
+		_username = "";
 		_name = "";
-		_pass = "";
-		_rights = [];
-		_tel = "";
+		_phone = "";
+		_roleId = 0;
+		_contact = "";
+		_email = "";
+		_avatar = "";
+		_rightList = [];
+		_department = 0;
+		_company = 0;
+		_duty = 0;
+		_isVerifyed = false;
+		_remark = 0;
+		_idCartFront = "";
+		_idCartBack = "";
+		_workCard = "";
 	}
 }
