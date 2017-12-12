@@ -1,47 +1,22 @@
 <template>
-	<div class="wrap-page register-wrap relative">
-		<div class="inner-register is-transformed">
-			<p class="register-tit">创客沃土</p>
-			<div class="form-wrap">
-				<div class="register-form">
-					<p>登录名:</p>
-					<input class="user-name border-gray-light ani-time" type="text" placeholder="请输入登录名：">
-				</div>
+	<div class="wrap-page relative">
+		<div class="login-wrap is-transformed gray-shadow resetPwd-wrap">
+			<p class="login-tit">找回密码</p>
+			<form-input :maxLength="11" placeholder="请输入登录名" type="text" v-model="account"></form-input>
+			<form-input type="text" v-model="phoneNum" placeholder="请输入您的手机号" errmsg="请输入正确的手机号"></form-input>
+			<div class="verify-wrap relative">
+				<form-input type="text" v-model="verifyCode" placeholder="请输入验证码" class="send-code"></form-input>
+				<span class="send-btn absolute pointer">获取验证码</span>
 			</div>
-			<div class="form-wrap">
-				<div class="register-form">
-					<p>手机号码:</p>
-					<input class="phone-num border-gray-light ani-time" type="text" placeholder="请输入手机号：">
-				</div>
-			</div>
-			<div class="form-wrap">
-				<div class="register-form">
-					<p>验证码:</p>
-					<div class="input-wrap">
-						<input class="verify-code border-gray-light ani-time" type="text" placeholder="请输入验证码：">
-						<span class="send-btn pointer right ani-time">验证码
-						</span>
-					</div>
-				</div>
-			</div>
-			<div class="form-wrap">
-				<div class="register-form">
-					<p>新密码:</p>
-					<input class="phone-num border-gray-light ani-time" type="password" placeholder="请输入密码：">
-				</div>
-			</div>
-			<div class="form-wrap">
-				<div class="register-form">
-					<p>重复密码:</p>
-					<input class="phone-num border-gray-light ani-time" type="password" placeholder="请再输入密码：">
-				</div>
-			</div>
-			<div class="sure-btn pointer ani-time">确定</div>
+			<form-input type="password" v-model="password" placeholder="请输入新密码"></form-input>
+			<form-input type="password" v-model="nextPsd" placeholder="请再次确认输入"></form-input>
+			<div class="pointer login-btn ani-time resetPwd-top">确定</div>
 		</div>
 	</div>
 </template>
 <script type="text/ecmascript-6">
 	import g from "../../global";
+	import FormInput from "../../components/formInput.vue"
 	export default{
 		created(){
 
@@ -49,12 +24,17 @@
 		data(){
 			return {
 				g: g,
+				account: '',
+				phoneNum: '',
+				password: '',
+				errorTip: "",
+				nextPsd: '',
+				verifyCode: ''
 			}
+		},
+		components: {
+			FormInput
 		},
 		methods: {}
 	}
 </script>
-<style type="text/css" lang="sass" rel="stylesheet/css" scoped>
-	@import "../../css/mixin.scss";
-	@import "../../css/register.scss";
-</style>

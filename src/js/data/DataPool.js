@@ -36,7 +36,6 @@ export var searchUnverifyPool = new UnverifyPool();
 export var searchRolePool = new RolePool();
 export var staffPool = new StaffPool();
 export var recordPool = new RecordPool();
-
 export function initStaticData()
 {
 	var staticData = g.data.staticData;

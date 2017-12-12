@@ -1,82 +1,93 @@
+.wrap-page {
+  background: #f4f4f4;
+}
+
 .login-wrap {
-  padding: 40px 0;
+  width: 500px;
+  height: 520px;
+  background: #ffffff;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
   .login-tit {
-	font-size: 18px;
+	color: #333333;
+	font-size: 29px;
 	margin: 0 auto;
-	color: #000000;
 	text-align: center;
-	height: 30px;
+	height: 88px;
+	line-height: 88px;
+	padding-top: 45px;
+	letter-spacing: 2px;
   }
-  .form-input {
-	margin-top: 25px;
-	img {
-	  left: 0;
-	  top: 0;
-	}
-	input {
-	  display: block;
-	  height: 26px;
-	  line-height: 26px;
-	  padding: 6px 0 6px 50px;
-	  width: 230px;
-	  border: 1px solid #dbdee7;
-	  -webkit-border-radius: 2px;
-	  -moz-border-radius: 2px;
-	  border-radius: 2px;
+  .link-forget {
+	width: 320px;
+	margin: 15px auto 22px;
+	a {
+	  padding: 3px 0px 2px 1px;
 	  font-size: 14px;
-	  caret-color: #999999;
-	  color: #000000;
 	}
   }
   .login-btn {
-	margin: 25px auto 0;
-	width: 272px;
-	height: 40px;
-	line-height: 40px;
+	margin: 0 auto;
+	width: 320px;
+	height: 42px;
+	line-height: 42px;
 	text-align: center;
 	letter-spacing: 5px;
-	background: #01aaef;
+	background: #ed5564;
 	color: #ffffff;
-	@include borderRadius(5px);
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 	font-size: 16px;
 	&:hover {
-	  background: #0582b5;
+	  background: #f5374a;
 	}
+  }
+  .resetPwd-top {
+	margin: 56px auto 0;
   }
   .link-keys {
-	overflow: hidden;
-	margin-top: 10px;
+	width: 320px;
+	text-align: center;
+	margin: 35px auto 0;
+	color: #4a4a4a;
 	a {
 	  font-size: 14px;
+	  padding: 5px;
 	  height: 20px;
-	  line-height: 20px;
-	  font-weight: 300;
-	  position: relative;
-	  color: #da3610;
-	  cursor: pointer;
-	  &:after {
-		width: 0;
-		content: "";
-		bottom: 0;
-		z-index: 99;
-		position: absolute;
-		left: 0;
-		height: 1px;
-		background: #ff4c3d;
-		-webkit-transition: all .3s;
-		-moz-transition: all .3s;
-		-ms-transition: all .3s;
-		-o-transition: all .3s;
-		transition: all .3s;
-	  }
+	  color: #61a4de;
 	  &:hover {
-		color: #ff0000;
-		&:after {
-		  width: 100%;
-		  background: #ff0000;
-
-		}
+		color: #1e7bcc;
 	  }
 	}
   }
+}
+
+.resetPwd-wrap {
+  width: 500px;
+  height: 626px;
+  .verify-wrap {
+	width: 320px;
+	margin: 0 auto;
+	.send-btn {
+	  right: 0;
+	  top: 26px;
+	  border-left: 1px solid #dbdee7;
+	  width: 120px;
+	  height: 40px;
+	  line-height: 40px;
+	  text-align: center;
+	  font-size: 14px;
+	  color: #61a4de;
+	  &:hover {
+		color: #1e7bcc;
+	  }
+	}
+  }
+}
+
+.register-wrap {
+  width: 500px;
+  height: 626px;
 }

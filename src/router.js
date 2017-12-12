@@ -9,7 +9,6 @@ import ResetPwd from "./pages/resetPwd/resetPwd.vue";	 // 重置密码
 import ResetPwdMain from "./pages/resetPwd/resetPwd";
 import Register from "./pages/register/register.vue";	 // 注册
 import RegisterMain from "./pages/register/register";
-
 import AccountMan from "./pages/accountMan/accountMan.vue"; // 账号管理
 import AccountManMain from "./pages/accountMan/accountMan";
 import UnverifyMan from "./pages/unverifyMan/unverifyMan.vue"; // 待认证列表
@@ -25,12 +24,12 @@ import OppApplyMain from "./pages/oppApply/oppApply";
 import OppMan from "./pages/oppMan/oppMan.vue";		 // 商机管理
 import OppManMain from "./pages/oppMan/oppMan";
 import Personal from "./pages/personal/personal.vue";	 // 个人中心
+import ModPwd from "./pages/modPsd/modPwd.vue";     //修改密码
 import PersonalMain from "./pages/personal/personal";
 import PositionMan from "./pages/positionMan/positionMan.vue";	 // 职位管理
 import PositionManMain from "./pages/positionMan/positionMan";
 import RoleMan from "./pages/roleMan/roleMan.vue";	 // 角色管理
 import RoleManMain from "./pages/roleMan/roleMan";
-
 
 export default [
 	{
@@ -107,9 +106,15 @@ export default [
 		preload: PersonalMain
 	},
 	{
+		path: '/modpwd',
+		name: "修改密码",
+		component: Personal,
+		preload: PersonalMain
+	},
+	{
 		path: '/positionman',
 		name: "职位管理",
-		component: PositionMan,
-		preload: PositionManMain
+		component: ModPwd,
+		preload: ModPwd
 	}
 ];

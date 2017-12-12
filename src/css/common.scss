@@ -1,5 +1,6 @@
 html, body, .view {
   min-height: 100%;
+  height: 100%;
 }
 
 input::-moz-placeholder {
@@ -96,6 +97,33 @@ input {
   color: #000000;
 }
 
+.draw-line {
+  position: relative;
+  cursor: pointer;
+  color: #61a4de;
+  &:after {
+	width: 0;
+	content: "";
+	bottom: 0;
+	z-index: 99;
+	position: absolute;
+	left: 0;
+	height: 1px;
+	background: #1e7bcc;
+	-webkit-transition: all .3s;
+	-moz-transition: all .3s;
+	-ms-transition: all .3s;
+	-o-transition: all .3s;
+	transition: all .3s;
+  }
+  &:hover {
+	color: #1e7bcc;
+	&:after {
+	  width: 100%;
+	}
+  }
+}
+
 .bg-overplay {
   background: rgba(0, 0, 0, .4);
 }
@@ -117,11 +145,17 @@ input {
 }
 
 .border-gray {
-  border: 1px solid #a5a5a5;
+  border: 1px solid #dddddd;
 }
 
 .border-gray-light {
   border: 1px solid #eaeaea;
+}
+
+.gray-shadow {
+  -moz-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
 }
 
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
@@ -224,7 +258,6 @@ input {
 	transform: translate3d(-50%, -100% 0);
   }
 }
-
 @-webkit-keyframes sideInTop-out {
   0% {
 	opacity: 1;
@@ -241,10 +274,7 @@ input {
 	transform: translate3d(-50%, -100% 0);
   }
 }
-
-.wrap-container {
-  width: 100%;
-  padding: 0;
+.clear {
   &:before {
 	display: table;
 	content: " ";
@@ -254,39 +284,6 @@ input {
 	content: " ";
 	clear: both;
   }
-  .top-header {
-	top: 0;
-	left: 0;
-	height: 58px;
-	width: 100%;
-  }
-  .left-col {
-	min-height: 100%;
-	width: 230px;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	padding: 58px 0 0 0;
-	display: -ms-flexbox;
-	display: flex;
-	left: 0;
-	top: 0;
-	z-index: 1;
-	background: #2A3F54;
-	.scroll-view {
-	  width: 230px;
-	}
-  }
-  .wrap-col {
-	background: #f7f7f7;
-	min-height: 100%;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	padding: 58px 0 0 230px;
-  }
-  .right-col {
-	min-height: 100%;
-  }
-
 }
+
+

@@ -1,54 +1,48 @@
 <template>
-	<div class="wrap-page register-wrap relative">
-		<div class="inner-register is-transformed">
-			<p class="register-tit">创客沃土注册</p>
-			<div class="form-wrap">
-				<div class="register-form">
-					<p>登录名:</p>
-					<input class="user-name border-gray-light ani-time" type="text" placeholder="请输入登录名：">
-				</div>
+	<div class="wrap-page relative">
+		<div class="login-wrap is-transformed gray-shadow register-wrap">
+			<p class="login-tit">注册</p>
+			<form-input :maxLength="11" placeholder="请输入登录名" type="text" v-model="account"></form-input>
+			<form-input :maxLength="11" placeholder="请输入姓名" type="text" v-model="nickName"></form-input>
+			<form-input type="password"
+						v-model="password" placeholder="请输入密码" errmsg="请输入正确的密码"></form-input>
+			<form-input type="password" v-model="nextPsd" placeholder="请再次确认输入"></form-input>
+			<div class="pointer login-btn resetPwd-top ani-time">注册</div>
+			<div class="link-keys ">已有账号？<router-link class="ani-time" tag="a" to="/login">登录>></router-link>
 			</div>
-			<div class="form-wrap">
-				<div class="register-form">
-					<p>姓名:</p>
-					<input class="phone-num border-gray-light ani-time" type="text" placeholder="请输入您的姓名：">
-				</div>
-			</div>
-			<div class="form-wrap">
-				<div class="register-form">
-					<p>密码:</p>
-					<input class="phone-num border-gray-light ani-time" type="password" placeholder="请输入密码：">
-				</div>
-			</div>
-			<div class="form-wrap">
-				<div class="register-form">
-					<p>重复密码:</p>
-					<input class="phone-num border-gray-light ani-time" type="password" placeholder="请再输入密码：">
-				</div>
-			</div>
-			<div class="action-wrap">
-				<span class="back-btn ani-time pointer left">返回</span>
-				<span class="register-btn ani-time pointer right">注册</span>
-			</div>
-
 		</div>
 	</div>
 </template>
 <script type="text/ecmascript-6">
-	import g from "../../global";
-	export default{
-		created(){
-
+	import g from './../../global';
+	import FormInput from "../../components/formInput.vue"
+	export default {
+		created()
+		{
+			this.init();
 		},
-		data(){
+		data()
+		{
 			return {
 				g: g,
+				account: '',
+				nickName: '',
+				password: '',
+				errorTip: "",
+				nextPsd: '',
 			}
 		},
-		methods: {}
+		watch: {},
+		components: {
+			FormInput
+		},
+		methods: {
+			init(){
+			}
+		}
+
 	}
 </script>
-<style type="text/css" lang="sass" rel="stylesheet/css" scoped>
-	@import "../../css/mixin.scss";
-	@import "../../css/register.scss";
+<style lang="sass" rel="stylesheet/scss" type="text/scss" scoped>
+
 </style>
