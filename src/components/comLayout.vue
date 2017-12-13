@@ -31,6 +31,7 @@
 				</div>
 			</div>
 			<div class="right-col">
+				<slot></slot>
 			</div>
 		</div>
 	</div>

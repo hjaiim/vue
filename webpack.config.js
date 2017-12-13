@@ -27,7 +27,7 @@ module.exports = {
 	devServer: {
 		historyApiFallback: true,
 		progress: true,
-		port: 8080,
+		port: 8085,
 		host: '0.0.0.0',
   		proxy: {
 //   			'/milky-tea/*': {
@@ -41,7 +41,7 @@ module.exports = {
 	entry: {
 		"index": [
 			'webpack/hot/dev-server',
-			'webpack-dev-server/client?http://' + localIp + ':8080',
+			'webpack-dev-server/client?http://' + localIp + ':8085',
 			'./main.js'
 		]
 	},
@@ -91,7 +91,7 @@ module.exports = {
 	devtool: '#eval-source-map',
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),
-		new OpenBrowserPlugin({url: 'http://' + localIp + ':8080'})
+		new OpenBrowserPlugin({url: 'http://' + localIp + ':8085'})
 	]
 }
 
