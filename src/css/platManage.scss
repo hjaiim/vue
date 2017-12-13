@@ -1,0 +1,74 @@
+.plat-wrap {
+  padding: 45px 0px 0 44px;
+  .action-btn {
+	background: #ed5564;
+	text-align: center;
+	color: #ffffff;
+	@include borderRadius(5px);
+	&:hover {
+	  background: #f5374a;
+	}
+  }
+  .add-btn {
+	@include wh(88px, 30px);
+	font-size: 13px;
+	text-align: center;
+	line-height: 30px;
+	vertical-align: middle;
+	@include boxSizing;
+  }
+  .search-btn{
+	height:30px;
+	line-height: 30px;
+	width: 58px;
+	text-align: center;
+	margin-left: 28px;
+  }
+  .cross-txt {
+	background: #ffffff;
+	height: 14px;
+	width: 4px;
+	@include wh(4px, 14px);
+	margin-right: 13px;
+	display: inline-block;
+	vertical-align: middle;
+	top: -3px;
+	&:after {
+	  background: #ffffff;
+	  content: "";
+	  @include wh(14px, 4px);
+	  left: -5px;
+	  position: absolute;
+	  top: 5px;
+	}
+
+  }
+  .search-wrap {
+	margin-left: 28px;
+	color: #404040;
+	font-size: 14px;
+	span {
+	  padding: 0 18px;
+	  height: 30px;
+	  line-height: 30px;
+	  text-align: center;
+	}
+	.search-bar {
+	  @include wh(149px, 30px);
+	  .search-name {
+		@include wh(130px, 18px);
+		padding: 5px 22px 5px 5px;
+		border: 1px solid #dedede;
+		@include borderRadius(5px);
+		&:focus {
+		  border: 1px solid #cccccc;
+		}
+	  }
+	  .close-btn {
+		right: -6px;
+		top: 5px;
+
+	  }
+	}
+  }
+}
