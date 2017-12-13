@@ -116,13 +116,13 @@ export default [
 	{
 		path: '/positionman',
 		name: "职位管理",
-		component: ModPwd,
-		preload: ModPwd
+		component: PositionMan,
+		preload: PositionManMain
 	},
 	{
 		path: '/roleman',
 		name: "角色管理",
 		component: RoleMan,
-		preload: ModPwd
+		preload: RoleManMain
 	}
 ];

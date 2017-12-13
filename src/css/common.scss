@@ -1,6 +1,7 @@
 html, body, .view {
   min-height: 100%;
   height: 100%;
+  min-width: 1200px;
 }
 
 input::-moz-placeholder {
@@ -147,6 +148,9 @@ input {
 .border-gray {
   border: 1px solid #dddddd;
 }
+.border-table{
+  border: 1px solid #efefef;
+}
 
 .border-gray-light {
   border: 1px solid #eaeaea;
@@ -258,6 +262,7 @@ input {
 	transform: translate3d(-50%, -100% 0);
   }
 }
+
 @-webkit-keyframes sideInTop-out {
   0% {
 	opacity: 1;
@@ -274,6 +279,7 @@ input {
 	transform: translate3d(-50%, -100% 0);
   }
 }
+
 .clear {
   &:before {
 	display: table;
