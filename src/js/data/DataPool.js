@@ -6,7 +6,6 @@ import UserInfo from "./UserInfo";
 import RightPool from "./RightPool";
 import LangPool from "./LangPool";
 import StaticNavPool from "./StaticNavPool";
-import StaticRightPool from "./StaticRightPool";
 import CompanyPool from "./CompanyPool";
 import MessagePool from "./MessagePool";
 import DepartmentPool from "./DepartmentPool";
@@ -26,7 +25,6 @@ export var companyPool = new CompanyPool();
 export var departmentPool = new DepartmentPool();
 export var dutyPool = new DutyPool();
 export var staticNavPool = new StaticNavPool(); //语言包数据池
-export var staticRightPool = new StaticRightPool();
 export var messagePool = new MessagePool();
 export var searchPositionPool = new PositionPool();
 export var searchCompanyPool = new CompanyPool();
@@ -41,7 +39,6 @@ export function initStaticData()
 	var staticData = g.data.staticData;
 	initLang(staticData);
 	staticNavPool.update(staticData["nav.json"]);
-	staticRightPool.update(staticData["right.json"]);
 }
 
 function initLang($staticData)
@@ -63,7 +60,6 @@ export function clearAll()
 	departmentPool.removeAll();
 	dutyPool.removeAll();
 	staticNavPool.removeAll();
-	staticRightPool.removeAll();
 	messagePool.removeAll();
 	searchPositionPool.removeAll();
 	searchCompanyPool.removeAll();

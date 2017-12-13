@@ -61,7 +61,7 @@ function createData($obj)
 	var d = {};
 	d.id = $obj.id;
 	d.name = $obj.name;
-	d.path = $obj.path;
 	d.highLightList = $obj.highLightList;
+	d.children = $obj.children;
 	return d;
 }

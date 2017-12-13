@@ -17,6 +17,12 @@
 		"path": "/verify",
 		"highLightList": ["/verify"],
 		"rightId":6
+	  },
+	  {
+		"name": "消息中心",
+		"path": "/message",
+		"highLightList": ["/message"],
+		"rightId":7
 	  }
 	]
   },
