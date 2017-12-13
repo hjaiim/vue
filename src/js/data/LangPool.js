@@ -1,56 +1,46 @@
-var _hash = {};
-var _list = [];
+/**
+ * Created by billy on 2016/12/20.
+ */
+var _currLang;
+var _list;
+var _hash
 export default class LangPool {
 	constructor()
 	{
-
+		_list = []; // {name:string; lang:string}[]
+		_hash = Object.create(null);
 	}
 
-	update($list)
+	init($langList)
 	{
-		for (var item of $list)
+		_list = $langList;
+		for (var item of _list)
 		{
-			this.add(item);
-		}
-
-	}
-
-	add($item)
-	{
-		var itemData = createData($item);
-		if (!_hash[itemData.id])
-		{
-			_hash[itemData.id] = itemData;
-			_list.push(itemData);
+			_hash[item.lang] = item;
 		}
 	}
 
-	getDataById($id)
+	setLang(langKey)
 	{
-		return _hash[$id];
+		if (_hash[langKey])
+		{
+			_currLang = langKey;
+		}
+	}
+
+	getDataBy(langKey)
+	{
+		return _hash[langKey];
+	}
+
+	get currLang()
+	{
+		return _currLang;
 	}
 
 	get list()
 	{
-		return _list;
-	}
-
-
-	removeAll()
-	{
-		_hash = {};  //brandId:{item}
-		_list = [];  //brandId:{item}
+		return _list.concat();
 	}
 }
-
-function createData($dObj)
-{
-	var d = {};
-	d.key = $dObj.key || '';
-	d.content = $dObj.content || '';
-	d.module = $dObj.module || '';
-	($dObj.module && $dObj.key) && (d.id = d.module + d.key);
-	return d;
-}
-
 

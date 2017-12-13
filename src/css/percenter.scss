@@ -4,40 +4,40 @@
     border-bottom: 1px solid #efefef;
   }
   .per-menu {
-    li {
-      height: 60px;
-      line-height: 60px;
-      margin-right: 50px;
-      font-size: 16px;
-      color: #7a7a7a;
-      &:after {
-        width: 0;
-        content: "";
-        bottom: -1px;
-        z-index: 99;
-        position: absolute;
-        left: 0;
-        height: 2px;
-        background: #ed5564;
-        -webkit-transition: all .3s;
-        -moz-transition: all .3s;
-        -ms-transition: all .3s;
-        -o-transition: all .3s;
-        transition: all .3s;
-      }
-      &:hover {
-        color: #000000;
-        &:after {
-          width: 100%;
-        }
-      }
-      &.high-active {
-        color: #000000;
-        &:after {
-          width: 100%;
-        }
-      }
-    }
+	li {
+	  height: 60px;
+	  line-height: 60px;
+	  margin-right: 50px;
+	  font-size: 16px;
+	  color: #7a7a7a;
+	  &:after {
+		width: 0;
+		content: "";
+		bottom: -1px;
+		z-index: 2;
+		position: absolute;
+		left: 0;
+		height: 2px;
+		background: #ed5564;
+		-webkit-transition: all .3s;
+		-moz-transition: all .3s;
+		-ms-transition: all .3s;
+		-o-transition: all .3s;
+		transition: all .3s;
+	  }
+	  &:hover {
+		color: #000000;
+		&:after {
+		  width: 100%;
+		}
+	  }
+	  &.high-active {
+		color: #000000;
+		&:after {
+		  width: 100%;
+		}
+	  }
+	}
   }
   .percenter-inner {
     .icon-collect {

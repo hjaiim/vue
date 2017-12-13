@@ -11,7 +11,7 @@ var _moveList = [];
 var _initList = [];
 var _key;
 _initList.push(initGlobal);
-// _initList.push(initStaticData);
+_initList.push(initStaticData);
 // _initList.push(initComponents);
 // _initList.push(initLogin);
 // _initList.push(initGlobalVariable);
