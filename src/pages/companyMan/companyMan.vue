@@ -1,5 +1,5 @@
 <template>
-	<com-layout>
+	<com-layout currPath="/companyman">
 		<div class="plat-wrap">
 			<div class="action-wrap clear">
 				<span class="add-btn action-btn ani-time left pointer">

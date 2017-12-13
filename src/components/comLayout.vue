@@ -2,13 +2,7 @@
 	<div class="wrap-page wrap-container clear">
 		<div class="header-wrap fixed">
 			<com-header></com-header>
-			<ul class="header-options clear">
-				<li class="left relative pointer ani-time"
-					:class="currId==item.id?'high-active':'' "
-					v-for="item in navList"
-					@click="onClick_navItem(item.id)">{{item.name}}
-				</li>
-			</ul>
+			<nav-header @click="onClick_navItem" ref="navHeader"></nav-header>
 		</div>
 		<div class="wrap-col relative">
 			<div class="left-col fixed">
@@ -38,6 +32,7 @@
 <script type="text/ecmascript-6">
 	import g from "../global";
 	import ComHeader from "./header.vue"
+	import NavHeader from "./navHeader.vue"
 	export default{
 		created()
 		{
@@ -46,43 +41,49 @@
 		data(){
 			return {
 				g: g,
-				navList: [],
-				currId: '',
-				currPath: "",
-				navItem: {}
+				navItem: {},
+				currentId: ""
 			}
-
+		},
+		props: {
+			currPath: {
+				default: "/"
+			}
 		},
 		components: {
-			ComHeader
+			ComHeader,
+			NavHeader
 		},
 		methods: {
 			init()
 			{
-				this.navList = g.data.staticNavPool.list;
-//				this.currId = this.navList[0] && this.navList[0].id;
-//				this.update();
-			},
-			update()
-			{
 
-//				this.navItem = g.data.staticNavPool.getDataById(this.currId);
-//				g.url = this.navItem.children && this.navItem.children[0].path;
-//				this.currPath = g.currentRoute.path;
+				this.$nextTick(() =>
+				{
+					var navData = g.data.staticNavPool.getChildByPath(this.currPath);
+					if (navData.parentId)
+					{
+						this.$refs.navHeader.update(navData.parentId);
+						this.currentId = navData.parentId;
+					}
+					this.update(this.currPath);
+				});
+			},
+			update($url)
+			{
+				this.navItem = g.data.staticNavPool.getDataById(this.currentId);
+				g.url = $url || (this.navItem.children && this.navItem.children[0].path);
 			},
 			onClick_navItem($id)
 			{
-//				if (this.currId != $id)
-//				{
-//					this.currId = $id;
-////					this.update();
-//				}
+				this.currentId = $id;
+				this.update();
 			},
 			onClick_childItem($path)
 			{
-//				g.url = $path;
-
+				this.update($path);
 			}
+
 		}
 	}
 </script>

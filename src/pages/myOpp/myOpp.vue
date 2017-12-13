@@ -1,5 +1,5 @@
 <template>
-    <com-layout></com-layout>
+    <com-layout currPath="/myopp"></com-layout>
 </template>
 <script type="text/ecmascript-6">
     import g from "../../global";

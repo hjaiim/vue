@@ -295,4 +295,18 @@ input {
 	margin-top: 34px;
 }
 
-
+.icon-trangle {
+  position: absolute;
+  top: 50%;
+  margin-top: -5px;
+  right: 11px;
+  display: inline-block;
+  border-top: 10px solid #ddd;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  transition: transform .2s;
+  transform: rotate(0deg);
+}
+.rotate{
+  transform: rotate(180deg);
+}

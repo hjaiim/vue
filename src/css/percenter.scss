@@ -1,18 +1,50 @@
 .percenter-wrap {
-  padding: 20px 44px 0 44px;
+  padding: 20px 44px 50px 44px;
   .menu-wrap {
-	border-bottom: 1px solid #efefef;
+    border-bottom: 1px solid #efefef;
   }
   .percenter-inner {
-	.icon-collect {
-	  width: 55%;
-	  min-width: 600px;
-	  padding-top: 45px;
-	  .default-img {
-		width: 121px;
-		height: 129px;
-		@include borderRadius(50%);
-	  }
-	}
+    .icon-collect {
+      width: 55%;
+      min-width: 600px;
+      padding-top: 45px;
+      .default-img {
+        width: 121px;
+        height: 129px;
+        @include borderRadius(50%);
+      }
+    }
   }
+}
+
+.upload-head {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  margin-right: 30px;
+  .load-head {
+    opacity: 0;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    z-index: 3;
+  }
+  .load-text {
+    width: 110px;
+    height: 110px;
+    line-height: 110px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+    color: #fff;
+  }
+  .del-head {
+    right: 0;
+  }
+}
+.required{
+  font-size: 20px;
+  line-height: 40px;
+  color: #ed5564;
+  margin-left: 10px;
 }
