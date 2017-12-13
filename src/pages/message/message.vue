@@ -1,5 +1,5 @@
 <template>
-	<com-layout>
+	<com-layout currId="percenter" currPath="/message">
 		<div class="message-wrap">
 			<div class="msg-content">
 				<div class="action-wrap clear">

@@ -1,5 +1,5 @@
 <template>
-	<com-layout>
+	<com-layout currId="percenter" currPath="/">
 		<div class="percenter-wrap">
 			<div class="menu-wrap">
 				<ul class="per-menu clear">
