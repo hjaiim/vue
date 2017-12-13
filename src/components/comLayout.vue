@@ -10,7 +10,7 @@
 			</ul>
 		</div>
 		<div class="wrap-col relative">
-			<div class="left-col absolute">
+			<div class="left-col fixed">
 				<div class="scroll-view">
 					<p class="nav-menu">个人中心内容</p>
 					<ul class="nav-list">
@@ -31,6 +31,7 @@
 				</div>
 			</div>
 			<div class="right-col">
+				<slot></slot>
 			</div>
 		</div>
 	</div>
@@ -106,7 +107,6 @@
 					}
 				}
 			}
-
 		}
 		.left-col {
 			min-height: 100%;
@@ -119,7 +119,7 @@
 			display: flex;
 			left: 0;
 			top: 0;
-			z-index: 1;
+			z-index: 9;
 			background: #fafafa;
 			-moz-box-shadow: -1px -0px 10px x rgba(0, 0, 0, 0.1) inset;
 			-webkit-box-shadow: -1px 0px 10px  rgba(0, 0, 0, 0.1) inset;

@@ -58,6 +58,19 @@
 	  }
 	  .text-msg {
 		padding-right: 44px;
+		height: 32px;
+		vertical-align: middle;
+		line-height: 32px;
+		.msg-txt {
+		  display: inline-block;
+		  height: 32px;
+		  line-height: 32px;
+		  vertical-align: middle;
+		  padding-right: 15px;
+		}
+		.switch-con {
+		  display: inline-block;
+		}
 	  }
 
 	}
@@ -68,6 +81,7 @@
   width: 32px;
   height: 18px;
   position: relative;
+  top: 7px;
   border: 1px solid #dfdfdf;
   background-color: #fdfdfd;
   box-shadow: #dfdfdf 0 0 0 0 inset;
@@ -86,12 +100,12 @@
 .mui-switch:checked {
   border-color: #f36478;
   box-shadow: #f36478 0 0 0 16px inset;
-  background-color: #64bd63;
+  background-color: #f36478;
 }
 
 .mui-switch.mui-switch-anim:checked {
-  box-shadow: #64bd63 0 0 0 16px inset;
-  background-color: #64bd63;
+  box-shadow: #f36478 0 0 0 16px inset;
+  background-color: #f36478;
   transition: border ease 0.4s, box-shadow ease 0.4s, background-color ease 1.2s;
 }
 
@@ -104,7 +118,7 @@
   width: 14px;
   height: 14px;
   position: absolute;
-  top: 0px;
+  top: 1px;
   left: 0;
   border-radius: 12px;
   border-top-left-radius: 12px;
@@ -114,10 +128,125 @@
   background-color: #ffffff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
-.mui-switch.mui-switch-anim:before{
+
+.mui-switch.mui-switch-anim:before {
   transition: left 0.3s;
 }
 
 .mui-switch:checked:before {
-  left: 20px;
+  left: 16px;
+}
+
+.table-content {
+  padding-top: 24px;
+  font-size: 14px;
+  .inner-table {
+	width: 100%;
+	border-collapse: collapse;
+	tr {
+	  border: 1px solid #efefef;
+	  height: 56px;
+	  th {
+		&:nth-of-type(2) {
+		  width: 20%;
+		}
+		&:nth-of-type(3) {
+		  width: 15%;
+		}
+		&:nth-of-type(4) {
+		  width: 21%;
+		}
+		&:nth-of-type(5) {
+		  width: 10%;
+		  min-width: 110px;
+		}
+	  }
+	  td {
+		color: #404040;
+		&:nth-of-type(2) {
+		  width: 24%;
+		}
+		&:nth-of-type(3) {
+		  width: 23.3%;
+		}
+		&:nth-of-type(4) {
+		  width: 22%;
+		}
+		&:nth-of-type(5) {
+		  width: 10%;
+		  min-width: 110px;
+		}
+	  }
+	  .draw-tick {
+		display: inline-block;
+		@include wh(18px, 18px);
+		margin-left: 26px;
+		vertical-align: middle;
+		&:after, &:before {
+		  content: '';
+		  font-family: helvetica;
+		  display: inline-block;
+		  width: 18px;
+		  height: 18px;
+		  left: 0;
+		  position: absolute;
+		  bottom: 0;
+		  text-align: center;
+		  @include borderRadius(3px);
+		}
+		&:before {
+		  border: 1px solid #cccccc;
+		  background-color: #ffffff;
+		  -moz-transition: all 0.3s ease-in-out;
+		  -o-transition: all 0.3s ease-in-out;
+		  -webkit-transition: all 0.3s ease-in-out;
+		  transition: all 0.3s ease-in-out;
+		}
+		&:after {
+		  color: #ffffff;
+		  content: "\2713";
+		  line-height: 18px;
+		  font-size: 14px;
+		}
+		&:hover {
+		  &:after {
+			color: #c7c7c7;
+		  }
+		}
+		&.action {
+		  &:before {
+			border: 1px solid #f36478;
+			-moz-box-shadow: inset 0 0 0 9px #f36478;
+			-webkit-box-shadow: inset 0 0 0 9px #f36478;
+			box-shadow: inset 0 0 0 9px #f36478;
+		  }
+		  &:after {
+			color: #ffffff;
+		  }
+
+		}
+	  }
+	  .rank-num {
+		display: inline-block;
+		padding-left: 30px;
+		height: 18px;
+		line-height: 18px;
+	  }
+	  .wait-pick {
+		color: #8de1c1;
+	  }
+	  .action-menu {
+		padding-right: 20%;
+		text-align: right;
+		span {
+		  width: 50%;
+		  text-align: center;
+		}
+	  }
+	  .is-picked {
+		color: #f2808b;
+	  }
+	}
+
+  }
 }
