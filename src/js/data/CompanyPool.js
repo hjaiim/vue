@@ -7,8 +7,8 @@ export default class CompanyPool {
 	{
 		this.listData = [];
 		this.hash = {};
-		this.total = 0;
-		this.totalPage = 1;
+		this.totalNum = 0;
+		this.totalPages = 1;
 	}
 
 	update($dObj)
@@ -17,8 +17,8 @@ export default class CompanyPool {
 		{
 			return;
 		}
-		$dObj.hasOwnProperty("total") && (this.total = $dObj.total);
-		$dObj.hasOwnProperty("totalPage") && (this.totalPage = $dObj.totalPage);
+		$dObj.hasOwnProperty("total") && (this.totalNum = $dObj.total);
+		$dObj.hasOwnProperty("totalPage") && (this.totalPages = $dObj.totalPage);
 		for (var item of $dObj.data)
 		{
 			this.add(item);
@@ -87,12 +87,22 @@ export default class CompanyPool {
 		return this.listData;
 	}
 
+	get total()
+	{
+		return this.totalNum;
+	}
+
+	get totalPage()
+	{
+		return this.totalPages;
+	}
+
 	removeAll()
 	{
 		this.listData = [];
 		this.hash = {};
-		this.total = 0;
-		this.totalPage = 1;
+		this.totalNum = 0;
+		this.totalPages = 1;
 	}
 }
 

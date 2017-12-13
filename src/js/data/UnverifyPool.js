@@ -53,6 +53,17 @@ export default class UnverifyPool {
 		return _list;
 	}
 
+	get total()
+	{
+		return _total;
+	}
+
+	get totalPage()
+	{
+		return _totalPage;
+	}
+
+
 	removeAll()
 	{
 		_list = [];

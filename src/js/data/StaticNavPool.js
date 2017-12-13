@@ -49,6 +49,7 @@ export default class StaticNavPool {
 		return _list;
 	}
 
+	
 	getChildByPath($path)
 	{
 		return _childHash[$path]
