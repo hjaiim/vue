@@ -16,7 +16,6 @@ import BusinessPool from "./BusinessPool";
 import RolePool from "./RolePool";
 import StaffPool from "./StaffPool";
 import UnverifyPool from "./UnverifyPool";
-import RecordPool from "./RecordPool";
 
 export var userInfo = new UserInfo(); //用户信息
 export var langPool = new LangPool(); //语言包数据池
@@ -33,7 +32,6 @@ export var searchBusinessPool = new BusinessPool();
 export var searchUnverifyPool = new UnverifyPool();
 export var searchRolePool = new RolePool();
 export var staffPool = new StaffPool();
-export var recordPool = new RecordPool();
 export function initStaticData()
 {
 	var staticData = g.data.staticData;
