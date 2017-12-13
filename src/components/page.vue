@@ -196,9 +196,17 @@
 				{
 					this.selectPage = 1;
 				}
+			},
+			currPage()
+			{
+				this.init();
 			}
 		},
 		methods: {
+			init()
+			{
+				this.indexPage = this.currPage;
+			},
 			onClick_pageBtn($page)
 			{
 				if (isNaN(int($page)))

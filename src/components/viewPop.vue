@@ -43,9 +43,6 @@
 			{
 				this.initEvent();
 			},
-			onClick_closeBtn(e){
-				this.$emit('close');
-			},
 			initEvent(e)
 			{
 				document.addEventListener('keydown', this.onKeyDown_doc)
@@ -56,6 +53,9 @@
 				{
 					this.$emit('close');
 				}
+			},
+			onClick_closeBtn(e){
+				this.$emit('close');
 			}
 		},
 		beforeDestroy()

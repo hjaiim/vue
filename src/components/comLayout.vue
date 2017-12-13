@@ -81,7 +81,7 @@
 			},
 			onClick_childItem($path)
 			{
-				this.update($path);
+				g.url = $path ;
 			}
 
 		}
