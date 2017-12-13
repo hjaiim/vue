@@ -47,7 +47,7 @@ export default class DutyPool {
 
 	getDataById($id)
 	{
-		return _hash[$id]
+		return _hash[$id];
 	}
 
 	get list()
