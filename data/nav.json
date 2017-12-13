@@ -1,0 +1,103 @@
+[
+  {
+	"id": "percenter",
+	"name": "个人中心",
+	"desc": "个人中心内容",
+	"highLightList": ["/","/verify"],
+	"rightId":1,
+	"children":[
+	  {
+		"name": "个人信息",
+		"path": "/",
+		"highLightList": ["/"],
+		"rightId":5
+	  },
+	  {
+		"name": "账号认证",
+		"path": "/verify",
+		"highLightList": ["/verify"],
+		"rightId":6
+	  },
+	  {
+		"name": "消息中心",
+		"path": "/message",
+		"highLightList": ["/message"],
+		"rightId":7
+	  }
+	]
+  },
+  {
+	"id": "platform",
+	"name": "平台管理",
+	"desc": "平台管理内容",
+	"highLightList": ["/companyman","/positionman","/roleman"],
+	"rightId":2,
+	"children": [
+	  {
+		"name": "公司管理",
+		"path": "/companyman",
+		"highLightList": ["/companyman"],
+		"rightId":7
+	  },
+	  {
+		"name": "角色管理",
+		"path": "/roleman",
+		"highLightList": ["/roleman"],
+		"rightId":8
+	  },
+	  {
+		"name": "岗位管理",
+		"path": "/positionman",
+		"highLightList": ["/positionman"],
+		"rightId":9
+	  }
+	]
+  },
+  {
+	"id": "staff",
+	"name": "人员管理",
+	"desc": "人员管理内容",
+	"highLightList": ["/accountman"],
+	"rightId":3,
+	"children": [
+	  {
+		"name": "账号管理",
+		"path": "/accountman",
+		"highLightList": ["/accountman"],
+		"rightId":10
+	  }
+	]
+  },
+  {
+	"id": "business",
+	"name": "商机管理",
+	"desc": "商机管理内容",
+	"highLightList": ["/oppapply","/oppman","/myopp"],
+	"rightId":4,
+	"children": [
+	  {
+		"name": "商机申请",
+		"path": "/oppapply",
+		"highLightList": ["/oppapply"],
+		"rightId":11
+	  },
+	  {
+		"name": "商机管理",
+		"path": "/oppman",
+		"highLightList": ["/oppman"],
+		"rightId":12
+	  },
+	  {
+		"name": "我的商机",
+		"path": "/myopp",
+		"highLightList": ["/myopp"],
+		"rightId":13
+	  }
+	]
+  }
+]
+
+
+
+
+

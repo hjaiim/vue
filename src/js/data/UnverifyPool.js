@@ -62,16 +62,32 @@ export default class UnverifyPool {
 	}
 }
 
-
 function createData($dObj)
 {
 	var d = {};
 	d.id = 0;
+	d.username = "";
 	d.name = "";
-	d.company = "";
-	d.department = "";
-	d.position = "";
-	d.createTime = "";
+	d.phone = "";
+	d.telphone = "";
+	d.companyId = 0;
+	d.companyName = "";
+	d.departmentId = 0;
+	d.departmentName = "";
+	d.dutyId = 0;
+	d.dutyName = "";
+	d.roleId = 0;
+	d.roleName = "";
+	d.positionId = 0;
+	d.positionName = "";
+	d.positionType = "";
+	d.authSatus = 0;
+	d.email = "";
+	d.avatar = "";
+	d.idCardFront = "";
+	d.idCardBack = "";
+	d.workCard = "";
+	d.remark = "";
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -80,5 +96,28 @@ function createData($dObj)
 
 function updateData($dObj)
 {
-	$dObj.hasOwnProperty("id") && (this.id = $dObj.id)
+	$dObj.hasOwnProperty("userId") && (this.id = $dObj.userId);
+	$dObj.hasOwnProperty("logon") && (this.username = $dObj.logon);
+	$dObj.hasOwnProperty("mobile") && (this.phone = $dObj.mobile);
+	$dObj.hasOwnProperty("telphone") && (this.telphone = $dObj.telphone);
+	$dObj.hasOwnProperty("roleId") && (this.roleId = $dObj.roleId);
+	$dObj.hasOwnProperty("roleName") && (this.roleName = $dObj.roleName);
+	$dObj.hasOwnProperty("name") && (this.name = $dObj.name);
+	$dObj.hasOwnProperty("authStatus") && (this.authStatus = $dObj.authStatus);
+	$dObj.hasOwnProperty("companyId") && (this.companyId = $dObj.companyId);
+	$dObj.hasOwnProperty("companyName") && (this.companyName = $dObj.companyName);
+	$dObj.hasOwnProperty("departmentId") && (this.departmentId = $dObj.departmentId);
+	$dObj.hasOwnProperty("departmentName") && (this.departmentName = $dObj.departmentName);
+	$dObj.hasOwnProperty("dutyId") && (this.dutyId = $dObj.dutyId);
+	$dObj.hasOwnProperty("dutyName") && (this.dutyName = $dObj.dutyName);
+	$dObj.hasOwnProperty("status") && (this.status = $dObj.status);
+	$dObj.hasOwnProperty("stationId") && (this.positionId = $dObj.stationId);
+	$dObj.hasOwnProperty("stationName") && (this.positionName = $dObj.stationName);
+	$dObj.hasOwnProperty("stationType") && (this.positionType = $dObj.stationType);
+	$dObj.hasOwnProperty("email") && (this.email = $dObj.email);
+	$dObj.hasOwnProperty("avatar") && (this.avatar = $dObj.avatar);
+	$dObj.hasOwnProperty("idcardImagA") && (this.idCardFront = $dObj.idcardImagA);
+	$dObj.hasOwnProperty("idcardImagB") && (this.idCardBack = $dObj.idcardImagB);
+	$dObj.hasOwnProperty("workCardImag") && (this.workCard = $dObj.workCardImag);
+	$dObj.hasOwnProperty("remark") && (this.remark = $dObj.remark);
 }

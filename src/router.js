@@ -23,14 +23,15 @@ import OppApply from "./pages/oppApply/oppApply.vue"; // 商机商机申请
 import OppApplyMain from "./pages/oppApply/oppApply";
 import OppMan from "./pages/oppMan/oppMan.vue";		 // 商机管理
 import OppManMain from "./pages/oppMan/oppMan";
-import Personal from "./pages/personal/personal.vue";	 // 个人中心
-import ModPwd from "./pages/modPsd/modPwd.vue";     //修改密码
-import ModPwdMain from "./pages/modPsd/modPwd";     //修改密码
-import PersonalMain from "./pages/personal/personal";
+import ModPwd from "./pages/modPwd/modPwd.vue";     //修改密码
+import ModPwdMain from "./pages/modPwd/modPwd";     //修改密码
 import PositionMan from "./pages/positionMan/positionMan.vue";	 // 职位管理
 import PositionManMain from "./pages/positionMan/positionMan";
 import RoleMan from "./pages/roleMan/roleMan.vue";	 // 角色管理
 import RoleManMain from "./pages/roleMan/roleMan";
+import MyOpp from "./pages/myOpp/myOpp.vue";	 // 角色管理
+import MyOppMain from "./pages/myOpp/myOpp";
+
 
 export default [
 	{
@@ -101,10 +102,10 @@ export default [
 		preload: OppManMain
 	},
 	{
-		path: '/personal',
-		name: "个人中心",
-		component: Personal,
-		preload: PersonalMain
+		path: '/myopp',
+		name: "我的商机",
+		component: MyOpp,
+		preload: MyOppMain
 	},
 	{
 		path: '/modpwd',
@@ -117,5 +118,11 @@ export default [
 		name: "职位管理",
 		component: PositionMan,
 		preload: PositionManMain
+	},
+	{
+		path: '/roleman',
+		name: "角色管理",
+		component: RoleMan,
+		preload: RoleManMain
 	}
 ];
