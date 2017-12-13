@@ -38,17 +38,18 @@ export function initStaticData()
 {
 	var staticData = g.data.staticData;
 	initLang(staticData);
-	staticNavPool.update(staticData["nav.json"]);
+	staticNavPool.init(staticData["nav.json"]);
 }
 
 function initLang($staticData)
 {
 	langPool.init($staticData["lang/langList.json"]);
-	(g.langPool.setLang = ($lang)=>
+	(($lang)=>
 	{
 		langPool.setLang($lang);
 		g.langPool.setLang($staticData["lang/" + $lang + ".json"]);
 	})(g.core.webParam.param.defaultLang);
+
 }
 
 export function clearAll()
