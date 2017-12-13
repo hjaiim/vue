@@ -1,22 +1,24 @@
 <template>
-    <div>
-     
-    </div>
+    <com-layout></com-layout>
 </template>
 <script type="text/ecmascript-6">
+    import g from "../../global";
+    import ComLayout from "../../components/comLayout.vue"
     export default{
+        created(){
+
+        },
         data(){
-            return{
-                
+            return {
+                g: g,
             }
         },
         components:{
-            
+            ComLayout
         },
-        methods:{
-        }
+        methods: {}
     }
 </script>
-<style lang="sass" rel="stylesheet/scss" type="text/scss" scoped>
-    
+<style type="text/css" lang="sass" rel="stylesheet/css">
+
 </style>

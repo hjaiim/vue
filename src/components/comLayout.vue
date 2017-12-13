@@ -60,26 +60,28 @@
 			init()
 			{
 				this.navList = g.data.staticNavPool.list;
-				this.currId = this.navList[0] && this.navList[0].id;
-				this.update();
+//				this.currId = this.navList[0] && this.navList[0].id;
+//				this.update();
 			},
 			update()
 			{
-				this.navItem = g.data.staticNavPool.getDataById(this.currId);
-				g.url = this.navItem.children && this.navItem.children[0].path;
-				this.currPath = g.currentRoute.path;
+
+//				this.navItem = g.data.staticNavPool.getDataById(this.currId);
+//				g.url = this.navItem.children && this.navItem.children[0].path;
+//				this.currPath = g.currentRoute.path;
 			},
 			onClick_navItem($id)
 			{
-				if (this.currId != $id)
-				{
-					this.currId = $id;
-					this.update();
-				}
+//				if (this.currId != $id)
+//				{
+//					this.currId = $id;
+////					this.update();
+//				}
 			},
 			onClick_childItem($path)
 			{
-				g.url = $path;
+//				g.url = $path;
+
 			}
 		}
 	}
