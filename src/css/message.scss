@@ -147,6 +147,9 @@
 	  border: 1px solid #efefef;
 	  height: 56px;
 	  th {
+		&:nth-of-type(1) {
+		  width: 20%;
+		}
 		&:nth-of-type(2) {
 		  width: 20%;
 		}
@@ -157,12 +160,14 @@
 		  width: 21%;
 		}
 		&:nth-of-type(5) {
-		  width: 10%;
 		  min-width: 110px;
 		}
 	  }
 	  td {
 		color: #404040;
+		&:nth-of-type(1) {
+		  width: 20%;
+		}
 		&:nth-of-type(2) {
 		  width: 24%;
 		}
@@ -173,7 +178,6 @@
 		  width: 22%;
 		}
 		&:nth-of-type(5) {
-		  width: 10%;
 		  min-width: 110px;
 		}
 	  }
@@ -236,11 +240,98 @@
 		color: #8de1c1;
 	  }
 	  .action-menu {
-		padding-right: 20%;
+		padding-right: 35%;
 		text-align: right;
 		span {
-		  width: 50%;
-		  text-align: center;
+		  color: #61a4de;
+		  position: relative;
+		  &:hover {
+			color: #2c85d3;
+
+		  }
+		}
+		span:nth-of-type(2) {
+		  text-align: right;
+		  .delete-pop {
+			right: -18px;
+			top: -132px;
+			z-index: 5;
+			@include wh(268px, 118px);
+			background: #ffffff;
+			@include borderRadius(4px);
+			&:before {
+			  position: absolute;
+			  content: "";
+			  height: 12px;
+			  width: 12px;
+			  bottom: -6px;
+			  right: 25px;
+			  overflow: hidden;
+			  background-color: #ffffff;
+			  pointer-events: none;
+			  transform: rotate(-135deg);
+			  z-index: -1;
+			  border-top: 1px solid rgba(0, 0, 0, 0.25);
+			  border-left: 1px solid rgba(0, 0, 0, 0.25);
+			  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+			}
+			.sure-content {
+			  left: 0;
+			  top: 0;
+			  width: 100%;
+			  height: 100%;
+			  cursor: default;
+			  background-color: #ffffff;
+			  .quesiton-txt {
+				height: 62px;
+				line-height: 62px;
+				padding: 0 0 6px 28px;
+				vertical-align: middle;
+				text-align: left;
+				img {
+				  display: inline-block;
+				  vertical-align: middle;
+				}
+				span {
+				  display: inline-block;
+				  padding-left: 14px;
+				  vertical-align: middle;
+				  height: 62px;
+				  line-height: 62px;
+				  font-size: 14px;
+				  color: #333333;
+				}
+
+			  }
+			  .btn-wrap {
+				padding-right: 8px;
+				.action-btn {
+				  margin-right: 24px;
+				  @include wh(48px, 26px);
+				  line-height: 26px;
+				  text-align: center;
+				  color: #333333;
+				  @include borderRadius(4px);
+
+				}
+				.cancel-btn {
+				  border: 1px solid #dddddd;
+				  background: #f8f8f8;
+				  &:hover {
+					border: 1px solid #cccccc
+				  }
+				}
+				.delete-btn {
+				  border: 1px solid transparent;
+				  background: #ed5564;
+				  color: #ffffff;
+				  &:hover {
+					background: #f5374a;
+				  }
+				}
+			  }
+			}
+		  }
 		}
 	  }
 	  .is-picked {
