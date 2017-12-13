@@ -70,6 +70,7 @@ function createData($dObj)
 	d.desc = "";
 	d.setter = "";
 	d.distribute = "";
+	d.rights = "";
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -78,5 +79,10 @@ function createData($dObj)
 
 function updateData($dObj)
 {
-	$dObj.hasOwnProperty("id") && (this.id = $dObj.id)
+	$dObj.hasOwnProperty("roleId") && (this.id = $dObj.roleId);
+	$dObj.hasOwnProperty("roleName") && (this.name = $dObj.roleName);
+	$dObj.hasOwnProperty("roleDesc") && (this.desc = $dObj.roleDesc);
+	$dObj.hasOwnProperty("userName") && (this.setter = $dObj.userName);
+	$dObj.hasOwnProperty("userNum") && (this.distribute = $dObj.userNum);
+	$dObj.hasOwnProperty("permissionIds") && (this.rights = $dObj.permissionIds);
 }

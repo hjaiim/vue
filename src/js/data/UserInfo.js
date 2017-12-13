@@ -7,14 +7,14 @@ var _username = "";
 var _name = "";
 var _phone = "";
 var _roleId = 0;
-var _contact = "";
+var _telphone = "";
 var _email = "";
 var _avatar = "";
 var _rightList = [];
 var _department = 0;
 var _company = 0;
 var _duty = 0;
-var _isVerified = false;
+var _authStatus = 0;
 var _remark = 0;
 var _idCartFront = "";
 var _idCartBack = "";
@@ -48,6 +48,7 @@ export default class UserInfo {
 		$dObj.hasOwnProperty('idcardImagA') && (_idCartFront = $dObj.idcardImagA);
 		$dObj.hasOwnProperty('idcardImagB') && (_idCartBack = $dObj.idcardImagB);
 		$dObj.hasOwnProperty('workCardImag') && (_workCard = $dObj.workCardImag);
+		$dObj.hasOwnProperty('authStatus') && (_authStatus = $dObj.authStatus);
 	}
 
 	get id()
@@ -75,9 +76,9 @@ export default class UserInfo {
 		return _roleId;
 	}
 
-	get contact()
+	get telphone()
 	{
-		return _contact;
+		return _telphone;
 	}
 
 	get email()
@@ -110,9 +111,9 @@ export default class UserInfo {
 		return _duty;
 	}
 
-	get isVerified()
+	get authStatus()
 	{
-		return _isVerified;
+		return _authStatus;
 	}
 
 	get remark()
@@ -142,14 +143,14 @@ export default class UserInfo {
 		_name = "";
 		_phone = "";
 		_roleId = 0;
-		_contact = "";
+		_telphone = "";
 		_email = "";
 		_avatar = "";
 		_rightList = [];
 		_department = 0;
 		_company = 0;
 		_duty = 0;
-		_isVerifyed = false;
+		_authStatus = "";
 		_remark = 0;
 		_idCartFront = "";
 		_idCartBack = "";
