@@ -9,6 +9,7 @@
 	  {
 		"name": "个人信息",
 		"path": "/",
+		"parentId":"percenter",
 		"highLightList": ["/"],
 		"rightId":5,
 		"icon":"/per1.png",
@@ -17,6 +18,7 @@
 	  {
 		"name": "账号认证",
 		"path": "/verify",
+		"parentId":"percenter",
 		"highLightList": ["/verify"],
 		"rightId":6,
 		"icon":"/per2.png",
@@ -25,6 +27,7 @@
 	  {
 		"name": "消息中心",
 		"path": "/message",
+		"parentId":"percenter",
 		"highLightList": ["/message"],
 		"rightId":7,
 		"icon":"/per3.png",
@@ -42,6 +45,7 @@
 	  {
 		"name": "公司管理",
 		"path": "/companyman",
+		"parentId":"platform",
 		"highLightList": ["/companyman"],
 		"rightId":7,
 		"icon":"/per1.png",
@@ -50,6 +54,7 @@
 	  {
 		"name": "角色管理",
 		"path": "/roleman",
+		"parentId":"platform",
 		"highLightList": ["/roleman"],
 		"rightId":8,
 		"icon":"/per1.png",
@@ -58,6 +63,7 @@
 	  {
 		"name": "岗位管理",
 		"path": "/positionman",
+		"parentId":"platform",
 		"highLightList": ["/positionman"],
 		"rightId":9,
 		"icon":"/per1.png",
@@ -75,6 +81,7 @@
 	  {
 		"name": "账号管理",
 		"path": "/accountman",
+		"parentId":"staff",
 		"highLightList": ["/accountman"],
 		"rightId":10,
 		"icon":"/per1.png",
@@ -92,6 +99,7 @@
 	  {
 		"name": "商机申请",
 		"path": "/oppapply",
+		"parentId":"business",
 		"highLightList": ["/oppapply"],
 		"rightId":11,
 		"icon":"/per1.png",
@@ -100,6 +108,7 @@
 	  {
 		"name": "商机管理",
 		"path": "/oppman",
+		"parentId":"business",
 		"highLightList": ["/oppman"],
 		"rightId":12,
 		"icon":"/per1.png",
@@ -108,11 +117,11 @@
 	  {
 		"name": "我的商机",
 		"path": "/myopp",
+		"parentId":"business",
 		"highLightList": ["/myopp"],
 		"rightId":13,
 		"icon":"/per1.png",
 		"lightIcon":"/per1-active.png"
-
 	  }
 	]
   }

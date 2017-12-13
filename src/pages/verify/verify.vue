@@ -1,12 +1,6 @@
 <template>
     <com-layout currId="percenter" currPath="/verify">
         <div class="percenter-wrap">
-            <div class="menu-wrap">
-                <ul class="per-menu clear">
-                    <li class="left ani-time relative pointer high-active">个人信息</li>
-                    <li class="left ani-time relative pointer">修改密码</li>
-                </ul>
-            </div>
             <div class="percenter-inner">
                 <div class="icon-collect clear">
                     <div class="default-img right">

@@ -1,5 +1,5 @@
 <template>
-	<com-layout currId="platform" currPath="/roleman"></com-layout>
+	<com-layout currPath="/roleman"></com-layout>
 </template>
 <script type="text/ecmascript-6">
 	import g from "../../global";

@@ -2,9 +2,10 @@
  * Created by Administrator on 2017/6/8.
  */
 
-import g from './../../global';
 var _hash = {};
 var _list = [];
+var _childHash = {};
+
 export default class StaticNavPool {
 	constructor()
 	{
@@ -48,6 +49,11 @@ export default class StaticNavPool {
 		return _list;
 	}
 
+	getChildByPath($path)
+	{
+		return _childHash[$path]
+	}
+
 	removeAll()
 	{
 		_hash = {};
@@ -55,6 +61,32 @@ export default class StaticNavPool {
 	}
 
 }
+
+class Child {
+	constructor()
+	{
+		this.list = [];
+	}
+
+	update($list)
+	{
+		for (var item of $list)
+		{
+			this.add(item);
+		}
+		return this.list;
+	}
+
+	add($item)
+	{
+		if (!_childHash[$item.path])
+		{
+			_childHash[$item.path] = $item;
+			this.list.push($item);
+		}
+	}
+}
+
 
 function createData($obj)
 {
@@ -64,6 +96,8 @@ function createData($obj)
 	d.desc = $obj.desc;
 	d.rightId = $obj.rightId;
 	d.highLightList = $obj.highLightList;
-	d.children = $obj.children;
+	var child = new Child();
+	d.children = child.update($obj.children);
 	return d;
 }
+

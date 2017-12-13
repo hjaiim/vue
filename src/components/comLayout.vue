@@ -46,9 +46,8 @@
 			}
 		},
 		props: {
-			currId: {},
-			currPath:{
-				default:"/"
+			currPath: {
+				default: "/"
 			}
 		},
 		components: {
@@ -58,10 +57,15 @@
 		methods: {
 			init()
 			{
+
 				this.$nextTick(() =>
 				{
-					this.$refs.navHeader.update(this.currId);
-					this.currentId = this.currId;
+					var navData = g.data.staticNavPool.getChildByPath(this.currPath);
+					if (navData.parentId)
+					{
+						this.$refs.navHeader.update(navData.parentId);
+						this.currentId = navData.parentId;
+					}
 					this.update(this.currPath);
 				});
 			},
