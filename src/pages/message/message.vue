@@ -43,7 +43,9 @@
 						<td>系统消息</td>
 						<td>2012.12.12 12:12:12</td>
 						<td>
-							<p class="action-menu clear"><span class="left pointer draw-line ani-time">详情</span>
+							<p class="action-menu clear"><span class="left pointer draw-line ani-time"
+															   @click="onClick_detailBtn">详情
+							</span>
 								<span class="right pointer draw-line ani-time" @click="onClick_deleteBtn(index+1)">删除
 								<div class="delete-pop absolute gray-shadow" v-show="(index+1)=== currIndex">
 									<div class="sure-content absolute">
@@ -64,9 +66,13 @@
 					</tr>
 					</tbody>
 				</table>
-				<common-page :total="20" :currPage="10" :showPageSize="false" :showTotalCount="true"
-							 :showElevator="true"
-							 :showFirstAndEnd="true"></common-page>
+				<div class="show-page clear">
+					<common-page class="right" :total="200" :currPage="10" :showPageSize="false" :showTotalCount="true"
+								 :showElevator="true"
+								 :showFirstAndEnd="true"></common-page>
+				</div>
+				<detail-pop :isShowPopView="isShowDetailPop" @close="onClose_detailPop"></detail-pop>
+
 			</div>
 		</div>
 	</com-layout>
@@ -74,7 +80,8 @@
 <script type="text/ecmascript-6">
 	import g from "../../global";
 	import ComLayout from "../../components/comLayout.vue"
-	import CommonPage from "../../components/page.vue"
+	import CommonPage from "../../components/page.vue";
+	import DetailPop from "../../components/pop/detailPop.vue"
 	export default{
 		created(){
 
@@ -83,11 +90,13 @@
 			return {
 				g: g,
 				currIndex: 0,
+				isShowDetailPop: false,
 			}
 		},
 		components: {
 			ComLayout,
-			CommonPage
+			CommonPage,
+			DetailPop
 		},
 		methods: {
 			onClick_deleteBtn($index){
@@ -98,6 +107,13 @@
 			},
 			onClick_removeBtn($index){
 				this.currIndex = null;
+			},
+			onClick_detailBtn(){
+				this.isShowDetailPop = true;
+
+			},
+			onClose_detailPop(){
+				this.isShowDetailPop = false;
 			}
 		}
 	}
