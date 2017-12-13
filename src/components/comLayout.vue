@@ -23,11 +23,14 @@
 							<img :src="g.path.images+'/per2.png'" alt="">
 							<span>账户认证</span>
 						</li>
+						<li class="ani-time pointer high-active">
+							<img :src="g.path.images+'/per3-active.png'" alt="">
+							<span>消息中心</span>
+						</li>
 					</ul>
 				</div>
 			</div>
 			<div class="right-col">
-				<slot></slot>
 			</div>
 		</div>
 	</div>

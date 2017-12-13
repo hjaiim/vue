@@ -25,6 +25,7 @@ import OppMan from "./pages/oppMan/oppMan.vue";		 // 商机管理
 import OppManMain from "./pages/oppMan/oppMan";
 import Personal from "./pages/personal/personal.vue";	 // 个人中心
 import ModPwd from "./pages/modPsd/modPwd.vue";     //修改密码
+import ModPwdMain from "./pages/modPsd/modPwd";     //修改密码
 import PersonalMain from "./pages/personal/personal";
 import PositionMan from "./pages/positionMan/positionMan.vue";	 // 职位管理
 import PositionManMain from "./pages/positionMan/positionMan";
@@ -108,13 +109,13 @@ export default [
 	{
 		path: '/modpwd',
 		name: "修改密码",
-		component: Personal,
-		preload: PersonalMain
+		component: ModPwd,
+		preload: ModPwdMain
 	},
 	{
 		path: '/positionman',
 		name: "职位管理",
-		component: ModPwd,
-		preload: ModPwd
+		component: PositionMan,
+		preload: PositionManMain
 	}
 ];
