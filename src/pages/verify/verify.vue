@@ -1,77 +1,155 @@
 <template>
-	<com-layout currId="percenter" currPath="/verify">
-		<div class="percenter-wrap">
-			<div class="menu-wrap">
-				<ul class="per-menu clear">
-					<li class="left ani-time relative pointer high-active">个人信息</li>
-					<li class="left ani-time relative pointer">修改密码</li>
-				</ul>
-			</div>
-			<div class="percenter-inner">
-				<p class="icon-collect clear">
-					<i class="default-img right">
-						<img :src="g.path.images+'/default-icon.png'" alt="">
-					</i>
-				</p>
-			</div>
-			<div class="personal-message">
-				<div class="personal-form"><span class="personal-title ">登录用户名</span><span class="personal-content">158********</span></div>
-				<div class="personal-form"><span class="personal-title">姓名</span><span class="personal-content">张三</span></div>
-				<div class="personal-form">
-					<span class="personal-title left">所属部门</span>
-					<div class="personal-content left relative form-list" @click="onClick_departmentBtn">
-						<span class="icon-trangle rotate"></span>
-						<ul class="absolute drop-list" v-show="isSow_departmentList">
-							<li>幻舞网络</li>
-							<li>幻舞网络</li>
-							<li>幻舞网络</li>
-						</ul>
-					</div>
-				</div>
-				<div class="personal-form">
-					<span class="personal-title">手机</span>
-					<input class="personal-content pensonal-input">
-				</div>
-				<div class="personal-form">
-					<span class="personal-title">验证码</span>
-					<input class="personal-content pensonal-input code">
-					<span class="btn-send pointer">发送验证码</span>
-				</div>
-				<div class="personal-form"><span class="personal-title">固定电话</span><input class="personal-content pensonal-input"></div>
-				<div class="personal-form"><span class="personal-title">电子邮箱</span><input class="personal-content pensonal-input"></div>
-				<div class="personal-form"><span class="personal-title">备注</span><input class="personal-content pensonal-input note"></div>
-				<div class="btn btn-save pointer">保存</div>
-			</div>
-		</div>
-	</com-layout>
+    <com-layout currId="percenter" currPath="/verify">
+        <div class="percenter-wrap">
+            <div class="menu-wrap">
+                <ul class="per-menu clear">
+                    <li class="left ani-time relative pointer high-active">个人信息</li>
+                    <li class="left ani-time relative pointer">修改密码</li>
+                </ul>
+            </div>
+            <div class="percenter-inner">
+                <div class="icon-collect clear">
+                    <div class="default-img right">
+                        <img :src="g.path.images+'/default-icon.png'" alt="">
+                    </div>
+                    <div class="relative upload-head right pointer">
+                        <img :src="g.path.images+'/del-head.png'" alt="" class="del-head absolute">
+                        <input type="file" class="absolute load-head">
+                        <p class="load-text">上传头像</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="personal-message">
+                <div class="personal-form"><span class="personal-title ">登录用户名</span><span class="personal-content">158********</span>
+                </div>
+                <div class="personal-form"><span class="personal-title">姓名</span><span
+                        class="personal-content">张三</span></div>
+                <div class="personal-form">
+                    <span class="personal-title left">所属公司</span>
+                    <div class="personal-content left relative form-list" @click="onClick_dropListBtn('Company')">
+                        <span :class="['icon-trangle', isShowCompanyList?'rotate':'']"></span>
+                        <ul class="absolute drop-list" v-show="isShowCompanyList">
+                            <li>幻舞网络</li>
+                            <li>幻舞网络</li>
+                            <li>幻舞网络</li>
+                        </ul>
+                    </div>
+                    <span class="required">*</span>
+                </div>
+                <div class="personal-form">
+                    <span class="personal-title left">所属部门</span>
+                    <div class="personal-content left relative form-list"
+                         @click="onClick_dropListBtn('Department')">
+                        <span :class="['icon-trangle', isShowDepartmentList?'rotate':'']"></span>
+                        <ul class="absolute drop-list" v-show="isShowDepartmentList">
+                            <li>前端</li>
+                        </ul>
+                    </div>
+                    <span class="required">*</span>
+                </div>
+                <div class="personal-form">
+                    <span class="personal-title left">职务名称</span>
+                    <div class="personal-content left relative form-list" @click="onClick_dropListBtn('Post')">
+                        <span :class="['icon-trangle', isShowPostList?'rotate':'']"></span>
+                        <ul class="absolute drop-list" v-show="isShowPostList">
+                            <li>总经理</li>
+                        </ul>
+                    </div>
+                    <span class="required">*</span>
+                </div>
+                <div class="personal-form">
+                    <span class="personal-title left">手机</span>
+                    <input class="personal-content pensonal-input left">
+                    <span class="required">*</span>
+                </div>
+                <div class="personal-form">
+                    <span class="personal-title left">验证码</span>
+                    <input class="personal-content pensonal-input code left">
+                    <span class="btn-send pointer left">发送验证码</span>
+                </div>
+                <div class="personal-form"><span class="personal-title left">固定电话</span><input
+                        class="personal-content pensonal-input left"></div>
+                <div class="personal-form"><span class="personal-title left">电子邮箱</span><input
+                        class="personal-content pensonal-input left"></div>
+                <div class="personal-form"><span class="personal-title left">备注</span><input
+                        class="personal-content pensonal-input note left"></div>
+                <div class="personal-form">
+                    <span class="personal-title left">身份证照</span>
+                    <div class="left relative upload-box pointer">
+                        <img :src="g.path.images+'/del-icon.png'" alt="" class="del-img">
+                        <input type="file" class="input-file">
+                        <div class="upload-btn flex">
+                            <img :src="g.path.images+'/upload.png'" alt="">
+                            <p class="upload-text">正面</p>
+                        </div>
+                    </div>
+                    <div class="left relative upload-box pointer">
+                        <img :src="g.path.images+'/del-icon.png'" alt="" class="del-img">
+                        <input type="file" class="input-file">
+                        <div class="upload-btn flex">
+                            <img :src="g.path.images+'/upload.png'" alt="">
+                            <p class="upload-text">反面</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="personal-form">
+                    <span class="personal-title left">工作证照</span>
+                    <div class="left relative upload-box pointer">
+                        <img :src="g.path.images+'/del-icon.png'" alt="" class="del-img">
+                        <input type="file" class="input-file">
+                        <div class="upload-btn flex">
+                            <img :src="g.path.images+'/upload.png'" alt="">
+                            <p class="upload-text">
+                                点击上传工作证照片<br>
+                                <span>
+                                    支持jpg/gif/png格式<br>
+                                    不超过10M长<800,<br>
+                                    宽<200
+                                </span>
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </com-layout>
 </template>
 <script type="text/ecmascript-6">
-	import g from "../../global";
-	import ComLayout from "../../components/comLayout.vue"
-	export default{
-		created(){
+    import g from "../../global";
+    import ComLayout from "../../components/comLayout.vue"
+    export default{
+        created(){
 
-		},
-		data(){
-			return {
-				g: g,
-				isSow_dapartmentList:false
-			}
-		},
-		components: {
-			ComLayout
-		},
-		methods: {
-			onClick_departmentBtn:{
+        },
+        data(){
+            return {
+                g: g,
+                isShowDepartmentList: false,
+                isShowCompanyList: false,
+                isShowPostList: false,
+            }
+        },
+        components: {
+            ComLayout
+        },
+        methods: {
+            onClick_dropListBtn($type){
+                if (this["isShow" + $type + "List"]) {
+                    this["isShow" + $type + "List"] = false;
+                } else {
+                    this["isShow" + $type + "List"] = true;
+                }
+            }
 
-			}
-		}
-	}
+        }
+    }
 </script>
 <style type="text/css" lang="sass" rel="stylesheet/css" scoped>
-	@import "../../css/mixin.scss";
-	@import "../../css/percenter.scss";
+    @import "../../css/mixin.scss";
+    @import "../../css/percenter.scss";
 </style>
 <style type="text/css" lang="sass" rel="stylesheet/css">
-	@import "../../css/personal.scss";
+    @import "../../css/personal.scss";
 </style>
