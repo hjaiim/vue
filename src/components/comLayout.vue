@@ -3,29 +3,28 @@
 		<div class="header-wrap fixed">
 			<com-header></com-header>
 			<ul class="header-options clear">
-				<li class="left relative pointer ani-time high-active">个人中心</li>
-				<li class="left relative pointer ani-time">平台管理</li>
-				<li class="left relative pointer ani-time">人员管理</li>
-				<li class="left relative pointer ani-time">商机管理</li>
+				<li class="left relative pointer ani-time"
+					:class="currId==item.id?'high-active':'' "
+					v-for="item in navList"
+					@click="onClick_navItem(item.id)">{{item.name}}
+				</li>
 			</ul>
 		</div>
 		<div class="wrap-col relative">
 			<div class="left-col fixed">
 				<div class="scroll-view">
-					<p class="nav-menu">个人中心内容</p>
+					<p class="nav-menu">{{navItem.desc}}</p>
 					<ul class="nav-list">
-						<li class="ani-time pointer high-active">
+						<li class="ani-time pointer"
+							:class="child.highLightList.indexOf(currPath) >= 0 ?'high-active':'' "
+							@click="onClick_childItem(child.path)"
+							v-for="child in navItem.children">
 							<!--<img :src="g.path.images+'/per1.png'" alt="">-->
-							<img :src="g.path.images+'/per1-active.png'" alt="">
-							<span>个人信息</span>
-						</li>
-						<li class="ani-time pointer">
-							<img :src="g.path.images+'/per2.png'" alt="">
-							<span>账户认证</span>
-						</li>
-						<li class="ani-time pointer high-active">
-							<img :src="g.path.images+'/per3-active.png'" alt="">
-							<span>消息中心</span>
+							<img :src="child.highLightList.indexOf(currPath)>= 0?
+										g.path.images+child.lightIcon:
+										g.path.images+child.icon"
+								 alt="">
+							<span>{{child.name}}</span>
 						</li>
 					</ul>
 				</div>
@@ -40,15 +39,49 @@
 	import g from "../global";
 	import ComHeader from "./header.vue"
 	export default{
+		created()
+		{
+			this.init();
+		},
 		data(){
 			return {
-				g: g
+				g: g,
+				navList: [],
+				currId: '',
+				currPath: "",
+				navItem: {}
 			}
+
 		},
 		components: {
-			ComHeader,
+			ComHeader
 		},
-		methods: {}
+		methods: {
+			init()
+			{
+				this.navList = g.data.staticNavPool.list;
+				this.currId = this.navList[0] && this.navList[0].id;
+				this.update();
+			},
+			update()
+			{
+				this.navItem = g.data.staticNavPool.getDataById(this.currId);
+				g.url = this.navItem.children && this.navItem.children[0].path;
+				this.currPath = g.currentRoute.path;
+			},
+			onClick_navItem($id)
+			{
+				if (this.currId != $id)
+				{
+					this.currId = $id;
+					this.update();
+				}
+			},
+			onClick_childItem($path)
+			{
+				g.url = $path;
+			}
+		}
 	}
 </script>
 <style lang="sass" rel="stylesheet/scss" type="text/scss">
@@ -122,8 +155,8 @@
 			z-index: 9;
 			background: #fafafa;
 			-moz-box-shadow: -1px -0px 10px x rgba(0, 0, 0, 0.1) inset;
-			-webkit-box-shadow: -1px 0px 10px  rgba(0, 0, 0, 0.1) inset;
-			box-shadow: -1px 0px 10px  rgba(0, 0, 0, 0.1) inset;
+			-webkit-box-shadow: -1px 0px 10px rgba(0, 0, 0, 0.1) inset;
+			box-shadow: -1px 0px 10px rgba(0, 0, 0, 0.1) inset;
 			.scroll-view {
 				width: 200px;
 				.nav-menu {

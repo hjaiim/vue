@@ -61,6 +61,8 @@ function createData($obj)
 	var d = {};
 	d.id = $obj.id;
 	d.name = $obj.name;
+	d.desc = $obj.desc;
+	d.rightId = $obj.rightId;
 	d.highLightList = $obj.highLightList;
 	d.children = $obj.children;
 	return d;
