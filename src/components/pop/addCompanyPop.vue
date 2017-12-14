@@ -2,45 +2,30 @@
     <view-popup @close="onClose_pop"
                 :isShowPopView="isShowPopView" class="mod-company-pop">
         <div class="mod-company-container">
-            <p class="mod-tit">修改公司信息</p>
+            <p class="mod-tit">新建公司信息</p>
             <div class="mod-company-content">
                 <div class="company-message">
                     <p class="from-group">
                         <span class="form-title">公司名称</span>
-                        <span class="form-trap">杭州分公司</span>
-                        <span v-show="">
-                            <input type="text" class="form-control">
-                            <span class="requied">*</span>
-                        </span>
-
+                        <input type="text" class="form-control">
+                        <span class="requied">*</span>
                     </p>
                     <p class="from-group">
                         <span class="form-title">公司电话</span>
-                        <span class="form-trap">88888888</span>
-                        <span v-show="">
-                            <input type="text" class="form-control">
-                            <span class="requied">*</span>
-                        </span>
+                        <input type="text" class="form-control">
+                        <span class="requied">*</span>
                     </p>
                     <p class="from-group">
                         <span class="form-title">公司负责人</span>
-                        <span class="form-trap">王大锤</span>
-                        <span v-show="">
-                            <input type="text" class="form-control">
-                            <span class="requied">*</span>
-                        </span>
-
+                        <input type="text" class="form-control">
+                        <span class="requied">*</span>
                     </p>
                     <p class="from-group">
                         <span class="form-title">负责人电话</span>
-                        <span class="form-trap">130********</span>
-                        <span v-show="">
-                            <input type="text" class="form-control">
-                            <span class="requied">*</span>
-                        </span>
+                        <input type="text" class="form-control">
+                        <span class="requied">*</span>
                     </p>
-                    <div class="pop-btn right pointer">
-                        <img :src="g.path.images+'/edit.png'" alt="" class="edit-company">编辑</div>
+                    <div class="pop-btn right pointer">保存</div>
 
                 </div>
                 <div class="company-message">
@@ -128,7 +113,7 @@
         data(){
             return {
                 g: g,
-                isShowEdit: false
+                isShowEdit: false,
             }
         },
         components: {

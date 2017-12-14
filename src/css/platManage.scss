@@ -1,5 +1,5 @@
 .plat-wrap {
-  padding: 45px 0px 0 44px;
+  padding: 45px 35px 50px 44px;
   .action-btn {
 	background: #ed5564;
 	text-align: center;
@@ -27,19 +27,18 @@
   .cross-txt {
 	background: #ffffff;
 	height: 14px;
-	width: 4px;
-	@include wh(4px, 14px);
-	margin-right: 13px;
+	width: 2px;
+	margin-right: 9px;
 	display: inline-block;
 	vertical-align: middle;
-	top: -3px;
+	top: -2px;
 	&:after {
 	  background: #ffffff;
 	  content: "";
-	  @include wh(14px, 4px);
-	  left: -5px;
+	  @include wh(14px, 2px);
+	  left: -6px;
 	  position: absolute;
-	  top: 5px;
+	  top: 6px;
 	}
 
   }
@@ -67,6 +66,61 @@
 	  .close-btn {
 		right: -6px;
 		top: 5px;
+
+	  }
+	}
+  }
+}
+.table-content {
+  .inner-table {
+	tr {
+	  th {
+		&:nth-of-type(1) {
+		  width: 12%;
+		}
+		&:nth-of-type(2) {
+		  width: 14%;
+		}
+		&:nth-of-type(3) {
+		  width: 13%;
+		}
+		&:nth-of-type(4) {
+		  width: 14%;
+		}
+		&:nth-of-type(5) {
+		  width: 15%;
+		}
+		&:nth-of-type(6) {
+		  width: 16%;
+		}
+		&:nth-of-type(7) {
+		  width: 16%;
+		}
+
+	  }
+	  td {
+		color: #404040;
+		&:nth-of-type(1) {
+		  width: 13%;
+		}
+		&:nth-of-type(2) {
+		  width: 14%;
+		}
+		&:nth-of-type(3) {
+		  width: 14%;
+		}
+		&:nth-of-type(4) {
+		  width: 14%;
+		}
+		&:nth-of-type(5) {
+		  width: 15%;
+		}
+		&:nth-of-type(6) {
+		  width: 15%;
+		}
+		&:nth-of-type(7) {
+		  width: 12%;
+		}
 
 	  }
 	}

@@ -4,22 +4,21 @@
 import g from "../../global";
 
 var _isLogin = false;
-
 var _lastUrl = "";
 
 function init($callback)
 {
+
 	g.addEventListener("APP_IS_LOGIN", onAppLogin_global);
-	g.net.call('user/checkLogin', {}).then((d) =>
+	g.net.call('user/queryUserIsLogin').then((d) =>
 	{
 		_isLogin = true;
-		g.data.userInfo.update(d);
-		g.data.rightPool.update(JSON.parse(d.rights));
+// 		g.data.userInfo.update(d);
 		$callback();
 	}, (error) =>
 	{
 		_isLogin = false;
-		$callback();
+		logout();
 	});
 }
 
@@ -32,11 +31,18 @@ function checkLogin($to, $next, $callBack)
 		//当前已登录
 		if (passUrl.indexOf($to.path) >= 0) //判断当前页面是否是login页面
 		{
-
+			if (g.data.userInfo.authStatus !== 2)
+			{
+				$next("/verify")
+			}
+			else
+			{
+				$next("/");
+			}
 		}
 		else
 		{
-
+			$callBack && $callBack();
 		}
 	}
 	else
@@ -58,7 +64,7 @@ function checkLogin($to, $next, $callBack)
 //是否跳登录页，是否监听登录
 export function logout()
 {
-	g.net.call("user/logout", {}).then((d) =>
+	g.net.call("user/loginOut").then((d) =>
 	{
 		_isLogin = false;
 		clearLoginInfo();
@@ -67,7 +73,6 @@ export function logout()
 	{
 	});
 }
-window.logout = logout;
 
 function onAppLogin_global(e)
 {
@@ -77,9 +82,13 @@ function onAppLogin_global(e)
 	{
 		g.url = _lastUrl;
 	}
+	else if (g.data.userInfo.authStatus !== 2)
+	{
+		$next("/verify")
+	}
 	else
 	{
-		g.url = "/index";
+		$next("/");
 	}
 }
 

@@ -26,9 +26,10 @@ export default class RightPool {
 	 * 增加权限
 	 * @param right 权限key
 	 */
-	add(right)
+	add($item)
 	{
-		_list.indexOf(right) < 0 && _list.push(right);
+		var rightData = createData($item);
+		_list.indexOf(rightData) < 0 && _list.push(rightData);
 	}
 
 	/**
@@ -76,4 +77,9 @@ export default class RightPool {
 	{
 		_list = [];
 	}
+}
+
+function createData($item)
+{
+	return 	$item.permissionId;
 }

@@ -12,9 +12,8 @@ var _initList = [];
 var _key;
 _initList.push(initGlobal);
 _initList.push(initStaticData);
-// _initList.push(initComponents);
 // _initList.push(initLogin);
-// _initList.push(initGlobalVariable);
+
 
 export function init($callback)
 {
@@ -59,22 +58,6 @@ function initStaticData()
 {
 	g.data.initStaticData();
 	this.apply();
-}
-
-function initComponents()
-{
-	this.apply();
-}
-
-function initGlobalVariable()
-{
-	g.isShowBrandPop = false;
-	this.apply();
-}
-
-export function getKey()
-{
-	return _key
 }
 
 export function addMove($el)

@@ -7,13 +7,19 @@ var _username = "";
 var _name = "";
 var _phone = "";
 var _roleId = 0;
+var _roleName = "";
 var _telphone = "";
 var _email = "";
 var _avatar = "";
 var _rightList = [];
-var _department = 0;
-var _company = 0;
-var _duty = 0;
+var _departmentId = 0;
+var _departmentName = "";
+var _companyId = 0;
+var _companyName = 0;
+var _dutyId = 0;
+var _dutyName = "";
+var _positionId = 0;
+var _positionName = "";
 var _authStatus = 0;
 var _remark = 0;
 var _idCartFront = "";
@@ -36,14 +42,20 @@ export default class UserInfo {
 		$dObj.hasOwnProperty('name') && (_name = $dObj.name);
 		$dObj.hasOwnProperty('mobile') && (_phone = $dObj.mobile);
 		$dObj.hasOwnProperty('roleId') && (_roleId = $dObj.roleId);
+		$dObj.hasOwnProperty('roleName') && (_roleName = $dObj.roleName);
 		$dObj.hasOwnProperty('telphone') && (_contact = $dObj.telphone);
 		$dObj.hasOwnProperty('email') && (_email = $dObj.email);
 		$dObj.hasOwnProperty('avatar') && (_avatar = $dObj.avatar);
 		$dObj.hasOwnProperty('permissionList') && (_rightList = $dObj.permissionList);
-		$dObj.hasOwnProperty('departmentId') && (_department = $dObj.departmentId);
-		$dObj.hasOwnProperty('companyId') && (_company = $dObj.companyId);
-		$dObj.hasOwnProperty('dutyId') && (_duty = $dObj.dutyId);
-		$dObj.hasOwnProperty('authStatus') && (_isVerified = $dObj.authStatus);
+		$dObj.hasOwnProperty('departmentId') && (_departmentId = $dObj.departmentId);
+		$dObj.hasOwnProperty('departmentName') && (_departmentName = $dObj.departmentName);
+		$dObj.hasOwnProperty('companyId') && (_companyId = $dObj.companyId);
+		$dObj.hasOwnProperty('companyName') && (_companyName = $dObj.companyName);
+		$dObj.hasOwnProperty('dutyId') && (_dutyId = $dObj.dutyId);
+		$dObj.hasOwnProperty('dutyName') && (_dutyName = $dObj.dutyName);
+		$dObj.hasOwnProperty('stationId') && (_positionId = $dObj.stationId);
+		$dObj.hasOwnProperty('stationName') && (_positionName = $dObj.stationName);
+		$dObj.hasOwnProperty('authStatus') && (_authStatus = $dObj.authStatus);
 		$dObj.hasOwnProperty('remark') && (_remark = $dObj.remark);
 		$dObj.hasOwnProperty('idcardImagA') && (_idCartFront = $dObj.idcardImagA);
 		$dObj.hasOwnProperty('idcardImagB') && (_idCartBack = $dObj.idcardImagB);
@@ -76,6 +88,12 @@ export default class UserInfo {
 		return _roleId;
 	}
 
+	get roleName()
+	{
+		return _roleName;
+	}
+
+
 	get telphone()
 	{
 		return _telphone;
@@ -96,19 +114,46 @@ export default class UserInfo {
 		return _rightList;
 	}
 
-	get department()
+	get departmentId()
 	{
-		return _department;
+		return _departmentId;
+	}
+	get departmentName()
+	{
+		return _departmentName;
 	}
 
-	get company()
+	get companyId()
 	{
-		return _company;
+		return _companyId;
 	}
 
-	get duty()
+
+	get companyName()
 	{
-		return _duty;
+		return _companyName;
+	}
+
+	get dutyId()
+	{
+		return _dutyId;
+	}
+
+
+	get dutyName()
+	{
+		return _dutyName;
+	}
+
+	get positionId()
+	{
+		return _positionId;
+	}
+
+
+	get positionName()
+	{
+		return _positionName;
 	}
 
 	get authStatus()
@@ -143,14 +188,20 @@ export default class UserInfo {
 		_name = "";
 		_phone = "";
 		_roleId = 0;
+		_roleName = "";
 		_telphone = "";
 		_email = "";
 		_avatar = "";
 		_rightList = [];
-		_department = 0;
-		_company = 0;
-		_duty = 0;
-		_authStatus = "";
+		_departmentId = 0;
+		_departmentName = "";
+		_companyId = 0;
+		_companyName = 0;
+		_dutyId = 0;
+		_dutyName = "";
+		_positionId = 0;
+		_positionName = "";
+		_authStatus = 0;
 		_remark = 0;
 		_idCartFront = "";
 		_idCartBack = "";

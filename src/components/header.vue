@@ -17,7 +17,7 @@
 					</i>
 				</li>
 				<li class="nav-item">
-					<a href="#" class="note-txt">退出</a>
+					<p class="note-txt" @click="onClick_logoutBtn">退出</p>
 				</li>
 			</ul>
 		</div>
@@ -25,6 +25,7 @@
 </template>
 <script type="text/ecmascript-6">
 	import g from "../global";
+	import loginManager from './../js/manager/LoginManager';
 	export default{
 		data(){
 			return {
@@ -32,7 +33,12 @@
 			}
 		},
 		components: {},
-		methods: {}
+		methods: {
+			onClick_logoutBtn()
+			{
+				loginManager.logout();
+			}
+		}
 	}
 </script>
 <style lang="sass" rel="stylesheet/scss" type="text/scss">
