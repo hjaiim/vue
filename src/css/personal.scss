@@ -1,65 +1,66 @@
 .personal-message {
   .personal-form {
-    margin-top: 18px;
-    height: auto;
-    &:after{
-      content:'';
-      display: block;
-      clear: both;
-    }
-    .personal-title {
-      width: 90px;
-      height: 40px;
-      line-height: 40px;
-      text-align: right;
-      display: inline-block;
-      margin-right: 30px;
-      font-size: 14px;
-    }
-    .personal-content {
-      font-size: 14px;
-      height: 40px;
-      line-height: 40px;
-    }
-    .pensonal-input {
-      width: 240px;
-      border: 1px solid #dddddd;
-      border-radius: 4px;
-      box-shadow: 0 0 2px #f5f5f5 inset;
-      padding: 0 12px;
-      box-sizing: border-box;
-    }
-    .code {
-      width: 124px;
-    }
-    .btn-send {
-      display: inline-block;
-      height: 40px;
-      width: 96px;
-      line-height: 40px;
-      text-align: center;
-      border-radius: 4px;
-      margin-left: 20px;
-      color: #666;
-      background: #f4f4f4;
-    }
-    .bind-phone {
-      color: #fe6e05;
-      margin-left: 12px;
-    }
-    .note {
-      width: 948px;
-    }
+	margin-top: 18px;
+	height: auto;
+	&:after {
+	  content: '';
+	  display: block;
+	  clear: both;
+	}
+	.personal-title {
+	  width: 90px;
+	  height: 40px;
+	  line-height: 40px;
+	  text-align: right;
+	  display: inline-block;
+	  margin-right: 30px;
+	  font-size: 14px;
+	}
+	.personal-content {
+	  font-size: 14px;
+	  height: 40px;
+	  line-height: 40px;
+	}
+	.pensonal-input {
+	  width: 240px;
+	  border: 1px solid #dddddd;
+	  border-radius: 4px;
+	  box-shadow: 0 0 2px #f5f5f5 inset;
+	  padding: 0 12px;
+	  box-sizing: border-box;
+	}
+	.code {
+	  width: 124px;
+	}
+	.btn-send {
+	  display: inline-block;
+	  height: 40px;
+	  width: 96px;
+	  line-height: 40px;
+	  text-align: center;
+	  border-radius: 4px;
+	  margin-left: 20px;
+	  color: #666666;
+	  background: #f4f4f4;
+	}
+	.bind-phone {
+	  color: #fe6e05;
+	  margin-left: 12px;
+	}
+	.note {
+	  //width: 948px;
+	  width: 86%;
+	}
   }
   .btn-save {
-    width: 160px;
-    height: 44px;
-    line-height: 44px;
-    text-align: center;
-    background: #ed5564;
-    color: #fff;
-    border-radius: 4px;
-    margin: 40px 0 0 120px;
+	width: 160px;
+	height: 44px;
+	line-height: 44px;
+	text-align: center;
+	background: #ed5564;
+	color: #ffffff;
+	border-radius: 4px;
+	margin: 40px 0 0 120px;
   }
 }
 
@@ -71,21 +72,21 @@
   padding: 0 12px;
   box-sizing: border-box;
   .drop-list {
-    top: 100%;
-    left: -1px;
-    width: 100%;
-    border: 1px solid #ddd;
-    z-index: 2;
-    background: #fff;
-    li {
-      height: 40px;
-      line-height: 40px;
-      padding: 0 12px;
-      border-bottom: 1px solid #ddd;
-      &:last-child {
-        border-bottom: none;
-      }
-    }
+	top: 100%;
+	left: -1px;
+	width: 100%;
+	border: 1px solid #dddddd;
+	z-index: 2;
+	background: #ffffff;
+	li {
+	  height: 40px;
+	  line-height: 40px;
+	  padding: 0 12px;
+	  border-bottom: 1px solid #dddddd;
+	  &:last-child {
+		border-bottom: none;
+	  }
+	}
   }
 }
 
@@ -96,45 +97,45 @@
   border-radius: 4px;
   margin-right: 30px;
   .input-file {
-    width: 240px;
-    height: 180px;
-    color: transparent;
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 3;
-    cursor: pointer;
+	width: 240px;
+	height: 180px;
+	color: transparent;
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 3;
+	cursor: pointer;
   }
   .upload-btn {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    .upload-text {
-      color: #666666;
-      margin-top: 15px;
-      font-size: 16px;
-      text-align: center;
-      span{
-        font-size: 12px;
-        line-height: 18px;
-      }
-    }
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	.upload-text {
+	  color: #666666;
+	  margin-top: 15px;
+	  font-size: 16px;
+	  text-align: center;
+	  span {
+		font-size: 12px;
+		line-height: 18px;
+	  }
+	}
   }
   .del-img {
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    z-index: 5;
-    display: none;
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	z-index: 5;
+	display: none;
   }
-  &:hover{
-    .del-img{
-      display: block;
-    }
+  &:hover {
+	.del-img {
+	  display: block;
+	}
   }
 }
 

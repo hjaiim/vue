@@ -43,22 +43,13 @@
 	"rightId":2,
 	"children": [
 	  {
-		"name": "公司管理",
+		"name": "公司设定",
 		"path": "/companyman",
 		"parentId":"platform",
 		"highLightList": ["/companyman"],
 		"rightId":7,
-		"icon":"/per1.png",
-		"lightIcon":"/per1-active.png"
-	  },
-	  {
-		"name": "角色管理",
-		"path": "/roleman",
-		"parentId":"platform",
-		"highLightList": ["/roleman"],
-		"rightId":8,
-		"icon":"/per1.png",
-		"lightIcon":"/per1-active.png"
+		"icon":"/plat1.png",
+		"lightIcon":"/plat1-active.png"
 	  },
 	  {
 		"name": "岗位管理",
@@ -66,8 +57,17 @@
 		"parentId":"platform",
 		"highLightList": ["/positionman"],
 		"rightId":9,
-		"icon":"/per1.png",
-		"lightIcon":"/per1-active.png"
+		"icon":"/plat2.png",
+		"lightIcon":"/plat2-active.png"
+	  },
+	  {
+		"name": "角色设置",
+		"path": "/roleman",
+		"parentId":"platform",
+		"highLightList": ["/roleman"],
+		"rightId":8,
+		"icon":"/plat3.png",
+		"lightIcon":"/plat3-active.png"
 	  }
 	]
   },

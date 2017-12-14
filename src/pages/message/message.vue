@@ -43,25 +43,16 @@
 						<td>系统消息</td>
 						<td>2012.12.12 12:12:12</td>
 						<td>
-							<p class="action-menu clear"><span class="left pointer draw-line ani-time"
-															   @click="onClick_detailBtn">详情
-							</span>
+							<p class="action-menu clear">
+								<span class="left pointer draw-line ani-time" @click="onClick_detailBtn">详情</span>
 								<span class="right pointer draw-line ani-time" @click="onClick_deleteBtn(index+1)">删除
-								<div class="delete-pop absolute gray-shadow" v-show="(index+1)=== currIndex">
-									<div class="sure-content absolute">
-										<div class="quesiton-txt">
-											<img :src="g.path.images+'/quesiton-icon.png'" alt="">
-											<span>您确定要删除该产品？</span>
-										</div>
-										<div class="btn-wrap clear">
-											<span class="action-btn right cancel-btn ani-time pointer"
-												  @click="onClick_cancelBtn(index+1)">取消</span>
-											<span class="action-btn right delete-btn ani-time pointer"
-												  @click="onClick_removeBtn(index+1)">删除</span>
-										</div>
-									</div>
-								</div>
-							</span></p>
+									<delete-pop :isDeletePop="(index+1)=== currIndex"
+												@cancel="onClick_cancelBtn(index+1)"
+												@remove="onClick_removeBtn(index+1)">
+										<span>您确定要删除该产品？</span>
+									</delete-pop>
+								</span>
+							</p>
 						</td>
 					</tr>
 					</tbody>
@@ -81,7 +72,8 @@
 	import g from "../../global";
 	import ComLayout from "../../components/comLayout.vue"
 	import CommonPage from "../../components/page.vue";
-	import DetailPop from "../../components/pop/detailPop.vue"
+	import DetailPop from "../../components/pop/detailPop.vue";
+	import DeletePop from "../../components/pop/deletePop.vue"
 	export default{
 		created(){
 
@@ -89,24 +81,26 @@
 		data(){
 			return {
 				g: g,
-				currIndex: 0,
+				currIndex: "",
 				isShowDetailPop: false,
 			}
+
 		},
 		components: {
 			ComLayout,
 			CommonPage,
-			DetailPop
+			DetailPop,
+			DeletePop
 		},
 		methods: {
 			onClick_deleteBtn($index){
 				this.currIndex = $index;
 			},
 			onClick_cancelBtn($index){
-				this.currIndex = null;
+				this.currIndex = "";
 			},
 			onClick_removeBtn($index){
-				this.currIndex = null;
+				this.currIndex = "";
 			},
 			onClick_detailBtn(){
 				this.isShowDetailPop = true;
@@ -118,7 +112,7 @@
 		}
 	}
 </script>
-<style type="text/css" lang="sass" rel="stylesheet/css">
+<style type="text/css" lang="sass" rel="stylesheet/css" scoped>
 	@import "../../css/mixin.scss";
 	@import "../../css/message.scss";
 </style>
