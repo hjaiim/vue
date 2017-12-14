@@ -10,7 +10,6 @@ export default function (to, next)
 			next();
 		})
 	})
-
 }
 export function getVerifyInfo()
 {
