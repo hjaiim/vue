@@ -14,6 +14,7 @@ _initList.push(initGlobal);
 _initList.push(initStaticData);
 _initList.push(initLogin);
 
+
 export function init($callback)
 {
 	var FastClick = require('fastclick');

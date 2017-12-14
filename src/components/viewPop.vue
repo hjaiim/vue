@@ -9,6 +9,7 @@
 					</div>
 					<div class="popup-content">
 						<slot>
+
 						</slot>
 					</div>
 				</div>
@@ -105,7 +106,7 @@
 			position: relative;
 			margin: 0 auto;
 			width: 720px;
-			height: 288px;
+			/*height: 288px;*/
 			border: 1px solid #e8e8e8;
 			background: #ffffff;
 			/*-webkit-box-shadow: 0 0 10px  rgba(0, 0, 0, 0.25);*/
