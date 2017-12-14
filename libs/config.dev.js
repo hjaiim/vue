@@ -18,8 +18,7 @@ var WEB_CONFIG = {
 
 	url: {
 		domain: "",
-  	server:"http://47.96.176.167:8101",
-//		server: "http://192.168.12.219:8001/"
+		server: "http://192.168.12.4:8080/"
 	},
 	http: {
 		method: "post",
@@ -27,9 +26,9 @@ var WEB_CONFIG = {
 		repeatReqTime: 2000,
 		req: {
 			result: {
-				name: "status",
+				name: "code",
 				type: "number",
-				success: 1
+				success: 2000
 			},
 			data: {
 				name: "data"
@@ -63,7 +62,7 @@ var WEB_CONFIG = {
 		pageSize: 20,
 		accountRegExp: /^1(3|4|5|7|8)\d{9}$/,
 		passwordRegExp: /^\w{6,20}$/,
-		hotMapMax:1000,
+		hotMapMax: 1000,
 		hotMapOptions: {
 			gradient: {
 				.25: '#3242fc',
@@ -75,11 +74,11 @@ var WEB_CONFIG = {
 		},
 		radiusRatio: 50,
 		hotMapLevel: 15,
-		level:5,
-		hotMapMinZoom:15,
-		hotMapMaxZoom:19
+		level: 5,
+		hotMapMinZoom: 15,
+		hotMapMaxZoom: 19
 	}
-}
+};
 
 WEB_CONFIG.path.ver = ver || "./";
 var production = {};
