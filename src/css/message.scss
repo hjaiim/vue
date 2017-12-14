@@ -138,14 +138,8 @@
 }
 
 .table-content {
-  padding-top: 24px;
-  font-size: 14px;
   .inner-table {
-	width: 100%;
-	border-collapse: collapse;
 	tr {
-	  border: 1px solid #efefef;
-	  height: 56px;
 	  th {
 		&:nth-of-type(1) {
 		  width: 20%;
@@ -159,9 +153,7 @@
 		&:nth-of-type(4) {
 		  width: 21%;
 		}
-		&:nth-of-type(5) {
-		  min-width: 110px;
-		}
+
 	  }
 	  td {
 		color: #404040;
@@ -175,169 +167,10 @@
 		  width: 23.3%;
 		}
 		&:nth-of-type(4) {
-		  width: 22%;
+		  width: 24%;
 		}
-		&:nth-of-type(5) {
-		  min-width: 110px;
-		}
-	  }
-	  .draw-tick {
-		display: inline-block;
-		@include wh(18px, 18px);
-		margin-left: 26px;
-		vertical-align: middle;
-		&:after, &:before {
-		  content: '';
-		  font-family: helvetica;
-		  display: inline-block;
-		  width: 18px;
-		  height: 18px;
-		  left: 0;
-		  position: absolute;
-		  bottom: 0;
-		  text-align: center;
-		  @include borderRadius(3px);
-		}
-		&:before {
-		  border: 1px solid #cccccc;
-		  background-color: #ffffff;
-		  -moz-transition: all 0.3s ease-in-out;
-		  -o-transition: all 0.3s ease-in-out;
-		  -webkit-transition: all 0.3s ease-in-out;
-		  transition: all 0.3s ease-in-out;
-		}
-		&:after {
-		  color: #ffffff;
-		  content: "\2713";
-		  line-height: 18px;
-		  font-size: 14px;
-		}
-		&:hover {
-		  &:after {
-			color: #c7c7c7;
-		  }
-		}
-		&.action {
-		  &:before {
-			border: 1px solid #f36478;
-			-moz-box-shadow: inset 0 0 0 9px #f36478;
-			-webkit-box-shadow: inset 0 0 0 9px #f36478;
-			box-shadow: inset 0 0 0 9px #f36478;
-		  }
-		  &:after {
-			color: #ffffff;
-		  }
 
-		}
-	  }
-	  .rank-num {
-		display: inline-block;
-		padding-left: 30px;
-		height: 18px;
-		line-height: 18px;
-	  }
-	  .wait-pick {
-		color: #8de1c1;
-	  }
-	  .action-menu {
-		padding-right: 35%;
-		text-align: right;
-		span {
-		  color: #61a4de;
-		  position: relative;
-		  &:hover {
-			color: #2c85d3;
-
-		  }
-		}
-		span:nth-of-type(2) {
-		  text-align: right;
-		  .delete-pop {
-			right: -18px;
-			top: -132px;
-			z-index: 5;
-			@include wh(268px, 118px);
-			background: #ffffff;
-			@include borderRadius(4px);
-			&:before {
-			  position: absolute;
-			  content: "";
-			  height: 12px;
-			  width: 12px;
-			  bottom: -6px;
-			  right: 25px;
-			  overflow: hidden;
-			  background-color: #ffffff;
-			  pointer-events: none;
-			  transform: rotate(-135deg);
-			  z-index: -1;
-			  border-top: 1px solid rgba(0, 0, 0, 0.25);
-			  border-left: 1px solid rgba(0, 0, 0, 0.25);
-			  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-			}
-			.sure-content {
-			  left: 0;
-			  top: 0;
-			  width: 100%;
-			  height: 100%;
-			  cursor: default;
-			  background-color: #ffffff;
-			  .quesiton-txt {
-				height: 62px;
-				line-height: 62px;
-				padding: 0 0 6px 28px;
-				vertical-align: middle;
-				text-align: left;
-				img {
-				  display: inline-block;
-				  vertical-align: middle;
-				}
-				span {
-				  display: inline-block;
-				  padding-left: 14px;
-				  vertical-align: middle;
-				  height: 62px;
-				  line-height: 62px;
-				  font-size: 14px;
-				  color: #333333;
-				}
-
-			  }
-			  .btn-wrap {
-				padding-right: 8px;
-				.action-btn {
-				  margin-right: 24px;
-				  @include wh(48px, 26px);
-				  line-height: 26px;
-				  text-align: center;
-				  color: #333333;
-				  @include borderRadius(4px);
-
-				}
-				.cancel-btn {
-				  border: 1px solid #dddddd;
-				  background: #f8f8f8;
-				  &:hover {
-					border: 1px solid #cccccc
-				  }
-				}
-				.delete-btn {
-				  border: 1px solid transparent;
-				  background: #ed5564;
-				  color: #ffffff;
-				  &:hover {
-					background: #f5374a;
-				  }
-				}
-			  }
-			}
-		  }
-		}
-	  }
-	  .is-picked {
-		color: #f2808b;
 	  }
 	}
-
   }
 }
