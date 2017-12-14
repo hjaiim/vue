@@ -1,10 +1,15 @@
+import g from "./../../global";
+import loginManager from "./../../js/manager/LoginManager";
 export default function (to, next)
 {
-	getUserInfo().then(() =>
+	loginManager.checkLogin(to, next, () =>
 	{
-		next();
-	})
+		getUserInfo().then(() =>
+		{
+			next();
+		})
 
+	})
 }
 
 export function getUserInfo()
@@ -13,7 +18,7 @@ export function getUserInfo()
 	{
 		g.net.call("user/queryUserInfo").then(($data) =>
 		{
-			trace($data);
+			g.data.userInfo.update($data);
 			resolved()
 		}, (err) =>
 		{

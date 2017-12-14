@@ -8,24 +8,22 @@ var _lastUrl = "";
 
 function init($callback)
 {
-
 	g.addEventListener("APP_IS_LOGIN", onAppLogin_global);
 	g.net.call('user/queryUserIsLogin').then((d) =>
 	{
 		_isLogin = true;
-// 		g.data.userInfo.update(d);
-		$callback();
-	}, (error) =>
+		$callback && $callback();
+	}, (err) =>
 	{
 		_isLogin = false;
-		logout();
+		$callback && $callback()
 	});
 }
 
 function checkLogin($to, $next, $callBack)
 {
 	_lastUrl = "";
-	var passUrl = ['/login', '/resetpwd', '/register']
+	var passUrl = ['/login', '/resetpwd', '/register'];
 	if (_isLogin)
 	{
 		//当前已登录
@@ -74,6 +72,7 @@ export function logout()
 	});
 }
 
+
 function onAppLogin_global(e)
 {
 	_isLogin = true;
@@ -82,13 +81,9 @@ function onAppLogin_global(e)
 	{
 		g.url = _lastUrl;
 	}
-	else if (g.data.userInfo.authStatus !== 2)
-	{
-		$next("/verify")
-	}
 	else
 	{
-		$next("/");
+		g.url = "/";
 	}
 }
 
