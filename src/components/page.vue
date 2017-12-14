@@ -196,9 +196,17 @@
 				{
 					this.selectPage = 1;
 				}
+			},
+			currPage()
+			{
+				this.init();
 			}
 		},
 		methods: {
+			init()
+			{
+				this.indexPage = this.currPage;
+			},
 			onClick_pageBtn($page)
 			{
 				if (isNaN(int($page)))
@@ -277,11 +285,7 @@
 	.operate {
 		font-size: 12px;
 		line-height: 22px;
-		position: absolute;
-		bottom: 300px;
-		right: 46px;
 		color: #909ca7;
-		min-width: 773px;
 		.op {
 			float: right;
 		}
@@ -366,63 +370,67 @@
 		}
 
 		.number {
-			height: 25px;
+			height: 35px;
 			text-align: center;
-			line-height: 25px;
-			border: 1px solid transparent;
+			line-height: 35px;
+			width: 35px;
+			border: 1px solid #dddddd;
 			border-radius: 4px;
-			margin: 0 2px;
-			background-color: #f2f5f6;
+			margin: 0 8px;
+			background-color: #fafafa;
 			display: inline-block;
 			cursor: pointer;
 			float: left;
 			font-size: 14px;
+
 			-webkit-transition: all .3s ease;
 			-moz-transition: all .3s ease;
 			-ms-transition: all .3s ease;
 			-o-transition: all .3s ease;
-			padding: 0 10px;
+			color: #6c6c6c;
 			transition: all .3s ease;
 			&:hover {
-				border-color: #108ee9;
-				color: #108ee9;
+				color: #ffffff;
+				border: 1px solid transparent;
+				background-color: #f36478;
 			}
 		}
 
 		.active-page {
 			color: #ffffff;
-			background-color: #108ee9;
+			background-color: #f36478;
+			border: 1px solid transparent;
 			&:hover {
 				color: #ffffff;
-				background-color: #108ee9;
+				background-color: #f36478;
 			}
 		}
 
 		.total-page, .to-page {
 			float: left;
-			height: 25px;
-			line-height: 25px;
-			margin: 0 10px;
+			height: 36px;
+			line-height: 36px;
+			margin: 0 25px 0 0;
 			font-size: 14px;
 			.to {
 				display: inline;
 				resize: none;
 				height: 25px;
-				width: 35px;
+				width: 25px;
+				padding: 5px;
+				border: 1px solid #dddddd;
 				text-align: center;
 				border-radius: 3px;
 				background: #f7f9fa;
-				margin: 0 2px;
-				padding: 0 10px;
+				margin: 0 15px;
 				color: #909ca7;
-				border: 1px solid transparent;
 				-webkit-transition: all .3s ease;
 				-moz-transition: all .3s ease;
 				-ms-transition: all .3s ease;
 				-o-transition: all .3s ease;
 				transition: all .3s ease;
 				&:hover {
-					border-color: #108ee9;
+					border-color: #f36478;
 				}
 			}
 
@@ -433,7 +441,7 @@
 			height: 22px;
 			width: 6em;
 			color: #ffffff;
-			background-color: #5baade;
+			background-color: #f36478;
 			line-height: 22px;
 			text-align: center;
 			border-radius: 5px;
@@ -464,4 +472,5 @@
 	.page-middle {
 		padding-left: 5px;
 	}
+
 </style>

@@ -53,6 +53,17 @@ export default class RolePool {
 		return _list;
 	}
 
+	get total()
+	{
+		return _total;
+	}
+
+	get totalPage()
+	{
+		return _totalPage;
+	}
+
+
 	removeAll()
 	{
 		_list = [];

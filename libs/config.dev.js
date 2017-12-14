@@ -60,7 +60,7 @@ var WEB_CONFIG = {
 		defaultLang: "cn",
 		loginExpires: 10 * 60,
 		sendCodeTime: 5,
-		pageSize: 9,
+		pageSize: 20,
 		accountRegExp: /^1(3|4|5|7|8)\d{9}$/,
 		passwordRegExp: /^\w{6,20}$/,
 		hotMapMax:1000,
