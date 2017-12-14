@@ -10,7 +10,6 @@ function init($callback)
 {
 
 	g.addEventListener("APP_IS_LOGIN", onAppLogin_global);
-	$callback();
 	g.net.call('user/queryUserIsLogin').then((d) =>
 	{
 		_isLogin = true;
@@ -19,7 +18,7 @@ function init($callback)
 	}, (error) =>
 	{
 		_isLogin = false;
-		$callback();
+		logout();
 	});
 }
 
