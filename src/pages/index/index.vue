@@ -93,9 +93,9 @@
 				telphone: "",
 				email: "",
 				remark: "",
-				password:"",
-				newPwd:"",
-				confirmPwd:""
+				password: "",
+				newPwd: "",
+				confirmPwd: ""
 
 			}
 		},
@@ -177,5 +177,5 @@
 	@import "../../css/percenter.scss";
 </style>
 <!--<style type="text/css" lang="sass" rel="stylesheet/css">-->
-	<!--@import "../../css/personal.scss";-->
+<!--@import "../../css/personal.scss";-->
 <!--</style>-->
