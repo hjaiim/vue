@@ -137,9 +137,9 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("departmentCount") && (this.departCount = $dObj.departmentCount);
 	$dObj.hasOwnProperty("dutyCount") && (this.dutyCount = $dObj.dutyCount);
 	$dObj.hasOwnProperty("isShow") && (this.isShow = $dObj.isShow);
-	if ($dObj.hasOwnProperty("departmentResultList"))
+	if ($dObj.hasOwnProperty("departWrapperResults"))
 	{
-		g.data.departmentPool.update($dObj.departmentResultList);
+		g.data.departmentPool.update($dObj.departWrapperResults);
 	}
 
 }

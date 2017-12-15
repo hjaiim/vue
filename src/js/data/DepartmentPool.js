@@ -108,8 +108,8 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("departmentName") && (this.name = $dObj.departmentName)
 	$dObj.hasOwnProperty("companyId") && (this.parentId = $dObj.companyId)
 	$dObj.hasOwnProperty("creatorId") && (this.creatorId = $dObj.creatorId)
-	if ($dObj.hasOwnProperty("dutyResultList"))
+	if ($dObj.hasOwnProperty("organizeDutyResults"))
 	{
-		g.data.dutyPool.update(children.dutyResultList);
+		g.data.dutyPool.update($dObj.organizeDutyResults);
 	}
 }
