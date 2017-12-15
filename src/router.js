@@ -23,8 +23,6 @@ import OppApply from "./pages/oppApply/oppApply.vue"; // 商机商机申请
 import OppApplyMain from "./pages/oppApply/oppApply";
 import OppMan from "./pages/oppMan/oppMan.vue";		 // 商机管理
 import OppManMain from "./pages/oppMan/oppMan";
-import ModPwd from "./pages/modPwd/modPwd.vue";     //修改密码
-import ModPwdMain from "./pages/modPwd/modPwd";     //修改密码
 import PositionMan from "./pages/positionMan/positionMan.vue";	 // 职位管理
 import PositionManMain from "./pages/positionMan/positionMan";
 import RoleMan from "./pages/roleMan/roleMan.vue";	 // 角色管理
@@ -106,12 +104,6 @@ export default [
 		name: "我的商机",
 		component: MyOpp,
 		preload: MyOppMain
-	},
-	{
-		path: '/modpwd',
-		name: "修改密码",
-		component: ModPwd,
-		preload: ModPwdMain
 	},
 	{
 		path: '/positionman',

@@ -61,13 +61,20 @@
 			</div>
 
 			<div class="personal-message" v-show="type=='modpwd'">
-				<p class="personal-form"><span class="personal-title">原密码</span><input
-						class="personal-content pensonal-input" v-model="password"></p>
-				<p class="personal-form"><span class="personal-title">新密码</span><input
-						class="personal-content pensonal-input" v-model="newPwd"></p>
-				<p class="personal-form"><span class="personal-title">确认密码</span><input
-						class="personal-content pensonal-input" v-model="confirmPwd"></p>
-				<div class="btn btn-save pointer">保存</div>
+				<div class="personal-form"><span class="personal-title">原密码</span>
+					<input-bar class="personal-content pensonal-input" placeholder="" type="password"
+							   v-model="oldPwd"></input-bar>
+					<div class="personal-form"><span class="personal-title">新密码</span>
+						<input-bar class="personal-content pensonal-input" placeholder="" type="password"
+								   v-model="newPwd"></input-bar>
+					</div>
+					<div class="personal-form"><span class="personal-title">确认密码</span>
+						<input-bar class="personal-content pensonal-input" placeholder="" type="password"
+								   v-model="surePwd"></input-bar>
+					</div>
+					<div class="btn btn-save pointer">保存</div>
+
+				</div>
 			</div>
 		</div>
 	</com-layout>
