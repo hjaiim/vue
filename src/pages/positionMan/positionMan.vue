@@ -2,12 +2,12 @@
     <com-layout currPath="/positionman">
         <div class="plat-wrap">
             <div class="action-wrap clear">
-				<span class="add-btn action-btn ani-time left pointer">
+				<span class="add-btn action-btn ani-time left pointer" @click="onClick_addPostBtn">
 					<i class="cross-txt relative"></i>
 					<span>新增</span>
 				</span>
             </div>
-            <div class="table-content">
+            <div class="table-content post-table">
                 <table class="inner-table">
                     <thead>
                     <tr>
@@ -22,7 +22,7 @@
                     <tbody>
                     <tr v-for="(n,index) in 10">
                         <td><span class="rank-num">{{index+1}}</span></td>
-                        <td><span :class="[index==2?'is-picked':'', index==5?'wait-pick':'']">商机管理员</span></td>
+                        <td>商机管理员</span></td>
                         <td>商机审核岗</td>
                         <td>王鑫</td>
                         <td>2017.12.15 10:10:10</td>
@@ -69,7 +69,7 @@
             return {
                 g: g,
                 currIndex: '',
-                isShowNewPostPop:true
+                isShowNewPostPop: false
             }
         },
         components: {
@@ -91,6 +91,9 @@
             onClick_detailBtn(){
 
             },
+            onClick_addPostBtn(){
+                this.isShowNewPostPop = true;
+            }
         }
     }
 </script>

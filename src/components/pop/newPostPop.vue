@@ -4,16 +4,30 @@
         <div class="detail-container">
             <p class="note-tit">新增岗位</p>
             <div class="note-content">
-                <div class="company-message">
+                <div class="company-message no-border add-post">
                     <p class="from-group">
                         <span class="form-title">名称</span>
                         <input type="text" class="form-control">
                     </p>
                     <p class="from-group">
                         <span class="form-title">类型</span>
-                        <label for=""><input type="checkbox">商机提交岗</label>
-                        <label for=""><input type="checkbox">商机审核岗</label>
+                        <span class="action-box post-type">
+                            <i class="pointer action"></i>
+                            <span>商机提交岗</span>
+                        </span>
+                        <span class="action-box post-type">
+                            <i class="pointer"></i>
+                            <span>商机审核岗</span>
+                        </span>
+                        <span class="form-trap form-type" v-show="">商机审核岗</span>
                     </p>
+                </div>
+                <div class="btn-wrap clear">
+				<span class="action-btn right pop-del-btn cancel-btn ani-time pointer"
+                      @click.stop="onClick_cancelBtn(index+1)">取消</span>
+				<span class="action-btn right pop-del-btn delete-btn ani-time pointer"
+                      @click.stop="onClick_removeBtn(index+1)">删除
+				</span>
                 </div>
             </div>
         </div>
@@ -57,12 +71,22 @@
             border-bottom: 1px solid #eaeaea;
         }
         .note-content {
-            padding: 35px 72px 0;
+            padding: 35px 72px 40px;
             line-height: 36px;
             font-size: 14px;
 
         }
     }
+
+    .add-post {
+        margin-bottom: 30px;
+    }
+
+    .post-type {
+        margin-left: 0;
+        margin-right: 20px;
+    }
+
 </style>
 <style lang="sass" rel="stylesheet/scss" type="text/scss">
     @import "../../css/pop";

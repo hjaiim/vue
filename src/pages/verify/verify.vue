@@ -208,6 +208,6 @@
 	@import "../../css/mixin.scss";
 	@import "../../css/percenter.scss";
 </style>
-<style type="text/css" lang="sass" rel="stylesheet/css">
-	@import "../../css/personal.scss";
-</style>
+<!--<style type="text/css" lang="sass" rel="stylesheet/css">-->
+	<!--@import "../../css/personal.scss";-->
+<!--</style>-->
