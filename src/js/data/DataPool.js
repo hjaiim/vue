@@ -11,7 +11,7 @@ import SearchCompanyPool from "./SearchCompanyPool";
 import MessagePool from "./MessagePool";
 import DepartmentPool from "./DepartmentPool";
 import DutyPool from "./DutyPool";
-import PositionPool from "./DutyPool";
+import PositionPool from "./PositionPool";
 import AccountPool from "./AccountPool";
 import BusinessPool from "./BusinessPool";
 import RolePool from "./RolePool";

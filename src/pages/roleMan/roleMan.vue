@@ -1,103 +1,111 @@
 <template>
-    <com-layout currPath="/roleman">
-        <div class="plat-wrap">
-            <div class="action-wrap clear">
+	<com-layout currPath="/roleman">
+		<div class="plat-wrap">
+			<div class="action-wrap clear">
 				<span class="add-btn action-btn ani-time left pointer">
 					<i class="cross-txt relative"></i>
 					<span>新角色</span>
 				</span>
-            </div>
-            <div class="table-content">
-                <table class="inner-table">
-                    <thead>
-                    <tr>
-                        <th><span class="rank-num">序号</span></th>
-                        <th>角色名称</th>
-                        <th>说明</th>
-                        <th>设定人</th>
-                        <th>公司负责人</th>
-                        <th>负责人电话</th>
-                        <th>公司电话</th>
-                        <th><p class="action-menu">操作</p></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="(n,index) in 10">
-                        <td><span class="rank-num">{{index+1}}</span></td>
-                        <td><span :class="[index==2?'is-picked':'', index==5?'wait-pick':'']">广宁分公司</span></td>
-                        <td>6</td>
-                        <td>26</td>
-                        <td>王鑫</td>
-                        <td>15555555555</td>
-                        <td>88888888</td>
-                        <td>
-                            <p class="action-menu clear"><span class="left pointer draw-line ani-time"
-                                                               @click="onClick_detailBtn">编辑
-							</span>
-								<span class="right pointer draw-line ani-time" @click="onClick_deleteBtn(index+1)">删除
-									<delete-pop :isDeletePop="(index+1)=== currIndex"
-                                                @cancel="onClick_cancelBtn(index+1)"
-                                                @remove="onClick_removeBtn(index+1)">
+			</div>
+			<div class="table-content">
+				<table class="inner-table">
+					<thead>
+					<tr>
+						<th><span class="rank-num">序号</span></th>
+						<th>角色名称</th>
+						<th>说明</th>
+						<th>设定人</th>
+						<th>已分配</th>
+						<th><p class="action-menu">操作</p></th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr v-for="(item,index) in roleList">
+						<td><span class="rank-num">{{index+1}}</span></td>
+						<!--:class="[index==2?'is-picked':'', index==5?'wait-pick':'']"-->
+						<td><span>{{item.name}}</span></td>
+						<td>{{item.desc}}</td>
+						<td>{{item.setter}}</td>
+						<td>{{item.distribute}}</td>
+						<td>
+							<p class="action-menu clear">
+								<span class="left pointer draw-line ani-time" @click="onClick_detailBtn(item.id)">编辑
+								</span>
+								<span class="right pointer draw-line ani-time" @click="onClick_deleteBtn(item.id)">删除
+									<delete-pop :isDeletePop="item.isShow"
+												@close="onClose_deletePop">
 										<span>您是否真的要删除该角色？</span>
 									</delete-pop>
 							</span>
-                            </p>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div class="show-page clear">
-                    <common-page class="right" :total="200" :currPage="10" :showPageSize="false" :showTotalCount="true"
-                                 :showElevator="true"
-                                 :showFirstAndEnd="true"></common-page>
-                </div>
+							</p>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+				<div class="show-page clear" v-if="g.data.searchRolePool.totalPage > 1">
+					<common-page class="right" :total="g.data.searchRolePool.total" :currPage="currPage"
+								 :showTotalCount="true"
+								 :showElevator="true" :showFirstAndEnd="true"></common-page>
+				</div>
 
 
-            </div>
-        </div>
-        <add-role-pop :isShowPopView="isShowAddRolePop"></add-role-pop>
-    </com-layout>
+			</div>
+		</div>
+		<add-role-pop :isShowPopView="isShowRolePop" :currId="currId"></add-role-pop>
+	</com-layout>
 </template>
 <script type="text/ecmascript-6">
-    import g from "../../global";
-    import ComLayout from "../../components/comLayout.vue";
-    import CommonPage from "../../components/page.vue";
-    import DeletePop from "../../components/pop/deletePop.vue"
-    import AddRolePop from "../../components/pop/addRolePop.vue"
-    export default{
-        created(){
-        },
-        data(){
-            return {
-                g: g,
-                currIndex: '',
-                isShowAddRolePop:false,
-            }
-        },
-        components: {
-            ComLayout,
-            CommonPage,
-            DeletePop,
-            AddRolePop,
+	import g from "../../global";
+	import ComLayout from "../../components/comLayout.vue";
+	import CommonPage from "../../components/page.vue";
+	import DeletePop from "../../components/pop/deletePop.vue"
+	import AddRolePop from "../../components/pop/addRolePop.vue"
+	export default{
+		created(){
+			this.routerUpdated();
+		},
+		data(){
+			return {
+				g: g,
+				roleList: [],
+				currId: 0,
+				isShowRolePop: false
+			}
+		},
+		components: {
+			ComLayout,
+			CommonPage,
+			DeletePop,
+			AddRolePop
 
-        },
-        methods: {
-            onClick_deleteBtn($index){
-                this.currIndex = $index;
-            },
-            onClick_cancelBtn($index){
-                this.currIndex = "";
-            },
-            onClick_removeBtn($index){
-                this.currIndex = "";
-            },
-            onClick_detailBtn(){
+		},
+		methods: {
+			routerUpdated()
+			{
+				this.roleList = g.data.searchRolePool.list;
+			},
+			onClick_detailBtn($id)
+			{
+				this.currId = $id;
+				this.isShowRolePop = true;
+			},
+			onClick_deleteBtn($id)
+			{
+				g.data.searchRolePool.getDataById($id).update({isShow: true});
+			},
+			onClose_deletePop($result)
+			{
+				g.data.searchRolePool.getDataById($id).update({isShow: false});
+				if ($result)
+				{
 
-            }
-        }
-    }
+				}
+			}
+
+		}
+	}
 </script>
 <style type="text/css" lang="sass" rel="stylesheet/css" scoped>
-    @import "../../css/mixin.scss";
-    @import "../../css/platManage.scss";
+	@import "../../css/mixin.scss";
+	@import "../../css/platManage.scss";
 </style>
