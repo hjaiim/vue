@@ -2,7 +2,7 @@
 	<com-layout currPath="/roleman">
 		<div class="plat-wrap">
 			<div class="action-wrap clear">
-				<span class="add-btn action-btn ani-time left pointer">
+				<span class="add-btn action-btn ani-time left pointer" @click="onClick_addRoleBtn">
 					<i class="cross-txt relative"></i>
 					<span>新角色</span>
 				</span>
@@ -51,7 +51,7 @@
 
 			</div>
 		</div>
-		<add-role-pop :isShowPopView="isShowRolePop" :currId="currId"></add-role-pop>
+		<add-role-pop :isShowPopView="isShowRolePop" :currId="currId" @close="onClose_rolePop"></add-role-pop>
 	</com-layout>
 </template>
 <script type="text/ecmascript-6">
@@ -84,6 +84,11 @@
 			{
 				this.roleList = g.data.searchRolePool.list;
 			},
+			onClick_addRoleBtn()
+			{
+				this.currId = 0;
+				this.isShowRolePop = true;
+			},
 			onClick_detailBtn($id)
 			{
 				this.currId = $id;
@@ -91,15 +96,20 @@
 			},
 			onClick_deleteBtn($id)
 			{
+				this.currId = $id;
 				g.data.searchRolePool.getDataById($id).update({isShow: true});
 			},
 			onClose_deletePop($result)
 			{
-				g.data.searchRolePool.getDataById($id).update({isShow: false});
+				g.data.searchRolePool.getDataById(this.currId).update({isShow: false});
 				if ($result)
 				{
 
 				}
+			},
+			onClose_rolePop($result)
+			{
+				this.isShowRolePop = false;
 			}
 
 		}

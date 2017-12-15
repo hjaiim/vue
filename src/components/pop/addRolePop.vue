@@ -16,13 +16,11 @@
                     </p>
                     <p class="from-group">
                         <span class="form-title left">平台权限</span>
-
                     </p>
                   </div>
-                <div class="pop-btn right pointer">取消</div>
-                <div class="btn-submit pop-btn right pointer">提交</div>
+                <div class="pop-btn right pointer" @click="onClick_cancelBtn">取消</div>
+                <div class="btn-submit pop-btn right pointer" @click="onClick_confirmBtn">提交</div>
             </div>
-
 
         </div>
     </view-popup>
@@ -31,9 +29,14 @@
     import g from "../../global";
     import ViewPopup from "../viewPop.vue"
     export default{
+        created()
+        {
+            this.init();
+        },
         data(){
             return {
                 g: g,
+                roleData:{}
             }
         },
         components: {
@@ -42,14 +45,38 @@
         props: {
             isShowPopView: {
                 type: Boolean,
-                default: false,
+                default: false
+            },
+            currId:{
+
+            }
+        },
+        watch:{
+            currId($val)
+            {
+                this.init();
             }
         },
         methods: {
-            onClose_pop(){
-                this.$emit('close');
+            init()
+            {
+                  if(!this.currId)
+                  {
+                      this.roleData = g.data.searchRolePool.getDataById(this.currId);
+                  }
             },
-
+            onClose_pop()
+            {
+                this.$emit('close', false);
+            },
+            onClick_cancelBtn()
+            {
+                this.$emit('close', false);
+            },
+            onClick_confirmBtn()
+            {
+                this.$emit('close', true);
+            }
         }
     }
 </script>
