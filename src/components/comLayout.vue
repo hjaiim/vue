@@ -57,7 +57,6 @@
 		methods: {
 			init()
 			{
-
 				this.$nextTick(() =>
 				{
 					var navData = g.data.staticNavPool.getChildByPath(this.currPath);

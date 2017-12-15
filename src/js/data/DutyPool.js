@@ -1,6 +1,10 @@
 /**
  * Created by Administrator on 2017/12/11.
  */
+var _list = [];
+var _hash = {};
+var _total = 0;
+var _totalPage = 1;
 export default class DutyPool {
 	constructor()
 	{

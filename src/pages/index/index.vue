@@ -77,7 +77,6 @@
 		methods: {
 			routerUpdated()
 			{
-				trace(11111);
 				this.type = g.vue.getQuery('type', "personal");
 			},
 			onClick_tabItem($id)

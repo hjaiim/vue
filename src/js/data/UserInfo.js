@@ -25,6 +25,7 @@ var _remark = 0;
 var _idCartFront = "";
 var _idCartBack = "";
 var _workCard = "";
+var _msgCount = 0;
 
 export default class UserInfo {
 	constructor()
@@ -43,7 +44,7 @@ export default class UserInfo {
 		$dObj.hasOwnProperty('mobile') && (_phone = $dObj.mobile);
 		$dObj.hasOwnProperty('roleId') && (_roleId = $dObj.roleId);
 		$dObj.hasOwnProperty('roleName') && (_roleName = $dObj.roleName);
-		$dObj.hasOwnProperty('telphone') && (_contact = $dObj.telphone);
+		$dObj.hasOwnProperty('telphone') && (_telphone = $dObj.telphone);
 		$dObj.hasOwnProperty('email') && (_email = $dObj.email);
 		$dObj.hasOwnProperty('avatar') && (_avatar = $dObj.avatar);
 		$dObj.hasOwnProperty('permissionList') && (_rightList = $dObj.permissionList);
@@ -61,6 +62,7 @@ export default class UserInfo {
 		$dObj.hasOwnProperty('idcardImagB') && (_idCartBack = $dObj.idcardImagB);
 		$dObj.hasOwnProperty('workCardImag') && (_workCard = $dObj.workCardImag);
 		$dObj.hasOwnProperty('authStatus') && (_authStatus = $dObj.authStatus);
+		$dObj.hasOwnProperty('msgCount') && (_msgCount = $dObj.msgCount);
 	}
 
 	get id()
@@ -93,7 +95,6 @@ export default class UserInfo {
 		return _roleName;
 	}
 
-
 	get telphone()
 	{
 		return _telphone;
@@ -118,6 +119,7 @@ export default class UserInfo {
 	{
 		return _departmentId;
 	}
+
 	get departmentName()
 	{
 		return _departmentName;
@@ -127,7 +129,6 @@ export default class UserInfo {
 	{
 		return _companyId;
 	}
-
 
 	get companyName()
 	{
@@ -139,7 +140,6 @@ export default class UserInfo {
 		return _dutyId;
 	}
 
-
 	get dutyName()
 	{
 		return _dutyName;
@@ -149,7 +149,6 @@ export default class UserInfo {
 	{
 		return _positionId;
 	}
-
 
 	get positionName()
 	{
@@ -179,6 +178,11 @@ export default class UserInfo {
 	get workCard()
 	{
 		return _workCard;
+	}
+
+	get msgCount()
+	{
+		return _msgCount;
 	}
 
 	removeAll()

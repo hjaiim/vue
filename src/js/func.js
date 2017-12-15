@@ -1,12 +1,10 @@
-
+import loginManager from './../js/manager/LoginManager';
 export function dealErr($err)
 {
-	var msgInfo = g.data.langPool.getDataById("error" + $err.error.code);
-	g.ui.toast(msgInfo.content);
 	g.ui.hideLoading();
-	if ($err.error.code == 1000)
+	if ($err.status == 4005)
 	{
-		logout();
+		loginManager.logout();
 	}
 }
 export function oneOf($value, validList)

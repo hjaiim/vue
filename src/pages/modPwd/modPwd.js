@@ -1,7 +1,9 @@
-/**
- * Created by Administrator on 2017/12/12.
- */
+import g from "./../../global";
+import loginManager from "./../../js/manager/LoginManager";
 export default function (to, next)
 {
-	next();
+	loginManager.checkLogin(to, next, () =>
+	{
+
+	})
 }

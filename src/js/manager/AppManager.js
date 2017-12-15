@@ -12,7 +12,7 @@ var _initList = [];
 var _key;
 _initList.push(initGlobal);
 _initList.push(initStaticData);
-// _initList.push(initLogin);
+_initList.push(initLogin);
 
 
 export function init($callback)
