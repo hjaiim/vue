@@ -17,8 +17,8 @@
 	vertical-align: middle;
 	@include boxSizing;
   }
-  .search-btn{
-	height:30px;
+  .search-btn {
+	height: 30px;
 	line-height: 30px;
 	width: 58px;
 	text-align: center;
@@ -54,23 +54,10 @@
 	}
 	.search-bar {
 	  @include wh(149px, 30px);
-	  .search-name {
-		@include wh(130px, 18px);
-		padding: 5px 22px 5px 5px;
-		border: 1px solid #dedede;
-		@include borderRadius(5px);
-		&:focus {
-		  border: 1px solid #cccccc;
-		}
-	  }
-	  .close-btn {
-		right: -6px;
-		top: 5px;
-
-	  }
 	}
   }
 }
+
 .table-content {
   .inner-table {
 	tr {

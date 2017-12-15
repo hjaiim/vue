@@ -38,6 +38,7 @@
 <style lang="sass" rel="stylesheet/scss" type="text/scss" scoped>
 	.detail-container {
 		color: #333333;
+		height:288px;
 		.note-tit {
 			line-height: 64px;
 			height: 64px;
@@ -47,7 +48,6 @@
 			border-bottom: 1px solid #eaeaea;
 		}
 		.note-content {
-
 			padding: 35px 72px 0 ;
 			line-height: 36px;
 			font-size: 14px;

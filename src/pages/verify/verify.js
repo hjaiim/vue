@@ -9,6 +9,7 @@ export default function (to, next)
 		{
 			next();
 		})
+
 	})
 }
 export function getVerifyInfo()
@@ -18,15 +19,15 @@ export function getVerifyInfo()
 		g.net.call("user/queryUserAuthInfo").then(($data) =>
 		{
 			g.data.userInfo.update($data);
-			if($data.companyList)
+			if ($data.companyList)
 			{
 				g.data.companyPool.update($data.companyList);
 			}
-			if($data.departmentList)
+			if ($data.departmentList)
 			{
 				g.data.departmentPool.update($data.departmentList);
 			}
-			if($data.dutyList)
+			if ($data.dutyList)
 			{
 				g.data.dutyPool.update($data.dutyList);
 			}
