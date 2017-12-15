@@ -119,6 +119,7 @@ function createData($dObj)
 	d.contact = "";
 	d.departCount = 0;
 	d.dutyCount = 0;
+	d.isShow = false;
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -135,6 +136,7 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("comLinkTel") && (this.contact = $dObj.comLinkTel);
 	$dObj.hasOwnProperty("departmentCount") && (this.departCount = $dObj.departmentCount);
 	$dObj.hasOwnProperty("dutyCount") && (this.dutyCount = $dObj.dutyCount);
+	$dObj.hasOwnProperty("isShow") && (this.isShow = $dObj.isShow);
 	if ($dObj.hasOwnProperty("departmentResultList"))
 	{
 		g.data.departmentPool.update($dObj.departmentResultList);

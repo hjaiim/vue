@@ -7,9 +7,9 @@
 			</div>
 			<div class="btn-wrap clear">
 				<span class="action-btn right cancel-btn ani-time pointer"
-					  @click.stop="onClick_cancelBtn(index+1)">取消</span>
+					  @click.stop="onClick_cancelBtn">取消</span>
 				<span class="action-btn right delete-btn ani-time pointer"
-					  @click.stop="onClick_removeBtn(index+1)">删除
+					  @click.stop="onClick_confirmBtn">删除
 				</span>
 			</div>
 		</div>
@@ -24,16 +24,15 @@
 			}
 		},
 		props: {
-			isDeletePop: false,
+			isDeletePop: false
 		},
 		components: {},
 		methods: {
 			onClick_cancelBtn(){
-				this.$emit('cancel');
+				this.$emit('close', false);
 			},
-			onClick_removeBtn(){
-				this.$emit('remove');
-
+			onClick_confirmBtn(){
+				this.$emit('close', true);
 			}
 		}
 	}

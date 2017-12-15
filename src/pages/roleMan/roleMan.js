@@ -25,10 +25,10 @@ export function searchRoleList($params)
 	}
 	var promise = new Promise((resolved, rejected) =>
 	{
-		g.net.call("searchRoleList", _params).then(($data) =>
+		g.net.call("permission/queryRoleListByPage", _params).then(($data) =>
 		{
-			g.data.seachRolePool.removeAll();
-			g.data.seachRolePool.update($data);
+			g.data.searchRolePool.removeAll();
+			g.data.searchRolePool.update($data);
 			resolved();
 		}, (err) =>
 		{
