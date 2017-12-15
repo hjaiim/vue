@@ -1,5 +1,4 @@
 <template>
-
 	<com-layout currPath="/positionman">
 		<div class="plat-wrap">
 			<div class="action-wrap clear">
@@ -23,20 +22,17 @@
 					<tbody>
 					<tr v-for="(n,index) in 10">
 						<td><span class="rank-num">{{index+1}}</span></td>
-						<td>商机管理员</span></td>
+						<td>商机管理员</td>
 						<td>商机审核岗</td>
 						<td>王鑫</td>
 						<td>2017.12.15 10:10:10</td>
 						<td>
-							<p class="action-menu clear"><span class="left pointer draw-line ani-time"
-															   @click="onClick_detailBtn">修改
-							</span>
+							<p class="action-menu clear"><span class="left pointer draw-line ani-time"></span>
 								<span class="right pointer draw-line ani-time" @click="onClick_deleteBtn(item.id)">删除
-                                    <delete-pop :isDeletePop="isShowDeletePop"
-												@cancel="onClick_cancelBtn(index+1)"
-												@remove="onClick_removeBtn(index+1)">
-                                    <span>您是否真的要删除该岗位吗？</span>
-                                    </delete-pop>
+									<delete-pop :isDeletePop="isShowDeletePop"
+												@close="onClose_deletePop" >
+										<span>您是否真的要删除该岗位吗？</span>
+									</delete-pop>
 							</span>
 							</p>
 						</td>
@@ -49,8 +45,6 @@
 								 :showElevator="true"
 								 :showFirstAndEnd="true"></common-page>
 				</div>
-
-
 			</div>
 		</div>
 		<add-post-pop :isShowPopView="isShowNewPostPop"></add-post-pop>
@@ -81,16 +75,20 @@
 			AddPostPop
 		},
 		methods: {
-			onClick_deleteBtn($index){
+			onClick_addPostBtn()
+			{
+
+			},
+			onClick_deleteBtn($index)
+			{
 				this.currIndex = $index;
 			},
-			onClick_cancelBtn($index){
-				this.currIndex = "";
+			onClose_deletePop()
+			{
+
 			},
-			onClick_removeBtn($index){
-				this.currIndex = "";
-			},
-			onClick_detailBtn(){
+			onClick_detailBtn()
+			{
 
 			},
 		}

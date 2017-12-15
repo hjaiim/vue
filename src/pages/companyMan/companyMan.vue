@@ -8,10 +8,9 @@
 				</span>
 				<div class="search-wrap clear left">
 					<span class="left">公司名称</span>
-					<div class="search-bar left relative">
-						<input type="text" class="search-name" v-model="customerName">
-						<img class="close-btn absolute pointer" :src="g.path.images+'/close-popup.png'" alt="">
-					</div>
+					<input-bar class="search-bar left relative" placeholder="" type="text"
+							   v-model="customerName"></input-bar>
+
 				</div>
 				<span class="search-btn action-btn ani-time left pointer" @click="onClick_searchBtn">查询</span>
 			</div>
@@ -46,6 +45,7 @@
 								<span class="right pointer draw-line ani-time" @click="onClick_deleteBtn(item.id)">删除
 									<delete-pop :isDeletePop="item.isShow"
 												@close="onClose_deletePop">
+
 										<span>您是否真的要删除该角色？</span>
 									</delete-pop>
 							</span>
@@ -64,6 +64,7 @@
 		<add-company-pop :isShowPopView="isShowCompanyPop"
 						 @close="onClose_companyPop"
 						 :id="currId"></add-company-pop>
+
 	</com-layout>
 </template>
 <script type="text/ecmascript-6">
@@ -72,8 +73,11 @@
 	import CommonPage from "../../components/page.vue";
 	import DeletePop from "../../components/pop/deletePop.vue"
 	import AddCompanyPop from "../../components/pop/addCompanyPop.vue"
+	import InputBar from "../../components/inputBar.vue"
+
 	export default{
 		created(){
+
 			this.routerUpdated();
 		},
 		data(){
@@ -90,7 +94,8 @@
 			ComLayout,
 			CommonPage,
 			DeletePop,
-			AddCompanyPop
+			AddCompanyPop,
+			InputBar
 		},
 		computed: {
 			totalPages()

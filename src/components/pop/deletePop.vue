@@ -33,7 +33,6 @@
 			},
 			onClick_confirmBtn(){
 				this.$emit('close', true);
-
 			}
 		}
 	}
