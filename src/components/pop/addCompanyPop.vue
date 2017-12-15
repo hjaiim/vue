@@ -111,8 +111,7 @@
 				default: false
 			},
 			currId: {
-				type: Number,
-				default: 0
+				type: Number
 			}
 		},
 		watch: {
@@ -124,6 +123,7 @@
 		methods: {
 			init()
 			{
+				trace("this.currId",this.currId);
 				if (!this.currId)
 				{
 					this.companyData = g.data.companyPool.getDataById(this.currId)

@@ -1,13 +1,14 @@
 <template>
+
 	<com-layout currPath="/positionman">
 		<div class="plat-wrap">
 			<div class="action-wrap clear">
-				<span class="add-btn action-btn ani-time left pointer">
+				<span class="add-btn action-btn ani-time left pointer" @click="onClick_addPostBtn">
 					<i class="cross-txt relative"></i>
 					<span>新增</span>
 				</span>
 			</div>
-			<div class="table-content">
+			<div class="table-content post-table">
 				<table class="inner-table">
 					<thead>
 					<tr>
@@ -22,13 +23,13 @@
 					<tbody>
 					<tr v-for="(n,index) in 10">
 						<td><span class="rank-num">{{index+1}}</span></td>
-						<td><span :class="[index==2?'is-picked':'', index==5?'wait-pick':'']">商机管理员</span></td>
+						<td>商机管理员</span></td>
 						<td>商机审核岗</td>
 						<td>王鑫</td>
 						<td>2017.12.15 10:10:10</td>
 						<td>
-							<p class="action-menu clear">
-								<span class="left pointer draw-line ani-time" @click="onClick_detailBtn">修改
+							<p class="action-menu clear"><span class="left pointer draw-line ani-time"
+															   @click="onClick_detailBtn">修改
 							</span>
 								<span class="right pointer draw-line ani-time" @click="onClick_deleteBtn(item.id)">删除
                                     <delete-pop :isDeletePop="isShowDeletePop"
@@ -62,7 +63,8 @@
 	import DeletePop from "../../components/pop/deletePop.vue"
 	import AddPostPop from "../../components/pop/newPostPop.vue"
 	export default{
-		created(){
+		created()
+		{
 
 		},
 		data(){
@@ -93,6 +95,7 @@
 			},
 		}
 	}
+
 </script>
 <style type="text/css" lang="sass" rel="stylesheet/css">
 	@import "../../css/mixin.scss";
