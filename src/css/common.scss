@@ -300,12 +300,12 @@ input {
 .icon-trangle {
   position: absolute;
   top: 50%;
-  margin-top: -5px;
+  margin-top: -4px;
   right: 11px;
   display: inline-block;
-  border-top: 10px solid #ddd;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
+  border-top: 8px solid #ddd;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
   transition: transform .2s;
   transform: rotate(0deg);
 }
@@ -559,71 +559,73 @@ input {
 
 }
 
-.personal-message {
-  .personal-form {
-    margin-top: 18px;
-    height: auto;
-    &:after {
-      content: '';
-      display: block;
-      clear: both;
-    }
-    .personal-title {
-      width: 90px;
-      height: 40px;
-      line-height: 40px;
-      text-align: right;
-      display: inline-block;
-      margin-right: 30px;
-      font-size: 14px;
-    }
-    .personal-content {
-      font-size: 14px;
-      height: 40px;
-      line-height: 40px;
-    }
-    .pensonal-input {
-      width: 240px;
-      border: 1px solid #dddddd;
-      border-radius: 4px;
-      box-shadow: 0 0 2px #f5f5f5 inset;
-      padding: 0 12px;
-      box-sizing: border-box;
-    }
-    .code {
-      width: 124px;
-    }
-    .btn-send {
-      display: inline-block;
-      height: 40px;
-      width: 96px;
-      line-height: 40px;
-      text-align: center;
-      border-radius: 4px;
-      margin-left: 20px;
-      color: #666666;
-      background: #f4f4f4;
-    }
-    .bind-phone {
-      color: #fe6e05;
-      margin-left: 12px;
-    }
-    .note {
-      //width: 948px;
-      width: 86%;
-    }
+//.personal-message {
+.personal-form {
+  margin-top: 18px;
+  height: auto;
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
   }
-  .btn-save {
-    width: 160px;
-    height: 44px;
-    line-height: 44px;
-    text-align: center;
-    background: #ed5564;
-    color: #ffffff;
+  .personal-title {
+    width: 90px;
+    height: 40px;
+    line-height: 40px;
+    text-align: right;
+    display: inline-block;
+    margin-right: 30px;
+    font-size: 14px;
+  }
+  .personal-content {
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+  }
+  .pensonal-input {
+    width: 240px;
+    border: 1px solid #dddddd;
     border-radius: 4px;
-    margin: 40px 0 0 120px;
+    box-shadow: 0 0 2px #f5f5f5 inset;
+    padding: 0 12px;
+    box-sizing: border-box;
+  }
+  .code {
+    width: 124px;
+  }
+  .btn-send {
+    display: inline-block;
+    height: 40px;
+    width: 96px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 4px;
+    margin-left: 20px;
+    color: #666666;
+    background: #f4f4f4;
+  }
+  .bind-phone {
+    color: #fe6e05;
+    margin-left: 12px;
+  }
+  .note {
+    //width: 948px;
+    width: 86%;
   }
 }
+
+.btn-save {
+  width: 160px;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  background: #ed5564;
+  color: #ffffff;
+  border-radius: 4px;
+  margin: 40px 0 0 120px;
+}
+
+//}
 
 .form-list {
   width: 240px;
