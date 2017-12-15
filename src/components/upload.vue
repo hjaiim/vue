@@ -1,7 +1,7 @@
 <template>
-	<div class="upload-wrap">
+	<div class="upload-wrap absolute">
 		<div class="upload-inner">
-			<input type="file" :disabled="disabled" :accept="accept" class="upload-input"
+			<input type="file" :disabled="disabled" :accept="accept" class="upload-input pointer"
 				   :multiple="multiple" ref="fileUpload" @change="onChange_upload" />
 			<!--<span class="upload-label">{{text}}</span>-->
 		</div>
@@ -85,6 +85,9 @@
 		-webkit-border-radius: 50%;
 		-moz-border-radius: 50%;
 		border-radius: 50%;
+		left: 0;
+		top: 0;
+		overflow: hidden;
 		.upload-inner {
 			width: 100%;
 			height: 100%;

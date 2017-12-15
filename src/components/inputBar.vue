@@ -1,13 +1,10 @@
 <template>
-	<div class="form-input ">
-		<p class="error-msg">{{errmsg}}</p>
-		<div class="relative">
-			<input @blur="onBlur_accountInput" :type="type" @focus="onFocus_inputFocus" class="g-input"
-				   :placeholder="placeholder" @input="onInput_value" @keyup.enter="onKeyupEnter_searchInput"
-				   v-model="inputContent" :maxLength="maxLength" :readonly="readonly" autocomplete="off">
-			<i v-show="inputContent.length>0 && isShowClearBtn"
-			   class="close-search-btn ani-time pointer absolute" @click="onClick_closeBtn"></i>
-		</div>
+	<div class="search-input relative">
+		<input @blur="onBlur_accountInput" :type="type" @focus="onFocus_inputFocus" class="input-con"
+			   :placeholder="placeholder" @input="onInput_value" @keyup.enter="onKeyupEnter_searchInput"
+			   v-model="inputContent" :maxLength="maxLength" :readonly="readonly" autocomplete="off">
+		<i v-show="inputContent.length>0 && isShowClearBtn" class="close-search-btn ani-time pointer absolute" alt=""
+			  @click="onClick_closeBtn"></i>
 	</div>
 </template>
 <script type="text/ecmascript-6">
@@ -73,6 +70,7 @@
 			onKeyupEnter_searchInput(e)
 			{
 				this.$emit('keyenter', e);
+
 			},
 			onInput_value(e)
 			{
@@ -87,54 +85,40 @@
 	}
 </script>
 <style type="text/scss" lang="sass" rel="stylesheet/scss">
-	.form-input {
-		margin: 0 auto;
-		width: 320px;
-		img {
-			left: 0;
-			top: 0;
-		}
-		.error-msg {
-			height: 34px;
-			line-height: 34px;
-			font-size: 14px;
-			color: #ed5564;
-		}
-		.g-input {
+	.search-input {
+		width: 100%;
+		height: 100%;
+		display: inline-block;
+		.input-con {
+			width: 100%;
+			height: 100%;
 			display: block;
-			height: 42px;
-			line-height: 42px;
-			padding: 6px 40px 6px 23px;
-			width: 320px;
-			font-size: 14px;
 			-webkit-box-sizing: border-box;
 			-moz-box-sizing: border-box;
 			box-sizing: border-box;
-			border: 1px solid #dbdee7;
-			-webkit-border-radius: 5px;
-			-moz-border-radius: 5px;
-			border-radius: 5px;
+			padding: 6px 20px 6px 6px;
+			border: 1px solid #dedede;
+			-webkit-border-radius: 4px;
+			-moz-border-radius: 4px;
+			border-radius: 4px;
+			box-shadow: 0 0 2px #f5f5f5 inset;
+			box-sizing: border-box;
 			font-size: 14px;
-			caret-color: #999999;
-			background: #f3f3f3;
-			color: #333333;
 			&:focus {
 				border: 1px solid #cccccc;
-
 			}
-
 		}
 		.close-search-btn {
-			width: 20px;
-			height: 20px;
-			right: 16px;
-			top: 10px;
+			width: 12px;
+			height: 12px;
+			right: 5px;
+			top: 50%;
+			padding: 4px;
+			margin-top: -10px;
 			background: transparent;
-			border: 2px solid #ed5564;
 			-moz-border-radius: 50%;
 			-webkit-border-radius: 50%;
 			border-radius: 50%;
-			display: inline-block;
 			-moz-transition: ease-in-out 100ms;
 			-o-transition: ease-in-out 100ms;
 			-webkit-transition: ease-in-out 100ms;
@@ -146,7 +130,7 @@
 				margin-top: -1px;
 				width: 14px;
 				height: 2px;
-				background-color: #ed5564;
+				background-color: #9d9d9d;
 				content: "";
 				position: absolute;
 				-moz-transform: rotate(45deg);
@@ -157,7 +141,7 @@
 			&:after {
 				width: 14px;
 				height: 2px;
-				background-color: #e91e63;
+				background-color: #9d9d9d;
 				content: "";
 				left: 50%;
 				top: 50%;
@@ -185,39 +169,6 @@
 				-webkit-transform: scale(1.6);
 				transform: scale(1.6);
 				opacity: 0;
-			}
-		}
-	}
-
-	.sj-psd {
-		.g-input {
-			background: #ffffff;
-		}
-	}
-
-	.resetPwd-wrap {
-		.form-input {
-			.error-msg {
-				height: 25px;
-				line-height: 25px;
-			}
-		}
-		.send-code {
-			.close-search-btn {
-				right: 136px;
-			}
-			.g-input {
-				padding: 6px 165px 6px 23px;
-			}
-
-		}
-	}
-
-	.register-wrap {
-		.form-input {
-			.error-msg {
-				height: 25px;
-				line-height: 25px;
 			}
 		}
 	}

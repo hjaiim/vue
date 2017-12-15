@@ -3,23 +3,15 @@
 		<div class="percenter-wrap">
 			<div class="percenter-inner">
 				<div class="icon-collect clear">
-					<!--<div class="default-img right">-->
-					<!--<img :src="g.path.images+'/default-icon.png'" alt="">-->
-					<!--</div>-->
 					<div class="relative upload-head right pointer">
-						<img :src="userInfo.avatar?userInfo.avatar:g.path.images+'/del-head.png'" alt=""
-							 class="del-head absolute">
-						<input type="file" class="absolute load-head">
-						<p class="load-text">上传头像</p>
-					</div>
-					<div class="relative upload-head right pointer">
-						<img :src="g.path.images+'/del-head.png'" alt="" class="del-head absolute">
-						<img :src="g.path.images+'/default-icon.png'" alt="">
-						<div class="upload-btn">
+						<img class="default-img" :src="imgUrl?imgUrl:g.path.images+'/default-icon.png'" alt="">
+						<div class="upload-btn absolute">
+							<p class="load-text">修改头像</p>
 							<upload-btn @change="onChange_upload" resultType="base64"></upload-btn>
+							<img :src="g.path.images+'/del-head.png'" alt=""
+								 class="del-head absolute pointer">
 						</div>
 					</div>
-
 				</div>
 			</div>
 			<div class="personal-message">
@@ -31,25 +23,23 @@
 						class="personal-content">{{userInfo.name}}</span></div>
 				<div class="personal-form">
 					<span class="personal-title left">所属公司</span>
-					<div class="personal-content left relative form-list" @click="onClick_dropListBtn('Company')">
+					<div class="personal-content left relative form-list pointer"
+						 @click="onClick_dropListBtn('Company')">
 						{{currCompany}}
-						<span :class="['icon-trangle', isShowCompanyList?'rotate':'']"></span>
-						<ul class="absolute drop-list" v-show="isShowCompanyList">
-							<li v-for="item in companylist" @click.stop="onClick_company(item.id)">{{item.name}}</li>
-						</ul>
+						<i :class="['icon-trangle', isShowCompanyList?'rotate':'']"></i>
+						<drop-list :dropList="companyList" :isShowDropList="isShowCompanyList"
+								   @change="onClick_company"></drop-list>
 					</div>
 					<span class="required">*</span>
 				</div>
 				<div class="personal-form">
 					<span class="personal-title left">所属部门</span>
-					<div class="personal-content left relative form-list"
+					<div class="personal-content left relative form-list pointer"
 						 @click="onClick_dropListBtn('Department')">
 						{{currDepartment}}
-						<span :class="['icon-trangle', isShowDepartmentList?'rotate':'']"></span>
-						<ul class="absolute drop-list" v-show="isShowDepartmentList">
-							<li v-for="item in departmentList" @click.stop="onClick_department(item.id)">{{item.name}}
-							</li>
-						</ul>
+						<i class="pointer" :class="['icon-trangle', isShowDepartmentList?'rotate':'']"></i>
+						<drop-list :dropList="departmentList" :isShowDropList="isShowDepartmentList"
+								   @change="onClick_department"></drop-list>
 					</div>
 					<span class="required">*</span>
 				</div>
@@ -58,28 +48,35 @@
 					<div class="personal-content left relative form-list" @click="onClick_dropListBtn('Post')">
 						{{currDuty}}
 						<span :class="['icon-trangle', isShowPostList?'rotate':'']"></span>
-						<ul class="absolute drop-list" v-show="isShowPostList">
-							<li v-for="item in dutyList" @click.stop="onClick_duty(item.id)">{{item.name}}</li>
-						</ul>
+						<drop-list :dropList="dutyList" :isShowDropList="isShowPostList"
+								   @change="onClick_duty"></drop-list>
 					</div>
 					<span class="required">*</span>
 				</div>
 				<div class="personal-form">
 					<span class="personal-title left">手机</span>
-					<input class="personal-content pensonal-input left" :value="userInfo.phone">
+					<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
+							   v-model="phone"></input-bar>
 					<span class="required">*</span>
 				</div>
 				<div class="personal-form">
 					<span class="personal-title left">验证码</span>
-					<input class="personal-content pensonal-input code left">
+					<input-bar class="personal-content pensonal-input code left" placeholder="" type="text"
+							   v-model="code"></input-bar>
 					<span class="btn-send pointer left">发送验证码</span>
 				</div>
-				<div class="personal-form"><span class="personal-title left">固定电话</span><input
-						class="personal-content pensonal-input left" :value="userInfo.telphone"></div>
-				<div class="personal-form"><span class="personal-title left">电子邮箱</span><input
-						class="personal-content pensonal-input left" :value="userInfo.email"></div>
-				<div class="personal-form"><span class="personal-title left">备注</span><input
-						class="personal-content pensonal-input note left" :value="userInfo.remark"></div>
+				<div class="personal-form"><span class="personal-title left">固定电话</span>
+					<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
+							   v-model="telphone"></input-bar>
+				</div>
+				<div class="personal-form"><span class="personal-title left">电子邮箱</span>
+					<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
+							   v-model="email"></input-bar>
+				</div>
+				<div class="personal-form"><span class="personal-title left">备注</span>
+					<input-bar class="personal-content pensonal-input note left" placeholder="" type="text"
+							   v-model="remark"></input-bar>
+				</div>
 				<div class="personal-form">
 					<span class="personal-title left">身份证照</span>
 					<div class="left relative upload-box pointer">
@@ -126,15 +123,21 @@
 	import g from "../../global";
 	import ComLayout from "../../components/comLayout.vue";
 	import UploadBtn from "../../components/upload.vue";
+	import InputBar from "../../components/inputBar.vue";
+	import DropList from "../../components/dropList.vue"
 	export default{
 		created(){
 			this.init();
-
 		},
 		data(){
 			return {
 				g: g,
 				userInfo: {},
+				phone: '',
+				remark: "",
+				email: '',
+				code: '',
+				telphone: '',
 				companyList: [],
 				currCompany: "",
 				departmentList: [],
@@ -144,18 +147,24 @@
 				isShowDepartmentList: false,
 				isShowCompanyList: false,
 				isShowPostList: false,
+				imgUrl: '',
+
 			}
 		},
 		components: {
 			ComLayout,
-			UploadBtn
+			UploadBtn,
+			InputBar,
+			DropList
 		},
 		computed: {},
 		methods: {
 			init()
 			{
 				this.userInfo = g.data.userInfo;
-				this.companylist = g.data.companyPool.list;
+//				this.remark = this.userInfo.remark;
+//				this.email = this.userInfo.email;
+				this.companyList = g.data.companyPool.list;
 			},
 			onClick_company($id)
 			{
@@ -190,6 +199,7 @@
 			onChange_upload($list)
 			{
 				trace("onChange_upload", $list);
+				this.imgUrl = $list;
 			}
 		}
 	}
