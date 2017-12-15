@@ -1,6 +1,7 @@
 /**
  * Created by Administrator on 2017/12/11.
  */
+import g from './../../global';
 var _list = [];
 var _hash = {};
 var _total = 0;
@@ -32,7 +33,7 @@ export default class DutyPool {
 		{
 			_hash[itemData.id] = itemData;
 			_list.push(itemData);
-			g.data.departmentPool.addDuty(itemData.parentId, itemData).addDuty(itemData.parentId, itemData);
+			g.data.departmentPool.addDuty(itemData.parentId, itemData);
 		}
 	}
 

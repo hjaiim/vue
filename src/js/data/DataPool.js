@@ -7,6 +7,7 @@ import RightPool from "./RightPool";
 import LangPool from "./LangPool";
 import StaticNavPool from "./StaticNavPool";
 import CompanyPool from "./CompanyPool";
+import SearchCompanyPool from "./SearchCompanyPool";
 import MessagePool from "./MessagePool";
 import DepartmentPool from "./DepartmentPool";
 import DutyPool from "./DutyPool";
@@ -26,7 +27,7 @@ export var dutyPool = new DutyPool();
 export var staticNavPool = new StaticNavPool(); //语言包数据池
 export var messagePool = new MessagePool();
 export var searchPositionPool = new PositionPool();
-export var searchCompanyPool = new CompanyPool();
+export var searchCompanyPool = new SearchCompanyPool();
 export var searchAccountPool = new AccountPool();
 export var searchBusinessPool = new BusinessPool();
 export var searchUnverifyPool = new UnverifyPool();
