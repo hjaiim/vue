@@ -49,7 +49,6 @@ export default class StaticNavPool {
 		return _list;
 	}
 
-	
 	getChildByPath($path)
 	{
 		return _childHash[$path]
@@ -71,6 +70,7 @@ class Child {
 
 	update($list)
 	{
+
 		for (var item of $list)
 		{
 			this.add(item);
@@ -80,14 +80,13 @@ class Child {
 
 	add($item)
 	{
-		if (!_childHash[$item.path])
+		_childHash[$item.path] = $item;
+		if (this.list.indexOf($item) < 0)
 		{
-			_childHash[$item.path] = $item;
 			this.list.push($item);
 		}
 	}
 }
-
 
 function createData($obj)
 {

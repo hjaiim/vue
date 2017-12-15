@@ -53,7 +53,6 @@ function initLang($staticData)
 export function clearAll()
 {
 	userInfo.removeAll();
-	langPool.removeAll();
 	rightPool.removeAll();
 	companyPool.removeAll();
 	departmentPool.removeAll();
@@ -67,5 +66,4 @@ export function clearAll()
 	searchUnverifyPool.removeAll();
 	searchRolePool.removeAll();
 	staffPool.removeAll();
-	recordPool.removeAll();
 }

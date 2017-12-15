@@ -1,6 +1,5 @@
 <template>
-    <view-popup @close="onClose_pop"
-                :isShowPopView="isShowPopView" class="mod-company-pop">
+    <view-popup @close="onClose_pop" :isShowPopView="isShowPopView" class="mod-company-pop">
         <div class="mod-company-container">
             <p class="mod-tit">修改公司信息</p>
             <div class="mod-company-content">

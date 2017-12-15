@@ -2,47 +2,53 @@
  * Created by Scc on 2017/3/28.
  */
 import g from "../../global";
-
 var _isLogin = false;
 var _lastUrl = "";
 
 function init($callback)
 {
-
 	g.addEventListener("APP_IS_LOGIN", onAppLogin_global);
 	g.net.call('user/queryUserIsLogin').then((d) =>
 	{
 		_isLogin = true;
-// 		g.data.userInfo.update(d);
-		$callback();
-	}, (error) =>
+		$callback && $callback();
+	}, (err) =>
 	{
 		_isLogin = false;
-		logout();
+		$callback && $callback()
 	});
 }
 
 function checkLogin($to, $next, $callBack)
 {
 	_lastUrl = "";
-	var passUrl = ['/login', '/resetpwd', '/register']
+	var passUrl = ['/login', '/resetpwd', '/register'];
 	if (_isLogin)
 	{
-		//当前已登录
+
 		if (passUrl.indexOf($to.path) >= 0) //判断当前页面是否是login页面
 		{
-			if (g.data.userInfo.authStatus !== 2)
-			{
-				$next("/verify")
-			}
-			else
-			{
-				$next("/");
-			}
+			$next("/");
+// 			if (g.data.userInfo.authStatus != 2 )
+// 			{
+// 				$next('/verify');
+// 			}
+// 			else
+// 			{
+// 				$next("/")
+// 			}
 		}
 		else
 		{
 			$callBack && $callBack();
+// 			if (g.data.userInfo.authStatus != 2 && $to.path != "/verify")
+// 			{
+// 				$next('/verify');
+// 			}
+// 			else
+// 			{
+// 				$callBack && $callBack();
+// 			}
 		}
 	}
 	else
@@ -82,13 +88,9 @@ function onAppLogin_global(e)
 	{
 		g.url = _lastUrl;
 	}
-	else if (g.data.userInfo.authStatus !== 2)
-	{
-		$next("/verify")
-	}
 	else
 	{
-		$next("/");
+		g.url = "/";
 	}
 }
 
