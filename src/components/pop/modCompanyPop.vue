@@ -2,7 +2,7 @@
     <view-popup @close="onClose_pop" :isShowPopView="isShowPopView" class="mod-company-pop">
         <div class="mod-company-container">
             <p class="mod-tit">修改公司信息</p>
-            <div class="mod-company-content">
+            <div class="mod-company-content clear">
                 <div class="company-message">
                     <p class="from-group">
                         <span class="form-title">公司名称</span>
