@@ -12,6 +12,13 @@
 						<input type="file" class="absolute load-head">
 						<p class="load-text">上传头像</p>
 					</div>
+					<div class="relative upload-head right pointer">
+						<img :src="g.path.images+'/del-head.png'" alt="" class="del-head absolute">
+						<img :src="g.path.images+'/default-icon.png'" alt="">
+						<div class="upload-btn">
+							<upload-btn @change="onChange_upload" resultType="base64"></upload-btn>
+						</div>
+					</div>
 
 				</div>
 			</div>
@@ -117,7 +124,8 @@
 </template>
 <script type="text/ecmascript-6">
 	import g from "../../global";
-	import ComLayout from "../../components/comLayout.vue"
+	import ComLayout from "../../components/comLayout.vue";
+	import UploadBtn from "../../components/upload.vue";
 	export default{
 		created(){
 			this.init();
@@ -139,7 +147,8 @@
 			}
 		},
 		components: {
-			ComLayout
+			ComLayout,
+			UploadBtn
 		},
 		computed: {},
 		methods: {
@@ -177,8 +186,11 @@
 				{
 					this["isShow" + $type + "List"] = true;
 				}
+			},
+			onChange_upload($list)
+			{
+				trace("onChange_upload", $list);
 			}
-
 		}
 	}
 </script>

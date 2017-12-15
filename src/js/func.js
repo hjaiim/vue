@@ -48,3 +48,48 @@ export function typeOf(obj)
 	};
 	return map[toString.call(obj)];
 }
+export function getBase64($fileList, $quality)
+{
+	var list = [], promises = [];
+	for (var item of $fileList)
+	{
+		var tmp = getBase64(item);
+		promises.push(tmp);
+	}
+	return Promise.all(promises);
+
+	function getBase64($imgFile)
+	{
+		var b = window.URL.createObjectURL($imgFile);
+		var img = new Image();
+		var promise = new Promise((okFunc, errFunc)=>
+		{
+			img.onload = ()=>
+			{
+				// 默认按比例压缩
+				var w = img.width,
+					h = img.height,
+					scale = w / h;
+				w = g.param.width || w;
+				h = g.param.height || (w / scale);
+				//生成canvas
+				var canvas = document.createElement('canvas');
+				var ctx = canvas.getContext('2d');
+				// 创建属性节点
+				var anw = document.createAttribute("width");
+				anw.nodeValue = w;
+				var anh = document.createAttribute("height");
+				anh.nodeValue = h;
+				canvas.setAttributeNode(anw);
+				canvas.setAttributeNode(anh);
+				ctx.drawImage(img, 0, 0, w, h);
+				var quality = $quality || 0.7; // 默认图片质量为0.5
+				var base64 = canvas.toDataURL('image/jpeg', quality * 10);
+				// 回调函数返回base64的值
+				okFunc(base64);
+			};
+			img.src = b;
+		});
+		return promise;
+	}
+}
