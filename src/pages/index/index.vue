@@ -109,10 +109,11 @@
 			routerUpdated()
 			{
 				this.userInfo = g.data.userInfo;
-				this.phone = this.userInfo.phone;
-				this.telphone = this.userInfo.telphone;
-				this.email = this.userInfo.email;
-				this.remark = this.userInfo.remark;
+
+//				this.phone = this.userInfo.phone;
+//				this.telphone = this.userInfo.telphone;
+//				this.email = this.userInfo.email;
+//				this.remark = this.userInfo.remark;
 				this.type = g.vue.getQuery('type', "personal");
 			},
 			onClick_tabItem($id)

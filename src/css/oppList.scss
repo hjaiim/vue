@@ -1,0 +1,145 @@
+.opp-wrap {
+  padding: 20px 44px 50px 44px;
+  .opp-banner {
+    line-height: 30px;
+  }
+}
+
+.p-left {
+  margin-left: 50px;
+}
+
+.business-form {
+  height: 30px;
+  line-height: 30px;
+  .business-title {
+    height: 30px;
+    //line-height: 30px;
+    margin-right: 10px;
+  }
+  .business-list {
+    width: 150px;
+    height: 30px;
+    li {
+      height: 30px;
+      line-height: 30px;
+    }
+  }
+}
+
+.status-form {
+  .form-title {
+    line-height: 30px;
+  }
+
+  .status-type {
+    margin-left: 18px;
+    height: 30px;
+    line-height: 30px;
+    span {
+      line-height: 30px;
+      padding-left: 8px;
+    }
+  }
+}
+
+.date-box {
+  .create-time {
+    margin-right: 10px;
+  }
+
+  .date-form {
+    height: 30px;
+    line-height: 30px;
+    width: 200px;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    box-shadow: 0 0 2px #f5f5f5 inset;
+    padding-left: 20px;
+    box-sizing: border-box;
+    .date-icon {
+      top: 50%;
+      margin-top: -7px;
+      right: 13px;
+    }
+  }
+
+  .date-line {
+    line-height: 30px;
+    margin: 0 12px;
+  }
+}
+
+.search-box {
+  .customer-name {
+    margin-right: 10px;
+  }
+  .search-input {
+    height: 30px;
+    line-height: 30px;
+    width: 200px;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    box-shadow: 0 0 2px #f5f5f5 inset;
+    padding-left: 20px;
+    box-sizing: border-box;
+  }
+  .active-btn {
+    width: 50px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-left: 20px;
+  }
+  .search-btn {
+    background: #ed5564;
+    color: #fff;
+    display: inline-block;
+  }
+  .all-btn {
+    border: 1px solid #ddd;
+    display: inline-block;
+    background: #f8f8f8;
+  }
+}
+
+@media screen and (max-width: 1700px) {
+  .p-left {
+    margin-left: 15px;
+  }
+  .date-box .date-form{
+    padding-left: 10px;
+    width: 165px;
+  }
+  .search-box .search-input{
+    width: 165px;
+  }
+  .search-box .active-btn{
+    margin-left: 10px;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .date-box{
+    float: left;
+    //display: block;
+    margin-top: 30px;
+    margin-left: 0;
+    .date-form {
+      padding-left: 20px;
+      width: 200px;
+    }
+  }
+  .search-box {
+    float: right;
+    .search-input{
+      width: 200px;
+    }
+  }
+
+  .search-box .active-btn{
+    margin-left: 24px;
+  }
+}

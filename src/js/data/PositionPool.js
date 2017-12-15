@@ -53,6 +53,16 @@ export default class PositionPool {
 		return _list;
 	}
 
+	get total()
+	{
+		return _total;
+	}
+
+	get totalPage()
+	{
+		return _totalPage;
+	}
+
 	removeAll()
 	{
 		_list = [];
@@ -70,6 +80,7 @@ function createData($dObj)
 	d.type = 0;
 	d.creatorId = 0;
 	d.creator = "";
+	d.isShow = false;
 	d.createTime = "";
 	d.update = updateData.bind(d);
 	d.update($dObj);
@@ -81,8 +92,13 @@ function updateData($dObj)
 {
 	$dObj.hasOwnProperty("stationId") && (this.id = $dObj.stationId);
 	$dObj.hasOwnProperty("stationName") && (this.name = $dObj.stationName);
-	$dObj.hasOwnProperty("stationType") && (this.type = $dObj.stationType);
 	$dObj.hasOwnProperty("creatorId") && (this.creatorId = $dObj.creatorId);
 	$dObj.hasOwnProperty("creatorName") && (this.creator = $dObj.creatorName);
-	$dObj.hasOwnProperty("createTime") && (this.createTime = $dObj.createTime);
+	$dObj.hasOwnProperty("isShow") && (this.isShow = $dObj.isShow);
+	$dObj.hasOwnProperty("createTime") && (this.createTime = g.timeTool.getFullDate($dObj.createTime));
+	if($dObj.hasOwnProperty("stationType"))
+	{
+		$dObj.stationType == 1 && (this.type = "审核岗");
+		$dObj.stationType == 2 && (this.type = "提交岗");
+	}
 }

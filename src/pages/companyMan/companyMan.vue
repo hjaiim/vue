@@ -53,7 +53,7 @@
 					</tr>
 					</tbody>
 				</table>
-				<div class="show-page clear" v-if="totalPages > 1">
+				<div class="show-page clear" v-if="g.data.searchCompanyPool.totalPage > 1">
 					<common-page class="right" :total="g.data.searchCompanyPool.total" :currPage="currPage"
 								 :showTotalCount="true"
 								 :showElevator="true" :showFirstAndEnd="true"></common-page>

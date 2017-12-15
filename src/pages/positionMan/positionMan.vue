@@ -20,17 +20,17 @@
 					</tr>
 					</thead>
 					<tbody>
-					<tr v-for="(n,index) in 10">
+					<tr v-for="(item,index) in positionList">
 						<td><span class="rank-num">{{index+1}}</span></td>
-						<td>商机管理员</td>
-						<td>商机审核岗</td>
-						<td>王鑫</td>
-						<td>2017.12.15 10:10:10</td>
+						<td>{{item.name}}</td>
+						<td>{{item.type}}</td>
+						<td>{{item.creator}}</td>
+						<td>{{item.createTime}}</td>
 						<td>
 							<p class="action-menu clear"><span class="left pointer draw-line ani-time"></span>
 								<span class="right pointer draw-line ani-time" @click="onClick_deleteBtn(item.id)">删除
-									<delete-pop :isDeletePop="isShowDeletePop"
-												@close="onClose_deletePop" >
+									<delete-pop :isDeletePop="item.isShow"
+												@close="onClose_deletePop">
 										<span>您是否真的要删除该岗位吗？</span>
 									</delete-pop>
 							</span>
@@ -40,14 +40,14 @@
 					</tbody>
 				</table>
 
-				<div class="show-page clear">
-					<common-page class="right" :total="200" :currPage="10" :showPageSize="false" :showTotalCount="true"
-								 :showElevator="true"
-								 :showFirstAndEnd="true"></common-page>
+				<div class="show-page clear" v-if="g.data.searchPositionPool.totalPage > 1">
+					<common-page class="right" :total="g.data.searchPositionPool.total" :currPage="currPage"
+								 :showTotalCount="true"
+								 :showElevator="true" :showFirstAndEnd="true"></common-page>
 				</div>
 			</div>
 		</div>
-		<add-post-pop :isShowPopView="isShowNewPostPop"></add-post-pop>
+		<add-post-pop :isShowPopView="isShowPostPop" :currId="currId"></add-post-pop>
 	</com-layout>
 </template>
 <script type="text/ecmascript-6">
@@ -59,13 +59,15 @@
 	export default{
 		created()
 		{
-
+			this.routerUpdated();
 		},
 		data(){
 			return {
 				g: g,
-				currIndex: '',
-				isShowNewPostPop: false
+				positionList: [],
+				currId: 0,
+				currPage:1,
+				isShowPostPop: false
 			}
 		},
 		components: {
@@ -75,17 +77,26 @@
 			AddPostPop
 		},
 		methods: {
+			routerUpdated()
+			{
+				this.positionList = g.data.searchPositionPool.list;
+			},
 			onClick_addPostBtn()
 			{
 
 			},
-			onClick_deleteBtn($index)
+			onClick_deleteBtn($id)
 			{
-				this.currIndex = $index;
+				this.currId = $id;
+				g.data.positionPool.getDataById(this.currId).update({isShow: true});
 			},
-			onClose_deletePop()
+			onClose_deletePop($result)
 			{
+				g.data.positionPool.getDataById(this.currId).update({isShow: false})
+				if ($result)
+				{
 
+				}
 			},
 			onClick_detailBtn()
 			{

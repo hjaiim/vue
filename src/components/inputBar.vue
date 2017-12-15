@@ -15,7 +15,8 @@
 		},
 		props: {
 			value: {
-				type: String
+				type: String,
+				default:""
 			},
 			type: {
 				type: String,

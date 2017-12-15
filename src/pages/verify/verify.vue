@@ -138,6 +138,7 @@
 				email: '',
 				code: '',
 				telphone: '',
+				imgUrl: '',
 				companyList: [],
 				currCompany: "",
 				departmentList: [],
@@ -146,8 +147,7 @@
 				currDuty: "",
 				isShowDepartmentList: false,
 				isShowCompanyList: false,
-				isShowPostList: false,
-				imgUrl: '',
+				isShowPostList: false
 
 			}
 		},

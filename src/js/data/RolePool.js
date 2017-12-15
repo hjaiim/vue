@@ -82,6 +82,7 @@ function createData($dObj)
 	d.setter = "";
 	d.distribute = "";
 	d.rights = "";
+	d.isShow = false;
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -96,4 +97,5 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("userName") && (this.setter = $dObj.userName);
 	$dObj.hasOwnProperty("userNum") && (this.distribute = $dObj.userNum);
 	$dObj.hasOwnProperty("permissionIds") && (this.rights = $dObj.permissionIds);
+	$dObj.hasOwnProperty("isShow") && (this.isShow = $dObj.isShow);
 }
