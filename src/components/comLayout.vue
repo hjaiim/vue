@@ -17,6 +17,8 @@
 							<img :src="child.highLightList.indexOf(currPath)>= 0?
 										g.path.images+child.lightIcon:
 										g.path.images+child.icon"
+
+
 								 alt="">
 							<span>{{child.name}}</span>
 						</li>
