@@ -18,7 +18,7 @@
 		},
 		props: {
 			value: {
-				type: String
+				type: [String,Number]
 			},
 			type: {
 				type: String,

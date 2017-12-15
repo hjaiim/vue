@@ -45,7 +45,6 @@
 								<span class="right pointer draw-line ani-time" @click="onClick_deleteBtn(item.id)">删除
 									<delete-pop :isDeletePop="item.isShow"
 												@close="onClose_deletePop">
-
 										<span>您是否真的要删除该角色？</span>
 									</delete-pop>
 							</span>
@@ -63,7 +62,7 @@
 		</div>
 		<add-company-pop :isShowPopView="isShowCompanyPop"
 						 @close="onClose_companyPop"
-						 :id="currId"></add-company-pop>
+						 :currId="currId"></add-company-pop>
 
 	</com-layout>
 </template>

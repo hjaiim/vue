@@ -11,8 +11,6 @@
 						<img class="default-img" :src="imgUrl?imgUrl:g.path.images+'/default-icon.png'" alt="">
 						<div class="upload-btn absolute">
 							<p class="load-text">修改头像</p>
-
-
 							<upload-btn @change="onChange_upload" resultType="base64" :multiType="false"></upload-btn>
 							<img :src="g.path.images+'/del-head.png'" alt=""
 								 class="del-head absolute pointer">

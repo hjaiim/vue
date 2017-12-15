@@ -24,7 +24,7 @@
 			}
 		},
 		props: {
-			isDeletePop: false,
+			isDeletePop: false
 		},
 		components: {},
 		methods: {
