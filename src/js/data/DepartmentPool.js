@@ -103,7 +103,8 @@ function createData($dObj)
 
 function updateData($dObj)
 {
-	$dObj.hasOwnProperty("departmenId") && (this.id = $dObj.departmenId)
+
+	$dObj.hasOwnProperty("departmentId") && (this.id = $dObj.departmentId)
 	$dObj.hasOwnProperty("departmentName") && (this.name = $dObj.departmentName)
 	$dObj.hasOwnProperty("companyId") && (this.parentId = $dObj.companyId)
 	$dObj.hasOwnProperty("creatorId") && (this.creatorId = $dObj.creatorId)

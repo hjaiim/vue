@@ -2,16 +2,24 @@
  * Created by Administrator on 2017/12/11.
  */
 
-var _list = [], _hash = {};
-export default class CompanyPool {
+export default class SearchCompanyPool {
 	constructor()
 	{
-
+		this.listData = [];
+		this.hash = {};
+		this.totalNum = 0;
+		this.totalPages = 1;
 	}
 
-	update($list)
+	update($dObj)
 	{
-		for (var item of $list)
+		if (!$dObj)
+		{
+			return;
+		}
+		$dObj.hasOwnProperty("total") && (this.totalNum = $dObj.total);
+		$dObj.hasOwnProperty("totalPage") && (this.totalPages = $dObj.totalPage);
+		for (var item of $dObj.data)
 		{
 			this.add(item);
 		}
@@ -21,68 +29,80 @@ export default class CompanyPool {
 	add($item)
 	{
 		var itemData = createData($item);
-		if (!_hash[itemData.id])
+		if (!this.hash[itemData.id])
 		{
-			_hash[itemData.id] = itemData;
-			_list.push(itemData);
+			this.hash[itemData.id] = itemData;
+			this.listData.push(itemData);
 		}
 
 	}
 
 	remove($id)
 	{
-		if (_hash[$id])
+		if (this.hash[$id])
 		{
-			var index = _list.indexOf(_hash[$id]);
+			var index = this.listData.indexOf(this.hash[$id]);
 			if (index >= 0)
 			{
-				_list.splice(index, 1);
+				this.listData.splice(index, 1);
 			}
 		}
 	}
 
 	addDepartment($id, $department)
 	{
-		if (_hash[$id])
+		if (this.hash[$id])
 		{
-			if (_hash[$id].children.indexOf($department) < 0)
+			if (this.hash[$id].children.indexOf($department) < 0)
 			{
-				_hash[$id].children.push($department);
+				this.hash[$id].children.push($department);
 			}
 		}
 	}
 
 	removeDepartment($id, $department)
 	{
-		if (_hash[$id])
+		if (this.hash[$id])
 		{
-			var index = _hash[$id].children.indexOf($department);
+			var index = this.hash[$id].children.indexOf($department);
 			if (index >= 0)
 			{
-				_hash[$id].children.splice(index, 1);
+				this.hash[$id].children.splice(index, 1);
 			}
 		}
 	}
 
 	getDataById($id)
 	{
-		return _hash[$id]
+		return this.hash[$id]
 	}
 
 	hasDetail($id)
 	{
-		return _hash[$id] && _hash[$id].leader;
+		return this.hash[$id] && this.hash[$id].leader;
 	}
 
 	get list()
 	{
-		return _list;
+		return this.listData;
+	}
+
+	get total()
+	{
+		return this.totalNum;
+	}
+
+	get totalPage()
+	{
+		return this.totalPages;
 	}
 
 	removeAll()
 	{
-		_list = [];
-		_hash = {};
+		this.listData = [];
+		this.hash = {};
+		this.totalNum = 0;
+		this.totalPages = 1;
 	}
 }
 

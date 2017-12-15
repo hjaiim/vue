@@ -3,11 +3,12 @@
 		<div class="percenter-wrap">
 			<div class="percenter-inner">
 				<div class="icon-collect clear">
-					<div class="default-img right">
-						<img :src="g.path.images+'/default-icon.png'" alt="">
-					</div>
+					<!--<div class="default-img right">-->
+					<!--<img :src="g.path.images+'/default-icon.png'" alt="">-->
+					<!--</div>-->
 					<div class="relative upload-head right pointer">
-						<img :src="g.path.images+'/del-head.png'" alt="" class="del-head absolute">
+						<img :src="userInfo.avatar?userInfo.avatar:g.path.images+'/del-head.png'" alt=""
+							 class="del-head absolute">
 						<input type="file" class="absolute load-head">
 						<p class="load-text">上传头像</p>
 					</div>
@@ -15,18 +16,19 @@
 				</div>
 			</div>
 			<div class="personal-message">
-				<div class="personal-form"><span class="personal-title ">登录用户名</span><span class="personal-content">158********</span>
+				<div class="personal-form"><span class="personal-title ">登录用户名</span><span
+						class="personal-content">{{userInfo.username}}
+				</span>
 				</div>
 				<div class="personal-form"><span class="personal-title">姓名</span><span
-						class="personal-content">张三</span></div>
+						class="personal-content">{{userInfo.name}}</span></div>
 				<div class="personal-form">
 					<span class="personal-title left">所属公司</span>
 					<div class="personal-content left relative form-list" @click="onClick_dropListBtn('Company')">
+						{{currCompany}}
 						<span :class="['icon-trangle', isShowCompanyList?'rotate':'']"></span>
 						<ul class="absolute drop-list" v-show="isShowCompanyList">
-							<li>幻舞网络</li>
-							<li>幻舞网络</li>
-							<li>幻舞网络</li>
+							<li v-for="item in companylist" @click.stop="onClick_company(item.id)">{{item.name}}</li>
 						</ul>
 					</div>
 					<span class="required">*</span>
@@ -35,9 +37,11 @@
 					<span class="personal-title left">所属部门</span>
 					<div class="personal-content left relative form-list"
 						 @click="onClick_dropListBtn('Department')">
+						{{currDepartment}}
 						<span :class="['icon-trangle', isShowDepartmentList?'rotate':'']"></span>
 						<ul class="absolute drop-list" v-show="isShowDepartmentList">
-							<li>前端</li>
+							<li v-for="item in departmentList" @click.stop="onClick_department(item.id)">{{item.name}}
+							</li>
 						</ul>
 					</div>
 					<span class="required">*</span>
@@ -45,16 +49,17 @@
 				<div class="personal-form">
 					<span class="personal-title left">职务名称</span>
 					<div class="personal-content left relative form-list" @click="onClick_dropListBtn('Post')">
+						{{currDuty}}
 						<span :class="['icon-trangle', isShowPostList?'rotate':'']"></span>
 						<ul class="absolute drop-list" v-show="isShowPostList">
-							<li>总经理</li>
+							<li v-for="item in dutyList" @click.stop="onClick_duty(item.id)">{{item.name}}</li>
 						</ul>
 					</div>
 					<span class="required">*</span>
 				</div>
 				<div class="personal-form">
 					<span class="personal-title left">手机</span>
-					<input class="personal-content pensonal-input left">
+					<input class="personal-content pensonal-input left" :value="userInfo.phone">
 					<span class="required">*</span>
 				</div>
 				<div class="personal-form">
@@ -63,11 +68,11 @@
 					<span class="btn-send pointer left">发送验证码</span>
 				</div>
 				<div class="personal-form"><span class="personal-title left">固定电话</span><input
-						class="personal-content pensonal-input left"></div>
+						class="personal-content pensonal-input left" :value="userInfo.telphone"></div>
 				<div class="personal-form"><span class="personal-title left">电子邮箱</span><input
-						class="personal-content pensonal-input left"></div>
+						class="personal-content pensonal-input left" :value="userInfo.email"></div>
 				<div class="personal-form"><span class="personal-title left">备注</span><input
-						class="personal-content pensonal-input note left"></div>
+						class="personal-content pensonal-input note left" :value="userInfo.remark"></div>
 				<div class="personal-form">
 					<span class="personal-title left">身份证照</span>
 					<div class="left relative upload-box pointer">
@@ -115,11 +120,19 @@
 	import ComLayout from "../../components/comLayout.vue"
 	export default{
 		created(){
+			this.init();
 
 		},
 		data(){
 			return {
 				g: g,
+				userInfo: {},
+				companyList: [],
+				currCompany: "",
+				departmentList: [],
+				currDepartment: "",
+				dutyList: [],
+				currDuty: "",
 				isShowDepartmentList: false,
 				isShowCompanyList: false,
 				isShowPostList: false,
@@ -128,7 +141,33 @@
 		components: {
 			ComLayout
 		},
+		computed: {},
 		methods: {
+			init()
+			{
+				this.userInfo = g.data.userInfo;
+				this.companylist = g.data.companyPool.list;
+			},
+			onClick_company($id)
+			{
+				this.isShowCompanyList = false;
+				var companyData = g.data.companyPool.getDataById($id);
+				this.departmentList = companyData.children;
+				this.currCompany = companyData.name;
+			},
+			onClick_department($id)
+			{
+				this.isShowDepartmentList = false;
+				var departmentData = g.data.departmentPool.getDataById($id);
+				this.dutyList = departmentData.children;
+				this.currDepartment = departmentData.name;
+			},
+			onClick_duty($id)
+			{
+				this.isShowPostList = false;
+				var dutyData = g.data.dutyPool.getDataById($id);
+				this.currDuty = dutyData.name;
+			},
 			onClick_dropListBtn($type){
 				if (this["isShow" + $type + "List"])
 				{
