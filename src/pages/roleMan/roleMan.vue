@@ -47,8 +47,6 @@
 								 :showTotalCount="true"
 								 :showElevator="true" :showFirstAndEnd="true"></common-page>
 				</div>
-
-
 			</div>
 		</div>
 		<add-role-pop :isShowPopView="isShowRolePop" :currId="currId" @close="onClose_rolePop"></add-role-pop>

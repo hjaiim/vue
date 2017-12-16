@@ -8,7 +8,7 @@
 					<p class="from-group">
 						<span class="form-title">名称</span>
 						<input-bar class="form-control" placeholder="" type="text"
-								   v-model="roleName"></input-bar>
+								   v-model="positionName"></input-bar>
 					</p>
 					<p class="from-group">
 						<span class="form-title">类型</span>
@@ -49,7 +49,7 @@
 				g: g,
 				positionName: "",
 				type: 1,
-				positionData:{}
+				positionData: {}
 			}
 		},
 		components: {
@@ -84,11 +84,20 @@
 			},
 			onClick_cancelBtn()
 			{
-				this.$emit('close', false);
+				this.onClose_pop();
 			},
 			onClick_confirmBtn()
 			{
-				this.$emit('close', true);
+				_params = {
+					stationId: this.currId,
+					stationName: this.positionName,
+					stationType: this.type
+				};
+				g.net.call("organizeOpt/editStation", _params).then(($data) =>
+				{
+					g.ui.toast("岗位编辑成功！")
+				})
+
 			}
 		}
 	}

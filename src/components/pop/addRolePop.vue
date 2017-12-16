@@ -53,7 +53,9 @@
 				type: Boolean,
 				default: false
 			},
-			currId: {}
+			currId: {
+				default: 0
+			}
 		},
 		watch: {
 			currId($val)
@@ -88,12 +90,18 @@
 			},
 			onClick_confirmBtn()
 			{
+				var postUrl = "permission/addRole";
 				_params = {
 					roleName: this.name,
 					roleDesc: this.desc,
 					permissionIds: this.rights
 				};
-				g.net.call('permission/addRole', _params).then(($data) =>
+				if (this.currId != 0)
+				{
+					_params.roleId = this.currId;
+					postUrl = "permission/addRole";
+				}
+				g.net.call(postUrl, _params).then(($data) =>
 				{
 					this.$emit('close', true);
 				})
