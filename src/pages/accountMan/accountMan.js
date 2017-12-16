@@ -3,6 +3,7 @@ import loginManager from "./../../js/manager/LoginManager";
 var _params = null;
 export default function (to, next)
 {
+	next();
 	loginManager.checkLogin(to, next, () =>
 	{
 		searchUserList(to.query).then(() =>
@@ -52,7 +53,7 @@ function createData($dObj)
 
 function updateData($dObj)
 {
-	if(!$dObj)
+	if (!$dObj)
 	{
 		return;
 	}

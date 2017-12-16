@@ -1,0 +1,160 @@
+.staff-wrap {
+  padding: 45px 35px 50px 44px;
+  .status-wrap {
+	font-size: 14px;
+	.total-nums {
+	  height: 32px;
+	  line-height: 32px;
+	}
+	.action-box {
+	  margin-left: 25px;
+	}
+	.staff-option {
+	  .staff-name {
+		height: 32px;
+		line-height: 32px;
+		padding: 0 18px 0 55px;
+
+	  }
+	  .option-content {
+		@include wh(150px, 32px);
+		line-height: 32px;
+		border: 1px solid #dddddd;
+		border-radius: 4px;
+		padding: 0 12px;
+
+	  }
+
+	}
+	.search-name {
+	  span {
+		padding: 0 20px 0 54px;
+		line-height: 32px;
+		height: 32px;
+	  }
+	  .search-input {
+		width: 150px;
+		height: 32px;
+	  }
+	}
+	.action-wrap {
+	  span {
+		margin-left: 25px;
+		height: 32px;
+		width: 58px;
+		line-height: 32px;
+		text-align: center;
+		@include borderRadius(5px);
+	  }
+
+	}
+	.total-btn {
+	  border: 1px solid #dedede;
+	  background: #f8f8f8;
+	  color: #424242;
+	  &:hover {
+		border: 1px solid #cccccc;
+	  }
+	}
+	.verify-btn {
+	  text-align: center;
+	  line-height: 30px;
+	  @include wh(100px, 30px);
+	}
+  }
+}
+
+@media only screen and (max-width: 1540px) {
+  .option-wrap {
+	display: block;
+	margin-top: 20px;
+  }
+  .staff-wrap .status-wrap .staff-option .staff-name {
+	padding: 0 18px 0 0;
+  }
+  .staff-wrap .status-wrap .verify-btn {
+	margin-left: 300px;
+  }
+}
+
+.staff-table {
+  .inner-table {
+	tr {
+	  th {
+		&:nth-of-type(1) {
+		  width: 9%;
+		}
+		&:nth-of-type(2) {
+		  width: 10%;
+		}
+		&:nth-of-type(3) {
+		  width: 12%;
+		}
+		&:nth-of-type(4) {
+		  width: 11%;
+		}
+		&:nth-of-type(5) {
+		  width: 12%;
+		}
+		&:nth-of-type(6) {
+		  width: 12%;
+		}
+		&:nth-of-type(7) {
+		  width: 12%;
+		}
+		&:nth-of-type(8) {
+		  width: 14%;
+		}
+		&:last-child {
+		  min-width: 210px;
+		}
+	  }
+	  td {
+		color: #404040;
+		&:nth-of-type(1) {
+		  width: 9%;
+		}
+		&:nth-of-type(2) {
+		  width: 10%;
+		}
+		&:nth-of-type(3) {
+		  width: 12%;
+		}
+		&:nth-of-type(4) {
+		  width: 11%;
+		}
+		&:nth-of-type(5) {
+		  width: 12%;
+		}
+		&:nth-of-type(6) {
+		  width: 12%;
+		}
+		&:nth-of-type(7) {
+		  width: 12%;
+		}
+		&:nth-of-type(8) {
+		  width: 14%;
+		}
+		&:last-child {
+		  min-width: 210px;
+		}
+	  }
+	  .action-menu {
+		padding-right: 14%;
+		text-align: right;
+		span:nth-of-type(1) {
+		  width: 40%;
+		  text-align: left;
+		}
+		span:nth-of-type(2) {
+		  width: 40%;
+		  text-align: center;
+		}
+		span:nth-of-type(3) {
+		  width: 20%;
+		  text-align: right;
+		}
+	  }
+	}
+  }
+}
