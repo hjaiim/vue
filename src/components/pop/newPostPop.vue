@@ -7,7 +7,8 @@
 				<div class="company-message no-border add-post">
 					<p class="from-group">
 						<span class="form-title">名称</span>
-						<input type="text" class="form-control">
+						<input-bar class="form-control" placeholder="" type="text"
+								   v-model="roleName"></input-bar>
 					</p>
 					<p class="from-group">
 						<span class="form-title">类型</span>
@@ -36,6 +37,7 @@
 <script type="text/ecmascript-6">
 	import g from "../../global";
 	import ViewPopup from "../viewPop.vue"
+	import InputBar from "../inputBar.vue"
 	export default{
 		data(){
 			return {
@@ -43,7 +45,8 @@
 			}
 		},
 		components: {
-			ViewPopup
+			ViewPopup,
+			InputBar
 		},
 		props: {
 			isShowPopView: {

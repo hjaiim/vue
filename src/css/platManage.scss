@@ -1,14 +1,6 @@
 .plat-wrap {
   padding: 45px 35px 50px 44px;
-  .action-btn {
-	background: #ed5564;
-	text-align: center;
-	color: #ffffff;
-	@include borderRadius(5px);
-	&:hover {
-	  background: #f5374a;
-	}
-  }
+
   .add-btn {
 	@include wh(88px, 30px);
 	font-size: 13px;
@@ -155,4 +147,47 @@
 			}
 		}
 	}
+}
+.role-table{
+  .inner-table {
+	tr {
+	  th {
+		&:nth-of-type(1) {
+		  width: 17%;
+		}
+		&:nth-of-type(2) {
+		  width: 21%;
+		}
+		&:nth-of-type(3) {
+		  width: 18%;
+		}
+		&:nth-of-type(4) {
+		  width: 20%;
+		}
+		&:nth-of-type(5) {
+		  width: 18%;
+		}
+
+	  }
+	  td {
+		color: #404040;
+		&:nth-of-type(1) {
+		  width: 16%;
+		}
+		&:nth-of-type(2) {
+		  width: 19%;
+		}
+		&:nth-of-type(3) {
+		  width: 18%;
+		}
+		&:nth-of-type(4) {
+		  width: 18%;
+		}
+		&:nth-of-type(5) {
+		  width: 20%;
+		}
+
+	  }
+	}
+  }
 }

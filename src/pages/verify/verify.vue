@@ -80,27 +80,27 @@
 				<div class="personal-form">
 					<span class="personal-title left">身份证照</span>
 					<div class="left relative upload-box pointer">
-						<img :src="g.path.images+'/del-icon.png'" alt="" class="del-img">
-						<input type="file" class="input-file">
 						<div class="upload-btn flex">
 							<img :src="g.path.images+'/upload.png'" alt="">
 							<p class="upload-text">正面</p>
 						</div>
+						<img class="img-url absolute" :src="imgProsUrl?imgProsUrl:''" alt="">
+						<span class="del-img pointer" :class="imgProsUrl?'hover-img':''"></span>
+						<upload-btn class="input-file" @change="onChange_uploadPros" resultType="base64"></upload-btn>
 					</div>
 					<div class="left relative upload-box pointer">
-						<img :src="g.path.images+'/del-icon.png'" alt="" class="del-img">
-						<input type="file" class="input-file">
 						<div class="upload-btn flex">
 							<img :src="g.path.images+'/upload.png'" alt="">
 							<p class="upload-text">反面</p>
 						</div>
+						<img class="img-url absolute" :src="imgConsUrl?imgConsUrl:''" alt="">
+						<span class="del-img pointer" :class="imgConsUrl?'hover-img':''"></span>
+						<upload-btn class="input-file" @change="onChange_uploadCons" resultType="base64"></upload-btn>
 					</div>
 				</div>
 				<div class="personal-form">
 					<span class="personal-title left">工作证照</span>
 					<div class="left relative upload-box pointer">
-						<img :src="g.path.images+'/del-icon.png'" alt="" class="del-img">
-						<input type="file" class="input-file">
 						<div class="upload-btn flex">
 							<img :src="g.path.images+'/upload.png'" alt="">
 							<p class="upload-text">
@@ -110,9 +110,12 @@
                                     不超过10M长<800,<br>
                                     宽<200
                                 </span>
-
 							</p>
 						</div>
+						<img class="img-url absolute" :src="imgWorkUrl?imgWorkUrl:''" alt="">
+						<span class="del-img pointer" :class="imgWorkUrl?'hover-img':''"></span>
+						<upload-btn class="input-file" @change="onChange_uploadWork" resultType="base64"></upload-btn>
+
 					</div>
 				</div>
 			</div>
@@ -139,6 +142,9 @@
 				code: '',
 				telphone: '',
 				imgUrl: '',
+				imgConsUrl: '',
+				imgProsUrl: '',
+				imgWorkUrl: '',
 				companyList: [],
 				currCompany: "",
 				departmentList: [],
@@ -200,6 +206,18 @@
 			{
 				trace("onChange_upload", $list);
 				this.imgUrl = $list;
+			},
+			onChange_uploadPros($list){
+				trace("onChange_upload", $list);
+				this.imgProsUrl = $list;
+			},
+			onChange_uploadCons($list){
+				trace("onChange_upload", $list);
+				this.imgConsUrl = $list;
+			},
+			onChange_uploadWork($list){
+				trace("onChange_upload", $list);
+				this.imgWorkUrl = $list;
 			}
 		}
 	}
@@ -209,5 +227,5 @@
 	@import "../../css/percenter.scss";
 </style>
 <!--<style type="text/css" lang="sass" rel="stylesheet/css">-->
-	<!--@import "../../css/personal.scss";-->
+<!--@import "../../css/personal.scss";-->
 <!--</style>-->

@@ -7,29 +7,33 @@
 				<div class="company-message">
 					<p class="from-group">
 						<span class="form-title">公司名称</span>
-						<input type="text" class="form-control" v-model="name">
+						<input-bar class="form-control" placeholder="" type="text"
+								   v-model="name"></input-bar>
 						<span class="requied">*</span>
 					</p>
 					<p class="from-group">
 						<span class="form-title">公司电话</span>
-						<input type="text" class="form-control" v-model="telphone">
+						<input-bar class="form-control" placeholder="" type="text"
+								   v-model="telphone"></input-bar>
 						<span class="requied">*</span>
 					</p>
 					<p class="from-group">
 						<span class="form-title">公司负责人</span>
-						<input type="text" class="form-control" v-model="leader">
+						<input-bar class="form-control" placeholder="" type="text"
+								   v-model="header"></input-bar>
 						<span class="requied">*</span>
 					</p>
 					<p class="from-group">
 						<span class="form-title">负责人电话</span>
-						<input type="text" class="form-control" v-model="phone">
+						<input-bar class="form-control" placeholder="" type="text"
+								   v-model="phone"></input-bar>
 						<span class="requied">*</span>
 					</p>
 					<div class="pop-btn right pointer">保存</div>
 
 				</div>
 				<div class="company-message">
-					<img :src="g.path.images+'/del.png'" alt="" class="del-depart">
+					<img :src="g.path.images+'/del.png'" alt="" class="del-depart pointer">
 					<p class="from-group">
 						<span class="form-title">部门名称</span>
                         <span v-show="currId != 0">
@@ -38,7 +42,8 @@
 								 @click="onClick_editBtn">
                         </span>
                         <span v-show="currId == 0">
-                            <input type="text" class="form-control" v-model="departName">
+							<input-bar class="form-control" placeholder="" type="text"
+									   v-model="departName"></input-bar>
                             <span class="pointer btn-save">保存</span>
                         </span>
 					</p>
@@ -49,13 +54,14 @@
 							<img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer">
 						</span>
                         <span v-show="currId == 0">
-                            <input type="text" class="form-control">
-                            <span class="pointer btn-save">保存</span>
+							<input-bar class="form-control" placeholder="" type="text"
+									   v-model="manager"></input-bar>
+                            <span class="pointer btn-save  ani-time">保存</span>
                         </span>
 					</p>
 				</div>
 				<div class="company-message">
-					<img :src="g.path.images+'/del.png'" alt="" class="del-depart">
+					<img :src="g.path.images+'/del.png'" alt="" class="del-depart pointer">
 					<p class="from-group">
 						<span class="form-title">部门名称</span>
                        	<span v-show="currId != 0">
@@ -63,7 +69,8 @@
                             <img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer">
                         </span>
                      <span v-show="currId == 0">
-                            <input type="text" class="form-control">
+						 <input-bar class="form-control" placeholder="" type="text"
+									v-model="departName1"></input-bar>
                             <span class="pointer btn-save">保存</span>
                         </span>
 					</p>
@@ -74,7 +81,8 @@
 						<img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer">
 						</span>
                          <span v-show="currId == 0">
-                            <input type="text" class="form-control">
+							  <input-bar class="form-control" placeholder="" type="text"
+										 v-model="manage1"></input-bar>
                             <span class="pointer btn-save">保存</span>
                         </span>
 						<img :src="g.path.images+'/del-depart.png'" alt="" class="edit-icon pointer">
@@ -83,14 +91,13 @@
 
 				<div class="btn-submit pop-btn top-btn right pointer" @click="onClick_submitBtn">提交</div>
 			</div>
-
-
 		</div>
 	</view-popup>
 </template>
 <script type="text/ecmascript-6">
 	import g from "../../global";
-	import ViewPopup from "../viewPop.vue"
+	import ViewPopup from "../viewPop.vue";
+	import InputBar from "../inputBar.vue"
 	export default{
 		created()
 		{
@@ -103,7 +110,8 @@
 			}
 		},
 		components: {
-			ViewPopup
+			ViewPopup,
+			InputBar
 		},
 		props: {
 			isShowPopView: {
@@ -123,7 +131,7 @@
 		methods: {
 			init()
 			{
-				trace("this.currId",this.currId);
+				trace("this.currId", this.currId);
 				if (!this.currId)
 				{
 					this.companyData = g.data.companyPool.getDataById(this.currId)
