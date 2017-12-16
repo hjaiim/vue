@@ -4,7 +4,7 @@
 			   :placeholder="placeholder" @input="onInput_value" @keyup.enter="onKeyupEnter_searchInput"
 			   v-model="inputContent" :maxLength="maxLength" :readonly="readonly" autocomplete="off">
 		<i v-show="inputContent.length>0 && isShowClearBtn" class="close-search-btn ani-time pointer absolute" alt=""
-			  @click="onClick_closeBtn"></i>
+		   @click="onClick_closeBtn"></i>
 	</div>
 </template>
 <script type="text/ecmascript-6">
@@ -16,7 +16,7 @@
 		props: {
 			value: {
 				type: String,
-				default:""
+				default: ""
 			},
 			type: {
 				type: String,
@@ -109,6 +109,68 @@
 				border: 1px solid #cccccc;
 			}
 		}
-
+		.close-search-btn {
+			width: 12px;
+			height: 12px;
+			right: 5px;
+			top: 50%;
+			padding: 4px;
+			margin-top: -10px;
+			background: transparent;
+			-moz-border-radius: 50%;
+			-webkit-border-radius: 50%;
+			border-radius: 50%;
+			-moz-transition: ease-in-out 100ms;
+			-o-transition: ease-in-out 100ms;
+			-webkit-transition: ease-in-out 100ms;
+			transition: ease-in-out 100ms;
+			&:before {
+				left: 50%;
+				top: 50%;
+				margin-left: -7px;
+				margin-top: -1px;
+				width: 14px;
+				height: 2px;
+				background-color: #9d9d9d;
+				content: "";
+				position: absolute;
+				-moz-transform: rotate(45deg);
+				-ms-transform: rotate(45deg);
+				-webkit-transform: rotate(45deg);
+				transform: rotate(45deg);
+			}
+			&:after {
+				width: 14px;
+				height: 2px;
+				background-color: #9d9d9d;
+				content: "";
+				left: 50%;
+				top: 50%;
+				margin-left: -7px;
+				margin-top: -1px;
+				position: absolute;
+				-moz-transform: rotate(-45deg);
+				-ms-transform: rotate(-45deg);
+				-webkit-transform: rotate(-45deg);
+				transform: rotate(-45deg);
+			}
+			&:hover {
+				-moz-transform: scale(0.9);
+				-ms-transform: scale(0.9);
+				-webkit-transform: scale(0.9);
+				transform: scale(0.9);
+			}
+			&:active {
+				-moz-transition: ease-in-out 200ms;
+				-o-transition: ease-in-out 200ms;
+				-webkit-transition: ease-in-out 200ms;
+				transition: ease-in-out 200ms;
+				-moz-transform: scale(1.6);
+				-ms-transform: scale(1.6);
+				-webkit-transform: scale(1.6);
+				transform: scale(1.6);
+				opacity: 0;
+			}
+		}
 	}
 </style>

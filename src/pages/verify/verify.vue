@@ -150,7 +150,7 @@
 				currDepartment: "",
 				dutyList: [],
 				currDuty: "",
-				isVerified:false,
+				isVerified: false,
 				isShowDepartmentList: false,
 				isShowCompanyList: false,
 				isShowPostList: false
@@ -168,7 +168,7 @@
 			{
 				this.userInfo = g.data.userInfo;
 				this.isVerified = (this.userInfo.authSatus == 2);
-				if(this.isVerified)
+				if (this.isVerified)
 				{
 					this.phone = this.userInfo.phone;
 					this.remark = this.userInfo.remark;
@@ -233,19 +233,19 @@
 			onChange_upload($list)
 			{
 				trace("onChange_upload", $list);
-				this.imgUrl = $list;
+				this.avatar = $list;
 			},
 			onChange_uploadPros($list){
 				trace("onChange_upload", $list);
-				this.imgProsUrl = $list;
+				this.idCardFront = $list;
 			},
 			onChange_uploadCons($list){
 				trace("onChange_upload", $list);
-				this.imgConsUrl = $list;
+				this.idCardBack = $list;
 			},
 			onChange_uploadWork($list){
 				trace("onChange_upload", $list);
-				this.imgWorkUrl = $list;
+				this.workCard = $list;
 			}
 		}
 	}

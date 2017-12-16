@@ -15,47 +15,47 @@
 					</div>
 				</div>
 			</div>
-			<!--<div class="table-content staff-table">-->
-				<!--<table class="inner-table">-->
-					<!--<thead>-->
-					<!--<tr>-->
-						<!--<th><span class="rank-num">序号</span></th>-->
-						<!--<th>姓名</th>-->
-						<!--<th>所属公司</th>-->
-						<!--<th>所属部门</th>-->
-						<!--<th>职务名称</th>-->
-						<!--<th>岗位名称</th>-->
-						<!--<th>岗位类型</th>-->
-						<!--<th>角色</th>-->
-						<!--<th><p class="action-menu">操作</p></th>-->
-					<!--</tr>-->
-					<!--</thead>-->
-					<!--<tbody>-->
-					<!--<tr v-for="(n,index) in 10">-->
-						<!--<td><span class="rank-num">{{index+1}}</span></td>-->
-						<!--<td>蒋怡君</td>-->
-						<!--<td>广州分公司</td>-->
-						<!--<td>客户部</td>-->
-						<!--<td>部门经理</td>-->
-						<!--<td>客户经理</td>-->
-						<!--<td>提交员</td>-->
-						<!--<td>人员管理权</td>-->
-						<!--<td>-->
-							<!--<p class="action-menu clear">-->
-								<!--<span class="left pointer draw-line ani-time">岗位设置</span>-->
-								<!--<span class="left pointer draw-line ani-time">角色设置</span>-->
-								<!--<span class="left pointer draw-line ani-time">停用</span>-->
-							<!--</p>-->
-						<!--</td>-->
-					<!--</tr>-->
-					<!--</tbody>-->
-				<!--</table>-->
-				<!--<div class="show-page clear">-->
-					<!--<common-page class="right" :total="200" :currPage="10" :showPageSize="false" :showTotalCount="true"-->
-								 <!--:showElevator="true"-->
-								 <!--:showFirstAndEnd="true"></common-page>-->
-				<!--</div>-->
-			<!--</div>-->
+			<div class="table-content staff-table">
+				<table class="inner-table">
+					<thead>
+					<tr>
+						<th><span class="rank-num">序号</span></th>
+						<th>姓名</th>
+						<th>所属公司</th>
+						<th>所属部门</th>
+						<th>职务名称</th>
+						<th>岗位名称</th>
+						<th>岗位类型</th>
+						<th>角色</th>
+						<th><p class="action-menu">操作</p></th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr v-for="(n,index) in 10">
+						<td><span class="rank-num">{{index+1}}</span></td>
+						<td>蒋怡君</td>
+						<td>广州分公司</td>
+						<td>客户部</td>
+						<td>部门经理</td>
+						<td>客户经理</td>
+						<td>提交员</td>
+						<td>人员管理权</td>
+						<td>
+							<p class="action-menu clear">
+								<span class="left pointer draw-line ani-time">岗位设置</span>
+								<span class="left pointer draw-line ani-time">角色设置</span>
+								<span class="left pointer draw-line ani-time">停用</span>
+							</p>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+				<div class="show-page clear">
+					<common-page class="right" :total="200" :currPage="10" :showPageSize="false" :showTotalCount="true"
+								 :showElevator="true"
+								 :showFirstAndEnd="true"></common-page>
+				</div>
+			</div>
 		</div>
 	</com-layout>
 </template>
