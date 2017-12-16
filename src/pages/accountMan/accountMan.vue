@@ -3,15 +3,15 @@
 		<div class="staff-wrap">
 			<div class="status-wrap clear">
 				<span class="total-nums left">岗位类别</span>
-				<div class="action-box left">
+				<div class="action-box left" @click="onClick_positionType(0)">
 					<i class="pointer"></i>
 					<span>未分配</span>
 				</div>
-				<div class="action-box left">
+				<div class="action-box left" @click="onClick_positionType(1)">
 					<i class="pointer action"></i>
 					<span>提交员</span>
 				</div>
-				<div class="action-box left">
+				<div class="action-box left" @click="onClick_positionType(2)">
 					<i class="pointer action"></i>
 					<span>审核员</span>
 				</div>
@@ -19,20 +19,20 @@
 				<div class="option-wrap left">
 					<div class="staff-option left clear">
 						<span class="left staff-name">平台角色</span>
-						<div class="option-content relative left" @click="onClick_dropListBtn">
+						<div class="option-content relative left" @click.stop="onClick_dropListBtn">
 							所有<i class="icon-trangle pointer" :class="isShowStatusList?'rotate':''"></i>
-							<drop-list :dropList=statusList :isShowDropList="isShowStatusList"
-									   @change="onClick_StatusItem"></drop-list>
+							<drop-list :dropList=roleList :isShowDropList="isShowStatusList"
+									   @change="onClick_roleItem" ref="dropList"></drop-list>
 						</div>
 					</div>
 					<div class="search-name left clear">
 						<span class="left">姓名</span>
 						<input-bar class="search-input left relative" placeholder="" type="text"
-								   v-model="email"></input-bar>
+								   v-model="name"></input-bar>
 					</div>
 					<div class="action-wrap left clear">
-						<span class="left action-btn ani-time pointer">查询</span>
-						<span class="left total-btn ani-time pointer">全部</span>
+						<span class="left action-btn ani-time pointer" @click="onClick_searchBtn">查询</span>
+						<span class="left total-btn ani-time pointer" @click="onClick_selectAllBtn">全部</span>
 					</div>
 				</div>
 			</div>
@@ -52,34 +52,35 @@
 					</tr>
 					</thead>
 					<tbody>
-					<tr v-for="(n,index) in 10">
+					<tr v-for="(item,index) in accountList">
 						<td><span class="rank-num">{{index+1}}</span></td>
-						<td>蒋怡君</td>
-						<td>广州分公司</td>
-						<td>客户部</td>
-						<td>部门经理</td>
-						<td>客户经理</td>
-						<td>提交员</td>
-						<td>人员管理权</td>
+						<td>{{item.name}}</td>
+						<td>{{item.companyName}}</td>
+						<td>{{item.departmentName}}</td>
+						<td>{{item.dutyName}}</td>
+						<td>{{item.positionName}}</td>
+						<td>{{item.positionType}}</td>
+						<td>{{item.roleName}}</td>
 						<td>
 							<p class="action-menu clear">
-								<span class="left pointer draw-line ani-time" @click="onClick_workBtn">岗位设置</span>
-								<span class="left pointer draw-line ani-time" @click="onClick_roleBtn">角色设置</span>
-								<span class="left pointer draw-line ani-time" @click="onClick_stopBtn">停用</span>
+								<span class="left pointer draw-line ani-time" @click="onClick_workBtn(item)">岗位设置
+								</span>
+								<span class="left pointer draw-line ani-time" @click="onClick_roleBtn(item)">角色设置</span>
+								<span class="left pointer draw-line ani-time" @click="onClick_stopBtn(item)">停用</span>
 							</p>
 						</td>
 					</tr>
 					</tbody>
 				</table>
-				<div class="show-page clear">
-					<common-page class="right" :total="200" :currPage="10" :showPageSize="false" :showTotalCount="true"
+				<div class="show-page clear" v-if="g.data.searchAccountPool.totalPage > 1">
+					<common-page class="right" :total="g.data.searchAccountPool.total" :currPage="currPage"
+								 :showPageSize="false" :showTotalCount="true"
 								 :showElevator="true"
-								 :showFirstAndEnd="true"></common-page>
+								 :showFirstAndEnd="true"
+								@change="onChange_pageCom"></common-page>
 				</div>
 			</div>
-			<set-rule-pop @close="onClose_setRulePop" :isShowPopView="isShowSetRulePop">
-
-			</set-rule-pop>
+			<set-rule-pop @close="onClose_setRulePop" :isShowPopView="isShowSetRulePop"></set-rule-pop>
 		</div>
 	</com-layout>
 </template>
@@ -92,12 +93,18 @@
 	import SetRulePop from "../../components/pop/setRulePop.vue"
 	export default{
 		created(){
+			this.routerUpdated();
 		},
 		data(){
 			return {
 				g: g,
+				accountList:[],
+				roleList: [],
+				currPage:1,
+				currRole:0,
+				name:"",
+				typeList:[0,1,2],
 				isShowStatusList: false,
-				statusList: [],
 				isShowSetRulePop: false
 			}
 		},
@@ -109,10 +116,63 @@
 			SetRulePop
 		},
 		methods: {
-			onClick_StatusItem($id){
-
+			routerUpdated()
+			{
+				this.accountList = g.data.searchAccountPool.list;
+				this.typeList = JSON.parse(g.vue.getQuery("typeList","[]"));
+				this.currPage = int(g.vue.getQuery("page",1));
+				this.name = g.vue.getQuery("name","");
+				this.currRole = g.vue.getQuery("role",0);
+				this.initEvents();
 			},
-			onClick_dropListBtn(){
+			init()
+			{
+				this.typeList = [0,1,2];
+				this.currPage = 1;
+				this.name = "";
+				this.currRole = 0;
+				this.updateUrl();
+			},
+			initEvents()
+			{
+				document.addEventListener("click", this.onClick_doc);
+			},
+			removeEvents()
+			{
+				document.removeEventListener("click", this.onClick_doc);
+			},
+			onClick_doc(e)
+			{
+				if (this.$refs.dropList && !this.$refs.dropList.$el.contains(e.target))
+				{
+					this.isShowStatusList = false;
+				}
+			},
+			onClick_positionType($type)
+			{
+				var index = this.typeList.indexOf($type);
+				if(index >= 0)
+				{
+					this.typeList.splice(index,1);
+				}
+				else
+				{
+					this.typeList.push($type);
+				}
+				this.currPage = 1;
+			},
+			onClick_roleItem($id)
+			{
+				this.currRole = $id;
+				this.currPage = 1;
+			},
+			onChange_pageCom($page)
+			{
+				this.currPage = $page;
+				this.updateUrl();
+			},
+			onClick_dropListBtn()
+			{
 				if (this.isShowStatusList)
 				{
 					this.isShowStatusList = false;
@@ -122,20 +182,49 @@
 					this.isShowStatusList = true;
 				}
 			},
-			onClick_workBtn(){
+			onClick_selectAllBtn()
+			{
+				this.init();
 			},
-			onClick_roleBtn(){
+			onClick_searchBtn()
+			{
+				this.updateUrl();
+			},
+			onClick_workBtn($item)
+			{
+			},
+			onClick_roleBtn($item)
+			{
 				this.isShowSetRulePop = true;
 			},
-			onClick_stopBtn(){
+			onClick_stopBtn($item)
+			{
 
 			},
-			onClick_unVerifyBtn(){
+			onClose_setRulePop()
+			{
+				this.isShowSetRulePop = false;
+			},
+			onClick_unVerifyBtn()
+			{
 				g.url = "/unverifyman";
 			},
-			onClose_setRulePop(){
-				this.isShowSetRulePop = false;
+			updateUrl()
+			{
+				g.url = {
+					path:"/account",
+					query:{
+						typeList:JSON.stringify(this.typeList),
+						page:int(this.currPage),
+						name:this.name,
+						role:this.currRole
+					}
+				}
 			}
+		},
+		beforeDestroy()
+		{
+			this.removeEvents();
 		}
 	}
 </script>

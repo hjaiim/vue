@@ -55,6 +55,10 @@ export default class BusinessPool {
 		return _recordHash[$id];
 	}
 
+	hasDetail($id)
+	{
+		return !!_hash[$id].formData;
+	}
 	get list()
 	{
 		return _list;
@@ -99,8 +103,9 @@ function createData($dObj)
 	d.creatorId = "";
 	d.creatorName = "";
 	d.customerId = "";
-	d.customerName = "";
+	d.customerCompName = "";
 	d.departmentId = "";
+	this.opperation = 0;
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -122,9 +127,11 @@ function updateData($dObj, $recordId)
 	$dObj.hasOwnProperty("creatorId") && (this.creatorId = $dObj.creatorId);
 	$dObj.hasOwnProperty("creatorName") && (this.creatorName = $dObj.creatorName);
 	$dObj.hasOwnProperty("comId") && (this.customerId = $dObj.comId);
-	$dObj.hasOwnProperty("comName") && (this.cusromerName = $dObj.comName);
+	$dObj.hasOwnProperty("comName") && (this.companyName = $dObj.comName);
 	$dObj.hasOwnProperty("departmentId") && (this.departmentId = $dObj.departmentId);
+	$dObj.hasOwnProperty("custComName") && (this.customerCompName = $dObj.custComName);
 	$dObj.hasOwnProperty("createTime") && (this.createTime = $dObj.createTime)
+	$dObj.hasOwnProperty("optType") && (this.opperation = $dObj.optType)
 	if ($dObj.hasOwnProperty("recordList"))
 	{
 		var recordData = new RecordData();
