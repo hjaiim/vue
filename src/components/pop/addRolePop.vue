@@ -98,7 +98,6 @@
 			line-height: 36px;
 			font-size: 14px;
 			height: 560px;
-
 		}
 	}
 

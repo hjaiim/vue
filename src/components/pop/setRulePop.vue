@@ -1,10 +1,10 @@
 <template>
 	<view-popup @close="onClose_pop"
 				:isShowPopView="isShowPopView">
-		<div class="detail-container">
-			<p class="note-tit">通知</p>
-			<div class="note-content">
-				这里是通知内容 爽肤水大润发的发v大润发东方闪电水电费水电费沙发上的电风扇防守打法范甘迪发布
+		<div class="setRule-wrap">
+			<p class="note-tit">角色设置</p>
+			<div class="set-content">
+
 			</div>
 		</div>
 	</view-popup>
@@ -30,15 +30,13 @@
 		methods: {
 			onClose_pop(){
 				this.$emit('close');
-
 			}
 		}
 	}
 </script>
 <style lang="sass" rel="stylesheet/scss" type="text/scss" scoped>
-	.detail-container {
-		color: #333333;
-		height: 288px;
+	.setRule-wrap {
+		height: 384px;
 		.note-tit {
 			line-height: 64px;
 			height: 64px;
@@ -47,10 +45,7 @@
 			font-size: 15px;
 			border-bottom: 1px solid #eaeaea;
 		}
-		.note-content {
-			padding: 35px 72px 0;
-			line-height: 36px;
-			font-size: 14px;
+		.set-content {
 
 		}
 	}

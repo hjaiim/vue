@@ -7,7 +7,7 @@
 			<form-input type="password" placeholder="请输入密码" v-model="password" errmsg="请输入正确的密码"></form-input>
 			<form-input type="password" placeholder="请再次确认输入" v-model="confirmPwd"></form-input>
 			<div class="pointer login-btn resetPwd-top ani-time" @click="onClick_registerBtn">注册</div>
-			<div class="link-keys ">已有账号？<p class="ani-time" @click="onClick_loginBtn">登录>></p>
+			<div class="link-keys ">已有账号？<span class="ani-time" @click="onClick_loginBtn">登录>></span>
 			</div>
 		</div>
 	</div>

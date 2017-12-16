@@ -17,7 +17,7 @@
 					</i>
 				</li>
 				<li class="nav-item">
-					<p class="note-txt" @click="onClick_logoutBtn">退出</p>
+					<p class="note-txt pointer" @click="onClick_logoutBtn">退出</p>
 				</li>
 			</ul>
 		</div>

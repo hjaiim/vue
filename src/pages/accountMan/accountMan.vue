@@ -77,6 +77,9 @@
 								 :showFirstAndEnd="true"></common-page>
 				</div>
 			</div>
+			<set-rule-pop @close="onClose_setRulePop" :isShowPopView="isShowSetRulePop">
+
+			</set-rule-pop>
 		</div>
 	</com-layout>
 </template>
@@ -85,7 +88,8 @@
 	import ComLayout from "../../components/comLayout.vue";
 	import CommonPage from "../../components/page.vue";
 	import DropList from "../../components/dropList.vue";
-	import InputBar from "../../components/inputBar.vue"
+	import InputBar from "../../components/inputBar.vue";
+	import SetRulePop from "../../components/pop/setRulePop.vue"
 	export default{
 		created(){
 		},
@@ -93,14 +97,16 @@
 			return {
 				g: g,
 				isShowStatusList: false,
-				statusList: []
+				statusList: [],
+				isShowSetRulePop: false
 			}
 		},
 		components: {
 			ComLayout,
 			CommonPage,
 			DropList,
-			InputBar
+			InputBar,
+			SetRulePop
 		},
 		methods: {
 			onClick_StatusItem($id){
@@ -117,16 +123,18 @@
 				}
 			},
 			onClick_workBtn(){
-
 			},
 			onClick_roleBtn(){
-
+				this.isShowSetRulePop = true;
 			},
 			onClick_stopBtn(){
 
 			},
 			onClick_unVerifyBtn(){
-				g.url="/unverifyman";
+				g.url = "/unverifyman";
+			},
+			onClose_setRulePop(){
+				this.isShowSetRulePop = false;
 			}
 		}
 	}
