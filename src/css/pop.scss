@@ -1,18 +1,18 @@
 .mod-company-container {
   color: #333333;
   .mod-tit {
-    line-height: 64px;
-    height: 64px;
-    padding-left: 25px;
-    margin: 0 10px;
-    font-size: 15px;
-    border-bottom: 1px solid #eaeaea;
+	line-height: 64px;
+	height: 64px;
+	padding-left: 25px;
+	margin: 0 10px;
+	font-size: 15px;
+	border-bottom: 1px solid #eaeaea;
   }
   .mod-company-content {
-    padding: 20px 10px 40px;
-    line-height: 36px;
-    font-size: 14px;
-    height: 790px;
+	padding: 20px 10px 40px;
+	line-height: 36px;
+	font-size: 14px;
+	height: 790px;
 
   }
 }
@@ -23,60 +23,64 @@
   padding: 20px 0;
   position: relative;
   .del-depart {
-    position: absolute;
-    top: 20px;
-    right: 18px;
+	position: absolute;
+	top: 20px;
+	right: 18px;
   }
   .from-group {
-    margin-bottom: 18px;
-    &:last-child {
-      margin-bottom: 0;
-    }
-    .form-title {
-      width: 125px;
-      height: 30px;
-      line-height: 30px;
-      text-align: right;
-      font-weight: bold;
-      color: #000000;
-      margin-right: 20px;
-      display: inline-block;
-    }
-    .form-control {
-      width: 150px;
-      height: 30px;
-      line-height: 30px;
-      border: 1px solid #dddddd;
-      border-radius: 4px;
-      box-shadow: 0 0 2px #f5f5f5 inset;
-      padding: 0 12px;
-      box-sizing: border-box;
-      margin-right: 10px;
-    }
-    .role-explain {
-      width: 460px;
-      height: 64px;
-    }
-    .form-trap {
-      font-weight: bold;
-      color: #000000;
-    }
-    .form-type {
-      color: #666666;
-    }
-    .edit-icon {
-      vertical-align: middle;
-      margin: 0 0 0 8px;
-      border: 3px solid transparent;
-    }
-    .requied {
-      height: 30px;
-      line-height: 30px;
-      color: #ed5564;
-    }
-    .btn-save {
-      color: #fe6e05;
-    }
+	margin-bottom: 18px;
+	&:last-child {
+	  margin-bottom: 0;
+	}
+	.form-title {
+	  width: 125px;
+	  height: 30px;
+	  line-height: 30px;
+	  text-align: right;
+	  color: #000000;
+	  margin-right: 20px;
+	  display: inline-block;
+	}
+	.form-control {
+	  width: 150px;
+	  height: 30px;
+	  line-height: 30px;
+	  margin-right: 10px;
+	}
+	.role-explain {
+	  width: 460px;
+	  height: 64px;
+	  outline: none;
+	  border: 1px solid #dedede;
+	  -webkit-border-radius: 4px;
+	  -moz-border-radius: 4px;
+	  border-radius: 4px;
+	  text-indent: 1em;
+	  &:focus {
+		border: 1px solid #cccccc
+	  }
+
+	}
+	.form-trap {
+	  font-weight: bold;
+	  color: #000000;
+	}
+	.form-type {
+	  color: #666666;
+	}
+	.edit-icon {
+	  vertical-align: middle;
+	  margin: 0 0 0 8px;
+	  border: 3px solid transparent;
+	}
+	.requied {
+	  height: 30px;
+	  line-height: 30px;
+	  color: #ed5564;
+	}
+	.btn-save {
+	  color: #fe6e05;
+	}
   }
 
 }
@@ -94,12 +98,16 @@
   border-radius: 4px;
   background: #f9f9f9;
   margin-right: 18px;
+  &:hover {
+	border: 1px solid #cccccc;
+
+  }
 }
 
 .btn-submit {
   border: none;
   background: #ed5564;
-  color: #fff;
+  color: #ffffff;
 }
 
 .top-btn {

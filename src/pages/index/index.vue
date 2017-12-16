@@ -36,7 +36,7 @@
 					<span class="personal-title">手机</span>
 					<input-bar class="personal-content pensonal-input" placeholder="" type="text"
 							   v-model="phone"></input-bar>
-					<span class="bind-phone pointer">解绑</span>
+					<span class="bind-phone pointer ani-time">解绑</span>
 				</p>
 				<p class="personal-form">
 					<span class="personal-title">验证码</span>
@@ -44,7 +44,7 @@
 					<input-bar class="personal-content pensonal-input code" placeholder="" type="text"
 							   v-model="code"></input-bar>
 					<span class="btn-send pointer">发送验证码</span>
-					<span class="bind-phone pointer">解绑</span>
+					<span class="bind-phone pointer ani-time">解绑</span>
 				</p>
 				<p class="personal-form"><span class="personal-title">固定电话</span>
 					<input-bar class="personal-content pensonal-input" placeholder="" type="text"
@@ -57,24 +57,23 @@
 				<p class="personal-form"><span class="personal-title">备注</span>
 					<input-bar class="personal-content pensonal-input note" placeholder="" type="text"
 							   v-model="remark"></input-bar>
-				<div class="btn btn-save pointer">保存</div>
+				<div class="btn btn-save pointer action-btn ani-time">保存</div>
 			</div>
 
 			<div class="personal-message" v-show="type=='modpwd'">
 				<div class="personal-form"><span class="personal-title">原密码</span>
 					<input-bar class="personal-content pensonal-input" placeholder="" type="password"
 							   v-model="oldPwd"></input-bar>
-					<div class="personal-form"><span class="personal-title">新密码</span>
-						<input-bar class="personal-content pensonal-input" placeholder="" type="password"
-								   v-model="newPwd"></input-bar>
-					</div>
-					<div class="personal-form"><span class="personal-title">确认密码</span>
-						<input-bar class="personal-content pensonal-input" placeholder="" type="password"
-								   v-model="surePwd"></input-bar>
-					</div>
-					<div class="btn btn-save pointer">保存</div>
-
 				</div>
+				<div class="personal-form"><span class="personal-title">新密码</span>
+					<input-bar class="personal-content pensonal-input" placeholder="" type="password"
+							   v-model="newPwd"></input-bar>
+				</div>
+				<div class="personal-form"><span class="personal-title">确认密码</span>
+					<input-bar class="personal-content pensonal-input" placeholder="" type="password"
+							   v-model="surePwd"></input-bar>
+				</div>
+				<div class="btn btn-save pointer action-btn ani-time ">保存</div>
 			</div>
 		</div>
 	</com-layout>
@@ -184,6 +183,3 @@
 	@import "../../css/mixin.scss";
 	@import "../../css/percenter.scss";
 </style>
-<!--<style type="text/css" lang="sass" rel="stylesheet/css">-->
-<!--@import "../../css/personal.scss";-->
-<!--</style>-->

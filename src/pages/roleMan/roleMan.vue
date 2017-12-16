@@ -7,7 +7,7 @@
 					<span>新角色</span>
 				</span>
 			</div>
-			<div class="table-content">
+			<div class="table-content role-table">
 				<table class="inner-table">
 					<thead>
 					<tr>
