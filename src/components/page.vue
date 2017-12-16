@@ -214,7 +214,7 @@
 					return;
 				}
 				this.indexPage = int($page);
-				this.$emit('changepage', this.indexPage);
+				this.$emit('change', this.indexPage);
 			},
 			onClick_nextBtn()
 			{
@@ -258,7 +258,7 @@
 			onClick_pageSize($pageSize)
 			{
 				this.isShowAdjustSize = false;
-				this.$emit('changepageSize', $pageSize);
+				this.$emit('changePageSize', $pageSize);
 				this.$forceUpdate();
 				this.onClick_pageBtn(1);
 			},

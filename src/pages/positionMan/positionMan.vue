@@ -27,8 +27,9 @@
 						<td>{{item.creator}}</td>
 						<td>{{item.createTime}}</td>
 						<td>
-							<p class="action-menu clear"><span class="left pointer draw-line ani-time">修改</span>
-
+							<p class="action-menu clear">
+								<span class="left pointer draw-line ani-time"
+									  @click="onClick_detailBtn(item.id)">修改</span>
 								<span class="right pointer draw-line ani-time" @click="onClick_deleteBtn(item.id)">删除
 									<delete-pop :isDeletePop="item.isShow"
 												@close="onClose_deletePop">
@@ -48,7 +49,7 @@
 				</div>
 			</div>
 		</div>
-		<add-post-pop :isShowPopView="isShowPostPop" :currId="currId"></add-post-pop>
+		<add-post-pop :isShowPopView="isShowPostPop" :currId="currId" @close="onClose_postPop"></add-post-pop>
 	</com-layout>
 </template>
 <script type="text/ecmascript-6">
@@ -84,7 +85,8 @@
 			},
 			onClick_addPostBtn()
 			{
-
+				this.currId = 0;
+				this.isShowPostPop = true;
 			},
 			onClick_deleteBtn($id)
 			{
@@ -99,10 +101,16 @@
 
 				}
 			},
-			onClick_detailBtn()
+			onClick_detailBtn($id)
 			{
-
+				this.currId = $id;
+				this.isShowPostPop = true;
 			},
+			onClose_postPop()
+			{
+				this.isShowPostPop = false;
+			}
+
 		}
 	}
 

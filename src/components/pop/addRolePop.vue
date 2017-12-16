@@ -8,13 +8,12 @@
 					<p class="from-group">
 						<span class="form-title left">角色名称</span>
 						<input-bar class="form-control" placeholder="" type="text"
-								   v-model="roleName"></input-bar>
-
+								   v-model="name"></input-bar>
 						<span class="requied">*</span>
 					</p>
 					<p class="from-group">
 						<span class="form-title left">角色说明</span>
-						<textarea type="text" class="form-control role-explain ani-time"></textarea>
+						<textarea type="text" class="form-control role-explain ani-time" v-model="desc"></textarea>
 					</p>
 					<p class="from-group">
 						<span class="form-title left">平台权限</span>
@@ -30,7 +29,8 @@
 <script type="text/ecmascript-6">
 	import g from "../../global";
 	import ViewPopup from "../viewPop.vue";
-	import InputBar from "../inputBar.vue"
+	import InputBar from "../inputBar.vue";
+	var _params = null;
 	export default{
 		created()
 		{
@@ -39,7 +39,9 @@
 		data(){
 			return {
 				g: g,
-				roleData: {}
+				name: "",
+				desc: [],
+				rights: []
 			}
 		},
 		components: {
@@ -62,9 +64,18 @@
 		methods: {
 			init()
 			{
-				if (!this.currId)
+				if (this.currId)
 				{
-					this.roleData = g.data.searchRolePool.getDataById(this.currId);
+					var roleData = g.data.searchRolePool.getDataById(this.currId);
+					this.name = roleData.name;
+					this.desc = roleData.desc;
+					this.rights = roleData.rights;
+				}
+				else
+				{
+					this.name = "";
+					this.desc = "";
+					this.rights = "";
 				}
 			},
 			onClose_pop()
@@ -73,11 +84,19 @@
 			},
 			onClick_cancelBtn()
 			{
-				this.$emit('close', false);
+				this.onClose_pop();
 			},
 			onClick_confirmBtn()
 			{
-				this.$emit('close', true);
+				_params = {
+					roleName: this.name,
+					roleDesc: this.desc,
+					permissionIds: this.rights
+				};
+				g.net.call('permission/addRole', _params).then(($data) =>
+				{
+					this.$emit('close', true);
+				})
 			}
 		}
 	}

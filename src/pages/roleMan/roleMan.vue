@@ -58,8 +58,10 @@
 	import g from "../../global";
 	import ComLayout from "../../components/comLayout.vue";
 	import CommonPage from "../../components/page.vue";
-	import DeletePop from "../../components/pop/deletePop.vue"
-	import AddRolePop from "../../components/pop/addRolePop.vue"
+	import DeletePop from "../../components/pop/deletePop.vue";
+	import AddRolePop from "../../components/pop/addRolePop.vue";
+	var _params = null;
+	var _delId = 0;
 	export default{
 		created(){
 			this.routerUpdated();
@@ -96,14 +98,18 @@
 			},
 			onClick_deleteBtn($id)
 			{
-				this.currId = $id;
-				g.data.searchRolePool.getDataById($id).update({isShow: true});
+				_delId = $id;
+				g.data.searchRolePool.getDataById(_delId).update({isShow: true});
 			},
 			onClose_deletePop($result)
 			{
-				g.data.searchRolePool.getDataById(this.currId).update({isShow: false});
+				g.data.searchRolePool.getDataById(_delId).update({isShow: false});
 				if ($result)
 				{
+					_params = {roleId:_delId};
+					g.net.call("permission/delRole").then(($data) => {
+						g.ui.toast("角色删除成功@")
+					})
 
 				}
 			},

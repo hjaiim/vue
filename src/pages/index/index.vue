@@ -8,7 +8,7 @@
 
 				<div class="icon-collect clear">
 					<div class="relative upload-head right pointer">
-						<img class="default-img" :src="imgUrl?imgUrl:g.path.images+'/default-icon.png'" alt="">
+						<img class="default-img" :src="avatar?avatar:g.path.images+'/default-icon.png'" alt="">
 						<div class="upload-btn absolute">
 							<p class="load-text">修改头像</p>
 							<upload-btn @change="onChange_upload" resultType="base64" :multiType="false"></upload-btn>
@@ -94,7 +94,7 @@
 				g: g,
 				type: "personal",
 				userInfo: {},
-				imgUrl: '',
+				avatar: '',
 				phone: "",
 				telphone: "",
 				email: "",
@@ -115,11 +115,11 @@
 			routerUpdated()
 			{
 				this.userInfo = g.data.userInfo;
-
-//				this.phone = this.userInfo.phone;
-//				this.telphone = this.userInfo.telphone;
-//				this.email = this.userInfo.email;
-//				this.remark = this.userInfo.remark;
+				this.phone = this.userInfo.phone;
+				this.avatar = this.userInfo.avatar;
+				this.telphone = this.userInfo.telphone;
+				this.email = this.userInfo.email;
+				this.remark = this.userInfo.remark;
 				this.type = g.vue.getQuery('type', "personal");
 			},
 			onClick_tabItem($id)
@@ -173,7 +173,7 @@
 			onChange_upload($data)
 			{
 				trace("onChange_upload", $data);
-				this.imgUrl = $data;
+				this.avatar = $data;
 			}
 		}
 	}

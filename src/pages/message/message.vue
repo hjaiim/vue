@@ -37,18 +37,18 @@
 					</tr>
 					</thead>
 					<tbody>
-					<tr v-for="(n,index) in 10">
+					<tr v-for="(item,index) in msgList">
 						<td><i class="draw-tick relative pointer"></i><span class="rank-num">{{index+1}}</span></td>
-						<td><span :class="[index==2?'is-picked':'', index==5?'wait-pick':'']">审批已通过</span></td>
-						<td>系统消息</td>
-						<td>2012.12.12 12:12:12</td>
+						<td><span :class="[index==2?'is-picked':'', index==5?'wait-pick':'']">{{item.title}}</span></td>
+						<td>{{item.source}}</td>
+						<td>{{item.createTime}}</td>
 						<td>
 							<p class="action-menu clear">
-								<span class="left pointer draw-line ani-time" @click="onClick_detailBtn">详情</span>
-								<span class="right pointer draw-line ani-time" @click="onClick_deleteBtn(index+1)">删除
-									<delete-pop :isDeletePop="(index+1)=== currIndex"
-												@cancel="onClick_cancelBtn(index+1)"
-												@remove="onClick_removeBtn(index+1)">
+								<span class="left pointer draw-line ani-time" @click="onClick_detailBtn(item.id)">详情
+								</span>
+								<span class="right pointer draw-line ani-time" @click="onClick_deleteBtn(item.id)">删除
+									<delete-pop :isDeletePop="item.isShow"
+												@close="onClose_deletePop">
 										<span>您确定要删除该产品？</span>
 									</delete-pop>
 								</span>
@@ -57,12 +57,14 @@
 					</tr>
 					</tbody>
 				</table>
-				<div class="show-page clear">
-					<common-page class="right" :total="200" :currPage="10" :showPageSize="false" :showTotalCount="true"
+				<div class="show-page clear" v-if="g.data.messagePool.totalPage > 1">
+					<common-page class="right" :total="g.data.messagePool.total" :currPage="currPage"
+								 :showPageSize="false"
+								 :showTotalCount="true"
 								 :showElevator="true"
 								 :showFirstAndEnd="true"></common-page>
 				</div>
-				<detail-pop :isShowPopView="isShowDetailPop" @close="onClose_detailPop"></detail-pop>
+				<detail-pop :isShowPopView="isShowDetailPop" :currId="currId" @close="onClose_detailPop"></detail-pop>
 
 			</div>
 		</div>
@@ -76,15 +78,15 @@
 	import DeletePop from "../../components/pop/deletePop.vue"
 	export default{
 		created(){
-
+			this.init();
 		},
 		data(){
 			return {
 				g: g,
-				currIndex: "",
+				currId: 0,
 				isShowDetailPop: false,
+				msgList: []
 			}
-
 		},
 		components: {
 			ComLayout,
@@ -93,18 +95,20 @@
 			DeletePop
 		},
 		methods: {
-			onClick_deleteBtn($index){
-				this.currIndex = $index;
+			init()
+			{
+				this.msgList = g.data.messagePool.list;
 			},
-			onClick_cancelBtn($index){
-				this.currIndex = "";
+			onClick_deleteBtn($id){
+				this.currId = $id;
+				g.data.messagePool.getDataById(this.currId).update({isShow:true});
 			},
-			onClick_removeBtn($index){
-				this.currIndex = "";
+			onClose_deletePop($result){
+				g.data.messagePool.getDataById(this.currId).update({isShow:false});
 			},
-			onClick_detailBtn(){
+			onClick_detailBtn($id){
+				this.currId = $id;
 				this.isShowDetailPop = true;
-
 			},
 			onClose_detailPop(){
 				this.isShowDetailPop = false;

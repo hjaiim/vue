@@ -78,10 +78,14 @@ function createData($dObj)
 {
 	var d = {};
 	d.id = 0;
+	d.userId = 0;
+	d.businessId = 0;
 	d.title = "";
 	d.source = "";
 	d.createTime = "";
 	d.desc = "";
+	d.readStatus = 0;
+	d.isShow = false;
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -90,5 +94,14 @@ function createData($dObj)
 
 function updateData($dObj)
 {
-	$dObj.hasOwnProperty("id") && (this.id = $dObj.id)
-}
+	$dObj.hasOwnProperty("msgId") && (this.id = $dObj.msgId);
+	$dObj.hasOwnProperty("userId") && (this.userId = $dObj.userId);
+	$dObj.hasOwnProperty("relationId") && (this.businessId = $dObj.relationId);
+	$dObj.hasOwnProperty("msgTitle") && (this.title = $dObj.msgTitle);
+	$dObj.hasOwnProperty("msgSource") && (this.source = $dObj.msgSource);
+	$dObj.hasOwnProperty("msgContent") && (this.desc = $dObj.msgContent);
+	$dObj.hasOwnProperty("sendTime") && (this.createTime = $dObj.sendTime);
+	$dObj.hasOwnProperty("readStatus") && (this.readStatus = $dObj.readStatus);
+	$dObj.hasOwnProperty("isShow") && (this.isShow = $dObj.isShow);
+};
+

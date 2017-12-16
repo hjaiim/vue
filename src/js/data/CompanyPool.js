@@ -96,7 +96,7 @@ function createData($dObj)
 	d.leader = "";
 	d.creatorId = 0;
 	d.phone = "";
-	d.contact = "";
+	d.telphone = "";
 	d.isShow = false;
 	d.update = updateData.bind(d);
 	d.update($dObj);
@@ -111,7 +111,7 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("creatorId") && (this.creatorId = $dObj.creatorId);
 	$dObj.hasOwnProperty("comLinkMan") && (this.leader = $dObj.comLinkMan);
 	$dObj.hasOwnProperty("comLinkManTel") && (this.phone = $dObj.comLinkManTel);
-	$dObj.hasOwnProperty("comLinkTel") && (this.contact = $dObj.comLinkTel);
+	$dObj.hasOwnProperty("comLinkTel") && (this.telphone = $dObj.comLinkTel);
 	$dObj.hasOwnProperty("departmentCount") && (this.departCount = $dObj.departmentCount);
 	$dObj.hasOwnProperty("dutyCount") && (this.dutyCount = $dObj.dutyCount);
 	$dObj.hasOwnProperty("isShow") && (this.isShow = $dObj.isShow);

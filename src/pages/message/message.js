@@ -28,8 +28,8 @@ export function searchMessageList($params)
 	{
 		g.net.call("message/queryMessageListByPage", _params).then(($data) =>
 		{
-			g.data.searchMessagePool.removeAll();
-			g.data.searchMessagePool.update($data);
+			g.data.messagePool.removeAll();
+			g.data.messagePool.update($data);
 			resolved();
 		}, (err) =>
 		{

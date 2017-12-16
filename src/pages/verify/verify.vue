@@ -4,7 +4,7 @@
 			<div class="percenter-inner">
 				<div class="icon-collect clear">
 					<div class="relative upload-head right pointer">
-						<img class="default-img" :src="imgUrl?imgUrl:g.path.images+'/default-icon.png'" alt="">
+						<img class="default-img" :src="avatar?avatar:g.path.images+'/default-icon.png'" alt="">
 						<div class="upload-btn absolute">
 							<p class="load-text">修改头像</p>
 							<upload-btn @change="onChange_upload" resultType="base64"></upload-btn>
@@ -84,8 +84,8 @@
 							<img :src="g.path.images+'/upload.png'" alt="">
 							<p class="upload-text">正面</p>
 						</div>
-						<img class="img-url absolute" :src="imgProsUrl?imgProsUrl:''" alt="">
-						<span class="del-img pointer" :class="imgProsUrl?'hover-img':''"></span>
+						<img class="img-url absolute" :src="idCardFront?idCardFront:''" alt="">
+						<span class="del-img pointer" :class="idCardFront?'hover-img':''"></span>
 						<upload-btn class="input-file" @change="onChange_uploadPros" resultType="base64"></upload-btn>
 					</div>
 					<div class="left relative upload-box pointer">
@@ -93,8 +93,8 @@
 							<img :src="g.path.images+'/upload.png'" alt="">
 							<p class="upload-text">反面</p>
 						</div>
-						<img class="img-url absolute" :src="imgConsUrl?imgConsUrl:''" alt="">
-						<span class="del-img pointer" :class="imgConsUrl?'hover-img':''"></span>
+						<img class="img-url absolute" :src="idCardBack?idCardBack:''" alt="">
+						<span class="del-img pointer" :class="idCardBack?'hover-img':''"></span>
 						<upload-btn class="input-file" @change="onChange_uploadCons" resultType="base64"></upload-btn>
 					</div>
 				</div>
@@ -112,8 +112,8 @@
                                 </span>
 							</p>
 						</div>
-						<img class="img-url absolute" :src="imgWorkUrl?imgWorkUrl:''" alt="">
-						<span class="del-img pointer" :class="imgWorkUrl?'hover-img':''"></span>
+						<img class="img-url absolute" :src="workCard?workCard:''" alt="">
+						<span class="del-img pointer" :class="workCard?'hover-img':''"></span>
 						<upload-btn class="input-file" @change="onChange_uploadWork" resultType="base64"></upload-btn>
 
 					</div>
@@ -141,20 +141,20 @@
 				email: '',
 				code: '',
 				telphone: '',
-				imgUrl: '',
-				imgConsUrl: '',
-				imgProsUrl: '',
-				imgWorkUrl: '',
+				avatar: '',
+				idCardBack: '',
+				idCardFront: '',
+				workCard: '',
 				companyList: [],
 				currCompany: "",
 				departmentList: [],
 				currDepartment: "",
 				dutyList: [],
 				currDuty: "",
+				isVerified:false,
 				isShowDepartmentList: false,
 				isShowCompanyList: false,
 				isShowPostList: false
-
 			}
 		},
 		components: {
@@ -168,9 +168,38 @@
 			init()
 			{
 				this.userInfo = g.data.userInfo;
-//				this.remark = this.userInfo.remark;
-//				this.email = this.userInfo.email;
-				this.companyList = g.data.companyPool.list;
+				this.isVerified = (this.userInfo.authSatus == 2);
+				if(this.isVerified)
+				{
+					this.phone = this.userInfo.phone;
+					this.remark = this.userInfo.remark;
+					this.email = this.userInfo.email;
+					this.telphone = this.userInfo.telphone;
+					this.avatar = this.userInfo.avatar;
+					this.idCardBack = this.userInfo.idCardBack;
+					this.idCardFront = this.userInfo.idCardFront;
+					this.workCard = this.userInfo.workCard;
+					this.currCompany = this.userInfo.companyName;
+					this.currDepartment = this.userInfo.departmentName;
+					this.currDuty = this.userInfo.dutyName;
+				}
+				else
+				{
+					this.phone = "";
+					this.remark = "";
+					this.email = "";
+					this.telphone = "";
+					this.avatar = "";
+					this.idCardBack = "";
+					this.idCardFront = "";
+					this.workCard = "";
+					this.currCompany = "";
+					this.currDepartment = "";
+					this.currDuty = "";
+					this.code = "";
+					this.companyList = g.data.companyPool.list;
+				}
+
 			},
 			onClick_company($id)
 			{

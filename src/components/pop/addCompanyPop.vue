@@ -20,7 +20,7 @@
 					<p class="from-group">
 						<span class="form-title">公司负责人</span>
 						<input-bar class="form-control" placeholder="" type="text"
-								   v-model="header"></input-bar>
+								   v-model="leader"></input-bar>
 						<span class="requied">*</span>
 					</p>
 					<p class="from-group">
@@ -32,62 +32,68 @@
 					<div class="pop-btn right pointer">保存</div>
 
 				</div>
-				<div class="company-message">
-					<img :src="g.path.images+'/del.png'" alt="" class="del-depart pointer">
+				<div class="company-message" v-for="item in departmentList">
+					<img :src="g.path.images+'/del.png'" alt="" class="del-depart pointer"
+						 @click="onClick_deleteDepart(item)">
 					<p class="from-group">
 						<span class="form-title">部门名称</span>
                         <span v-show="currId != 0">
-                            <span class="form-trap">研发部</span>
+                            <span class="form-trap">{{item.name}}</span>
                             <img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer"
-								 @click="onClick_editBtn">
+								 @click="onClick_editDepart(item)">
                         </span>
+
                         <span v-show="currId == 0">
 							<input-bar class="form-control" placeholder="" type="text"
 									   v-model="departName"></input-bar>
                             <span class="pointer btn-save">保存</span>
                         </span>
 					</p>
-					<p class="from-group">
+					<p class="from-group" v-for="duty in item.children">
 						<span class="form-title">职务名称</span>
 						<span v-show="currId != 0">
-							<span class="form-trap">研发部主管</span>
-							<img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer">
+							<span class="form-trap">{{duty.name}}</span>
+							<img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer"
+								 @click="onClick_editDuty(duty)">
+							<img :src="g.path.images+'/del-depart.png'" alt="" class="edit-icon pointer"
+								 @click="onClick_deleteDuty(duty)">
 						</span>
                         <span v-show="currId == 0">
 							<input-bar class="form-control" placeholder="" type="text"
-									   v-model="manager"></input-bar>
+									   v-model="dutyName"></input-bar>
                             <span class="pointer btn-save  ani-time">保存</span>
                         </span>
 					</p>
 				</div>
-				<div class="company-message">
-					<img :src="g.path.images+'/del.png'" alt="" class="del-depart pointer">
-					<p class="from-group">
-						<span class="form-title">部门名称</span>
-                       	<span v-show="currId != 0">
-                            <span class="form-trap">销售部</span>
-                            <img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer">
-                        </span>
-                     <span v-show="currId == 0">
-						 <input-bar class="form-control" placeholder="" type="text"
-									v-model="departName1"></input-bar>
-                            <span class="pointer btn-save">保存</span>
-                        </span>
-					</p>
-					<p class="from-group">
-						<span class="form-title">职务名称</span>
-						<span v-show="currId != 0">
-							<span class="form-trap">销售部经理</span>
-						<img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer">
-						</span>
-                         <span v-show="currId == 0">
-							  <input-bar class="form-control" placeholder="" type="text"
-										 v-model="manage1"></input-bar>
-                            <span class="pointer btn-save">保存</span>
-                        </span>
-						<img :src="g.path.images+'/del-depart.png'" alt="" class="edit-icon pointer">
-					</p>
-				</div>
+				<!--<div class="company-message">-->
+				<!--<img :src="g.path.images+'/del.png'" alt="" class="del-depart pointer">-->
+				<!--<p class="from-group">-->
+				<!--<span class="form-title">部门名称</span>-->
+				<!--<span v-show="currId != 0">-->
+				<!--<span class="form-trap">销售部</span>-->
+				<!--<img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer">-->
+				<!--</span>-->
+				<!--<span v-show="currId == 0">-->
+				<!--<input-bar class="form-control" placeholder="" type="text"-->
+				<!--v-model="departName1"></input-bar>-->
+				<!--<span class="pointer btn-save">保存</span>-->
+				<!--</span>-->
+				<!--</p>-->
+				<!--<p class="from-group">-->
+				<!--<span class="form-title">职务名称</span>-->
+				<!--<span v-show="currId != 0">-->
+				<!--<span class="form-trap">销售部经理</span>-->
+				<!--<img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer">-->
+				<!---->
+				<!--</span>-->
+				<!--<span v-show="currId == 0">-->
+				<!--<input-bar class="form-control" placeholder="" type="text"-->
+				<!--v-model="manage1"></input-bar>-->
+				<!--<span class="pointer btn-save">保存</span>-->
+				<!--</span>-->
+				<!---->
+				<!--</p>-->
+				<!--</div>-->
 
 				<div class="btn-submit pop-btn top-btn right pointer" @click="onClick_submitBtn">提交</div>
 			</div>
@@ -97,7 +103,8 @@
 <script type="text/ecmascript-6">
 	import g from "../../global";
 	import ViewPopup from "../viewPop.vue";
-	import InputBar from "../inputBar.vue"
+	import InputBar from "../inputBar.vue";
+	var _params = null;
 	export default{
 		created()
 		{
@@ -106,6 +113,13 @@
 		data(){
 			return {
 				g: g,
+				name: "",
+				telphone: "",
+				leader: "",
+				phone: "",
+				departName:'',
+				dutyName:"",
+				departmentList: [],
 				isShowEdit: false
 			}
 		},
@@ -119,7 +133,8 @@
 				default: false
 			},
 			currId: {
-				type: Number
+				type: Number,
+				default: 0
 			}
 		},
 		watch: {
@@ -132,20 +147,75 @@
 			init()
 			{
 				trace("this.currId", this.currId);
-				if (!this.currId)
+				if (this.currId)
 				{
-					this.companyData = g.data.companyPool.getDataById(this.currId)
+					this.companyData = g.data.companyPool.getDataById(this.currId);
+					this.name = this.companyData.name;
+					this.telphone = this.companyData.telphone;
+					this.leader = this.companyData.leader;
+					this.phone = this.companyData.phone;
+					this.departmentList = this.companyData.children;
 				}
 			},
 			onClose_pop(){
 				this.$emit('close', false);
 			},
-			onClick_editBtn(){
-				this.isShowEdit = true;
+			onClick_deleteDepart($depart)
+			{
+				_params = {departmentId: $depart.id};
+				g.net.call("organizeOpt/deleteDepartmentById", _params).then(() =>
+				{
+					g.data.departmentPool.remove($depart.id);
+				})
+			},
+			onClick_editDepart($depart)
+			{
+				_params = {
+					departmentId: $depart.id,
+					departmentName: this.departName,
+					companyId: $depart.parentId
+				};
+				g.net.call("organizeOpt/editDepartment", _params).then((data) =>
+				{
+					g.data.departmentPool.getDataById($depart.id).update(data);
+				})
+			},
+			onClick_editDuty($duty)
+			{
+				_params = {
+					dutyId: $duty.id,
+					dutyName:this.dutyName,
+					departmentId: $duty.parentId,
+					companyId: $duty.companyId
+				};
+				g.net.call("organizeOpt/editDuty", _params).then((data) =>
+				{
+					g.data.dutyPool.getDataById($duty.id).update(data);
+				})
+			},
+			onClick_deleteDuty($duty)
+			{
+				_params = {
+					dutyId: $duty.id
+				};
+				g.net.call("organizeOpt/deleteDutyById", _params).then((data) =>
+				{
+					g.data.dutyPool.remove($duty.id);
+				})
 			},
 			onClick_submitBtn()
 			{
-				this.$emit('close', true);
+				_params = {
+					comId:this.currId,
+					comName:this.name,
+					comLinkMan:this.leader,
+					comLinkManTel:this.phone,
+					comLinkTel:this.telphone
+				};
+				g.net.call("organizeOpt/editCompany", _params).then((data) =>
+				{
+					g.ui.toast("信息修改成功");
+				})
 			}
 		}
 	}

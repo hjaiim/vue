@@ -104,12 +104,73 @@ function createData($dObj)
 function updateData($dObj)
 {
 
-	$dObj.hasOwnProperty("departmentId") && (this.id = $dObj.departmentId)
-	$dObj.hasOwnProperty("departmentName") && (this.name = $dObj.departmentName)
-	$dObj.hasOwnProperty("companyId") && (this.parentId = $dObj.companyId)
+	$dObj.hasOwnProperty("departmentId") && (this.id = $dObj.departmentId);
+	$dObj.hasOwnProperty("departmentName") && (this.name = $dObj.departmentName);
+	$dObj.hasOwnProperty("companyId") && (this.parentId = $dObj.companyId);
 	$dObj.hasOwnProperty("creatorId") && (this.creatorId = $dObj.creatorId)
 	if ($dObj.hasOwnProperty("organizeDutyResults"))
 	{
-		g.data.dutyPool.update($dObj.organizeDutyResults);
+		var timer = setTimeout(() =>
+		{
+			g.data.dutyPool.update($dObj.organizeDutyResults);
+		}, 500);
+// 		var duty = new Duty();
+// 		this.children = duty.update($dObj.organizeDutyResults);
 	}
 }
+
+// class Duty{
+// 	constructor()
+// 	{
+// 		this.hash = {};
+// 		this.list = [];
+// 	}
+// 	update($list)
+// 	{
+// 		for(var item of $list)
+// 		{
+// 			this.add(item);
+// 		}
+// 		return this.list;
+// 	}
+// 	add($item)
+// 	{
+// 		var item = createDuty($item);
+// 		if(this.list.indexOf(item) < 0)
+// 		{
+// 			this.list.push(item)
+// 			this.hash[item.id] = item;
+// 		}
+// 	}
+//
+// 	remove($id)
+// 	{
+// 		if(this.list.indexOf(this.hash[$id]) > 0)
+// 		{
+// 			this.list.splice(this.list.indexOf(this.hash[$id]),1);
+// 		}
+// 	}
+//
+// }
+//
+// function createDuty($dObj)
+// {
+// 	var d = {};
+// 	d.id = 0;
+// 	d.name = "";
+// 	d.parentId = 0;
+// 	d.companyId = 0;
+// 	d.creatorId = 0;
+// 	d.update = updateDuty.bind(d);
+// 	d.update($dObj);
+// 	return d;
+// }
+//
+// function updateDuty($dObj)
+// {
+// 	$dObj.hasOwnProperty("dutyId") && (this.id = $dObj.dutyId);
+// 	$dObj.hasOwnProperty("dutyName") && (this.name = $dObj.dutyName);
+// 	$dObj.hasOwnProperty("companyId") && (this.companyId = $dObj.companyId);
+// 	$dObj.hasOwnProperty("departmentId") && (this.parentId = $dObj.departmentId);
+// 	$dObj.hasOwnProperty("creatorId") && (this.creatorId = $dObj.creatorId);
+// }
