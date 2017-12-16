@@ -12,15 +12,15 @@
 					</p>
 					<p class="from-group">
 						<span class="form-title">类型</span>
-                        <span class="action-box post-type">
-                            <i class="pointer action"></i>
+                        <span class="action-box post-type" v-show="currId ==  0" @click="onClick_selectPosition(1)">
+                            <i class="pointer" :class="type== 1?'action':''"></i>
                             <span>商机提交岗</span>
                         </span>
-                        <span class="action-box post-type">
-                            <i class="pointer"></i>
+                        <span class="action-box post-type" v-show="currId ==  0" @click="onClick_selectPosition(2)">
+                            <i class="pointer" :class="type== 2?'action':''"></i>
                             <span>商机审核岗</span>
                         </span>
-						<span class="form-trap form-type" v-show="">商机审核岗</span>
+						<span class="form-trap form-type" v-show="currId !=  0">{{positionData.type}}</span>
 					</p>
 				</div>
 				<div class="btn-wrap clear">
@@ -36,12 +36,20 @@
 </template>
 <script type="text/ecmascript-6">
 	import g from "../../global";
-	import ViewPopup from "../viewPop.vue"
-	import InputBar from "../inputBar.vue"
+	import ViewPopup from "../viewPop.vue";
+	import InputBar from "../inputBar.vue";
+	var _params = null;
 	export default{
+		created()
+		{
+			this.init();
+		},
 		data(){
 			return {
 				g: g,
+				positionName: "",
+				type: 1,
+				positionData:{}
 			}
 		},
 		components: {
@@ -53,9 +61,23 @@
 				type: Boolean,
 				default: false
 			},
-			currId: {}
+			currId: {
+				default: 0
+			}
 		},
 		methods: {
+			init()
+			{
+				if (this.currId)
+				{
+					this.positionData = g.data.searchRolePool.getDataById(this.currId);
+					this.positionName = this.positionData.name;
+				}
+			},
+			onClick_selectPosition($num)
+			{
+				this.type = $num;
+			},
 			onClose_pop()
 			{
 				this.$emit('close', false);

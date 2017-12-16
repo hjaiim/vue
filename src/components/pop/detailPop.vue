@@ -4,7 +4,7 @@
 		<div class="detail-container">
 			<p class="note-tit">通知</p>
 			<div class="note-content">
-				这里是通知内容 爽肤水大润发的发v大润发东方闪电水电费水电费沙发上的电风扇防守打法范甘迪发布
+				{{msgData.desc}}
 			</div>
 		</div>
 	</view-popup>
@@ -16,6 +16,7 @@
 		data(){
 			return {
 				g: g,
+				msgData:{}
 			}
 		},
 		components: {
@@ -25,12 +26,21 @@
 			isShowPopView: {
 				type: Boolean,
 				default: false
+			},
+			currId:{
+
 			}
 		},
 		methods: {
+			init()
+			{
+				if(this.currId)
+				{
+					this.msgData = g.data.messagePool.getDataById(this.currId);
+				}
+			},
 			onClose_pop(){
 				this.$emit('close');
-
 			}
 		}
 	}

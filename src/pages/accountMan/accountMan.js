@@ -46,6 +46,8 @@ function createData($dObj)
 	var d = {};
 	d.name = "jasmine";
 	d.stationType = -1;
+	d.page = 1;
+	d.pageSize = 10;
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -59,5 +61,6 @@ function updateData($dObj)
 	}
 	$dObj.hasOwnProperty("name") && (this.name = $dObj.name);
 	$dObj.hasOwnProperty("stationType") && (this.stationType = $dObj.stationType);
+	$dObj.hasOwnProperty("page") && (this.page = $dObj.page);
 }
 

@@ -37,7 +37,7 @@
 						<td>{{item.dutyCount}}</td>
 						<td>{{item.leader}}</td>
 						<td>{{item.phone}}</td>
-						<td>{{item.contact}}</td>
+						<td>{{item.telphone}}</td>
 						<td>
 							<p class="action-menu clear">
                                 <span class="left pointer draw-line ani-time" @click="onClick_detailBtn(item.id)">编辑
@@ -56,7 +56,9 @@
 				<div class="show-page clear" v-if="g.data.searchCompanyPool.totalPage > 1">
 					<common-page class="right" :total="g.data.searchCompanyPool.total" :currPage="currPage"
 								 :showTotalCount="true"
-								 :showElevator="true" :showFirstAndEnd="true"></common-page>
+								 :showElevator="true"
+								 :showFirstAndEnd="true"
+					@change="onChange_pageCom"></common-page>
 				</div>
 			</div>
 		</div>
@@ -73,7 +75,8 @@
 	import DeletePop from "../../components/pop/deletePop.vue"
 	import AddCompanyPop from "../../components/pop/addCompanyPop.vue"
 	import InputBar from "../../components/inputBar.vue"
-
+	var _delId = 0;
+	var _params = null;
 	export default{
 		created(){
 
@@ -83,7 +86,7 @@
 			return {
 				g: g,
 				companyList: [],
-				currId: 1,
+				currId: 0,
 				currPage: 1,
 				customerName: "",
 				isShowCompanyPop: false
@@ -109,30 +112,34 @@
 			},
 			onClick_deleteBtn($id)
 			{
-				this.currId = $id;
-				g.data.searchCompanyPool.getDataById(this.currId).update({isShow: true})
+				_delId = $id;
+				g.data.searchCompanyPool.getDataById(_delId).update({isShow: true})
 			},
 			onClose_deletePop($result)
 			{
-				g.data.searchCompanyPool.getDataById(this.currId).update({isShow: false});
+				g.data.searchCompanyPool.getDataById(_delId).update({isShow: false});
 				if ($result)
 				{
-
+					_params = {comId: _delId};
+					g.net.call("organizeOpt/deleteCompanyById",_params).then(($data) =>
+					{
+						g.ui.toast("公司删除成功！");
+					})
 				}
 			},
-
 			onClick_detailBtn($id)
 			{
-				this.currId = $id;
-				if (g.data.companyPool.hasDetail(this.currId))
+
+				if (g.data.companyPool.hasDetail($id))
 				{
+					this.currId = $id;
 					this.isShowCompanyPop = true;
 				}
 				else
 				{
-					g.net.call("organizeQuery/organizeDetail", {comId: this.currId}).then(($data) =>
+					g.net.call("organizeQuery/organizeDetail", {comId: $id}).then(($data) =>
 					{
-						var companyData = g.data.companyPool.getDataById(this.currId);
+						var companyData = g.data.companyPool.getDataById($id);
 						if (companyData)
 						{
 							companyData.update($data.companyResult);
@@ -141,11 +148,12 @@
 						{
 							g.data.companyPool.update([$data.companyResult]);
 						}
-						g.data.departmentPool.update($data.departmentResultList);
-						g.data.dutyPool.update($data.dutyResultList);
+						g.data.departmentPool.update($data.departWrapperResults);
+						this.currId = $id;
 						this.isShowCompanyPop = true;
 					})
 				}
+
 			},
 			onClick_addCompanyBtn()
 			{
@@ -162,7 +170,27 @@
 			},
 			onClick_searchBtn()
 			{
-
+				if(!this.customerName)
+				{
+					return ;
+				}
+				this.currPage = 1;
+				this.updateUrl();
+			},
+			updateUrl()
+			{
+				g.url = {
+					path:"/companyman",
+					query:{
+						page:this.currPage,
+						name:this.customerName
+					}
+				}
+			},
+			onChange_pageCom($page)
+			{
+				this.currPage = $page;
+				this.updateUrl();
 			}
 		}
 	}

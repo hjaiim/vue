@@ -26,10 +26,10 @@ export function searchMessageList($params)
 	}
 	var promise = new Promise((resolved, rejected) =>
 	{
-		g.net.call("organizeQuery/organizePageList", _params).then(($data) =>
+		g.net.call("message/queryMessageListByPage", _params).then(($data) =>
 		{
-			g.data.searchCompanyPool.removeAll();
-			g.data.searchCompanyPool.update($data);
+			g.data.messagePool.removeAll();
+			g.data.messagePool.update($data);
 			resolved();
 		}, (err) =>
 		{
@@ -43,7 +43,7 @@ export function searchMessageList($params)
 function createData($dObj)
 {
 	var d = {};
-	d.comName = "";
+	d.readStatus = 0;
 	d.page = 1;
 	d.pageSize = 10;
 	d.update = updateData.bind(d);
@@ -57,7 +57,7 @@ function updateData($dObj)
 	{
 		return;
 	}
-	$dObj.hasOwnProperty("customerName") && (this.comName = $dObj.customerName);
+	$dObj.hasOwnProperty("readStatus") && (this.readStatus = $dObj.readStatus);
 	$dObj.hasOwnProperty("page") && (this.page = $dObj.page);
 	$dObj.hasOwnProperty("pageSize") && (this.pageSize = $dObj.pageSize);
 }
