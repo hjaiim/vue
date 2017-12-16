@@ -27,7 +27,7 @@
                         <span>已通过</span>
                     </span>
                 </div>
-                <div class="right search-box p-left">
+                <div class="right search-box p-left clear">
                     <span class="customer-name">客户公司名称</span>
                     <input type="text" class="search-input">
                     <span class="search-btn active-btn ani-time pointer">搜索</span>
@@ -47,7 +47,7 @@
                 </div>
 
             </div>
-            <div class="table-content">
+            <div class="table-content opp-table">
                 <table class="inner-table">
                     <thead>
                     <tr>
@@ -106,7 +106,7 @@
             return {
                 g: g,
                 isShowBusinessList: false,
-                isShowOppDetailPop:true
+                isShowOppDetailPop: false,
             }
         },
         components: {
@@ -131,6 +131,6 @@
         }
     }
 </script>
-<style type="text/css" lang="sass" rel="stylesheet/css">
+<style type="text/css" lang="sass" rel="stylesheet/css" scoped>
     @import "../../css/oppList.scss";
 </style>
