@@ -27,7 +27,8 @@
 						<td>{{item.creator}}</td>
 						<td>{{item.createTime}}</td>
 						<td>
-							<p class="action-menu clear"><span class="left pointer draw-line ani-time"></span>
+							<p class="action-menu clear"><span class="left pointer draw-line ani-time">修改</span>
+
 								<span class="right pointer draw-line ani-time" @click="onClick_deleteBtn(item.id)">删除
 									<delete-pop :isDeletePop="item.isShow"
 												@close="onClose_deletePop">
@@ -66,7 +67,7 @@
 				g: g,
 				positionList: [],
 				currId: 0,
-				currPage:1,
+				currPage: 1,
 				isShowPostPop: false
 			}
 		},
@@ -106,7 +107,7 @@
 	}
 
 </script>
-<style type="text/css" lang="sass" rel="stylesheet/css">
+<style type="text/css" lang="sass" rel="stylesheet/css" scoped>
 	@import "../../css/mixin.scss";
 	@import "../../css/platManage.scss";
 </style>

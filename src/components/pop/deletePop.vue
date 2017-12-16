@@ -6,11 +6,11 @@
 				<slot></slot>
 			</div>
 			<div class="btn-wrap clear">
-				<span class="action-btn right cancel-btn ani-time pointer"
-					  @click.stop="onClick_cancelBtn">取消</span>
-				<span class="action-btn right delete-btn ani-time pointer"
+				<i class="action-btn right cancel-btn ani-time pointer"
+					  @click.stop="onClick_cancelBtn">取消</i>
+				<i class="action-btn right delete-btn ani-time pointer"
 					  @click.stop="onClick_confirmBtn">删除
-				</span>
+				</i>
 			</div>
 		</div>
 	</div>
