@@ -108,7 +108,7 @@
 				{
 					_params = {roleId:_delId};
 					g.net.call("permission/delRole").then(($data) => {
-						g.ui.toast("角色删除成功@")
+						g.ui.toast("角色删除成功!")
 					})
 
 				}

@@ -107,6 +107,7 @@ function createData($dObj)
 
 function updateData($dObj)
 {
+	debugger;
 	$dObj.hasOwnProperty("userId") && (this.id = $dObj.userId);
 	$dObj.hasOwnProperty("logon") && (this.username = $dObj.logon);
 	$dObj.hasOwnProperty("mobile") && (this.phone = $dObj.mobile);

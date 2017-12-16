@@ -1,5 +1,5 @@
 <template>
-	<com-layout currPath="/accountman">
+	<com-layout currPath="/accountman" :isInited="false">
 		<div class="staff-wrap">
 			<div class="status-wrap clear">
 				<div class="verify-btn total-btn right pointer">已认证</div>

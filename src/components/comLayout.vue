@@ -42,12 +42,17 @@
 			return {
 				g: g,
 				navItem: {},
-				currentId: ""
+				currentId: "",
+				needInit:this.isInited
 			}
 		},
 		props: {
 			currPath: {
 				default: "/"
+			},
+			isInited: {
+				type: Boolean,
+				default: true
 			}
 		},
 		components: {
@@ -71,11 +76,15 @@
 			update($url)
 			{
 				this.navItem = g.data.staticNavPool.getDataById(this.currentId);
-				g.url = $url || (this.navItem.children && this.navItem.children[0].path);
+				if (this.needInit)
+				{
+					g.url = $url || (this.navItem.children && this.navItem.children[0].path);
+				}
 			},
 			onClick_navItem($id)
 			{
 				this.currentId = $id;
+				this.needInit = true;
 				this.update();
 			},
 			onClick_childItem($path)

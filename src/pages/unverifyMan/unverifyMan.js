@@ -1,13 +1,18 @@
 import g from "./../../global";
+import loginManager from "./../../js/manager/LoginManager";
 var _params = null;
 export default function (to, next)
 {
 	next();
-	debugger;
-	searchUnverifyList(to.query).then(() =>
-	{
-		next();
-	})
+
+// 	loginManager.checkLogin(to, next, () =>
+// 	{
+// 		searchUnverifyList(to.query).then(() =>
+// 		{
+// 			next();
+// 		})
+// 	})
+
 }
 
 export function searchUnverifyList($params)
@@ -39,7 +44,7 @@ export function searchUnverifyList($params)
 function createData($dObj)
 {
 	var d = {};
-	d.name = "";
+	d.name = "a";
 	d.pageSize = 10;
 	d.page = 1;
 	d.update = updateData.bind(d);
