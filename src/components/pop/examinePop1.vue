@@ -113,37 +113,29 @@
                         <span class="form-trap">已通过 2017.13.13 20:20:01</span>
                     </p>
                     <p class="from-group ">
-                        <span class="form-title">  <i class="leader"></i>一级经理1</span>
-                        <span class="form-trap">张帅</span>
+                        <span class="form-title left">  <i class="leader"></i>签批意见</span>
+                        <textarea class="examine"></textarea>
                     </p>
                     <p class="from-group">
-                        <span class="form-title">附件下载</span>
-                        <span class="form-trap file-download">无</span>
-                    <p class="from-group">
-                        <span class="form-title left">签批意见</span>
-                        <span class="form-trap left address-width">通过，交付下一级改电风扇的凤凰山非师范生非和顺丰复合肥双丰收国防生合法化是东方红</span>
+                        <span class="form-title">上传附件</span>
+                        <span class="form-trap up-btn pointer">点击上传
+                            <input type="file" class="upload-file">
+                        </span>
                     </p>
-                    <p class="from-group">
-                        <span class="form-title">结果</span>
-                        <span class="form-trap">已通过 2017.13.13 20:20:01</span>
-                    </p>
-                    <p class="from-group ">
-                        <span class="form-title">一级经理2</span>
-                        <span class="form-trap">张帅</span>
-                    </p>
-                    <p class="from-group">
-                        <span class="form-title">附件下载</span>
-                        <span class="form-trap file-download">无</span>
-                    <p class="from-group">
-                        <span class="form-title left">签批意见</span>
-                        <span class="form-trap left address-width">通过，交付下一级</span>
-                    </p>
-                    <p class="from-group">
-                        <span class="form-title">结果</span>
-                        <span class="form-trap"><i class="no-result">未通过</i> 2017.13.13 20:20:01</span>
+                    <p class="examine-people">
+                        <span class="exam-btn">结束审核</span>
+                        <span class="exam-btn">选择后续人</span>
+                        <span class="choose-people">李小龙
+                            <img :src="g.path.images+'/del-head.png'" alt="" class="delete-choose pointer">
+                        </span>
+                        <span class="choose-people">李小龙
+                            <img :src="g.path.images+'/del-head.png'" alt="" class="delete-choose pointer">
+                        </span>
+                        <span class="exam-btn end-exam">结束审核</span>
                     </p>
                 </div>
                 <div class="pop-btn top-btn right pointer">关闭</div>
+                <div class="btn-submit pop-btn top-btn right pointer">提交</div>
             </div>
         </div>
     </view-popup>
@@ -205,6 +197,7 @@
             margin-right: 20px;
         }
     }
+
 
 </style>
 <style lang="sass" rel="stylesheet/scss" type="text/scss">
