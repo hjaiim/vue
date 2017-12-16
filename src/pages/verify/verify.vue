@@ -115,7 +115,6 @@
 						<img class="img-url absolute" :src="workCard?workCard:''" alt="">
 						<span class="del-img pointer" :class="workCard?'hover-img':''"></span>
 						<upload-btn class="input-file" @change="onChange_uploadWork" resultType="base64"></upload-btn>
-
 					</div>
 				</div>
 			</div>

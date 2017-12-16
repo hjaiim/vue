@@ -2,6 +2,8 @@ import g from "./../../global";
 var _params = null;
 export default function (to, next)
 {
+	next();
+	debugger;
 	searchUnverifyList(to.query).then(() =>
 	{
 		next();
