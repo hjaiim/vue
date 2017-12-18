@@ -74,6 +74,7 @@ function createData($dObj)
 	var d = {};
 	d.id = 0;
 	d.name = "";
+	d.isEdit = false;
 	d.parentId = 0;
 	d.companyId = 0;
 	d.creatorId = 0;
@@ -89,4 +90,5 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("companyId") && (this.companyId = $dObj.companyId);
 	$dObj.hasOwnProperty("departmentId") && (this.parentId = $dObj.departmentId);
 	$dObj.hasOwnProperty("creatorId") && (this.creatorId = $dObj.creatorId);
+	$dObj.hasOwnProperty("isEdit") && (this.isEdit = $dObj.isEdit);
 }

@@ -98,6 +98,7 @@ function createData($dObj)
 	d.phone = "";
 	d.telphone = "";
 	d.isShow = false;
+	d.isEdit = false;
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -115,4 +116,6 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("departmentCount") && (this.departCount = $dObj.departmentCount);
 	$dObj.hasOwnProperty("dutyCount") && (this.dutyCount = $dObj.dutyCount);
 	$dObj.hasOwnProperty("isShow") && (this.isShow = $dObj.isShow);
+	$dObj.hasOwnProperty("isEdit") && (this.isEdit = $dObj.isEdit);
 }
+
