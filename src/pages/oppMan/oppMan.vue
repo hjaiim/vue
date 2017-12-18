@@ -49,8 +49,6 @@
 					<span class="search-btn active-btn ani-time pointer" @click="onClick_searchBtn">搜索</span>
 					<span class="all-btn active-btn ani-time pointer" @click="onClick_selectAllBtn">全部</span>
 				</div>
-
-
 			</div>
 			<div class="table-content oppman-table">
 				<table class="inner-table">

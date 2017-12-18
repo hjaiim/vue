@@ -177,6 +177,11 @@
 				this.currPage = 1;
 				this.updateUrl();
 			},
+			onChange_pageCom($page)
+			{
+				this.currPage = $page;
+				this.updateUrl();
+			},
 			updateUrl()
 			{
 				g.url = {
@@ -186,11 +191,6 @@
 						name:this.customerName
 					}
 				}
-			},
-			onChange_pageCom($page)
-			{
-				this.currPage = $page;
-				this.updateUrl();
 			}
 		}
 	}
