@@ -1,6 +1,5 @@
 <template>
 	<div class="form-input ">
-		<p class="error-msg">{{errmsg}}</p>
 		<div class="relative">
 			<input @blur="onBlur_accountInput" :type="type" @focus="onFocus_inputFocus" class="g-input"
 				   :placeholder="placeholder" @input="onInput_value" @keyup.enter="onKeyupEnter_searchInput"
@@ -8,6 +7,7 @@
 			<i v-show="inputContent.length>0 && isShowClearBtn"
 			   class="close-search-btn ani-time pointer absolute" @click="onClick_closeBtn"></i>
 		</div>
+		<p class="error-msg">{{errmsg}}</p>
 	</div>
 </template>
 <script type="text/ecmascript-6">

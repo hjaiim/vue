@@ -25,7 +25,7 @@
 					<span class="personal-title left">所属公司</span>
 					<div class="personal-content left relative form-list pointer"
 						 @click="onClick_dropListBtn('Company')">
-						{{currCompany}}
+						{{currCompanyData.name}}
 						<i :class="['icon-trangle', isShowCompanyList?'rotate':'']"></i>
 						<drop-list :dropList="companyList" :isShowDropList="isShowCompanyList"
 								   @change="onClick_company"></drop-list>
@@ -36,7 +36,7 @@
 					<span class="personal-title left">所属部门</span>
 					<div class="personal-content left relative form-list pointer"
 						 @click="onClick_dropListBtn('Department')">
-						{{currDepartment}}
+						{{currDepartData.name}}
 						<i class="pointer" :class="['icon-trangle', isShowDepartmentList?'rotate':'']"></i>
 						<drop-list :dropList="departmentList" :isShowDropList="isShowDepartmentList"
 								   @change="onClick_department"></drop-list>
@@ -46,7 +46,7 @@
 				<div class="personal-form">
 					<span class="personal-title left">职务名称</span>
 					<div class="personal-content left relative form-list" @click="onClick_dropListBtn('Post')">
-						{{currDuty}}
+						{{currDutyData.name}}
 						<span :class="['icon-trangle', isShowPostList?'rotate':'']"></span>
 						<drop-list :dropList="dutyList" :isShowDropList="isShowPostList"
 								   @change="onClick_duty"></drop-list>
@@ -119,6 +119,7 @@
 						<upload-btn class="input-file" @change="onChange_uploadWork" resultType="base64"></upload-btn>
 					</div>
 				</div>
+				<button @click="onClick_submitBtn">提交</button>
 			</div>
 		</div>
 	</com-layout>
@@ -129,7 +130,7 @@
 	import UploadBtn from "../../components/upload.vue";
 	import InputBar from "../../components/inputBar.vue";
 	import DropList from "../../components/dropList.vue";
-	var _isValid = true;
+	var _isValid = true, _params = null;
 	export default{
 		created(){
 			this.init();
@@ -149,11 +150,11 @@
 				idCardFront: '',
 				workCard: '',
 				companyList: [],
-				currCompany: "",
+				currCompanyData: {},
 				departmentList: [],
-				currDepartment: "",
+				currDepartData: {},
 				dutyList: [],
-				currDuty: "",
+				currDutyData: {},
 				isVerified: false,
 				isShowDepartmentList: false,
 				isShowCompanyList: false,
@@ -206,22 +207,20 @@
 			onClick_company($id)
 			{
 				this.isShowCompanyList = false;
-				var companyData = g.data.companyPool.getDataById($id);
-				this.departmentList = companyData.children;
-				this.currCompany = companyData.name;
+				this.currCompanyData = g.data.companyPool.getDataById($id);
+				this.departmentList = this.currCompanyData.children;
 			},
 			onClick_department($id)
 			{
 				this.isShowDepartmentList = false;
-				var departmentData = g.data.departmentPool.getDataById($id);
-				this.dutyList = departmentData.children;
-				this.currDepartment = departmentData.name;
+				this.currDepartData = g.data.departmentPool.getDataById($id);
+				this.dutyList = this.currDepartData.children;
 			},
 			onClick_duty($id)
 			{
 				this.isShowPostList = false;
-				var dutyData = g.data.dutyPool.getDataById($id);
-				this.currDuty = dutyData.name;
+				this.currDutyData = g.data.dutyPool.getDataById($id);
+				this.currDuty = this.currDutyData.name;
 			},
 			onClick_dropListBtn($type)
 			{
@@ -253,6 +252,35 @@
 			onFocus_inputBar($type)
 			{
 				this.errData[$type] = "";
+			},
+			onClick_submitBtn()
+			{
+				this.checkValid();
+				if (!_isValid)
+				{
+					return;
+				}
+				_params = {
+					companyId: this.currCompanyData.id,
+					departmentId: this.currDepartData.id,
+					dutyId: this.currDutyData.id,
+					avatar: this.avatar,
+					idcardImgA: this.idCardFront,
+					idcardImgB: this.idCardBack,
+					workCardImg: this.workCard,
+					mobile: this.phone,
+					code: this.code,
+					telphone: this.telphone,
+					email: this.email,
+					remark: this.remark
+				};
+
+				g.ui.toast("user/applyUserAuth", _params).then(($data) =>
+				{
+					trace($data);
+					g.ui.toast('申请提交成功！')
+				})
+
 			},
 			checkValid()
 			{
@@ -297,21 +325,24 @@
 					this.errData.workCard = "表单内容不能为空";
 					_isValid = false;
 				}
-				if (!this.currCompany)
+				if (!this.currCompanyData.name)
 				{
 					this.errData.currCompany = "表单内容不能为空";
 					_isValid = false;
 				}
-				if (!this.currDepartment)
+				if (!this.currDepartData.name)
 				{
 					this.errData.currDepartment = "表单内容不能为空";
 					_isValid = false;
 				}
-				if (!this.currDuty)
+				if (!this.currDutyData.name)
 				{
 					this.errData.currDuty = "表单内容不能为空";
 					_isValid = false;
 				}
+				this.$forceUpdate();
+
+				trace("this.errData",this.errData);
 			}
 		}
 	}

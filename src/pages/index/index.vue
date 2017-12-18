@@ -85,6 +85,7 @@
 	import InputBar from "../../components/inputBar.vue"
 	import UploadBtn from "../../components/upload.vue";
 	var _params = null;
+	var _isValid = true;
 	export default{
 		created(){
 			this.routerUpdated();
