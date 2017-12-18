@@ -16,10 +16,10 @@
 					<span>审核员</span>
 				</div>
 				<div class="verify-btn total-btn right pointer" @click="onClick_unVerifyBtn">待认证>></div>
-				<div class="option-wrap left">
+				<div class="option-wrap left ani-time">
 					<div class="staff-option left clear">
 						<span class="left staff-name">平台角色</span>
-						<div class="option-content relative left" @click.stop="onClick_dropListBtn">
+						<div class="option-content relative left pointer" @click.stop="onClick_dropListBtn">
 							所有<i class="icon-trangle pointer" :class="isShowStatusList?'rotate':''"></i>
 							<drop-list :dropList=roleList :isShowDropList="isShowStatusList"
 									   @change="onClick_roleItem" ref="dropList"></drop-list>
@@ -63,7 +63,7 @@
 						<td>{{item.roleName}}</td>
 						<td>
 							<p class="action-menu clear">
-								<span class="left pointer draw-line ani-time" @click="onClick_workBtn(item)">岗位设置
+								<span class="left pointer draw-line ani-time" @click="onClick_jobBtn(item)">岗位设置
 								</span>
 								<span class="left pointer draw-line ani-time" @click="onClick_roleBtn(item)">角色设置</span>
 								<span class="left pointer draw-line ani-time" @click="onClick_stopBtn(item)">停用</span>
@@ -77,10 +77,10 @@
 								 :showPageSize="false" :showTotalCount="true"
 								 :showElevator="true"
 								 :showFirstAndEnd="true"
-								@change="onChange_pageCom"></common-page>
+								 @change="onChange_pageCom"></common-page>
 				</div>
 			</div>
-			<set-rule-pop @close="onClose_setRulePop" :isShowPopView="isShowSetRulePop"></set-rule-pop>
+			<set-role-pop @close="onClose_setRolePop" :isShowPopView="isShowSetRolePop"></set-role-pop>
 		</div>
 	</com-layout>
 </template>
@@ -90,7 +90,8 @@
 	import CommonPage from "../../components/page.vue";
 	import DropList from "../../components/dropList.vue";
 	import InputBar from "../../components/inputBar.vue";
-	import SetRulePop from "../../components/pop/setRulePop.vue"
+	import SetRolePop from "../../components/pop/setRolePop.vue";
+	import OrderWorkPop from "../../components/pop/orderWorkPop.vue";
 	export default{
 		created(){
 			this.routerUpdated();
@@ -98,14 +99,15 @@
 		data(){
 			return {
 				g: g,
-				accountList:[],
+				accountList: [],
 				roleList: [],
-				currPage:1,
-				currRole:0,
-				name:"",
-				typeList:[0,1,2],
+				currPage: 1,
+				currRole: 0,
+				name: "",
+				typeList: [0, 1, 2],
 				isShowStatusList: false,
-				isShowSetRulePop: false
+				isShowSetRolePop: false,
+				isShowOrderWorkPop: false,
 			}
 		},
 		components: {
@@ -113,21 +115,21 @@
 			CommonPage,
 			DropList,
 			InputBar,
-			SetRulePop
+			SetRolePop
 		},
 		methods: {
 			routerUpdated()
 			{
 				this.accountList = g.data.searchAccountPool.list;
-				this.typeList = JSON.parse(g.vue.getQuery("typeList","[]"));
-				this.currPage = int(g.vue.getQuery("page",1));
-				this.name = g.vue.getQuery("name","");
-				this.currRole = g.vue.getQuery("role",0);
+				this.typeList = JSON.parse(g.vue.getQuery("typeList", "[]"));
+				this.currPage = int(g.vue.getQuery("page", 1));
+				this.name = g.vue.getQuery("name", "");
+				this.currRole = g.vue.getQuery("role", 0);
 				this.initEvents();
 			},
 			init()
 			{
-				this.typeList = [0,1,2];
+				this.typeList = [0, 1, 2];
 				this.currPage = 1;
 				this.name = "";
 				this.currRole = 0;
@@ -151,9 +153,9 @@
 			onClick_positionType($type)
 			{
 				var index = this.typeList.indexOf($type);
-				if(index >= 0)
+				if (index >= 0)
 				{
-					this.typeList.splice(index,1);
+					this.typeList.splice(index, 1);
 				}
 				else
 				{
@@ -190,20 +192,20 @@
 			{
 				this.updateUrl();
 			},
-			onClick_workBtn($item)
+			onClick_jobBtn($item)
 			{
 			},
 			onClick_roleBtn($item)
 			{
-				this.isShowSetRulePop = true;
+				this.isShowSetRolePop = true;
 			},
 			onClick_stopBtn($item)
 			{
 
 			},
-			onClose_setRulePop()
+			onClose_setRolePop()
 			{
-				this.isShowSetRulePop = false;
+				this.isShowSetRolePop = false;
 			},
 			onClick_unVerifyBtn()
 			{
@@ -212,12 +214,12 @@
 			updateUrl()
 			{
 				g.url = {
-					path:"/account",
-					query:{
-						typeList:JSON.stringify(this.typeList),
-						page:int(this.currPage),
-						name:this.name,
-						role:this.currRole
+					path: "/account",
+					query: {
+						typeList: JSON.stringify(this.typeList),
+						page: int(this.currPage),
+						name: this.name,
+						role: this.currRole
 					}
 				}
 			}

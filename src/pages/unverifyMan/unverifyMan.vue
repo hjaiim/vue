@@ -2,7 +2,7 @@
 	<com-layout currPath="/accountman" :isInited="false">
 		<div class="staff-wrap">
 			<div class="status-wrap clear">
-				<div class="verify-btn total-btn right pointer">已认证</div>
+				<div class="verify-btn total-btn right pointer" @click="onClick_verifyBtn">已认证</div>
 				<div class="option-wrap left">
 					<div class="search-name left clear">
 						<span class="left">姓名</span>
@@ -15,7 +15,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="table-content staff-table">
+			<div class="table-content verify-table">
 				<table class="inner-table">
 					<thead>
 					<tr>
@@ -24,9 +24,7 @@
 						<th>所属公司</th>
 						<th>所属部门</th>
 						<th>职务名称</th>
-						<th>岗位名称</th>
-						<th>岗位类型</th>
-						<th>角色</th>
+						<th>提交时间</th>
 						<th><p class="action-menu">操作</p></th>
 					</tr>
 					</thead>
@@ -37,14 +35,10 @@
 						<td>广州分公司</td>
 						<td>客户部</td>
 						<td>部门经理</td>
-						<td>客户经理</td>
-						<td>提交员</td>
-						<td>人员管理权</td>
+						<td>2017.12.12 12:12:12</td>
 						<td>
-							<p class="action-menu clear">
-								<span class="left pointer draw-line ani-time">岗位设置</span>
-								<span class="left pointer draw-line ani-time">角色设置</span>
-								<span class="left pointer draw-line ani-time">停用</span>
+							<p class="clear diff-action">
+								<span class="right pointer draw-line ani-time">详情</span>
 							</p>
 						</td>
 					</tr>
@@ -95,6 +89,9 @@
 					this.isShowStatusList = true;
 
 				}
+			},
+			onClick_verifyBtn(){
+				g.url = "/accountman";
 			}
 		}
 	}

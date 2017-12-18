@@ -175,6 +175,21 @@ input {
   }
 }
 
+.cancel-btn {
+  border: 1px solid #dddddd;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background: #f9f9f9;
+  color: #424242;
+  &:hover {
+	border: 1px solid #cccccc
+  }
+}
+
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
 .iscroll-ref::-webkit-scrollbar {
   width: 4px;
@@ -339,13 +354,7 @@ input {
 	-moz-border-radius: 4px;
 	border-radius: 4px;
   }
-  .cancel-btn {
-	border: 1px solid #dddddd;
-	background: #f8f8f8;
-	&:hover {
-	  border: 1px solid #cccccc
-	}
-  }
+
   .delete-btn {
 	border: 1px solid transparent;
 	background: #ed5564;
@@ -732,7 +741,7 @@ input {
 	  margin-top: -1px;
 	  width: 14px;
 	  height: 2px;
-	  background-color: #fff;
+	  background-color: #ffffff;
 	  content: "";
 	  position: absolute;
 	  -moz-transform: rotate(45deg);
@@ -743,7 +752,7 @@ input {
 	&:after {
 	  width: 14px;
 	  height: 2px;
-	  background-color: #fff;
+	  background-color: #ffffff;
 	  content: "";
 	  left: 50%;
 	  top: 50%;
@@ -802,94 +811,94 @@ input {
   height: 30px;
   line-height: 30px;
   .business-title {
-    height: 30px;
-    //line-height: 30px;
-    margin-right: 10px;
+	height: 30px;
+	//line-height: 30px;
+	margin-right: 10px;
   }
   .business-list {
-    width: 150px;
-    height: 30px;
-    li {
-      height: 30px;
-      line-height: 30px;
-    }
+	width: 150px;
+	height: 30px;
+	li {
+	  height: 30px;
+	  line-height: 30px;
+	}
   }
 }
 
 .status-form {
   .form-title {
-    line-height: 30px;
+	line-height: 30px;
   }
 
   .status-type {
-    margin-left: 18px;
-    height: 30px;
-    line-height: 30px;
-    span {
-      line-height: 30px;
-      padding-left: 8px;
-    }
+	margin-left: 18px;
+	height: 30px;
+	line-height: 30px;
+	span {
+	  line-height: 30px;
+	  padding-left: 8px;
+	}
   }
 }
 
 .date-box {
   .create-time {
-    margin-right: 10px;
+	margin-right: 10px;
   }
 
   .date-form {
-    height: 30px;
-    line-height: 30px;
-    width: 200px;
-    border: 1px solid #dddddd;
-    border-radius: 4px;
-    box-shadow: 0 0 2px #f5f5f5 inset;
-    padding-left: 20px;
-    box-sizing: border-box;
-    .date-icon {
-      top: 50%;
-      margin-top: -7px;
-      right: 13px;
-    }
+	height: 30px;
+	line-height: 30px;
+	width: 200px;
+	border: 1px solid #dddddd;
+	border-radius: 4px;
+	box-shadow: 0 0 2px #f5f5f5 inset;
+	padding-left: 20px;
+	box-sizing: border-box;
+	.date-icon {
+	  top: 50%;
+	  margin-top: -7px;
+	  right: 13px;
+	}
   }
 
   .date-line {
-    line-height: 30px;
-    margin: 0 12px;
+	line-height: 30px;
+	margin: 0 12px;
   }
 }
 
 .search-box {
   .customer-name {
-    margin-right: 10px;
+	margin-right: 10px;
   }
   .search-input {
-    height: 30px;
-    line-height: 30px;
-    width: 200px;
-    border: 1px solid #dddddd;
-    border-radius: 4px;
-    box-shadow: 0 0 2px #f5f5f5 inset;
-    padding-left: 20px;
-    box-sizing: border-box;
+	height: 30px;
+	line-height: 30px;
+	width: 200px;
+	border: 1px solid #dddddd;
+	border-radius: 4px;
+	box-shadow: 0 0 2px #f5f5f5 inset;
+	padding-left: 20px;
+	box-sizing: border-box;
   }
   .active-btn {
-    width: 50px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-left: 20px;
+	width: 50px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	border-radius: 4px;
+	box-sizing: border-box;
+	margin-left: 20px;
   }
   .search-btn {
-    background: #ed5564;
-    color: #fff;
-    display: inline-block;
+	background: #ed5564;
+	color: #ffffff;
+	display: inline-block;
   }
   .all-btn {
-    border: 1px solid #ddd;
-    display: inline-block;
-    background: #f8f8f8;
+	border: 1px solid #dddddd;
+	display: inline-block;
+	background: #f8f8f8;
   }
 }

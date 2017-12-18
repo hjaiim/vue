@@ -1,10 +1,13 @@
 <template>
 	<view-popup @close="onClose_pop"
 				:isShowPopView="isShowPopView">
-		<div class="setRule-wrap">
-			<p class="note-tit">角色设置</p>
-			<div class="set-content">
+		<div class="orderWork-wrap">
+			<div class="work-menu">
 
+			</div>
+			<div class="action-wrap clear ">
+				<span class="cancel-btn pointer right ani-time">取消</span>
+				<span class="action-btn  pointer right ani-time">确认</span>
 			</div>
 		</div>
 	</view-popup>
@@ -35,18 +38,27 @@
 	}
 </script>
 <style lang="sass" rel="stylesheet/scss" type="text/scss" scoped>
-	.setRule-wrap {
-		height: 384px;
+	.orderWork-wrap {
+		height: 386px;
 		.note-tit {
 			line-height: 64px;
 			height: 64px;
 			padding-left: 25px;
-			margin: 0 15px;
 			font-size: 15px;
 			border-bottom: 1px solid #eaeaea;
 		}
-		.set-content {
-
+		.work-menu {
+			padding: 45px 0 0 90px;
+		}
+		.action-wrap {
+			padding: 18px 34px 0 0;
+			span {
+				width: 88px;
+				line-height: 36px;
+				height: 36px;
+				text-align: center;
+				margin-left: 34px;
+			}
 		}
 	}
 </style>
