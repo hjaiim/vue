@@ -1,5 +1,5 @@
 <template>
-	<div class="wrap-page wrap-container clear">
+	<div class="wrap-page wrap-container clear relative">
 		<div class="header-wrap fixed">
 			<com-header></com-header>
 			<nav-header @click="onClick_navItem" ref="navHeader"></nav-header>
@@ -43,7 +43,7 @@
 				g: g,
 				navItem: {},
 				currentId: "",
-				needInit:this.isInited
+				needInit: this.isInited
 			}
 		},
 		props: {

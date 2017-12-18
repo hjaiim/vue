@@ -1,11 +1,11 @@
 <template>
-	<com-layout currPath="/accountman" :isInited="false">
+	<com-layout class="unverify-wrap" currPath="/accountman" :isInited="false">
 		<div class="staff-wrap">
 			<div class="status-wrap clear">
 				<div class="verify-btn total-btn right pointer" @click="onClick_verifyBtn">已认证</div>
 				<div class="option-wrap left">
-					<div class="search-name left clear">
-						<span class="left">姓名</span>
+					<div class="search-name left clear ">
+						<span class="left diff-padding">姓名</span>
 						<input-bar class="search-input left relative" placeholder="" type="text"
 								   v-model="name"></input-bar>
 					</div>
@@ -53,6 +53,7 @@
 								 :showFirstAndEnd="true"></common-page>
 				</div>
 			</div>
+			<account-des-pop @close="onClose_accountDesPop" :isShowPopView="isShowDetailPop"></account-des-pop>
 		</div>
 	</com-layout>
 </template>
@@ -61,7 +62,8 @@
 	import ComLayout from "../../components/comLayout.vue";
 	import CommonPage from "../../components/page.vue";
 	import DropList from "../../components/dropList.vue";
-	import InputBar from "../../components/inputBar.vue"
+	import InputBar from "../../components/inputBar.vue";
+	import AccountDesPop from "../../components/pop/accountDesPop.vue"
 	export default{
 		created(){
 			this.routerUpdated();
@@ -70,7 +72,7 @@
 			return {
 				g: g,
 				accountList: [],
-				isShowDetailPop: false,
+				isShowDetailPop: true,
 				currPage: 1,
 				name: "",
 				currId: 0
@@ -80,7 +82,8 @@
 			ComLayout,
 			CommonPage,
 			DropList,
-			InputBar
+			InputBar,
+			AccountDesPop
 		},
 		methods: {
 			init()
@@ -110,6 +113,9 @@
 			{
 				this.init();
 				this.updateUrl();
+			},
+			onClose_accountDesPop(){
+				this.isShowDetailPop = false;
 			},
 			onClick_detailBtn($id)
 			{

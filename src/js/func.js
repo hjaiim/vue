@@ -98,3 +98,6 @@ export function getBase64($fileList, $quality)
 		return promise;
 	}
 }
+export function firstUpperCase(str) {
+	return str.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase());
+}

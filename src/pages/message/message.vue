@@ -110,7 +110,8 @@
 				if ($result)
 				{
 					_params = {msgIds: _delId};
-					g.net.call("message/delMessage",($data) => {
+					g.net.call("message/delMessage", ($data) =>
+					{
 						g.ui.toast("消息删除成功！");
 					})
 				}
