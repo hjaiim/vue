@@ -24,32 +24,32 @@
 				<div class="personal-form">
 					<span class="personal-title left">所属公司</span>
 					<div class="personal-content left relative form-list pointer"
-						 @click="onClick_dropListBtn('Company')">
+						 @click.stop="onClick_dropListBtn('Company')">
 						{{currCompanyData.name}}
 						<i :class="['icon-trangle', isShowCompanyList?'rotate':'']"></i>
 						<drop-list :dropList="companyList" :isShowDropList="isShowCompanyList"
-								   @change="onClick_company"></drop-list>
+								   @change="onClick_company" ref="company"></drop-list>
 					</div>
 					<span class="required">*</span>
 				</div>
 				<div class="personal-form">
 					<span class="personal-title left">所属部门</span>
 					<div class="personal-content left relative form-list pointer"
-						 @click="onClick_dropListBtn('Department')">
+						 @click.stop="onClick_dropListBtn('Department')">
 						{{currDepartData.name}}
 						<i class="pointer" :class="['icon-trangle', isShowDepartmentList?'rotate':'']"></i>
 						<drop-list :dropList="departmentList" :isShowDropList="isShowDepartmentList"
-								   @change="onClick_department"></drop-list>
+								   @change="onClick_department" ref="depart"></drop-list>
 					</div>
 					<span class="required">*</span>
 				</div>
 				<div class="personal-form">
 					<span class="personal-title left">职务名称</span>
-					<div class="personal-content left relative form-list" @click="onClick_dropListBtn('Post')">
+					<div class="personal-content left relative form-list" @click.stop="onClick_dropListBtn('Duty')">
 						{{currDutyData.name}}
-						<span :class="['icon-trangle', isShowPostList?'rotate':'']"></span>
-						<drop-list :dropList="dutyList" :isShowDropList="isShowPostList"
-								   @change="onClick_duty"></drop-list>
+						<span :class="['icon-trangle', isShowDutyList?'rotate':'']"></span>
+						<drop-list :dropList="dutyList" :isShowDropList="isShowDutyList"
+								   @change="onClick_duty" ref="duty"></drop-list>
 					</div>
 					<span class="required">*</span>
 				</div>
@@ -63,7 +63,7 @@
 					<span class="personal-title left">验证码</span>
 					<input-bar class="personal-content pensonal-input code left" placeholder="" type="text"
 							   v-model="code" @focus="onFocus_inputBar('code')" :errmsg="errData.code"></input-bar>
-					<span class="btn-send pointer left">发送验证码</span>
+					<span class="btn-send pointer left" @click="onClick_sendCodeBtn">发送验证码</span>
 				</div>
 				<div class="personal-form"><span class="personal-title left">固定电话</span>
 					<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
@@ -158,7 +158,7 @@
 				isVerified: false,
 				isShowDepartmentList: false,
 				isShowCompanyList: false,
-				isShowPostList: false
+				isShowDutyList: false
 			}
 		},
 		components: {
@@ -203,6 +203,26 @@
 					this.code = "";
 					this.companyList = g.data.companyPool.list;
 				}
+				this.initEvents();
+			},
+			initEvents()
+			{
+				document.addEventListener('click', this.onClick_doc);
+			},
+			onClick_doc(e)
+			{
+				if (this.$refs.company && !this.$refs.company.$el.contains(e.target))
+				{
+					this.isShowCompanyList = false;
+				}
+				if (this.$refs.depart && !this.$refs.depart.$el.contains(e.target))
+				{
+					this.isShowDepartmentList = false;
+				}
+				if (this.$refs.duty && !this.$refs.duty.$el.contains(e.target))
+				{
+					this.isShowDutyList = false;
+				}
 			},
 			onClick_company($id)
 			{
@@ -218,12 +238,30 @@
 			},
 			onClick_duty($id)
 			{
-				this.isShowPostList = false;
+				this.isShowDutyList = false;
 				this.currDutyData = g.data.dutyPool.getDataById($id);
 				this.currDuty = this.currDutyData.name;
 			},
 			onClick_dropListBtn($type)
 			{
+				if ($type == "Company")
+				{
+					this.isShowDepartmentList = false;
+					this.isShowDutyList = false;
+				}
+
+				if ($type == "Department")
+				{
+					this.isShowCompanyList = false;
+					this.isShowDutyList = false;
+				}
+
+				if ($type == "Duty")
+				{
+					this.isShowDepartmentList = false;
+					this.isShowCompanyList = false;
+				}
+
 				if (this["isShow" + $type + "List"])
 				{
 					this["isShow" + $type + "List"] = false;
@@ -232,6 +270,20 @@
 				{
 					this["isShow" + $type + "List"] = true;
 				}
+			},
+			onClick_sendCodeBtn()
+			{
+				this.checkPhoneData();
+				if (!_isValid)
+				{
+					return;
+				}
+				_params = {mobile: this.phone};
+				g.net.call("user/applyUserAuthSendCode", _params).then(($data) =>
+				{
+					g.ui.toast("验证码发送成功!");
+				},(err) => {
+					g.func.dealErr(err);				})
 			},
 			onChange_upload($data)
 			{
@@ -282,67 +334,61 @@
 				})
 
 			},
-			checkValid()
+			checkPhoneData()
 			{
 				if (!this.phone)
 				{
-					this.errData.phone = "表单内容不能为空";
+					this.errData.phone = "手机号码不能为空";
+					_isValid = false;
+				}
+				var regExp = /^1[34578]\d{9}$/;
+				if (!regExp.test(this.phone))
+				{
+					this.errData.phone = "手机格式有误";
 					_isValid = false;
 				}
 
-				if (!this.remark)
-				{
-					this.errData.remark = "表单内容不能为空";
-					_isValid = false;
-				}
-				if (!this.email)
-				{
-					this.errData.email = "表单内容不能为空";
-					_isValid = false;
-				}
+			},
+			checkValid()
+			{
+				this.checkPhoneData();
 				if (!this.code)
 				{
-					this.errData.code = "表单内容不能为空";
-					_isValid = false;
-				}
-				if (!this.telphone)
-				{
-					this.errData.telphone = "表单内容不能为空";
+					this.errData.code = "请输入验证码";
 					_isValid = false;
 				}
 				if (!this.idCardBack)
 				{
-					this.errData.idCardBack = "表单内容不能为空";
+					this.errData.idCardBack = "请上传身份证反面照片";
 					_isValid = false;
 				}
 				if (!this.idCardFront)
 				{
-					this.errData.idCardFront = "表单内容不能为空";
+					this.errData.idCardFront = "请上传身份证正面照片";
 					_isValid = false;
 				}
 				if (!this.workCard)
 				{
-					this.errData.workCard = "表单内容不能为空";
+					this.errData.workCard = "请上传工作证件照";
 					_isValid = false;
 				}
 				if (!this.currCompanyData.name)
 				{
-					this.errData.currCompany = "表单内容不能为空";
+					this.errData.currCompany = "请选择所属公司";
 					_isValid = false;
 				}
 				if (!this.currDepartData.name)
 				{
-					this.errData.currDepartment = "表单内容不能为空";
+					this.errData.currDepartment = "请选择所属部门";
 					_isValid = false;
 				}
 				if (!this.currDutyData.name)
 				{
-					this.errData.currDuty = "表单内容不能为空";
+					this.errData.currDuty = "请选择所属职务";
 					_isValid = false;
 				}
 				this.$forceUpdate();
 
-				trace("this.errData",this.errData);
 			}
 		}
 	}
