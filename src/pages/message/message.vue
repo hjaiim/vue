@@ -49,7 +49,7 @@
 								<span class="right pointer draw-line ani-time" @click="onClick_deleteBtn(item.id)">删除
 									<delete-pop :isDeletePop="item.isShow"
 												@close="onClose_deletePop">
-										<span>您确定要删除该产品？</span>
+										<span>您确定要删除该消息？</span>
 									</delete-pop>
 								</span>
 							</p>
@@ -76,6 +76,8 @@
 	import CommonPage from "../../components/page.vue";
 	import DetailPop from "../../components/pop/detailPop.vue";
 	import DeletePop from "../../components/pop/deletePop.vue"
+	var _delId = 0;
+	var _params = null;
 	export default{
 		created(){
 			this.init();
@@ -100,11 +102,18 @@
 				this.msgList = g.data.messagePool.list;
 			},
 			onClick_deleteBtn($id){
-				this.currId = $id;
-				g.data.messagePool.getDataById(this.currId).update({isShow:true});
+				_delId = $id;
+				g.data.messagePool.getDataById(_delId).update({isShow: true});
 			},
 			onClose_deletePop($result){
-				g.data.messagePool.getDataById(this.currId).update({isShow:false});
+				g.data.messagePool.getDataById(_delId).update({isShow: false});
+				if ($result)
+				{
+					_params = {msgIds: _delId};
+					g.net.call("message/delMessage",($data) => {
+						g.ui.toast("消息删除成功！");
+					})
+				}
 			},
 			onClick_detailBtn($id){
 				this.currId = $id;

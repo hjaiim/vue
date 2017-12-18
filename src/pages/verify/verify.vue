@@ -56,26 +56,28 @@
 				<div class="personal-form">
 					<span class="personal-title left">手机</span>
 					<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
-							   v-model="phone"></input-bar>
+							   v-model="phone" @focus="onFocus_inputBar('phone')" :errmsg="errData.phone"></input-bar>
 					<span class="required">*</span>
 				</div>
 				<div class="personal-form">
 					<span class="personal-title left">验证码</span>
 					<input-bar class="personal-content pensonal-input code left" placeholder="" type="text"
-							   v-model="code"></input-bar>
+							   v-model="code" @focus="onFocus_inputBar('code')" :errmsg="errData.code"></input-bar>
 					<span class="btn-send pointer left">发送验证码</span>
 				</div>
 				<div class="personal-form"><span class="personal-title left">固定电话</span>
 					<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
-							   v-model="telphone"></input-bar>
+							   v-model="telphone" @focus="onFocus_inputBar('telphone')"
+							   :errmsg="errData.telphone"></input-bar>
 				</div>
 				<div class="personal-form"><span class="personal-title left">电子邮箱</span>
 					<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
-							   v-model="email"></input-bar>
+							   v-model="email" @focus="onFocus_inputBar('email')" :errmsg="errData.email"></input-bar>
 				</div>
 				<div class="personal-form"><span class="personal-title left">备注</span>
 					<input-bar class="personal-content pensonal-input note left" placeholder="" type="text"
-							   v-model="remark"></input-bar>
+							   v-model="remark" @focus="onFocus_inputBar('remark')"
+							   :errmsg="errData.remark"></input-bar>
 				</div>
 				<div class="personal-form">
 					<span class="personal-title left">身份证照</span>
@@ -86,7 +88,7 @@
 						</div>
 						<img class="img-url absolute" :src="idCardFront?idCardFront:''" alt="">
 						<span class="del-img pointer" :class="idCardFront?'hover-img':''"></span>
-						<upload-btn class="input-file" @change="onChange_uploadPros" resultType="base64"></upload-btn>
+						<upload-btn class="input-file" @change="onChange_uploadFront" resultType="base64"></upload-btn>
 					</div>
 					<div class="left relative upload-box pointer">
 						<div class="upload-btn flex">
@@ -95,7 +97,7 @@
 						</div>
 						<img class="img-url absolute" :src="idCardBack?idCardBack:''" alt="">
 						<span class="del-img pointer" :class="idCardBack?'hover-img':''"></span>
-						<upload-btn class="input-file" @change="onChange_uploadCons" resultType="base64"></upload-btn>
+						<upload-btn class="input-file" @change="onChange_uploadBack" resultType="base64"></upload-btn>
 					</div>
 				</div>
 				<div class="personal-form">
@@ -126,7 +128,8 @@
 	import ComLayout from "../../components/comLayout.vue";
 	import UploadBtn from "../../components/upload.vue";
 	import InputBar from "../../components/inputBar.vue";
-	import DropList from "../../components/dropList.vue"
+	import DropList from "../../components/dropList.vue";
+	var _isValid = true;
 	export default{
 		created(){
 			this.init();
@@ -134,6 +137,7 @@
 		data(){
 			return {
 				g: g,
+				errData: {},
 				userInfo: {},
 				phone: '',
 				remark: "",
@@ -198,7 +202,6 @@
 					this.code = "";
 					this.companyList = g.data.companyPool.list;
 				}
-
 			},
 			onClick_company($id)
 			{
@@ -220,7 +223,8 @@
 				var dutyData = g.data.dutyPool.getDataById($id);
 				this.currDuty = dutyData.name;
 			},
-			onClick_dropListBtn($type){
+			onClick_dropListBtn($type)
+			{
 				if (this["isShow" + $type + "List"])
 				{
 					this["isShow" + $type + "List"] = false;
@@ -230,22 +234,84 @@
 					this["isShow" + $type + "List"] = true;
 				}
 			},
-			onChange_upload($list)
+			onChange_upload($data)
 			{
-				trace("onChange_upload", $list);
-				this.avatar = $list;
+				this.avatar = $data;
 			},
-			onChange_uploadPros($list){
-				trace("onChange_upload", $list);
-				this.idCardFront = $list;
+			onChange_uploadFront($data)
+			{
+				this.idCardFront = $data;
 			},
-			onChange_uploadCons($list){
-				trace("onChange_upload", $list);
-				this.idCardBack = $list;
+			onChange_uploadBack($data)
+			{
+				this.idCardBack = $data;
 			},
-			onChange_uploadWork($list){
-				trace("onChange_upload", $list);
-				this.workCard = $list;
+			onChange_uploadWork($data)
+			{
+				this.workCard = $data;
+			},
+			onFocus_inputBar($type)
+			{
+				this.errData[$type] = "";
+			},
+			checkValid()
+			{
+				if (!this.phone)
+				{
+					this.errData.phone = "表单内容不能为空";
+					_isValid = false;
+				}
+
+				if (!this.remark)
+				{
+					this.errData.remark = "表单内容不能为空";
+					_isValid = false;
+				}
+				if (!this.email)
+				{
+					this.errData.email = "表单内容不能为空";
+					_isValid = false;
+				}
+				if (!this.code)
+				{
+					this.errData.code = "表单内容不能为空";
+					_isValid = false;
+				}
+				if (!this.telphone)
+				{
+					this.errData.telphone = "表单内容不能为空";
+					_isValid = false;
+				}
+				if (!this.idCardBack)
+				{
+					this.errData.idCardBack = "表单内容不能为空";
+					_isValid = false;
+				}
+				if (!this.idCardFront)
+				{
+					this.errData.idCardFront = "表单内容不能为空";
+					_isValid = false;
+				}
+				if (!this.workCard)
+				{
+					this.errData.workCard = "表单内容不能为空";
+					_isValid = false;
+				}
+				if (!this.currCompany)
+				{
+					this.errData.currCompany = "表单内容不能为空";
+					_isValid = false;
+				}
+				if (!this.currDepartment)
+				{
+					this.errData.currDepartment = "表单内容不能为空";
+					_isValid = false;
+				}
+				if (!this.currDuty)
+				{
+					this.errData.currDuty = "表单内容不能为空";
+					_isValid = false;
+				}
 			}
 		}
 	}
