@@ -1,3 +1,7 @@
+.unverify-wrap {
+  min-height: 950px !important;
+}
+
 .staff-wrap {
   padding: 45px 35px 50px 44px;
   .status-wrap {
@@ -23,6 +27,9 @@
 		padding: 0 20px 0 54px;
 		line-height: 32px;
 		height: 32px;
+	  }
+	  .diff-padding {
+		padding-left: 0;
 	  }
 	  .search-input {
 		width: 150px;
@@ -59,7 +66,7 @@
 @media only screen and (max-width: 1540px) {
   .option-wrap {
 	display: block;
-	margin-top: 20px;
+	margin-top: 15px;
   }
   .staff-wrap .status-wrap .staff-option .staff-name {
 	padding: 0 18px 0 0;

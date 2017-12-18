@@ -65,13 +65,6 @@
 <style lang="sass" rel="stylesheet/scss" type="text/scss" scoped>
 	.setRole-wrap {
 		height: 386px;
-		.note-tit {
-			line-height: 64px;
-			height: 64px;
-			padding-left: 25px;
-			font-size: 15px;
-			border-bottom: 1px solid #eaeaea;
-		}
 		.set-content {
 			padding-top: 20px;
 			.role-list {
