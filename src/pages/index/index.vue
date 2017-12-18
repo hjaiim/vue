@@ -101,7 +101,8 @@
 				remark: "",
 				password: "",
 				newPwd: "",
-				confirmPwd: ""
+				confirmPwd: "",
+				errData:{}
 
 			}
 		},

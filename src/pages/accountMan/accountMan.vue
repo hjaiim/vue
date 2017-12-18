@@ -189,6 +189,7 @@
 			onClick_selectAllBtn()
 			{
 				this.init();
+				this.updateUrl()
 			},
 			onClick_searchBtn()
 			{
