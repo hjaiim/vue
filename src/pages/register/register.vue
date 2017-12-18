@@ -55,6 +55,7 @@
 				this.checkValid();
 				if(!_isValid)
 				{
+					_isValid = true;
 					return ;
 				}
 				_params.logon = this.account;

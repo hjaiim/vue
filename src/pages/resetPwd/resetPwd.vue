@@ -58,6 +58,7 @@
 				this.checkCodeDataValid();
 				if(!_isValid)
 				{
+					_isValid = true;
 					return ;
 				}
 				_codeData.logon = this.account;
@@ -72,6 +73,7 @@
 				this.checkResetDataValid();
 				if(!_isValid)
 				{
+					_isValid = true;
 					return ;
 				}
 				_params.logon = this.account;

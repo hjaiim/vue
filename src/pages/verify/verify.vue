@@ -7,9 +7,9 @@
 						<img class="default-img" :src="avatar?avatar:g.path.images+'/default-icon.png'" alt="">
 						<div class="upload-btn absolute">
 							<p class="load-text">修改头像</p>
-							<upload-btn @change="onChange_upload" resultType="base64"></upload-btn>
+							<upload-btn @change="onChange_uploadAvatar" resultType="base64"></upload-btn>
 							<img :src="g.path.images+'/del-head.png'" alt=""
-								 class="del-head absolute pointer">
+								 class="del-head absolute pointer" @click="onClick_deleteImg('avatar')">
 						</div>
 					</div>
 				</div>
@@ -87,8 +87,10 @@
 							<p class="upload-text">正面</p>
 						</div>
 						<img class="img-url absolute" :src="idCardFront?idCardFront:''" alt="">
-						<span class="del-img pointer" :class="idCardFront?'hover-img':''"></span>
-						<upload-btn class="input-file" @change="onChange_uploadFront" resultType="base64"></upload-btn>
+						<span class="del-img pointer" :class="idCardFront?'hover-img':''"
+							  @click="onClick_deleteImg('idCardFront')"></span>
+						<upload-btn class="input-file" @change="onChange_uploadFront"
+									resultType="base64"></upload-btn>
 					</div>
 					<div class="left relative upload-box pointer">
 						<div class="upload-btn flex">
@@ -96,8 +98,10 @@
 							<p class="upload-text">反面</p>
 						</div>
 						<img class="img-url absolute" :src="idCardBack?idCardBack:''" alt="">
-						<span class="del-img pointer" :class="idCardBack?'hover-img':''"></span>
-						<upload-btn class="input-file" @change="onChange_uploadBack" resultType="base64"></upload-btn>
+						<span class="del-img pointer" :class="idCardBack?'hover-img':''"
+							  @click="onClick_deleteImg('idCardBack')"></span>
+						<upload-btn class="input-file" @change="onChange_uploadBack"
+									resultType="base64"></upload-btn>
 					</div>
 				</div>
 				<div class="personal-form">
@@ -115,11 +119,14 @@
 							</p>
 						</div>
 						<img class="img-url absolute" :src="workCard?workCard:''" alt="">
-						<span class="del-img pointer" :class="workCard?'hover-img':''"></span>
-						<upload-btn class="input-file" @change="onChange_uploadWork" resultType="base64"></upload-btn>
+						<span class="del-img pointer" :class="workCard?'hover-img':''"
+							  @click="onClick_deleteImg('workCard')"></span>
+						<upload-btn class="input-file" @change="onChange_uploadWork"
+									resultType="base64"></upload-btn>
 					</div>
 				</div>
-				<div class="btn btn-save pointer action-btn ani-time "  @click="onClick_submitBtn">提交</div>
+				<div class="btn btn-save pointer action-btn ani-time " @click="onClick_submitBtn"
+				v-if="g.data.userInfo.authStatus == 0">提交</div>
 			</div>
 		</div>
 	</com-layout>
@@ -171,9 +178,10 @@
 		methods: {
 			init()
 			{
+				debugger;
 				this.userInfo = g.data.userInfo;
-				this.isVerified = (this.userInfo.authSatus == 2);
-				if (this.isVerified)
+				this.authStatus = this.userInfo.authStatus;
+				if (this.authStatus != 0)
 				{
 					this.phone = this.userInfo.phone;
 					this.remark = this.userInfo.remark;
@@ -183,9 +191,9 @@
 					this.idCardBack = this.userInfo.idCardBack;
 					this.idCardFront = this.userInfo.idCardFront;
 					this.workCard = this.userInfo.workCard;
-					this.currCompany = this.userInfo.companyName;
-					this.currDepartment = this.userInfo.departmentName;
-					this.currDuty = this.userInfo.dutyName;
+					this.currCompanyData = g.data.companyPool.getDataById(this.userInfo.companyId);
+					this.currDepartData = g.data.departmentPool.getDataById(this.userInfo.departmentId);
+					this.currDutyData = g.data.dutyPool.getDataById(this.userInfo.dutyId);
 				}
 				else
 				{
@@ -197,12 +205,12 @@
 					this.idCardBack = "";
 					this.idCardFront = "";
 					this.workCard = "";
-					this.currCompany = "";
-					this.currDepartment = "";
-					this.currDuty = "";
-					this.code = "";
+					this.currCompanyData = "";
+					this.currDepartData = "";
+					this.currDutyData = "";
 					this.companyList = g.data.companyPool.list;
 				}
+					this.code = "";
 				this.initEvents();
 			},
 			initEvents()
@@ -276,30 +284,37 @@
 				this.checkPhoneData();
 				if (!_isValid)
 				{
+					_isValid = true;
 					return;
 				}
 				_params = {mobile: this.phone};
 				g.net.call("user/applyUserAuthSendCode", _params).then(($data) =>
 				{
 					g.ui.toast("验证码发送成功!");
-				},(err) => {
-					g.func.dealErr(err);				})
+				}, (err) =>
+				{
+					g.func.dealErr(err);
+				})
 			},
-			onChange_upload($data)
+			onClick_deleteImg($type)
 			{
-				this.avatar = $data;
+				this[$type] = "";
 			},
-			onChange_uploadFront($data)
+			onChange_uploadAvatar($list)
 			{
-				this.idCardFront = $data;
+				this.avatar = $list[0];
 			},
-			onChange_uploadBack($data)
+			onChange_uploadFront($list)
 			{
-				this.idCardBack = $data;
+				this.idCardFront = $list[0];
 			},
-			onChange_uploadWork($data)
+			onChange_uploadBack($list)
 			{
-				this.workCard = $data;
+				this.idCardBack = $list[0];
+			},
+			onChange_uploadWork($list)
+			{
+				this.workCard = $list[0];
 			},
 			onFocus_inputBar($type)
 			{
@@ -310,6 +325,7 @@
 				this.checkValid();
 				if (!_isValid)
 				{
+					_isValid = true;
 					return;
 				}
 				_params = {
@@ -327,7 +343,7 @@
 					remark: this.remark
 				};
 
-				g.ui.toast("user/applyUserAuth", _params).then(($data) =>
+				g.net.call("user/applyUserAuth", _params).then(($data) =>
 				{
 					trace($data);
 					g.ui.toast('申请提交成功！')

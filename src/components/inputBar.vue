@@ -60,7 +60,7 @@
 		methods: {
 			init()
 			{
-				this.inputContent = this.value;
+				this.inputContent = this.value || "";
 			},
 			onBlur_accountInput(e)
 			{
