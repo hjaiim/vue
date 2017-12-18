@@ -6,6 +6,11 @@ export function dealErr($err)
 	{
 		loginManager.logout();
 	}
+	if($err.errorMsg)
+	{
+		g.ui.toast($err.errorMsg);
+
+	}
 }
 export function oneOf($value, validList)
 {

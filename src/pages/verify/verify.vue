@@ -7,9 +7,9 @@
 						<img class="default-img" :src="avatar?avatar:g.path.images+'/default-icon.png'" alt="">
 						<div class="upload-btn absolute">
 							<p class="load-text">修改头像</p>
-							<upload-btn @change="onChange_upload" resultType="base64"></upload-btn>
+							<upload-btn @change="onChange_uploadAvatar" resultType="base64"></upload-btn>
 							<img :src="g.path.images+'/del-head.png'" alt=""
-								 class="del-head absolute pointer">
+								 class="del-head absolute pointer" @click="onClick_deleteImg('avatar')">
 						</div>
 					</div>
 				</div>
@@ -24,32 +24,32 @@
 				<div class="personal-form">
 					<span class="personal-title left">所属公司</span>
 					<div class="personal-content left relative form-list pointer"
-						 @click="onClick_dropListBtn('Company')">
+						 @click.stop="onClick_dropListBtn('Company')">
 						{{currCompanyData.name}}
 						<i :class="['icon-trangle', isShowCompanyList?'rotate':'']"></i>
 						<drop-list :dropList="companyList" :isShowDropList="isShowCompanyList"
-								   @change="onClick_company"></drop-list>
+								   @change="onClick_company" ref="company"></drop-list>
 					</div>
 					<span class="required">*</span>
 				</div>
 				<div class="personal-form">
 					<span class="personal-title left">所属部门</span>
 					<div class="personal-content left relative form-list pointer"
-						 @click="onClick_dropListBtn('Department')">
+						 @click.stop="onClick_dropListBtn('Department')">
 						{{currDepartData.name}}
 						<i class="pointer" :class="['icon-trangle', isShowDepartmentList?'rotate':'']"></i>
 						<drop-list :dropList="departmentList" :isShowDropList="isShowDepartmentList"
-								   @change="onClick_department"></drop-list>
+								   @change="onClick_department" ref="depart"></drop-list>
 					</div>
 					<span class="required">*</span>
 				</div>
 				<div class="personal-form">
 					<span class="personal-title left">职务名称</span>
-					<div class="personal-content left relative form-list" @click="onClick_dropListBtn('Post')">
+					<div class="personal-content left relative form-list" @click.stop="onClick_dropListBtn('Duty')">
 						{{currDutyData.name}}
-						<span :class="['icon-trangle', isShowPostList?'rotate':'']"></span>
-						<drop-list :dropList="dutyList" :isShowDropList="isShowPostList"
-								   @change="onClick_duty"></drop-list>
+						<span :class="['icon-trangle', isShowDutyList?'rotate':'']"></span>
+						<drop-list :dropList="dutyList" :isShowDropList="isShowDutyList"
+								   @change="onClick_duty" ref="duty"></drop-list>
 					</div>
 					<span class="required">*</span>
 				</div>
@@ -63,7 +63,7 @@
 					<span class="personal-title left">验证码</span>
 					<input-bar class="personal-content pensonal-input code left" placeholder="" type="text"
 							   v-model="code" @focus="onFocus_inputBar('code')" :errmsg="errData.code"></input-bar>
-					<span class="btn-send pointer left">发送验证码</span>
+					<span class="btn-send pointer left" @click="onClick_sendCodeBtn">发送验证码</span>
 				</div>
 				<div class="personal-form"><span class="personal-title left">固定电话</span>
 					<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
@@ -87,8 +87,10 @@
 							<p class="upload-text">正面</p>
 						</div>
 						<img class="img-url absolute" :src="idCardFront?idCardFront:''" alt="">
-						<span class="del-img pointer" :class="idCardFront?'hover-img':''"></span>
-						<upload-btn class="input-file" @change="onChange_uploadFront" resultType="base64"></upload-btn>
+						<span class="del-img pointer" :class="idCardFront?'hover-img':''"
+							  @click="onClick_deleteImg('idCardFront')"></span>
+						<upload-btn class="input-file" @change="onChange_uploadFront"
+									resultType="base64"></upload-btn>
 					</div>
 					<div class="left relative upload-box pointer">
 						<div class="upload-btn flex">
@@ -96,8 +98,10 @@
 							<p class="upload-text">反面</p>
 						</div>
 						<img class="img-url absolute" :src="idCardBack?idCardBack:''" alt="">
-						<span class="del-img pointer" :class="idCardBack?'hover-img':''"></span>
-						<upload-btn class="input-file" @change="onChange_uploadBack" resultType="base64"></upload-btn>
+						<span class="del-img pointer" :class="idCardBack?'hover-img':''"
+							  @click="onClick_deleteImg('idCardBack')"></span>
+						<upload-btn class="input-file" @change="onChange_uploadBack"
+									resultType="base64"></upload-btn>
 					</div>
 				</div>
 				<div class="personal-form">
@@ -115,11 +119,14 @@
 							</p>
 						</div>
 						<img class="img-url absolute" :src="workCard?workCard:''" alt="">
-						<span class="del-img pointer" :class="workCard?'hover-img':''"></span>
-						<upload-btn class="input-file" @change="onChange_uploadWork" resultType="base64"></upload-btn>
+						<span class="del-img pointer" :class="workCard?'hover-img':''"
+							  @click="onClick_deleteImg('workCard')"></span>
+						<upload-btn class="input-file" @change="onChange_uploadWork"
+									resultType="base64"></upload-btn>
 					</div>
 				</div>
-				<button @click="onClick_submitBtn">提交</button>
+				<div class="btn btn-save pointer action-btn ani-time " @click="onClick_submitBtn"
+				v-if="g.data.userInfo.authStatus == 0">提交</div>
 			</div>
 		</div>
 	</com-layout>
@@ -158,7 +165,7 @@
 				isVerified: false,
 				isShowDepartmentList: false,
 				isShowCompanyList: false,
-				isShowPostList: false
+				isShowDutyList: false
 			}
 		},
 		components: {
@@ -171,9 +178,10 @@
 		methods: {
 			init()
 			{
+				debugger;
 				this.userInfo = g.data.userInfo;
-				this.isVerified = (this.userInfo.authSatus == 2);
-				if (this.isVerified)
+				this.authStatus = this.userInfo.authStatus;
+				if (this.authStatus != 0)
 				{
 					this.phone = this.userInfo.phone;
 					this.remark = this.userInfo.remark;
@@ -183,9 +191,9 @@
 					this.idCardBack = this.userInfo.idCardBack;
 					this.idCardFront = this.userInfo.idCardFront;
 					this.workCard = this.userInfo.workCard;
-					this.currCompany = this.userInfo.companyName;
-					this.currDepartment = this.userInfo.departmentName;
-					this.currDuty = this.userInfo.dutyName;
+					this.currCompanyData = g.data.companyPool.getDataById(this.userInfo.companyId);
+					this.currDepartData = g.data.departmentPool.getDataById(this.userInfo.departmentId);
+					this.currDutyData = g.data.dutyPool.getDataById(this.userInfo.dutyId);
 				}
 				else
 				{
@@ -197,11 +205,31 @@
 					this.idCardBack = "";
 					this.idCardFront = "";
 					this.workCard = "";
-					this.currCompany = "";
-					this.currDepartment = "";
-					this.currDuty = "";
-					this.code = "";
+					this.currCompanyData = "";
+					this.currDepartData = "";
+					this.currDutyData = "";
 					this.companyList = g.data.companyPool.list;
+				}
+					this.code = "";
+				this.initEvents();
+			},
+			initEvents()
+			{
+				document.addEventListener('click', this.onClick_doc);
+			},
+			onClick_doc(e)
+			{
+				if (this.$refs.company && !this.$refs.company.$el.contains(e.target))
+				{
+					this.isShowCompanyList = false;
+				}
+				if (this.$refs.depart && !this.$refs.depart.$el.contains(e.target))
+				{
+					this.isShowDepartmentList = false;
+				}
+				if (this.$refs.duty && !this.$refs.duty.$el.contains(e.target))
+				{
+					this.isShowDutyList = false;
 				}
 			},
 			onClick_company($id)
@@ -218,12 +246,30 @@
 			},
 			onClick_duty($id)
 			{
-				this.isShowPostList = false;
+				this.isShowDutyList = false;
 				this.currDutyData = g.data.dutyPool.getDataById($id);
 				this.currDuty = this.currDutyData.name;
 			},
 			onClick_dropListBtn($type)
 			{
+				if ($type == "Company")
+				{
+					this.isShowDepartmentList = false;
+					this.isShowDutyList = false;
+				}
+
+				if ($type == "Department")
+				{
+					this.isShowCompanyList = false;
+					this.isShowDutyList = false;
+				}
+
+				if ($type == "Duty")
+				{
+					this.isShowDepartmentList = false;
+					this.isShowCompanyList = false;
+				}
+
 				if (this["isShow" + $type + "List"])
 				{
 					this["isShow" + $type + "List"] = false;
@@ -233,21 +279,42 @@
 					this["isShow" + $type + "List"] = true;
 				}
 			},
-			onChange_upload($data)
+			onClick_sendCodeBtn()
 			{
-				this.avatar = $data;
+				this.checkPhoneData();
+				if (!_isValid)
+				{
+					_isValid = true;
+					return;
+				}
+				_params = {mobile: this.phone};
+				g.net.call("user/applyUserAuthSendCode", _params).then(($data) =>
+				{
+					g.ui.toast("验证码发送成功!");
+				}, (err) =>
+				{
+					g.func.dealErr(err);
+				})
 			},
-			onChange_uploadFront($data)
+			onClick_deleteImg($type)
 			{
-				this.idCardFront = $data;
+				this[$type] = "";
 			},
-			onChange_uploadBack($data)
+			onChange_uploadAvatar($list)
 			{
-				this.idCardBack = $data;
+				this.avatar = $list[0];
 			},
-			onChange_uploadWork($data)
+			onChange_uploadFront($list)
 			{
-				this.workCard = $data;
+				this.idCardFront = $list[0];
+			},
+			onChange_uploadBack($list)
+			{
+				this.idCardBack = $list[0];
+			},
+			onChange_uploadWork($list)
+			{
+				this.workCard = $list[0];
 			},
 			onFocus_inputBar($type)
 			{
@@ -258,6 +325,7 @@
 				this.checkValid();
 				if (!_isValid)
 				{
+					_isValid = true;
 					return;
 				}
 				_params = {
@@ -275,74 +343,68 @@
 					remark: this.remark
 				};
 
-				g.ui.toast("user/applyUserAuth", _params).then(($data) =>
+				g.net.call("user/applyUserAuth", _params).then(($data) =>
 				{
 					trace($data);
 					g.ui.toast('申请提交成功！')
 				})
 
 			},
-			checkValid()
+			checkPhoneData()
 			{
 				if (!this.phone)
 				{
-					this.errData.phone = "表单内容不能为空";
+					this.errData.phone = "手机号码不能为空";
+					_isValid = false;
+				}
+				var regExp = /^1[34578]\d{9}$/;
+				if (!regExp.test(this.phone))
+				{
+					this.errData.phone = "手机格式有误";
 					_isValid = false;
 				}
 
-				if (!this.remark)
-				{
-					this.errData.remark = "表单内容不能为空";
-					_isValid = false;
-				}
-				if (!this.email)
-				{
-					this.errData.email = "表单内容不能为空";
-					_isValid = false;
-				}
+			},
+			checkValid()
+			{
+				this.checkPhoneData();
 				if (!this.code)
 				{
-					this.errData.code = "表单内容不能为空";
-					_isValid = false;
-				}
-				if (!this.telphone)
-				{
-					this.errData.telphone = "表单内容不能为空";
+					this.errData.code = "请输入验证码";
 					_isValid = false;
 				}
 				if (!this.idCardBack)
 				{
-					this.errData.idCardBack = "表单内容不能为空";
+					this.errData.idCardBack = "请上传身份证反面照片";
 					_isValid = false;
 				}
 				if (!this.idCardFront)
 				{
-					this.errData.idCardFront = "表单内容不能为空";
+					this.errData.idCardFront = "请上传身份证正面照片";
 					_isValid = false;
 				}
 				if (!this.workCard)
 				{
-					this.errData.workCard = "表单内容不能为空";
+					this.errData.workCard = "请上传工作证件照";
 					_isValid = false;
 				}
 				if (!this.currCompanyData.name)
 				{
-					this.errData.currCompany = "表单内容不能为空";
+					this.errData.currCompany = "请选择所属公司";
 					_isValid = false;
 				}
 				if (!this.currDepartData.name)
 				{
-					this.errData.currDepartment = "表单内容不能为空";
+					this.errData.currDepartment = "请选择所属部门";
 					_isValid = false;
 				}
 				if (!this.currDutyData.name)
 				{
-					this.errData.currDuty = "表单内容不能为空";
+					this.errData.currDuty = "请选择所属职务";
 					_isValid = false;
 				}
 				this.$forceUpdate();
 
-				trace("this.errData",this.errData);
 			}
 		}
 	}

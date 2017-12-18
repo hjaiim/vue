@@ -63,7 +63,7 @@
 			<div class="personal-message" v-show="type=='modpwd'">
 				<div class="personal-form"><span class="personal-title">原密码</span>
 					<input-bar class="personal-content pensonal-input" placeholder="" type="password"
-							   v-model="oldPwd" :errmsg="errData.oldPwd"></input-bar>
+							   v-model="password" :errmsg="errData.password"></input-bar>
 				</div>
 				<div class="personal-form"><span class="personal-title">新密码</span>
 					<input-bar class="personal-content pensonal-input" placeholder="" type="password"
@@ -103,7 +103,7 @@
 				password: "",
 				newPwd: "",
 				confirmPwd: "",
-				errData:{}
+				errData: {}
 
 			}
 		},
@@ -135,11 +135,6 @@
 			},
 			onClick_savePersonal()
 			{
-				this.checkPersonalDataValid();
-				if(!_isValid)
-				{
-					return;
-				}
 				_params = {
 					avatar: this.avatar,
 					telphone: this.telphone,
@@ -164,12 +159,14 @@
 					g.data.userInfo.update(_params);
 					g.ui.toast("用户手机修改成功！");
 				})
+
 			},
 			onClick_updatePwd()
 			{
 				this.checkPwdDataValid();
-				if(!_isValid)
+				if (!_isValid)
 				{
+					_isValid = true;
 					return;
 				}
 				_params = {
@@ -179,7 +176,10 @@
 				g.net.call("user/updatePassword", _params).then(() =>
 				{
 					g.data.userInfo.update(_params);
-					g.ui.toast("用户信息修改密码！");
+					g.ui.toast("密码修改成功！");
+				}, (err) =>
+				{
+					g.func.dealErr(err);
 				})
 			},
 			onChange_upload($data)
@@ -189,44 +189,31 @@
 			},
 			checkPersonalDataValid()
 			{
-				if (!this.phone)
-				{
-					this.errData.phone = "内容不能为空";
-					_isValid = false;
-				}
-				if (!this.telphone)
-				{
-					this.errData.telphone = "内容不能为空";
-					_isValid = false;
-				}
-				if (!this.email)
-				{
-					this.errData.email = "内容不能为空";
-					_isValid = false;
-				}
-				if (!this.remark)
-				{
-					this.errData.remark = "内容不能为空";
-					_isValid = false;
-				}
+
 			},
 			checkPwdDataValid()
 			{
 				if (!this.password)
 				{
-					this.errData.password = "内容不能为空";
+					this.errData.password = "请输入原始密码";
 					_isValid = false;
 				}
 				if (!this.newPwd)
 				{
-					this.errData.newPwd = "内容不能为空";
+					this.errData.newPwd = "请输入新密码";
 					_isValid = false;
 				}
 				if (!this.confirmPwd)
 				{
-					this.errData.confirmPwd = "内容不能为空";
+					this.errData.confirmPwd = "请输入确认密码";
 					_isValid = false;
 				}
+				if (this.newPwd != this.confirmPwd)
+				{
+					this.errData.confirmPwd = "两次新密码不一致";
+					_isValid = false;
+				}
+				this.$forceUpdate();
 			}
 		}
 	}

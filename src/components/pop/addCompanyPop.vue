@@ -38,32 +38,45 @@
 					<p class="from-group">
 						<span class="form-title">部门名称</span>
                         <span v-show="currId != 0">
-                            <span class="form-trap">{{item.name}}</span>
+							<input-bar class="form-control" placeholder="" type="text"
+									   v-model="item.name"></input-bar>
                             <img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer"
 								 @click="onClick_editDepart(item)">
-                        </span>
-
-                        <span v-show="currId == 0">
-							<input-bar class="form-control" placeholder="" type="text"
-									   v-model="departName"></input-bar>
-                            <span class="pointer btn-save">保存</span>
-                        </span>
+                        	<span class="pointer btn-save">保存</span>
+						</span>
 					</p>
 					<p class="from-group" v-for="duty in item.children">
 						<span class="form-title">职务名称</span>
 						<span v-show="currId != 0">
-							<span class="form-trap">{{duty.name}}</span>
+							<input-bar class="form-control" placeholder="" type="text"
+									   v-model="dutyName"></input-bar>
+                            <span class="pointer btn-save  ani-time">保存</span>
 							<img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer"
 								 @click="onClick_editDuty(duty)">
 							<img :src="g.path.images+'/del-depart.png'" alt="" class="edit-icon pointer"
 								 @click="onClick_deleteDuty(duty)">
 						</span>
-                        <span v-show="currId == 0">
+					</p>
+				</div>
+
+				<div class="company-message">
+					<p class="from-group">
+						<span class="form-title">部门名称</span>
+                        <span>
+							<input-bar class="form-control" placeholder="" type="text"
+									   v-model="departName"></input-bar>
+                        	<span class="pointer btn-save">保存</span>
+						</span>
+					</p>
+					<p class="from-group">
+						<span class="form-title">职务名称</span>
+						<span>
 							<input-bar class="form-control" placeholder="" type="text"
 									   v-model="dutyName"></input-bar>
                             <span class="pointer btn-save  ani-time">保存</span>
-                        </span>
+						</span>
 					</p>
+
 				</div>
 
 				<div class="btn-submit pop-btn top-btn right pointer" @click="onClick_submitBtn">提交</div>
