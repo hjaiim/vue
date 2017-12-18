@@ -9,27 +9,32 @@
 						<img :src="g.path.images+'/default-icon.png'" alt="">
 					</div>
 					<div class="role-detail left">
-						<p>张蓝心</p>
+						<p>{{accountData.name}}</p>
 						<ul class="role-box relative clear">
-							<li class="left" v-for="n in 3">
-								<span>部门经理</span></li>
+							<li class="left">
+								<span>{{accountData.companyName}}</span></li>
+							<li class="left">
+								<span>{{accountData.departmentName}}</span></li>
+							<li class="left">
+								<span>{{accountData.dutyName}}</span></li>
 						</ul>
 					</div>
 				</div>
 				<div class="work-detail clear">
 					<span class="menu-name left">岗位名称</span>
 					<div class="option-content left relative pointer" @click="onClick_jobMenu">
-						商机管理员
+						{{positionData.name?positionData.name:'请选择'}}
 						<i class="icon-trangle pointer" :class="isShowRoleList?'rotate':''"></i>
-						<drop-list :dropList="roleList" :isShowDropList="isShowRoleList" @change="onClick_roleItem">
+						<drop-list :dropList="positionList" :isShowDropList="isShowRoleList"
+								   @change="onClick_positionItem">
 						</drop-list>
 					</div>
-					<span class="stick-name">审核岗</span>
+					<span class="stick-name">{{positionData.typeDesc}}</span>
 				</div>
 			</div>
 			<div class="action-wrap clear ">
-				<span class="cancel-btn pointer right ani-time">取消</span>
-				<span class="action-btn  pointer right ani-time">确认</span>
+				<span class="cancel-btn pointer right ani-time" @click="onClick_cancelBtn">取消</span>
+				<span class="action-btn  pointer right ani-time" @click="onClick_confirmBtn">确认</span>
 			</div>
 		</div>
 	</view-popup>
@@ -37,13 +42,16 @@
 <script type="text/ecmascript-6">
 	import g from "../../global";
 	import ViewPopup from "../viewPop.vue";
-	import DropList from "../dropList.vue"
+	import DropList from "../dropList.vue";
+	var _params = null;
 	export default{
 		data(){
 			return {
 				g: g,
 				isShowRoleList: false,
-				roleList: []
+				positionList: [],
+				positionData: {},
+				accountData: {}
 			}
 		},
 		components: {
@@ -55,13 +63,32 @@
 			isShowPopView: {
 				type: Boolean,
 				default: false
+			},
+			currId: {
+				default: 0
+			}
+		},
+		watch: {
+			currId($val)
+			{
+				this.init();
 			}
 		},
 		methods: {
-			onClose_pop(){
-				this.$emit('close');
+			init()
+			{
+				if (this.currId)
+				{
+					this.accountData = g.data.searchAccountPool.getDataById(this.currId);
+					this.positionList = g.data.searchPositionPool.list;
+				}
 			},
-			onClick_jobMenu(){
+			onClose_pop()
+			{
+				this.$emit('close', false);
+			},
+			onClick_jobMenu()
+			{
 				if (this.isShowRoleList)
 				{
 					this.isShowRoleList = false;
@@ -71,8 +98,34 @@
 					this.isShowRoleList = true;
 				}
 			},
-			onClick_roleItem(){
+			onClick_positionItem($id)
+			{
 				this.isShowRoleList = false;
+				var data = g.data.searchPositionPool.getDataById($id);
+				this.positionData = __merge({}, data);
+			},
+			onClick_cancelBtn()
+			{
+				this.$emit('close', false)
+			},
+			onClick_confirmBtn()
+			{
+				_params = {
+					userId: this.currId,
+					stationId: this.positionData.id,
+					stationType: this.positionData.type
+				};
+				g.net.call("user/editUserStation", _params).then(($data) =>
+				{
+					g.data.searchAccountPool.getDataById(_params.userId).update(_params);
+					g.ui.toast("岗位设置成功！");
+
+					this.$emit('close', true)
+
+				}, (err) =>
+				{
+					g.func.dealErr(err);
+				})
 			}
 		}
 	}

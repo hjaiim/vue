@@ -3,16 +3,16 @@
 		<div class="staff-wrap">
 			<div class="status-wrap clear">
 				<span class="total-nums left">岗位类别</span>
-				<div class="action-box left" @click="onClick_positionType(0)">
-					<i class="pointer"></i>
+				<div class="action-box left" @click="onClick_positionType(-1)">
+					<i class="pointer" :class="typeList.indexOf(-1) >= 0?'action':''"></i>
 					<span>未分配</span>
 				</div>
 				<div class="action-box left" @click="onClick_positionType(1)">
-					<i class="pointer action"></i>
+					<i class="pointer" :class="typeList.indexOf(1) >= 0?'action':''"></i>
 					<span>提交员</span>
 				</div>
 				<div class="action-box left" @click="onClick_positionType(2)">
-					<i class="pointer action"></i>
+					<i class="pointer" :class="typeList.indexOf(2) >= 0?'action':''"></i>
 					<span>审核员</span>
 				</div>
 				<div class="verify-btn total-btn right pointer" @click="onClick_unVerifyBtn">待认证>></div>
@@ -20,8 +20,8 @@
 					<div class="staff-option left clear">
 						<span class="left staff-name">平台角色</span>
 						<div class="option-content relative left pointer" @click.stop="onClick_dropListBtn">
-							所有<i class="icon-trangle pointer" :class="isShowStatusList?'rotate':''"></i>
-							<drop-list :dropList=roleList :isShowDropList="isShowStatusList"
+							所有<i class="icon-trangle pointer" :class="isShowRoleList?'rotate':''"></i>
+							<drop-list :dropList=roleList :isShowDropList="isShowRoleList"
 									   @change="onClick_roleItem" ref="dropList"></drop-list>
 						</div>
 					</div>
@@ -59,14 +59,15 @@
 						<td>{{item.departmentName}}</td>
 						<td>{{item.dutyName}}</td>
 						<td>{{item.positionName}}</td>
-						<td>{{item.positionType}}</td>
+						<td>{{item.positionTypeDesc}}</td>
 						<td>{{item.roleName}}</td>
 						<td>
 							<p class="action-menu clear">
-								<span class="left pointer draw-line ani-time" @click="onClick_jobBtn(item)">岗位设置
+								<span class="left pointer draw-line ani-time" @click="onClick_positionBtn(item)">岗位设置
 								</span>
 								<span class="left pointer draw-line ani-time" @click="onClick_roleBtn(item)">角色设置</span>
-								<span class="left pointer draw-line ani-time" @click="onClick_stopBtn(item)">停用</span>
+								<span class="left pointer draw-line ani-time"
+									  @click="onClick_stopBtn(item)">{{item.status == 1?'停用':'启用'}}</span>
 							</p>
 						</td>
 					</tr>
@@ -80,8 +81,11 @@
 								 @change="onChange_pageCom"></common-page>
 				</div>
 			</div>
-			<set-role-pop @close="onClose_setRolePop" :isShowPopView="isShowSetRolePop"></set-role-pop>
-			<order-work-pop @close="onClose_orderWorkPop" :isShowPopView="isShowOrderWorkPop"></order-work-pop>
+			<set-role-pop @close="onClose_setRolePop" :roleId="roleId" :currId="currId"
+						  :isShowPopView="isShowSetRolePop"></set-role-pop>
+			<order-work-pop @close="onClose_orderWorkPop"
+							:positionId="positionId" :currId="currId"
+							:isShowPopView="isShowOrderWorkPop"></order-work-pop>
 		</div>
 	</com-layout>
 </template>
@@ -93,6 +97,7 @@
 	import InputBar from "../../components/inputBar.vue";
 	import SetRolePop from "../../components/pop/setRolePop.vue";
 	import OrderWorkPop from "../../components/pop/orderWorkPop.vue";
+	var _params = null;
 	export default{
 		created(){
 			this.routerUpdated();
@@ -105,10 +110,11 @@
 				currPage: 1,
 				currRole: 0,
 				name: "",
-				typeList: [0, 1, 2],
-				isShowStatusList: false,
+				typeList: [-1, 1, 2],
+				isShowRoleList: false,
 				isShowSetRolePop: false,
 				isShowOrderWorkPop: false,
+				roleId: 0
 			}
 		},
 		components: {
@@ -123,15 +129,16 @@
 			routerUpdated()
 			{
 				this.accountList = g.data.searchAccountPool.list;
-				this.typeList = JSON.parse(g.vue.getQuery("typeList", "[]"));
+				this.typeList = JSON.parse(g.vue.getQuery("typeList", "[-1,1,2]"));
 				this.currPage = int(g.vue.getQuery("page", 1));
 				this.name = g.vue.getQuery("name", "");
 				this.currRole = g.vue.getQuery("role", 0);
+				this.roleList = g.data.searchRolePool.list;
 				this.initEvents();
 			},
 			init()
 			{
-				this.typeList = [0, 1, 2];
+				this.typeList = [-1, 1, 2];
 				this.currPage = 1;
 				this.name = "";
 				this.currRole = 0;
@@ -149,7 +156,7 @@
 			{
 				if (this.$refs.dropList && !this.$refs.dropList.$el.contains(e.target))
 				{
-					this.isShowStatusList = false;
+					this.isShowRoleList = false;
 				}
 			},
 			onClick_positionType($type)
@@ -169,6 +176,7 @@
 			{
 				this.currRole = $id;
 				this.currPage = 1;
+				this.isShowRoleList = false;
 			},
 			onChange_pageCom($page)
 			{
@@ -177,13 +185,13 @@
 			},
 			onClick_dropListBtn()
 			{
-				if (this.isShowStatusList)
+				if (this.isShowRoleList)
 				{
-					this.isShowStatusList = false;
+					this.isShowRoleList = false;
 				}
 				else
 				{
-					this.isShowStatusList = true;
+					this.isShowRoleList = true;
 				}
 			},
 			onClick_selectAllBtn()
@@ -195,17 +203,28 @@
 			{
 				this.updateUrl();
 			},
-			onClick_jobBtn($item)
+			onClick_positionBtn($item)
 			{
+				this.currId = $item.id;
 				this.isShowOrderWorkPop = true;
 			},
 			onClick_roleBtn($item)
 			{
+				this.currId = $item.id;
 				this.isShowSetRolePop = true;
 			},
 			onClick_stopBtn($item)
 			{
-
+				_params = {
+					userId: $item.id,
+					status: $item.status == 1 ? 0 : 1
+				};
+				g.net.call('user/freezeUser', _params).then(($data) =>
+				{
+					g.data.searchAccountPool.getDataById($item.id).update({
+						status: $item.status == 1 ? 0 : 1
+					})
+				})
 			},
 			onClose_setRolePop()
 			{
@@ -221,7 +240,7 @@
 			updateUrl()
 			{
 				g.url = {
-					path: "/account",
+					path: "/accountman",
 					query: {
 						typeList: JSON.stringify(this.typeList),
 						page: int(this.currPage),

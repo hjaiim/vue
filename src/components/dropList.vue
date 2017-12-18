@@ -14,12 +14,13 @@
 				default: false
 			},
 			dropList: {
-				type: Array,
+				type: Array
 			}
 		},
 		components: {},
 		methods: {
-			onClick_dropItem($id){
+			onClick_dropItem($id)
+			{
 				this.$emit('change', $id);
 			}
 		}
@@ -34,9 +35,9 @@
 		border-radius: 4px;
 		z-index: 2;
 		background: #ffffff;
-		-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1) ;
-		-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1) ;
-		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1) ;
+		-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+		-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 		li {
 			height: 40px;
 			line-height: 40px;

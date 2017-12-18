@@ -42,7 +42,7 @@ export default class DepartmentPool {
 			if (index >= 0)
 			{
 				_list.splice(index, 1);
-				g.data.companyPool.removeDepartment(itemData.parentId, itemData)
+				g.data.companyPool.removeDepartment(_hash[$id].parentId, _hash[$id])
 			}
 		}
 	}

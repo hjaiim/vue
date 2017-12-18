@@ -77,7 +77,7 @@
 				{
 					this.name = "";
 					this.desc = "";
-					this.rights = "";
+					this.rights = "1,3,5";
 				}
 			},
 			onClose_pop()
@@ -99,11 +99,19 @@
 				if (this.currId != 0)
 				{
 					_params.roleId = this.currId;
-					postUrl = "permission/addRole";
+					postUrl = "permission/editRole";
 				}
 				g.net.call(postUrl, _params).then(($data) =>
 				{
+					if(this.currId != 0)
+					{
+						g.data.searchRolePool.getDataById(this.currId).update(_params);
+						g.ui.toast("角色编辑成功!")
+					}
 					this.$emit('close', true);
+				}, (err) =>
+				{
+					g.func.dealErr(err);
 				})
 			}
 		}

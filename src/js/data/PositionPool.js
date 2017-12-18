@@ -78,6 +78,7 @@ function createData($dObj)
 	d.id = 0;
 	d.name = "";
 	d.type = 0;
+	d.typeDesc = "";
 	d.creatorId = 0;
 	d.creator = "";
 	d.isShow = false;
@@ -95,10 +96,11 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("creatorId") && (this.creatorId = $dObj.creatorId);
 	$dObj.hasOwnProperty("creatorName") && (this.creator = $dObj.creatorName);
 	$dObj.hasOwnProperty("isShow") && (this.isShow = $dObj.isShow);
-	$dObj.hasOwnProperty("createTime") && (this.createTime = g.timeTool.getFullDate($dObj.createTime));
-	if($dObj.hasOwnProperty("stationType"))
+	$dObj.hasOwnProperty("createTime") && (this.createTime = $dObj.createTime);
+	if ($dObj.hasOwnProperty("stationType"))
 	{
-		$dObj.stationType == 1 && (this.type = "审核岗");
-		$dObj.stationType == 2 && (this.type = "提交岗");
+		this.type = $dObj.stationType;
+		$dObj.stationType == 1 && (this.typeDesc = "审核岗");
+		$dObj.stationType == 2 && (this.typeDesc = "提交岗");
 	}
 }

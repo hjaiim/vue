@@ -45,7 +45,8 @@
 				<div class="show-page clear" v-if="g.data.searchRolePool.totalPage > 1">
 					<common-page class="right" :total="g.data.searchRolePool.total" :currPage="currPage"
 								 :showTotalCount="true"
-								 :showElevator="true" :showFirstAndEnd="true"></common-page>
+								 :showElevator="true" :showFirstAndEnd="true"
+								 @change="onChange_pageCom"></common-page>
 				</div>
 			</div>
 		</div>
@@ -104,9 +105,14 @@
 				g.data.searchRolePool.getDataById(_delId).update({isShow: false});
 				if ($result)
 				{
-					_params = {roleId:_delId};
-					g.net.call("permission/delRole").then(($data) => {
+					_params = {roleId: _delId};
+					g.net.call("permission/delRole", _params).then(($data) =>
+					{
+						g.data.searchRolePool.remove(_delId);
 						g.ui.toast("角色删除成功!")
+					}, (err) =>
+					{
+						g.func.dealErr(err);
 					})
 
 				}
@@ -114,6 +120,25 @@
 			onClose_rolePop($result)
 			{
 				this.isShowRolePop = false;
+				if ($result)
+				{
+					this.currPage = 1;
+					this.updateUrl();
+				}
+			},
+			onChange_pageCom($page)
+			{
+				this.currPage = $page;
+				this.updateUrl();
+			},
+			updateUrl()
+			{
+				g.url = {
+					path: "/roleman",
+					query: {
+						page: this.currPage
+					}
+				}
 			}
 
 		}

@@ -123,6 +123,7 @@
 					_params = {comId: _delId};
 					g.net.call("organizeOpt/deleteCompanyById",_params).then(($data) =>
 					{
+						g.data.searchCompanyPool.remove(_delId);
 						g.ui.toast("公司删除成功！");
 					})
 				}

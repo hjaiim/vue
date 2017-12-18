@@ -45,7 +45,8 @@
 				<div class="show-page clear" v-if="g.data.searchPositionPool.totalPage > 1">
 					<common-page class="right" :total="g.data.searchPositionPool.total" :currPage="currPage"
 								 :showTotalCount="true"
-								 :showElevator="true" :showFirstAndEnd="true"></common-page>
+								 :showElevator="true" :showFirstAndEnd="true"
+					@change="onChange_pageCom"></common-page>
 				</div>
 			</div>
 		</div>
@@ -58,6 +59,7 @@
 	import CommonPage from "../../components/page.vue";
 	import DeletePop from "../../components/pop/deletePop.vue";
 	import AddPostPop from "../../components/pop/addPostPop.vue";
+	import {searchPositionList} from "./positionMan";
 	var _params = null;
 	var _delId = 0;
 	export default{
@@ -83,6 +85,7 @@
 		methods: {
 			routerUpdated()
 			{
+				this.currPage = int(g.vue.getQuery('page',1));
 				this.positionList = g.data.searchPositionPool.list;
 			},
 			onClick_addPostBtn()
@@ -93,17 +96,19 @@
 			onClick_deleteBtn($id)
 			{
 				_delId = $id;
-				g.data.positionPool.getDataById(_delId).update({isShow: true});
+				g.data.searchPositionPool.getDataById(_delId).update({isShow: true});
 			},
 			onClose_deletePop($result)
 			{
-				g.data.positionPool.getDataById(_delId).update({isShow: false});
+				g.data.searchPositionPool.getDataById(_delId).update({isShow: false});
 				if ($result)
 				{
 					_params = {stationId: _delId};
 					g.net.call("organizeOpt/deleteStationById", _params).then(($data) =>
 					{
+						g.data.searchPositionPool.remove(_delId);
 						g.ui.toast("岗位删除成功!");
+
 					})
 				}
 			},
@@ -112,9 +117,30 @@
 				this.currId = $id;
 				this.isShowPostPop = true;
 			},
-			onClose_postPop()
+			onClose_postPop($result)
 			{
 				this.isShowPostPop = false;
+				if ($result)
+				{
+					_params = {
+						page: this.currPage,
+						pageSize: 10
+					};
+					searchPositionList(_params).then(() =>
+					{
+						this.routerUpdated();
+					})
+				}
+			},
+			onChange_pageCom($page)
+			{
+				this.currPage = $page;
+				g.url = {
+					path:'/positionman',
+					query:{
+						page:this.currPage
+					}
+				}
 			}
 
 		}

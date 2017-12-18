@@ -91,7 +91,8 @@ function createData($dObj)
 	d.roleName = "";
 	d.positionId = 0;
 	d.positionName = "";
-	d.positionType = "";
+	d.positionType = 1;
+	d.positionTypeDesc = "";
 	d.authSatus = 0;
 	d.status = 0;
 	d.update = updateData.bind(d);
@@ -119,4 +120,5 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("stationId") && (this.positionId = $dObj.stationId);
 	$dObj.hasOwnProperty("stationName") && (this.positionName = $dObj.stationName);
 	$dObj.hasOwnProperty("stationType") && (this.positionType = $dObj.stationType);
+	$dObj.hasOwnProperty("stationTypeDesc") && (this.positionTypeDesc = $dObj.stationTypeDesc);
 }

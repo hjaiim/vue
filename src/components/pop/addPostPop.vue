@@ -20,14 +20,15 @@
                             <i class="pointer" :class="type== 2?'action':''"></i>
                             <span>商机审核岗</span>
                         </span>
-						<span class="form-trap form-type" v-show="currId !=  0">{{positionData.type}}</span>
+						<span class="form-trap form-type" v-show="currId !=  0">{{positionData.typeDesc}}</span>
 					</p>
+
 				</div>
 				<div class="btn-wrap clear">
 				<span class="action-btn right pop-del-btn cancel-btn ani-time pointer"
 					  @click.stop="onClick_cancelBtn">取消</span>
 				<span class="action-btn right pop-del-btn delete-btn ani-time pointer"
-					  @click.stop="onClick_confirmBtn">删除
+					  @click.stop="onClick_confirmBtn">确定
 				</span>
 				</div>
 			</div>
@@ -65,13 +66,25 @@
 				default: 0
 			}
 		},
+		watch:{
+			currId()
+			{
+				this.init();
+			}
+		},
 		methods: {
 			init()
 			{
 				if (this.currId)
 				{
-					this.positionData = g.data.searchRolePool.getDataById(this.currId);
+					this.positionData = __merge({},g.data.searchPositionPool.getDataById(this.currId),true);
 					this.positionName = this.positionData.name;
+					this.type = this.positionData.type;
+				}
+				else
+				{
+					this.positionName = "";
+					this.type = 1;
 				}
 			},
 			onClick_selectPosition($num)
@@ -95,7 +108,12 @@
 				};
 				g.net.call("organizeOpt/editStation", _params).then(($data) =>
 				{
-					g.ui.toast("岗位编辑成功！")
+					if(this.currId !=0 )
+					{
+						g.data.searchPositionPool.getDataById(this.currId).update($data)
+					}
+					g.ui.toast("岗位编辑成功！");
+					this.$emit('close', true);
 				})
 
 			}

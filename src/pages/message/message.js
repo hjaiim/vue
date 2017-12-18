@@ -47,6 +47,7 @@ function createData($dObj)
 	d.page = 1;
 	d.pageSize = 10;
 	d.update = updateData.bind(d);
+	$dObj = __merge({}, $dObj);
 	d.update($dObj);
 	return d;
 }

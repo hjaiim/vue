@@ -42,8 +42,9 @@ export function getBusinessDetail($params)
 function createData($dObj)
 {
 	var d = {};
-	d.id = 0;
+	d.type = 1;
 	d.update = updateData.bind(d);
+	$dObj = __merge({},$dObj);
 	d.update($dObj);
 	return d;
 }
@@ -54,6 +55,6 @@ function updateData($dObj)
 	{
 		return;
 	}
-	$dObj.hasOwnProperty("id") && (this.id = $dObj.id);
+	$dObj.hasOwnProperty("type") && (this.type = $dObj.type);
 }
 

@@ -3,7 +3,6 @@ import loginManager from "./../../js/manager/LoginManager";
 var _params = null;
 export default function (to, next)
 {
-	next();
 	loginManager.checkLogin(to, next, () =>
 	{
 		searchUserList(to.query).then(() =>
@@ -37,6 +36,7 @@ export function searchUserList($data)
 			rejected();
 		})
 	});
+
 	return promise;
 
 }
@@ -45,10 +45,11 @@ function createData($dObj)
 {
 	var d = {};
 	d.name = "jasmine";
-	d.stationType = -1;
+// 	d.stationType = JSON.stringify([-1,1,2]);
 	d.page = 1;
 	d.pageSize = 10;
 	d.update = updateData.bind(d);
+	$dObj = __merge({}, $dObj);
 	d.update($dObj);
 	return d;
 }
@@ -60,7 +61,7 @@ function updateData($dObj)
 		return;
 	}
 	$dObj.hasOwnProperty("name") && (this.name = $dObj.name);
-	$dObj.hasOwnProperty("stationType") && (this.stationType = $dObj.stationType);
+// 	$dObj.hasOwnProperty("typeList") && (this.stationType = $dObj.typeList);
 	$dObj.hasOwnProperty("page") && (this.page = $dObj.page);
 }
 
