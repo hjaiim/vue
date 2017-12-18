@@ -31,6 +31,7 @@
 		left: -1px;
 		width: 100%;
 		border: 1px solid #dddddd;
+		border-radius: 4px;
 		z-index: 2;
 		background: #ffffff;
 		-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1) ;

@@ -5,6 +5,7 @@
   }
 }
 
+
 .opp-table {
   .inner-table {
 	tr {
@@ -95,6 +96,7 @@
   .search-box .active-btn {
 	margin-left: 24px;
   }
+
 }
 
 @media screen and (max-width: 1280px) {
@@ -114,5 +116,10 @@
   }
   .search-box .active-btn {
 	margin-left: 10px;
+  }
+  .status-form {
+    .status-type {
+      margin-right: 0;
+    }
   }
 }

@@ -50,7 +50,8 @@
 							<span class="form-title">职务名称</span>
 						<span v-show="currId != 0">
 							<input-bar class="form-control" placeholder="" type="text"
-									   v-model="dutyName"></input-bar>
+									   v-model="duty.name"></input-bar>
+
                             <span class="pointer btn-save  ani-time">保存</span>
 							<img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer"
 								 @click="onClick_editDuty(duty)">
@@ -59,7 +60,6 @@
 						</span>
 						</p>
 					</div>
-
 					<div class="company-message">
 						<p class="from-group">
 							<span class="form-title">部门名称</span>
@@ -107,7 +107,7 @@
 				departName: '',
 				dutyName: "",
 				departmentList: [],
-				isShowEdit: false
+				authStatus: 0
 			}
 		},
 		components: {
@@ -133,7 +133,7 @@
 		methods: {
 			init()
 			{
-				trace("this.currId", this.currId);
+				this.authStatus = g.data.userInfo.authStatus;
 				if (this.currId)
 				{
 					this.companyData = g.data.companyPool.getDataById(this.currId);
