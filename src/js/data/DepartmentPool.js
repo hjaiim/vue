@@ -93,6 +93,7 @@ function createData($dObj)
 	d.id = 0;
 	d.name = "";
 	d.parentId = 0;
+	d.isEdit = false;
 	d.creatorId = 0;
 	d.children = [];
 	d.update = updateData.bind(d);
@@ -107,7 +108,8 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("departmentId") && (this.id = $dObj.departmentId);
 	$dObj.hasOwnProperty("departmentName") && (this.name = $dObj.departmentName);
 	$dObj.hasOwnProperty("companyId") && (this.parentId = $dObj.companyId);
-	$dObj.hasOwnProperty("creatorId") && (this.creatorId = $dObj.creatorId)
+	$dObj.hasOwnProperty("creatorId") && (this.creatorId = $dObj.creatorId);
+	$dObj.hasOwnProperty("isEdit") && (this.isEdit = $dObj.isEdit);
 	if ($dObj.hasOwnProperty("organizeDutyResults"))
 	{
 		var timer = setTimeout(() =>

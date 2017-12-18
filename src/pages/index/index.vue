@@ -84,6 +84,7 @@
 	import PercenterTab from "../../components/percenterTab.vue"
 	import InputBar from "../../components/inputBar.vue"
 	import UploadBtn from "../../components/upload.vue";
+	import sha256 from "sha256";
 	var _params = null;
 	var _isValid = true;
 	export default{
@@ -170,8 +171,8 @@
 					return;
 				}
 				_params = {
-					oldPassword: this.password,
-					newPassword: this.newPwd
+					oldPassword: sha256(this.password),
+					newPassword: sha256(this.newPwd)
 				};
 				g.net.call("user/updatePassword", _params).then(() =>
 				{
@@ -186,10 +187,6 @@
 			{
 				trace("onChange_upload", $data);
 				this.avatar = $data;
-			},
-			checkPersonalDataValid()
-			{
-
 			},
 			checkPwdDataValid()
 			{
