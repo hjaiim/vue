@@ -48,6 +48,11 @@ export default class UnverifyPool {
 		return _hash[$id]
 	}
 
+	hasDetail($id)
+	{
+		return !!_hash[$id].workCard;
+	}
+
 	get list()
 	{
 		return _list;
@@ -62,7 +67,6 @@ export default class UnverifyPool {
 	{
 		return _totalPage;
 	}
-
 
 	removeAll()
 	{

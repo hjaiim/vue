@@ -7,11 +7,11 @@
 					<div class="search-name left clear">
 						<span class="left">姓名</span>
 						<input-bar class="search-input left relative" placeholder="" type="text"
-								   v-model="email"></input-bar>
+								   v-model="name"></input-bar>
 					</div>
 					<div class="action-wrap left clear">
-						<span class="left action-btn ani-time pointer">查询</span>
-						<span class="left total-btn ani-time pointer">全部</span>
+						<span class="left action-btn ani-time pointer" @click="onClick_searchBtn">查询</span>
+						<span class="left total-btn ani-time pointer" @click="onClick_selectAllBtn">全部</span>
 					</div>
 				</div>
 			</div>
@@ -29,23 +29,26 @@
 					</tr>
 					</thead>
 					<tbody>
-					<tr v-for="(n,index) in 10">
+					<tr v-for="(item,index) in accountList">
 						<td><span class="rank-num">{{index+1}}</span></td>
-						<td>蒋怡君</td>
-						<td>广州分公司</td>
-						<td>客户部</td>
-						<td>部门经理</td>
-						<td>2017.12.12 12:12:12</td>
+						<td>{{item.name}}</td>
+						<td>{{item.companyName}}</td>
+						<td>{{item.departmentName}}</td>
+						<td>{{item.dutyName}}</td>
+						<td>{{item.createTime}}</td>
 						<td>
 							<p class="clear diff-action">
-								<span class="right pointer draw-line ani-time">详情</span>
+								<span class="right pointer draw-line ani-time" @click="onClick_detailBtn(item.id)">详情
+								</span>
 							</p>
 						</td>
 					</tr>
 					</tbody>
 				</table>
-				<div class="show-page clear">
-					<common-page class="right" :total="200" :currPage="10" :showPageSize="false" :showTotalCount="true"
+				<div class="show-page clear" v-if="g.data.searchUnverifyPool.totalPage > 1">
+					<common-page class="right" :total="g.data.searchUnverifyPool.total" :currPage="currPage"
+								 :showPageSize="false"
+								 :showTotalCount="true"
 								 :showElevator="true"
 								 :showFirstAndEnd="true"></common-page>
 				</div>
@@ -61,12 +64,16 @@
 	import InputBar from "../../components/inputBar.vue"
 	export default{
 		created(){
+			this.routerUpdated();
 		},
 		data(){
 			return {
 				g: g,
-				isShowStatusList: false,
-				statusList: []
+				accountList: [],
+				isShowDetailPop: false,
+				currPage: 1,
+				name: "",
+				currId: 0
 			}
 		},
 		components: {
@@ -76,22 +83,51 @@
 			InputBar
 		},
 		methods: {
-			onClick_StatusItem($id){
-
+			init()
+			{
+				this.currPage = 1;
+				this.name = "";
 			},
-			onClick_dropListBtn(){
-				if (this.isShowStatusList)
-				{
-					this.isShowStatusList = false;
-				}
-				else
-				{
-					this.isShowStatusList = true;
-
-				}
+			routerUpdated()
+			{
+				this.accountList = g.data.searchUnverifyPool.list;
+				this.currPage = int(g.vue.getQuery("page", 1));
+				this.name = g.vue.getQuery("name", "");
 			},
-			onClick_verifyBtn(){
+			onClick_verifyBtn()
+			{
 				g.url = "/accountman";
+			},
+			onClick_searchBtn()
+			{
+				if (!this.name)
+				{
+					return;
+				}
+				this.updateUrl();
+			},
+			onClick_selectAllBtn()
+			{
+				this.init();
+				this.updateUrl();
+			},
+			onClick_detailBtn($id)
+			{
+				if (g.data.searchUnverifyPool.hasDetail($id))
+				{
+					this.currId = $id;
+					this.isShowDetailPop = true;
+				}
+			},
+			updateUrl()
+			{
+				g.url = {
+					path: "/unverifyman",
+					query: {
+						page: this.currPage,
+						name: this.name
+					}
+				}
 			}
 		}
 	}
