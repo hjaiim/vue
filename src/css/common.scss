@@ -190,6 +190,16 @@ input {
   }
 }
 
+.option-content {
+  width: 150px;
+  height: 32px;
+  line-height: 32px;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  padding: 0 12px;
+
+}
+
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
 .iscroll-ref::-webkit-scrollbar {
   width: 4px;
