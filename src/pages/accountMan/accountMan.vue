@@ -108,7 +108,7 @@
 				typeList: [0, 1, 2],
 				isShowStatusList: false,
 				isShowSetRolePop: false,
-				isShowOrderWorkPop: true,
+				isShowOrderWorkPop: false,
 			}
 		},
 		components: {

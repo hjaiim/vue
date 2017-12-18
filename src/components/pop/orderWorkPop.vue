@@ -18,7 +18,7 @@
 				</div>
 				<div class="work-detail clear">
 					<span class="menu-name left">岗位名称</span>
-					<div class="option-content left relative" @click="onClick_jobMenu">
+					<div class="option-content left relative pointer" @click="onClick_jobMenu">
 						商机管理员
 						<i class="icon-trangle pointer" :class="isShowRoleList?'rotate':''"></i>
 						<drop-list :dropList="roleList" :isShowDropList="isShowRoleList" @change="onClick_roleItem">
@@ -80,30 +80,11 @@
 <style lang="sass" rel="stylesheet/scss" type="text/scss" scoped>
 	.orderWork-wrap {
 		height: 345px;
-		.note-tit {
-			line-height: 64px;
-			height: 64px;
-			padding-left: 25px;
-			font-size: 15px;
-			border-bottom: 1px solid #eaeaea;
-		}
 		.work-menu {
 			padding: 45px 0 0 90px;
 			color: #000000;
 			font-size: 15px;
 			.role-wrap {
-				.img-wrap {
-					width: 77px;
-					height: 77px;
-					overflow: hidden;
-					-webkit-border-radius: 50%;
-					-moz-border-radius: 50%;
-					border-radius: 50%;
-					img {
-						display: block;
-						width: 100%;
-					}
-				}
 				.role-detail {
 					padding-left: 26px;
 					p {
@@ -134,7 +115,7 @@
 				}
 			}
 			.work-detail {
-				padding-top: 25px;
+				padding: 25px 0 10px 0;
 				.menu-name {
 					height: 32px;
 					line-height: 32px;

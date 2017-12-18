@@ -8,9 +8,7 @@
 						<img :src="g.path.images+'/close-popup.png'" alt="">
 					</div>
 					<div class="popup-content">
-						<slot>
-
-						</slot>
+						<slot></slot>
 					</div>
 				</div>
 			</div>
@@ -118,6 +116,14 @@
 		}
 	}
 
+	.note-tit {
+		line-height: 64px;
+		height: 64px;
+		padding-left: 25px;
+		font-size: 15px;
+		border-bottom: 1px solid #eaeaea;
+	}
+
 	.return-btn {
 		position: absolute;
 		right: 15px;
@@ -131,6 +137,14 @@
 			-o-transform: translate3d(0, 5px, 0);
 			transform: translate3d(0, 5px, 0);
 		}
-
 	}
+
+	.account-content .md-modal {
+		position: absolute;
+	}
+
+	.account-content.md-overlay {
+		position: absolute;
+	}
+
 </style>

@@ -20,6 +20,14 @@ input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  background-color: rgb(0, 0, 0) !important;
+  background-image: none !important;
+  color: rgb(0, 0, 0) !important;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+}
+
 .ani-time {
   -webkit-transition: all .3s;
   -moz-transition: all .3s;
@@ -183,6 +191,7 @@ input {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+  text-align: center;
   background: #f9f9f9;
   color: #424242;
   &:hover {
@@ -197,7 +206,19 @@ input {
   border: 1px solid #dddddd;
   border-radius: 4px;
   padding: 0 12px;
+}
 
+.img-wrap {
+  width: 77px;
+  height: 77px;
+  overflow: hidden;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  img {
+	display: block;
+	width: 100%;
+  }
 }
 
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
@@ -836,6 +857,7 @@ input {
 	height: 30px;
 	//line-height: 30px;
 	margin-right: 10px;
+    width:auto;
   }
   .business-list {
 	width: 150px;
@@ -923,4 +945,8 @@ input {
 	display: inline-block;
 	background: #f8f8f8;
   }
+}
+
+.font-weight{
+  font-weight: bold;
 }

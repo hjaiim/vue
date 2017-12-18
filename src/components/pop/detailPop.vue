@@ -49,14 +49,6 @@
 	.detail-container {
 		color: #333333;
 		height: 288px;
-		.note-tit {
-			line-height: 64px;
-			height: 64px;
-			padding-left: 25px;
-			margin: 0 15px;
-			font-size: 15px;
-			border-bottom: 1px solid #eaeaea;
-		}
 		.note-content {
 			padding: 35px 72px 0;
 			line-height: 36px;

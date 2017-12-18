@@ -4,7 +4,8 @@
     line-height: 30px;
   }
 }
-.opp-table{
+
+.opp-table {
   .inner-table {
     tr {
       th {
@@ -96,6 +97,7 @@
     margin-left: 24px;
   }
 }
+
 @media screen and (max-width: 1280px) {
   .p-left {
     margin-left: 10px;
@@ -113,5 +115,10 @@
   }
   .search-box .active-btn {
     margin-left: 10px;
+  }
+  .status-form {
+    .status-type {
+      margin-right: 0;
+    }
   }
 }
