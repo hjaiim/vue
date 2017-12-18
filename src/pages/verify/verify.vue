@@ -126,7 +126,8 @@
 					</div>
 				</div>
 				<div class="btn btn-save pointer action-btn ani-time " @click="onClick_submitBtn"
-				v-if="g.data.userInfo.authStatus == 0">提交</div>
+					 v-if="g.data.userInfo.authStatus == 0">提交
+				</div>
 			</div>
 		</div>
 	</com-layout>
@@ -210,7 +211,7 @@
 					this.currDutyData = "";
 					this.companyList = g.data.companyPool.list;
 				}
-					this.code = "";
+				this.code = "";
 				this.initEvents();
 			},
 			initEvents()

@@ -15,15 +15,15 @@
 				<div class="from-group status-form p-left left">
 					<span class="form-title left">状态</span>
                     <span class="action-box status-type left" @click="onClick_statusItem(0)">
-                        <i class="pointer" :class="status == 0?'action':''"></i>
+                        <i class="pointer " :class="status == 0?'action':''"></i>
                         <span>审核中</span>
                     </span>
                     <span class="action-box status-type left" @click="onClick_statusItem(1)">
-                        <i class="pointer" :class="status == 1?'action':''"></i>
+                        <i class="pointer " :class="status == 1?'action':''"></i>
                         <span>未通过</span>
                     </span>
                       <span class="action-box status-type left" @click="onClick_statusItem(2)">
-                        <i class="pointer" :class="status == 2?'action':''"></i>
+                        <i class="pointer " :class="status == 2?'action':''"></i>
                         <span>已通过</span>
                     </span>
 				</div>
@@ -38,11 +38,13 @@
 					<div class="date-form left relative" @click="onClick_dateSelect('start')">
 						2017-12-25 00:00:00
 						<img :src="g.path.images+'/date-icon.png'" alt="" class="absolute date-icon">
+						<common-date @change="onChange_date" v-model="isShowStartDate"></common-date>
 					</div>
 					<span class="date-line left">-</span>
 					<div class="date-form left relative" @click="onClick_dateSelect('end')">
 						2017-12-25 00:00:00
 						<img :src="g.path.images+'/date-icon.png'" alt="" class="absolute date-icon">
+						<common-date @change="onChange_date" v-model="isShowEndDate"></common-date>
 					</div>
 				</div>
 
@@ -87,8 +89,6 @@
 								 :showFirstAndEnd="true"
 								 @change="onChange_pageCom"></common-page>
 				</div>
-
-
 			</div>
 		</div>
 		<opp-detail-pop :isShowPopView="isShowDetailPop"></opp-detail-pop>
@@ -97,9 +97,11 @@
 </template>
 <script type="text/ecmascript-6">
 	import g from "../../global";
+	import * as func from "../../js/func"
 	import ComLayout from "../../components/comLayout.vue"
 	import CommonPage from "../../components/page.vue";
-	import OppDetailPop from "../../components/pop/oppDetailPop.vue"
+	import OppDetailPop from "../../components/pop/oppDetailPop.vue";
+	import CommonDate from "../../components/dateBox.vue";
 	export default{
 		created(){
 			this.routerUpdated();
@@ -110,6 +112,8 @@
 				businessList: [],
 				typeList: [],
 				isShowDetailPop: false,
+				isShowStartDate: false,
+				isShowEndDate: false,
 				currPage: 1,
 				type: 1,
 				status: 1,
@@ -122,7 +126,8 @@
 		components: {
 			ComLayout,
 			CommonPage,
-			OppDetailPop
+			OppDetailPop,
+			CommonDate
 		},
 		methods: {
 			init()
@@ -162,6 +167,15 @@
 			},
 			onClick_dateSelect($type)
 			{
+				if (this['isShow' + func.firstUpperCase($type) + 'Date'])
+				{
+					this['isShow' + func.firstUpperCase($type) + 'Date'] = false;
+				}
+				else
+				{
+					this['isShow' + func.firstUpperCase($type) + 'Date'] = true
+
+				}
 			},
 			onClick_searchBtn()
 			{
@@ -212,7 +226,11 @@
 						companyName: this.companyName
 					}
 				};
-			}
+			},
+			onChange_date($timeStamp)
+			{
+				trace('$timeStamp=====', $timeStamp);
+			},
 		}
 	}
 </script>
