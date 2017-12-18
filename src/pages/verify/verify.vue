@@ -63,7 +63,7 @@
 					<span class="personal-title left">验证码</span>
 					<input-bar class="personal-content pensonal-input code left" placeholder="" type="text"
 							   v-model="code" @focus="onFocus_inputBar('code')" :errmsg="errData.code"></input-bar>
-					<span class="btn-send pointer left" @click="onClick_sendCodeBtn">发送验证码</span>
+					<span class="btn-send pointer left ani-time" @click="onClick_sendCodeBtn">发送验证码</span>
 				</div>
 				<div class="personal-form"><span class="personal-title left">固定电话</span>
 					<input-bar class="personal-content pensonal-input left" placeholder="" type="text"

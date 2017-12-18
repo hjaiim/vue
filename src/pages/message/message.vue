@@ -3,7 +3,7 @@
 		<div class="message-wrap">
 			<div class="msg-content">
 				<div class="action-wrap clear">
-					<i class="more-delete left border-gray pointer">
+					<i class="more-delete left border-gray pointer" @click="onClick_allDeleteBtn">
 						<img :src="g.path.images+'/delete-icon.png'" alt="">
 						<span>批量删除</span>
 					</i>
@@ -65,9 +65,9 @@
 								 :showFirstAndEnd="true"></common-page>
 				</div>
 				<detail-pop :isShowPopView="isShowDetailPop" :currId="currId" @close="onClose_detailPop"></detail-pop>
-
 			</div>
 		</div>
+		<total-delete-pop :isShowPopView="isShowAllDeletePop" @close="onClose_AllDeletePop"></total-delete-pop>
 	</com-layout>
 </template>
 <script type="text/ecmascript-6">
@@ -76,6 +76,7 @@
 	import CommonPage from "../../components/page.vue";
 	import DetailPop from "../../components/pop/detailPop.vue";
 	import DeletePop from "../../components/pop/deletePop.vue"
+	import TotalDeletePop from "../../components/pop/totalDeletePop.vue"
 	var _delId = 0;
 	var _params = null;
 	export default{
@@ -87,14 +88,17 @@
 				g: g,
 				currId: 0,
 				isShowDetailPop: false,
-				msgList: []
+
+				msgList: [],
+				isShowAllDeletePop: false
 			}
 		},
 		components: {
 			ComLayout,
 			CommonPage,
 			DetailPop,
-			DeletePop
+			DeletePop,
+			TotalDeletePop
 		},
 		methods: {
 			init()
@@ -122,6 +126,20 @@
 			},
 			onClose_detailPop(){
 				this.isShowDetailPop = false;
+			},
+			onClick_allDeleteBtn(){
+				this.isShowAllDeletePop = true;
+			},
+			onClose_AllDeletePop($type){
+				if ($type)
+				{
+					this.isShowAllDeletePop = false;
+				}
+				else
+				{
+					this.isShowAllDeletePop = false;
+
+				}
 			}
 		}
 	}

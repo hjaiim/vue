@@ -32,11 +32,12 @@
 					<div class="pop-btn right pointer">保存</div>
 
 				</div>
-				<div class="company-message" v-for="item in departmentList">
-					<img :src="g.path.images+'/del.png'" alt="" class="del-depart pointer"
-						 @click="onClick_deleteDepart(item)">
-					<p class="from-group">
-						<span class="form-title">部门名称</span>
+				<div class="meaasge-wrap">
+					<div class="company-message" v-for="item in departmentList">
+						<img :src="g.path.images+'/del.png'" alt="" class="del-depart pointer"
+							 @click="onClick_deleteDepart(item)">
+						<p class="from-group">
+							<span class="form-title">部门名称</span>
                         <span v-show="currId != 0">
 							<input-bar class="form-control" placeholder="" type="text"
 									   v-model="item.name"></input-bar>
@@ -44,9 +45,9 @@
 								 @click="onClick_editDepart(item)">
                         	<span class="pointer btn-save">保存</span>
 						</span>
-					</p>
-					<p class="from-group" v-for="duty in item.children">
-						<span class="form-title">职务名称</span>
+						</p>
+						<p class="from-group" v-for="duty in item.children">
+							<span class="form-title">职务名称</span>
 						<span v-show="currId != 0">
 							<input-bar class="form-control" placeholder="" type="text"
 									   v-model="dutyName"></input-bar>
@@ -56,30 +57,32 @@
 							<img :src="g.path.images+'/del-depart.png'" alt="" class="edit-icon pointer"
 								 @click="onClick_deleteDuty(duty)">
 						</span>
-					</p>
-				</div>
+						</p>
+					</div>
 
-				<div class="company-message">
-					<p class="from-group">
-						<span class="form-title">部门名称</span>
+					<div class="company-message">
+						<p class="from-group">
+							<span class="form-title">部门名称</span>
                         <span>
 							<input-bar class="form-control" placeholder="" type="text"
 									   v-model="departName"></input-bar>
                         	<span class="pointer btn-save">保存</span>
 						</span>
-					</p>
-					<p class="from-group">
-						<span class="form-title">职务名称</span>
+						</p>
+						<p class="from-group">
+							<span class="form-title">职务名称</span>
 						<span>
 							<input-bar class="form-control" placeholder="" type="text"
 									   v-model="dutyName"></input-bar>
                             <span class="pointer btn-save  ani-time">保存</span>
 						</span>
-					</p>
+						</p>
 
+					</div>
+					<div class="company-action clear">
+						<div class="btn-submit pop-btn top-btn right pointer" @click="onClick_submitBtn">提交</div>
+					</div>
 				</div>
-
-				<div class="btn-submit pop-btn top-btn right pointer" @click="onClick_submitBtn">提交</div>
 			</div>
 		</div>
 	</view-popup>

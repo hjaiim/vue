@@ -72,7 +72,7 @@
 			return {
 				g: g,
 				accountList: [],
-				isShowDetailPop: true,
+				isShowDetailPop: false,
 				currPage: 1,
 				name: "",
 				currId: 0

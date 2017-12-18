@@ -1,56 +1,56 @@
 .opp-wrap {
   padding: 20px 44px 50px 44px;
   .opp-banner {
-    line-height: 30px;
+	line-height: 30px;
   }
 }
-.opp-table{
+
+.opp-table {
   .inner-table {
-    tr {
-      th {
-        &:nth-of-type(1) {
-          width: 8%;
-        }
-        &:nth-of-type(2) {
-          width: 16%;
-        }
-        &:nth-of-type(3) {
-          width: 17%;
-        }
-        &:nth-of-type(4) {
-          width: 15%;
-        }
-        &:nth-of-type(5) {
-          width: 17%;
-        }
-        &:nth-of-type(6) {
-          width: 12%;
-        }
+	tr {
+	  th {
+		&:nth-of-type(1) {
+		  width: 8%;
+		}
+		&:nth-of-type(2) {
+		  width: 16%;
+		}
+		&:nth-of-type(3) {
+		  width: 17%;
+		}
+		&:nth-of-type(4) {
+		  width: 15%;
+		}
+		&:nth-of-type(5) {
+		  width: 17%;
+		}
+		&:nth-of-type(6) {
+		  width: 12%;
+		}
+	  }
+	  td {
+		color: #404040;
+		&:nth-of-type(1) {
+		  width: 6%;
+		}
+		&:nth-of-type(2) {
+		  width: 16%;
+		}
+		&:nth-of-type(3) {
+		  width: 17%;
+		}
+		&:nth-of-type(4) {
+		  width: 15%;
+		}
+		&:nth-of-type(5) {
+		  width: 17%;
+		}
+		&:nth-of-type(6) {
+		  width: 12%;
+		}
 
-      }
-      td {
-        color: #404040;
-        &:nth-of-type(1) {
-          width: 6%;
-        }
-        &:nth-of-type(2) {
-          width: 16%;
-        }
-        &:nth-of-type(3) {
-          width: 17%;
-        }
-        &:nth-of-type(4) {
-          width: 15%;
-        }
-        &:nth-of-type(5) {
-          width: 17%;
-        }
-        &:nth-of-type(6) {
-          width: 12%;
-        }
-
-      }
-    }
+	  }
+	}
   }
 }
 
@@ -76,42 +76,43 @@
 
 @media screen and (max-width: 1600px) {
   .date-box {
-    float: left;
-    //display: block;
-    margin-top: 30px;
-    margin-left: 0;
-    .date-form {
-      padding-left: 20px;
-      width: 200px;
-    }
+	float: left;
+	//display: block;
+	margin-top: 30px;
+	margin-left: 0;
+	.date-form {
+	  padding-left: 20px;
+	  width: 200px;
+	}
   }
   .search-box {
-    float: right;
-    .search-input {
-      width: 200px;
-    }
+	float: right;
+	.search-input {
+	  width: 200px;
+	}
   }
 
   .search-box .active-btn {
-    margin-left: 24px;
+	margin-left: 24px;
   }
 }
+
 @media screen and (max-width: 1280px) {
   .p-left {
-    margin-left: 10px;
+	margin-left: 10px;
   }
   .date-box {
-    margin-top: 30px;
-    margin-left: 0;
-    .date-form {
-      padding-left: 10px;
-      width: 165px;
-    }
+	margin-top: 30px;
+	margin-left: 0;
+	.date-form {
+	  padding-left: 10px;
+	  width: 165px;
+	}
   }
   .search-box .search-input {
-    width: 165px;
+	width: 165px;
   }
   .search-box .active-btn {
-    margin-left: 10px;
+	margin-left: 10px;
   }
 }
