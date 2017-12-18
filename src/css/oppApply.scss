@@ -5,6 +5,15 @@
   margin-left: 10px;
 }
 
+@media screen and(max-width:1600px) {
+.lang-explain{
+  display: block;
+  margin-left: 128px;
+  float: left;
+}
+}
+
+
 .action-box {
   margin-left: 0;
   margin-right: 20px;
@@ -15,7 +24,7 @@
 }
 
 .large-input {
-  width: 60%;
+  width: 58%;
 }
 
 .opp-up-btn {

@@ -38,7 +38,7 @@
             <div class="personal-form">
                 <span class="personal-title left">业务用途及场景</span>
                 <input-bar class="personal-content pensonal-input left large-input" placeholder="" type="text"></input-bar>
-                <span class="explain">务必描述清楚，使用CTD业务用来做什么，说明是办公电话/客户服务/快递物流还是其他业务场景</span>
+                <span class="explain lang-explain">务必描述清楚，使用CTD业务用来做什么，说明是办公电话/客户服务/快递物流还是其他业务场景</span>
             </div>
             <div class="personal-form">
                 <span class="personal-title left">接入方式</span>
@@ -67,12 +67,12 @@
             <div class="personal-form">
                 <span class="personal-title left">发起方式</span>
                 <input-bar class="personal-content pensonal-input left large-input" placeholder="" type="text"></input-bar>
-                <span class="explain">APP发起还是台席发起（如果是台席发起，注明台席发起数量）</span>
+                <span class="explain lang-explain">APP发起还是台席发起（如果是台席发起，注明台席发起数量）</span>
             </div>
             <div class="personal-form">
                 <span class="personal-title left">呼叫范围</span>
                 <input-bar class="personal-content pensonal-input left large-input" placeholder="" type="text"></input-bar>
-                <span class="explain">请填写被叫权限（例：全国三网手机和固话，开通本地、长途，不开通国际权限）</span>
+                <span class="explain lang-explain">请填写被叫权限（例：全国三网手机和固话，开通本地、长途，不开通国际权限）</span>
             </div>
             <div class="personal-form">
                 <span class="personal-title left">是否回呼</span>
