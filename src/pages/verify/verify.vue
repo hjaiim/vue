@@ -119,7 +119,7 @@
 						<upload-btn class="input-file" @change="onChange_uploadWork" resultType="base64"></upload-btn>
 					</div>
 				</div>
-				<button @click="onClick_submitBtn">提交</button>
+				<div class="btn btn-save pointer action-btn ani-time "  @click="onClick_submitBtn">提交</div>
 			</div>
 		</div>
 	</com-layout>
