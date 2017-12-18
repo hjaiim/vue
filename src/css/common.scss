@@ -836,6 +836,7 @@ input {
 	height: 30px;
 	//line-height: 30px;
 	margin-right: 10px;
+    width:auto;
   }
   .business-list {
 	width: 150px;
@@ -923,4 +924,8 @@ input {
 	display: inline-block;
 	background: #f8f8f8;
   }
+}
+
+.font-weight{
+  font-weight: bold;
 }
