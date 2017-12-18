@@ -65,35 +65,6 @@
                         </span>
 					</p>
 				</div>
-				<!--<div class="company-message">-->
-				<!--<img :src="g.path.images+'/del.png'" alt="" class="del-depart pointer">-->
-				<!--<p class="from-group">-->
-				<!--<span class="form-title">部门名称</span>-->
-				<!--<span v-show="currId != 0">-->
-				<!--<span class="form-trap">销售部</span>-->
-				<!--<img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer">-->
-				<!--</span>-->
-				<!--<span v-show="currId == 0">-->
-				<!--<input-bar class="form-control" placeholder="" type="text"-->
-				<!--v-model="departName1"></input-bar>-->
-				<!--<span class="pointer btn-save">保存</span>-->
-				<!--</span>-->
-				<!--</p>-->
-				<!--<p class="from-group">-->
-				<!--<span class="form-title">职务名称</span>-->
-				<!--<span v-show="currId != 0">-->
-				<!--<span class="form-trap">销售部经理</span>-->
-				<!--<img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer">-->
-				<!---->
-				<!--</span>-->
-				<!--<span v-show="currId == 0">-->
-				<!--<input-bar class="form-control" placeholder="" type="text"-->
-				<!--v-model="manage1"></input-bar>-->
-				<!--<span class="pointer btn-save">保存</span>-->
-				<!--</span>-->
-				<!---->
-				<!--</p>-->
-				<!--</div>-->
 
 				<div class="btn-submit pop-btn top-btn right pointer" @click="onClick_submitBtn">提交</div>
 			</div>
@@ -117,8 +88,8 @@
 				telphone: "",
 				leader: "",
 				phone: "",
-				departName:'',
-				dutyName:"",
+				departName: '',
+				dutyName: "",
 				departmentList: [],
 				isShowEdit: false
 			}
@@ -184,7 +155,7 @@
 			{
 				_params = {
 					dutyId: $duty.id,
-					dutyName:this.dutyName,
+					dutyName: this.dutyName,
 					departmentId: $duty.parentId,
 					companyId: $duty.companyId
 				};
@@ -206,11 +177,11 @@
 			onClick_submitBtn()
 			{
 				_params = {
-					comId:this.currId,
-					comName:this.name,
-					comLinkMan:this.leader,
-					comLinkManTel:this.phone,
-					comLinkTel:this.telphone
+					comId: this.currId,
+					comName: this.name,
+					comLinkMan: this.leader,
+					comLinkManTel: this.phone,
+					comLinkTel: this.telphone
 				};
 				g.net.call("organizeOpt/editCompany", _params).then((data) =>
 				{
