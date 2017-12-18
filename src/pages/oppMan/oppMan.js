@@ -44,8 +44,8 @@ function createData($dObj)
 	var d = {};
 	d.businessId = 1;
 	d.auditStatusList = [];
-	d.startTime = g.timeTool.getNowStamp();
-	d.endTime = g.timeTool.getNowStamp();
+	d.startTime = g.timeTool.getFullDate(Date.now());
+	d.endTime = g.timeTool.getFullDate(Date.now());
 	d.custComName = "";
 	d.creatorName = "";
 	d.page = 1;

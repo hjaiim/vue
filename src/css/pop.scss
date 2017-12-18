@@ -27,9 +27,9 @@
   }
   .from-group {
 	margin-bottom: 18px;
-	&:last-child {
-	  margin-bottom: 0;
-	}
+	//&:last-child {
+	//  margin-bottom: 0;
+	//}
 	.form-title {
 	  width: 125px;
 	  height: 30px;
@@ -96,9 +96,9 @@
   border-radius: 4px;
   background: #f9f9f9;
   margin-right: 18px;
+  box-sizing: border-box;
   &:hover {
 	border: 1px solid #cccccc;
-
   }
 }
 
@@ -177,6 +177,7 @@
 
 .examine-people {
   margin-left: 150px;
+  margin-top: 18px;
   .exam-btn {
     width: 90px;
     height: 36px;
