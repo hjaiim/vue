@@ -81,6 +81,7 @@
 				</div>
 			</div>
 			<set-role-pop @close="onClose_setRolePop" :isShowPopView="isShowSetRolePop"></set-role-pop>
+			<order-work-pop @close="onClose_orderWorkPop" :isShowPopView="isShowOrderWorkPop"></order-work-pop>
 		</div>
 	</com-layout>
 </template>
@@ -107,7 +108,7 @@
 				typeList: [0, 1, 2],
 				isShowStatusList: false,
 				isShowSetRolePop: false,
-				isShowOrderWorkPop: false,
+				isShowOrderWorkPop: true,
 			}
 		},
 		components: {
@@ -115,7 +116,8 @@
 			CommonPage,
 			DropList,
 			InputBar,
-			SetRolePop
+			SetRolePop,
+			OrderWorkPop
 		},
 		methods: {
 			routerUpdated()
@@ -194,6 +196,7 @@
 			},
 			onClick_jobBtn($item)
 			{
+				this.isShowOrderWorkPop = true;
 			},
 			onClick_roleBtn($item)
 			{
@@ -206,6 +209,9 @@
 			onClose_setRolePop()
 			{
 				this.isShowSetRolePop = false;
+			},
+			onClose_orderWorkPop(){
+				this.isShowOrderWorkPop = false;
 			},
 			onClick_unVerifyBtn()
 			{
