@@ -62,7 +62,7 @@ function updateData($dObj)
 	}
 	$dObj.hasOwnProperty("name") && (this.name = $dObj.name);
 	$dObj.hasOwnProperty("roleId") && (this.roleId = $dObj.roleId);
-	$dObj.hasOwnProperty("typeList") && (this.stationType = $dObj.typeList.join(","));
+	$dObj.hasOwnProperty("typeList") && (this.stationType = JSON.parse($dObj.typeList).join(","));
 	$dObj.hasOwnProperty("page") && (this.page = $dObj.page);
 }
 

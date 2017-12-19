@@ -65,9 +65,9 @@
 				</ul>
 			</div>
 			<div class="bot-flex laydate-btn">
-				<span @click="onClick_okBtn" :class="theme">确认</span>
-				<span @click="onClick_todayBtn" :class="theme">今天</span>
-				<span @click="onClick_clearBtn" :class="theme">清空</span>
+				<span @click.stop="onClick_okBtn" :class="theme">确认</span>
+				<span @click.stop="onClick_todayBtn" :class="theme">今天</span>
+				<span @click.stop="onClick_clearBtn" :class="theme">清空</span>
 			</div>
 		</div>
 		<div class="laydate-prop-hms laydate-props">

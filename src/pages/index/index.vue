@@ -138,7 +138,6 @@
 			onClick_savePersonal()
 			{
 				_params = {
-					avatar: this.avatar,
 					telphone: this.telphone,
 					email: this.email,
 					remark: this.remark,

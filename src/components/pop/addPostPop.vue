@@ -66,7 +66,7 @@
 				default: 0
 			}
 		},
-		watch:{
+		watch: {
 			currId()
 			{
 				this.init();
@@ -77,7 +77,7 @@
 			{
 				if (this.currId)
 				{
-					this.positionData = __merge({},g.data.searchPositionPool.getDataById(this.currId),true);
+					this.positionData = __merge({}, g.data.searchPositionPool.getDataById(this.currId), true);
 					this.positionName = this.positionData.name;
 					this.type = this.positionData.type;
 				}
@@ -108,14 +108,16 @@
 				};
 				g.net.call("organizeOpt/editStation", _params).then(($data) =>
 				{
-					if(this.currId !=0 )
+					if (this.currId != 0)
 					{
 						g.data.searchPositionPool.getDataById(this.currId).update($data)
 					}
 					g.ui.toast("岗位编辑成功！");
 					this.$emit('close', true);
+				}, (err) =>
+				{
+					g.func.dealErr(err);
 				})
-
 			}
 		}
 	}

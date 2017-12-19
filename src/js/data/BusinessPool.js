@@ -59,6 +59,7 @@ export default class BusinessPool {
 	{
 		return !!_hash[$id].formData;
 	}
+
 	get list()
 	{
 		return _list;
@@ -73,7 +74,6 @@ export default class BusinessPool {
 	{
 		return _totalPage;
 	}
-	
 
 	removeAll()
 	{
@@ -131,7 +131,7 @@ function updateData($dObj, $recordId)
 	$dObj.hasOwnProperty("comName") && (this.companyName = $dObj.comName);
 	$dObj.hasOwnProperty("departmentId") && (this.departmentId = $dObj.departmentId);
 	$dObj.hasOwnProperty("custComName") && (this.customerCompName = $dObj.custComName);
-	$dObj.hasOwnProperty("createTime") && (this.createTime = $dObj.createTime);
+	$dObj.hasOwnProperty("createTime") && (this.createTime = g.timeTool.getFullDate($dObj.createTime, true));
 	$dObj.hasOwnProperty("optType") && (this.operation = $dObj.optType);
 	if ($dObj.hasOwnProperty("recordList"))
 	{

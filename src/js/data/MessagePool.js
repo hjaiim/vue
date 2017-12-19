@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2017/12/11.
  */
-var _list = [], _hash = {};
+var _list = [], _hash = {},_idList = [];
 var _total = 0, _totalPage = 1;
 export default class MessagePool {
 	constructor()
@@ -31,6 +31,7 @@ export default class MessagePool {
 		{
 			_hash[itemData.id] = itemData;
 			_list.push(itemData);
+			_idList.push(itemData.id);
 		}
 	}
 
@@ -42,6 +43,7 @@ export default class MessagePool {
 			if (index >= 0)
 			{
 				_list.splice(index, 1);
+				_idList.splice(index, 1);
 			}
 		}
 	}
@@ -54,6 +56,12 @@ export default class MessagePool {
 	get list()
 	{
 		return _list;
+	}
+
+
+	get idList()
+	{
+		return _idList;
 	}
 
 	get total()
@@ -71,6 +79,7 @@ export default class MessagePool {
 	{
 		_list = [];
 		_hash = {};
+		_idList = [];
 	}
 }
 

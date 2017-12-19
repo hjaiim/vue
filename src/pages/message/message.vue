@@ -7,17 +7,17 @@
 						<img :src="g.path.images+'/delete-icon.png'" alt="">
 						<span>批量删除</span>
 					</i>
-					<div class="action-box left">
-						<i class="pointer action"></i>
+					<div class="action-box left" @click="onClick_msgType(1)">
+						<i class="pointer" :class="typeList.indexOf(1)>=0?'action':''"></i>
 						<span>已读</span>
 					</div>
-					<div class="action-box left">
-						<i class="pointer"></i>
+					<div class="action-box left" @click="onClick_msgType(0)">
+						<i class="pointer" :class="typeList.indexOf(0)>=0?'action':''"></i>
 						<span>未读</span>
 					</div>
 					<div class="text-msg right">
 						<p class="msg-txt">开启手机短信提醒</p>
-						<div class="switch-con pointer">
+						<div class="switch-con pointer" @click="onClick_switch">
 							<label class="switch-label pointer">
 								<input type="checkbox" class="mui-switch mui-switch-anim pointer">
 							</label>
@@ -29,7 +29,8 @@
 				<table class="inner-table">
 					<thead>
 					<tr>
-						<th><i class="draw-tick relative pointer action"></i><span class="rank-num">序号</span></th>
+						<th><i class="draw-tick relative pointer" :class="checkAll?'action':''"></i><span
+								class="rank-num">序号</span></th>
 						<th>标题</th>
 						<th>来源</th>
 						<th>发送时间</th>
@@ -57,12 +58,13 @@
 					</tr>
 					</tbody>
 				</table>
-				<div class="show-page clear" v-if="g.data.messagePool.totalPage > 1">
-					<common-page class="right" :total="g.data.messagePool.total" :currPage="currPage"
+				<div class="show-page clear" v-if="g.data.searchMessagePool.totalPage > 1">
+					<common-page class="right" :total="g.data.searchMessagePool.total" :currPage="currPage"
 								 :showPageSize="false"
 								 :showTotalCount="true"
 								 :showElevator="true"
-								 :showFirstAndEnd="true"></common-page>
+								 :showFirstAndEnd="true"
+								 @change="onChange_pageCom"></common-page>
 				</div>
 				<detail-pop :isShowPopView="isShowDetailPop" :currId="currId" @close="onClose_detailPop"></detail-pop>
 			</div>
@@ -81,14 +83,17 @@
 	var _params = null;
 	export default{
 		created(){
-			this.init();
+			this.routerUpdated();
 		},
 		data(){
 			return {
 				g: g,
 				currId: 0,
-				isShowDetailPop: false,
 				msgList: [],
+				typeList: [],
+				currPage: 1,
+				delList: [],
+				isShowDetailPop: false,
 				isShowAllDeletePop: false
 			}
 		},
@@ -99,37 +104,79 @@
 			DeletePop,
 			TotalDeletePop
 		},
-		methods: {
-			init()
+		computed: {
+			checkAll()
 			{
-				this.msgList = g.data.messagePool.list;
+				return g.func.looseEqual(this.delList, g.data.searchMessagePool.idList);
+			}
+		},
+		methods: {
+			routerUpdated()
+			{
+				this.msgList = g.data.searchMessagePool.list;
+				var typeList = g.vue.getQuery('typeList', "[0,1]");
+				this.typeList = JSON.parse(typeList).map(function (item)
+				{
+					return int(item);
+				});
+
+				this.currPage = int(g.vue.getQuery('page', 1));
 			},
-			onClick_deleteBtn($id){
+			onClick_deleteBtn($id)
+			{
 				_delId = $id;
-				g.data.messagePool.getDataById(_delId).update({isShow: true});
+				g.data.searchMessagePool.getDataById(_delId).update({isShow: true});
 			},
-			onClose_deletePop($result){
-				g.data.messagePool.getDataById(_delId).update({isShow: false});
+			onClose_deletePop($result)
+			{
+				g.data.searchMessagePool.getDataById(_delId).update({isShow: false});
 				if ($result)
 				{
 					_params = {msgIds: _delId};
 					g.net.call("message/delMessage", ($data) =>
 					{
+						g.data.searchMessagePool.remove(_delId);
 						g.ui.toast("消息删除成功！");
 					})
 				}
 			},
-			onClick_detailBtn($id){
+			onClick_switch($status)
+			{
+				_params = {msgSwitch: $status == 1 ? 0 : 1};
+				g.net.call("message/updateReceiveMobileMsg", _params).then(($data) =>
+				{
+					g.ui.toast("用户消息设置成功!");
+				})
+			},
+			onClick_msgType($type)
+			{
+				var index = this.typeList.indexOf($type);
+				if (index >= 0)
+				{
+					this.typeList.splice(index, 1);
+				}
+				else
+				{
+					this.typeList.push($type);
+				}
+				this.currPage = 1;
+				this.updateUrl();
+			},
+			onClick_detailBtn($id)
+			{
 				this.currId = $id;
 				this.isShowDetailPop = true;
 			},
-			onClose_detailPop(){
+			onClose_detailPop()
+			{
 				this.isShowDetailPop = false;
 			},
-			onClick_allDeleteBtn(){
+			onClick_allDeleteBtn()
+			{
 				this.isShowAllDeletePop = true;
 			},
-			onClose_AllDeletePop($type){
+			onClose_AllDeletePop($type)
+			{
 				if ($type)
 				{
 					this.isShowAllDeletePop = false;
@@ -139,6 +186,21 @@
 					this.isShowAllDeletePop = false;
 
 				}
+			},
+			onChange_pageCom($page)
+			{
+				this.currPage = $page;
+				this.updateUrl();
+			},
+			updateUrl()
+			{
+				g.url = {
+					path: "/message",
+					query: {
+						page: this.currPage,
+						typeList: JSON.stringify(this.typeList)
+					}
+				};
 			}
 		}
 	}

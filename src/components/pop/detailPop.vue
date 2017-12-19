@@ -16,7 +16,7 @@
 		data(){
 			return {
 				g: g,
-				msgData:{}
+				msgData: {}
 			}
 		},
 		components: {
@@ -27,16 +27,22 @@
 				type: Boolean,
 				default: false
 			},
-			currId:{
-
+			currId: {
+				default: 0
+			}
+		},
+		watch: {
+			currId($val)
+			{
+				this.init();
 			}
 		},
 		methods: {
 			init()
 			{
-				if(this.currId)
+				if (this.currId)
 				{
-					this.msgData = g.data.messagePool.getDataById(this.currId);
+					this.msgData = g.data.searchMessagePool.getDataById(this.currId);
 				}
 			},
 			onClose_pop(){

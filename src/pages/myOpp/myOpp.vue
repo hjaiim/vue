@@ -8,7 +8,7 @@
 						{{currType}}
 						<span :class="['icon-trangle', isShowBusinessList?'rotate':'']"></span>
 						<ul class="absolute drop-list" v-show="isShowBusinessList">
-							<li v-for="item in typeList" @click="onClick_typeItem(item.id)">{{item.name}}</li>
+							<li v-for="item in typeList" @click.stop="onClick_typeItem(item.id)">{{item.name}}</li>
 						</ul>
 					</div>
 				</div>

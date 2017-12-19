@@ -1,19 +1,20 @@
 <template>
 	<div class="header-top clear">
-		<p class="site-name left">联通业务生命同期平台</p>
+		<p class="site-name left">联通业务生命周期平台</p>
 		<div class="navBar-right right">
 			<ul>
 				<li class="nav-item">
 					<a href="#" class="note-txt">通知</a>
-					<i class="note-icon relative">
+					<i class="note-icon relative" @click="onClick_msgCenter">
 						<img :src="g.path.images+'/note-icon.png'" alt="">
-						<span class="badeg absolute">2</span>
+						<span class="badeg absolute">{{g.data.userInfo.msgCount}}</span>
 					</i>
 				</li>
-				<li class="nav-item">
-					<a href="#" class="note-txt">统一食品</a>
+				<li class="nav-item" @click="onClick_perCenter">
+					<a href="#" class="note-txt">{{g.data.userInfo.username}}</a>
 					<i class="avatar-icon">
-						<img :src="g.path.images+'/avatar-icon.png'" alt="">
+						<img :src="g.data.userInfo.avatar?g.data.userInfo.avatar:g.path.images+'/avatar-icon.png'"
+							 alt="">
 					</i>
 				</li>
 				<li class="nav-item">
@@ -37,6 +38,14 @@
 			onClick_logoutBtn()
 			{
 				loginManager.logout();
+			},
+			onClick_msgCenter()
+			{
+				g.url = "/message";
+			},
+			onClick_perCenter()
+			{
+				g.url = "/";
 			}
 		}
 	}

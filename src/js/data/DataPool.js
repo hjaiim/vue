@@ -27,7 +27,7 @@ export var departmentPool = new DepartmentPool();
 export var dutyPool = new DutyPool();
 export var staticNavPool = new StaticNavPool(); //语言包数据池
 export var staticTypePool = new StaticTypePool(); //语言包数据池
-export var messagePool = new MessagePool();
+export var searchMessagePool = new MessagePool();
 export var searchPositionPool = new PositionPool();
 export var searchCompanyPool = new SearchCompanyPool();
 export var searchAccountPool = new AccountPool();
@@ -62,7 +62,7 @@ export function clearAll()
 	departmentPool.removeAll();
 	dutyPool.removeAll();
 	staticNavPool.removeAll();
-	messagePool.removeAll();
+	searchMessagePool.removeAll();
 	searchPositionPool.removeAll();
 	searchCompanyPool.removeAll();
 	searchAccountPool.removeAll();

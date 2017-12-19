@@ -1,4 +1,4 @@
-import loginManager from './../js/manager/LoginManager';
+import loginManager from "./../js/manager/LoginManager";
 export function dealErr($err)
 {
 	g.ui.hideLoading();
@@ -6,7 +6,7 @@ export function dealErr($err)
 	{
 		loginManager.logout();
 	}
-	if($err.errorMsg)
+	if ($err.errorMsg)
 	{
 		g.ui.toast($err.errorMsg);
 
@@ -98,19 +98,69 @@ export function getBase64($fileList, $quality)
 		return promise;
 	}
 }
-export function insertOneInArray($list, $item)
+
+export function looseEqual(a, b)
 {
-	var index = $list.indexOf($item);
-	if (index >= 0)
+	if (typeOf(a) == "object" && typeOf(b) == "object")
 	{
-		return;
+		try
+		{
+			return JSON.stringify(a) === JSON.stringify(b)
+		}
+		catch (e)
+		{
+			// possible circular reference
+			return a === b
+		}
 	}
-	$list.push($item);
-	return $list;
+	else if (typeOf(a) == "array" && typeOf(b) == "array")
+	{
+
+		a = a.sort(function (x, y)
+		{
+			return x - y;
+		});
+		b = b.sort(function (x, y)
+		{
+			return x - y;
+		});
+
+		try
+		{
+			return JSON.stringify(a) === JSON.stringify(b)
+		}
+		catch (e)
+		{
+			// possible circular reference
+			return a === b
+		}
+// 		if(a.length > 0 && b.length > 0)
+// 		{
+//
+// 		}
+// 		else
+// 		{
+// 			return false;
+// 		}
+
+	}
+	else if (typeOf(a) != "object" && typeOf(b) != "object")
+	{
+		return String(a) === String(b)
+	}
+	else
+	{
+		return false
+	}
 }
-export function firstUpperCase(str) {
+
+
+export function firstUpperCase(str)
+{
 	return str.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase());
 }
+
+
 export function insertOneOrZero($list, $item)
 {
 	if (!Array.isArray($list))
