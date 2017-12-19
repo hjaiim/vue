@@ -35,16 +35,16 @@
 				</div>
 				<div class="date-box p-left left clear">
 					<span class="create-time left">创建时间</span>
-					<div class="date-form left relative" @click="onClick_dateSelect('start')">
+					<div class="date-form left relative pointer" @click="onClick_dateSelect('start')">
 						2017-12-25 00:00:00
 						<img :src="g.path.images+'/date-icon.png'" alt="" class="absolute date-icon">
 						<common-date @change="onChange_date" v-model="isShowStartDate" type="hour"></common-date>
 					</div>
 					<span class="date-line left">-</span>
-					<div class="date-form left relative" @click="onClick_dateSelect('end')">
+					<div class="date-form left relative pointer" @click="onClick_dateSelect('end')">
 						2017-12-25 00:00:00
 						<img :src="g.path.images+'/date-icon.png'" alt="" class="absolute date-icon">
-						<common-date @change="onChange_date" v-model="isShowEndDate"  type="hour"></common-date>
+						<common-date @change="onChange_date" v-model="isShowEndDate" type="hour"></common-date>
 					</div>
 				</div>
 
@@ -91,7 +91,7 @@
 				</div>
 			</div>
 		</div>
-		<opp-detail-pop :isShowPopView="isShowDetailPop"></opp-detail-pop>
+		<opp-detail-pop :isShowPopView="isShowDetailPop" @close="onClose_detailPop"></opp-detail-pop>
 	</com-layout>
 
 </template>
@@ -111,7 +111,7 @@
 				g: g,
 				businessList: [],
 				typeList: [],
-				isShowDetailPop: false,
+				isShowDetailPop: true,
 				isShowStartDate: false,
 				isShowEndDate: false,
 				currPage: 1,
@@ -133,7 +133,7 @@
 			init()
 			{
 				this.currPage = 1;
-				this.statusList = [-1,1,2];
+				this.statusList = [-1, 1, 2];
 				this.startTime = 1400000000;
 				this.endTime = g.timeTool.getNowStamp();
 				this.creatorName = "";
@@ -144,11 +144,14 @@
 				this.businessList = g.data.searchBusinessPool.list;
 				this.currPage = int(g.vue.getQuery("page", 1));
 				this.type = g.vue.getQuery("type", 1);
-				this.statusList = g.vue.getQuery("status", [-1,1,2]);
+				this.statusList = g.vue.getQuery("status", [-1, 1, 2]);
 				this.startTime = g.vue.getQuery("startTime", 1400000000);
 				this.endTime = g.vue.getQuery("endTime", g.timeTool.getNowStamp());
 				this.creatorName = g.vue.getQuery("creatorName", 1);
 				this.companyName = g.vue.getQuery("companyName", 1);
+			},
+			onClose_detailPop(){
+				this.isShowDetailPop = false;
 			},
 			onClick_dropListBtn()
 			{
@@ -167,15 +170,8 @@
 			},
 			onClick_dateSelect($type)
 			{
-				if (this['isShow' + func.firstUpperCase($type) + 'Date'])
-				{
-					this['isShow' + func.firstUpperCase($type) + 'Date'] = false;
-				}
-				else
-				{
-					this['isShow' + func.firstUpperCase($type) + 'Date'] = true
 
-				}
+				this['isShow' + func.firstUpperCase($type) + 'Date'] = true;
 			},
 			onClick_searchBtn()
 			{

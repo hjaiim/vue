@@ -83,27 +83,21 @@
   clear: both;
 }
 
-
-@media screen and (max-width: 1410px) {
-  .p-left {
-	margin-left: 8px;
-  }
-  .date-box {
-	.date-form {
-	  width: 176px;
-	}
-  }
+.p-left {
+  margin-left: 50px;
 }
-@media screen and (max-width: 1290px) {
+
+@media screen and (max-width: 1450px) {
   .p-left {
 	margin-left: 8px;
   }
   .date-box {
+	margin-left: 15px;
 	.date-form {
 	  width: 176px;
 	}
   }
-  .status-form .status-type{
+  .status-form .status-type {
 	margin-left: 12px;
   }
 }
