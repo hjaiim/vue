@@ -38,13 +38,13 @@
 					<div class="date-form left relative" @click="onClick_dateSelect('start')">
 						2017-12-25 00:00:00
 						<img :src="g.path.images+'/date-icon.png'" alt="" class="absolute date-icon">
-						<common-date @change="onChange_date" v-model="isShowStartDate"></common-date>
+						<common-date @change="onChange_date" v-model="isShowStartDate" type="hour"></common-date>
 					</div>
 					<span class="date-line left">-</span>
 					<div class="date-form left relative" @click="onClick_dateSelect('end')">
 						2017-12-25 00:00:00
 						<img :src="g.path.images+'/date-icon.png'" alt="" class="absolute date-icon">
-						<common-date @change="onChange_date" v-model="isShowEndDate"></common-date>
+						<common-date @change="onChange_date" v-model="isShowEndDate"  type="hour"></common-date>
 					</div>
 				</div>
 

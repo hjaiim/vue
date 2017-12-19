@@ -106,7 +106,8 @@
 				</div>
 			</div>
 		</div>
-		<business-detail-pop :isShowPopView="isShowDetailPop" :currId="currId"></business-detail-pop>
+		<business-detail-pop :isShowPopView="isShowDetailPop" :currId="currId"
+							 @close="onClose_detailPop"></business-detail-pop>
 	</com-layout>
 </template>
 <script type="text/ecmascript-6">
@@ -123,7 +124,7 @@
 				g: g,
 				businessList: [],
 				typeList: [],
-				isShowDetailPop: false,
+				isShowDetailPop: true,
 				currPage: 1,
 				type: 1,
 				statusList: [],
@@ -131,7 +132,7 @@
 				endTime: g.timeTool.getNowStamp(),
 				creatorName: '',
 				companyName: "",
-				currId:0
+				currId: 0
 			}
 		},
 		components: {
@@ -144,7 +145,7 @@
 			{
 				this.currPage = 1;
 				this.type = 1;
-				this.statusList = [1,-1,2];
+				this.statusList = [1, -1, 2];
 				this.startTime = 1400000000;
 				this.endTime = g.timeTool.getNowStamp();
 				this.creatorName = "";
@@ -155,7 +156,7 @@
 				this.businessList = g.data.searchBusinessPool.list;
 				this.currPage = int(g.vue.getQuery("page", 1));
 				this.type = g.vue.getQuery("type", 1);
-				this.statusList = g.vue.getQuery("statusList", [1,-1,2]);
+				this.statusList = g.vue.getQuery("statusList", [1, -1, 2]);
 				this.startTime = g.vue.getQuery("startTime", 1400000000);
 				this.endTime = g.vue.getQuery("endTime", g.timeTool.getNowStamp());
 				this.creatorName = g.vue.getQuery("creatorName", "");
@@ -179,15 +180,15 @@
 			onClick_statusItem($status)
 			{
 				var index = this.statusList.indexOf($status);
-				if(index >= 0)
+				if (index >= 0)
 				{
-					this.statusList.splice(index,1);
+					this.statusList.splice(index, 1);
 				}
 				else
 				{
 					this.statusList.push($status);
 				}
-				trace("this.statusList",this.statusList);
+				trace("this.statusList", this.statusList);
 			},
 			onClick_dateSelect($type)
 			{
@@ -214,7 +215,6 @@
 				}
 				else
 				{
-
 				}
 			},
 			onClick_editBtn()
@@ -224,6 +224,9 @@
 			onClick_auditBtn()
 			{
 
+			},
+			onClose_detailPop(){
+				this.isShowDetailPop = false;
 			},
 			updateUrl()
 			{

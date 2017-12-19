@@ -2,6 +2,7 @@
   padding: 20px 44px 50px 44px;
   .oppman-banner {
 	line-height: 30px;
+	font-size: 14px;
   }
 }
 
@@ -82,25 +83,6 @@
   clear: both;
 }
 
-@media screen and (max-width: 1345px) {
-  .p-left {
-	//margin-left: 10px;
-  }
-  .date-box {
-	//margin-left: 0;
-	//margin-top: 20px;
-	.date-form {
-	  //padding-left: 5px;
-	  //width: 148px;
-	  .date-icon {
-		//right: 5px;
-	  }
-	}
-  }
-  .status-form .status-type {
-	//margin-left: 10px;
-  }
-}
 
 @media screen and (max-width: 1410px) {
   .p-left {
@@ -110,5 +92,18 @@
 	.date-form {
 	  width: 176px;
 	}
+  }
+}
+@media screen and (max-width: 1290px) {
+  .p-left {
+	margin-left: 8px;
+  }
+  .date-box {
+	.date-form {
+	  width: 176px;
+	}
+  }
+  .status-form .status-type{
+	margin-left: 12px;
   }
 }

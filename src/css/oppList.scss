@@ -2,9 +2,9 @@
   padding: 20px 44px 50px 44px;
   .opp-banner {
 	line-height: 30px;
+	font-size: 14px;
   }
 }
-
 
 .opp-table {
   .inner-table {
@@ -75,31 +75,32 @@
 //  }
 //}
 
-@media screen and (max-width: 1600px) {
+@media screen and (max-width: 1800px) {
   .date-box {
 	float: left;
 	//display: block;
 	margin-top: 30px;
 	margin-left: 0;
 	.date-form {
-	  padding-left: 20px;
+	  padding-left: 10px;
 	  width: 200px;
 	}
   }
   .search-box {
 	float: right;
+	margin-left: 0;
 	.search-input {
 	  width: 200px;
+
 	}
   }
 
   .search-box .active-btn {
 	margin-left: 24px;
   }
-
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1310px) {
   .p-left {
 	margin-left: 10px;
   }
@@ -118,8 +119,8 @@
 	margin-left: 10px;
   }
   .status-form {
-    .status-type {
-      margin-right: 0;
-    }
+	.status-type {
+	  margin-right: 0;
+	}
   }
 }

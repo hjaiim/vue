@@ -4,7 +4,7 @@
         <div class="detail-container">
             <p class="note-tit">商机详情</p>
             <div class="note-content opp-content">
-                <div class="company-message no-border opp-pop-detail iscroll-ref">
+                <div class="company-message no-border iscroll-ref opp-content" is="scroll-group">
                     <div>
                         <h3 class="opp-title">商机内容</h3>
                         <!--CTD业务-->
@@ -404,7 +404,8 @@
 </template>
 <script type="text/ecmascript-6">
     import g from "../../global";
-    import ViewPopup from "../viewPop.vue"
+    import ViewPopup from "../viewPop.vue";
+    import ScrollGroup from "../scrollGroup.vue"
     export default{
         data(){
             return {
@@ -414,7 +415,8 @@
             }
         },
         components: {
-            ViewPopup
+            ViewPopup,
+            ScrollGroup
         },
         props: {
             isShowPopView: {
@@ -439,7 +441,8 @@
             font-size: 14px;
         }
         .opp-content {
-            height: 700px;
+            height: 600px;
+            overflow: hidden;
         }
     }
 
