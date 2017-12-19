@@ -6,8 +6,8 @@
 				   v-model="inputContent" :maxLength="maxLength" :readonly="readonly" autocomplete="off">
 			<i v-show="inputContent.length>0 && isShowClearBtn"
 			   class="close-search-btn ani-time pointer absolute" @click="onClick_closeBtn"></i>
+			<p class="error-msg absolute">{{errmsg}}</p>
 		</div>
-		<p class="error-msg">{{errmsg}}</p>
 	</div>
 </template>
 <script type="text/ecmascript-6">
@@ -18,7 +18,7 @@
 		},
 		props: {
 			value: {
-				type: [String,Number]
+				type: [String, Number]
 			},
 			type: {
 				type: String,
@@ -88,7 +88,7 @@
 </script>
 <style type="text/scss" lang="sass" rel="stylesheet/scss">
 	.form-input {
-		margin: 0 auto;
+		margin: 0 auto 34px;
 		width: 320px;
 		img {
 			left: 0;
@@ -99,6 +99,9 @@
 			line-height: 34px;
 			font-size: 14px;
 			color: #ed5564;
+			width: 100%;
+			left: 0;
+			bottom: 100%;
 		}
 		.g-input {
 			display: block;
@@ -120,13 +123,11 @@
 			color: #333333;
 			&:focus {
 				border: 1px solid #cccccc;
-
 			}
-
 		}
 		.close-search-btn {
-			width: 20px;
-			height: 20px;
+			width: 18px;
+			height: 18px;
 			right: 16px;
 			top: 10px;
 			background: transparent;
@@ -190,6 +191,7 @@
 	}
 
 	.sj-psd {
+		margin: 0 auto;
 		.g-input {
 			background: #ffffff;
 		}
@@ -197,6 +199,7 @@
 
 	.resetPwd-wrap {
 		.form-input {
+			margin: 0 auto 25px;
 			.error-msg {
 				height: 25px;
 				line-height: 25px;
@@ -215,6 +218,7 @@
 
 	.register-wrap {
 		.form-input {
+			margin: 0 auto 25px;
 			.error-msg {
 				height: 25px;
 				line-height: 25px;

@@ -19,17 +19,18 @@
 				</div>
 			</div>
 			<div class="personal-message" v-show="type=='personal'">
-				<p class="personal-form"><span class="personal-title">所属公司</span><span
+
+				<p class="personal-form diff-personal"><span class="personal-title">所属公司</span><span
 						class="personal-content">{{userInfo.companyName}}</span></p>
-				<p class="personal-form"><span class="personal-title">所属部门</span><span
+				<p class="personal-form diff-personal"><span class="personal-title">所属部门</span><span
 						class="personal-content">{{userInfo.departmentName}}</span></p>
-				<p class="personal-form"><span class="personal-title">职务名称</span><span
+				<p class="personal-form diff-personal"><span class="personal-title">职务名称</span><span
 						class="personal-content">{{userInfo.dutyName}}</span></p>
-				<p class="personal-form"><span class="personal-title">岗位名称</span><span
+				<p class="personal-form diff-personal"><span class="personal-title">岗位名称</span><span
 						class="personal-content">{{userInfo.positionName}}</span></p>
-				<p class="personal-form"><span class="personal-title">角色</span><span
+				<p class="personal-form diff-personal"><span class="personal-title">角色</span><span
 						class="personal-content">{{userInfo.roleName}}</span></p>
-				<p class="personal-form"><span class="personal-title">姓名</span><span class="personal-content">
+				<p class="personal-form diff-personal"><span class="personal-title">姓名</span><span class="personal-content">
 					{{userInfo.name}}</span>
 				</p>
 				<p class="personal-form">

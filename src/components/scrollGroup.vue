@@ -144,25 +144,24 @@
 		right: 0px;
 		border-radius: 3px;
 	}
-
 	.gui-scrollgroup-content {
 		display: flex;
 		flex-direction: column;
 	}
+	.gui-scrollgroup-show-bar-enter-active {
+		transition: all .9s ease;
+	}
 
-	/*.gui-scrollgroup-show-bar-enter-active {*/
-	/*transition: all .9s ease;*/
-	/*}*/
+	.gui-scrollgroup-show-bar-leave-active {
+		transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+	}
 
-	/*.gui-scrollgroup-show-bar-leave-active {*/
-	/*transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);*/
-	/*}*/
+	.gui-scrollgroup-show-bar-enter {
+		opacity: 0;
 
-	/*.gui-scrollgroup-show-bar-enter {*/
-	/*opacity: 0;*/
-	/*}*/
+	}
 
-	/*.gui-scrollgroup-show-bar-leave-active {*/
-	/*opacity: 0;*/
-	/*}*/
+	.gui-scrollgroup-show-bar-leave-active {
+		opacity: 0;
+	}
 </style>

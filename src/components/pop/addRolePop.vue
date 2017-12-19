@@ -15,9 +15,12 @@
 						<span class="form-title left">角色说明</span>
 						<textarea type="text" class="form-control role-explain ani-time" v-model="desc"></textarea>
 					</p>
-					<p class="from-group">
+					<div class="from-group clear">
 						<span class="form-title left">平台权限</span>
-					</p>
+						<div class="tree-relate">
+							<common-tree></common-tree>
+						</div>
+					</div>
 				</div>
 				<div class="pop-btn right pointer" @click="onClick_cancelBtn">取消</div>
 				<div class="btn-submit pop-btn right pointer" @click="onClick_confirmBtn">提交</div>
@@ -30,6 +33,7 @@
 	import g from "../../global";
 	import ViewPopup from "../viewPop.vue";
 	import InputBar from "../inputBar.vue";
+	import CommonTree from "../tree/tree.vue"
 	var _params = null;
 	export default{
 		created()
@@ -46,7 +50,8 @@
 		},
 		components: {
 			ViewPopup,
-			InputBar
+			InputBar,
+			CommonTree
 		},
 		props: {
 			isShowPopView: {
@@ -103,7 +108,7 @@
 				}
 				g.net.call(postUrl, _params).then(($data) =>
 				{
-					if(this.currId != 0)
+					if (this.currId != 0)
 					{
 						g.data.searchRolePool.getDataById(this.currId).update(_params);
 						g.ui.toast("角色编辑成功!")
