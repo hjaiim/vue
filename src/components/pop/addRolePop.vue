@@ -28,8 +28,9 @@
 					</div>
 				</div>
 				<div class="role-action-wrap clear">
-					<div class="pop-btn right pointer cancel-btn" @click="onClick_cancelBtn">取消</div>
-					<div class="btn-submit pop-btn right pointer action-btn" @click="onClick_confirmBtn">提交</div>
+					<div class="pop-btn right pointer cancel-btn ani-time" @click="onClick_cancelBtn">取消</div>
+					<div class="btn-submit pop-btn right pointer action-btn ani-time" @click="onClick_confirmBtn">提交
+					</div>
 				</div>
 			</div>
 

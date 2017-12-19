@@ -83,7 +83,8 @@
 					</div>
 				</div>
 				<div class="company-action clear">
-					<div class="btn-submit pop-btn top-btn right pointer" @click="onClick_submitBtn">提交</div>
+					<div class="btn-submit pop-btn top-btn right pointer action-btn ani-time"
+						 @click="onClick_submitBtn">提交</div>
 				</div>
 			</div>
 		</div>

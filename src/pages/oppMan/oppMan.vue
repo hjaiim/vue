@@ -124,7 +124,7 @@
 				g: g,
 				businessList: [],
 				typeList: [],
-				isShowDetailPop: true,
+				isShowDetailPop: false,
 				currPage: 1,
 				type: 1,
 				statusList: [],

@@ -300,9 +300,10 @@
 						<i class="del-file pointer" @click="onClick_delBtn">删除</i></span>
 				</div>
 			</div>
+			<div class="btn btn-save pointer action-btn ani-time" @click="onClick_submitBtn">提交</div>
 		</div>
-		<div class="btn btn-save pointer action-btn ani-time" @click="onClick_submitBtn">提交</div>
 		</div>
+
 	</com-layout>
 </template>
 <script type="text/ecmascript-6">
