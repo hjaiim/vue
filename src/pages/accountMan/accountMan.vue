@@ -129,7 +129,7 @@
 			routerUpdated()
 			{
 				this.accountList = g.data.searchAccountPool.list;
-				this.typeList = JSON.parse(g.vue.getQuery("typeList", "[-1,1,2]"));
+				this.typeList = g.vue.getQuery("typeList", [-1,1,2]);
 				this.currPage = int(g.vue.getQuery("page", 1));
 				this.name = g.vue.getQuery("name", "");
 				this.currRole = g.vue.getQuery("role", 0);
@@ -242,7 +242,7 @@
 				g.url = {
 					path: "/accountman",
 					query: {
-						typeList: JSON.stringify(this.typeList),
+						typeList: this.typeList,
 						page: int(this.currPage),
 						name: this.name,
 						role: this.currRole

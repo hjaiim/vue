@@ -105,7 +105,7 @@ function createData($dObj)
 	d.customerId = "";
 	d.customerCompName = "";
 	d.departmentId = "";
-	this.opperation = 0;
+	d.operation = 0;
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -130,8 +130,8 @@ function updateData($dObj, $recordId)
 	$dObj.hasOwnProperty("comName") && (this.companyName = $dObj.comName);
 	$dObj.hasOwnProperty("departmentId") && (this.departmentId = $dObj.departmentId);
 	$dObj.hasOwnProperty("custComName") && (this.customerCompName = $dObj.custComName);
-	$dObj.hasOwnProperty("createTime") && (this.createTime = $dObj.createTime)
-	$dObj.hasOwnProperty("optType") && (this.opperation = $dObj.optType)
+	$dObj.hasOwnProperty("createTime") && (this.createTime = $dObj.createTime);
+	$dObj.hasOwnProperty("optType") && (this.operation = $dObj.optType);
 	if ($dObj.hasOwnProperty("recordList"))
 	{
 		var recordData = new RecordData();

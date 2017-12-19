@@ -179,7 +179,6 @@
 		methods: {
 			init()
 			{
-				debugger;
 				this.userInfo = g.data.userInfo;
 				this.authStatus = this.userInfo.authStatus;
 				if (this.authStatus != 0)

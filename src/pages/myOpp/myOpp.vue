@@ -69,7 +69,7 @@
 						<td>{{item.companyName}}</td>
 						<td>{{item.typeName}}</td>
 						<td>{{item.createTime}}</td>
-						<td>{{item.authStatusDesc}}</td>
+						<td>{{item.auditStatusDesc}}</td>
 						<td>
 							<p class="action-menu clear">
                                 <span class="left pointer draw-line ani-time" v-if="item.operation == 1"
@@ -116,7 +116,7 @@
 				isShowEndDate: false,
 				currPage: 1,
 				type: 1,
-				status: 1,
+				statusList: [],
 				startTime: 0,
 				endTime: g.timeTool.getNowStamp(),
 				companyName: "",
@@ -133,19 +133,22 @@
 			init()
 			{
 				this.currPage = 1;
-				this.status = 0;
-				this.startTime = 0;
+				this.statusList = [-1,1,2];
+				this.startTime = 1400000000;
 				this.endTime = g.timeTool.getNowStamp();
 				this.creatorName = "";
 				this.companyName = "";
 			},
 			routerUpdated()
 			{
+				debugger;
+
+
 				this.businessList = g.data.searchBusinessPool.list;
 				this.currPage = int(g.vue.getQuery("page", 1));
 				this.type = g.vue.getQuery("type", 1);
-				this.status = g.vue.getQuery("status", 1);
-				this.startTime = g.vue.getQuery("startTime", 0);
+				this.statusList = g.vue.getQuery("status", [-1,1,2]);
+				this.startTime = g.vue.getQuery("startTime", 1400000000);
 				this.endTime = g.vue.getQuery("endTime", g.timeTool.getNowStamp());
 				this.creatorName = g.vue.getQuery("creatorName", 1);
 				this.companyName = g.vue.getQuery("companyName", 1);

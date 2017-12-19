@@ -62,22 +62,7 @@ var WEB_CONFIG = {
 		sendCodeTime: 5,
 		pageSize: 20,
 		accountRegExp: /^1(3|4|5|7|8)\d{9}$/,
-		passwordRegExp: /^\w{6,20}$/,
-		hotMapMax: 1000,
-		hotMapOptions: {
-			gradient: {
-				.25: '#3242fc',
-				.50: '#3ce058',
-				.75: '#ffcc00',
-				.90: '#fc0000'
-			},
-			opacity: 0.7
-		},
-		radiusRatio: 50,
-		hotMapLevel: 15,
-		level: 5,
-		hotMapMinZoom: 15,
-		hotMapMaxZoom: 19
+		passwordRegExp: /^\w{6,20}$/
 	}
 };
 

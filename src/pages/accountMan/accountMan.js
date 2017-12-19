@@ -23,7 +23,6 @@ export function searchUserList($data)
 	{
 		_params = createData($data);
 	}
-	_params.roleId = g.data.userInfo.roleId;
 	var promise = new Promise((resolved, rejected) =>
 	{
 		g.net.call("user/queryUserListByPage", _params).then(($data) =>
@@ -44,8 +43,9 @@ export function searchUserList($data)
 function createData($dObj)
 {
 	var d = {};
-	d.name = "jasmine";
-// 	d.stationType = JSON.stringify([-1,1,2]);
+	d.name = "";
+	d.stationType = [-1,1,2].join(",");
+	d.roleId =0;
 	d.page = 1;
 	d.pageSize = 10;
 	d.update = updateData.bind(d);
@@ -61,7 +61,8 @@ function updateData($dObj)
 		return;
 	}
 	$dObj.hasOwnProperty("name") && (this.name = $dObj.name);
-// 	$dObj.hasOwnProperty("typeList") && (this.stationType = $dObj.typeList);
+	$dObj.hasOwnProperty("roleId") && (this.roleId = $dObj.roleId);
+	$dObj.hasOwnProperty("typeList") && (this.stationType = $dObj.typeList.join(","));
 	$dObj.hasOwnProperty("page") && (this.page = $dObj.page);
 }
 

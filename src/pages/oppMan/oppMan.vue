@@ -14,16 +14,16 @@
 
 				<div class="from-group status-form p-left left">
 					<span class="form-title left">状态</span>
-                    <span class="action-box status-type left" @click="onClick_statusItem(0)">
-                        <i class="pointer" :class="status == 0?'action':''"></i>
+                    <span class="action-box status-type left" @click="onClick_statusItem(1)">
+                        <i class="pointer" :class="statusList.indexOf(1) >= 0?'action':''"></i>
                         <span>审核中</span>
                     </span>
-                    <span class="action-box status-type left" @click="onClick_statusItem(1)">
-                        <i class="pointer" :class="status == 1?'action':''"></i>
+                    <span class="action-box status-type left" @click="onClick_statusItem(-1)">
+                        <i class="pointer" :class="statusList.indexOf(-1)>= 0?'action':''"></i>
                         <span>未通过</span>
                     </span>
                       <span class="action-box status-type left" @click="onClick_statusItem(2)">
-                        <i class="pointer" :class="status == 2?'action':''"></i>
+                        <i class="pointer" :class="statusList.indexOf(2)>= 0?'action':''"></i>
                         <span>已通过</span>
                     </span>
 				</div>
@@ -126,8 +126,8 @@
 				isShowDetailPop: false,
 				currPage: 1,
 				type: 1,
-				status: 1,
-				startTime: 0,
+				statusList: [],
+				startTime: 1400000000,
 				endTime: g.timeTool.getNowStamp(),
 				creatorName: '',
 				companyName: "",
@@ -143,9 +143,9 @@
 			init()
 			{
 				this.currPage = 1;
-				this.type = 0;
-				this.status = 0;
-				this.startTime = 0;
+				this.type = 1;
+				this.statusList = [1,-1,2];
+				this.startTime = 1400000000;
 				this.endTime = g.timeTool.getNowStamp();
 				this.creatorName = "";
 				this.companyName = "";
@@ -155,11 +155,11 @@
 				this.businessList = g.data.searchBusinessPool.list;
 				this.currPage = int(g.vue.getQuery("page", 1));
 				this.type = g.vue.getQuery("type", 1);
-				this.status = g.vue.getQuery("status", 1);
-				this.startTime = g.vue.getQuery("startTime", 0);
+				this.statusList = g.vue.getQuery("statusList", [1,-1,2]);
+				this.startTime = g.vue.getQuery("startTime", 1400000000);
 				this.endTime = g.vue.getQuery("endTime", g.timeTool.getNowStamp());
-				this.creatorName = g.vue.getQuery("creatorName", 1);
-				this.companyName = g.vue.getQuery("companyName", 1);
+				this.creatorName = g.vue.getQuery("creatorName", "");
+				this.companyName = g.vue.getQuery("companyName", "");
 			},
 			onClick_dropListBtn()
 			{
@@ -178,7 +178,16 @@
 			},
 			onClick_statusItem($status)
 			{
-				this.status = $status;
+				var index = this.statusList.indexOf($status);
+				if(index >= 0)
+				{
+					this.statusList.splice(index,1);
+				}
+				else
+				{
+					this.statusList.push($status);
+				}
+				trace("this.statusList",this.statusList);
 			},
 			onClick_dateSelect($type)
 			{
@@ -223,7 +232,7 @@
 					query: {
 						page: this.currPage,
 						type: this.type,
-						status: this.status,
+						statusList: this.statusList,
 						startTime: this.startTime,
 						endTime: this.endTime,
 						creatorName: this.creatorName,

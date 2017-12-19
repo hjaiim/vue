@@ -44,9 +44,9 @@ function createData($dObj)
 {
 	var d = {};
 	d.businessId = 1;
-	d.auditStatusList = [];
-	d.startTime = g.timeTool.getNowStamp();
-	d.endTime = g.timeTool.getNowStamp();
+	d.auditStatusList = [-1,1,2];
+	d.startTime = g.timeTool.getFullDate(1400000000,true);
+	d.endTime = g.timeTool.getFullDate(Date.now(),true);
 	d.custComName = "";
 	d.creatorName = "";
 	d.page = 1;
@@ -64,7 +64,7 @@ function updateData($dObj)
 		return;
 	}
 	$dObj.hasOwnProperty("customerName") && (this.comName = $dObj.customerName);
-	$dObj.hasOwnProperty("auditStatusList") && (this.auditStatusList = $dObj.auditStatusList);
+	$dObj.hasOwnProperty("statusList") && (this.auditStatusList = __merge([],$dObj.statusList));
 	$dObj.hasOwnProperty("startTime") && (this.startTime = $dObj.startTime);
 	$dObj.hasOwnProperty("endTime") && (this.endTime = $dObj.endTime);
 	$dObj.hasOwnProperty("creatorName") && (this.creatorName = $dObj.creatorName);

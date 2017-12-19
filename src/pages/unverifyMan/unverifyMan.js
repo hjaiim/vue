@@ -3,15 +3,14 @@ import loginManager from "./../../js/manager/LoginManager";
 var _params = null;
 export default function (to, next)
 {
-	next();
 
-// 	loginManager.checkLogin(to, next, () =>
-// 	{
-// 		searchUnverifyList(to.query).then(() =>
-// 		{
-// 			next();
-// 		})
-// 	})
+	loginManager.checkLogin(to, next, () =>
+	{
+		searchUnverifyList(to.query).then(() =>
+		{
+			next();
+		})
+	})
 
 }
 
@@ -44,7 +43,7 @@ export function searchUnverifyList($params)
 function createData($dObj)
 {
 	var d = {};
-	d.name = "a";
+	d.name = "jasmine";
 	d.pageSize = 10;
 	d.page = 1;
 	d.update = updateData.bind(d);
@@ -55,6 +54,10 @@ function createData($dObj)
 
 function updateData($dObj)
 {
+	if(!$dObj)
+	{
+		return;
+	}
 	$dObj.hasOwnProperty("name") && (this.name = $dObj.name);
 	$dObj.hasOwnProperty("pageSize") && (this.pageSize = $dObj.pageSize);
 	$dObj.hasOwnProperty("page") && (this.page = $dObj.page);

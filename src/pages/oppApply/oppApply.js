@@ -5,11 +5,18 @@ export default function (to, next)
 {
 	loginManager.checkLogin(to, next, () =>
 	{
-		next();
-		getBusinessDetail(to.query).then(() =>
+		if(to.query.id)
+		{
+			getBusinessDetail(to.query).then(() =>
+			{
+				next();
+			})
+		}
+		else
 		{
 			next();
-		})
+		}
+
 	})
 
 }
@@ -42,7 +49,7 @@ export function getBusinessDetail($params)
 function createData($dObj)
 {
 	var d = {};
-	d.type = 1;
+	d.orderId = 0;
 	d.update = updateData.bind(d);
 	$dObj = __merge({},$dObj);
 	d.update($dObj);
@@ -55,6 +62,6 @@ function updateData($dObj)
 	{
 		return;
 	}
-	$dObj.hasOwnProperty("type") && (this.type = $dObj.type);
+	$dObj.hasOwnProperty("id") && (this.orderId = $dObj.id);
 }
 

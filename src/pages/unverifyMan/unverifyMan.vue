@@ -50,7 +50,8 @@
 								 :showPageSize="false"
 								 :showTotalCount="true"
 								 :showElevator="true"
-								 :showFirstAndEnd="true"></common-page>
+								 :showFirstAndEnd="true"
+					@change="onChange_pageCom"></common-page>
 				</div>
 			</div>
 			<account-des-pop @close="onClose_accountDesPop" :isShowPopView="isShowDetailPop"></account-des-pop>
@@ -107,6 +108,12 @@
 				{
 					return;
 				}
+				this.currPage = 1;
+				this.updateUrl();
+			},
+			onChange_pageCom($page)
+			{
+				this.currPage = $page;
 				this.updateUrl();
 			},
 			onClick_selectAllBtn()
