@@ -10,16 +10,12 @@
 </template>
 <script type="text/ecmascript-6">
 	export default{
-		name: "c-scrollgroup",
+		name: "gui-scrollgroup",
 		created(){
-			this.$nextTick(() =>
-			{
-				this.initBar()
-			})
 		},
 		data(){
 			return {
-				barVisible: true,
+				barVisible: false,
 				offset: 0,
 				timer: 0
 			}
@@ -28,6 +24,10 @@
 		mounted()
 		{
 			this.addEvent();
+			this.initBar();
+		},
+		updated()
+		{
 			this.initBar();
 		},
 		methods: {
@@ -50,7 +50,6 @@
 			},
 			initBar()
 			{
-				this.barVisible = true;
 				var mainCon = this.$refs["scrollMain"];
 				var parent = mainCon.parentNode;
 				var bar = this.$refs["scrollBar"];
@@ -119,7 +118,14 @@
 							(parent.clientHeight - parseInt(bar.style.height.replace("px", ""))))
 							+ "px";
 					this.$emit("change", this.offset);
-
+					if (this.timer != 0)
+					{
+						clearTimeout(this.timer);
+					}
+					this.timer = setTimeout(()=>
+					{
+						this.barVisible = false;
+					}, 1000);
 				}
 			}
 		},
@@ -137,17 +143,19 @@
 
 	.gui-scrollgroup-bar {
 		display: block;
+		width: 6px;
 		background-color: #bababa;
 		position: absolute;
 		opacity: 0.8;
-		z-index: 2;
 		right: 0px;
 		border-radius: 3px;
 	}
+
 	.gui-scrollgroup-content {
 		display: flex;
 		flex-direction: column;
 	}
+
 	.gui-scrollgroup-show-bar-enter-active {
 		transition: all .9s ease;
 	}
@@ -158,7 +166,6 @@
 
 	.gui-scrollgroup-show-bar-enter {
 		opacity: 0;
-
 	}
 
 	.gui-scrollgroup-show-bar-leave-active {

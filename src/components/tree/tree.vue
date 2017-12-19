@@ -1,17 +1,18 @@
 <template>
-	<ul >
+	<ul class="tree-wrap">
 		<li v-for="itemData in list">
 			<div>
 				<span @click="onClick_item(itemData,$event)" v-show="isShowArrow && isValid(itemData)">
-				<!--<c-icon-->
-						<!--:type="currIdList.indexOf(itemData.id) >= 0 && isValid(itemData)?'bottom-arrow':'right-arrow'"/>-->
+					<i class="diff-trangle"
+					   :class="currIdList.indexOf(itemData.id) >= 0 && isValid(itemData)?'rotateRight':''"></i>
 				</span>
-				<span @click="onClick_icon(itemData)" v-if="showCheckbox">
-				<!--<c-icon :type="checkedChildren.indexOf(itemData.id) >= 0?'square-checked':'square-check'"/>-->
-				</span>
+				<!--<span @click="onClick_icon(itemData)" v-if="showCheckbox">-->
+				<!--<i class="tick-select relative"-->
+				<!--:class="checkedChildren.indexOf(itemData.id) >= 0?'action':''"></i>-->
+				<!--</span>-->
 				<span @click="onClick_item(itemData,$event)">{{itemData.name}}</span>
 			</div>
-			<ul v-show="isValid(itemData) && currIdList.indexOf(itemData.id) >= 0" class="padleft">
+			<ul v-show="isValid(itemData) && currIdList.indexOf(itemData.id) >= 0" class="padleft relative tree-list">
 				<tree-node :data="child" v-for="child in itemData.children" @change="onChange_list"
 						   :checkedList="checkedChildren" :isShowArrow="isShowArrow"></tree-node>
 			</ul>
@@ -30,9 +31,9 @@
 		data(){
 			return {
 				currIdList: [],
-				list: this.listData,
+				list: [],
 				tmpItem: {},
-				checkedChildren: this.checkedList
+				checkedChildren: []
 			}
 		},
 		props: {
@@ -70,7 +71,7 @@
 				]
 			}
 		},
-		watch:{
+		watch: {
 			listData($val)
 			{
 				this.init();
@@ -83,8 +84,9 @@
 		methods: {
 			init()
 			{
-				this.list = __merge({},this.listData);
-				this.checkedChildren = __merge({},this.checkedList);
+				this.list = __merge([], this.listData);
+				this.checkedChildren = __merge([], this.checkedList);
+				trace("this.checkedChildren", this.checkedChildren)
 				for (var item of this.list)
 				{
 					this.checkedAllChildren(item)
@@ -137,11 +139,11 @@
 		}
 	}
 </script>
-<style type="text/css" lang="sass" rel="stylesheet/css">
-	.padleft {
-		padding-left: 40px;
+<style type="text/css" lang="sass" rel="stylesheet/scss">
+	.tree-wrap{
+		color: #000;
+		font-size: 14px;
 	}
-
 	.flex-col {
 		display: flex;
 		flex-direction: column;
