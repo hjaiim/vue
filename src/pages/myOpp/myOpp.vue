@@ -5,6 +5,7 @@
 				<div class="business-form left">
 					<span class="personal-title business-title  left">业务名称</span>
 					<div class="personal-content left relative form-list business-list" @click="onClick_dropListBtn">
+						{{currType}}
 						<span :class="['icon-trangle', isShowBusinessList?'rotate':'']"></span>
 						<ul class="absolute drop-list" v-show="isShowBusinessList">
 							<li v-for="item in typeList" @click="onClick_typeItem(item.id)">{{item.name}}</li>
@@ -14,16 +15,16 @@
 
 				<div class="from-group status-form p-left left">
 					<span class="form-title left">状态</span>
-                    <span class="action-box status-type left" @click="onClick_statusItem(0)">
-                        <i class="pointer " :class="status == 0?'action':''"></i>
+                    <span class="action-box status-type left" @click="onClick_statusItem(1)">
+                        <i class="pointer" :class="statusList.indexOf(1) >= 0?'action':''"></i>
                         <span>审核中</span>
                     </span>
-                    <span class="action-box status-type left" @click="onClick_statusItem(1)">
-                        <i class="pointer " :class="status == 1?'action':''"></i>
+                    <span class="action-box status-type left" @click="onClick_statusItem(-1)">
+                        <i class="pointer" :class="statusList.indexOf(-1)>= 0?'action':''"></i>
                         <span>未通过</span>
                     </span>
                       <span class="action-box status-type left" @click="onClick_statusItem(2)">
-                        <i class="pointer " :class="status == 2?'action':''"></i>
+                        <i class="pointer" :class="statusList.indexOf(2)>= 0?'action':''"></i>
                         <span>已通过</span>
                     </span>
 				</div>
@@ -33,18 +34,20 @@
 					<span class="search-btn active-btn ani-time pointer" @click="onClick_searchBtn">搜索</span>
 					<span class="all-btn active-btn ani-time pointer" @click="onClick_selectAllBtn">全部</span>
 				</div>
-				<div class="date-box p-left left clear">
+				<div class="date-box p-left left">
 					<span class="create-time left">创建时间</span>
-					<div class="date-form left relative pointer" @click="onClick_dateSelect('start')">
-						2017-12-25 00:00:00
+					<div class="date-form left relative pointer" @click="onClick_dateSelect('Start')">
+						{{startDate}}
 						<img :src="g.path.images+'/date-icon.png'" alt="" class="absolute date-icon">
-						<common-date @change="onChange_date" v-model="isShowStartDate" type="hour"></common-date>
+						<common-date @change="onChange_date" :isShowDatePicker="isShowStartDate"
+									 type="hour"></common-date>
 					</div>
 					<span class="date-line left">-</span>
-					<div class="date-form left relative pointer" @click="onClick_dateSelect('end')">
-						2017-12-25 00:00:00
+					<div class="date-form left relative pointer" @click="onClick_dateSelect('End')">
+						{{endDate}}
 						<img :src="g.path.images+'/date-icon.png'" alt="" class="absolute date-icon">
-						<common-date @change="onChange_date" v-model="isShowEndDate" type="hour"></common-date>
+						<common-date @change="onChange_date" :isShowDatePicker="isShowEndDate"
+									 type="hour"></common-date>
 					</div>
 				</div>
 
@@ -91,7 +94,8 @@
 				</div>
 			</div>
 		</div>
-		<opp-detail-pop :isShowPopView="isShowDetailPop" @close="onClose_detailPop"></opp-detail-pop>
+		<business-detail-pop :isShowPopView="isShowDetailPop" @close="onClose_detailPop"
+							 :currId="currId"></business-detail-pop>
 	</com-layout>
 
 </template>
@@ -100,8 +104,9 @@
 	import * as func from "../../js/func"
 	import ComLayout from "../../components/comLayout.vue"
 	import CommonPage from "../../components/page.vue";
-	import OppDetailPop from "../../components/pop/oppDetailPop.vue";
+	import BusinessDetailPop from "../../components/pop/businessDetail.vue";
 	import CommonDate from "../../components/dateBox.vue";
+	var _dateType = "", _params = null;
 	export default{
 		created(){
 			this.routerUpdated();
@@ -109,15 +114,16 @@
 		data(){
 			return {
 				g: g,
-				businessList: [],
 				typeList: [],
-				isShowDetailPop: true,
+				businessList: [],
+				isShowDetailPop: false,
 				isShowStartDate: false,
 				isShowEndDate: false,
+				isShowBusinessList: false,
 				currPage: 1,
-				type: 1,
+				type: -1,
 				statusList: [],
-				startTime: 0,
+				startTime: 1400000000,
 				endTime: g.timeTool.getNowStamp(),
 				companyName: "",
 				currId: 0
@@ -126,14 +132,40 @@
 		components: {
 			ComLayout,
 			CommonPage,
-			OppDetailPop,
+			BusinessDetailPop,
 			CommonDate
+		},
+		computed: {
+			currType()
+			{
+				if (this.type > 0)
+				{
+					return g.data.staticTypePool.getDataById(this.type) &&
+							g.data.staticTypePool.getDataById(this.type).name;
+				}
+				return "全部"
+			},
+			startDate()
+			{
+				return g.timeTool.getFullDate(this.startTime, true);
+			},
+			endDate()
+			{
+				return g.timeTool.getFullDate(this.endTime, true);
+			}
+		},
+		watch: {
+			isShowStartDate($val)
+			{
+				trace("$val", $val);
+			}
 		},
 		methods: {
 			init()
 			{
 				this.currPage = 1;
 				this.statusList = [-1, 1, 2];
+				this.type = -1;
 				this.startTime = 1400000000;
 				this.endTime = g.timeTool.getNowStamp();
 				this.creatorName = "";
@@ -141,16 +173,22 @@
 			},
 			routerUpdated()
 			{
+				this.typeList = g.data.staticTypePool.list;
 				this.businessList = g.data.searchBusinessPool.list;
 				this.currPage = int(g.vue.getQuery("page", 1));
-				this.type = g.vue.getQuery("type", 1);
-				this.statusList = g.vue.getQuery("status", [-1, 1, 2]);
+				this.type = g.vue.getQuery("type", -1);
+				var statusList = g.vue.getQuery("statusList", "[1,-1,2]");
+				this.statusList = JSON.parse(statusList).map(function (item)
+				{
+					return int(item);
+				});
 				this.startTime = g.vue.getQuery("startTime", 1400000000);
 				this.endTime = g.vue.getQuery("endTime", g.timeTool.getNowStamp());
-				this.creatorName = g.vue.getQuery("creatorName", 1);
-				this.companyName = g.vue.getQuery("companyName", 1);
+				this.creatorName = g.vue.getQuery("creatorName", "");
+				this.companyName = g.vue.getQuery("companyName", "");
 			},
-			onClose_detailPop(){
+			onClose_detailPop()
+			{
 				this.isShowDetailPop = false;
 			},
 			onClick_dropListBtn()
@@ -163,15 +201,32 @@
 				{
 					this.isShowBusinessList = true;
 				}
+				this.isShowEndDate = false;
+				this.isShowStartDate = false;
+
+			},
+			onClick_typeItem($type)
+			{
+				this.type = $type;
+				this.isShowBusinessList = false;
 			},
 			onClick_statusItem($status)
 			{
-				this.status = $status;
+				var index = this.statusList.indexOf($status);
+				if (index >= 0)
+				{
+					this.statusList.splice(index, 1);
+				}
+				else
+				{
+					this.statusList.push($status);
+				}
 			},
 			onClick_dateSelect($type)
 			{
-
-				this['isShow' + func.firstUpperCase($type) + 'Date'] = true;
+				_dateType = $type;
+				this.isShowBusinessList = false;
+				this['isShow' + $type + 'Date'] = true;
 			},
 			onClick_searchBtn()
 			{
@@ -189,13 +244,20 @@
 			},
 			onClick_detailBtn($id)
 			{
-				if (g.data.businessPool.hasDetail($id))
+				if (g.data.searchBusinessPool.hasDetail($id))
 				{
+					this.currId = $id;
 					this.isShowDetailPop = true;
 				}
 				else
 				{
-
+					_params = {orderId: $id};
+					g.net.call("bo/viewOrderDetail", _params).then(($data) =>
+					{
+						g.data.searchBusinessPool.getDataById($id).update($data);
+						this.currId = $id;
+						this.isShowDetailPop = true;
+					})
 				}
 			},
 			onClick_editBtn($id)
@@ -215,7 +277,7 @@
 					path: "/myopp",
 					query: {
 						page: this.currPage,
-						status: this.status,
+						statusList: JSON.stringify(this.statusList),
 						startTime: this.startTime,
 						endTime: this.endTime,
 						creatorName: this.creatorName,
@@ -225,8 +287,12 @@
 			},
 			onChange_date($timeStamp)
 			{
-				trace('$timeStamp=====', $timeStamp);
-			},
+				this[_dateType.toLowerCase() + 'Time'] = $timeStamp;
+				this.isShowStartDate = false;
+				this.isShowEndDate = false;
+				_dateType = "";
+				trace(this.isShowStartDate);
+			}
 		}
 	}
 </script>

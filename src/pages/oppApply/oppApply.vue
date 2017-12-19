@@ -162,9 +162,8 @@
 							   :errmsg="errData.remark"
 							   @focus="onFocus_inputBar('remark')"></input-bar>
 				</div>
-
 			</div>
-			<!--续联业务-->
+			<!--全流通业务-->
 			<div v-if="type==2">
 				<div class="personal-form">
 					<span class="personal-title left">客户类别</span>
@@ -181,61 +180,36 @@
 							   :errmsg="errData.businessDesc"
 							   @focus="onFocus_inputBar('businessDesc')"></input-bar>
 				</div>
-				<div class="personal-form">
-					<span class="personal-title left">预计业务规模</span>
-					<input-bar class="personal-content pensonal-input left" placeholder=""
-							   type="text" v-model="formData.businessScale"
-							   :errmsg="errData.businessScale"
-							   @focus="onFocus_inputBar('businessScale')"></input-bar>
-				</div>
-				<div class="personal-form">
-					<span class="personal-title left">报价</span>
-					<input-bar class="personal-content pensonal-input left" placeholder=""
-							   type="text" v-model="formData.budget"
-							   :errmsg="errData.budget"
-							   @focus="onFocus_inputBar('budget')"></input-bar>
-					<span class="explain">续联使用费和CTD分开报价（续联使用费：5元/次；CTD指导报价：本地0.1元/分钟，异地0.15元/分钟）</span>
-				</div>
-				<div class="personal-form">
-					<span class="personal-title left">其他说明</span>
-					<input-bar class="personal-content pensonal-input left large-input" placeholder=""
-							   type="text" v-model="formData.remark"
-							   :errmsg="errData.remark"
-							   @focus="onFocus_inputBar('remark')"></input-bar>
-				</div>
-			</div>
-			<!--声音名片业务-->
-			<div v-if="type==3">
 
 				<div class="personal-form">
-					<span class="personal-title left">业务用途及场景</span>
-					<input-bar class="personal-content pensonal-input left large-input" placeholder="" type="text"
-							   v-model="formData.businessDesc"
-							   :errmsg="errData.businessDesc"
-							   @focus="onFocus_inputBar('businessDesc')"></input-bar>
+					<span class="personal-title left">对接方式</span>
+					<input-bar class="personal-content pensonal-input left" placeholder=""
+							   type="text" v-model="formData.accessMethod"
+							   :errmsg="errData.accessMethod"
+							   @focus="onFocus_inputBar('accessMethod')"></input-bar>
+					<span class="explain">接口发起还是Web发起（零售方式）</span>
 				</div>
 				<div class="personal-form">
-					<span class="personal-title left">预计开通数量</span>
-					<input-bar class="personal-content pensonal-input left" placeholder=""
-							   type="text" v-model="formData.accessNum"
-							   :errmsg="errData.accessNum"
-							   @focus="onFocus_inputBar('accessNum')"></input-bar>
+					<span class="personal-title left">使用流量类型</span>
+					<input-bar class="personal-content pensonal-input left large-input" placeholder=""
+							   type="text" v-model="formData.flowType"
+							   :errmsg="errData.flowType"
+							   @focus="onFocus_inputBar('flowType')"></input-bar>
+					<span class="explain">单网还是三网，单网是哪个网别，三网各多少额度</span>
 				</div>
 				<div class="personal-form">
-					<span class="personal-title left">报价</span>
-					<input-bar class="personal-content pensonal-input left" placeholder=""
-							   type="text" v-model="formData.budget"
-							   :errmsg="errData.budget"
-							   @focus="onFocus_inputBar('budget')"></input-bar>
-					<span class="explain">标准价：60元/户/年</span>
+					<span class="personal-title left">预计入账收入</span>
+					<input-bar class="personal-content pensonal-input left large-input" placeholder=""
+							   type="text" v-model="formData.income"
+							   :errmsg="errData.income"
+							   @focus="onFocus_inputBar('income')"></input-bar>
 				</div>
 				<div class="personal-form">
-					<span class="personal-title left">付款方式</span>
-					<input-bar class="personal-content pensonal-input left" placeholder=""
-							   type="text" v-model="formData.payway"
-							   :errmsg="errData.payway"
-							   @focus="onFocus_inputBar('payway')"></input-bar>
-					<span class="explain">预付费/后付费</span>
+					<span class="personal-title left">折扣说明</span>
+					<input-bar class="personal-content pensonal-input left large-input" placeholder=""
+							   type="text" v-model="formData.discount"
+							   :errmsg="errData.discount"
+							   @focus="onFocus_inputBar('discount')"></input-bar>
 				</div>
 				<div class="personal-form">
 					<span class="personal-title left">其他说明</span>
@@ -243,10 +217,11 @@
 							   type="text" v-model="formData.remark"
 							   :errmsg="errData.remark"
 							   @focus="onFocus_inputBar('remark')"></input-bar>
+					<span class="explain">是否需要配置流量营销活动，如大转盘等</span>
 				</div>
 			</div>
 			<!--全数通业务-->
-			<div v-if="type==4">
+			<div v-if="type==3">
 				<div class="personal-form">
 					<span class="personal-title left">客户类别</span>
 					<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
@@ -308,8 +283,8 @@
 							   @focus="onFocus_inputBar('remark')"></input-bar>
 				</div>
 			</div>
-			<!--全流通业务-->
-			<div v-if="type==5">
+			<!--续联业务-->
+			<div v-if="type==4">
 				<div class="personal-form">
 					<span class="personal-title left">客户类别</span>
 					<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
@@ -325,36 +300,20 @@
 							   :errmsg="errData.businessDesc"
 							   @focus="onFocus_inputBar('businessDesc')"></input-bar>
 				</div>
-
 				<div class="personal-form">
-					<span class="personal-title left">对接方式</span>
+					<span class="personal-title left">预计业务规模</span>
 					<input-bar class="personal-content pensonal-input left" placeholder=""
-							   type="text" v-model="formData.accessMethod"
-							   :errmsg="errData.accessMethod"
-							   @focus="onFocus_inputBar('accessMethod')"></input-bar>
-					<span class="explain">接口发起还是Web发起（零售方式）</span>
+							   type="text" v-model="formData.businessScale"
+							   :errmsg="errData.businessScale"
+							   @focus="onFocus_inputBar('businessScale')"></input-bar>
 				</div>
 				<div class="personal-form">
-					<span class="personal-title left">使用流量类型</span>
-					<input-bar class="personal-content pensonal-input left large-input" placeholder=""
-							   type="text" v-model="formData.flowType"
-							   :errmsg="errData.flowType"
-							   @focus="onFocus_inputBar('flowType')"></input-bar>
-					<span class="explain">单网还是三网，单网是哪个网别，三网各多少额度</span>
-				</div>
-				<div class="personal-form">
-					<span class="personal-title left">预计入账收入</span>
-					<input-bar class="personal-content pensonal-input left large-input" placeholder=""
-							   type="text" v-model="formData.income"
-							   :errmsg="errData.income"
-							   @focus="onFocus_inputBar('income')"></input-bar>
-				</div>
-				<div class="personal-form">
-					<span class="personal-title left">折扣说明</span>
-					<input-bar class="personal-content pensonal-input left large-input" placeholder=""
-							   type="text" v-model="formData.discount"
-							   :errmsg="errData.discount"
-							   @focus="onFocus_inputBar('discount')"></input-bar>
+					<span class="personal-title left">报价</span>
+					<input-bar class="personal-content pensonal-input left" placeholder=""
+							   type="text" v-model="formData.budget"
+							   :errmsg="errData.budget"
+							   @focus="onFocus_inputBar('budget')"></input-bar>
+					<span class="explain">续联使用费和CTD分开报价（续联使用费：5元/次；CTD指导报价：本地0.1元/分钟，异地0.15元/分钟）</span>
 				</div>
 				<div class="personal-form">
 					<span class="personal-title left">其他说明</span>
@@ -362,9 +321,50 @@
 							   type="text" v-model="formData.remark"
 							   :errmsg="errData.remark"
 							   @focus="onFocus_inputBar('remark')"></input-bar>
-					<span class="explain">是否需要配置流量营销活动，如大转盘等</span>
 				</div>
 			</div>
+			<!--声音名片业务-->
+			<div v-if="type==5">
+
+				<div class="personal-form">
+					<span class="personal-title left">业务用途及场景</span>
+					<input-bar class="personal-content pensonal-input left large-input" placeholder="" type="text"
+							   v-model="formData.businessDesc"
+							   :errmsg="errData.businessDesc"
+							   @focus="onFocus_inputBar('businessDesc')"></input-bar>
+				</div>
+				<div class="personal-form">
+					<span class="personal-title left">预计开通数量</span>
+					<input-bar class="personal-content pensonal-input left" placeholder=""
+							   type="text" v-model="formData.accessNum"
+							   :errmsg="errData.accessNum"
+							   @focus="onFocus_inputBar('accessNum')"></input-bar>
+				</div>
+				<div class="personal-form">
+					<span class="personal-title left">报价</span>
+					<input-bar class="personal-content pensonal-input left" placeholder=""
+							   type="text" v-model="formData.budget"
+							   :errmsg="errData.budget"
+							   @focus="onFocus_inputBar('budget')"></input-bar>
+					<span class="explain">标准价：60元/户/年</span>
+				</div>
+				<div class="personal-form">
+					<span class="personal-title left">付款方式</span>
+					<input-bar class="personal-content pensonal-input left" placeholder=""
+							   type="text" v-model="formData.payway"
+							   :errmsg="errData.payway"
+							   @focus="onFocus_inputBar('payway')"></input-bar>
+					<span class="explain">预付费/后付费</span>
+				</div>
+				<div class="personal-form">
+					<span class="personal-title left">其他说明</span>
+					<input-bar class="personal-content pensonal-input left large-input" placeholder=""
+							   type="text" v-model="formData.remark"
+							   :errmsg="errData.remark"
+							   @focus="onFocus_inputBar('remark')"></input-bar>
+				</div>
+			</div>
+
 			<div>
 				<div class="personal-form">
 					<span class="personal-title left">上传附件</span>

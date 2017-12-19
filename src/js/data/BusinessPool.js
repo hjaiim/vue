@@ -122,6 +122,7 @@ function updateData($dObj, $recordId)
 	$dObj.hasOwnProperty("flowName") && (this.flowName = $dObj.flowName);
 	$dObj.hasOwnProperty("auditStatus") && (this.auditStatus = $dObj.auditStatus);
 	$dObj.hasOwnProperty("auditStatusDesc") && (this.auditStatusDesc = $dObj.auditStatusDesc);
+	$dObj.hasOwnProperty("boFormData") && (this.formData = JSON.parse($dObj.boFormData));
 	$dObj.hasOwnProperty("auditStage") && (this.auditStage = $dObj.auditStage);
 	$dObj.hasOwnProperty("attachs") && (this.attachList = $dObj.attachs);
 	$dObj.hasOwnProperty("creatorId") && (this.creatorId = $dObj.creatorId);

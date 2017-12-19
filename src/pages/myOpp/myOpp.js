@@ -63,7 +63,7 @@ function updateData($dObj)
 		return;
 	}
 	$dObj.hasOwnProperty("customerName") && (this.comName = $dObj.customerName);
-	$dObj.hasOwnProperty("statusList") && (this.auditStatusList =$dObj.statusList.join(','));
+	$dObj.hasOwnProperty("statusList") && (this.auditStatusList =JSON.parse($dObj.statusList).join(','));
 	$dObj.hasOwnProperty("startTime") && (this.startTime = $dObj.startTime);
 	$dObj.hasOwnProperty("endTime") && (this.endTime = $dObj.endTime);
 	$dObj.hasOwnProperty("creatorName") && (this.creatorName = $dObj.creatorName);

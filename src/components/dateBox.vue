@@ -1,5 +1,5 @@
 <template>
-	<div class="laydate-box" v-show="value">
+	<div class="laydate-box" v-show="isShowDatePicker">
 		<div class="laydate-top" :class="theme">
 			<div class="laydate-ym">
 				<div @click="onClick_dateSelect('Year')" class="laydate-year">
@@ -120,8 +120,7 @@
 				pops: {},
 				date: {},
 				currMonth: 0,
-				yearList: [],
-				isShowDatePicker: this.value
+				yearList: []
 			}
 		},
 		filters: {
@@ -131,9 +130,9 @@
 			}
 		},
 		props: {
-			value: {
+			isShowDatePicker: {
 				type: Boolean,
-				default: true
+				default: false
 			},
 			type: {
 				type: String,
@@ -156,6 +155,12 @@
 				default: 'color-pinky'
 			}
 
+		},
+		watch:{
+			isShowDatePicker($val)
+			{
+				trace("isShowDatePicker",this.isShowDatePicker)
+			}
 		},
 		computed: {
 			weekNum()
@@ -411,10 +416,6 @@
 						}
 					}
 				}
-			},
-			setDefaultDate()
-			{
-
 			}
 		}
 	}

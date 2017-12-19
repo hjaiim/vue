@@ -7,313 +7,13 @@
 				<div class="company-message no-border opp-content" is="scroll-group">
 					<div>
 						<h3 class="opp-title">商机内容</h3>
-						<!--CTD业务-->
-						<div v-if="oppType ==1">
-							<p class="from-group left detail-custer-msg">
-								<span class="form-title">业务名称</span>
-								<span class="form-trap">CTD业务</span>
-							</p>
-							<p class="from-group left detail-custer-msg">
-								<span class="form-title">客户公司名称</span>
-								<span class="form-trap">杭州幻舞科技</span>
-							</p>
-							<p class="from-group left detail-custer-msg">
-								<span class="form-title">客户联系人</span>
-								<span class="form-trap">马云</span>
-							</p>
-							<p class="from-group left detail-custer-msg">
+						<business-type-1 v-if="oppType==1" :formData="formData"></business-type-1>
+						<business-type-2 v-if="oppType==2" :formData="formData"></business-type-2>
+						<business-type-3 v-if="oppType==3" :formData="formData"></business-type-3>
+						<business-type-4 v-if="oppType==4" :formData="formData"></business-type-4>
+						<business-type-5 v-if="oppType==5" :formData="formData"></business-type-5>
+						<div>
 
-								<span class="form-title">客户联系电话</span>
-								<span class="form-trap">135****1234</span>
-							</p>
-							<p class="from-group clear">
-								<span class="form-title left">客户公司地址</span>
-								<span class="form-trap left address-width">商公司地址杭州市, consectetur adipiscing elit. Aenean euismod bibendum,consectetur adipiscing elit. Aenean euismod bibendum </span>
-							</p>
-							<p class="from-group clear">
-								<span class="form-title left">客户公司介绍</span>
-								<span class="form-trap left address-width">商公司地址杭州市, consectetur adipiscing elit. Aenean euismod bibendum 商公司地址杭州市, consectetur</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">客户类别</span>
-								<span class="form-trap">代理类</span>
-							</p>
-							<p class="from-group clear">
-								<span class="form-title left">业务用途及场景</span>
-								<span class="form-trap left address-width">办公电话</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">对接方式</span>
-								<span class="form-trap">总部对接</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">呼叫模式</span>
-								<span class="form-trap">双呼</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">发起方式</span>
-								<span class="form-trap">APP发起sit amet, consectetur adipiscing elit. Aenean euismod bibe</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">呼叫范围</span>
-								<span class="form-trap">全国三网手机和固话，开通本地、长途，不开通国际权限</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">是否呼叫</span>
-								<span class="form-trap">是</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">是否转接</span>
-								<span class="form-trap">否</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">测试码号需求</span>
-								<span class="form-trap">**地市**个号码</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">预计业务规模</span>
-								<span class="form-trap"> **万分钟/月  **万分钟/月 </span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">报价</span>
-								<span class="form-trap">本地**元/分钟</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title left">其他说明</span>
-								<span class="form-trap left address-width">其他说明, consectetur adipiscing elit. Aenean euismod bibendum 商公司地址杭州市, consectetur</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">附件下载</span>
-								<span class="form-trap file-download pointer">合同文件.doc</span>
-								<span class="form-trap file-download pointer">合同细节.doc</span>
-							</p>
-						</div>
-						<!--续联业务-->
-						<div v-if="oppType ==2">
-							<p class="from-group left detail-custer-msg">
-								<span class="form-title">业务名称</span>
-								<span class="form-trap">续联业务</span>
-							</p>
-							<p class="from-group left detail-custer-msg">
-								<span class="form-title">客户公司名称</span>
-								<span class="form-trap">杭州幻舞科技</span>
-							</p>
-							<p class="from-group left detail-custer-msg">
-								<span class="form-title">客户联系人</span>
-								<span class="form-trap">马云</span>
-							</p>
-							<p class="from-group left detail-custer-msg">
-
-								<span class="form-title">客户联系电话</span>
-								<span class="form-trap">135****1234</span>
-							</p>
-							<p class="from-group clear">
-								<span class="form-title left">客户公司地址</span>
-								<span class="form-trap left address-width">商公司地址杭州市, consectetur adipiscing elit. Aenean euismod bibendum,consectetur adipiscing elit. Aenean euismod bibendum </span>
-							</p>
-							<p class="from-group clear">
-								<span class="form-title left">客户公司介绍</span>
-								<span class="form-trap left address-width">商公司地址杭州市, consectetur adipiscing elit. Aenean euismod bibendum 商公司地址杭州市, consectetur</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">客户类别</span>
-								<span class="form-trap">代理类</span>
-							</p>
-							<p class="from-group clear">
-								<span class="form-title left">业务用途及场景</span>
-								<span class="form-trap left address-width">办公电话的咖啡广东省高科技股份反而覅而且热if二天河口儿童房卡IE我日特我定个蛋糕费到</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">预计业务规模</span>
-								<span class="form-trap">的飞洒发大厦</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">报价</span>
-								<span class="form-trap">续联使用费</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title left">其他说明</span>
-								<span class="form-trap left address-width">其他说明, consectetur adipiscing elit. Aenean euismod bibendum 商公司地址杭州市, consectetur</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">附件下载</span>
-								<span class="form-trap file-download pointer">合同文件.doc</span>
-								<span class="form-trap file-download pointer">合同细节.doc</span>
-							</p>
-						</div>
-						<!--声音名片业务-->
-						<div v-if="oppType ==3">
-							<p class="from-group left detail-custer-msg">
-								<span class="form-title">业务名称</span>
-								<span class="form-trap">声音名片业务</span>
-							</p>
-							<p class="from-group left detail-custer-msg">
-								<span class="form-title">客户公司名称</span>
-								<span class="form-trap">杭州幻舞科技</span>
-							</p>
-							<p class="from-group left detail-custer-msg">
-								<span class="form-title">客户联系人</span>
-								<span class="form-trap">马云</span>
-							</p>
-							<p class="from-group left detail-custer-msg">
-
-								<span class="form-title">客户联系电话</span>
-								<span class="form-trap">135****1234</span>
-							</p>
-							<p class="from-group clear">
-								<span class="form-title left">客户公司地址</span>
-								<span class="form-trap left address-width">商公司地址杭州市, consectetur adipiscing elit. Aenean euismod bibendum,consectetur adipiscing elit. Aenean euismod bibendum </span>
-							</p>
-							<p class="from-group clear">
-								<span class="form-title left">客户公司介绍</span>
-								<span class="form-trap left address-width">商公司地址杭州市, consectetur adipiscing elit. Aenean euismod bibendum 商公司地址杭州市, consectetur</span>
-							</p>
-							<p class="from-group clear">
-								<span class="form-title left">业务用途及场景</span>
-								<span class="form-trap left address-width">办公电话的咖啡广东省高科技股份反而覅而且热if二天河口儿童房卡IE我日特我定个蛋糕费到</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">预计开通数量</span>
-								<span class="form-trap">10000</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">报价</span>
-								<span class="form-trap">123</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">付费方式</span>
-								<span class="form-trap">预付费</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title left">其他说明</span>
-								<span class="form-trap left address-width">其他说明, consectetur adipiscing elit. Aenean euismod bibendum 商公司地址杭州市, consectetur</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">附件下载</span>
-								<span class="form-trap file-download pointer">合同文件.doc</span>
-								<span class="form-trap file-download pointer">合同细节.doc</span>
-							</p>
-						</div>
-						<!--全数通业务-->
-						<div v-if="oppType ==4">
-							<p class="from-group left detail-custer-msg">
-								<span class="form-title">业务名称</span>
-								<span class="form-trap">全数通业务</span>
-							</p>
-							<p class="from-group left detail-custer-msg">
-								<span class="form-title">客户公司名称</span>
-								<span class="form-trap">杭州幻舞科技</span>
-							</p>
-							<p class="from-group left detail-custer-msg">
-								<span class="form-title">客户联系人</span>
-								<span class="form-trap">马云</span>
-							</p>
-							<p class="from-group left detail-custer-msg">
-
-								<span class="form-title">客户联系电话</span>
-								<span class="form-trap">135****1234</span>
-							</p>
-							<p class="from-group clear">
-								<span class="form-title left">客户公司地址</span>
-								<span class="form-trap left address-width">商公司地址杭州市, consectetur adipiscing elit. Aenean euismod bibendum,consectetur adipiscing elit. Aenean euismod bibendum </span>
-							</p>
-							<p class="from-group clear">
-								<span class="form-title left">客户公司介绍</span>
-								<span class="form-trap left address-width">商公司地址杭州市, consectetur adipiscing elit. Aenean euismod bibendum 商公司地址杭州市, consectetur</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">客户类别</span>
-								<span class="form-trap">代理类</span>
-							</p>
-							<p class="from-group clear">
-								<span class="form-title left">业务用途及场景</span>
-								<span class="form-trap left address-width">办公电话的咖啡广东省高科技股份反而覅而且热if二天河口儿童房卡IE我日特我定个蛋糕费到</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">产品类型</span>
-								<span class="form-trap">三要素验证</span>
-							</p>
-							<p class="from-group clear">
-								<span class="form-title left">使用数据类别</span>
-								<span class="form-trap left address-width">办公电话的咖啡广东省高科技股份反而覅而且热if二天河口儿童房卡IE我日特我定个蛋糕费到</span>
-							</p>
-							<p class="from-group clear">
-								<span class="form-title left">预计业务规模</span>
-								<span class="form-trap left address-width">对法拉伐</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">报价</span>
-								<span class="form-trap">123</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">付费方式</span>
-								<span class="form-trap">预付费</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title left">其他说明</span>
-								<span class="form-trap left address-width">其他说明, consectetur adipiscing elit. Aenean euismod bibendum 商公司地址杭州市, consectetur</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">附件下载</span>
-								<span class="form-trap file-download pointer">合同文件.doc</span>
-								<span class="form-trap file-download pointer">合同细节.doc</span>
-							</p>
-						</div>
-						<!--全流通业务-->
-						<div v-if="oppType ==5">
-							<p class="from-group left detail-custer-msg">
-								<span class="form-title">业务名称</span>
-								<span class="form-trap">全流通业务</span>
-							</p>
-							<p class="from-group left detail-custer-msg">
-								<span class="form-title">客户公司名称</span>
-								<span class="form-trap">杭州幻舞科技</span>
-							</p>
-							<p class="from-group left detail-custer-msg">
-								<span class="form-title">客户联系人</span>
-								<span class="form-trap">马云</span>
-							</p>
-							<p class="from-group left detail-custer-msg">
-
-								<span class="form-title">客户联系电话</span>
-								<span class="form-trap">135****1234</span>
-							</p>
-							<p class="from-group clear">
-								<span class="form-title left">客户公司地址</span>
-								<span class="form-trap left address-width">商公司地址杭州市, consectetur adipiscing elit. Aenean euismod bibendum,consectetur adipiscing elit. Aenean euismod bibendum </span>
-							</p>
-							<p class="from-group clear">
-								<span class="form-title left">客户公司介绍</span>
-								<span class="form-trap left address-width">商公司地址杭州市, consectetur adipiscing elit. Aenean euismod bibendum 商公司地址杭州市, consectetur</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">客户类别</span>
-								<span class="form-trap">代理类</span>
-							</p>
-							<p class="from-group clear">
-								<span class="form-title left">业务用途及场景</span>
-								<span class="form-trap left address-width">办公电话的咖啡广东省高科技股份反而覅而且热if二天河口儿童房卡IE我日特我定个蛋糕费到</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title">对接方式</span>
-								<span class="form-trap">总部对接</span>
-							</p>
-							<p class="from-group clear">
-								<span class="form-title left">使用流量类别</span>
-								<span class="form-trap left address-width">办公电话的咖啡广东省高科技股份反而覅而且热if二天河口儿童房卡IE我日特我定个蛋糕费到</span>
-							</p>
-							<p class="from-group clear">
-								<span class="form-title left">预计入账收入</span>
-								<span class="form-trap left address-width">发哦发放卡怪费按房间酒瓯噶该法规发生</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title left">折扣说明</span>
-								<span class="form-trap left address-width">其他说明, consectetur adipiscing elit. Aenean euismod bibendum 商公司地址杭州市, consectetur</span>
-							</p>
-							<p class="from-group">
-								<span class="form-title left">其他说明</span>
-								<span class="form-trap left address-width">其他说明, consectetur adipiscing elit. Aenean euismod bibendum 商公司地址杭州市, consectetur</span>
-							</p>
 							<p class="from-group">
 								<span class="form-title">附件下载</span>
 								<span class="form-trap file-download pointer">合同文件.doc</span>
@@ -321,6 +21,8 @@
 							</p>
 						</div>
 					</div>
+
+
 					<div>
 						<h3 class="opp-title">审核详情</h3>
 						<div v-if="type==1">
@@ -407,26 +109,60 @@
 <script type="text/ecmascript-6">
 	import g from "../../global";
 	import ViewPopup from "../viewPop.vue";
-	import ScrollGroup from "../scrollGroup.vue"
+	import ScrollGroup from "../scrollGroup.vue";
+	import BusinessType1 from "../../components/businessDetail/businessType_1.vue";
+	import BusinessType2 from "../../components/businessDetail/businessType_2.vue";
+	import BusinessType3 from "../../components/businessDetail/businessType_3.vue";
+	import BusinessType4 from "../../components/businessDetail/businessType_4.vue";
+	import BusinessType5 from "../../components/businessDetail/businessType_5.vue";
 	export default{
+		created()
+		{
+			this.init();
+		},
 		data(){
 			return {
 				g: g,
 				type: 1,
 				oppType: 1,
+				formData: {}
 			}
 		},
 		components: {
 			ViewPopup,
-			ScrollGroup
+			ScrollGroup,
+			BusinessType1,
+			BusinessType2,
+			BusinessType3,
+			BusinessType4,
+			BusinessType5
 		},
 		props: {
 			isShowPopView: {
 				type: Boolean,
 				default: false
+			},
+			currId: {
+				default: 0
+			}
+		},
+		watch: {
+			currId()
+			{
+				this.init();
 			}
 		},
 		methods: {
+			init()
+			{
+				if (this.currId)
+				{
+					this.businessData = g.data.searchBusinessPool.getDataById(this.currId);
+					this.formData = this.businessData.formData;
+					this.oppType = this.businessData.type;
+					trace("this.businessData",this.businessData);
+				}
+			},
 			onClose_pop(){
 				this.$emit('close');
 
@@ -446,7 +182,7 @@
 			max-height: 600px;
 			overflow: hidden;
 		}
-		.detail-wrap{
+		.detail-wrap {
 			padding-bottom: 45px;
 		}
 	}

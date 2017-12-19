@@ -5,9 +5,10 @@
 				<div class="business-form left" ref="businessType">
 					<span class="personal-title business-title  left">业务名称</span>
 					<div class="personal-content left relative form-list business-list" @click="onClick_dropListBtn">
+						{{currType}}
 						<span :class="['icon-trangle', isShowBusinessList?'rotate':'']"></span>
 						<ul class="absolute drop-list" v-show="isShowBusinessList">
-							<li @click="onClick_typeItem(item.id)" v-for="item in typeList">{{item.name}}</li>
+							<li @click.stop="onClick_typeItem(item.id)" v-for="item in typeList">{{item.name}}</li>
 						</ul>
 					</div>
 				</div>
@@ -27,19 +28,21 @@
                         <span>已通过</span>
                     </span>
 				</div>
+
 				<div class="date-box p-left left">
 					<span class="create-time left">创建时间</span>
-					<div class="date-form left relative pointer" @click="onClick_dateSelect('start')">
-						2017-12-25 00:00:00
+					<div class="date-form left relative pointer" @click="onClick_dateSelect('Start')">
+						{{startDate}}
 						<img :src="g.path.images+'/date-icon.png'" alt="" class="absolute date-icon">
-						<common-date @change="onChange_date" v-model="isShowStartDate" type="hour"></common-date>
+						<common-date @change="onChange_date" :isShowDatePicker="isShowStartDate"
+									 type="hour"></common-date>
 
 					</div>
 					<span class="date-line left">-</span>
-					<div class="date-form left relative pointer" @click="onClick_dateSelect('end')">
-						2017-12-25 00:00:00
+					<div class="date-form left relative pointer" @click="onClick_dateSelect('End')">
+						{{endDate}}
 						<img :src="g.path.images+'/date-icon.png'" alt="" class="absolute date-icon">
-						<common-date @change="onChange_date" v-model="isShowEndDate" type="hour"></common-date>
+						<common-date @change="onChange_date" :isShowDatePicker="isShowEndDate" type="hour"></common-date>
 					</div>
 				</div>
 				<div class="search-box search-size left clear clearfix">
@@ -123,6 +126,8 @@
 	import BusinessDetailPop from "../../components/pop/businessDetail.vue";
 	import InputBar from "../../components/inputBar.vue";
 	import CommonDate from "../../components/dateBox.vue";
+
+	var _dateType = "", _params = null;
 	export default{
 		created(){
 			this.routerUpdated();
@@ -133,6 +138,7 @@
 				businessList: [],
 				typeList: [],
 				isShowDetailPop: false,
+				isShowBusinessList: false,
 				currPage: 1,
 				isShowStartDate: false,
 				isShowEndDate: false,
@@ -152,11 +158,31 @@
 			InputBar,
 			CommonDate
 		},
+		computed: {
+			currType()
+			{
+				if (this.type > 0)
+				{
+					return g.data.staticTypePool.getDataById(this.type) &&
+							g.data.staticTypePool.getDataById(this.type).name;
+				}
+				return "全部"
+
+			},
+			startDate()
+			{
+				return g.timeTool.getFullDate(this.startTime, true);
+			},
+			endDate()
+			{
+				return g.timeTool.getFullDate(this.endTime, true);
+			}
+		},
 		methods: {
 			init()
 			{
 				this.currPage = 1;
-				this.type = 1;
+				this.type = -1;
 				this.statusList = [1, -1, 2];
 				this.startTime = 1400000000;
 				this.endTime = g.timeTool.getNowStamp();
@@ -165,10 +191,15 @@
 			},
 			routerUpdated()
 			{
+				this.typeList = g.data.staticTypePool.list;
 				this.businessList = g.data.searchBusinessPool.list;
 				this.currPage = int(g.vue.getQuery("page", 1));
-				this.type = g.vue.getQuery("type", 1);
-				this.statusList = g.vue.getQuery("statusList", [1, -1, 2]);
+				this.type = g.vue.getQuery("type", -1);
+				var statusList = g.vue.getQuery("statusList", "[1,-1,2]");
+				this.statusList = JSON.parse(statusList).map(function (item)
+				{
+					return int(item);
+				});
 				this.startTime = g.vue.getQuery("startTime", 1400000000);
 				this.endTime = g.vue.getQuery("endTime", g.timeTool.getNowStamp());
 				this.creatorName = g.vue.getQuery("creatorName", "");
@@ -184,10 +215,13 @@
 				{
 					this.isShowBusinessList = true;
 				}
+				this.isShowStartDate = false;
+				this.isShowEndDate = false;
 			},
 			onClick_typeItem($type)
 			{
 				this.type = $type;
+				this.isShowBusinessList = false;
 			},
 			onClick_statusItem($status)
 			{
@@ -200,12 +234,11 @@
 				{
 					this.statusList.push($status);
 				}
-				trace("this.statusList", this.statusList);
 			},
 			onClick_dateSelect($type)
 			{
-
-				this['isShow' + func.firstUpperCase($type) + 'Date'] = true;
+				_dateType = $type;
+				this['isShow' + $type + 'Date'] = true;
 			},
 			onClick_searchBtn()
 			{
@@ -223,12 +256,20 @@
 			},
 			onClick_detailBtn($id)
 			{
-				if (g.data.businessPool.hasDetail($id))
+				if (g.data.searchBusinessPool.hasDetail($id))
 				{
+					this.currId = $id;
 					this.isShowDetailPop = true;
 				}
 				else
 				{
+					_params = {orderId: $id};
+					g.net.call("bo/viewOrderDetail", _params).then(($data) =>
+					{
+						g.data.searchBusinessPool.getDataById($id).update($data);
+						this.currId = $id;
+						this.isShowDetailPop = true;
+					})
 				}
 			},
 			onClick_editBtn()
@@ -248,7 +289,7 @@
 					query: {
 						page: this.currPage,
 						type: this.type,
-						statusList: this.statusList,
+						statusList: JSON.stringify(this.statusList),
 						startTime: this.startTime,
 						endTime: this.endTime,
 						creatorName: this.creatorName,
@@ -258,7 +299,10 @@
 			},
 			onChange_date($timeStamp)
 			{
-				trace('$timeStamp=====', $timeStamp);
+				this[_dateType.toLowerCase() + 'Time'] = $timeStamp;
+				this.isShowStartDate = false;
+				this.isShowEndDate = false;
+				_dateType = "";
 			},
 		}
 	}
