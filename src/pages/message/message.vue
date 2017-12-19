@@ -88,7 +88,6 @@
 				g: g,
 				currId: 0,
 				isShowDetailPop: false,
-
 				msgList: [],
 				isShowAllDeletePop: false
 			}

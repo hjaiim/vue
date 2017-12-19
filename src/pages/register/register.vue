@@ -11,7 +11,7 @@
 			<form-input type="password" placeholder="请再次确认输入" v-model="confirmPwd"
 						@focus="onFocus_formInput('confirmPwd')" :errmsg="errData.confirmPwd"></form-input>
 			<div class="pointer login-btn resetPwd-top ani-time" @click="onClick_registerBtn">注册</div>
-			<div class="link-keys ">已有账号？<span class="ani-time" @click="onClick_loginBtn">登录>></span>
+			<div class="link-keys ">已有账号？<span class="ani-time pointer" @click="onClick_loginBtn">登录>></span>
 			</div>
 		</div>
 	</div>

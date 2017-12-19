@@ -15,12 +15,22 @@
 						<span class="form-title left">角色说明</span>
 						<textarea type="text" class="form-control role-explain ani-time" v-model="desc"></textarea>
 					</p>
-					<p class="from-group">
+					<div class="from-group clear">
 						<span class="form-title left">平台权限</span>
-					</p>
+						<div class="tree-relate left">
+							<div class="tree-height">
+								<div class="tree-height" is="scroll-group">
+									<common-tree :listData="listData" @change="onChange_treeMenu" :isShowArrow="true"
+												 :checkedList="checkedList"></common-tree>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="pop-btn right pointer" @click="onClick_cancelBtn">取消</div>
-				<div class="btn-submit pop-btn right pointer" @click="onClick_confirmBtn">提交</div>
+				<div class="role-action-wrap clear">
+					<div class="pop-btn right pointer cancel-btn" @click="onClick_cancelBtn">取消</div>
+					<div class="btn-submit pop-btn right pointer action-btn" @click="onClick_confirmBtn">提交</div>
+				</div>
 			</div>
 
 		</div>
@@ -30,6 +40,8 @@
 	import g from "../../global";
 	import ViewPopup from "../viewPop.vue";
 	import InputBar from "../inputBar.vue";
+	import CommonTree from "../tree/tree.vue"
+	import ScrollGroup from "../scrollGroup.vue"
 	var _params = null;
 	export default{
 		created()
@@ -41,12 +53,67 @@
 				g: g,
 				name: "",
 				desc: [],
-				rights: []
+				rights: [],
+				listData: [
+					{
+						id: "No1-1",
+//						name: "test",
+						children: [
+							{
+								id: "No2-1",
+								name: "平台管理",
+								children: [
+									{
+										id: "No3",
+										name: "业务设定",
+									},
+									{
+										id: "No4",
+										name: "公司设定",
+									},
+									{
+										id: "No5",
+										name: "角色管理",
+									},
+									{
+										id: "No6",
+										name: "流程设定",
+									}
+								]
+							},
+							{
+								id: "No2-2",
+								name: "人员管理",
+								children: [
+									{
+										id: "No3",
+										name: "账号管理",
+									}
+								]
+							},
+							{
+								id: "No2-3",
+								name: "商机管理",
+								children: [
+									{
+										id: "No3",
+										name: "商机全局浏览",
+									}
+
+								]
+							}
+
+						]
+					},
+				],
+				checkedList: ['No2-2']
 			}
 		},
 		components: {
 			ViewPopup,
-			InputBar
+			InputBar,
+			CommonTree,
+			ScrollGroup
 		},
 		props: {
 			isShowPopView: {
@@ -103,7 +170,7 @@
 				}
 				g.net.call(postUrl, _params).then(($data) =>
 				{
-					if(this.currId != 0)
+					if (this.currId != 0)
 					{
 						g.data.searchRolePool.getDataById(this.currId).update(_params);
 						g.ui.toast("角色编辑成功!")
@@ -113,6 +180,10 @@
 				{
 					g.func.dealErr(err);
 				})
+			},
+			onChange_treeMenu($list)
+			{
+				trace('$list', $list)
 			}
 		}
 	}
@@ -129,10 +200,9 @@
 			border-bottom: 1px solid #eaeaea;
 		}
 		.mod-company-content {
-			padding: 20px 10px 40px;
+			padding: 20px 10px 45px;
 			line-height: 36px;
 			font-size: 14px;
-			height: 560px;
 		}
 	}
 

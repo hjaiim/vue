@@ -15,13 +15,13 @@
 				</div>
 			</div>
 			<div class="personal-message">
-				<div class="personal-form"><span class="personal-title ">登录用户名</span><span
+				<div class="personal-form diff-personal"><span class="personal-title ">登录用户名</span><span
 						class="personal-content">{{userInfo.username}}
 				</span>
 				</div>
-				<div class="personal-form"><span class="personal-title">姓名</span><span
+				<div class="personal-form diff-personal"><span class="personal-title">姓名</span><span
 						class="personal-content">{{userInfo.name}}</span></div>
-				<div class="personal-form">
+				<div class="personal-form diff-personal">
 					<span class="personal-title left">所属公司</span>
 					<div class="personal-content left relative form-list pointer"
 						 @click.stop="onClick_dropListBtn('Company')">
@@ -32,7 +32,7 @@
 					</div>
 					<span class="required">*</span>
 				</div>
-				<div class="personal-form">
+				<div class="personal-form diff-personal">
 					<span class="personal-title left">所属部门</span>
 					<div class="personal-content left relative form-list pointer"
 						 @click.stop="onClick_dropListBtn('Department')">
@@ -43,7 +43,7 @@
 					</div>
 					<span class="required">*</span>
 				</div>
-				<div class="personal-form">
+				<div class="personal-form diff-personal">
 					<span class="personal-title left">职务名称</span>
 					<div class="personal-content left relative form-list" @click.stop="onClick_dropListBtn('Duty')">
 						{{currDutyData.name}}
@@ -413,6 +413,3 @@
 	@import "../../css/mixin.scss";
 	@import "../../css/percenter.scss";
 </style>
-<!--<style type="text/css" lang="sass" rel="stylesheet/css">-->
-<!--@import "../../css/personal.scss";-->
-<!--</style>-->

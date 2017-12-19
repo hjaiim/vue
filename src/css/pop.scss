@@ -15,6 +15,11 @@
   }
 }
 
+.message-wrap {
+  max-height: 300px;
+  overflow: hidden;
+}
+
 .company-message {
   border-bottom: 1px solid #e4e4e4;
   overflow: hidden;
@@ -89,17 +94,13 @@
 
 .pop-btn {
   width: 90px;
-  height: 36px;
-  line-height: 36px;
+  height: 35px;
+  line-height: 35px;
   text-align: center;
-  border: 1px solid #e4e4e4;
   border-radius: 4px;
   background: #f9f9f9;
   margin-right: 18px;
   box-sizing: border-box;
-  &:hover {
-	border: 1px solid #cccccc;
-  }
 }
 
 .btn-submit {
@@ -141,7 +142,7 @@
   width: 405px;
   height: 64px;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   border-radius: 4px;
   box-shadow: 0 0 2px #f5f5f5 inset;
 }
@@ -162,16 +163,16 @@
   display: inline-block;
   line-height: 22px;
   text-align: center;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   background: #f8f8f8;
   border-radius: 15px;
   .upload-file {
-    width: 72px;
-    height: 22px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
+	width: 72px;
+	height: 22px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
   }
 }
 
@@ -179,40 +180,48 @@
   margin-left: 150px;
   margin-top: 18px;
   .exam-btn {
-    width: 90px;
-    height: 36px;
-    line-height: 36px;
-    display: inline-block;
-    text-align: center;
-    border: 1px solid #ccc;
-    background: #f8f8f8;
-    border-radius: 4px;
-    margin-right: 20px;
+	width: 90px;
+	height: 36px;
+	line-height: 36px;
+	display: inline-block;
+	text-align: center;
+	border: 1px solid #cccccc;
+	background: #f8f8f8;
+	border-radius: 4px;
+	margin-right: 20px;
   }
   .choose-people {
-    width: 60px;
-    height: 36px;
-    line-height: 36px;
-    display: inline-block;
-    text-align: center;
-    position: relative;
-    .delete-choose {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 8px;
-      height: 8px;
-      display: none;
-    }
-    &:hover {
-      .delete-choose {
-        display: block;
-      }
-    }
+	width: 60px;
+	height: 36px;
+	line-height: 36px;
+	display: inline-block;
+	text-align: center;
+	position: relative;
+	.delete-choose {
+	  position: absolute;
+	  top: 0;
+	  right: 0;
+	  width: 8px;
+	  height: 8px;
+	  display: none;
+	}
+	&:hover {
+	  .delete-choose {
+		display: block;
+	  }
+	}
   }
-  .end-exam{
-    background: none;
-    display: block;
-    margin-top: 6px;
+  .end-exam {
+	background: none;
+	display: block;
+	margin-top: 6px;
   }
+}
+.tree-relate {
+  margin-top: 25px;
+  width: 460px;
+}
+.tree-height{
+  max-height: 280px;
+  overflow: hidden;
 }

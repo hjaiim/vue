@@ -49,7 +49,7 @@
 </script>
 <style lang="sass" rel="stylesheet/scss" type="text/scss" scoped>
 	.delete-pop {
-		height: 118px;
+		height: 150px;
 		width: 100%;
 		background: #ffffff;
 		-webkit-border-radius: 4px;
@@ -63,8 +63,8 @@
 			cursor: default;
 			background-color: #ffffff;
 			.quesiton-txt {
-				height: 62px;
-				line-height: 62px;
+				height: 75px;
+				line-height: 75px;
 				padding: 0 0 6px 28px;
 				vertical-align: middle;
 				text-align: left;
@@ -76,20 +76,20 @@
 					display: inline-block;
 					padding-left: 14px;
 					vertical-align: middle;
-					height: 62px;
-					line-height: 62px;
+					height: 75px;
+					line-height: 75px;
 					font-size: 14px;
 					color: #333333;
 				}
 			}
 			.btn-wrap {
+				margin-top: 10px;
 				.action-btn {
 					height: 32px;
 					width: 58px;
 					line-height: 32px;
 				}
 			}
-
 		}
 	}
 </style>

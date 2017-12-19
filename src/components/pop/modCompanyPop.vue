@@ -12,7 +12,6 @@
 									   v-model="companyName"></input-bar>
                             <span class="requied">*</span>
                         </span>
-
 					</p>
 					<p class="from-group">
 						<span class="form-title">公司电话</span>
@@ -130,15 +129,14 @@
 				</div>
 				<div class="btn-submit pop-btn top-btn right pointer">提交</div>
 			</div>
-
-
 		</div>
 	</view-popup>
 </template>
 <script type="text/ecmascript-6">
 	import g from "../../global";
-	import ViewPopup from "../viewPop.vue"
-	import InputBar from "../inputBar.vue"
+	import ViewPopup from "../viewPop.vue";
+	import InputBar from "../inputBar.vue";
+	import ScrollGroup from "../scrollGroup.vue"
 	export default{
 		data(){
 			return {
@@ -148,7 +146,8 @@
 		},
 		components: {
 			ViewPopup,
-			InputBar
+			InputBar,
+			ScrollGroup
 		},
 		props: {
 			isShowPopView: {

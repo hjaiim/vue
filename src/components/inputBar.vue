@@ -1,12 +1,11 @@
 <template>
 	<div class="search-input relative">
-
 		<input @blur="onBlur_accountInput" :type="type" @focus="onFocus_inputFocus" class="input-con"
 			   :placeholder="placeholder" @input="onInput_value" @keyup.enter="onKeyupEnter_searchInput"
 			   v-model="inputContent" :maxLength="maxLength" :readonly="readonly" autocomplete="off">
 		<i v-show="inputContent.length>0 && isShowClearBtn" class="close-search-btn ani-time pointer absolute" alt=""
 		   @click="onClick_closeBtn"></i>
-		<p class="error-msg">{{errmsg}}</p>
+		<p class="error-msg absolute">{{errmsg}}</p>
 	</div>
 </template>
 <script type="text/ecmascript-6">
@@ -92,6 +91,15 @@
 		width: 100%;
 		height: 100%;
 		display: inline-block;
+		.error-msg {
+			height: 25px;
+			line-height: 25px;
+			font-size: 14px;
+			color: #ed5564;
+			width: 100%;
+			left: 0;
+			bottom: 100%;
+		}
 		.input-con {
 			width: 100%;
 			height: 100%;

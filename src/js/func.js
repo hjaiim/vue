@@ -98,6 +98,55 @@ export function getBase64($fileList, $quality)
 		return promise;
 	}
 }
+export function insertOneInArray($list, $item)
+{
+	var index = $list.indexOf($item);
+	if (index >= 0)
+	{
+		return;
+	}
+	$list.push($item);
+	return $list;
+}
 export function firstUpperCase(str) {
 	return str.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase());
+}
+export function insertOneOrZero($list, $item)
+{
+	if (!Array.isArray($list))
+	{
+		return;
+	}
+	if ($list.indexOf($item) < 0)
+	{
+		$list.push($item);
+	}
+	else
+	{
+		$list.splice($list.indexOf($item), 1)
+	}
+}
+export function pushIn($list, $item)
+{
+	if (!Array.isArray($list))
+	{
+		return;
+	}
+	if ($list.indexOf($item) < 0)
+	{
+		$list.push($item)
+	}
+	return $list;
+}
+
+export function splice($list, $item)
+{
+	if (!Array.isArray($list))
+	{
+		return;
+	}
+	if ($list.indexOf($item) >= 0)
+	{
+		$list.splice($list.indexOf($item), 1)
+	}
 }
