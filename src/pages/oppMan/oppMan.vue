@@ -29,23 +29,29 @@
 				</div>
 				<div class="date-box p-left left">
 					<span class="create-time left">创建时间</span>
-					<div class="date-form left relative" @click="onClick_dateSelect('start')">
+					<div class="date-form left relative pointer" @click="onClick_dateSelect('start')">
 						2017-12-25 00:00:00
 						<img :src="g.path.images+'/date-icon.png'" alt="" class="absolute date-icon">
+						<common-date @change="onChange_date" v-model="isShowStartDate" type="hour"></common-date>
+
 					</div>
 					<span class="date-line left">-</span>
-					<div class="date-form left relative" @click="onClick_dateSelect('end')">
+					<div class="date-form left relative pointer" @click="onClick_dateSelect('end')">
 						2017-12-25 00:00:00
 						<img :src="g.path.images+'/date-icon.png'" alt="" class="absolute date-icon">
+						<common-date @change="onChange_date" v-model="isShowEndDate" type="hour"></common-date>
 					</div>
 				</div>
 				<div class="search-box search-size left clear clearfix">
 					<span class="customer-name left">客户经理</span>
-					<input type="text" class="search-input left" v-model="creatorName">
+					<input-bar class="search-input left relative" placeholder="" type="text"
+							   v-model="creatorName"></input-bar>
 				</div>
 				<div class=" search-box search-size p-left left">
 					<span class="customer-name">客户公司名称</span>
-					<input type="text" class="search-input" v-model="companyName">
+
+					<input-bar class="search-input relative" placeholder="" type="text"
+							   v-model="companyName"></input-bar>
 					<span class="search-btn active-btn ani-time pointer" @click="onClick_searchBtn">搜索</span>
 					<span class="all-btn active-btn ani-time pointer" @click="onClick_selectAllBtn">全部</span>
 				</div>
@@ -90,7 +96,6 @@
                                 <span class="right pointer draw-line ani-time"
 									  @click="onClick_auditBtn(index+1)">审核</span>
 							</p>
-
 						</td>
 					</tr>
 					</tbody>
@@ -112,9 +117,12 @@
 </template>
 <script type="text/ecmascript-6">
 	import g from "../../global";
+	import * as func from "../../js/func"
 	import ComLayout from "../../components/comLayout.vue"
 	import CommonPage from "../../components/page.vue";
-	import BusinessDetailPop from "../../components/pop/businessDetail.vue"
+	import BusinessDetailPop from "../../components/pop/businessDetail.vue";
+	import InputBar from "../../components/inputBar.vue";
+	import CommonDate from "../../components/dateBox.vue";
 	export default{
 		created(){
 			this.routerUpdated();
@@ -126,6 +134,8 @@
 				typeList: [],
 				isShowDetailPop: false,
 				currPage: 1,
+				isShowStartDate: false,
+				isShowEndDate: false,
 				type: 1,
 				statusList: [],
 				startTime: 1400000000,
@@ -138,7 +148,9 @@
 		components: {
 			ComLayout,
 			CommonPage,
-			BusinessDetailPop
+			BusinessDetailPop,
+			InputBar,
+			CommonDate
 		},
 		methods: {
 			init()
@@ -192,6 +204,8 @@
 			},
 			onClick_dateSelect($type)
 			{
+
+				this['isShow' + func.firstUpperCase($type) + 'Date'] = true;
 			},
 			onClick_searchBtn()
 			{
@@ -223,7 +237,6 @@
 			},
 			onClick_auditBtn()
 			{
-
 			},
 			onClose_detailPop(){
 				this.isShowDetailPop = false;
@@ -242,7 +255,11 @@
 						companyName: this.companyName
 					}
 				};
-			}
+			},
+			onChange_date($timeStamp)
+			{
+				trace('$timeStamp=====', $timeStamp);
+			},
 		}
 	}
 </script>

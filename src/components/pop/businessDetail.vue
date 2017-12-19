@@ -4,7 +4,7 @@
 		<div class="detail-container">
 			<p class="note-tit">商机详情</p>
 			<div class="note-content opp-content">
-				<div class="company-message no-border iscroll-ref opp-content" is="scroll-group">
+				<div class="company-message no-border opp-content" is="scroll-group">
 					<div>
 						<h3 class="opp-title">商机内容</h3>
 						<!--CTD业务-->
