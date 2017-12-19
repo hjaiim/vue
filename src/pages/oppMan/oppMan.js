@@ -42,8 +42,8 @@ export function searchBusinessList($params)
 function createData($dObj)
 {
 	var d = {};
-	d.businessId = 1;
-	d.auditStatusList = [];
+	d.businessId = -1;
+	d.auditStatusList = [-1, 1, 2].join(',');
 	d.startTime = g.timeTool.getFullDate(1400000000, true);
 	d.endTime = g.timeTool.getFullDate(Date.now(), true);
 	d.custComName = "";
@@ -63,7 +63,7 @@ function updateData($dObj)
 		return;
 	}
 	$dObj.hasOwnProperty("customerName") && (this.comName = $dObj.customerName);
-	$dObj.hasOwnProperty("statusList") && (this.auditStatusList = __merge([], $dObj.statusList));
+	$dObj.hasOwnProperty("statusList") && (this.auditStatusList = $dObj.statusList).join(',');
 	$dObj.hasOwnProperty("startTime") && (this.startTime = g.timeTool.getFullDate($dObj.startTime), true );
 	$dObj.hasOwnProperty("endTime") && (this.endTime = g.timeTool.getFullDate($dObj.endTime), true);
 	$dObj.hasOwnProperty("creatorName") && (this.creatorName = $dObj.creatorName);

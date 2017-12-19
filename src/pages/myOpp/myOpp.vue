@@ -141,9 +141,6 @@
 			},
 			routerUpdated()
 			{
-				debugger;
-
-
 				this.businessList = g.data.searchBusinessPool.list;
 				this.currPage = int(g.vue.getQuery("page", 1));
 				this.type = g.vue.getQuery("type", 1);
