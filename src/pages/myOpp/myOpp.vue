@@ -30,7 +30,8 @@
 				</div>
 				<div class="right search-box p-left clear">
 					<span class="customer-name">客户公司名称</span>
-					<input type="text" class="search-input" v-model="companyName">
+					<input-bar class="search-input" placeholder="" type="text"
+							   v-model="companyName"></input-bar>
 					<span class="search-btn active-btn ani-time pointer" @click="onClick_searchBtn">搜索</span>
 					<span class="all-btn active-btn ani-time pointer" @click="onClick_selectAllBtn">全部</span>
 				</div>
@@ -106,6 +107,8 @@
 	import CommonPage from "../../components/page.vue";
 	import BusinessDetailPop from "../../components/pop/businessDetail.vue";
 	import CommonDate from "../../components/dateBox.vue";
+	import InputBar from "../../components/inputBar.vue";
+
 	var _dateType = "", _params = null;
 	export default{
 		created(){
@@ -133,7 +136,8 @@
 			ComLayout,
 			CommonPage,
 			BusinessDetailPop,
-			CommonDate
+			CommonDate,
+			InputBar
 		},
 		computed: {
 			currType()
