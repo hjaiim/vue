@@ -555,6 +555,7 @@
 			},
 			onClick_submitBtn()
 			{
+				debugger;
 				this.checkValid();
 				if (!_isValid)
 				{
@@ -587,6 +588,7 @@
 						}
 					}
 				}
+				trace("this.errData",this.errData);
 				this.$forceUpdate();
 			},
 			getFormData()

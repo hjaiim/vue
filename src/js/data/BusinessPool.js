@@ -106,6 +106,13 @@ function createData($dObj)
 	d.customerCompName = "";
 	d.departmentId = "";
 	d.operation = 0;
+	d.engineResult = {};
+	d.taskProperties = {};
+	d.hasApproved = false;
+	d.hasRejected = false;
+	d.hasOpinion = false;
+	d.hasNext = false;
+	d.hasAttaches = false;
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -133,6 +140,19 @@ function updateData($dObj, $recordId)
 	$dObj.hasOwnProperty("custComName") && (this.customerCompName = $dObj.custComName);
 	$dObj.hasOwnProperty("createTime") && (this.createTime = g.timeTool.getFullDate($dObj.createTime, true));
 	$dObj.hasOwnProperty("optType") && (this.operation = $dObj.optType);
+	$dObj.hasOwnProperty("engineResult") && (this.engineResult = __merge({}, $dObj.engineResult));
+	$dObj.hasOwnProperty("taskProperties") && (this.taskProperties = __merge({}, JSON.parse($dObj.taskProperties)));
+	if (this.taskProperties.process_button)
+	{
+		this.hasApproved = !!this.taskProperties.process_button.split(";")[0];
+		this.hasRejected = !!this.taskProperties.process_button.split(";")[1];
+	}
+	if (this.taskProperties)
+	{
+		this.hasOpinion = !!int(this.taskProperties.process_opinion);
+		this.hasNext = !!int(this.taskProperties.process_candidate);
+		this.hasAttaches = !!int(this.taskProperties.process_attachment);
+	}
 	if ($dObj.hasOwnProperty("recordList"))
 	{
 		var recordData = new RecordData();

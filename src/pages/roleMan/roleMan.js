@@ -7,6 +7,7 @@ export default function (to, next)
 	{
 		searchRoleList(to.query).then(() =>
 		{
+			getRightList();
 			next();
 		})
 	})
@@ -37,7 +38,21 @@ export function searchRoleList($params)
 		})
 	});
 	return promise;
+}
 
+function getRightList()
+{
+	if (g.data.staticRightPool.list.length > 0)
+	{
+		return;
+	}
+	else
+	{
+		g.net.call("permission/queryAllPermission").then(($data) =>
+		{
+			g.data.staticRightPool.update($data.data);
+		})
+	}
 }
 
 function createData($dObj)
