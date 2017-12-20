@@ -3,7 +3,8 @@
 		<input @blur="onBlur_accountInput" :type="type" @focus="onFocus_inputFocus" class="input-con"
 			   :placeholder="placeholder" @input="onInput_value" @keyup.enter="onKeyupEnter_searchInput"
 			   v-model="inputContent" :maxLength="maxLength" :readonly="readonly" autocomplete="off">
-		<i v-show="inputContent.length>0 && isShowClearBtn" class="close-search-btn ani-time pointer absolute" alt=""
+		<i v-show="inputContent.length>0 && isShowClearBtn && !readonly"
+		   class="close-search-btn ani-time pointer absolute"
 		   @click="onClick_closeBtn"></i>
 		<p class="error-msg absolute">{{errmsg}}</p>
 	</div>
@@ -41,6 +42,10 @@
 			isShowClearBtn: {
 				type: Boolean,
 				default: true
+			},
+			readonly:{
+				type: Boolean,
+				default: false
 			}
 		},
 		data(){

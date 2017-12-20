@@ -12,8 +12,9 @@
 						<business-type-3 v-if="oppType==3" :formData="formData"></business-type-3>
 						<business-type-4 v-if="oppType==4" :formData="formData"></business-type-4>
 						<business-type-5 v-if="oppType==5" :formData="formData"></business-type-5>
+						<business-type-6 v-if="oppType==6" :formData="formData"></business-type-6>
+						<business-type-7 v-if="oppType==7" :formData="formData"></business-type-7>
 						<div>
-
 							<p class="from-group">
 								<span class="form-title">附件下载</span>
 								<span class="form-trap file-download pointer">合同文件.doc</span>
@@ -21,7 +22,6 @@
 							</p>
 						</div>
 					</div>
-
 
 					<div>
 						<h3 class="opp-title">审核详情</h3>
@@ -100,8 +100,9 @@
 				</div>
 			</div>
 			<div class="detail-wrap clear">
-				<div class="pop-btn top-btn right pointer cancel-btn ani-time">关闭</div>
-				<div class="btn-submit pop-btn top-btn right pointer action-btn ani-time">提交</div>
+				<div class="pop-btn top-btn right pointer cancel-btn ani-time" @click="onClick_closeBtn">关闭</div>
+				<div class="btn-submit pop-btn top-btn right pointer action-btn ani-time" @click="onClick_submitBtn">提交
+				</div>
 			</div>
 		</div>
 	</view-popup>
@@ -110,11 +111,13 @@
 	import g from "../../global";
 	import ViewPopup from "../viewPop.vue";
 	import ScrollGroup from "../scrollGroup.vue";
-	import BusinessType1 from "../../components/businessDetail/businessType_1.vue";
-	import BusinessType2 from "../../components/businessDetail/businessType_2.vue";
-	import BusinessType3 from "../../components/businessDetail/businessType_3.vue";
-	import BusinessType4 from "../../components/businessDetail/businessType_4.vue";
-	import BusinessType5 from "../../components/businessDetail/businessType_5.vue";
+	import BusinessType1 from "../businessDetail/businessType1.vue";
+	import BusinessType2 from "../businessDetail/businessType2.vue";
+	import BusinessType3 from "../businessDetail/businessType3.vue";
+	import BusinessType4 from "../businessDetail/businessType4.vue";
+	import BusinessType5 from "../businessDetail/businessType5.vue";
+	import BusinessType6 from "../businessDetail/businessType6.vue";
+	import BusinessType7 from "../businessDetail/businessType7.vue";
 	export default{
 		created()
 		{
@@ -135,7 +138,9 @@
 			BusinessType2,
 			BusinessType3,
 			BusinessType4,
-			BusinessType5
+			BusinessType5,
+			BusinessType6,
+			BusinessType7
 		},
 		props: {
 			isShowPopView: {

@@ -384,6 +384,13 @@
 	import ComLayout from "../../components/comLayout.vue";
 	import DropList from "../../components/dropList.vue";
 	import InputBar from "../../components/inputBar.vue";
+	import OppForm1 from "./oppForm1.vue";
+	import OppForm2 from "./oppForm2.vue";
+	import OppForm3 from "./oppForm3.vue";
+	import OppForm4 from "./oppForm4.vue";
+	import OppForm5 from "./oppForm5.vue";
+	import OppForm6 from "./oppForm6.vue";
+	import OppForm7 from "./oppForm7.vue";
 	var _params = null, _formData = {}, _isValid = true;
 	export default{
 		created(){
@@ -402,7 +409,14 @@
 		components: {
 			ComLayout,
 			DropList,
-			InputBar
+			InputBar,
+			OppForm1,
+			OppForm2,
+			OppForm3,
+			OppForm4,
+			OppForm5,
+			OppForm6,
+			OppForm7
 		},
 		computed: {
 			currType()
@@ -439,7 +453,9 @@
 					transfer: "是",
 					businessScale: "",
 					prodType: "",
-					dataType: ""
+					dataType: "",
+					transactionType: "",
+					callInOut: ""
 				};
 				this.errData = {
 					cusCompName: "",
@@ -465,7 +481,9 @@
 					transfer: "",
 					businessScale: "",
 					prodType: "",
-					dataType: ""
+					dataType: "",
+					transactionType: "",
+					callInOut: ""
 				};
 				this.typeList = g.data.staticTypePool.list;
 				this.type = g.vue.getQuery('type', 1);
@@ -474,7 +492,6 @@
 			onFocus_inputBar($type)
 			{
 				this.errData[$type] = "";
-				_isValid = true;
 				this.$forceUpdate();
 			},
 			initEvents()
@@ -541,6 +558,7 @@
 				this.checkValid();
 				if (!_isValid)
 				{
+					_isValid = true;
 					return;
 				}
 				this.getFormData();

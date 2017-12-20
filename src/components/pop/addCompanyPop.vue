@@ -237,6 +237,7 @@
 				this.checkValid();
 				if (!_isValid)
 				{
+					_isValid = true;
 					return;
 				}
 				_params = {
@@ -248,6 +249,7 @@
 				};
 				g.net.call("organizeOpt/editCompany", _params).then(($data) =>
 				{
+					this.init();
 					_companyId = $data.comId;
 					if (this.currId == 0)
 					{

@@ -65,7 +65,7 @@ var WEB_CONFIG = {
 		accountReg: /^[a-z0-9]{6,16}$/,
 		passwordReg: /^[a-z0-9]{6,16}$/,
 		nameReg:/^[\u2E80-\u9FFF]{2,10}/,
-		telReg:/(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,8}/,
+		telphoneReg:/(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,8}/,
 		emailReg:/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
 		codeReg:/\d{4}/
 	}

@@ -80,6 +80,15 @@
 			AddRolePop
 
 		},
+		watch:{
+			roleList($val)
+			{
+				if($val.length == 0)
+				{
+					this.updateUrl();
+				}
+			}
+		},
 		methods: {
 			routerUpdated()
 			{

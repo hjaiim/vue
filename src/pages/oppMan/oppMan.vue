@@ -42,7 +42,8 @@
 					<div class="date-form left relative pointer" @click="onClick_dateSelect('End')">
 						{{endDate}}
 						<img :src="g.path.images+'/date-icon.png'" alt="" class="absolute date-icon">
-						<common-date @change="onChange_date" :isShowDatePicker="isShowEndDate" type="hour"></common-date>
+						<common-date @change="onChange_date" :isShowDatePicker="isShowEndDate"
+									 type="hour"></common-date>
 					</div>
 				</div>
 				<div class="search-box search-size left clear clearfix">
@@ -54,7 +55,7 @@
 					<span class="customer-name">客户公司名称</span>
 
 					<input-bar class="search-input relative" placeholder="" type="text"
-							   v-model="companyName"></input-bar>
+							   v-model="companyName" @keyenter="onKeyEnter_searchInput"></input-bar>
 					<span class="search-btn active-btn ani-time pointer" @click="onClick_searchBtn">搜索</span>
 					<span class="all-btn active-btn ani-time pointer" @click="onClick_selectAllBtn">全部</span>
 				</div>
@@ -97,7 +98,7 @@
 
 							<p class="action-menu clear" v-if="item.operation== 2">
                                 <span class="right pointer draw-line ani-time"
-									  @click="onClick_auditBtn(index+1)">审核</span>
+									  @click="onClick_auditBtn(item.id)">审核</span>
 							</p>
 						</td>
 					</tr>
@@ -240,6 +241,10 @@
 				_dateType = $type;
 				this['isShow' + $type + 'Date'] = true;
 			},
+			onKeyEnter_searchInput()
+			{
+				this.onClick_searchBtn();
+			},
 			onClick_searchBtn()
 			{
 				this.updateUrl();
@@ -272,12 +277,18 @@
 					})
 				}
 			},
-			onClick_editBtn()
+			onClick_editBtn($id)
 			{
-
+				g.url = {
+					path: "/oppapply",
+					query: {
+						id: $id
+					}
+				}
 			},
-			onClick_auditBtn()
+			onClick_auditBtn($id)
 			{
+				this.onClick_detailBtn($id)
 			},
 			onClose_detailPop(){
 				this.isShowDetailPop = false;

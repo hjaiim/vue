@@ -32,6 +32,7 @@ export function searchRoleList($params)
 			resolved();
 		}, (err) =>
 		{
+			g.func.dealErr(err);
 			rejected();
 		})
 	});

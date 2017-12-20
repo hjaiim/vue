@@ -82,6 +82,15 @@
 			DeletePop,
 			AddPostPop
 		},
+		watch:{
+			positionList($val)
+			{
+				if($val.length == 0)
+				{
+					this.updateUrl();
+				}
+			}
+		},
 		methods: {
 			routerUpdated()
 			{
@@ -135,6 +144,10 @@
 			onChange_pageCom($page)
 			{
 				this.currPage = $page;
+				this.updateUrl();
+			},
+			updateUrl()
+			{
 				g.url = {
 					path:'/positionman',
 					query:{

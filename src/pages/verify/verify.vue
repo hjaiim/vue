@@ -3,6 +3,7 @@
 		<div class="percenter-wrap">
 			<div class="percenter-inner">
 				<div class="icon-collect clear">
+					{{errData.avatar}}
 					<div class="relative upload-head right pointer">
 						<img class="default-img" :src="avatar?avatar:g.path.images+'/default-icon.png'" alt="">
 						<div class="upload-btn absolute">
@@ -22,6 +23,7 @@
 				<div class="personal-form diff-personal"><span class="personal-title">姓名</span><span
 						class="personal-content">{{userInfo.name}}</span></div>
 				<div class="personal-form diff-personal">
+					<p class="err-msg"> {{errData.currCompany}}</p>
 					<span class="personal-title left">所属公司</span>
 					<div class="personal-content left relative form-list pointer"
 						 @click.stop="onClick_dropListBtn('Company')">
@@ -33,6 +35,7 @@
 					<span class="required">*</span>
 				</div>
 				<div class="personal-form diff-personal">
+					<p class="err-msg"> {{errData.currDepartment}}</p>
 					<span class="personal-title left">所属部门</span>
 					<div class="personal-content left relative form-list pointer"
 						 @click.stop="onClick_dropListBtn('Department')">
@@ -44,6 +47,7 @@
 					<span class="required">*</span>
 				</div>
 				<div class="personal-form diff-personal">
+					<p class="err-msg"> {{errData.currDuty}}</p>
 					<span class="personal-title left">职务名称</span>
 					<div class="personal-content left relative form-list" @click.stop="onClick_dropListBtn('Duty')">
 						{{currDutyData.name}}
@@ -80,6 +84,7 @@
 							   :errmsg="errData.remark"></input-bar>
 				</div>
 				<div class="personal-form">
+					<p class="err-msg"> {{errData.idCardBack || errData.idCardFront}}</p>
 					<span class="personal-title left">身份证照</span>
 					<div class="left relative upload-box pointer">
 						<div class="upload-btn flex">
@@ -105,6 +110,7 @@
 					</div>
 				</div>
 				<div class="personal-form">
+					<p class="err-msg"> {{errData.workCard}}</p>
 					<span class="personal-title left">工作证照</span>
 					<div class="left relative upload-box pointer">
 						<div class="upload-btn flex">
@@ -319,6 +325,7 @@
 			onFocus_inputBar($type)
 			{
 				this.errData[$type] = "";
+				this.$forceUpdate();
 			},
 			onClick_submitBtn()
 			{
@@ -345,7 +352,6 @@
 
 				g.net.call("user/applyUserAuth", _params).then(($data) =>
 				{
-					trace($data);
 					g.ui.toast('申请提交成功！')
 				})
 
@@ -357,30 +363,42 @@
 					this.errData.phone = "手机号码不能为空";
 					_isValid = false;
 				}
-				var regExp = /^1[34578]\d{9}$/;
-				if (!regExp.test(this.phone))
+				else if (!g.param.phoneReg.test(this.phone))
 				{
 					this.errData.phone = "手机格式有误";
 					_isValid = false;
 				}
+				this.$forceUpdate();
 
 			},
 			checkValid()
 			{
 				this.checkPhoneData();
+				if (!this.avatar)
+				{
+					this.errData.avatar = "请选择用户头像";
+					_isValid = false;
+				}
+
 				if (!this.code)
 				{
 					this.errData.code = "请输入验证码";
 					_isValid = false;
 				}
+				else if (!g.param.codeReg.test(this.code))
+				{
+					this.errData.code = "验证码格式有误";
+					_isValid = false;
+				}
+
 				if (!this.idCardBack)
 				{
-					this.errData.idCardBack = "请上传身份证反面照片";
+					this.errData.idCardBack = "请上传身份证照片";
 					_isValid = false;
 				}
 				if (!this.idCardFront)
 				{
-					this.errData.idCardFront = "请上传身份证正面照片";
+					this.errData.idCardFront = "请上传身份证照片";
 					_isValid = false;
 				}
 				if (!this.workCard)
@@ -401,6 +419,18 @@
 				if (!this.currDutyData.name)
 				{
 					this.errData.currDuty = "请选择所属职务";
+					_isValid = false;
+				}
+
+				if (this.telphone && !g.param.telphoneReg.test(this.telphone))
+				{
+					this.errData.telphone = "固话号码格式不正确";
+					_isValid = false;
+				}
+
+				if (this.email && !g.param.emailReg.test(this.email))
+				{
+					this.errData.telphone = "邮箱格式不正确";
 					_isValid = false;
 				}
 				this.$forceUpdate();

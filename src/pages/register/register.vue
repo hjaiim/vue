@@ -20,7 +20,7 @@
 	import g from './../../global';
 	import sha256 from 'sha256';
 	import FormInput from "../../components/formInput.vue"
-	var _params = {};
+	var _params = {},_isValid = true;
 	export default {
 		created()
 		{
@@ -34,7 +34,7 @@
 				name: '',
 				password: '',
 				confirmPwd: '',
-				errData:{}
+				errData: {}
 			}
 		},
 		watch: {},
@@ -53,10 +53,10 @@
 			onClick_registerBtn()
 			{
 				this.checkValid();
-				if(!_isValid)
+				if (!_isValid)
 				{
 					_isValid = true;
-					return ;
+					return;
 				}
 				_params.logon = this.account;
 				_params.name = this.name;
@@ -74,30 +74,59 @@
 			onFocus_formInput($type)
 			{
 				this.errData[$type] = "";
+				this.$forceUpdate();
 			},
 			checkValid()
 			{
-				if(!this.account)
+				if (!this.account)
 				{
-					this.errData.account = "表单内容不能为空";
+					this.errData.account = "请输入登录名";
 					_isValid = false;
 				}
-				if(!this.name)
+				else if (!g.param.accountReg.test(this.account))
 				{
-					this.errData.name = "表单内容不能为空";
+					this.errData.account = "登录名是6-16位的字母或数字";
 					_isValid = false;
 				}
-				if(!this.password)
+
+				if (!this.name)
 				{
-					this.errData.password = "表单内容不能为空";
+					this.errData.name = "请输入姓名";
 					_isValid = false;
 				}
-				if(!this.confirmPwd)
+				else if (!g.param.nameReg.test(this.name))
 				{
-					this.errData.confirmPwd = "表单内容不能为空";
+					this.errData.name = "姓名是2-10个字符的汉字"
 					_isValid = false;
 				}
+				if (!this.password)
+				{
+					this.errData.password = "请输入密码";
+					_isValid = false;
+				}
+				else if (!g.param.passwordReg.test(this.password))
+				{
+					this.errData.password = "密码是6-16位的字母或数字";
+					_isValid = false;
+				}
+				if (!this.confirmPwd)
+				{
+					this.errData.confirmPwd = "请输入确认密码";
+					_isValid = false;
+				}
+				else if (!g.param.passwordReg.test(this.password))
+				{
+					this.errData.confirmPwd = "密码是6-16位的字母或数字";
+					_isValid = false;
+				}
+				else if (this.confirmPwd != this.password)
+				{
+					this.errData.confirmPwd = "两次密码输入不一致";
+					_isValid = false;
+				}
+				this.$forceUpdate();
 			}
+
 		}
 
 	}

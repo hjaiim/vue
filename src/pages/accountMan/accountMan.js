@@ -32,6 +32,7 @@ export function searchUserList($data)
 			resolved();
 		}, (err) =>
 		{
+			g.func.dealErr(err);
 			rejected();
 		})
 	});

@@ -32,6 +32,7 @@ export function getMyBusinessList($params)
 			resolved();
 		}, (err) =>
 		{
+			g.func.dealErr(err);
 			rejected();
 		})
 	});

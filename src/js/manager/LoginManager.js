@@ -25,30 +25,34 @@ function checkLogin($to, $next, $callBack)
 	var passUrl = ['/login', '/resetpwd', '/register'];
 	if (_isLogin)
 	{
-
 		if (passUrl.indexOf($to.path) >= 0) //判断当前页面是否是login页面
 		{
-			$next("/");
-// 			if (g.data.userInfo.authStatus != 2 )
-// 			{
-// 				$next('/verify');
-// 			}
-// 			else
-// 			{
-// 				$next("/")
-// 			}
+			if (g.data.userInfo.authStatus != 2)
+			{
+				$next('/verify');
+			}
+			else
+			{
+				$next("/")
+			}
 		}
 		else
 		{
-			$callBack && $callBack();
-// 			if (g.data.userInfo.authStatus != 2 && $to.path != "/verify")
-// 			{
-// 				$next('/verify');
-// 			}
-// 			else
-// 			{
-// 				$callBack && $callBack();
-// 			}
+			if (g.data.userInfo.authStatus != 2)
+			{
+				if ($to.path != "/verify")
+				{
+					$next('/verify');
+				}
+				else
+				{
+					$callBack && $callBack();
+				}
+			}
+			else
+			{
+				$callBack && $callBack();
+			}
 		}
 	}
 	else
@@ -77,6 +81,9 @@ export function logout()
 		g.url = "/login";
 	}, (err) =>
 	{
+		_isLogin = false;
+		clearLoginInfo();
+		g.url = "/login";
 	});
 }
 
