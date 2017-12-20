@@ -48,7 +48,8 @@
 				</p>
 				<p class="personal-form"><span class="personal-title">固定电话</span>
 					<input-bar class="personal-content pensonal-input" placeholder="" type="text"
-							   v-model="telphone" :errmsg="errData.telphone" @focus="onFocus_inputBar('telphone')"></input-bar>
+							   v-model="telphone" :errmsg="errData.telphone"
+							   @focus="onFocus_inputBar('telphone')"></input-bar>
 				</p>
 				<p class="personal-form"><span class="personal-title">电子邮箱</span>
 					<input-bar class="personal-content pensonal-input" placeholder="" type="text"
@@ -56,22 +57,26 @@
 				</p>
 				<p class="personal-form"><span class="personal-title">备注</span>
 					<input-bar class="personal-content pensonal-input note" placeholder="" type="text"
-							   v-model="remark" :errmsg="errData.remark" @focus="onFocus_inputBar('remark')"></input-bar>
+							   v-model="remark" :errmsg="errData.remark"
+							   @focus="onFocus_inputBar('remark')"></input-bar>
 				<div class="btn btn-save pointer action-btn ani-time" @click="onClick_savePersonal">保存</div>
 			</div>
 
 			<div class="personal-message" v-show="type=='modpwd'">
 				<div class="personal-form"><span class="personal-title">原密码</span>
 					<input-bar class="personal-content pensonal-input" placeholder="" type="password"
-							   v-model="password" :errmsg="errData.password" @focus="onFocus_inputBar('password')"></input-bar>
+							   v-model="password" :errmsg="errData.password"
+							   @focus="onFocus_inputBar('password')"></input-bar>
 				</div>
 				<div class="personal-form"><span class="personal-title">新密码</span>
 					<input-bar class="personal-content pensonal-input" placeholder="" type="password"
-							   v-model="newPwd" :errmsg="errData.newPwd" @focus="onFocus_inputBar('newPwd')"></input-bar>
+							   v-model="newPwd" :errmsg="errData.newPwd"
+							   @focus="onFocus_inputBar('newPwd')"></input-bar>
 				</div>
 				<div class="personal-form"><span class="personal-title">确认密码</span>
 					<input-bar class="personal-content pensonal-input" placeholder="" type="password"
-							   v-model="confirmPwd" :errmsg="errData.confirmPwd" @focus="onFocus_inputBar('confirmPwd')"></input-bar>
+							   v-model="confirmPwd" :errmsg="errData.confirmPwd"
+							   @focus="onFocus_inputBar('confirmPwd')"></input-bar>
 				</div>
 				<div class="btn btn-save pointer action-btn ani-time" @click="onClick_updatePwd">保存</div>
 			</div>
@@ -177,7 +182,7 @@
 			onClick_savePersonal()
 			{
 				this.checkPersonalInfo();
-				if(!_isValid)
+				if (!_isValid)
 				{
 					_isValid = true;
 					return;
@@ -186,7 +191,7 @@
 					telphone: this.telphone,
 					email: this.email,
 					remark: this.remark,
-					avatar:this.avatar
+					avatar: this.avatar
 				};
 				g.net.call("user/updateUserInfo", _params).then(() =>
 				{

@@ -32,8 +32,8 @@
 					<span class="customer-name">客户公司名称</span>
 					<input-bar class="search-input" placeholder="" type="text"
 							   v-model="companyName"></input-bar>
-					<span class="search-btn active-btn ani-time pointer" @click="onClick_searchBtn">搜索</span>
-					<span class="all-btn active-btn ani-time pointer" @click="onClick_selectAllBtn">全部</span>
+					<span class="active-btn ani-time pointer action-btn" @click="onClick_searchBtn">搜索</span>
+					<span class="active-btn ani-time pointer cancel-btn" @click="onClick_selectAllBtn">全部</span>
 				</div>
 				<div class="date-box p-left left">
 					<span class="create-time left">创建时间</span>
