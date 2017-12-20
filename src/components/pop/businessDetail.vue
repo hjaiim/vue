@@ -3,8 +3,8 @@
 				:isShowPopView="isShowPopView">
 		<div class="detail-container">
 			<p class="note-tit">商机详情</p>
-			<div class="note-content opp-content">
-				<div class="company-message no-border opp-content" is="scroll-group">
+			<div class=" company-message note-content opp-content">
+				<div class="no-border opp-content" is="scroll-group">
 					<div>
 						<h3 class="opp-title">商机内容</h3>
 						<business-type-1 v-if="oppType==1" :formData="formData"></business-type-1>
@@ -214,7 +214,7 @@
 	.detail-container {
 		color: #333333;
 		.note-content {
-			padding: 15px 10px 20px;
+
 			line-height: 36px;
 			font-size: 14px;
 		}

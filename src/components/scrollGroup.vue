@@ -10,12 +10,16 @@
 </template>
 <script type="text/ecmascript-6">
 	export default{
-		name: "gui-scrollgroup",
+		name: "c-scrollgroup",
 		created(){
+			this.$nextTick(() =>
+			{
+				this.initBar()
+			})
 		},
 		data(){
 			return {
-				barVisible: false,
+				barVisible: true,
 				offset: 0,
 				timer: 0
 			}
@@ -24,10 +28,6 @@
 		mounted()
 		{
 			this.addEvent();
-			this.initBar();
-		},
-		updated()
-		{
 			this.initBar();
 		},
 		methods: {
@@ -50,6 +50,7 @@
 			},
 			initBar()
 			{
+				this.barVisible = true;
 				var mainCon = this.$refs["scrollMain"];
 				var parent = mainCon.parentNode;
 				var bar = this.$refs["scrollBar"];
@@ -118,14 +119,7 @@
 							(parent.clientHeight - parseInt(bar.style.height.replace("px", ""))))
 							+ "px";
 					this.$emit("change", this.offset);
-					if (this.timer != 0)
-					{
-						clearTimeout(this.timer);
-					}
-					this.timer = setTimeout(()=>
-					{
-						this.barVisible = false;
-					}, 1000);
+
 				}
 			}
 		},

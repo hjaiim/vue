@@ -62,7 +62,7 @@
 				default: 0
 			}
 		},
-		watch:{
+		watch: {
 			currId()
 			{
 				this.init();
@@ -116,11 +116,12 @@
 </script>
 <style lang="sass" rel="stylesheet/scss" type="text/scss" scoped>
 	.setRole-wrap {
-		height: 386px;
+		min-height: 386px;
 		.set-content {
 			padding-top: 20px;
 			.role-list {
 				font-size: 14px;
+				max-width: 620px;
 				margin-bottom: 15px;
 				color: #666666;
 				p {

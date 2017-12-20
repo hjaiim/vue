@@ -23,7 +23,7 @@
 .company-message {
   border-bottom: 1px solid #e4e4e4;
   overflow: hidden;
-  padding: 20px 0;
+  margin: 20px 10px 40px;
   position: relative;
   .del-depart {
 	position: absolute;
@@ -90,6 +90,10 @@
 
 .no-border {
   border-bottom: none;
+}
+
+.btn-wrap {
+  padding-bottom: 22px;
 }
 
 .pop-btn {
@@ -217,11 +221,13 @@
 	margin-top: 6px;
   }
 }
+
 .tree-relate {
   margin-top: 25px;
   width: 460px;
 }
-.tree-height{
+
+.tree-height {
   max-height: 280px;
   overflow: hidden;
 }
