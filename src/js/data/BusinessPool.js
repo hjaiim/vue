@@ -153,17 +153,19 @@ function updateData($dObj, $recordId)
 		this.hasNext = !!int(this.taskProperties.process_candidate);
 		this.hasAttaches = !!int(this.taskProperties.process_attachment);
 	}
-	if ($dObj.hasOwnProperty("recordList"))
+	if ($dObj.hasOwnProperty("recordResult"))
 	{
 		var recordData = new RecordData();
-		this.recordList = recordData.update($dObj.recordList);
+		this.recordList = recordData.update($dObj.recordResult);
 	}
 }
 
+var _recordList = [];
 class RecordData {
 	constructor()
 	{
-		this.list = [];
+		_recordList = [];
+		_recordHash = {};
 	}
 
 	update($list)
@@ -177,7 +179,7 @@ class RecordData {
 		{
 			this.add(item);
 		}
-		return this.list;
+		return _recordList;
 	}
 
 	add($item)
@@ -186,7 +188,7 @@ class RecordData {
 		if (!_recordHash[itemData.id])
 		{
 			_recordHash[itemData.id] = itemData;
-			this.list.push(itemData);
+			_recordList.push(itemData);
 		}
 	}
 
@@ -196,12 +198,16 @@ function createRecord($dObj)
 {
 	var d = {};
 	d.id = 0;
-	d.type = "";
-	d.formData = "";
+	d.auditorId = 0;
+	d.auditorName = "";
+	d.positionName = "";
+	d.auditorTime = "";
+	d.opinion = "";
+	d.result = "";
 	d.attachList = [];
-	d.createTime = "";
-	d.isCurrAudit = "";
-	d.currAuditType = "";
+	d.createTime = g.timeTool.getNowStamp();
+	d.orderId = 0;
+	d.taskTodoId = "";
 	d.update = updateRecord.bind(d);
 	d.update($dObj);
 	return d;
@@ -209,5 +215,19 @@ function createRecord($dObj)
 
 function updateRecord($dObj)
 {
-	$dObj.hasOwnProperty("id") && (this.id = $dObj.id)
+	$dObj.hasOwnProperty("recordId") && (this.id = $dObj.recordId);
+	$dObj.hasOwnProperty("auditorId") && (this.auditorId = $dObj.auditorId);
+	$dObj.hasOwnProperty("auditorName") && (this.auditorName = $dObj.auditorName);
+	$dObj.hasOwnProperty("stationName") && (this.positionName = $dObj.stationName);
+	$dObj.hasOwnProperty("auditorTime") && (this.auditorTime = g.timeTool.getFullDate($dObj.auditorTime));
+	$dObj.hasOwnProperty("auditSuggest") && (this.opinion = $dObj.auditSuggest);
+	if($dObj.hasOwnProperty("auditResult"))
+	{
+		$dObj.auditResult == 1 && (this.result = "已通过" );
+		$dObj.auditResult == 2 && (this.result = "已退回" );
+	}
+	$dObj.hasOwnProperty("attachs") && !!$dObj.attachs && (this.attachList = $dObj.attachs.split(';'));
+	$dObj.hasOwnProperty("createTime") && (this.createTime = $dObj.createTime);
+	$dObj.hasOwnProperty("orderId") && (this.orderId = $dObj.orderId);
+	$dObj.hasOwnProperty("taskTodoId") && (this.taskTodoId = $dObj.taskTodoId);
 }

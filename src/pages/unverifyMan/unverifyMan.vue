@@ -102,12 +102,12 @@
 			{
 				g.url = "/accountman";
 			},
+			onKeyenter_inputBar()
+			{
+				this.onClick_searchBtn();
+			},
 			onClick_searchBtn()
 			{
-				if (!this.name)
-				{
-					return;
-				}
 				this.currPage = 1;
 				this.updateUrl();
 			},

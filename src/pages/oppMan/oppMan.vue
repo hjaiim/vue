@@ -167,8 +167,7 @@
 					return g.data.staticTypePool.getDataById(this.type) &&
 							g.data.staticTypePool.getDataById(this.type).name;
 				}
-				return "全部"
-
+				return "全部";
 			},
 			startDate()
 			{
@@ -247,6 +246,7 @@
 			},
 			onClick_searchBtn()
 			{
+				this.currPage = 1;
 				this.updateUrl();
 			},
 			onClick_selectAllBtn()
@@ -288,29 +288,21 @@
 			},
 			onClick_auditBtn($id)
 			{
-				if (g.data.searchBusinessPool.hasDetail($id))
+				var businessData = g.data.searchBusinessPool.getDataById($id);
+				_params = {
+					orderId: $id,
+					todoId: businessData.engineResult.todoId,
+					processTemplateId: businessData.engineResult.processTemplateId,
+					processInstanceId: businessData.engineResult.processInstanceId,
+					taskId: businessData.engineResult.taskId,
+					taskInstanceId: businessData.engineResult.taskInstanceId
+				};
+				g.net.call("bo/auditOrderDetail", _params).then(($data) =>
 				{
+					g.data.searchBusinessPool.getDataById($id).update($data);
 					this.currId = $id;
 					this.isShowDetailPop = true;
-				}
-				else
-				{
-					var businessData = g.data.searchBusinessPool.getDataById($id);
-					_params = {
-						orderId: $id,
-						todoId: businessData.engineResult.todoId,
-						processTemplateId: businessData.engineResult.processTemplateId,
-						processInstanceId: businessData.engineResult.processInstanceId,
-						taskId: businessData.engineResult.taskId,
-						taskInstanceId: businessData.engineResult.taskInstanceId
-					};
-					g.net.call("bo/auditOrderDetail", _params).then(($data) =>
-					{
-						g.data.searchBusinessPool.getDataById($id).update($data);
-						this.currId = $id;
-						this.isShowDetailPop = true;
-					})
-				}
+				})
 			},
 			onClose_detailPop(){
 				this.isShowDetailPop = false;

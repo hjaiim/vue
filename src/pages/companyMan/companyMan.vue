@@ -184,6 +184,10 @@
 			},
 			onClick_searchBtn()
 			{
+				if(!this.customerName)
+				{
+					return ;
+				}
 				this.currPage = 1;
 				this.updateUrl();
 			},

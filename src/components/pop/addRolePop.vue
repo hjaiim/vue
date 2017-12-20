@@ -20,7 +20,7 @@
 						<div class="tree-relate left">
 							<div class="tree-height">
 								<div class="tree-height" is="scroll-group">
-									<common-tree :listData="listData" @change="onChange_treeMenu" :isShowArrow="true"
+									<common-tree :listData="listData" @update="onUpdate_treeMenu" :isShowArrow="true"
 												 :checkedList="checkedList"></common-tree>
 								</div>
 							</div>
@@ -54,60 +54,8 @@
 				g: g,
 				name: "",
 				desc: [],
-				rights: [],
-				listData: [
-					{
-						id: "No1-1",
-//						name: "test",
-						children: [
-							{
-								id: "No2-1",
-								name: "平台管理",
-								children: [
-									{
-										id: "No3",
-										name: "业务设定",
-									},
-									{
-										id: "No4",
-										name: "公司设定",
-									},
-									{
-										id: "No5",
-										name: "角色管理",
-									},
-									{
-										id: "No6",
-										name: "流程设定",
-									}
-								]
-							},
-							{
-								id: "No2-2",
-								name: "人员管理",
-								children: [
-									{
-										id: "No3",
-										name: "账号管理",
-									}
-								]
-							},
-							{
-								id: "No2-3",
-								name: "商机管理",
-								children: [
-									{
-										id: "No3",
-										name: "商机全局浏览",
-									}
-
-								]
-							}
-
-						]
-					},
-				],
-				checkedList: ['No2-2']
+				listData: [],
+				checkedList: []
 			}
 		},
 		components: {
@@ -134,18 +82,23 @@
 		methods: {
 			init()
 			{
+				this.listData = g.data.staticRightPool.list;
 				if (this.currId)
 				{
 					var roleData = g.data.searchRolePool.getDataById(this.currId);
 					this.name = roleData.name;
 					this.desc = roleData.desc;
-					this.rights = roleData.rights;
+					this.checkedList = roleData.rights.split(',').map(function (item)
+					{
+						return int(item);
+
+					});
 				}
 				else
 				{
 					this.name = "";
 					this.desc = "";
-					this.rights = "1,3,5";
+					this.checkedList = [];
 				}
 			},
 			onClose_pop()
@@ -162,7 +115,7 @@
 				_params = {
 					roleName: this.name,
 					roleDesc: this.desc,
-					permissionIds: this.rights
+					permissionIds: this.checkedList.join(',')
 				};
 				if (this.currId != 0)
 				{
@@ -183,9 +136,10 @@
 					g.func.dealErr(err);
 				})
 			},
-			onChange_treeMenu($list)
+			onUpdate_treeMenu($list)
 			{
-				trace('$list', $list)
+				trace("$list", $list);
+				this.checkedList = $list;
 			}
 		}
 	}

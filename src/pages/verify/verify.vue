@@ -1,7 +1,7 @@
 <template>
 	<com-layout currId="percenter" currPath="/verify">
 		<div class="percenter-wrap">
-			<div class="percenter-inner">
+			<div class="percenter-inner" :class="authStatus != 0?'disabled':''">
 				<div class="icon-collect clear">
 					{{errData.avatar}}
 					<div class="relative upload-head right pointer">
@@ -26,6 +26,7 @@
 					<p class="err-msg"> {{errData.currCompany}}</p>
 					<span class="personal-title left">所属公司</span>
 					<div class="personal-content left relative form-list pointer"
+						 :class="authStatus != 0 ?'disabled':''"
 						 @click.stop="onClick_dropListBtn('Company')">
 						{{currCompanyData.name}}
 						<i :class="['icon-trangle', isShowCompanyList?'rotate':'']"></i>
@@ -38,6 +39,7 @@
 					<p class="err-msg"> {{errData.currDepartment}}</p>
 					<span class="personal-title left">所属部门</span>
 					<div class="personal-content left relative form-list pointer"
+						 :class="authStatus != 0 ?'disabled':''"
 						 @click.stop="onClick_dropListBtn('Department')">
 						{{currDepartData.name}}
 						<i class="pointer" :class="['icon-trangle', isShowDepartmentList?'rotate':'']"></i>
@@ -49,7 +51,9 @@
 				<div class="personal-form diff-personal">
 					<p class="err-msg"> {{errData.currDuty}}</p>
 					<span class="personal-title left">职务名称</span>
-					<div class="personal-content left relative form-list" @click.stop="onClick_dropListBtn('Duty')">
+					<div class="personal-content left relative form-list"
+						 :class="authStatus != 0 ?'disabled':''"
+						 @click.stop="onClick_dropListBtn('Duty')">
 						{{currDutyData.name}}
 						<span :class="['icon-trangle', isShowDutyList?'rotate':'']"></span>
 						<drop-list :dropList="dutyList" :isShowDropList="isShowDutyList"
@@ -60,10 +64,11 @@
 				<div class="personal-form">
 					<span class="personal-title left">手机</span>
 					<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
-							   v-model="phone" @focus="onFocus_inputBar('phone')" :errmsg="errData.phone"></input-bar>
+							   v-model="phone" @focus="onFocus_inputBar('phone')" :errmsg="errData.phone"
+							   :readonly="authStatus != 0"></input-bar>
 					<span class="required">*</span>
 				</div>
-				<div class="personal-form">
+				<div class="personal-form" v-if="authStatus == 0">
 					<span class="personal-title left">验证码</span>
 					<input-bar class="personal-content pensonal-input code left" placeholder="" type="text"
 							   v-model="code" @focus="onFocus_inputBar('code')" :errmsg="errData.code"></input-bar>
@@ -71,19 +76,22 @@
 				</div>
 				<div class="personal-form"><span class="personal-title left">固定电话</span>
 					<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
+							   :readonly="authStatus != 0"
 							   v-model="telphone" @focus="onFocus_inputBar('telphone')"
 							   :errmsg="errData.telphone"></input-bar>
 				</div>
 				<div class="personal-form"><span class="personal-title left">电子邮箱</span>
 					<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
+							   :readonly="authStatus != 0"
 							   v-model="email" @focus="onFocus_inputBar('email')" :errmsg="errData.email"></input-bar>
 				</div>
 				<div class="personal-form"><span class="personal-title left">备注</span>
 					<input-bar class="personal-content pensonal-input note left" placeholder="" type="text"
+							   :readonly="authStatus != 0"
 							   v-model="remark" @focus="onFocus_inputBar('remark')"
 							   :errmsg="errData.remark"></input-bar>
 				</div>
-				<div class="personal-form">
+				<div class="personal-form" :class="authStatus != 0 ?'disabled':''">
 					<p class="err-msg"> {{errData.idCardBack || errData.idCardFront}}</p>
 					<span class="personal-title left">身份证照</span>
 					<div class="left relative upload-box pointer">
@@ -109,7 +117,7 @@
 									resultType="base64"></upload-btn>
 					</div>
 				</div>
-				<div class="personal-form">
+				<div class="personal-form" :class="authStatus != 0 ?'disabled':''">
 					<p class="err-msg"> {{errData.workCard}}</p>
 					<span class="personal-title left">工作证照</span>
 					<div class="left relative upload-box pointer">
@@ -132,7 +140,7 @@
 					</div>
 				</div>
 				<div class="btn btn-save pointer action-btn ani-time " @click="onClick_submitBtn"
-					 v-if="g.data.userInfo.authStatus == 0">提交
+					 v-if="authStatus == 0">提交
 				</div>
 			</div>
 		</div>

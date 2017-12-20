@@ -36,10 +36,96 @@
 					   :errmsg="errData.cusCompIntro"
 					   @focus="onFocus_inputBar('cusCompIntro')"></input-bar>
 		</div>
+
+		<div class="personal-form">
+			<span class="personal-title left">申请的95业务类别</span>
+                 <span class="action-box status-type left" @click="onClick_checkCallBack('是')">
+                        <i class="pointer" :class="formData.callBack=='是'?'action':''"></i>
+                        <span>客户自带95码号落地</span>
+                 </span>
+                <span class="action-box status-type left" @click="onClick_checkCallBack('否')">
+                    <i class="pointer" :class="formData.callBack=='否'?'action':''"></i>
+                    <span>使用联通已有的95号</span>
+                </span>
+				<input-bar class="personal-content pensonal-input left large-input" placeholder="" type="text"
+					   v-model="formData.prodType"
+					   :errmsg="errData.prodType"
+					   @focus="onFocus_inputBar('prodType')"></input-bar>
+			<span class="explain">需要落地的具体号码</span>
+		</div>
+		<div class="personal-form">
+			<span class="personal-title left">业务用途及场景</span>
+			<input-bar class="personal-content pensonal-input left large-input" placeholder="" type="text"
+					   v-model="formData.businessDesc"
+					   :errmsg="errData.businessDesc"
+					   @focus="onFocus_inputBar('businessDesc')"></input-bar>
+			<span class="explain lang-explain">务必描述清楚，使用95业务用来做什么，说明是办公电话/客户服务/快递物流还是其他业务场景</span>
+		</div>
+		<div class="personal-form">
+			<span class="personal-title left">接入方式</span>
+                 <span class="action-box status-type left" @click="onClick_accessType('API')">
+                        <i class="pointer" :class="formData.accessType == 'API'?'action':''"></i>
+                        <span>API</span>
+                 </span>
+                <span class="action-box status-type left" @click="onClick_accessType('SIP')">
+                    <i class="pointer" :class="formData.accessType == 'SIP'?'action':''"></i>
+                    <span>SIP</span>
+                </span>
+			<span class="explain">API/SIP（请选择一种）</span>
+		</div>
+		<div class="personal-form">
+			<span class="personal-title left">呼叫范围</span>
+			<input-bar class="personal-content pensonal-input left large-input" placeholder=""
+					   type="text" v-model="formData.callRange"
+					   :errmsg="errData.callRange"
+					   @focus="onFocus_inputBar('callRange')"></input-bar>
+			<span class="explain lang-explain">请填写被叫权限（例：全国三网手机和固话，开通本地、长途，不开通国际权限）</span>
+		</div>
+
+
+		<div class="personal-form">
+			<span class="personal-title left">呼入呼出</span>
+                 <span class="action-box status-type left" @click="onClick_checkCallBack('是')">
+                        <i class="pointer" :class="formData.callInOut=='是'?'action':''"></i>
+                        <span>是</span>
+                 </span>
+                <span class="action-box status-type left" @click="onClick_checkCallBack('否')">
+                    <i class="pointer" :class="formData.callInOut=='否'?'action':''"></i>
+                    <span>否</span>
+                </span>
+			<span class="explain">是否回呼</span>
+		</div>
+		<div class="personal-form">
+			<span class="personal-title left">预计业务规模</span>
+			<input-bar class="personal-content pensonal-input left large-input" placeholder=""
+					   type="text" v-model="formData.businessScale"
+					   :errmsg="errData.businessScale"
+					   @focus="onFocus_inputBar('businessScale')"></input-bar>
+			<span class="explain">**万分钟/月</span>
+		</div>
+		<div class="personal-form">
+			<span class="personal-title left">报价</span>
+			<input-bar class="personal-content pensonal-input left large-input" placeholder=""
+					   type="text" v-model="formData.budget"
+					   :errmsg="errData.budget"
+					   @focus="onFocus_inputBar('budget')"></input-bar>
+			<span class="explain">例：本地**元/分钟，异地**元/分钟</span>
+		</div>
+		<div class="personal-form">
+			<span class="personal-title left">其他说明</span>
+			<input-bar class="personal-content pensonal-input left large-input" placeholder=""
+					   type="text" v-model="formData.remark"
+					   :errmsg="errData.remark"
+					   @focus="onFocus_inputBar('remark')"></input-bar>
+		</div>
 	</div>
 </template>
 <script type="text/ecmascript-6">
 	import g from "../../global";
+	import InputBar from "../../components/inputBar.vue";
+
+
+
 	export default{
 		created(){
 			this.init();
@@ -47,7 +133,12 @@
 		data(){
 			return {
 				g: g,
+				errData: {},
+				formData: {}
 			}
+		},
+		components:{
+			InputBar
 		},
 		methods: {
 			init()

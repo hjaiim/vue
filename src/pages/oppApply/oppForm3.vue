@@ -100,6 +100,7 @@
 </template>
 <script type="text/ecmascript-6">
 	import g from "../../global";
+	import InputBar from "../../components/inputBar.vue";
 	export default{
 		created(){
 			this.init();
@@ -107,7 +108,12 @@
 		data(){
 			return {
 				g: g,
+				errData: {},
+				formData: {}
 			}
+		},
+		components:{
+			InputBar
 		},
 		methods: {
 			init()

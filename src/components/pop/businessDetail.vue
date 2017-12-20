@@ -25,27 +25,27 @@
 
 					<div>
 						<h3 class="opp-title">审核详情</h3>
-						<div v-for="item in recordList">
+						<div v-for="item in businessData.recordList">
 							<p class="from-group  clear">
-								<span class="form-title">  <i class="leader"></i>商机管理员</span>
-								<span class="form-trap">大头</span>
+								<span class="form-title">  <i class="leader"></i>{{item.positionName}}</span>
+								<span class="form-trap">{{item.auditorName}}</span>
 							</p>
-							<p class="from-group  clear">
+
+							<p class="from-group  clear" v-if="item.attachList.length > 0">
 								<span class="form-title">附件下载</span>
-								<span class="form-trap">无</span>
+								<span class="form-trap">{{item.attachList}}</span>
 							</p>
 							<p class="from-group  clear">
 								<span class="form-title left">签批意见</span>
-								<span class="form-trap left address-width">通过，交付下一级通过，交付下一级通过，交付下一级通过，交付下一级通过，交付下一级通过，交付下一级通过，交付下一级通过，交付下一级通过，交付下一级通过，交付下一级通过，交付下一级通过，交付下一级</span>
+								<span class="form-trap left address-width">{{item.opinion}}</span>
 							</p>
 							<p class="from-group  clear">
 								<span class="form-title">结果</span>
-								<span class="form-trap">已通过 2017.13.13 20:20:01</span>
+								<span class="form-trap">{{item.result}} {{item.auditTime}}</span>
 							</p>
 						</div>
-						<div class="clear">
+						<div class="clear" v-if="businessData.operation == 2">
 							<p class="from-group clear">
-
 								<span class="form-title left">我的审核</span>
 								<span class="action-box status-type left" @click="onClick_statusItem(1)"
 									  v-if="businessData.hasApproved">
@@ -87,23 +87,23 @@
 						<!--</p>-->
 						<!--</div>-->
 						<!--<div v-if="type==1 ||type ==3">-->
-							<!--<p class="examine-people">-->
-								<!--<span class="exam-btn" v-if="type==1">结束审核</span>-->
-								<!--<span class="exam-btn">选择后续人</span>-->
+						<!--<p class="examine-people">-->
+						<!--<span class="exam-btn" v-if="type==1">结束审核</span>-->
+						<!--<span class="exam-btn">选择后续人</span>-->
 						<!--<span class="choose-people">李小龙-->
 						<!--<img :src="g.path.images+'/del-head.png'" alt="" class="delete-choose pointer">-->
 						<!--</span>-->
 						<!--<span class="choose-people">李小龙-->
 						<!--<img :src="g.path.images+'/del-head.png'" alt="" class="delete-choose pointer">-->
 						<!--</span>-->
-								<!--<span class="exam-btn end-exam" v-if="type==1">结束审核</span>-->
-							<!--</p>-->
+						<!--<span class="exam-btn end-exam" v-if="type==1">结束审核</span>-->
+						<!--</p>-->
 						<!--</div>-->
 
 					</div>
 				</div>
 			</div>
-			<div class="detail-wrap clear">
+			<div class="detail-wrap clear" v-if="businessData.operation == 2">
 				<div class="pop-btn top-btn right pointer cancel-btn ani-time" @click="onClick_closeBtn">关闭</div>
 				<div class="btn-submit pop-btn top-btn right pointer action-btn ani-time" @click="onClick_submitBtn">提交
 				</div>
@@ -122,6 +122,7 @@
 	import BusinessType5 from "../businessDetail/businessType5.vue";
 	import BusinessType6 from "../businessDetail/businessType6.vue";
 	import BusinessType7 from "../businessDetail/businessType7.vue";
+	var _params = null;
 	export default{
 		created()
 		{
@@ -134,8 +135,8 @@
 				oppType: 1,
 				formData: {},
 				status: 1,
-				businessData:{
-					taskProperties:{}
+				businessData: {
+					taskProperties: {}
 				}
 			}
 		},
@@ -160,7 +161,7 @@
 			}
 		},
 		watch: {
-			currId()
+			isShowPopView()
 			{
 				this.init();
 			}
@@ -168,6 +169,7 @@
 		methods: {
 			init()
 			{
+				debugger;
 				if (this.currId)
 				{
 					this.businessData = g.data.searchBusinessPool.getDataById(this.currId);
@@ -175,7 +177,6 @@
 					this.oppType = this.businessData.type;
 					trace("this.businessData", this.businessData);
 				}
-
 
 			},
 			onClose_pop(){
@@ -192,7 +193,19 @@
 			},
 			onClick_submitBtn($status)
 			{
-
+				_params = {
+					orderId: this.currId,
+					auditResult: 1,
+					auditSuggest: "可以通过",
+					taskTodoId: this.businessData.engineResult.todoId
+				};
+				g.net.call("bo/saveAuditRecord", _params).then(($data) =>
+				{
+					trace("$data", $data)
+				}, (err) =>
+				{
+					g.func.dealErr(err);
+				})
 			},
 		}
 	}

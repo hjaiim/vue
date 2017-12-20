@@ -234,6 +234,7 @@
 			},
 			onClick_searchBtn()
 			{
+				this.currPage = 1;
 				this.updateUrl();
 			},
 			onClick_selectAllBtn()

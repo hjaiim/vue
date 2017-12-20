@@ -100,7 +100,7 @@ function updateData($dObj)
 	if ($dObj.hasOwnProperty("stationType"))
 	{
 		this.type = $dObj.stationType;
-		$dObj.stationType == 1 && (this.typeDesc = "审核岗");
-		$dObj.stationType == 2 && (this.typeDesc = "提交岗");
+		$dObj.stationType == 1 && (this.typeDesc = "提交岗");
+		$dObj.stationType == 2 && (this.typeDesc = "审核岗");
 	}
 }

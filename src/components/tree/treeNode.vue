@@ -1,10 +1,10 @@
 <template>
 	<li>
 		<div>
-			<!--<span @click="onClick_item(itemData,$event)" v-show="isValid(itemData) && isShowArrow">-->
-			<!--<i class="diff-trangle"-->
-			<!--:class="currIdList.indexOf(itemData.id) >= 0 && isValid(itemData)?'rotateRight':''"></i>-->
-			<!--</span>-->
+			<span @click="onClick_item(itemData,$event)" v-show="isValid(itemData) && isShowArrow">
+			<i class="diff-trangle"
+			   :class="currIdList.indexOf(itemData.id) >= 0 && isValid(itemData)?'rotateRight':''"></i>
+			</span>
 			<span @click="onClick_icon(itemData)">
 				<i class="tick-select relative"
 				   :class="checkedChildren.indexOf(itemData.id) >= 0?'action':''"></i>
@@ -56,7 +56,16 @@
 				default: true
 			}
 		},
-		watch: {},
+		watch: {
+			checkedList()
+			{
+				this.init();
+			},
+			data()
+			{
+				this.init();
+			}
+		},
 		methods: {
 			init()
 			{
@@ -77,11 +86,14 @@
 			},
 			onChange_list($idList)
 			{
-				this.checkedChildren = $idList;
-				util.splice(this.checkedChildren, this.itemData.id);
-				if ($idList.length > 0)
+
+				util.splice(this.checkedChildren, this.tmpItem.id);
+				for(var item of this.tmpItem.children)
 				{
-					util.pushIn(this.checkedChildren, this.itemData.id);
+					if(this.checkedChildren.indexOf(item.id) >= 0)
+					{
+						util.pushIn(this.checkedChildren, this.tmpItem.id);
+					}
 				}
 				this.$emit('change', this.checkedChildren);
 			},
@@ -116,8 +128,8 @@
 	}
 
 	.tree-list {
-		top: -36px;
-		left: 25px;
+		top: -7px;
+		left: 47px;
 	}
 	.tree-diff{
 		top: 0px;

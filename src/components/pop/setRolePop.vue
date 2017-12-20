@@ -101,6 +101,9 @@
 				};
 				g.net.call('user/editUserRole', _params).then(($data) =>
 				{
+					var roleData =  g.data.searchRolePool.getDataById(_params.roleId);
+					_params.roleName = roleData.name;
+					g.data.searchAccountPool.getDataById(_params.userId).update(_params);
 					g.ui.toast("角色设置成功");
 					this.$emit('close', true);
 				}, (err) =>

@@ -6,10 +6,10 @@
 					<i class="diff-trangle"
 					   :class="currIdList.indexOf(itemData.id) >= 0 && isValid(itemData)?'rotateRight':''"></i>
 				</span>
-				<!--<span @click="onClick_icon(itemData)" v-if="showCheckbox">-->
-				<!--<i class="tick-select relative"-->
-				<!--:class="checkedChildren.indexOf(itemData.id) >= 0?'action':''"></i>-->
-				<!--</span>-->
+				<span @click="onClick_icon(itemData)" v-if="showCheckbox">
+				<i class="tick-select relative"
+				   :class="checkedChildren.indexOf(itemData.id) >= 0?'action':''"></i>
+				</span>
 				<span @click="onClick_item(itemData,$event)">{{itemData.name}}</span>
 			</div>
 			<ul v-show="isValid(itemData) && currIdList.indexOf(itemData.id) >= 0" class="padleft relative tree-list">
@@ -72,21 +72,14 @@
 			}
 		},
 		watch: {
-			listData($val)
-			{
-				this.init();
-			},
-			checkedList($val)
-			{
-				this.init();
-			}
+
 		},
 		methods: {
 			init()
 			{
 				this.list = __merge([], this.listData);
+
 				this.checkedChildren = __merge([], this.checkedList);
-				trace("this.checkedChildren", this.checkedChildren)
 				for (var item of this.list)
 				{
 					this.checkedAllChildren(item)
@@ -102,17 +95,20 @@
 				this.tmpItem = $item;
 				util.insertOneOrZero(this.checkedChildren, $item.id)
 				this.checkedAllChildren($item);
-				this.$emit('change', this.checkedChildren);
+				this.$emit('update', this.checkedChildren);
 			},
 			onChange_list($idList)
 			{
 				this.checkedChildren = $idList;
 				util.splice(this.checkedChildren, this.tmpItem.id);
-				if ($idList.length > 0)
+				for(var item of this.tmpItem.children)
 				{
-					util.pushIn(this.checkedChildren, this.tmpItem.id);
+					if(this.checkedChildren.indexOf(item.id) >= 0)
+					{
+						util.pushIn(this.checkedChildren, this.tmpItem.id);
+					}
 				}
-				this.$emit('change', this.checkedChildren);
+				this.$emit('update', this.checkedChildren);
 			},
 			checkedAllChildren($data)
 			{
@@ -122,7 +118,9 @@
 					{
 						if (this.checkedChildren.indexOf($data.id) >= 0)
 						{
+
 							util.pushIn(this.checkedChildren, item.id);
+
 						}
 						else
 						{
@@ -130,7 +128,8 @@
 						}
 						this.checkedAllChildren(item);
 					}
-				}
+				};
+				this.$forceUpdate();
 			},
 			isValid(item)
 			{
@@ -140,10 +139,11 @@
 	}
 </script>
 <style type="text/css" lang="sass" rel="stylesheet/scss">
-	.tree-wrap{
-		color: #000;
+	.tree-wrap {
+		color: #000000;
 		font-size: 14px;
 	}
+
 	.flex-col {
 		display: flex;
 		flex-direction: column;

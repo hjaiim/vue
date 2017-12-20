@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<form id="form1" action="http://192.168.12.219:8001/file/upload" method="post" enctype="multipart/form-data">
+	<div class="none">
+		<input type="file" name="btn" id="fileBtn" onchange="onChange_fileBtn()">
+		<label id="fileName">请选择文件</label>
+		<input type="submit" name="submit" id="submit" style="display: none;">
+		<input type="button" name="cancel" id="cancelBtn" onclick="onClick_cancelBtn()" value="取消"
+			   style="display: none;">
+	</div>
+</form>
+</body>
+<script>
+
+	$("#submit").hide();
+	$("#cancelBtn").hide();
+	function onChange_fileBtn(e)
+	{
+		if ($("#fileBtn")[0].files.length > 0)
+		{
+			var file = $("#fileBtn")[0].files[0];
+			var fileName = file.name;
+			var fileSize = file.size;
+//			if (fileName.substr(fileName.length - 4) == ".zip" && fileSize > 0)
+//			{
+			fileSize = Math.floor(fileSize / 1048576 * 100) / 100 + "MB";
+			$("#fileName").html(fileName + "（" + fileSize + "）");
+			$("#fileBtn").hide();
+			$("#packageBtn").hide();
+			$("#submit").show();
+			$("#cancelBtn").show();
+//			}
+//			else
+//			{
+//				$("#fileName").html("无效文件，重新选择");
+//				$("#form1")[0].reset();
+//			}
+		}
+	}
+
+	function onClick_cancelBtn()
+	{
+		$("#fileName").html("请选择文件");
+		$("#submit").hide();
+		$("#cancelBtn").hide();
+		$("#fileBtn").show();
+		$("#packageBtn").show();
+		$("#form1")[0].reset();
+	}
+
+	function onClick_packageBtn()
+	{
+		$.ajax({
+			url: "http://{$host}/publish/package",
+			type: "get"
+		});
+		window.location.href = "http://{$host}/upload";
+	}
+
+</script>
+</html>

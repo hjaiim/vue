@@ -7,14 +7,23 @@
 			<div class="percenter-inner" v-show="type=='personal'">
 
 				<div class="icon-collect clear">
+
 					<div class="relative upload-head right pointer">
 						<img class="default-img" :src="avatar?avatar:g.path.images+'/default-icon.png'" alt="">
+						<iframe name="fileUpload"></iframe>
+						<form action="http://192.168.12.219:8001/file/upload" method="post"
+							  enctype="multipart/form-data" name="fileForm" target="fileUpload">
+							<input type="file" class="file-input" name="fileInput" @change="onChange_upload">
+							<input type="submit" value="提交"/>
+						</form>
 						<div class="upload-btn absolute">
 							<p class="load-text">修改头像</p>
-							<upload-btn @change="onChange_upload" resultType="base64" :multiType="false"></upload-btn>
+
+							<!--<upload-btn @change="onChange_upload" resultType="base64" :multiType="false"></upload-btn>-->
 							<img :src="g.path.images+'/del-head.png'" alt=""
 								 class="del-head absolute pointer">
 						</div>
+
 					</div>
 				</div>
 			</div>
@@ -39,7 +48,7 @@
 							   v-model="phone" :readonly="readonly" :errmsg="errData.phone"></input-bar>
 					<span class="bind-phone pointer ani-time" @click="onClick_unbindBtn">解绑</span>
 				</p>
-				<p class="personal-form">
+				<p class="personal-form" v-if="!readonly">
 					<span class="personal-title">验证码</span>
 					<input-bar class="personal-content pensonal-input code" placeholder="" type="text"
 							   v-model="code" :errmsg="errData.code" @focus="onFocus_inputBar('code')"></input-bar>
@@ -48,7 +57,8 @@
 				</p>
 				<p class="personal-form"><span class="personal-title">固定电话</span>
 					<input-bar class="personal-content pensonal-input" placeholder="" type="text"
-							   v-model="telphone" :errmsg="errData.telphone" @focus="onFocus_inputBar('telphone')"></input-bar>
+							   v-model="telphone" :errmsg="errData.telphone"
+							   @focus="onFocus_inputBar('telphone')"></input-bar>
 				</p>
 				<p class="personal-form"><span class="personal-title">电子邮箱</span>
 					<input-bar class="personal-content pensonal-input" placeholder="" type="text"
@@ -56,22 +66,26 @@
 				</p>
 				<p class="personal-form"><span class="personal-title">备注</span>
 					<input-bar class="personal-content pensonal-input note" placeholder="" type="text"
-							   v-model="remark" :errmsg="errData.remark" @focus="onFocus_inputBar('remark')"></input-bar>
+							   v-model="remark" :errmsg="errData.remark"
+							   @focus="onFocus_inputBar('remark')"></input-bar>
 				<div class="btn btn-save pointer action-btn ani-time" @click="onClick_savePersonal">保存</div>
 			</div>
 
 			<div class="personal-message" v-show="type=='modpwd'">
 				<div class="personal-form"><span class="personal-title">原密码</span>
 					<input-bar class="personal-content pensonal-input" placeholder="" type="password"
-							   v-model="password" :errmsg="errData.password" @focus="onFocus_inputBar('password')"></input-bar>
+							   v-model="password" :errmsg="errData.password"
+							   @focus="onFocus_inputBar('password')"></input-bar>
 				</div>
 				<div class="personal-form"><span class="personal-title">新密码</span>
 					<input-bar class="personal-content pensonal-input" placeholder="" type="password"
-							   v-model="newPwd" :errmsg="errData.newPwd" @focus="onFocus_inputBar('newPwd')"></input-bar>
+							   v-model="newPwd" :errmsg="errData.newPwd"
+							   @focus="onFocus_inputBar('newPwd')"></input-bar>
 				</div>
 				<div class="personal-form"><span class="personal-title">确认密码</span>
 					<input-bar class="personal-content pensonal-input" placeholder="" type="password"
-							   v-model="confirmPwd" :errmsg="errData.confirmPwd" @focus="onFocus_inputBar('confirmPwd')"></input-bar>
+							   v-model="confirmPwd" :errmsg="errData.confirmPwd"
+							   @focus="onFocus_inputBar('confirmPwd')"></input-bar>
 				</div>
 				<div class="btn btn-save pointer action-btn ani-time" @click="onClick_updatePwd">保存</div>
 			</div>
@@ -177,7 +191,7 @@
 			onClick_savePersonal()
 			{
 				this.checkPersonalInfo();
-				if(!_isValid)
+				if (!_isValid)
 				{
 					_isValid = true;
 					return;
@@ -186,7 +200,7 @@
 					telphone: this.telphone,
 					email: this.email,
 					remark: this.remark,
-					avatar:this.avatar
+					avatar: this.avatar
 				};
 				g.net.call("user/updateUserInfo", _params).then(() =>
 				{
@@ -220,10 +234,13 @@
 				this.errData[$type] = "";
 				this.$forceUpdate();
 			},
-			onChange_upload($data)
+			onChange_upload(e)
 			{
-				trace("onChange_upload", $data);
-				this.avatar = $data;
+				var file = e.target.files[0];
+				var fileName = file.name;
+				var fileSize = file.size;
+				fileSize = Math.floor(fileSize / 1048576 * 100) / 100 + "MB";
+				trace(fileName + "（" + fileSize + "）");
 			},
 			checkPhone()
 			{
@@ -317,4 +334,14 @@
 <style type="text/css" lang="sass" rel="stylesheet/css" scoped>
 	@import "../../css/mixin.scss";
 	@import "../../css/percenter.scss";
+
+	.file-input {
+		width: 120px;
+		height: 120px;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 2;
+		opacity: 0;
+	}
 </style>

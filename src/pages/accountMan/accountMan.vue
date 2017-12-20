@@ -20,15 +20,16 @@
 					<div class="staff-option left clear">
 						<span class="left staff-name">平台角色</span>
 						<div class="option-content relative left pointer" @click.stop="onClick_dropListBtn">
-							所有<i class="icon-trangle pointer" :class="isShowRoleList?'rotate':''"></i>
+							{{roleName}}
+							<i class="icon-trangle pointer" :class="isShowRoleList?'rotate':''"></i>
 							<drop-list :dropList=roleList :isShowDropList="isShowRoleList"
-									   @change="onClick_roleItem" ref="dropList"></drop-list>
+									   @change="onChange_roleItem" ref="dropList"></drop-list>
 						</div>
 					</div>
 					<div class="search-name left clear">
 						<span class="left">姓名</span>
 						<input-bar class="search-input left relative" placeholder="" type="text"
-								   v-model="name"></input-bar>
+								   v-model="name" @keyenter="onKeyenter_inputBar"></input-bar>
 					</div>
 					<div class="action-wrap left clear">
 						<span class="left action-btn ani-time pointer" @click="onClick_searchBtn">查询</span>
@@ -81,10 +82,10 @@
 								 @change="onChange_pageCom"></common-page>
 				</div>
 			</div>
-			<set-role-pop @close="onClose_setRolePop" :roleId="roleId" :currId="currId"
+			<set-role-pop @close="onClose_setRolePop" :currId="currId"
 						  :isShowPopView="isShowSetRolePop"></set-role-pop>
 			<order-work-pop @close="onClose_orderWorkPop"
-							:positionId="positionId" :currId="currId"
+							:currId="currId"
 							:isShowPopView="isShowOrderWorkPop"></order-work-pop>
 		</div>
 	</com-layout>
@@ -125,6 +126,18 @@
 			SetRolePop,
 			OrderWorkPop
 		},
+		computed: {
+			roleName()
+			{
+				if (this.currRole)
+				{
+					return g.data.searchRolePool.getDataById(this.currRole) &&
+							g.data.searchRolePool.getDataById(this.currRole).name
+
+				}
+				return "全部";
+			}
+		},
 		methods: {
 			routerUpdated()
 			{
@@ -137,7 +150,8 @@
 				this.currPage = int(g.vue.getQuery("page", 1));
 				this.name = g.vue.getQuery("name", "");
 				this.currRole = g.vue.getQuery("role", 0);
-				this.roleList = g.data.searchRolePool.list;
+				this.roleList = g.data.searchRolePool.list.concat();
+				this.roleList.unshift({name: "全部", id: 0});
 				this.initEvents();
 			},
 			init()
@@ -176,7 +190,7 @@
 				}
 				this.currPage = 1;
 			},
-			onClick_roleItem($id)
+			onChange_roleItem($id)
 			{
 				this.currRole = $id;
 				this.currPage = 1;
@@ -203,8 +217,17 @@
 				this.init();
 				this.updateUrl()
 			},
+			onKeyenter_inputBar()
+			{
+				this.onClick_searchBtn();
+			},
 			onClick_searchBtn()
 			{
+				if(!this.name)
+				{
+					return ;
+				}
+				this.currPage = 1;
 				this.updateUrl();
 			},
 			onClick_positionBtn($item)
@@ -249,7 +272,7 @@
 						typeList: JSON.stringify(this.typeList),
 						page: int(this.currPage),
 						name: this.name,
-						role: this.currRole
+						roleId: this.currRole
 					}
 				}
 			}

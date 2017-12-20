@@ -37,7 +37,7 @@ export default class StaticRightPool {
 			}
 			else if (_hash[itemData.parentId])
 			{
-				_hash[itemData.parentId].children.push(itemData)
+				_hash[itemData.parentId].children .push(itemData)
 			}
 		}
 
@@ -62,7 +62,11 @@ export default class StaticRightPool {
 
 	get list()
 	{
-		return _list;
+		return _list.sort(function (a,b)
+		{
+			a.sort -b.sort;
+
+		});
 	}
 
 	get allList()

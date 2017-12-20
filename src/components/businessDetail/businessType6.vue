@@ -3,7 +3,7 @@
 	<div>
 		<p class="from-group detail-custer-msg">
 			<span class="form-title">业务名称</span>
-			<span class="form-trap">声音名片业务</span>
+			<span class="form-trap">M-CTD小号业务</span>
 		</p>
 
 		<p class="from-group detail-custer-msg" v-for="(value,key) in formInfo">
