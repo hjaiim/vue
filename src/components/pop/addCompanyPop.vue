@@ -29,7 +29,10 @@
 								   v-model="phone" :errmsg="errData.phone"></input-bar>
 						<span class="requied">*</span>
 					</p>
-					<div class="pop-btn right pointer" @click="onClick_saveCompany">保存</div>
+					<div class="btn-wrap clear">
+
+						<div class="pop-btn right pointer" @click="onClick_saveCompany">保存</div>
+					</div>
 				</div>
 				<div class="message-wrap">
 					<div class="message-wrap" is="scroll-group">
@@ -84,7 +87,8 @@
 				</div>
 				<div class="company-action clear">
 					<div class="btn-submit pop-btn top-btn right pointer action-btn ani-time"
-						 @click="onClick_submitBtn">提交</div>
+						 @click="onClick_submitBtn">提交
+					</div>
 				</div>
 			</div>
 		</div>

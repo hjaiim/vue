@@ -48,7 +48,7 @@
 						<th>岗位名称</th>
 						<th>岗位类型</th>
 						<th>角色</th>
-						<th><p class="action-menu diff-menu">操作</p></th>
+						<th><p class="action-menu">操作</p></th>
 					</tr>
 					</thead>
 					<tbody>
@@ -62,11 +62,11 @@
 						<td>{{item.positionTypeDesc}}</td>
 						<td>{{item.roleName}}</td>
 						<td>
-							<p class="action-menu clear diff-menu">
-								<span class="left pointer draw-line ani-time" @click="onClick_positionBtn(item)">岗位设置
+							<p class="diff-menu ">
+								<span class="pointer draw-line ani-time" @click="onClick_positionBtn(item)">岗位设置
 								</span>
-								<span class="left pointer draw-line ani-time" @click="onClick_roleBtn(item)">角色设置</span>
-								<span class="left pointer draw-line ani-time"
+								<span class=" pointer draw-line ani-time" @click="onClick_roleBtn(item)">角色设置</span>
+								<span class=" pointer draw-line ani-time"
 									  @click="onClick_stopBtn(item)">{{item.status == 1?'停用':'启用'}}</span>
 							</p>
 						</td>
@@ -260,7 +260,7 @@
 		}
 	}
 </script>
-<style type="text/css" lang="sass" rel="stylesheet/css">
+<style type="text/css" lang="sass" rel="stylesheet/css" scoped>
 	@import "../../css/mixin.scss";
 	@import "../../css/accountman.scss";
 </style>
