@@ -2,8 +2,8 @@
 	<div class="wrap-page relative">
 		<div class="login-wrap is-transformed gray-shadow resetPwd-wrap">
 			<p class="login-tit">找回密码</p>
-			<form-input placeholder="请输入登录名" type="text" v-model="account" 
-			@focus="onFocus_formInput('account')" :errmsg="errData.account"></form-input>
+			<form-input placeholder="请输入登录名" type="text" v-model="account"
+						@focus="onFocus_formInput('account')" :errmsg="errData.account"></form-input>
 			<form-input type="text" placeholder="请输入您的手机号" errmsg="请输入正确的手机号" v-model="phone"
 						@focus="onFocus_formInput('phone')" :errmsg="errData.phone"></form-input>
 			<div class="verify-wrap relative">
@@ -23,7 +23,7 @@
 	import g from "../../global";
 	import sha256 from 'sha256';
 	import FormInput from "../../components/formInput.vue";
-	var _params = {}, _codeData = {};
+	var _params = null, _isValid = true;
 	export default{
 		created(){
 			this.init();
@@ -37,7 +37,7 @@
 				errorTip: "",
 				confirmPwd: '',
 				code: '',
-				errData:{}
+				errData: {}
 			}
 		},
 		components: {
@@ -56,14 +56,16 @@
 			onClick_getCodeBtn()
 			{
 				this.checkCodeDataValid();
-				if(!_isValid)
+				if (!_isValid)
 				{
 					_isValid = true;
-					return ;
+					return;
 				}
-				_codeData.logon = this.account;
-				_codeData.mobile = this.phone;
-				g.net.call("user/resetPasswordSendCode", _codeData).then(() =>
+				_params = {
+					logon:this.account,
+					mobile:this.phone
+				};
+				g.net.call("user/resetPasswordSendCode", _params).then(() =>
 				{
 					g.ui.toast("发送成功！");
 				})
@@ -71,18 +73,22 @@
 			onClick_resetBtn()
 			{
 				this.checkResetDataValid();
-				if(!_isValid)
+				if (!_isValid)
 				{
 					_isValid = true;
-					return ;
+					return;
 				}
-				_params.logon = this.account;
-				_params.mobile = this.phone;
-				_params.code = this.code;
-				_params.password = sha256(this.password);
+
+				_params = {
+					logon:this.account,
+					mobile:this.phone,
+					code:this.code,
+					password:sha256(this.password)
+				};
 
 				g.net.call('user/resetPwd', _params).then(() =>
 				{
+					g.ui.toast("密码重置成功！");
 					this.init();
 					g.url = "/login";
 				})
@@ -90,39 +96,74 @@
 			onFocus_formInput($type)
 			{
 				this.errData[$type] = "";
+				this.$forceUpdate();
 			},
 			checkCodeDataValid()
 			{
-				if(!this.account)
+				if (!this.account)
 				{
+					this.errData.account = "请输入登录名";
 					_isValid = false;
-					this.errData.account = "内容不能为空";
 				}
-				if(!this.phone)
+				else if (!g.param.accountReg.test(this.account))
 				{
+					this.errData.account = "登录名格式不正确";
 					_isValid = false;
-					this.errData.phone = "内容不能为空";
 				}
+
+				if (!this.phone)
+				{
+					this.errData.phone = "请输入手机号";
+					_isValid = false;
+				}
+				else if (!g.param.phoneReg.test(this.phone))
+				{
+					this.errData.phone = "手机号格式不正确"
+					_isValid = false;
+				}
+				this.$forceUpdate();
 			},
 			checkResetDataValid()
 			{
 
 				this.checkCodeDataValid();
-				if(!this.password)
+				if (!this.code)
 				{
+					this.errData.code = "请输入验证码";
 					_isValid = false;
-					this.errData.password = "内容不能为空";
 				}
-				if(!this.confirmPwd)
+				else if (!g.param.codeReg.test(this.code))
 				{
+					this.errData.code = "验证码格式有误";
 					_isValid = false;
-					this.errData.confirmPwd = "内容不能为空";
 				}
-				if(!this.code)
+
+				if (!this.password)
 				{
+					this.errData.password = "请输入密码";
 					_isValid = false;
-					this.errData.code = "内容不能为空";
 				}
+				else if (!g.param.passwordReg.test(this.password))
+				{
+					this.errData.password = "密码是6-16位的字母或数字";
+					_isValid = false;
+				}
+				if (!this.confirmPwd)
+				{
+					this.errData.confirmPwd = "请输入确认密码";
+					_isValid = false;
+				}
+				else if (!g.param.passwordReg.test(this.password))
+				{
+					this.errData.confirmPwd = "密码是6-16位的字母或数字";
+					_isValid = false;
+				}
+				else if (this.confirmPwd != this.password)
+				{
+					this.errData.confirmPwd = "两次密码输入不一致";
+					_isValid = false;
+				}
+				this.$forceUpdate();
 			}
 
 		}

@@ -21,6 +21,7 @@ export function getUserInfo()
 			resolved()
 		}, (err) =>
 		{
+			g.func.dealErr(err);
 			rejected();
 		})
 	})

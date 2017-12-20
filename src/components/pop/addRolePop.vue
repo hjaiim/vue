@@ -171,6 +171,7 @@
 				}
 				g.net.call(postUrl, _params).then(($data) =>
 				{
+					this.init();
 					if (this.currId != 0)
 					{
 						g.data.searchRolePool.getDataById(this.currId).update(_params);

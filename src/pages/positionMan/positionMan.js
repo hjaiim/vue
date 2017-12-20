@@ -32,6 +32,7 @@ export function searchPositionList($params)
 			resolved();
 		}, (err) =>
 		{
+			g.func.dealErr(err);
 			rejected();
 		})
 	});

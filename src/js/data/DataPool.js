@@ -11,6 +11,7 @@ import CompanyPool from "./CompanyPool";
 import SearchCompanyPool from "./SearchCompanyPool";
 import MessagePool from "./MessagePool";
 import DepartmentPool from "./DepartmentPool";
+import StaticRightPool from "./StaticRightPool";
 import DutyPool from "./DutyPool";
 import PositionPool from "./PositionPool";
 import AccountPool from "./AccountPool";
@@ -34,6 +35,7 @@ export var searchAccountPool = new AccountPool();
 export var searchBusinessPool = new BusinessPool();
 export var searchUnverifyPool = new UnverifyPool();
 export var searchRolePool = new RolePool();
+export var staticRightPool = new StaticRightPool();
 export var staffPool = new StaffPool();
 export function initStaticData()
 {

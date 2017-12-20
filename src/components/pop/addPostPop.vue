@@ -108,6 +108,7 @@
 				};
 				g.net.call("organizeOpt/editStation", _params).then(($data) =>
 				{
+					this.init();
 					if (this.currId != 0)
 					{
 						g.data.searchPositionPool.getDataById(this.currId).update($data)

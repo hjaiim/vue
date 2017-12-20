@@ -9,7 +9,7 @@
 				<div class="search-wrap clear left">
 					<span class="left">公司名称</span>
 					<input-bar class="search-bar left relative" placeholder="" type="text"
-							   v-model="customerName"></input-bar>
+							   v-model="customerName" @keyenter="onKeyEnter_inputBar"></input-bar>
 
 				</div>
 				<span class="search-btn action-btn ani-time left pointer" @click="onClick_searchBtn">查询</span>
@@ -58,7 +58,7 @@
 								 :showTotalCount="true"
 								 :showElevator="true"
 								 :showFirstAndEnd="true"
-					@change="onChange_pageCom"></common-page>
+								 @change="onChange_pageCom"></common-page>
 				</div>
 			</div>
 		</div>
@@ -105,6 +105,15 @@
 				return Math.ceil(g.data.searchCompanyPool.total / 10);
 			}
 		},
+		watch:{
+			companyList($val)
+			{
+				if($val.length == 0)
+				{
+					this.updateUrl();
+				}
+			}
+		},
 		methods: {
 			routerUpdated()
 			{
@@ -121,7 +130,7 @@
 				if ($result)
 				{
 					_params = {comId: _delId};
-					g.net.call("organizeOpt/deleteCompanyById",_params).then(($data) =>
+					g.net.call("organizeOpt/deleteCompanyById", _params).then(($data) =>
 					{
 						g.data.searchCompanyPool.remove(_delId);
 						g.ui.toast("公司删除成功！");
@@ -169,12 +178,12 @@
 
 				}
 			},
+			onKeyEnter_inputBar()
+			{
+				this.onClick_searchBtn();
+			},
 			onClick_searchBtn()
 			{
-				if(!this.customerName)
-				{
-					return ;
-				}
 				this.currPage = 1;
 				this.updateUrl();
 			},
@@ -186,10 +195,10 @@
 			updateUrl()
 			{
 				g.url = {
-					path:"/companyman",
-					query:{
-						page:this.currPage,
-						name:this.customerName
+					path: "/companyman",
+					query: {
+						page: this.currPage,
+						customerName: this.customerName
 					}
 				}
 			}

@@ -57,24 +57,14 @@ var WEB_CONFIG = {
 		defaultLang: "cn",
 		loginExpires: 10 * 60,
 		sendCodeTime: 5,
-		pageSize: 9,
-		accountRegExp: /^1(3|4|5|7|8)\d{9}$/,
-		passwordRegExp: /^\w{6,20}$/,
-		hotMapMax:1000,
-		hotMapOptions: {
-			gradient: {
-				.25: '#3242fc',
-				.50: '#3ce058',
-				.75: '#ffcc00',
-				.90: '#fc0000'
-			},
-			opacity: 0.7
-		},
-		radiusRatio: 50,
-		hotMapLevel: 15,
-		level:5,
-		hotMapMinZoom:15,
-		hotMapMaxZoom:19
+		pageSize: 10,
+		phoneReg: /^1(3|4|5|7|8)\d{9}$/,
+		accountReg: /^[a-z0-9]{6,16}$/,
+		passwordReg: /^[a-z0-9]{6,16}$/,
+		nameReg:/^[\u2E80-\u9FFF]{2,10}/,
+		telReg:/(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,8}/,
+		emailReg:/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
+		codeReg:/\d{4}/
 	}
 }
 

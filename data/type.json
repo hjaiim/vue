@@ -37,7 +37,7 @@
 		"呼叫范围": "callRange"
 	  },
 	  {
-		"是否回呼": "callback"
+		"是否回呼": "callBack"
 	  },
 	  {
 		"是否转接": "transfer"
@@ -82,10 +82,16 @@
 		"业务用途及场景": "businessDesc"
 	  },
 	  {
-		"预计业务规模": "businessScale"
+		"对接方式": "accessType"
 	  },
 	  {
-		"报价": "budget"
+		"使用流量类别": "flowType"
+	  },
+	  {
+		"预计入账收入": "income"
+	  },
+	  {
+		"折扣说明": "discount"
 	  },
 	  {
 		"其他说明": "remark"
@@ -95,42 +101,6 @@
   {
 	"id": 3,
 	"name": "全数通业务",
-	"titles": [
-	  {
-		"客户公司名称": "cusCompName"
-	  },
-	  {
-		"客户联系人": "customer"
-	  },
-	  {
-		"客户联系方式": "cusPhone"
-	  },
-	  {
-		"客户公司地址": "cusCompAdd"
-	  },
-	  {
-		"客户公司介绍": "cusCompIntro"
-	  },
-	  {
-		"业务用途及场景": "businessDesc"
-	  },
-	  {
-		"预计开通数量": "accessNum"
-	  },
-	  {
-		"报价": "budget"
-	  },
-	  {
-		"付款方式": "payway"
-	  },
-	  {
-		"其他说明": "remark"
-	  }
-	]
-  },
-  {
-	"id": 4,
-	"name": "续联业务",
 	"titles": [
 	  {
 		"客户公司名称": "cusCompName"
@@ -174,8 +144,8 @@
 	]
   },
   {
-	"id": 5,
-	"name": "声音名片业务",
+	"id": 4,
+	"name": "续联业务",
 	"titles": [
 	  {
 		"客户公司名称": "cusCompName"
@@ -199,18 +169,143 @@
 		"业务用途及场景": "businessDesc"
 	  },
 	  {
-		"对接方式": "accessMethod"
+		"预计业务规模": "businessScale"
 	  },
 	  {
-		"使用流量类型": "flowType"
+		"报价": "budget"
 	  },
 	  {
-		"预计入账收入": "income"
+		"其他说明": "remark"
+	  }
+	]
+  },
+  {
+	"id": 5,
+	"name": "声音名片业务",
+	"titles": [
+	  {
+		"客户公司名称": "cusCompName"
 	  },
 	  {
-		"折扣说明": "discount"
+		"客户联系人": "customer"
 	  },
-
+	  {
+		"客户联系方式": "cusPhone"
+	  },
+	  {
+		"客户公司地址": "cusCompAdd"
+	  },
+	  {
+		"客户公司介绍": "cusCompIntro"
+	  },
+	  {
+		"业务用途及场景": "businessDesc"
+	  },
+	  {
+		"预计开通数量": "accessNum"
+	  },
+	  {
+		"报价": "budget"
+	  },
+	  {
+		"付款方式": "payway"
+	  },
+	  {
+		"其他说明": "remark"
+	  }
+	]
+  },
+  {
+	"id": 6,
+	"name": "M-CTD小号业务",
+	"titles": [
+	  {
+		"客户公司名称": "cusCompName"
+	  },
+	  {
+		"客户联系人": "customer"
+	  },
+	  {
+		"客户联系方式": "cusPhone"
+	  },
+	  {
+		"客户公司地址": "cusCompAdd"
+	  },
+	  {
+		"客户公司介绍": "cusCompIntro"
+	  },
+	  {
+		"客户类别": "cusType"
+	  },
+	  {
+		"业务用途及场景": "businessDesc"
+	  },
+	  {
+		"接入方式": "accessType"
+	  },
+	  {
+		"呼叫范围": "callRange"
+	  },
+	  {
+		"是否回呼": "callBack"
+	  },
+	  {
+		"是否转接": "transfer"
+	  },
+	  {
+		"测试号码需求": "testNum"
+	  },
+	  {
+		"预计业务规模": "businessScale"
+	  },
+	  {
+		"报价": "budget"
+	  },
+	  {
+		"其他说明": "remark"
+	  }
+	]
+  },
+  {
+	"id": 7,
+	"name": "95业务",
+	"titles": [
+	  {
+		"客户公司名称": "cusCompName"
+	  },
+	  {
+		"客户联系人": "customer"
+	  },
+	  {
+		"客户联系方式": "cusPhone"
+	  },
+	  {
+		"客户公司地址": "cusCompAdd"
+	  },
+	  {
+		"客户公司介绍": "cusCompIntro"
+	  },
+	  {
+		"申请的95业务类别": "transactionType"
+	  },
+	  {
+		"业务用途及场景": "businessDesc"
+	  },
+	  {
+		"接入方式": "accessType"
+	  },
+	  {
+		"呼叫范围": "callRange"
+	  },
+	  {
+		"呼入呼出": "callInOut"
+	  },
+	  {
+		"预计业务规模": "businessScale"
+	  },
+	  {
+		"报价": "budget"
+	  },
 	  {
 		"其他说明": "remark"
 	  }

@@ -5,7 +5,6 @@ export default function (to, next)
 {
 	loginManager.checkLogin(to, next, () =>
 	{
-		next();
 		searchMessageList(to.query).then(() =>
 		{
 			next();
@@ -33,6 +32,7 @@ export function searchMessageList($params)
 			resolved();
 		}, (err) =>
 		{
+			g.func.dealErr(err);
 			rejected();
 		})
 	});

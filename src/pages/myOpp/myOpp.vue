@@ -266,13 +266,11 @@
 			},
 			onClick_editBtn($id)
 			{
-				if (g.data.businessPool.hasDetail($id))
-				{
-					this.isShowDetailPop = true;
-				}
-				else
-				{
-
+				g.url = {
+					path: "/oppapply",
+					query: {
+						id: $id
+					}
 				}
 			},
 			updateUrl()
@@ -295,7 +293,6 @@
 				this.isShowStartDate = false;
 				this.isShowEndDate = false;
 				_dateType = "";
-				trace(this.isShowStartDate);
 			}
 		}
 	}
