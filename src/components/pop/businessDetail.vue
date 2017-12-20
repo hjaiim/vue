@@ -3,8 +3,8 @@
 				:isShowPopView="isShowPopView">
 		<div class="detail-container">
 			<p class="note-tit">商机详情</p>
-			<div class="note-content opp-content">
-				<div class="company-message no-border opp-content" is="scroll-group">
+			<div class=" company-message note-content opp-content">
+				<div class="no-border opp-content" is="scroll-group">
 					<div>
 						<h3 class="opp-title">商机内容</h3>
 						<business-type-1 v-if="oppType==1" :formData="formData"></business-type-1>
@@ -87,17 +87,17 @@
 						<!--</p>-->
 						<!--</div>-->
 						<!--<div v-if="type==1 ||type ==3">-->
-							<!--<p class="examine-people">-->
-								<!--<span class="exam-btn" v-if="type==1">结束审核</span>-->
-								<!--<span class="exam-btn">选择后续人</span>-->
+						<!--<p class="examine-people">-->
+						<!--<span class="exam-btn" v-if="type==1">结束审核</span>-->
+						<!--<span class="exam-btn">选择后续人</span>-->
 						<!--<span class="choose-people">李小龙-->
 						<!--<img :src="g.path.images+'/del-head.png'" alt="" class="delete-choose pointer">-->
 						<!--</span>-->
 						<!--<span class="choose-people">李小龙-->
 						<!--<img :src="g.path.images+'/del-head.png'" alt="" class="delete-choose pointer">-->
 						<!--</span>-->
-								<!--<span class="exam-btn end-exam" v-if="type==1">结束审核</span>-->
-							<!--</p>-->
+						<!--<span class="exam-btn end-exam" v-if="type==1">结束审核</span>-->
+						<!--</p>-->
 						<!--</div>-->
 
 					</div>
@@ -134,8 +134,8 @@
 				oppType: 1,
 				formData: {},
 				status: 1,
-				businessData:{
-					taskProperties:{}
+				businessData: {
+					taskProperties: {}
 				}
 			}
 		},
@@ -176,7 +176,6 @@
 					trace("this.businessData", this.businessData);
 				}
 
-
 			},
 			onClose_pop(){
 				this.$emit('close');
@@ -201,7 +200,7 @@
 	.detail-container {
 		color: #333333;
 		.note-content {
-			padding: 15px 10px 20px;
+
 			line-height: 36px;
 			font-size: 14px;
 		}
