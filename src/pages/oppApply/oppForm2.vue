@@ -230,6 +230,10 @@
 		}
 	}
 </script>
-<style type="text/css" lang="sass" rel="stylesheet/css">
+<style type="text/css" lang="sass" rel="stylesheet/css" scoped>
+	.apply-wrap {
+		padding: 20px 44px 50px 44px;
+	}
 
+	@import "../../css/oppApply.scss";
 </style>

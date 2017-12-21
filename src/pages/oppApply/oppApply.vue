@@ -11,9 +11,6 @@
 							   @change="onChange_typeItem" ref="typeList"></drop-list>
 				</div>
 			</div>
-
-
-
 			<!---->
 
 			<!--<div>-->
@@ -368,14 +365,14 @@
 			<!--@focus="onFocus_inputBar('remark')"></input-bar>-->
 			<!--</div>-->
 			<!--</div>-->
+			<opp-form-1 v-if="type == 1" :currId="currId" @submit="onSubmit_formData"></opp-form-1>
+			<opp-form-2 v-if="type == 2" :currId="currId" @submit="onSubmit_formData"></opp-form-2>
+			<opp-form-3 v-if="type == 3" :currId="currId" @submit="onSubmit_formData"></opp-form-3>
+			<opp-form-4 v-if="type == 4" :currId="currId" @submit="onSubmit_formData"></opp-form-4>
+			<opp-form-5 v-if="type == 5" :currId="currId" @submit="onSubmit_formData"></opp-form-5>
+			<opp-form-6 v-if="type == 6" :currId="currId" @submit="onSubmit_formData"></opp-form-6>
+			<opp-form-7 v-if="type == 7" :currId="currId" @submit="onSubmit_formData"></opp-form-7>
 		</div>
-		<opp-form-1 v-if="type == 1" :currId="currId" @submit="onSubmit_formData"></opp-form-1>
-		<opp-form-2 v-if="type == 2" :currId="currId" @submit="onSubmit_formData"></opp-form-2>
-		<opp-form-3 v-if="type == 3" :currId="currId" @submit="onSubmit_formData"></opp-form-3>
-		<opp-form-4 v-if="type == 4" :currId="currId" @submit="onSubmit_formData"></opp-form-4>
-		<opp-form-5 v-if="type == 5" :currId="currId" @submit="onSubmit_formData"></opp-form-5>
-		<opp-form-6 v-if="type == 6" :currId="currId" @submit="onSubmit_formData"></opp-form-6>
-		<opp-form-7 v-if="type == 7" :currId="currId" @submit="onSubmit_formData"></opp-form-7>
 	</com-layout>
 </template>
 <script type="text/ecmascript-6">

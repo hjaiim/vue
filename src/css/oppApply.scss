@@ -1,25 +1,25 @@
 .explain {
   line-height: 40px;
-  color: #999;
+  color: #999999;
+  float: left;
   font-size: 12px;
   margin-left: 10px;
 }
 
-@media screen and(max-width:1600px) {
-.lang-explain{
-  display: block;
-  margin-left: 128px;
-  float: left;
+@media screen and(max-width: 1880px) {
+  .lang-explain {
+	display: block;
+	margin-left: 128px;
+	clear: both;
+  }
 }
-}
-
 
 .action-box {
   margin-left: 0;
   margin-right: 20px;
   span {
-    height: 40px;
-    line-height: 40px;
+	height: 40px;
+	line-height: 40px;
   }
 }
 
@@ -31,10 +31,10 @@
   margin-top: 9px;
   position: relative;
   .upload-file {
-    position: absolute;
-    left: 0;
-    top: 0;
-    margin-left: 0;
+	position: absolute;
+	left: 0;
+	top: 0;
+	margin-left: 0;
   }
 }
 
