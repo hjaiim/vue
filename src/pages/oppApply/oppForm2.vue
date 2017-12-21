@@ -204,6 +204,13 @@
 							this.errData[item[key]] = "请填写" + key;
 							_isValid = false;
 						}
+						if (item[key] == "cusPhone"
+								&& !g.param.phoneReg.test(this.formData[item[key]])
+								&& !g.param.telphoneReg.test(this.formData[item[key]]))
+						{
+							this.errData[item[key]] = "联系电话格式有误";
+							_isValid = false;
+						}
 					}
 				}
 				trace("this.errData", this.errData);

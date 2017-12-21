@@ -28,7 +28,7 @@
 		"接入方式": "accessType"
 	  },
 	  {
-		"呼叫模式": "callType"
+		"呼叫模式": "callTypeList"
 	  },
 	  {
 		"发起方式": "launchMethod"
@@ -298,7 +298,7 @@
 		"呼叫范围": "callRange"
 	  },
 	  {
-		"呼入呼出": "callInOut"
+		"呼入呼出": "callInList"
 	  },
 	  {
 		"预计业务规模": "businessScale"

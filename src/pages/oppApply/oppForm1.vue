@@ -68,11 +68,11 @@
 			<div class="personal-form">
 				<span class="personal-title left">呼叫模式</span>
                  <span class="action-box status-type left" @click="onClick_callType('双呼')">
-                        <i class="pointer" :class="formData.callType== '双呼'?'action':''"></i>
+                        <i class="pointer" :class="formData.callTypeList.indexOf('双呼')>=0?'action':''"></i>
                         <span>双呼</span>
                  </span>
                 <span class="action-box status-type left" @click="onClick_callType('单呼')">
-                    <i class="pointer" :class="formData.callType== '单呼'?'action':''"></i>
+                    <i class="pointer" :class="formData.callTypeList.indexOf('单呼')>=0?'action':''"></i>
                     <span>单呼</span>
                 </span>
 				<span class="explain">双呼/单呼（请选择一种或多种）</span>
@@ -209,7 +209,7 @@
 						cusType: "",
 						businessDesc: "",
 						accessType: "API",
-						callType: "双呼",
+						callTypeList: ["双呼"],
 						launchMethod: "",
 						callRange: "",
 						callBack: "是",
@@ -228,7 +228,7 @@
 						cusType: "",
 						businessDesc: "",
 						accessType: "",
-						callType: "",
+						callTypeList: "",
 						launchMethod: "",
 						callRange: "",
 						callBack: "",
@@ -252,7 +252,15 @@
 			},
 			onClick_callType($type)
 			{
-				this.formData.callType = $type;
+				var index = this.formData.callTypeList.indexOf($type);
+				if (index >= 0)
+				{
+					this.formData.callTypeList.splice(index, 1);
+				}
+				else
+				{
+					this.formData.callTypeList.push($type)
+				}
 				this.$forceUpdate();
 			},
 			onClick_checkCallBack($type)
@@ -291,10 +299,16 @@
 				{
 					for (var key in item)
 					{
-						trace("this.formData.cusCompName",this.formData.cusCompName);
 						if (!this.formData[item[key]] && item[key] != "remark")
 						{
 							this.errData[item[key]] = "请填写" + key;
+							_isValid = false;
+						}
+						if (item[key] == "cusPhone"
+								&& !g.param.phoneReg.test(this.formData[item[key]])
+								&& !g.param.telphoneReg.test(this.formData[item[key]]))
+						{
+							this.errData[item[key]] = "联系电话格式有误";
 							_isValid = false;
 						}
 					}

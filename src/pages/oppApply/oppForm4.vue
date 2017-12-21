@@ -151,26 +151,6 @@
 				this.errData[$type] = "";
 				this.$forceUpdate();
 			},
-			onClick_accessType($type)
-			{
-				this.formData.accessType = $type;
-				this.$forceUpdate();
-			},
-			onClick_callType($type)
-			{
-				this.formData.callType = $type;
-				this.$forceUpdate();
-			},
-			onClick_checkCallBack($type)
-			{
-				this.formData.callBack = $type;
-				this.$forceUpdate();
-			},
-			onClick_checkTransfer($type)
-			{
-				this.formData.transfer = $type;
-				this.$forceUpdate();
-			},
 			onClick_submitBtn()
 			{
 				this.checkValid();
@@ -197,10 +177,16 @@
 				{
 					for (var key in item)
 					{
-						trace("this.formData.cusCompName", this.formData.cusCompName);
 						if (!this.formData[item[key]] && item[key] != "remark")
 						{
 							this.errData[item[key]] = "请填写" + key;
+							_isValid = false;
+						}
+						if (item[key] == "cusPhone"
+								&& !g.param.phoneReg.test(this.formData[item[key]])
+								&& !g.param.telphoneReg.test(this.formData[item[key]]))
+						{
+							this.errData[item[key]] = "联系电话格式有误";
 							_isValid = false;
 						}
 					}

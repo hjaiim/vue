@@ -40,11 +40,11 @@
 
 			<div class="personal-form">
 				<span class="personal-title left">申请的95业务类别</span>
-                 <span class="action-box status-type left" @click="onClick_checkCallBack('客户自带95码号落地')">
+                 <span class="action-box status-type left" @click="onClick_prodType('客户自带95码号落地')">
                         <i class="pointer" :class="formData.prodType=='客户自带95码号落地'?'action':''"></i>
                         <span>客户自带95码号落地</span>
                  </span>
-                <span class="action-box status-type left" @click="onClick_checkCallBack('客户自带95码号落地')">
+                <span class="action-box status-type left" @click="onClick_prodType('客户自带95码号落地')">
                     <i class="pointer" :class="formData.prodType=='客户自带95码号落地'?'action':''"></i>
                     <span>使用联通已有的95号</span>
                 </span>
@@ -86,15 +86,15 @@
 
 			<div class="personal-form">
 				<span class="personal-title left">呼入呼出</span>
-                 <span class="action-box status-type left" @click="onClick_checkCallBack('是')">
-                        <i class="pointer" :class="formData.callInOut=='是'?'action':''"></i>
+                 <span class="action-box status-type left" @click="onClick_checkCallInOut('呼入')">
+                        <i class="pointer" :class="formData.callInList.indexOf('呼入')>=0?'action':''"></i>
                         <span>是</span>
                  </span>
-                <span class="action-box status-type left" @click="onClick_checkCallBack('否')">
-                    <i class="pointer" :class="formData.callInOut=='否'?'action':''"></i>
+                <span class="action-box status-type left" @click="onClick_checkCallInOut('呼出')">
+                    <i class="pointer" :class="formData.callInList.indexOf('呼出')>=0?'action':''?'action':''"></i>
                     <span>否</span>
                 </span>
-				<span class="explain">是否回呼</span>
+				<span class="explain">呼入呼出</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">预计业务规模</span>
@@ -176,7 +176,7 @@
 						businessDesc: "95业务",
 						accessType: "API",
 						callRange: "95业务",
-						callInOut: "是",
+						callInList: ["呼入"],
 						businessScale: "95业务",
 						budget: "95业务",
 						remark: "95业务"
@@ -192,7 +192,7 @@
 						businessDesc: "",
 						accessType: "",
 						callRange: "",
-						callInOut: "",
+						callInList: "",
 						businessScale: "",
 						budget: "",
 						remark: "",
@@ -210,19 +210,22 @@
 				this.formData.accessType = $type;
 				this.$forceUpdate();
 			},
-			onClick_callType($type)
+			onClick_prodType($type)
 			{
-				this.formData.callType = $type;
+				this.formData.prodType = $type;
 				this.$forceUpdate();
 			},
-			onClick_checkCallBack($type)
+			onClick_checkCallInOut($type)
 			{
-				this.formData.callBack = $type;
-				this.$forceUpdate();
-			},
-			onClick_checkTransfer($type)
-			{
-				this.formData.transfer = $type;
+				var index = this.formData.callInList.indexOf($type);
+				if(index >= 0)
+				{
+					this.formData.callInList.splice(index,1)
+				}
+				else
+				{
+					this.formData.callInList.push($type);
+				}
 				this.$forceUpdate();
 			},
 			onClick_submitBtn()
@@ -251,10 +254,16 @@
 				{
 					for (var key in item)
 					{
-						trace("this.formData.cusCompName", this.formData.cusCompName);
 						if (!this.formData[item[key]] && item[key] != "remark")
 						{
 							this.errData[item[key]] = "请填写" + key;
+							_isValid = false;
+						}
+						if (item[key] == "cusPhone"
+								&& !g.param.phoneReg.test(this.formData[item[key]])
+								&& !g.param.telphoneReg.test(this.formData[item[key]]))
+						{
+							this.errData[item[key]] = "联系电话格式有误";
 							_isValid = false;
 						}
 					}
