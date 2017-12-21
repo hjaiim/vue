@@ -32,8 +32,8 @@
 			fileSize = Math.floor(fileSize / 1048576 * 100) / 100 + "MB";
 			$("#fileName").html(fileName + "（" + fileSize + "）");
 			$("#fileBtn").hide();
-			$("#packageBtn").hide();
 			$("#submit").show();
+			$("#packageBtn").hide();
 			$("#cancelBtn").show();
 //			}
 //			else
@@ -41,8 +41,14 @@
 //				$("#fileName").html("无效文件，重新选择");
 //				$("#form1")[0].reset();
 //			}
+			autoSubmit();
 		}
 	}
+
+//	function autoSubmit()
+//	{
+//		$("#submit").submit();
+//	}
 
 	function onClick_cancelBtn()
 	{
