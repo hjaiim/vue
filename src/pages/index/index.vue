@@ -10,19 +10,13 @@
 
 					<div class="relative upload-head right pointer">
 						<img class="default-img" :src="avatar?avatar:g.path.images+'/default-icon.png'" alt="">
-						<iframe name="fileUpload" src=""></iframe>
-						<form action="http://192.168.12.219:8001/file/upload" method="post"
-							  enctype="multipart/form-data" name="fileForm" target="fileUpload">
-							<input type="file" class="file-input" name="fileInput" @change="onChange_upload">
-							<input type="submit" value="提交"/>
-						</form>
+						<iframe name="fileUpload" src="http://192.168.12.179:8085/upload.html" id="avatar"></iframe>
 						<div class="upload-btn absolute">
 							<p class="load-text">修改头像</p>
 							<!--<upload-btn @change="onChange_upload" resultType="base64" :multiType="false"></upload-btn>-->
 							<img :src="g.path.images+'/del-head.png'" alt=""
 								 class="del-head absolute pointer">
 						</div>
-
 					</div>
 				</div>
 			</div>
@@ -139,6 +133,19 @@
 				this.remark = this.userInfo.remark;
 				this.readonly = true;
 				this.type = g.vue.getQuery('type', "personal");
+				this.$nextTick(() =>
+				{
+					this.initEvents();
+				})
+			},
+			initEvents()
+			{
+				var avatarDom = document.querySelector("#avatar");
+				avatarDom.contentWindow.addEventListener("UPLOAD_FILE", this.onUpload_iFrame)
+			},
+			onUpload_iFrame(e)
+			{
+				trace("eeeee");
 			},
 			onClick_tabItem($id)
 			{
@@ -254,7 +261,7 @@
 					this.errData.phone = "手机格式有误";
 					_isValid = false;
 				}
-				else if(this.phone == this.userInfo.phone)
+				else if (this.phone == this.userInfo.phone)
 				{
 					this.errData.phone = "手机号码未做改变";
 					_isValid = false;
