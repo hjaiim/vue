@@ -368,7 +368,6 @@ input {
   transform: rotate(0deg);
 }
 
-
 .rotate {
   transform: rotate(180deg);
 }
@@ -649,6 +648,17 @@ input {
   }
   &.diff-personal {
 	margin-top: 12px;
+	.personal-content {
+	  &.disabled {
+		min-width: 240px;
+		width: auto;
+		border: 1px solid transparent;
+		.icon-trangle {
+		  display: none;
+		}
+	  }
+	}
+
   }
 }
 
@@ -869,7 +879,6 @@ input {
   align-items: center;
   justify-content: center;
 }
-
 
 .business-form {
   height: 30px;

@@ -425,7 +425,7 @@
 		z-index: 89;
 		position: absolute;
 		display: block;
-		left: 0;
+		right: 0;
 		top: 100%;
 		width: 298px;
 		font-family: 'microsoft yahei', Verdana, "u5faeu8f6fu96c5u9ed1", "\5B8B\4F53", Arial;

@@ -2,7 +2,8 @@
 	<div class="search-input relative">
 		<input @blur="onBlur_accountInput" :type="type" @focus="onFocus_inputFocus" class="input-con"
 			   :placeholder="placeholder" @input="onInput_value" @keyup.enter="onKeyupEnter_searchInput"
-			   v-model="inputContent" :maxLength="maxLength" :readonly="readonly" autocomplete="off">
+			   v-model="inputContent" :maxLength="maxLength" :readonly="readonly" autocomplete="off"
+			   :class="readonly?'only-read':''">
 		<i v-show="inputContent.length>0 && isShowClearBtn && !readonly"
 		   class="close-search-btn ani-time pointer absolute"
 		   @click="onClick_closeBtn"></i>
@@ -43,7 +44,7 @@
 				type: Boolean,
 				default: true
 			},
-			readonly:{
+			readonly: {
 				type: Boolean,
 				default: false
 			}
@@ -123,6 +124,14 @@
 			&:focus {
 				border: 1px solid #cccccc;
 			}
+		}
+		.only-read {
+			border: 1px solid transparent;
+			box-shadow: none;
+			&:focus {
+				border: 1px solid transparent;
+			}
+
 		}
 		.close-search-btn {
 			width: 12px;
