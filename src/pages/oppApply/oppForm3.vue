@@ -1,5 +1,4 @@
 <template>
-
 	<div>
 		<div>
 			<div class="personal-form">
@@ -115,6 +114,7 @@
 <script type="text/ecmascript-6">
 	import g from "../../global";
 	import InputBar from "../../components/inputBar.vue";
+	var _type = 3, _isValid = true, _formData = {};
 	export default{
 		created(){
 			this.init();
@@ -126,46 +126,59 @@
 				formData: {}
 			}
 		},
-		components:{
+		components: {
 			InputBar
+		},
+		props: {
+			currId: {
+				default: 0
+			}
 		},
 		methods: {
 			init()
 			{
+				if (this.currId)
+				{
+					this.formData = JSON.parse(g.data.searchBusinessPool.getDataById(this.currId).formData);
+				}
+				else
+				{
+					this.formData = {
+						cusCompName: "全数通业务",
+						customer: "全数通业务",
+						cusPhone: "全数通业务",
+						cusCompAdd: "全数通业务",
+						cusCompIntro: "全数通业务",
+						cusType: "全数通业务",
+						businessDesc: "全数通业务",
+						prodType: "全数通业务",
+						dataType: "全数通业务",
+						businessScale: "全数通业务",
+						budget: "全数通业务",
+						payway: "全数通业务",
+						remark: "全数通业务"
+					};
+					this.errData = {
+						cusCompName: "",
+						customer: "",
+						cusPhone: "",
+						cusCompAdd: "",
+						cusCompIntro: "",
+						cusType: "",
+						businessDesc: "",
+						prodType: "",
+						dataType: "",
+						businessScale: "",
+						budget: "",
+						payway: ""
+					};
+				}
 
 			},
 			onFocus_inputBar($type)
 			{
 				this.errData[$type] = "";
 				this.$forceUpdate();
-			},
-			onClick_accessType($type)
-			{
-				this.formData.accessType = $type;
-				this.$forceUpdate();
-			},
-			onClick_callType($type)
-			{
-				this.formData.callType = $type;
-				this.$forceUpdate();
-			},
-			onClick_checkCallBack($type)
-			{
-				this.formData.callBack = $type;
-				this.$forceUpdate();
-			},
-			onClick_checkTransfer($type)
-			{
-				this.formData.transfer = $type;
-				this.$forceUpdate();
-			},
-			onClick_uploadBtn($type)
-			{
-
-			},
-			onClick_delBtn($type)
-			{
-
 			},
 			onClick_submitBtn()
 			{
@@ -176,20 +189,19 @@
 					return;
 				}
 				this.getFormData();
-				_params = {
-					businessId: this.type,
-					custComName: this.formData.cusCompName,
-					boFormData: JSON.stringify(_formData)
-				};
-				g.net.call("/bo/orderApply", _params).then(($data) =>
-				{
-					g.ui.toast("商机提交成功");
-					this.routerUpdated();
-				})
+				this.$emit("submit", _formData);
+			},
+			onClick_uploadBtn()
+			{
+
+			},
+			onClick_delBtn()
+			{
+
 			},
 			checkValid()
 			{
-				var titles = g.data.staticTypePool.getDataById(this.type).titles;
+				var titles = g.data.staticTypePool.getDataById(_type).titles;
 				for (var item of titles)
 				{
 					for (var key in item)
@@ -199,6 +211,13 @@
 							this.errData[item[key]] = "请填写" + key;
 							_isValid = false;
 						}
+						if (item[key] == "cusPhone"
+								&& !g.param.phoneReg.test(this.formData[item[key]])
+								&& !g.param.telphoneReg.test(this.formData[item[key]]))
+						{
+							this.errData[item[key]] = "联系电话格式有误";
+							_isValid = false;
+						}
 					}
 				}
 				trace("this.errData", this.errData);
@@ -206,7 +225,7 @@
 			},
 			getFormData()
 			{
-				var titles = g.data.staticTypePool.getDataById(this.type).titles;
+				var titles = g.data.staticTypePool.getDataById(_type).titles;
 				for (var item of titles)
 				{
 					for (var key in item)

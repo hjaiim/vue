@@ -28,7 +28,7 @@
 		"接入方式": "accessType"
 	  },
 	  {
-		"呼叫模式": "callType"
+		"呼叫模式": "callTypeList"
 	  },
 	  {
 		"发起方式": "launchMethod"
@@ -82,7 +82,7 @@
 		"业务用途及场景": "businessDesc"
 	  },
 	  {
-		"对接方式": "accessType"
+		"对接方式": "accessMethod"
 	  },
 	  {
 		"使用流量类别": "flowType"
@@ -286,7 +286,7 @@
 		"客户公司介绍": "cusCompIntro"
 	  },
 	  {
-		"申请的95业务类别": "transactionType"
+		"申请的95业务类别": "prodType"
 	  },
 	  {
 		"业务用途及场景": "businessDesc"
@@ -298,7 +298,7 @@
 		"呼叫范围": "callRange"
 	  },
 	  {
-		"呼入呼出": "callInOut"
+		"呼入呼出": "callInList"
 	  },
 	  {
 		"预计业务规模": "businessScale"
