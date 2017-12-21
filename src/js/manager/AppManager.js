@@ -6,6 +6,7 @@ import RouterList from "../../router";
 import Mint from "mint-ui";
 import "mint-ui/lib/style.css";
 import loginManager from "./LoginManager";
+import sha256 from "sha256";
 
 var _moveList = [];
 var _initList = [];
@@ -33,7 +34,10 @@ export function init($callback)
 	if (g.core.onMode("debug"))
 	{
 		window.g = g;
+		window.sha256 = sha256;
 	}
+
+
 }
 
 //初始化登录状态

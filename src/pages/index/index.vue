@@ -18,7 +18,6 @@
 						</form>
 						<div class="upload-btn absolute">
 							<p class="load-text">修改头像</p>
-
 							<!--<upload-btn @change="onChange_upload" resultType="base64" :multiType="false"></upload-btn>-->
 							<img :src="g.path.images+'/del-head.png'" alt=""
 								 class="del-head absolute pointer">
@@ -156,6 +155,7 @@
 			},
 			onClick_sendCodeBtn()
 			{
+
 				this.checkPhone();
 				if (!_isValid)
 				{
@@ -252,6 +252,11 @@
 				else if (!g.param.phoneReg.test(this.phone))
 				{
 					this.errData.phone = "手机格式有误";
+					_isValid = false;
+				}
+				else if(this.phone == this.userInfo.phone)
+				{
+					this.errData.phone = "手机号码未做改变";
 					_isValid = false;
 				}
 				this.$forceUpdate();

@@ -1,5 +1,6 @@
 <template>
 
+<div>
 	<div>
 		<div class="personal-form">
 			<span class="personal-title left">客户公司名称</span>
@@ -148,13 +149,25 @@
 					   @focus="onFocus_inputBar('remark')"></input-bar>
 		</div>
 	</div>
+	<div>
+		<div class="personal-form">
+			<span class="personal-title left">上传附件</span>
+                <span class="form-trap up-btn pointer opp-up-btn" @click="onClick_uploadBtn">点击上传
+                    <input type="file" class="upload-file">
+                </span>
+					<span class="complate-upload-file">初步合同
+						<i class="del-file pointer" @click="onClick_delBtn">删除</i></span>
+		</div>
+	</div>
+	<div class="btn btn-save pointer action-btn ani-time" @click="onClick_submitBtn">提交</div>
+</div>
 </template>
 <script type="text/ecmascript-6">
 	import g from "../../global";
 	import InputBar from "../../components/inputBar.vue";
 	export default{
 		created(){
-            this.init();
+			this.init();
 		},
 		data(){
 			return {
@@ -163,27 +176,176 @@
 				formData: {}
 			}
 		},
-		components:{
+		components: {
 			InputBar
 		},
-
+		props: {
+			currId: {
+				default: 0
+			}
+		},
+		watch: {
+			currId($val)
+			{
+				this.init();
+			}
+		},
 		methods: {
-		    init()
-		    {
-		    
-		    },
-		    update()
-		    {
-		    },
-		    render()
-		    {
-		    },
-		    clear()
-		    {
-		    },
-		    destroy()
-		    {
-		    }
+			init()
+			{
+				if(this.currId)
+				{
+					this.formData = JSON.parse(g.data.searchBusinessPool.getDataById(this.currId).formData);
+				}
+				else
+				{
+					this.formData = {
+						cusCompName: "",
+						customer: "",
+						cusPhone: "",
+						cusCompAdd: "",
+						cusCompIntro: "",
+						cusType: "",
+						businessDesc: "",
+						launchMethod: "",
+						callRange: "",
+						testNum: "",
+						budget: "",
+						remark: "",
+						accessNum: "",
+						payway: "",
+						flowType: "",
+						income: "",
+						discount: "",
+						accessType: "API",
+						accessMethod: "",
+						callType: "双呼",
+						callBack: "是",
+						transfer: "是",
+						businessScale: "",
+						prodType: "",
+						dataType: "",
+						transactionType: "",
+						callInOut: ""
+					};
+					this.errData = {
+						cusCompName: "",
+						customer: "",
+						cusPhone: "",
+						cusCompAdd: "",
+						cusCompIntro: "",
+						cusType: "",
+						businessDesc: "",
+						launchMethod: "",
+						callRange: "",
+						testNum: "",
+						budget: "",
+						accessNum: "",
+						payway: "",
+						flowType: "",
+						income: "",
+						discount: "",
+						accessType: "",
+						accessMethod: "",
+						callType: "",
+						callBack: "",
+						transfer: "",
+						businessScale: "",
+						prodType: "",
+						dataType: "",
+						transactionType: "",
+						callInOut: ""
+					};
+				}
+			},
+			onFocus_inputBar($type)
+			{
+				this.errData[$type] = "";
+				this.$forceUpdate();
+			},
+			onClick_accessType($type)
+			{
+				this.formData.accessType = $type;
+				this.$forceUpdate();
+			},
+			onClick_callType($type)
+			{
+				this.formData.callType = $type;
+				this.$forceUpdate();
+			},
+			onClick_checkCallBack($type)
+			{
+				this.formData.callBack = $type;
+				this.$forceUpdate();
+			},
+			onClick_checkTransfer($type)
+			{
+				this.formData.transfer = $type;
+				this.$forceUpdate();
+			},
+			onClick_uploadBtn($type)
+			{
+
+			},
+			onClick_delBtn($type)
+			{
+
+			},
+			onClick_submitBtn()
+			{
+				this.checkValid();
+				if (!_isValid)
+				{
+					_isValid = true;
+					return;
+				}
+				this.getFormData();
+				_params = {
+					businessId: this.type,
+					custComName: this.formData.cusCompName,
+					boFormData: JSON.stringify(_formData)
+				};
+				g.net.call("/bo/orderApply", _params).then(($data) =>
+				{
+					g.ui.toast("商机提交成功");
+					this.routerUpdated();
+				})
+			},
+			checkValid()
+			{
+				var titles = g.data.staticTypePool.getDataById(this.type).titles;
+				for (var item of titles)
+				{
+					for (var key in item)
+					{
+						if (!this.formData[item[key]] && item[key] != "remark")
+						{
+							this.errData[item[key]] = "请填写" + key;
+							_isValid = false;
+						}
+					}
+				}
+				trace("this.errData", this.errData);
+				this.$forceUpdate();
+			},
+			getFormData()
+			{
+				var titles = g.data.staticTypePool.getDataById(this.type).titles;
+				for (var item of titles)
+				{
+					for (var key in item)
+					{
+						if (key == "客户联系方式")
+						{
+							_formData[key] = this.formData[item[key]] + "*tel";
+						}
+						else
+						{
+							_formData[key] = this.formData[item[key]];
+						}
+					}
+				}
+			},
 		}
 	}
 </script>
