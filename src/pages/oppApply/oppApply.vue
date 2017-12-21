@@ -390,7 +390,7 @@
 	import OppForm5 from "./oppForm5.vue";
 	import OppForm6 from "./oppForm6.vue";
 	import OppForm7 from "./oppForm7.vue";
-	var _params = null, _formData = {}, _isValid = true;
+	var _params = null;
 	export default{
 		created(){
 			this.routerUpdated();
@@ -433,7 +433,16 @@
 
 			onSubmit_formData($data)
 			{
-				this._formData = $data;
+				_params = {
+					businessId: this.type,
+					custComName: $data["客户公司名称"],
+					boFormData: JSON.stringify($data)
+				};
+				g.net.call("/bo/orderApply", _params).then(($data) =>
+				{
+					g.ui.toast("商机提交成功");
+					this.routerUpdated();
+				})
 			},
 			initEvents()
 			{

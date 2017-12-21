@@ -10,7 +10,7 @@
 
 					<div class="relative upload-head right pointer">
 						<img class="default-img" :src="avatar?avatar:g.path.images+'/default-icon.png'" alt="">
-						<iframe name="fileUpload"></iframe>
+						<iframe name="fileUpload" src=""></iframe>
 						<form action="http://192.168.12.219:8001/file/upload" method="post"
 							  enctype="multipart/form-data" name="fileForm" target="fileUpload">
 							<input type="file" class="file-input" name="fileInput" @change="onChange_upload">

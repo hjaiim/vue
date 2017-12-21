@@ -90,6 +90,7 @@
 <script type="text/ecmascript-6">
 	import g from "../../global";
 	import InputBar from "../../components/inputBar.vue";
+	var _type = 4, _isValid = true, _formData = {};
 	export default{
 		created(){
 			this.init();
@@ -104,9 +105,45 @@
 		components: {
 			InputBar
 		},
+		props: {
+			currId: {
+				default: 0
+			}
+		},
 		methods: {
 			init()
 			{
+				if (this.currId)
+				{
+					this.formData = JSON.parse(g.data.searchBusinessPool.getDataById(this.currId).formData);
+				}
+				else
+				{
+					this.formData = {
+						cusCompName: "许梿业务",
+						customer: "许梿业务",
+						cusPhone: "许梿业务",
+						cusCompAdd: "许梿业务",
+						cusCompIntro: "许梿业务",
+						cusType: "许梿业务",
+						businessDesc: "许梿业务",
+						businessScale: "许梿业务",
+						budget: "许梿业务",
+						remark: "许梿业务",
+					};
+					this.errData = {
+						cusCompName: "",
+						customer: "",
+						cusPhone: "",
+						cusCompAdd: "",
+						cusCompIntro: "",
+						cusType: "",
+						businessDesc: "",
+						businessScale: "",
+						budget: "",
+						remark: ""
+					};
+				}
 
 			},
 			onFocus_inputBar($type)
@@ -134,14 +171,6 @@
 				this.formData.transfer = $type;
 				this.$forceUpdate();
 			},
-			onClick_uploadBtn($type)
-			{
-
-			},
-			onClick_delBtn($type)
-			{
-
-			},
 			onClick_submitBtn()
 			{
 				this.checkValid();
@@ -151,24 +180,24 @@
 					return;
 				}
 				this.getFormData();
-				_params = {
-					businessId: this.type,
-					custComName: this.formData.cusCompName,
-					boFormData: JSON.stringify(_formData)
-				};
-				g.net.call("/bo/orderApply", _params).then(($data) =>
-				{
-					g.ui.toast("商机提交成功");
-					this.routerUpdated();
-				})
+				this.$emit("submit", _formData);
+			},
+			onClick_uploadBtn()
+			{
+
+			},
+			onClick_delBtn()
+			{
+
 			},
 			checkValid()
 			{
-				var titles = g.data.staticTypePool.getDataById(this.type).titles;
+				var titles = g.data.staticTypePool.getDataById(_type).titles;
 				for (var item of titles)
 				{
 					for (var key in item)
 					{
+						trace("this.formData.cusCompName", this.formData.cusCompName);
 						if (!this.formData[item[key]] && item[key] != "remark")
 						{
 							this.errData[item[key]] = "请填写" + key;
@@ -181,7 +210,7 @@
 			},
 			getFormData()
 			{
-				var titles = g.data.staticTypePool.getDataById(this.type).titles;
+				var titles = g.data.staticTypePool.getDataById(_type).titles;
 				for (var item of titles)
 				{
 					for (var key in item)
