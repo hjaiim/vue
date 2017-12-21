@@ -7,15 +7,18 @@
 			<div class="percenter-inner" v-show="type=='personal'">
 
 				<div class="icon-collect clear">
-
 					<div class="relative upload-head right pointer">
-						<img class="default-img" :src="avatar?avatar:g.path.images+'/default-icon.png'" alt="">
-						<iframe name="fileUpload" src="http://192.168.12.179:8085/upload.html" id="avatar"></iframe>
-						<div class="upload-btn absolute">
+						<img class="default-img"
+							 :src="avatar?g.param.ossUrl+avatar.spilt(';')[0]:g.path.images+'/default-icon.png'"
+							 alt="">
+						<div class="
+						 absolute">
 							<p class="load-text">修改头像</p>
-							<!--<upload-btn @change="onChange_upload" resultType="base64" :multiType="false"></upload-btn>-->
+							<iframe name="fileUpload"
+									:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=avatar'"
+									v-if="!avatar"></iframe>
 							<img :src="g.path.images+'/del-head.png'" alt=""
-								 class="del-head absolute pointer">
+								 class="del-head absolute pointer" @click="onClick_delBtn">
 						</div>
 					</div>
 				</div>
@@ -92,8 +95,7 @@
 	import InputBar from "../../components/inputBar.vue"
 	import UploadBtn from "../../components/upload.vue";
 	import sha256 from "sha256";
-	var _params = null;
-	var _isValid = true;
+	var _params = null, _isValid = true;
 	export default{
 		created(){
 			this.routerUpdated();
@@ -133,19 +135,11 @@
 				this.remark = this.userInfo.remark;
 				this.readonly = true;
 				this.type = g.vue.getQuery('type', "personal");
-				this.$nextTick(() =>
-				{
-					this.initEvents();
-				})
+				window.uploadComplete = this.uploadComplete;
 			},
-			initEvents()
+			uploadComplete($data)
 			{
-				var avatarDom = document.querySelector("#avatar");
-				avatarDom.contentWindow.addEventListener("UPLOAD_FILE", this.onUpload_iFrame)
-			},
-			onUpload_iFrame(e)
-			{
-				trace("eeeee");
+				this.avatar = $data.fileName + ";" + $data.size;
 			},
 			onClick_tabItem($id)
 			{
@@ -156,13 +150,22 @@
 					}
 				};
 			},
+			onClick_delBtn()
+			{
+				g.net.call(g.param.delPicAccess, {fileName: this.avatar}).then(() =>
+				{
+					trace(1111);
+				}, (err) =>
+				{
+					this.avatar = "";
+				})
+			},
 			onClick_unbindBtn()
 			{
 				this.readonly = false;
 			},
 			onClick_sendCodeBtn()
 			{
-
 				this.checkPhone();
 				if (!_isValid)
 				{

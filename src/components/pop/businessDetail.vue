@@ -68,9 +68,8 @@
 
 							<p class="from-group clear" v-if="businessData.hasAttches">
 								<span class="form-title">上传附件</span>
-                                <span class="form-trap up-btn pointer">点击上传
-                                    <input type="file" class="upload-file">
-                                </span>
+								<iframe name="fileUpload"
+										:src="g.path.base+'upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppAudit'"></iframe>
 							</p>
 						</div>
 						<!--<div v-if="type==2">-->
@@ -169,7 +168,6 @@
 		methods: {
 			init()
 			{
-				debugger;
 				if (this.currId)
 				{
 					this.businessData = g.data.searchBusinessPool.getDataById(this.currId);

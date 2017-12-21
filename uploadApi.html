@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>upload</title>
+</head>
+<body>
+</body>
+</html>
+<script type="text/javascript">
+	//	var evt = new Event("UPLOAD_FILE");
+	//	evt.data = "{$fileName}";
+	var urlObj = queryUrl(window.location.href);
+	var subType = urlObj.query.subType.split("?")[0];
+	var fileName  = urlObj.query.subType.split("?")[1].split("=")[1];
+	var data = {
+		subType:subType,
+		fileName:fileName,
+		size:urlObj.query.size
+	};
+	window.parent.uploadComplete(data);
+	//	window.dispatchEvent(evt)
+
+	function queryUrl($query)
+	{
+		var res = {};
+		var url = $query.split("?")[0];
+		var port = url.split("://")[0];
+		port != "" && (port += "://");
+		var tempurl = url.substr(port.length);
+		var host = port + tempurl.substring(0, tempurl.indexOf("/"));
+		$query = $query.replace(url, "");
+		var query = {};
+		var bookmark = "";
+		$query = $query.trim().replace(/^(\?|#|&)/, '')
+		if ($query.indexOf('#') > 0)
+		{
+			bookmark = $query.substr($query.indexOf('#') + 1);
+			$query = $query.replace('#' + bookmark, '');
+		}
+
+		if ($query)
+		{
+			$query.split('&').forEach(function (param)
+			{
+				var parts = param.replace(/\+/g, ' ').split('=')
+				var key = decodeURIComponent(parts.shift())
+				var val = parts.length > 0
+						? decodeURIComponent(parts.join('='))
+						: null
+
+				if (query[key] === undefined)
+				{
+					query[key] = val
+				}
+				else if (Array.isArray(query[key]))
+				{
+					query[key].push(val)
+				}
+				else
+				{
+					query[key] = [query[key], val]
+				}
+			})
+		}
+		res.url = url;
+		res.host = host;
+		res.bookmark = bookmark;
+		res.query = query;
+		return res
+	}
+</script>
+
