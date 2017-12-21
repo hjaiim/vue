@@ -7,7 +7,7 @@
 				<div class="company-message">
 					<p class="from-group">
 						<span class="form-title">公司名称</span>
-						<input-bar class="form-control" placeholder="" type="text" :readonly="currId != 0"
+						<input-bar class="form-control company-input" placeholder="" type="text" :readonly="currId != 0"
 								   v-model="name" :errmsg="errData.name"></input-bar>
 						<span class="requied">*</span>
 					</p>
@@ -262,7 +262,7 @@
 			},
 			onClick_submitBtn()
 			{
-				this.$emit("close",true);
+				this.$emit("close", true);
 			},
 			checkValid()
 			{
@@ -276,7 +276,7 @@
 					this.errData.leader = "请输入负责人姓名";
 					_isValid = false;
 				}
-				else if(!g.param.nameReg.test(this.leader))
+				else if (!g.param.nameReg.test(this.leader))
 				{
 					this.errData.leader = "负责人格式不正确";
 					_isValid = false;
@@ -286,7 +286,7 @@
 					this.errData.phone = "请输入负责人电话";
 					_isValid = false;
 				}
-				else if(!g.param.phoneReg.test(this.phone) && !g.param.telphoneReg.test(this.phone))
+				else if (!g.param.phoneReg.test(this.phone) && !g.param.telphoneReg.test(this.phone))
 				{
 					this.errData.phone = "号码格式不正确";
 					_isValid = false;
@@ -296,7 +296,7 @@
 					this.errData.telphone = "请输入公司电话";
 					_isValid = false;
 				}
-				else if(!g.param.phoneReg.test(this.phone) && !g.param.telphoneReg.test(this.phone))
+				else if (!g.param.phoneReg.test(this.phone) && !g.param.telphoneReg.test(this.phone))
 				{
 					this.errData.telphone = "号码格式不正确";
 					_isValid = false;

@@ -25,7 +25,7 @@
 					<div class="option-content left relative pointer" @click="onClick_jobMenu">
 						{{positionData.name?positionData.name:'请选择'}}
 						<i class="icon-trangle pointer" :class="isShowRoleList?'rotate':''"></i>
-						<drop-list :dropList="positionList" :isShowDropList="isShowRoleList"
+						<drop-list class="order-workList" :dropList="positionList" :isShowDropList="isShowRoleList"
 								   @change="onClick_positionItem">
 						</drop-list>
 					</div>
@@ -135,7 +135,7 @@
 </script>
 <style lang="sass" rel="stylesheet/scss" type="text/scss" scoped>
 	.orderWork-wrap {
-		height: 345px;
+		height: 380px;
 		.work-menu {
 			padding: 45px 0 0 90px;
 			color: #000000;

@@ -1,6 +1,6 @@
 <template>
 	<ul class="absolute drop-list" v-show="isShowDropList">
-		<li class="pointer" v-for="item in dropList" @click.stop="onClick_dropItem(item.id)">{{item.name}}</li>
+		<li class="pointer ani-time" v-for="item in dropList" @click.stop="onClick_dropItem(item.id)">{{item.name}}</li>
 	</ul>
 </template>
 <script type="text/ecmascript-6">
@@ -46,6 +46,14 @@
 			&:last-child {
 				border-bottom: none;
 			}
+			&:hover {
+				background: #f8f8f8;
+			}
 		}
 	}
+	.order-workList{
+		max-height: 123px;
+		overflow: auto;
+	}
+
 </style>
