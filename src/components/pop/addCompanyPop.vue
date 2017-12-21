@@ -7,30 +7,29 @@
 				<div class="company-message">
 					<p class="from-group">
 						<span class="form-title">公司名称</span>
-						<input-bar class="form-control" placeholder="" type="text"
+						<input-bar class="form-control" placeholder="" type="text" :readonly="currId != 0"
 								   v-model="name" :errmsg="errData.name"></input-bar>
 						<span class="requied">*</span>
 					</p>
 					<p class="from-group">
 						<span class="form-title">公司电话</span>
-						<input-bar class="form-control" placeholder="" type="text"
+						<input-bar class="form-control" placeholder="" type="text" :readonly="currId != 0"
 								   v-model="telphone" :errmsg="errData.telphone"></input-bar>
 						<span class="requied">*</span>
 					</p>
 					<p class="from-group">
 						<span class="form-title">公司负责人</span>
-						<input-bar class="form-control" placeholder="" type="text"
+						<input-bar class="form-control" placeholder="" type="text" :readonly="currId != 0"
 								   v-model="leader" :errmsg="errData.leader"></input-bar>
 						<span class="requied">*</span>
 					</p>
 					<p class="from-group">
 						<span class="form-title">负责人电话</span>
-						<input-bar class="form-control" placeholder="" type="text"
+						<input-bar class="form-control" placeholder="" type="text" :readonly="currId != 0"
 								   v-model="phone" :errmsg="errData.phone"></input-bar>
 						<span class="requied">*</span>
 					</p>
-					<div class="btn-wrap clear">
-
+					<div class="btn-wrap clear" v-if="currId == 0">
 						<div class="pop-btn right pointer" @click="onClick_saveCompany">保存</div>
 					</div>
 				</div>
@@ -147,7 +146,7 @@
 				_companyId = this.currId;
 				if (this.currId)
 				{
-					this.companyData = g.data.companyPool.getDataById(this.currId);
+					this.companyData = g.data.searchCompanyPool.getDataById(this.currId);
 					this.name = this.companyData.name;
 					this.telphone = this.companyData.telphone;
 					this.leader = this.companyData.leader;
@@ -198,7 +197,7 @@
 					_departId = $data.departmentId;
 					if ($depart.id == 0)
 					{
-						g.data.departmentPool.update([$data]);
+						g.data.departmentPool.add($data);
 					}
 					else
 					{
@@ -255,23 +254,18 @@
 				{
 					this.init();
 					_companyId = $data.comId;
-					if (this.currId == 0)
+					if (this.currId != 0)
 					{
-						g.data.companyPool.update([$data]);
-					}
-					else
-					{
-						g.data.companyPool.getDataById(this.currId).update($data);
+						g.data.searchCompanyPool.getDataById(this.currId).update($data);
 					}
 				})
 			},
 			onClick_submitBtn()
 			{
-
+				this.$emit("close",true);
 			},
 			checkValid()
 			{
-
 				if (!this.name)
 				{
 					this.errData.name = "请输入公司名称";
@@ -282,14 +276,29 @@
 					this.errData.leader = "请输入负责人姓名";
 					_isValid = false;
 				}
+				else if(!g.param.nameReg.test(this.leader))
+				{
+					this.errData.leader = "负责人格式不正确";
+					_isValid = false;
+				}
 				if (!this.phone)
 				{
 					this.errData.phone = "请输入负责人电话";
 					_isValid = false;
 				}
+				else if(!g.param.phoneReg.test(this.phone) && !g.param.telphoneReg.test(this.phone))
+				{
+					this.errData.phone = "号码格式不正确";
+					_isValid = false;
+				}
 				if (!this.telphone)
 				{
 					this.errData.telphone = "请输入公司电话";
+					_isValid = false;
+				}
+				else if(!g.param.phoneReg.test(this.phone) && !g.param.telphoneReg.test(this.phone))
+				{
+					this.errData.telphone = "号码格式不正确";
 					_isValid = false;
 				}
 				this.$forceUpdate();

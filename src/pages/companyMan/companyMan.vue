@@ -139,8 +139,7 @@
 			},
 			onClick_detailBtn($id)
 			{
-
-				if (g.data.companyPool.hasDetail($id))
+				if (g.data.searchCompanyPool.hasDetail($id))
 				{
 					this.currId = $id;
 					this.isShowCompanyPop = true;
@@ -149,14 +148,10 @@
 				{
 					g.net.call("organizeQuery/organizeDetail", {comId: $id}).then(($data) =>
 					{
-						var companyData = g.data.companyPool.getDataById($id);
+						var companyData = g.data.searchCompanyPool.getDataById($id);
 						if (companyData)
 						{
 							companyData.update($data.companyResult);
-						}
-						else
-						{
-							g.data.companyPool.update([$data.companyResult]);
 						}
 						g.data.departmentPool.update($data.departWrapperResults);
 						this.currId = $id;
@@ -175,7 +170,7 @@
 				this.isShowCompanyPop = false;
 				if ($result)
 				{
-
+					this.updateUrl();
 				}
 			},
 			onKeyEnter_inputBar()
@@ -184,10 +179,6 @@
 			},
 			onClick_searchBtn()
 			{
-				if(!this.customerName)
-				{
-					return ;
-				}
 				this.currPage = 1;
 				this.updateUrl();
 			},

@@ -42,8 +42,9 @@
 	import ViewPopup from "../viewPop.vue";
 	import InputBar from "../inputBar.vue";
 	import CommonTree from "../tree/tree.vue"
-	import ScrollGroup from "../scrollGroup.vue"
+	import ScrollGroup from "../../jslib/components/scrollGroup.vue"
 	var _params = null;
+
 	export default{
 		created()
 		{

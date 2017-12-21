@@ -1,5 +1,6 @@
 <template>
 
+<div>
 	<div>
 		<div class="personal-form">
 			<span class="personal-title left">客户公司名称</span>
@@ -91,6 +92,18 @@
 			<span class="explain">是否需要配置流量营销活动，如大转盘等</span>
 		</div>
 	</div>
+	<div>
+		<div class="personal-form">
+			<span class="personal-title left">上传附件</span>
+                <span class="form-trap up-btn pointer opp-up-btn" @click="onClick_uploadBtn">点击上传
+                    <input type="file" class="upload-file">
+                </span>
+					<span class="complate-upload-file">初步合同
+						<i class="del-file pointer" @click="onClick_delBtn">删除</i></span>
+		</div>
+	</div>
+	<div class="btn btn-save pointer action-btn ani-time" @click="onClick_submitBtn">提交</div>
+</div>
 </template>
 <script type="text/ecmascript-6">
 	import g from "../../global";
@@ -114,18 +127,94 @@
 			{
 
 			},
-			update()
+			onFocus_inputBar($type)
 			{
+				this.errData[$type] = "";
+				this.$forceUpdate();
 			},
-			render()
+			onClick_accessType($type)
 			{
+				this.formData.accessType = $type;
+				this.$forceUpdate();
 			},
-			clear()
+			onClick_callType($type)
 			{
+				this.formData.callType = $type;
+				this.$forceUpdate();
 			},
-			destroy()
+			onClick_checkCallBack($type)
 			{
-			}
+				this.formData.callBack = $type;
+				this.$forceUpdate();
+			},
+			onClick_checkTransfer($type)
+			{
+				this.formData.transfer = $type;
+				this.$forceUpdate();
+			},
+			onClick_uploadBtn($type)
+			{
+
+			},
+			onClick_delBtn($type)
+			{
+
+			},
+			onClick_submitBtn()
+			{
+				this.checkValid();
+				if (!_isValid)
+				{
+					_isValid = true;
+					return;
+				}
+				this.getFormData();
+				_params = {
+					businessId: this.type,
+					custComName: this.formData.cusCompName,
+					boFormData: JSON.stringify(_formData)
+				};
+				g.net.call("/bo/orderApply", _params).then(($data) =>
+				{
+					g.ui.toast("商机提交成功");
+					this.routerUpdated();
+				})
+			},
+			checkValid()
+			{
+				var titles = g.data.staticTypePool.getDataById(this.type).titles;
+				for (var item of titles)
+				{
+					for (var key in item)
+					{
+						if (!this.formData[item[key]] && item[key] != "remark")
+						{
+							this.errData[item[key]] = "请填写" + key;
+							_isValid = false;
+						}
+					}
+				}
+				trace("this.errData", this.errData);
+				this.$forceUpdate();
+			},
+			getFormData()
+			{
+				var titles = g.data.staticTypePool.getDataById(this.type).titles;
+				for (var item of titles)
+				{
+					for (var key in item)
+					{
+						if (key == "客户联系方式")
+						{
+							_formData[key] = this.formData[item[key]] + "*tel";
+						}
+						else
+						{
+							_formData[key] = this.formData[item[key]];
+						}
+					}
+				}
+			},
 		}
 	}
 </script>
