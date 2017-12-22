@@ -56,7 +56,7 @@
 			<div class="personal-form">
 				<span class="personal-title left">接入方式</span>
                  <span class="action-box status-type left" @click="onClick_accessType('API')">
-                        <i class="pointer" :class="formData.accessType == 'API'?'action':''"></i>
+                        <i class="draw-round pointer" :class="formData.accessType == 'API'?'action':''"></i>
                         <span>API</span>
                  </span>
 			</div>
@@ -73,11 +73,11 @@
 			<div class="personal-form">
 				<span class="personal-title left">是否回呼</span>
                  <span class="action-box status-type left" @click="onClick_checkCallBack('是')">
-                        <i class="pointer" :class="formData.callBack=='是'?'action':''"></i>
+                        <i class="draw-round pointer" :class="formData.callBack=='是'?'action':''"></i>
                         <span>是</span>
                  </span>
                 <span class="action-box status-type left" @click="onClick_checkCallBack('否')">
-                    <i class="pointer" :class="formData.callBack=='否'?'action':''"></i>
+                    <i class="draw-round pointer" :class="formData.callBack=='否'?'action':''"></i>
                     <span>否</span>
                 </span>
 				<span class="explain">是否回呼</span>
@@ -85,11 +85,11 @@
 			<div class="personal-form">
 				<span class="personal-title left">是否转接</span>
                  <span class="action-box status-type left" @click="onClick_checkTransfer('是')">
-                        <i class="pointer" :class="formData.transfer=='是'?'action':''"></i>
+                        <i class="draw-round pointer" :class="formData.transfer=='是'?'action':''"></i>
                         <span>是</span>
                  </span>
                 <span class="action-box status-type left" @click="onClick_checkTransfer('否')">
-                    <i class="pointer" :class="formData.transfer=='否'?'action':''"></i>
+                    <i class="draw-round pointer" :class="formData.transfer=='否'?'action':''"></i>
                     <span>否</span>
                 </span>
 				<span class="explain">是否转接</span>

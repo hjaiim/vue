@@ -4,15 +4,15 @@
 			<div class="status-wrap clear">
 				<span class="total-nums left">岗位类别</span>
 				<div class="action-box left" @click="onClick_positionType(-1)">
-					<i class="pointer" :class="typeList.indexOf(-1) >= 0?'action':''"></i>
+					<i class="draw-tick relative pointer" :class="typeList.indexOf(-1) >= 0?'action':''"></i>
 					<span>未分配</span>
 				</div>
 				<div class="action-box left" @click="onClick_positionType(1)">
-					<i class="pointer" :class="typeList.indexOf(1) >= 0?'action':''"></i>
+					<i class="draw-tick relative pointer" :class="typeList.indexOf(1) >= 0?'action':''"></i>
 					<span>提交员</span>
 				</div>
 				<div class="action-box left" @click="onClick_positionType(2)">
-					<i class="pointer" :class="typeList.indexOf(2) >= 0?'action':''"></i>
+					<i class="draw-tick relative pointer" :class="typeList.indexOf(2) >= 0?'action':''"></i>
 					<span>审核员</span>
 				</div>
 				<div class="verify-btn total-btn right pointer" @click="onClick_unVerifyBtn">待认证>></div>
@@ -151,7 +151,10 @@
 				this.name = g.vue.getQuery("name", "");
 				this.currRole = g.vue.getQuery("role", 0);
 				this.roleList = g.data.searchRolePool.list.concat();
-				this.roleList.unshift({name: "全部", id: 0});
+				this.roleList.unshift({
+					name: "全部",
+					id: 0
+				});
 				this.initEvents();
 			},
 			init()
@@ -223,9 +226,9 @@
 			},
 			onClick_searchBtn()
 			{
-				if(!this.name)
+				if (!this.name)
 				{
-					return ;
+					return;
 				}
 				this.currPage = 1;
 				this.updateUrl();

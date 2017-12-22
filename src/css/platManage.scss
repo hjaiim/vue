@@ -105,67 +105,25 @@
 	}
   }
 }
-.post-table{
-	.inner-table {
-		tr {
-			th {
-				&:nth-of-type(1) {
-					width: 16%;
-				}
-				&:nth-of-type(2) {
-					width: 19%;
-				}
-				&:nth-of-type(3) {
-					width: 18%;
-				}
-				&:nth-of-type(4) {
-					width: 18%;
-				}
-				&:nth-of-type(5) {
-					width: 20%;
-				}
 
-			}
-			td {
-				color: #404040;
-				&:nth-of-type(1) {
-					width: 16%;
-				}
-				&:nth-of-type(2) {
-					width: 19%;
-				}
-				&:nth-of-type(3) {
-					width: 18%;
-				}
-				&:nth-of-type(4) {
-					width: 18%;
-				}
-				&:nth-of-type(5) {
-					width: 20%;
-				}
-
-			}
-		}
-	}
-}
-.role-table{
+.post-table {
   .inner-table {
 	tr {
 	  th {
 		&:nth-of-type(1) {
-		  width: 17%;
+		  width: 16%;
 		}
 		&:nth-of-type(2) {
-		  width: 21%;
+		  width: 19%;
 		}
 		&:nth-of-type(3) {
 		  width: 18%;
 		}
 		&:nth-of-type(4) {
-		  width: 20%;
+		  width: 18%;
 		}
 		&:nth-of-type(5) {
-		  width: 18%;
+		  width: 20%;
 		}
 
 	  }
@@ -185,6 +143,56 @@
 		}
 		&:nth-of-type(5) {
 		  width: 20%;
+		}
+
+	  }
+	}
+  }
+}
+
+.role-table {
+  .inner-table {
+	tr {
+	  th {
+		&:nth-of-type(1) {
+		  width: 17%;
+		}
+		&:nth-of-type(2) {
+		  width: 18%;
+		}
+		&:nth-of-type(3) {
+		  width: 30%;
+
+		}
+		&:nth-of-type(4) {
+		  width: 18%;
+		}
+		&:nth-of-type(5) {
+		  width: 18%;
+		}
+
+	  }
+	  td {
+		color: #404040;
+		&:nth-of-type(1) {
+		  width: 17%;
+		}
+		&:nth-of-type(2) {
+		  width: 18%;
+		}
+		&:nth-of-type(3) {
+		  width: 30%;
+		}
+		&:nth-of-type(4) {
+		  width: 18%;
+		}
+		&:nth-of-type(5) {
+		  width: 18%;
+		}
+		.role-desc {
+		  overflow: hidden;
+		  white-space: nowrap;
+		  text-overflow: ellipsis;
 		}
 
 	  }
