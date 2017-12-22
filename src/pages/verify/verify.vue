@@ -5,13 +5,13 @@
 				<div class="icon-collect clear">
 					{{errData.avatar}}
 					<div class="relative upload-head right pointer">
-						<img class="default-img" :src="avatar?g.param.ossUrl+avatar:g.path.images+'/default-icon.png'"
+						<img class="default-img" :src="avatar?g.param.ossUrl+avatar:g.path.images+'/default.png'"
 							 alt="">
 						<div class="absolute upload-btn">
 							<p class="load-text">修改头像</p>
 							<iframe name="fileUpload"
 									:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=avatar'"
-									id="avatar" v-show="!avatar"
+									id="avatar" v-show="avatar != 'default.png'"
 							></iframe>
 							<img v-show="avatar" :src="g.path.images+'/del-head.png'" alt=""
 								 class="del-head absolute pointer" @click="onClick_deleteImg('avatar')">
@@ -154,7 +154,7 @@
 					</div>
 				</div>
 				<div class="btn btn-save pointer action-btn ani-time " @click="onClick_submitBtn"
-					 v-if="authStatus == 0">提交
+					 v-if="authStatus == 0 || authStatus == 3">提交
 				</div>
 			</div>
 			<right-pop :isShowPopView="isShowRightPop"></right-pop>
@@ -197,7 +197,7 @@
 				isShowDepartmentList: false,
 				isShowCompanyList: false,
 				isShowDutyList: false,
-				isShowRightPop: false
+				isSubmit: false
 			}
 		},
 		components: {
@@ -207,7 +207,16 @@
 			DropList,
 			RightPop
 		},
-		computed: {},
+		computed: {
+			isShowRightPop()
+			{
+				if (this.isSubmit)
+				{
+					return true;
+				}
+				return this.authStatus == 1;
+			}
+		},
 		methods: {
 			init()
 			{
@@ -233,7 +242,7 @@
 					this.remark = "";
 					this.email = "";
 					this.telphone = "";
-					this.avatar = "default-icon.png";
+					this.avatar = "default.png";
 					this.idCardBack = "";
 					this.idCardFront = "";
 					this.workCard = "";
@@ -252,14 +261,7 @@
 			},
 			uploadComplete($data)
 			{
-				trace("$data", $data);
 				this[$data.subType] = $data.fileName;
-
-			},
-			onClick_upload($type)
-			{
-				trace("$type", $type)
-				_type = $type;
 			},
 			onClick_doc(e)
 			{
@@ -380,8 +382,8 @@
 
 				g.net.call("user/applyUserAuth", _params).then(($data) =>
 				{
-					this.init();
-					g.ui.toast('申请提交成功！')
+					this.isSubmit = true;
+					g.ui.toast('申请提交成功！');
 				})
 
 			},

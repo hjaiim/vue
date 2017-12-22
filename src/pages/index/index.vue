@@ -8,13 +8,14 @@
 				<div class="icon-collect clear">
 					<div class="relative upload-head right pointer">
 						<img class="default-img"
-							 :src="avatar?g.param.ossUrl+avatar.split(';')[0]:g.path.images+'/default-icon.png'"
+							 :src="avatar?g.param.ossUrl+avatar.split(';')[0]:g.path.images+'/default.png'"
 							 alt="">
 						<div class="absolute upload-btn">
 							<p class="load-text">修改头像</p>
-							<iframe class="iframe-btn absolute" name="fileUpload"
+							<iframe name="fileUpload"
 									:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=avatar'"
-									v-if="!avatar"></iframe>
+									id="avatar" v-show="avatar != 'default.png'"
+							></iframe>
 							<img :src="g.path.images+'/del-head.png'" alt=""
 								 class="del-head absolute pointer" @click="onClick_delBtn" v-show="avatar">
 						</div>
@@ -104,7 +105,7 @@
 				type: "personal",
 				readonly: true,
 				userInfo: {},
-				avatar: '',
+				avatar: 'default.png',
 				phone: "",
 				telphone: "",
 				email: "",

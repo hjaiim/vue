@@ -23,7 +23,7 @@ var _positionName = "";
 var _authStatus = 0;
 var _remark = 0;
 var _idCartFront = "";
-var _idCartBack = "";
+var _idCardBack = "";
 var _workCard = "";
 var _msgCount = 0;
 
@@ -59,7 +59,7 @@ export default class UserInfo {
 		$dObj.hasOwnProperty('authStatus') && (_authStatus = $dObj.authStatus);
 		$dObj.hasOwnProperty('remark') && (_remark = $dObj.remark);
 		$dObj.hasOwnProperty('idcardImgA') && (_idCartFront = $dObj.idcardImgA);
-		$dObj.hasOwnProperty('idcardImgB') && (_idCartBack = $dObj.idcardImgB);
+		$dObj.hasOwnProperty('idcardImgB') && (_idCardBack = $dObj.idcardImgB)		;
 		$dObj.hasOwnProperty('workCardImg') && (_workCard = $dObj.workCardImg);
 		$dObj.hasOwnProperty('authStatus') && (_authStatus = $dObj.authStatus);
 		$dObj.hasOwnProperty('msgCount') && (_msgCount = $dObj.msgCount);
@@ -170,9 +170,9 @@ export default class UserInfo {
 		return _idCartFront;
 	}
 
-	get _idCartBack()
+	get idCardBack()
 	{
-		return _idCartBack;
+		return _idCardBack;
 	}
 
 	get workCard()
@@ -208,7 +208,7 @@ export default class UserInfo {
 		_authStatus = 0;
 		_remark = 0;
 		_idCartFront = "";
-		_idCartBack = "";
+		_idCardBack = "";
 		_workCard = "";
 	}
 }

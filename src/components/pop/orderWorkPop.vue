@@ -6,7 +6,7 @@
 			<div class="work-menu">
 				<div class="role-wrap clear">
 					<div class="img-wrap left">
-						<img :src="g.path.images+'/default-icon.png'" alt="">
+						<img :src="g.path.images+'/default.png'" alt="">
 					</div>
 					<div class="role-detail left">
 						<p>{{accountData.name}}</p>

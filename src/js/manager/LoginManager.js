@@ -7,6 +7,7 @@ var _lastUrl = "";
 
 function init($callback)
 {
+
 	g.addEventListener("APP_IS_LOGIN", onAppLogin_global);
 	g.net.call('user/queryUserIsLogin').then((d) =>
 	{

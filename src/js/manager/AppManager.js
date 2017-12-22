@@ -7,14 +7,13 @@ import Mint from "mint-ui";
 import "mint-ui/lib/style.css";
 import loginManager from "./LoginManager";
 import sha256 from "sha256";
-
+window.loginManager = loginManager;
 var _moveList = [];
 var _initList = [];
 var _key;
 _initList.push(initGlobal);
 _initList.push(initStaticData);
 _initList.push(initLogin);
-
 
 export function init($callback)
 {
@@ -36,7 +35,6 @@ export function init($callback)
 		window.g = g;
 		window.sha256 = sha256;
 	}
-
 
 }
 

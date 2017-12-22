@@ -2,7 +2,7 @@
 	<view-popup @close="onClose_pop"
 				:isShowPopView="isShowPopView" class="right-viewPop">
 		<div class="right-container">
-			<p class="right-content">管理员正在审核中，请耐心等候！！！</p>
+			<p class="right-content">管理员正在审核您的认证申请，账号暂时关闭，请您耐心等候...</p>
 		</div>
 	</view-popup>
 </template>
