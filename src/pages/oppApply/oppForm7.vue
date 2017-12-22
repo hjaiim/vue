@@ -52,7 +52,7 @@
 						   v-model="formData.prodType"
 						   :errmsg="errData.prodType"
 						   @focus="onFocus_inputBar('telNum')"></input-bar>
-				<span class="explain">需要落地的具体号码</span>
+				<span class="explain lang-explain">需要落地的具体号码</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">业务用途及场景</span>
@@ -102,7 +102,7 @@
 						   type="text" v-model="formData.businessScale"
 						   :errmsg="errData.businessScale"
 						   @focus="onFocus_inputBar('businessScale')"></input-bar>
-				<span class="explain">**万分钟/月</span>
+				<span class="explain lang-explain">**万分钟/月</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">报价</span>
@@ -110,7 +110,7 @@
 						   type="text" v-model="formData.budget"
 						   :errmsg="errData.budget"
 						   @focus="onFocus_inputBar('budget')"></input-bar>
-				<span class="explain">例：本地**元/分钟，异地**元/分钟</span>
+				<span class="explain lang-explain">例：本地**元/分钟，异地**元/分钟</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">其他说明</span>

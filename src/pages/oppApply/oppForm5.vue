@@ -57,7 +57,7 @@
 						   type="text" v-model="formData.budget"
 						   :errmsg="errData.budget"
 						   @focus="onFocus_inputBar('budget')"></input-bar>
-				<span class="explain">标准价：60元/户/年</span>
+				<span class="explain lang-explain">标准价：60元/户/年</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">付款方式</span>
@@ -65,7 +65,7 @@
 						   type="text" v-model="formData.payway"
 						   :errmsg="errData.payway"
 						   @focus="onFocus_inputBar('payway')"></input-bar>
-				<span class="explain">预付费/后付费</span>
+				<span class="explain lang-explain">预付费/后付费</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">其他说明</span>

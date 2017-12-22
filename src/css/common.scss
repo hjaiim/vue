@@ -479,7 +479,7 @@ input {
 	  -o-transition: all .3s;
 	  transition: all .3s;
 	  &:hover {
-		background: #fdf4f5;
+		background: rgba(252, 244, 245, .9);
 	  }
 	  th {
 		padding: 0 10px;
@@ -496,7 +496,6 @@ input {
 	  td {
 		color: #404040;
 		padding: 0 10px;
-
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
