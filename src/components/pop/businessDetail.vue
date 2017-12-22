@@ -72,32 +72,6 @@
 										:src="g.path.base+'upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppAudit'"></iframe>
 							</p>
 						</div>
-						<!--<div v-if="type==2">-->
-						<!--<p class="from-group">-->
-						<!--<span class="form-title left">我的审核</span>-->
-						<!--<span class="action-box status-type left" @click="onClick_statusItem(0)">-->
-						<!--<i class="pointer" :class="status == 0?'action':''"></i>-->
-						<!--<span>通过</span>-->
-						<!--</span>-->
-						<!--<span class="action-box status-type left" @click="onClick_statusItem(0)">-->
-						<!--<i class="pointer" :class="status == 0?'action':''"></i>-->
-						<!--<span>返回</span>-->
-						<!--</span>-->
-						<!--</p>-->
-						<!--</div>-->
-						<!--<div v-if="type==1 ||type ==3">-->
-						<!--<p class="examine-people">-->
-						<!--<span class="exam-btn" v-if="type==1">结束审核</span>-->
-						<!--<span class="exam-btn">选择后续人</span>-->
-						<!--<span class="choose-people">李小龙-->
-						<!--<img :src="g.path.images+'/del-head.png'" alt="" class="delete-choose pointer">-->
-						<!--</span>-->
-						<!--<span class="choose-people">李小龙-->
-						<!--<img :src="g.path.images+'/del-head.png'" alt="" class="delete-choose pointer">-->
-						<!--</span>-->
-						<!--<span class="exam-btn end-exam" v-if="type==1">结束审核</span>-->
-						<!--</p>-->
-						<!--</div>-->
 
 					</div>
 				</div>
@@ -134,6 +108,7 @@
 				oppType: 1,
 				formData: {},
 				status: 1,
+				opinion: "",
 				businessData: {
 					taskProperties: {}
 				}
@@ -168,14 +143,14 @@
 		methods: {
 			init()
 			{
+				this.opinion = "";
+				this.status = 1;
 				if (this.currId)
 				{
 					this.businessData = g.data.searchBusinessPool.getDataById(this.currId);
 					this.formData = this.businessData.formData;
 					this.oppType = this.businessData.type;
-					trace("this.businessData", this.businessData);
 				}
-
 			},
 			onClose_pop()
 			{
@@ -195,7 +170,7 @@
 					orderId: this.currId,
 					auditResult: 1,
 					auditSuggest: "可以通过",
-					taskTodoId: this.businessData.engineResult.todoId
+					todoId: this.businessData.engineResult.todoId
 				};
 				g.net.call("bo/saveAuditRecord", _params).then(($data) =>
 				{

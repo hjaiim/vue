@@ -226,10 +226,6 @@
 			},
 			onClick_searchBtn()
 			{
-				if (!this.name)
-				{
-					return;
-				}
 				this.currPage = 1;
 				this.updateUrl();
 			},

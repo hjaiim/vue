@@ -73,7 +73,8 @@
                         <span>双呼</span>
                  </span>
                 <span class="action-box status-type left" @click="onClick_callType('单呼')">
-                    <i class="draw-tick pointer relative" :class="formData.callTypeList.indexOf('单呼')>=0?'action':''"></i>
+                    <i class="draw-tick pointer relative"
+					   :class="formData.callTypeList.indexOf('单呼')>=0?'action':''"></i>
                     <span>单呼</span>
                 </span>
 				<span class="explain">双呼/单呼（请选择一种或多种）</span>
@@ -180,7 +181,7 @@
 				errData: {},
 				formData: {},
 				attachList: [],
-				hasIframe: false
+				hasIframe: true
 			}
 		},
 		components: {
@@ -280,6 +281,7 @@
 				}
 				this.$forceUpdate();
 			},
+
 			onClick_checkCallBack($type)
 			{
 				this.formData.callBack = $type;
@@ -305,13 +307,14 @@
 				};
 				this.$emit("submit", data);
 			},
-			onClick_uploadBtn()
+			onClick_delBtn($name, $index)
 			{
-
-			},
-			onClick_delBtn()
-			{
-
+				g.net.call(g.param.delPicAccess, {fileName: $name}).then(($data) =>
+				{
+				}, (err) =>
+				{
+					this.attachList.splice($index, 1);
+				})
 			},
 			checkValid()
 			{
@@ -334,7 +337,6 @@
 						}
 					}
 				}
-				trace("this.errData", this.errData);
 				this.$forceUpdate();
 			},
 			getFormData()
@@ -348,13 +350,17 @@
 						{
 							_formData[key] = this.formData[item[key]] + "*tel";
 						}
+						else if (key == "呼叫模式")
+						{
+							_formData[key] = this.formData[item[key]].join("和");
+						}
 						else
 						{
 							_formData[key] = this.formData[item[key]];
 						}
 					}
 				}
-			},
+			}
 		}
 	}
 </script>

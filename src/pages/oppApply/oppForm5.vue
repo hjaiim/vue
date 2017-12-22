@@ -178,13 +178,14 @@
 				this.getFormData();
 				this.$emit("submit", _formData);
 			},
-			onClick_uploadBtn()
+			onClick_delBtn($name, $index)
 			{
-
-			},
-			onClick_delBtn()
-			{
-
+				g.net.call(g.param.delPicAccess, {fileName: $name}).then(($data) =>
+				{
+				}, (err) =>
+				{
+					this.attachList.splice($index, 1);
+				})
 			},
 			checkValid()
 			{

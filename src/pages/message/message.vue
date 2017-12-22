@@ -31,7 +31,8 @@
 				<table class="inner-table">
 					<thead>
 					<tr>
-						<th><i class="draw-tick relative pointer" :class="checkAll?'action':''"></i><span
+						<th @click="onClick_checkedAll"><i class="draw-tick relative pointer"
+														   :class="checkAll?'action':''"></i><span
 								class="rank-num">序号</span></th>
 						<th>标题</th>
 						<th>来源</th>
@@ -41,7 +42,9 @@
 					</thead>
 					<tbody>
 					<tr v-for="(item,index) in msgList">
-						<td><i class="draw-tick relative pointer"></i><span class="rank-num">{{index+1}}</span></td>
+						<td><i class="draw-tick relative pointer" :class="item.checked?'action':''"
+							   @click="onClick_checkedItem(item.id)"></i><span
+								class="rank-num">{{index+1}}</span></td>
 						<td><span :class="[index==2?'is-picked':'', index==5?'wait-pick':'']">{{item.title}}</span></td>
 						<td>{{item.sourceDesc}}</td>
 						<td>{{item.createTime}}</td>
@@ -95,6 +98,7 @@
 				typeList: [],
 				currPage: 1,
 				delList: [],
+				checkedAll: false,
 				isShowDetailPop: false,
 				isShowAllDeletePop: false
 			}
@@ -109,7 +113,18 @@
 		computed: {
 			checkAll()
 			{
-				return g.func.looseEqual(this.delList, g.data.searchMessagePool.idList);
+				if (this.checkedAll)
+				{
+					return true;
+				}
+				for (var item of this.msgList)
+				{
+					if (!item.checked)
+					{
+						return false;
+					}
+				}
+				return true;
 			}
 		},
 		methods: {
@@ -166,11 +181,54 @@
 			},
 			onClick_detailBtn($id)
 			{
-				g.net.call('message/readMessage', {msgId: $id}).then(($data) =>
+				var data = g.data.searchMessagePool.getDataById($id);
+				if (data.readStatus == 0)
+				{
+					g.net.call('message/readMessage', {msgId: $id}).then(($data) =>
+					{
+						this.currId = $id;
+						this.isShowDetailPop = true;
+					})
+				}
+				else
 				{
 					this.currId = $id;
 					this.isShowDetailPop = true;
-				})
+				}
+			},
+			onClick_checkedItem($id)
+			{
+				var data = g.data.searchMessagePool.getDataById($id);
+				var index = this.delList.indexOf($id);
+				if (data.checked)
+				{
+					data.update({checked: false});
+					this.delList.splice(index, 1);
+				}
+				else
+				{
+					data.update({checked: true});
+					this.delList.push($id);
+				}
+			},
+			onClick_checkedAll()
+			{
+				if (this.checkedAll)
+				{
+					this.checkedAll = false;
+					for(var item of this.msgList)
+					{
+						item.update({checked:false})
+					}
+				}
+				else
+				{
+					this.checkedAll = true;
+					for(var item of this.msgList)
+					{
+						item.update({checked:true})
+					}
+				}
 			},
 			onClose_detailPop()
 			{
@@ -178,19 +236,31 @@
 			},
 			onClick_allDeleteBtn()
 			{
-				this.isShowAllDeletePop = true;
-			},
-			onClose_AllDeletePop($type)
-			{
-				if ($type)
+				if (this.delList.length > 0)
 				{
-					this.isShowAllDeletePop = false;
+					this.isShowAllDeletePop = true;
+
 				}
 				else
 				{
-					this.isShowAllDeletePop = false;
-
+					g.ui.toast("您当前未选中任何消息");
 				}
+			},
+			onClose_AllDeletePop($result)
+			{
+				this.isShowAllDeletePop = false;
+				if ($result)
+				{
+					g.net.call('message/delMessage', {msgIds: this.delList.join(',')}).then(($data) =>
+					{
+						for(var id of this.delList)
+						{
+							g.data.searchMessagePool.remove(id);
+						}
+						g.ui.toast("消息删除成功！");
+					})
+				}
+
 			},
 			onChange_pageCom($page)
 			{
