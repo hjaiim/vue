@@ -112,6 +112,7 @@
 				this.currPage = 1;
 				this.updateUrl();
 			},
+
 			onChange_pageCom($page)
 			{
 				this.currPage = $page;
@@ -122,12 +123,16 @@
 				this.init();
 				this.updateUrl();
 			},
-			onClose_accountDesPop(){
+			onClose_accountDesPop($result)
+			{
 				this.isShowDetailPop = false;
+				if($result)
+				{
+					this.updateUrl();
+				}
 			},
 			onClick_detailBtn($id)
 			{
-				trace(g.data.searchUnverifyPool.list);
 				if (g.data.searchUnverifyPool.hasDetail($id))
 				{
 					this.currId = $id;

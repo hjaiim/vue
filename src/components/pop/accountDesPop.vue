@@ -94,6 +94,7 @@
 					</div>
 				</div>
 			</div>
+
 			<div class="user-list diff-padding" v-if="accountData.authStatus == 1 || accountData.authStatus == 3">
 				<div class="user-item left clear">
 					<span class="user-tit left diff-distancre">认证反馈</span>

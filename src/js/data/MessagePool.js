@@ -96,6 +96,7 @@ function createData($dObj)
 	d.desc = "";
 	d.readStatus = 0;
 	d.isShow = false;
+	d.checked = false;
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -114,5 +115,6 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("sendTime") && (this.createTime = g.timeTool.getFullDate($dObj.sendTime),true);
 	$dObj.hasOwnProperty("readStatus") && (this.readStatus = $dObj.readStatus);
 	$dObj.hasOwnProperty("isShow") && (this.isShow = $dObj.isShow);
+	$dObj.hasOwnProperty("checked") && (this.checked = $dObj.checked);
 };
 
