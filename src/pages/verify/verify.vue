@@ -157,6 +157,7 @@
 					 v-if="authStatus == 0">提交
 				</div>
 			</div>
+			<right-pop :isShowPopView="isShowRightPop"></right-pop>
 		</div>
 	</com-layout>
 </template>
@@ -166,6 +167,7 @@
 	import UploadBtn from "../../components/upload.vue";
 	import InputBar from "../../components/inputBar.vue";
 	import DropList from "../../components/dropList.vue";
+	import RightPop from "../../components/pop/rightPop.vue"
 	var _isValid = true, _params = null, _type = "";
 	export default{
 		created(){
@@ -194,14 +196,16 @@
 				isVerified: false,
 				isShowDepartmentList: false,
 				isShowCompanyList: false,
-				isShowDutyList: false
+				isShowDutyList: false,
+				isShowRightPop: false
 			}
 		},
 		components: {
 			ComLayout,
 			UploadBtn,
 			InputBar,
-			DropList
+			DropList,
+			RightPop
 		},
 		computed: {},
 		methods: {

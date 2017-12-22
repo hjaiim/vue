@@ -16,9 +16,9 @@
 				</ul>
 			</div>
 		</div>
-
 		<ul class="pager" :class="innerClass" style="float: left">
-			<li class="number" @click="onClick_pageBtn(1)" :class="indexPage== 1 ?'page-disabled':''" v-if="showFirstAndEnd">
+			<li class="number" @click="onClick_pageBtn(1)" :class="indexPage== 1 ?'page-disabled':''"
+				v-if="showFirstAndEnd">
 				{{defaultTextList[0]}}
 			</li>
 			<li class="number" :class="indexPage== 1 ?'page-disabled':''" @click="onClick_prevBtn">
@@ -33,12 +33,16 @@
 				{{defaultTextList[2
 				]}}
 			</li>
-			<li class="number" @click="onClick_pageBtn(totalPage)" v-if="showFirstAndEnd" :class="indexPage== totalPage ?'page-disabled':''">{{defaultTextList[3]}}</li>
+			<li class="number" @click="onClick_pageBtn(totalPage)" v-if="showFirstAndEnd"
+				:class="indexPage== totalPage ?'page-disabled':''">{{defaultTextList[3]}}
+			</li>
 
-			<span class="to-page" v-if="showElevator">到第<input type="text" class="to" v-model.number.trim="selectPage"
-															   @keyup.enter="onKeyUpEnter_pageBtn"
-															   @change="onKeyUpEnter_pageBtn"
-															   @focus="onFocus_input" ref="inputPage">页
+			<span class="to-page" v-if="showElevator">到第
+				<input type="text" class="to" v-model.number.trim="selectPage"
+					   @keyup.enter="onKeyUpEnter_pageBtn"
+					   @change="onKeyUpEnter_pageBtn"
+					   @focus="onFocus_input" ref="inputPage">页
+				<i @click="onKeyUpEnter_pageBtn">go</i>
 			</span>
 		</ul>
 	</div>
@@ -431,6 +435,18 @@
 				transition: all .3s ease;
 				&:hover {
 					border-color: #f36478;
+				}
+			}
+			i {
+				padding: 6px;
+				cursor: pointer;
+				-webkit-transition: all .3s ease;
+				-moz-transition: all .3s ease;
+				-ms-transition: all .3s ease;
+				-o-transition: all .3s ease;
+				transition: all .3s ease;
+				&:hover {
+					color: #f36478;
 				}
 			}
 

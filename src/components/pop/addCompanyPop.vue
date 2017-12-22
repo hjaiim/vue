@@ -7,30 +7,31 @@
 				<div class="company-message">
 					<p class="from-group">
 						<span class="form-title">公司名称</span>
-						<input-bar class="form-control company-input" placeholder="" type="text" :readonly="currentId != 0"
+						<input-bar class="form-control company-input" placeholder="" type="text"
+								   :readonly="currentId != 0"
 								   v-model="name" :errmsg="errData.name" @focus="onFocus_inputBar('name')"></input-bar>
-						<span class="requied">*</span>
+						<span class="requied" v-show="currentId == 0">*</span>
 					</p>
 					<p class="from-group">
 						<span class="form-title">公司电话</span>
 						<input-bar class="form-control" placeholder="" type="text" :readonly="currentId != 0"
 								   v-model="telphone" :errmsg="errData.telphone"
 								   @focus="onFocus_inputBar('telphone')"></input-bar>
-						<span class="requied">*</span>
+						<span class="requied" v-show="currentId == 0">*</span>
 					</p>
 					<p class="from-group">
 						<span class="form-title">公司负责人</span>
 						<input-bar class="form-control" placeholder="" type="text" :readonly="currentId != 0"
 								   v-model="leader" :errmsg="errData.leader"
 								   @focus="onFocus_inputBar('leader')"></input-bar>
-						<span class="requied">*</span>
+						<span class="requied" v-show="currentId == 0">*</span>
 					</p>
 					<p class="from-group">
 						<span class="form-title">负责人电话</span>
 						<input-bar class="form-control" placeholder="" type="text" :readonly="currentId != 0"
 								   v-model="phone" :errmsg="errData.phone"
 								   @focus="onFocus_inputBar('phone')"></input-bar>
-						<span class="requied">*</span>
+						<span class="requied" v-show="currentId == 0">*</span>
 					</p>
 					<div class="btn-wrap clear">
 						<div class="pop-btn right pointer" @click="onClick_saveCompany">{{currentId > 0?'编辑':'保存'}}
@@ -60,9 +61,9 @@
 
                             <span class="pointer btn-save  ani-time">保存</span>
 								<img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer"
-								 @click="onClick_editDuty(duty)">
+									 @click="onClick_editDuty(duty)">
 								<img :src="g.path.images+'/del-depart.png'" alt="" class="edit-icon pointer"
-								 @click="onClick_deleteDuty(duty)">
+									 @click="onClick_deleteDuty(duty)">
 							</span>
 							</p>
 							<p class="from-group">
