@@ -14,7 +14,7 @@
 									id="avatar"
 							></iframe>
 							<!--v-show="!avatar"-->
-							<img :src="g.path.images+'/del-head.png'" alt=""
+							<img v-show="avatar" :src="g.path.images+'/del-head.png'" alt=""
 								 class="del-head absolute pointer" @click="onClick_deleteImg('avatar')">
 						</div>
 					</div>
@@ -105,7 +105,9 @@
 							<img :src="g.path.images+'/upload.png'" alt="">
 							<p class="upload-text">正面</p>
 						</div>
-						<img class="img-url absolute" :src="idCardFront?g.param.ossUrl+idCardFront:''" alt="">
+						<div class="img-contain absolute" v-show="idCardFront">
+							<img class="img-url " :src="idCardFront?g.param.ossUrl+idCardFront:''" alt="">
+						</div>
 						<iframe class="pointer" name="fileUpload"
 								:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=idCardFront'"
 								v-if="!idCardFront" id="idCardFront"></iframe>
@@ -117,7 +119,9 @@
 							<img :src="g.path.images+'/upload.png'" alt="">
 							<p class="upload-text">反面</p>
 						</div>
-						<img class="img-url absolute" :src="idCardBack?g.param.ossUrl+idCardBack:''" alt="">
+						<div class="img-contain absolute" v-show="idCardBack">
+							<img class="img-url " :src="idCardBack?g.param.ossUrl+idCardBack:''" alt="">
+						</div>
 						<iframe class="pointer" name="fileUpload"
 								:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=idCardBack'"
 								v-if="!idCardBack" id="idCardBack"></iframe>
@@ -140,7 +144,9 @@
                                 </span>
 							</p>
 						</div>
-						<img class="img-url absolute" :src="workCard?g.param.ossUrl+workCard:''" alt="">
+						<div class="img-contain absolute" v-show="workCard">
+							<img class="img-url " :src="workCard?g.param.ossUrl+workCard:''" alt="">
+						</div>
 						<iframe class="pointer" name="fileUpload"
 								:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=workCard'"
 								id="workCard"></iframe>
