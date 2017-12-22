@@ -10,7 +10,7 @@
 					<div class="action-box left" @click="onClick_msgType(1)">
 						<!--<i class="pointer" :class="typeList.indexOf(1)>=0?'action':''"></i>-->
 						<i class="check-tick">
-							<input type="checkbox">
+							<input type="checkbox" class="mui-check">
 						</i>
 						<span>已读</span>
 					</div>
