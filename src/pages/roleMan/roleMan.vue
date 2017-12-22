@@ -34,7 +34,7 @@
 								<span class="right pointer draw-line ani-time" @click="onClick_deleteBtn(item.id)">删除
 									<delete-pop :isDeletePop="item.isShow"
 												@close="onClose_deletePop">
-										<span>您是否真的要删除该角色？</span>
+										<i>您是否真的要删除该角色？</i>
 									</delete-pop>
 							</span>
 							</p>
@@ -80,10 +80,10 @@
 			AddRolePop
 
 		},
-		watch:{
+		watch: {
 			roleList($val)
 			{
-				if($val.length == 0)
+				if ($val.length == 0)
 				{
 					this.updateUrl();
 				}

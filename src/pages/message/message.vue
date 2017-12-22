@@ -8,11 +8,15 @@
 						<span>批量删除</span>
 					</i>
 					<div class="action-box left" @click="onClick_msgType(1)">
-						<i class="pointer" :class="typeList.indexOf(1)>=0?'action':''"></i>
+						<!--<i class="pointer" :class="typeList.indexOf(1)>=0?'action':''"></i>-->
+						<i class="check-tick">
+							<input type="checkbox" class="mui-check">
+						</i>
 						<span>已读</span>
 					</div>
 					<div class="action-box left" @click="onClick_msgType(0)">
-						<i class="pointer" :class="typeList.indexOf(0)>=0?'action':''"></i>
+						<i class="pointer" :class="typeList.indexOf(0)>=0?'action':''">
+						</i>
 						<span>未读</span>
 					</div>
 					<div class="text-msg right">
@@ -50,7 +54,7 @@
 								<span class="right pointer draw-line ani-time" @click="onClick_deleteBtn(item.id)">删除
 									<delete-pop :isDeletePop="item.isShow"
 												@close="onClose_deletePop">
-										<span>您确定要删除该消息？</span>
+										<i>您确定要删除该消息？</i>
 									</delete-pop>
 								</span>
 							</p>

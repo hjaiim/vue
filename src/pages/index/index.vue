@@ -5,20 +5,18 @@
 				<percenter-tab @click="onClick_tabItem" :type="type"></percenter-tab>
 			</div>
 			<div class="percenter-inner" v-show="type=='personal'">
-
 				<div class="icon-collect clear">
 					<div class="relative upload-head right pointer">
 						<img class="default-img"
-							 :src="avatar?g.param.ossUrl+avatar.spilt(';')[0]:g.path.images+'/default-icon.png'"
+							 :src="avatar?g.param.ossUrl+avatar.split(';')[0]:g.path.images+'/default-icon.png'"
 							 alt="">
-						<div class="
-						 absolute">
+						<div class="absolute upload-btn">
 							<p class="load-text">修改头像</p>
-							<iframe name="fileUpload"
+							<iframe class="iframe-btn absolute" name="fileUpload"
 									:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=avatar'"
 									v-if="!avatar"></iframe>
 							<img :src="g.path.images+'/del-head.png'" alt=""
-								 class="del-head absolute pointer" @click="onClick_delBtn">
+								 class="del-head absolute pointer" @click="onClick_delBtn" v-show="avatar">
 						</div>
 					</div>
 				</div>

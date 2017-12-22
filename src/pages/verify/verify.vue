@@ -7,14 +7,14 @@
 					<div class="relative upload-head right pointer">
 						<img class="default-img" :src="avatar?g.param.ossUrl+avatar:g.path.images+'/default-icon.png'"
 							 alt="">
-						<div class="upload-btn absolute">
+						<div class="absolute upload-btn">
 							<p class="load-text">修改头像</p>
 							<iframe name="fileUpload"
 									:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=avatar'"
 									id="avatar"
 							></iframe>
 							<!--v-show="!avatar"-->
-							<img :src="g.path.images+'/del-head.png'" alt=""
+							<img v-show="avatar" :src="g.path.images+'/del-head.png'" alt=""
 								 class="del-head absolute pointer" @click="onClick_deleteImg('avatar')">
 						</div>
 					</div>
@@ -100,27 +100,31 @@
 				<div class="personal-form" :class="authStatus != 0 ?'disabled':''">
 					<p class="err-msg"> {{errData.idCardBack || errData.idCardFront}}</p>
 					<span class="personal-title left">身份证照</span>
-					<div class="left relative upload-box pointer" >
+					<div class="left relative upload-box pointer">
 						<div class="upload-btn flex">
-							<iframe name="fileUpload"
-									:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=idCardFront'"
-									v-if="!idCardFront" id="idCardFront"></iframe>
 							<img :src="g.path.images+'/upload.png'" alt="">
 							<p class="upload-text">正面</p>
 						</div>
-						<img class="img-url absolute" :src="idCardFront?g.param.ossUrl+idCardFront:''" alt="">
+						<div class="img-contain absolute" v-show="idCardFront">
+							<img class="img-url " :src="idCardFront?g.param.ossUrl+idCardFront:''" alt="">
+						</div>
+						<iframe class="pointer" name="fileUpload"
+								:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=idCardFront'"
+								v-if="!idCardFront" id="idCardFront"></iframe>
 						<span class="del-img pointer" :class="idCardFront?'hover-img':''"
 							  @click="onClick_deleteImg('idCardFront')"></span>
 					</div>
-					<div class="left relative upload-box pointer" >
+					<div class="left relative upload-box pointer">
 						<div class="upload-btn flex">
-							<iframe name="fileUpload"
-									:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=idCardBack'"
-									v-if="!idCardBack" id="idCardBack"></iframe>
 							<img :src="g.path.images+'/upload.png'" alt="">
 							<p class="upload-text">反面</p>
 						</div>
-						<img class="img-url absolute" :src="idCardBack?g.param.ossUrl+idCardBack:''" alt="">
+						<div class="img-contain absolute" v-show="idCardBack">
+							<img class="img-url " :src="idCardBack?g.param.ossUrl+idCardBack:''" alt="">
+						</div>
+						<iframe class="pointer" name="fileUpload"
+								:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=idCardBack'"
+								v-if="!idCardBack" id="idCardBack"></iframe>
 						<span class="del-img pointer" :class="idCardBack?'hover-img':''"
 							  @click="onClick_deleteImg('idCardBack')"></span>
 					</div>
@@ -130,9 +134,6 @@
 					<span class="personal-title left">工作证照</span>
 					<div class="left relative upload-box pointer">
 						<div class="upload-btn flex">
-							<iframe name="fileUpload"
-									:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=workCard'"
-									id="workCard"></iframe>
 							<img :src="g.path.images+'/upload.png'" alt="">
 							<p class="upload-text">
 								点击上传工作证照片<br>
@@ -143,7 +144,12 @@
                                 </span>
 							</p>
 						</div>
-						<img class="img-url absolute" :src="workCard?g.param.ossUrl+workCard:''" alt="">
+						<div class="img-contain absolute" v-show="workCard">
+							<img class="img-url " :src="workCard?g.param.ossUrl+workCard:''" alt="">
+						</div>
+						<iframe class="pointer" name="fileUpload"
+								:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=workCard'"
+								id="workCard"></iframe>
 						<span class="del-img pointer" :class="workCard?'hover-img':''"
 							  @click="onClick_deleteImg('workCard')"></span>
 					</div>
@@ -243,7 +249,7 @@
 			},
 			uploadComplete($data)
 			{
-				trace("$data",$data);
+				trace("$data", $data);
 				this[$data.subType] = $data.fileName;
 
 			},
@@ -467,8 +473,9 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		width: 100px;
-		height: 100px;
+		width: 100%;
+		height: 100%;
 		opacity: 0;
+		z-index: 1;
 	}
 </style>
