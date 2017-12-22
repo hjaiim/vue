@@ -18,7 +18,7 @@
 		</div>
 
 		<ul class="pager" :class="innerClass" style="float: left">
-			<li class="number" @click="onClick_pageBtn(1)" v-if="showFirstAndEnd">
+			<li class="number" @click="onClick_pageBtn(1)" :class="indexPage== 1 ?'page-disabled':''" v-if="showFirstAndEnd">
 				{{defaultTextList[0]}}
 			</li>
 			<li class="number" :class="indexPage== 1 ?'page-disabled':''" @click="onClick_prevBtn">
@@ -33,7 +33,7 @@
 				{{defaultTextList[2
 				]}}
 			</li>
-			<li class="number" @click="onClick_pageBtn(totalPage)" v-if="showFirstAndEnd">{{defaultTextList[3]}}</li>
+			<li class="number" @click="onClick_pageBtn(totalPage)" v-if="showFirstAndEnd" :class="indexPage== totalPage ?'page-disabled':''">{{defaultTextList[3]}}</li>
 
 			<span class="to-page" v-if="showElevator">到第<input type="text" class="to" v-model.number.trim="selectPage"
 															   @keyup.enter="onKeyUpEnter_pageBtn"

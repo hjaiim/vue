@@ -78,8 +78,9 @@
 			{
 				_params = {
 					businessId: this.type,
-					custComName: $data["客户公司名称"],
-					boFormData: JSON.stringify($data)
+					custComName: $data.formData["客户公司名称"],
+					boFormData: JSON.stringify($data.formData),
+					attachs: JSON.stringify($data.attachList)
 				};
 				g.net.call("/bo/orderApply", _params).then(($data) =>
 				{

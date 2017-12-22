@@ -58,9 +58,9 @@ export default class UserInfo {
 		$dObj.hasOwnProperty('stationName') && (_positionName = $dObj.stationName);
 		$dObj.hasOwnProperty('authStatus') && (_authStatus = $dObj.authStatus);
 		$dObj.hasOwnProperty('remark') && (_remark = $dObj.remark);
-		$dObj.hasOwnProperty('idcardImagA') && (_idCartFront = $dObj.idcardImagA);
-		$dObj.hasOwnProperty('idcardImagB') && (_idCartBack = $dObj.idcardImagB);
-		$dObj.hasOwnProperty('workCardImag') && (_workCard = $dObj.workCardImag);
+		$dObj.hasOwnProperty('idcardImgA') && (_idCartFront = $dObj.idcardImgA);
+		$dObj.hasOwnProperty('idcardImgB') && (_idCartBack = $dObj.idcardImgB);
+		$dObj.hasOwnProperty('workCardImg') && (_workCard = $dObj.workCardImg);
 		$dObj.hasOwnProperty('authStatus') && (_authStatus = $dObj.authStatus);
 		$dObj.hasOwnProperty('msgCount') && (_msgCount = $dObj.msgCount);
 	}

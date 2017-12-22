@@ -11,9 +11,8 @@
 							<p class="load-text">修改头像</p>
 							<iframe name="fileUpload"
 									:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=avatar'"
-									id="avatar"
+									id="avatar" v-show="!avatar"
 							></iframe>
-							<!--v-show="!avatar"-->
 							<img v-show="avatar" :src="g.path.images+'/del-head.png'" alt=""
 								 class="del-head absolute pointer" @click="onClick_deleteImg('avatar')">
 						</div>
@@ -149,7 +148,7 @@
 						</div>
 						<iframe class="pointer" name="fileUpload"
 								:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=workCard'"
-								id="workCard"></iframe>
+								id="workCard" v-if="!workCard"></iframe>
 						<span class="del-img pointer" :class="workCard?'hover-img':''"
 							  @click="onClick_deleteImg('workCard')"></span>
 					</div>

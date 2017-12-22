@@ -95,11 +95,14 @@
 		<div>
 			<div class="personal-form">
 				<span class="personal-title left">上传附件</span>
-                <span class="form-trap up-btn pointer opp-up-btn" @click="onClick_uploadBtn">点击上传
-                    <input type="file" class="upload-file">
+                <span class="form-trap up-btn pointer opp-up-btn">点击上传
+               	<iframe name="fileUpload" v-if="hasIframe"
+						:src="g.path.base+'upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
                 </span>
-					<span class="complate-upload-file">初步合同
-						<i class="del-file pointer" @click="onClick_delBtn">删除</i></span>
+				<span class="complate-upload-file"
+					  v-for="(attach,index) in attachList">{{attach.name}}/{{attach.size}}kB;
+					<i class="del-file pointer"
+					   @click="onClick_delBtn(attach.name,index)">删除</i></span>
 			</div>
 		</div>
 		<div class="btn btn-save pointer action-btn ani-time" @click="onClick_submitBtn">提交</div>
@@ -117,15 +120,23 @@
 			return {
 				g: g,
 				errData: {},
-				formData: {}
+				formData: {},
+				attachList: [],
+				hasIframe: true
 			}
 		},
 		components: {
 			InputBar
 		},
-		props:{
-			currId:{
-				default:0
+		props: {
+			currId: {
+				default: 0
+			}
+		},
+		watch: {
+			currId()
+			{
+				this.init();
 			}
 		},
 		methods: {
@@ -166,6 +177,17 @@
 						remark: ""
 					};
 				}
+				window.uploadComplete = this.uploadComplete;
+			},
+			uploadComplete($data)
+			{
+				this.hasIframe = false;
+				var attach = {size: $data.size, name: $data.fileName};
+				this.attachList.push(attach);
+				setTimeout(()=>
+				{
+					this.hasIframe = true;
+				}, 200)
 			},
 			onFocus_inputBar($type)
 			{
@@ -181,15 +203,20 @@
 					return;
 				}
 				this.getFormData();
-				this.$emit("submit", _formData);
+				var data = {
+					formData: _formData,
+					attachList: this.attachList
+				};
+				this.$emit("submit", data);
 			},
-			onClick_uploadBtn()
+			onClick_delBtn($name, $index)
 			{
-
-			},
-			onClick_delBtn()
-			{
-
+				g.net.call(g.param.delPicAccess, {fileName: $name}).then(($data) =>
+				{
+				}, (err) =>
+				{
+					this.attachList.splice($index, 1);
+				})
 			},
 			checkValid()
 			{
@@ -198,7 +225,6 @@
 				{
 					for (var key in item)
 					{
-						trace("this.formData.cusCompName", this.formData.cusCompName);
 						if (!this.formData[item[key]] && item[key] != "remark")
 						{
 							this.errData[item[key]] = "请填写" + key;
@@ -213,7 +239,6 @@
 						}
 					}
 				}
-				trace("this.errData", this.errData);
 				this.$forceUpdate();
 			},
 			getFormData()
@@ -233,7 +258,7 @@
 						}
 					}
 				}
-			},
+			}
 		}
 	}
 </script>
@@ -241,6 +266,5 @@
 	.apply-wrap {
 		padding: 20px 44px 50px 44px;
 	}
-
 	@import "../../css/oppApply.scss";
 </style>

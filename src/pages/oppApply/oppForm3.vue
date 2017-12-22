@@ -100,11 +100,14 @@
 		<div>
 			<div class="personal-form">
 				<span class="personal-title left">上传附件</span>
-                <span class="form-trap up-btn pointer opp-up-btn" @click="onClick_uploadBtn">点击上传
-                    <input type="file" class="upload-file">
+                <span class="form-trap up-btn pointer opp-up-btn">点击上传
+               	<iframe name="fileUpload" v-if="hasIframe"
+						:src="g.path.base+'upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
                 </span>
-					<span class="complate-upload-file">初步合同
-						<i class="del-file pointer" @click="onClick_delBtn">删除</i></span>
+				<span class="complate-upload-file"
+					  v-for="(attach,index) in attachList">{{attach.name}}/{{attach.size}}kB;
+					<i class="del-file pointer"
+					   @click="onClick_delBtn(attach.name,index)">删除</i></span>
 			</div>
 		</div>
 		<div class="btn btn-save pointer action-btn ani-time" @click="onClick_submitBtn">提交</div>
@@ -123,7 +126,8 @@
 			return {
 				g: g,
 				errData: {},
-				formData: {}
+				formData: {},
+				hasIframe:true
 			}
 		},
 		components: {
@@ -173,7 +177,17 @@
 						payway: ""
 					};
 				}
-
+				window.uploadComplete = this.uploadComplete;
+			},
+			uploadComplete($data)
+			{
+				this.hasIframe = false;
+				var attach = {size: $data.size, name: $data.fileName};
+				this.attachList.push(attach);
+				setTimeout(()=>
+				{
+					this.hasIframe = true;
+				}, 200)
 			},
 			onFocus_inputBar($type)
 			{
