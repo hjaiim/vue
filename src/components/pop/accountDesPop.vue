@@ -2,36 +2,36 @@
 	<view-popup class="account-content" @close="onClose_pop"
 				:isShowPopView="isShowPopView">
 		<div class="account-desc">
-			<p class="note-tit">角色设置</p>
+			<p class="note-tit">用户信息</p>
 			<div class="user-list clear">
 				<div class="user-item left clear">
 					<span class="user-tit left">登录用户名</span>
 					<div class="user-txt left">
-						<span>hahaha</span>
+						<span>{{accountData.username}}</span>
 					</div>
 				</div>
 				<div class="user-item left clear">
 					<span class="user-tit left">姓名</span>
 					<div class="user-txt left">
-						<span>张三</span>
+						<span>{{accountData.name}}</span>
 					</div>
 				</div>
 				<div class="user-item left clear">
 					<span class="user-tit left">所属公司</span>
 					<div class="user-txt left">
-						<span>江苏分公司</span>
+						<span>{{accountData.companyName}}</span>
 					</div>
 				</div>
 				<div class="user-item left clear">
 					<span class="user-tit left">所属部门</span>
 					<div class="user-txt left">
-						<span>运营部</span>
+						<span>{{accountData.departmentName}}</span>
 					</div>
 				</div>
 				<div class="user-item left clear">
 					<span class="user-tit left">职务名称</span>
 					<div class="user-txt left">
-						<span>运营经理</span>
+						<span>{{accountData.dutyName}}</span>
 					</div>
 				</div>
 			</div>
@@ -39,19 +39,19 @@
 				<div class="user-item left clear">
 					<span class="user-tit left">手机</span>
 					<div class="user-txt left">
-						<span>13000000000</span>
+						<span>{{accountData.phone}}</span>
 					</div>
 				</div>
 				<div class="user-item left clear">
 					<span class="user-tit left">固定电话</span>
 					<div class="user-txt left">
-						<span>12345678</span>
+						<span>{{accountData.telphone}}</span>
 					</div>
 				</div>
 				<div class="user-item left clear">
 					<span class="user-tit left">电子邮箱</span>
 					<div class="user-txt left">
-						<span>dfsaf@das.com </span>
+						<span>{{accountData.email}} </span>
 					</div>
 				</div>
 			</div>
@@ -59,14 +59,14 @@
 				<div class="user-item left clear">
 					<span class="user-tit left">备注</span>
 					<div class="user-txt left diff-frame">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean</p>
+						<p>{{accountData.remark}}</p>
 					</div>
 				</div>
 				<div class="user-item left clear">
 					<span class="user-tit left diff-distancre">头像</span>
 					<div class="user-txt left diff-frame">
 						<div class="img-wrap">
-							<img :src="g.path.images+'/default-icon.png'" alt="">
+							<img :src="g.param.ossUrl+accountData.avatar" alt="">
 						</div>
 					</div>
 				</div>
@@ -76,36 +76,37 @@
 					<span class="user-tit left diff-distancre">身份证照</span>
 					<div class="user-txt left diff-frame">
 						<div class="card-wrap left pointer" @click="onClick_imgBtn()">
-							<img :src="g.path.images+'/card.png'" alt="">
+							<img :src="g.param.ossUrl+accountData.idCardFront" alt="">
 						</div>
 						<div class="card-wrap left pointer">
-							<img :src="g.path.images+'/card.png'" alt="" @click="onClick_imgBtn()">
+							<img :src="g.param.ossUrl+accountData.idCardBack" alt="" @click="onClick_imgBtn()">
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="user-list diff-padding">
 				<div class="user-item left clear">
-					<span class="user-tit left diff-distancre">身份证照</span>
+					<span class="user-tit left diff-distancre">工作照</span>
 					<div class="user-txt left diff-frame">
 						<div class="card-wrap left work-wrap">
-							<img :src="g.path.images+'/work-card.png'" alt="">
+							<img :src="g.param.ossUrl+accountData.workCard" alt="">
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="user-list diff-padding">
+			<div class="user-list diff-padding" v-if="accountData.authStatus == 1 || accountData.authStatus == 3">
 				<div class="user-item left clear">
 					<span class="user-tit left diff-distancre">认证反馈</span>
 					<div class="user-txt left diff-frame">
-						<textarea class="verify-feedback"></textarea>
+						<textarea class="verify-feedback" v-model="opinion"></textarea>
 					</div>
 				</div>
 			</div>
-			<div class="desc-action absolute">
-				<span class="right cancel-btn ani-time pointer">不通过</span>
-				<span class="right action-btn ani-time pointer">通过</span>
+			<div class="desc-action absolute" v-if="accountData.authStatus == 1 || accountData.authStatus == 3">
+				<span class="right cancel-btn ani-time pointer" @click="onClick_rejectedBtn">不通过</span>
+				<span class="right action-btn ani-time pointer" @click="onClick_resolvedBtn">通过</span>
 			</div>
+
 		</div>
 		<transition name="fade">
 			<div class="slide-img fixed center-flex" v-show="isShowSlidePop">
@@ -121,14 +122,21 @@
 	</view-popup>
 </template>
 <script type="text/ecmascript-6">
-	import g from "../../global"
-	import ViewPopup from "../viewPop.vue"
+	import g from "../../global";
+	import ViewPopup from "../viewPop.vue";
+	var _params = null;
 	export default{
+		created()
+		{
+			this.init();
+		},
 		data(){
 			return {
 				g: g,
-				isShowSlidePop: false,
 				showUrl: '',
+				opinion: "",
+				isShowSlidePop: false,
+				accountData: {}
 			}
 		},
 		components: {
@@ -138,16 +146,64 @@
 			isShowPopView: {
 				type: Boolean,
 				default: false
+			},
+			currId: {
+				default: 0
+			}
+		},
+		watch: {
+			currId($val)
+			{
+				this.init();
 			}
 		},
 		methods: {
-			onClose_pop(){
-				this.$emit('close');
+			init()
+			{
+				if (this.currId > 0)
+				{
+					this.accountData = g.data.searchUnverifyPool.getDataById(this.currId);
+					window.accountData = this.accountData;
+				}
 			},
-			onClick_closeBtn(){
+			onClick_rejectedBtn()
+			{
+
+				_params = {
+					userId: this.currId,
+					authStatus: 3,
+					authRemark: this.opinion
+				};
+				g.net.call("user/updateUserAuth", _params).then(($data) =>
+				{
+					this.$emit("close", true);
+					g.ui.toast("已拒绝该用户");
+				})
+			},
+			onClick_resolvedBtn()
+			{
+				_params = {
+					userId: this.currId,
+					authStatus: 2,
+					authRemark: this.opinion
+				};
+				g.net.call("user/updateUserAuth", _params).then(($data) =>
+				{
+					this.$emit("close", true);
+					g.ui.toast("已认证该用户");
+				})
+			},
+			onClose_pop()
+			{
+				this.$emit('close', false);
+
+			},
+			onClick_closeBtn()
+			{
 				this.isShowSlidePop = false;
 			},
-			onClick_imgBtn($url){
+			onClick_imgBtn($url)
+			{
 				this.showUrl = $url;
 				this.isShowSlidePop = true;
 

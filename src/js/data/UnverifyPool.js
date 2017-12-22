@@ -91,12 +91,14 @@ function createData($dObj)
 	d.departmentName = "";
 	d.dutyId = 0;
 	d.dutyName = "";
+	d.createTime = "";
 	d.roleId = 0;
 	d.roleName = "";
 	d.positionId = 0;
 	d.positionName = "";
 	d.positionType = "";
-	d.authSatus = 0;
+	d.authStatus = 0;
+
 	d.email = "";
 	d.avatar = "";
 	d.idCardFront = "";
@@ -125,14 +127,15 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("departmentName") && (this.departmentName = $dObj.departmentName);
 	$dObj.hasOwnProperty("dutyId") && (this.dutyId = $dObj.dutyId);
 	$dObj.hasOwnProperty("dutyName") && (this.dutyName = $dObj.dutyName);
+	$dObj.hasOwnProperty("createTime") && (this.createTime = g.timeTool.getFullDate($dObj.createTime),true);
 	$dObj.hasOwnProperty("status") && (this.status = $dObj.status);
 	$dObj.hasOwnProperty("stationId") && (this.positionId = $dObj.stationId);
 	$dObj.hasOwnProperty("stationName") && (this.positionName = $dObj.stationName);
 	$dObj.hasOwnProperty("stationType") && (this.positionType = $dObj.stationType);
 	$dObj.hasOwnProperty("email") && (this.email = $dObj.email);
 	$dObj.hasOwnProperty("avatar") && (this.avatar = $dObj.avatar);
-	$dObj.hasOwnProperty("idcardImagA") && (this.idCardFront = $dObj.idcardImagA);
-	$dObj.hasOwnProperty("idcardImagB") && (this.idCardBack = $dObj.idcardImagB);
-	$dObj.hasOwnProperty("workCardImag") && (this.workCard = $dObj.workCardImag);
+	$dObj.hasOwnProperty("idcardImgA") && (this.idCardFront = $dObj.idcardImgA);
+	$dObj.hasOwnProperty("idcardImgB") && (this.idCardBack = $dObj.idcardImgB);
+	$dObj.hasOwnProperty("workCardImg") && (this.workCard = $dObj.workCardImg);
 	$dObj.hasOwnProperty("remark") && (this.remark = $dObj.remark);
 }

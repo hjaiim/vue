@@ -224,7 +224,7 @@
 					this.remark = "";
 					this.email = "";
 					this.telphone = "";
-					this.avatar = "";
+					this.avatar = "default-icon.png";
 					this.idCardBack = "";
 					this.idCardFront = "";
 					this.workCard = "";
@@ -236,26 +236,6 @@
 				this.code = "";
 				this.initEvents();
 				window.uploadComplete = this.uploadComplete;
-				this.$nextTick(()=>
-				{
-//					document.querySelector("#avatar").contentWindow.addEventListener("UPLOAD_FILE", (e) =>
-//					{
-//						trace(e);
-//						_type = "avatar"
-//					});
-//					document.querySelector("#idCardFront").contentWindow.addEventListener("UPLOAD_FILE", (e) =>
-//					{
-//						_type = "idCardFront"
-//					});
-//					document.querySelector("#idCardBack").contentWindow.addEventListener("UPLOAD_FILE", (e) =>
-//					{
-//						_type = "idCardBack"
-//					});
-//					document.querySelector("#workCard").contentWindow.addEventListener("UPLOAD_FILE", (e) =>
-//					{
-//						_type = "workCard";
-//					});
-				})
 			},
 			initEvents()
 			{
@@ -391,6 +371,7 @@
 
 				g.net.call("user/applyUserAuth", _params).then(($data) =>
 				{
+					this.init();
 					g.ui.toast('申请提交成功！')
 				})
 

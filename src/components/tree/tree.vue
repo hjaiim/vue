@@ -71,9 +71,7 @@
 				]
 			}
 		},
-		watch: {
-
-		},
+		watch: {},
 		methods: {
 			init()
 			{
@@ -101,9 +99,9 @@
 			{
 				this.checkedChildren = $idList;
 				util.splice(this.checkedChildren, this.tmpItem.id);
-				for(var item of this.tmpItem.children)
+				for (var item of this.tmpItem.children)
 				{
-					if(this.checkedChildren.indexOf(item.id) >= 0)
+					if (this.checkedChildren.indexOf(item.id) >= 0)
 					{
 						util.pushIn(this.checkedChildren, this.tmpItem.id);
 					}
@@ -128,7 +126,8 @@
 						}
 						this.checkedAllChildren(item);
 					}
-				};
+				}
+				;
 				this.$forceUpdate();
 			},
 			isValid(item)

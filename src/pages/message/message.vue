@@ -36,8 +36,6 @@
 						<th>发送时间</th>
 						<th><p class="action-menu">操作</p></th>
 					</tr>
-
-
 					</thead>
 					<tbody>
 					<tr v-for="(item,index) in msgList">

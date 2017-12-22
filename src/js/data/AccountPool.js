@@ -93,7 +93,7 @@ function createData($dObj)
 	d.positionName = "";
 	d.positionType = 1;
 	d.positionTypeDesc = "";
-	d.authSatus = 0;
+	d.authStatus = 0;
 	d.status = 0;
 	d.update = updateData.bind(d);
 	d.update($dObj);

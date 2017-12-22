@@ -177,9 +177,9 @@
 				}
 
 			},
-			onClose_pop(){
-				this.$emit('close');
-
+			onClose_pop()
+			{
+				this.$emit('close', false);
 			},
 			onClick_statusItem($status)
 			{
@@ -187,7 +187,7 @@
 			},
 			onClick_closeBtn()
 			{
-				this.$emit("close")
+				this.$emit("close", false);
 			},
 			onClick_submitBtn($status)
 			{
@@ -199,7 +199,7 @@
 				};
 				g.net.call("bo/saveAuditRecord", _params).then(($data) =>
 				{
-					trace("$data", $data)
+					this.$emit("close", true);
 				}, (err) =>
 				{
 					g.func.dealErr(err);

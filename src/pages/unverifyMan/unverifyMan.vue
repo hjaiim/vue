@@ -51,10 +51,11 @@
 								 :showTotalCount="true"
 								 :showElevator="true"
 								 :showFirstAndEnd="true"
-					@change="onChange_pageCom"></common-page>
+								 @change="onChange_pageCom"></common-page>
 				</div>
 			</div>
-			<account-des-pop @close="onClose_accountDesPop" :isShowPopView="isShowDetailPop"></account-des-pop>
+			<account-des-pop @close="onClose_accountDesPop" :currId="currId"
+							 :isShowPopView="isShowDetailPop"></account-des-pop>
 		</div>
 	</com-layout>
 </template>
@@ -126,10 +127,15 @@
 			},
 			onClick_detailBtn($id)
 			{
+				trace(g.data.searchUnverifyPool.list);
 				if (g.data.searchUnverifyPool.hasDetail($id))
 				{
 					this.currId = $id;
 					this.isShowDetailPop = true;
+				}
+				else
+				{
+					trace(11111);
 				}
 			},
 			updateUrl()

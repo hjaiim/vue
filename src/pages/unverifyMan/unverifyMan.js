@@ -44,7 +44,7 @@ export function searchUnverifyList($params)
 function createData($dObj)
 {
 	var d = {};
-	d.name = "jasmine";
+	d.name = "";
 	d.pageSize = 10;
 	d.page = 1;
 	d.update = updateData.bind(d);
