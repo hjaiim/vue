@@ -146,5 +146,10 @@
 	.account-content.md-overlay {
 		position: absolute;
 	}
+	.right-viewPop{
+		.return-btn{
+			display: none;
+		}
+	}
 
 </style>

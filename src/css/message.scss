@@ -12,14 +12,18 @@
 		img {
 		  display: inline-block;
 		  vertical-align: middle;
+		  padding-bottom: 2px;
 		}
 		span {
-		  display: inline-block;
-		  line-height: 30px;
 		  font-size: 12px;
-		  height: 30px;
-		  vertical-align: middle;
 		  padding-left: 14px;
+		}
+		&:after {
+		  content: "";
+		  display: inline-block;
+		  width: 0;
+		  height: 100%;
+		  vertical-align: middle;
 		}
 		&:hover {
 		  border: 1px solid #cccccc;
@@ -48,7 +52,7 @@
 		  .mui-check {
 			position: relative;
 			left: 2px;
-			top:-2px;
+			top: -2px;
 			border: none;
 			border: none;
 			display: inline-block;
