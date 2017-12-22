@@ -16,6 +16,9 @@
 			<form-input type="password" v-model="confirmPwd" placeholder="请再次确认输入"
 						@focus="onFocus_formInput('confirmPwd')" :errmsg="errData.confirmPwd"></form-input>
 			<div class="pointer login-btn ani-time resetPwd-top" @click="onClick_resetBtn">确定</div>
+			<div class="link-keys diff-margin ">已有账号？<span class="ani-time pointer"
+														   @click="onClick_loginBtn">登录>></span>
+			</div>
 		</div>
 	</div>
 </template>
@@ -62,8 +65,8 @@
 					return;
 				}
 				_params = {
-					logon:this.account,
-					mobile:this.phone
+					logon: this.account,
+					mobile: this.phone
 				};
 				g.net.call("user/resetPasswordSendCode", _params).then(() =>
 				{
@@ -80,10 +83,10 @@
 				}
 
 				_params = {
-					logon:this.account,
-					mobile:this.phone,
-					code:this.code,
-					password:sha256(this.password)
+					logon: this.account,
+					mobile: this.phone,
+					code: this.code,
+					password: sha256(this.password)
 				};
 
 				g.net.call('user/resetPwd', _params).then(() =>
@@ -164,7 +167,11 @@
 					_isValid = false;
 				}
 				this.$forceUpdate();
-			}
+			},
+			onClick_loginBtn()
+			{
+				g.url = "/login";
+			},
 
 		}
 	}

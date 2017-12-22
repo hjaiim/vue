@@ -51,7 +51,7 @@
 								 :showTotalCount="true"
 								 :showElevator="true"
 								 :showFirstAndEnd="true"
-					@change="onChange_pageCom"></common-page>
+								 @change="onChange_pageCom"></common-page>
 				</div>
 			</div>
 			<account-des-pop @close="onClose_accountDesPop" :isShowPopView="isShowDetailPop"></account-des-pop>

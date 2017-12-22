@@ -3,22 +3,22 @@
 		<p class="site-name left">联通业务生命周期平台</p>
 		<div class="navBar-right right">
 			<ul>
-				<li class="nav-item">
+				<li class="nav-item pointer" @click="onClick_msgCenter">
 					<a href="#" class="note-txt">通知</a>
-					<i class="note-icon relative" @click="onClick_msgCenter">
+					<i class="note-icon relative">
 						<img :src="g.path.images+'/note-icon.png'" alt="">
 						<span class="badeg absolute">{{g.data.userInfo.msgCount}}</span>
 					</i>
 				</li>
-				<li class="nav-item" @click="onClick_perCenter">
+				<li class="nav-item pointer" @click="onClick_perCenter">
 					<a href="#" class="note-txt">{{g.data.userInfo.username}}</a>
 					<i class="avatar-icon">
 						<img :src="g.data.userInfo.avatar?g.data.userInfo.avatar:g.path.images+'/avatar-icon.png'"
 							 alt="">
 					</i>
 				</li>
-				<li class="nav-item">
-					<p class="note-txt pointer" @click="onClick_logoutBtn">退出</p>
+				<li class="nav-item pointer" @click="onClick_logoutBtn">
+					<p class="note-txt ">退出</p>
 				</li>
 			</ul>
 		</div>

@@ -101,7 +101,7 @@
 			color: #ed5564;
 			width: 100%;
 			left: 0;
-			bottom: 100%;
+			top: 100%;
 		}
 		.g-input {
 			display: block;
@@ -192,9 +192,6 @@
 
 	.sj-psd {
 		margin: 0 auto;
-		.g-input {
-			background: #ffffff;
-		}
 	}
 
 	.resetPwd-wrap {

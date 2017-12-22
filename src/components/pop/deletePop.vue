@@ -81,7 +81,7 @@
 					display: inline-block;
 					vertical-align: middle;
 				}
-				span {
+				i {
 					display: inline-block;
 					padding-left: 14px;
 					vertical-align: middle;

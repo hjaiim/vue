@@ -12,7 +12,6 @@
 						</ul>
 					</div>
 				</div>
-
 				<div class="from-group status-form p-left left">
 					<span class="form-title left">状态</span>
                     <span class="action-box status-type left" @click="onClick_statusItem(1)">

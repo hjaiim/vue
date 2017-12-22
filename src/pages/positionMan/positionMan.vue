@@ -33,7 +33,7 @@
 								<span class="right pointer draw-line ani-time" @click="onClick_deleteBtn(item.id)">删除
 									<delete-pop :isDeletePop="item.isShow"
 												@close="onClose_deletePop">
-										<span>您是否真的要删除该岗位吗？</span>
+										<i>您是否真的要删除该岗位吗？</i>
 									</delete-pop>
 							</span>
 							</p>
@@ -46,7 +46,7 @@
 					<common-page class="right" :total="g.data.searchPositionPool.total" :currPage="currPage"
 								 :showTotalCount="true"
 								 :showElevator="true" :showFirstAndEnd="true"
-					@change="onChange_pageCom"></common-page>
+								 @change="onChange_pageCom"></common-page>
 				</div>
 			</div>
 		</div>
@@ -82,10 +82,10 @@
 			DeletePop,
 			AddPostPop
 		},
-		watch:{
+		watch: {
 			positionList($val)
 			{
-				if($val.length == 0)
+				if ($val.length == 0)
 				{
 					this.updateUrl();
 				}
@@ -94,7 +94,7 @@
 		methods: {
 			routerUpdated()
 			{
-				this.currPage = int(g.vue.getQuery('page',1));
+				this.currPage = int(g.vue.getQuery('page', 1));
 				this.positionList = g.data.searchPositionPool.list;
 			},
 			onClick_addPostBtn()
@@ -149,9 +149,9 @@
 			updateUrl()
 			{
 				g.url = {
-					path:'/positionman',
-					query:{
-						page:this.currPage
+					path: '/positionman',
+					query: {
+						page: this.currPage
 					}
 				}
 			}
