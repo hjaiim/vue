@@ -7,22 +7,19 @@
 			<div class="percenter-inner" v-show="type=='personal'">
 
 				<div class="icon-collect clear">
-
 					<div class="relative upload-head right pointer">
-						<img class="default-img" :src="avatar?avatar:g.path.images+'/default-icon.png'" alt="">
-						<iframe name="fileUpload" src=""></iframe>
-						<form action="http://192.168.12.219:8001/file/upload" method="post"
-							  enctype="multipart/form-data" name="fileForm" target="fileUpload">
-							<input type="file" class="file-input" name="fileInput" @change="onChange_upload">
-							<input type="submit" value="提交"/>
-						</form>
-						<div class="upload-btn absolute">
+						<img class="default-img"
+							 :src="avatar?g.param.ossUrl+avatar.spilt(';')[0]:g.path.images+'/default-icon.png'"
+							 alt="">
+						<div class="
+						 absolute">
 							<p class="load-text">修改头像</p>
-							<!--<upload-btn @change="onChange_upload" resultType="base64" :multiType="false"></upload-btn>-->
+							<iframe name="fileUpload"
+									:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=avatar'"
+									v-if="!avatar"></iframe>
 							<img :src="g.path.images+'/del-head.png'" alt=""
-								 class="del-head absolute pointer">
+								 class="del-head absolute pointer" @click="onClick_delBtn">
 						</div>
-
 					</div>
 				</div>
 			</div>
@@ -98,8 +95,7 @@
 	import InputBar from "../../components/inputBar.vue"
 	import UploadBtn from "../../components/upload.vue";
 	import sha256 from "sha256";
-	var _params = null;
-	var _isValid = true;
+	var _params = null, _isValid = true;
 	export default{
 		created(){
 			this.routerUpdated();
@@ -139,6 +135,11 @@
 				this.remark = this.userInfo.remark;
 				this.readonly = true;
 				this.type = g.vue.getQuery('type', "personal");
+				window.uploadComplete = this.uploadComplete;
+			},
+			uploadComplete($data)
+			{
+				this.avatar = $data.fileName + ";" + $data.size;
 			},
 			onClick_tabItem($id)
 			{
@@ -149,13 +150,22 @@
 					}
 				};
 			},
+			onClick_delBtn()
+			{
+				g.net.call(g.param.delPicAccess, {fileName: this.avatar}).then(() =>
+				{
+					trace(1111);
+				}, (err) =>
+				{
+					this.avatar = "";
+				})
+			},
 			onClick_unbindBtn()
 			{
 				this.readonly = false;
 			},
 			onClick_sendCodeBtn()
 			{
-
 				this.checkPhone();
 				if (!_isValid)
 				{
@@ -254,7 +264,7 @@
 					this.errData.phone = "手机格式有误";
 					_isValid = false;
 				}
-				else if(this.phone == this.userInfo.phone)
+				else if (this.phone == this.userInfo.phone)
 				{
 					this.errData.phone = "手机号码未做改变";
 					_isValid = false;

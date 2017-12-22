@@ -3,21 +3,30 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+	<style>
+		.file-upload {
+			width: 100px;
+			height: 100px;
+		}
+	</style>
 </head>
 <body>
-<form id="form1" action="http://192.168.12.219:8001/file/upload" method="post" enctype="multipart/form-data">
+<form id="form1" method="post" action="http://192.168.12.219:8001/file/upload" enctype="multipart/form-data"
+	  name="form1">
 	<div class="none">
-		<input type="file" name="btn" id="fileBtn" onchange="onChange_fileBtn()">
+		<input type="file" name="btn" id="fileBtn" class="file-upload" onchange="onChange_fileBtn()">
 		<label id="fileName">请选择文件</label>
-		<input type="submit" name="submit" id="submit" style="display: none;">
-		<input type="button" name="cancel" id="cancelBtn" onclick="onClick_cancelBtn()" value="取消"
-			   style="display: none;">
+		<input type="text" style="display: none" name="type" id="type">
+		<input type="text" style="display: none" name="redirectUrl" id="redirectUrl">
+		<input type="submit" name="submit" id="submit" style="visibility: hidden;">
+		<!--<input type="button" name="cancel" id="cancelBtn" onclick="onClick_cancelBtn()" value="取消"-->
+		<!--style="display: none;">-->
 	</div>
 </form>
 </body>
 <script>
 
-	$("#submit").hide();
 	$("#cancelBtn").hide();
 	function onChange_fileBtn(e)
 	{
@@ -26,21 +35,27 @@
 			var file = $("#fileBtn")[0].files[0];
 			var fileName = file.name;
 			var fileSize = file.size;
-//			if (fileName.substr(fileName.length - 4) == ".zip" && fileSize > 0)
-//			{
 			fileSize = Math.floor(fileSize / 1048576 * 100) / 100 + "MB";
 			$("#fileName").html(fileName + "（" + fileSize + "）");
 			$("#fileBtn").hide();
 			$("#packageBtn").hide();
-			$("#submit").show();
 			$("#cancelBtn").show();
-//			}
-//			else
-//			{
-//				$("#fileName").html("无效文件，重新选择");
-//				$("#form1")[0].reset();
-//			}
+			var urlData = queryUrl(window.location.href);
+			$("#redirectUrl").val(urlData.query.redirectUrl);
+			$("#type").val(urlData.query.type);
+//			var parentWindow = parent.window;
+//			$("#form1").action =
+//					"http://192.168.12.219:8001/file/upload?type" + query.type + "&pictype=" + query.pictype +
+//					"&redirectUrl"+ query.redirectUrl;
+
+			$("#submit").click();
 		}
+	}
+
+	function getPicType()
+	{
+		var urlData = queryUrl(window.location.href);
+		return urlData.query.picType;
 	}
 
 	function onClick_cancelBtn()
@@ -60,6 +75,55 @@
 			type: "get"
 		});
 		window.location.href = "http://{$host}/upload";
+	}
+
+	function queryUrl($query)
+	{
+		var res = {};
+		var url = $query.split("?")[0];
+		var port = url.split("://")[0];
+		port != "" && (port += "://");
+		var tempurl = url.substr(port.length);
+		var host = port + tempurl.substring(0, tempurl.indexOf("/"));
+		$query = $query.replace(url, "");
+		var query = {};
+		var bookmark = "";
+		$query = $query.trim().replace(/^(\?|#|&)/, '')
+		if ($query.indexOf('#') > 0)
+		{
+			bookmark = $query.substr($query.indexOf('#') + 1);
+			$query = $query.replace('#' + bookmark, '');
+		}
+
+		if ($query)
+		{
+			$query.split('&').forEach(function (param)
+			{
+				var parts = param.replace(/\+/g, ' ').split('=')
+				var key = decodeURIComponent(parts.shift())
+				var val = parts.length > 0
+						? decodeURIComponent(parts.join('='))
+						: null
+
+				if (query[key] === undefined)
+				{
+					query[key] = val
+				}
+				else if (Array.isArray(query[key]))
+				{
+					query[key].push(val)
+				}
+				else
+				{
+					query[key] = [query[key], val]
+				}
+			})
+		}
+		res.url = url;
+		res.host = host;
+		res.bookmark = bookmark;
+		res.query = query;
+		return res
 	}
 
 </script>

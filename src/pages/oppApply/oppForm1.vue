@@ -152,9 +152,9 @@
 		<div>
 			<div class="personal-form">
 				<span class="personal-title left">上传附件</span>
-                <span class="form-trap up-btn pointer opp-up-btn" @click="onClick_uploadBtn">点击上传
-                    <input type="file" class="upload-file">
-                </span>
+				<iframe name="fileUpload"
+						:src="g.path.base+'upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"
+						id="workCard"></iframe>
 				<span class="complate-upload-file">初步合同<i class="del-file pointer" @click="onClick_delBtn">删除</i></span>
 			</div>
 		</div>

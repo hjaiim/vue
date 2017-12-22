@@ -52,11 +52,12 @@
 	display: none;
 	@include borderRadius(50%);
   }
-  &:hover {
+  //&:hover {
 	.upload-btn {
 	  display: block;
 	}
-  }
+  //}
+
 }
 
 .required {

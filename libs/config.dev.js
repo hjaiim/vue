@@ -68,7 +68,9 @@ var WEB_CONFIG = {
 		compNameReg:/^[\u2E80-\u9FFF]{2,40}/,
 		telphoneReg:/(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,8}/,
 		emailReg:/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
-		codeReg:/\d{4}/
+		codeReg:/\d{4}/,
+		ossUrl:"http://hw-web-test.oss-cn-shanghai.aliyuncs.com/boms/upload/",
+		delPicAccess:"http://192.168.12.219:8001/file/del"
 	}
 };
 

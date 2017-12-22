@@ -5,10 +5,15 @@
 				<div class="icon-collect clear">
 					{{errData.avatar}}
 					<div class="relative upload-head right pointer">
-						<img class="default-img" :src="avatar?avatar:g.path.images+'/default-icon.png'" alt="">
+						<img class="default-img" :src="avatar?g.param.ossUrl+avatar:g.path.images+'/default-icon.png'"
+							 alt="">
 						<div class="upload-btn absolute">
 							<p class="load-text">修改头像</p>
-							<upload-btn @change="onChange_uploadAvatar" resultType="base64"></upload-btn>
+							<iframe name="fileUpload"
+									:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=avatar'"
+									id="avatar"
+							></iframe>
+							<!--v-show="!avatar"-->
 							<img :src="g.path.images+'/del-head.png'" alt=""
 								 class="del-head absolute pointer" @click="onClick_deleteImg('avatar')">
 						</div>
@@ -19,6 +24,7 @@
 				<div class="personal-form diff-personal"><span class="personal-title ">登录用户名</span><span
 						class="personal-content">{{userInfo.username}}
 				</span>
+
 				</div>
 				<div class="personal-form diff-personal"><span class="personal-title">姓名</span><span
 						class="personal-content">{{userInfo.name}}</span></div>
@@ -94,27 +100,29 @@
 				<div class="personal-form" :class="authStatus != 0 ?'disabled':''">
 					<p class="err-msg"> {{errData.idCardBack || errData.idCardFront}}</p>
 					<span class="personal-title left">身份证照</span>
-					<div class="left relative upload-box pointer">
+					<div class="left relative upload-box pointer" >
 						<div class="upload-btn flex">
+							<iframe name="fileUpload"
+									:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=idCardFront'"
+									v-if="!idCardFront" id="idCardFront"></iframe>
 							<img :src="g.path.images+'/upload.png'" alt="">
 							<p class="upload-text">正面</p>
 						</div>
-						<img class="img-url absolute" :src="idCardFront?idCardFront:''" alt="">
+						<img class="img-url absolute" :src="idCardFront?g.param.ossUrl+idCardFront:''" alt="">
 						<span class="del-img pointer" :class="idCardFront?'hover-img':''"
 							  @click="onClick_deleteImg('idCardFront')"></span>
-						<upload-btn class="input-file" @change="onChange_uploadFront"
-									resultType="base64"></upload-btn>
 					</div>
-					<div class="left relative upload-box pointer">
+					<div class="left relative upload-box pointer" >
 						<div class="upload-btn flex">
+							<iframe name="fileUpload"
+									:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=idCardBack'"
+									v-if="!idCardBack" id="idCardBack"></iframe>
 							<img :src="g.path.images+'/upload.png'" alt="">
 							<p class="upload-text">反面</p>
 						</div>
-						<img class="img-url absolute" :src="idCardBack?idCardBack:''" alt="">
+						<img class="img-url absolute" :src="idCardBack?g.param.ossUrl+idCardBack:''" alt="">
 						<span class="del-img pointer" :class="idCardBack?'hover-img':''"
 							  @click="onClick_deleteImg('idCardBack')"></span>
-						<upload-btn class="input-file" @change="onChange_uploadBack"
-									resultType="base64"></upload-btn>
 					</div>
 				</div>
 				<div class="personal-form" :class="authStatus != 0 ?'disabled':''">
@@ -122,6 +130,9 @@
 					<span class="personal-title left">工作证照</span>
 					<div class="left relative upload-box pointer">
 						<div class="upload-btn flex">
+							<iframe name="fileUpload"
+									:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=workCard'"
+									id="workCard"></iframe>
 							<img :src="g.path.images+'/upload.png'" alt="">
 							<p class="upload-text">
 								点击上传工作证照片<br>
@@ -132,11 +143,9 @@
                                 </span>
 							</p>
 						</div>
-						<img class="img-url absolute" :src="workCard?workCard:''" alt="">
+						<img class="img-url absolute" :src="workCard?g.param.ossUrl+workCard:''" alt="">
 						<span class="del-img pointer" :class="workCard?'hover-img':''"
 							  @click="onClick_deleteImg('workCard')"></span>
-						<upload-btn class="input-file" @change="onChange_uploadWork"
-									resultType="base64"></upload-btn>
 					</div>
 				</div>
 				<div class="btn btn-save pointer action-btn ani-time " @click="onClick_submitBtn"
@@ -152,7 +161,7 @@
 	import UploadBtn from "../../components/upload.vue";
 	import InputBar from "../../components/inputBar.vue";
 	import DropList from "../../components/dropList.vue";
-	var _isValid = true, _params = null;
+	var _isValid = true, _params = null, _type = "";
 	export default{
 		created(){
 			this.init();
@@ -226,10 +235,42 @@
 				}
 				this.code = "";
 				this.initEvents();
+				window.uploadComplete = this.uploadComplete;
+				this.$nextTick(()=>
+				{
+//					document.querySelector("#avatar").contentWindow.addEventListener("UPLOAD_FILE", (e) =>
+//					{
+//						trace(e);
+//						_type = "avatar"
+//					});
+//					document.querySelector("#idCardFront").contentWindow.addEventListener("UPLOAD_FILE", (e) =>
+//					{
+//						_type = "idCardFront"
+//					});
+//					document.querySelector("#idCardBack").contentWindow.addEventListener("UPLOAD_FILE", (e) =>
+//					{
+//						_type = "idCardBack"
+//					});
+//					document.querySelector("#workCard").contentWindow.addEventListener("UPLOAD_FILE", (e) =>
+//					{
+//						_type = "workCard";
+//					});
+				})
 			},
 			initEvents()
 			{
 				document.addEventListener('click', this.onClick_doc);
+			},
+			uploadComplete($data)
+			{
+				trace("$data",$data);
+				this[$data.subType] = $data.fileName;
+
+			},
+			onClick_upload($type)
+			{
+				trace("$type", $type)
+				_type = $type;
 			},
 			onClick_doc(e)
 			{
@@ -293,6 +334,7 @@
 					this["isShow" + $type + "List"] = true;
 				}
 			},
+
 			onClick_sendCodeBtn()
 			{
 				this.checkPhoneData();
@@ -312,23 +354,12 @@
 			},
 			onClick_deleteImg($type)
 			{
-				this[$type] = "";
-			},
-			onChange_uploadAvatar($list)
-			{
-				this.avatar = $list[0];
-			},
-			onChange_uploadFront($list)
-			{
-				this.idCardFront = $list[0];
-			},
-			onChange_uploadBack($list)
-			{
-				this.idCardBack = $list[0];
-			},
-			onChange_uploadWork($list)
-			{
-				this.workCard = $list[0];
+				g.net.call(g.param.delPicAccess, {fileName: this[$type]}).then(() =>
+				{
+				}, (err) =>
+				{
+					this[$type] = "";
+				})
 			},
 			onFocus_inputBar($type)
 			{
@@ -438,7 +469,7 @@
 
 				if (this.email && !g.param.emailReg.test(this.email))
 				{
-					this.errData.telphone = "邮箱格式不正确";
+					this.errData.email = "邮箱格式不正确";
 					_isValid = false;
 				}
 				this.$forceUpdate();
@@ -450,4 +481,13 @@
 <style type="text/css" lang="sass" rel="stylesheet/css" scoped>
 	@import "../../css/mixin.scss";
 	@import "../../css/percenter.scss";
+
+	iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100px;
+		height: 100px;
+		opacity: 0;
+	}
 </style>
