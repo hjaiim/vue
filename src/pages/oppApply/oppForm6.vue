@@ -1,6 +1,5 @@
 <template>
 	<div>
-
 		<div>
 			<div class="personal-form">
 				<span class="personal-title left">客户公司名称</span>
@@ -43,7 +42,7 @@
 						   v-model="formData.cusType"
 						   :errmsg="errData.cusType"
 						   @focus="onFocus_inputBar('cusType')"></input-bar>
-				<span class="explain">直客/平台类客户</span>
+				<span class="explain lang-explain">直客/平台类客户</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">业务用途及场景</span>
@@ -101,7 +100,7 @@
 						   type="text" v-model="formData.testNum"
 						   :errmsg="errData.testNum"
 						   @focus="onFocus_inputBar('testNum')"></input-bar>
-				<span class="explain">**地市**个号码</span>
+				<span class="explain lang-explain">**地市**个号码</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">预计业务规模</span>
@@ -109,7 +108,7 @@
 						   type="text" v-model="formData.businessScale"
 						   :errmsg="errData.businessScale"
 						   @focus="onFocus_inputBar('businessScale')"></input-bar>
-				<span class="explain">**万分钟/月</span>
+				<span class="explain lang-explain">**万分钟/月</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">报价</span>
@@ -117,7 +116,7 @@
 						   type="text" v-model="formData.budget"
 						   :errmsg="errData.budget"
 						   @focus="onFocus_inputBar('budget')"></input-bar>
-				<span class="explain">例：本地**元/分钟，异地**元/分钟</span>
+				<span class="explain lang-explain">例：本地**元/分钟，异地**元/分钟</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">其他说明</span>

@@ -6,6 +6,12 @@
   margin-left: 10px;
 }
 
+.lang-explain {
+  display: block;
+  margin-left: 128px;
+  clear: both;
+}
+
 @media screen and(max-width: 1880px) {
   .lang-explain {
 	display: block;
@@ -35,6 +41,11 @@
 	left: 0;
 	top: 0;
 	margin-left: 0;
+  }
+  .iframe-wrap {
+	width: 100%;
+	height: 100%;
+	left: 0;
   }
 }
 

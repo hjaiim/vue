@@ -43,7 +43,7 @@
 						   v-model="formData.cusType"
 						   :errmsg="errData.cusType"
 						   @focus="onFocus_inputBar('cusType')"></input-bar>
-				<span class="explain">直客/平台类客户</span>
+				<span class="explain lang-explain">直客/平台类客户</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">业务用途及场景</span>
@@ -59,7 +59,7 @@
 						   type="text" v-model="formData.accessMethod"
 						   :errmsg="errData.accessMethod"
 						   @focus="onFocus_inputBar('accessMethod')"></input-bar>
-				<span class="explain">接口发起还是Web发起（零售方式）</span>
+				<span class="explain lang-explain">接口发起还是Web发起（零售方式）</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">使用流量类型</span>
@@ -67,7 +67,7 @@
 						   type="text" v-model="formData.flowType"
 						   :errmsg="errData.flowType"
 						   @focus="onFocus_inputBar('flowType')"></input-bar>
-				<span class="explain">单网还是三网，单网是哪个网别，三网各多少额度</span>
+				<span class="explain lang-explain">单网还是三网，单网是哪个网别，三网各多少额度</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">预计入账收入</span>
@@ -89,7 +89,7 @@
 						   type="text" v-model="formData.remark"
 						   :errmsg="errData.remark"
 						   @focus="onFocus_inputBar('remark')"></input-bar>
-				<span class="explain">是否需要配置流量营销活动，如大转盘等</span>
+				<span class="explain lang-explain">是否需要配置流量营销活动，如大转盘等</span>
 			</div>
 		</div>
 		<div>

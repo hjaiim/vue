@@ -42,7 +42,7 @@
 						   v-model="formData.cusType"
 						   :errmsg="errData.cusType"
 						   @focus="onFocus_inputBar('cusType')"></input-bar>
-				<span class="explain">直客/代理类客户</span>
+				<span class="explain lang-explain">直客/代理类客户</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">业务用途及场景</span>
@@ -57,7 +57,7 @@
 						   type="text" v-model="formData.prodType"
 						   :errmsg="errData.prodType"
 						   @focus="onFocus_inputBar('prodType')"></input-bar>
-				<span class="explain">三要素验证/用户在网状态校验/用户在网时长/其他</span>
+				<span class="explain lang-explain">三要素验证/用户在网状态校验/用户在网时长/其他</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">使用数据类别</span>
@@ -65,7 +65,7 @@
 						   type="text" v-model="formData.dataType"
 						   :errmsg="errData.dataType"
 						   @focus="onFocus_inputBar('dataType')"></input-bar>
-				<span class="explain">单网还是三网，单网是哪个网别，三网各多少额度</span>
+				<span class="explain lang-explain">单网还是三网，单网是哪个网别，三网各多少额度</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">预计业务规模</span>
@@ -87,7 +87,7 @@
 						   type="text" v-model="formData.payway"
 						   :errmsg="errData.payway"
 						   @focus="onFocus_inputBar('payway')"></input-bar>
-				<span class="explain">预付费/后付费</span>
+				<span class="explain lang-explain">预付费/后付费</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">其他说明</span>
@@ -127,7 +127,7 @@
 				g: g,
 				errData: {},
 				formData: {},
-				hasIframe:true
+				hasIframe: true
 			}
 		},
 		components: {
@@ -182,7 +182,10 @@
 			uploadComplete($data)
 			{
 				this.hasIframe = false;
-				var attach = {size: $data.size, name: $data.fileName};
+				var attach = {
+					size: $data.size,
+					name: $data.fileName
+				};
 				this.attachList.push(attach);
 				setTimeout(()=>
 				{

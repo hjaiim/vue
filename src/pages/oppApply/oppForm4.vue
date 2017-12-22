@@ -42,7 +42,7 @@
 						   v-model="formData.cusType"
 						   :errmsg="errData.cusType"
 						   @focus="onFocus_inputBar('cusType')"></input-bar>
-				<span class="explain">直客/平台类客户</span>
+				<span class="explain lang-explain">直客/平台类客户</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">业务用途及场景</span>
@@ -64,7 +64,7 @@
 						   type="text" v-model="formData.budget"
 						   :errmsg="errData.budget"
 						   @focus="onFocus_inputBar('budget')"></input-bar>
-				<span class="explain">续联使用费和CTD分开报价（续联使用费：5元/次；CTD指导报价：本地0.1元/分钟，异地0.15元/分钟）</span>
+				<span class="explain lang-explain">续联使用费和CTD分开报价（续联使用费：5元/次；CTD指导报价：本地0.1元/分钟，异地0.15元/分钟）</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">其他说明</span>
