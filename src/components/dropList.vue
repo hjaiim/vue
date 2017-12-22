@@ -51,7 +51,8 @@
 			}
 		}
 	}
-	.order-workList{
+
+	.order-workList {
 		max-height: 123px;
 		overflow: auto;
 	}
