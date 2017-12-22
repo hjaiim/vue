@@ -226,7 +226,7 @@ input {
   display: inline-block;
   width: 18px;
   height: 18px;
-  margin-left: 26px;
+  margin-left: 0px;
   vertical-align: middle;
   &:after, &:before {
 	content: '';
@@ -245,10 +245,10 @@ input {
   &:before {
 	border: 1px solid #cccccc;
 	background-color: #ffffff;
-	-moz-transition: all 0.3s ease-in-out;
-	-o-transition: all 0.3s ease-in-out;
-	-webkit-transition: all 0.3s ease-in-out;
-	transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
   }
   &:after {
 	color: #ffffff;
@@ -489,8 +489,8 @@ input {
 		&:last-child {
 		  min-width: 120px;
 		}
-		&:first-child {
-		  padding: 0;
+		.draw-tick {
+		  margin-left: 30px;
 		}
 	  }
 	  td {
@@ -503,8 +503,8 @@ input {
 		&:last-child {
 		  min-width: 120px;
 		}
-		&:first-child {
-		  padding: 0;
+		.draw-tick {
+		  margin-left: 30px;
 		}
 	  }
 
@@ -554,7 +554,7 @@ input {
   height: 32px;
   margin-right: 10px;
   vertical-align: middle;
-  i {
+  .draw-round {
 	display: inline-block;
 	width: 14px;
 	height: 14px;

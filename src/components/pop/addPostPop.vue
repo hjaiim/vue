@@ -12,12 +12,12 @@
 					</p>
 					<p class="from-group">
 						<span class="form-title">类型</span>
-                        <span class="action-box post-type" v-show="currId ==  0" @click="onClick_selectPosition(1)">
-                            <i class="pointer" :class="type== 1?'action':''"></i>
+                        <span class=" action-box post-type" v-show="currId ==  0" @click="onClick_selectPosition(1)">
+                            <i class="pointer draw-round" :class="type== 1?'action':''"></i>
                             <span>商机提交岗</span>
                         </span>
                         <span class="action-box post-type" v-show="currId ==  0" @click="onClick_selectPosition(2)">
-                            <i class="pointer" :class="type== 2?'action':''"></i>
+                            <i class="pointer draw-round" :class="type== 2?'action':''"></i>
                             <span>商机审核岗</span>
                         </span>
 						<span class="form-trap form-type" v-show="currId !=  0">{{positionData.typeDesc}}</span>

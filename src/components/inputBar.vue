@@ -104,7 +104,7 @@
 			color: #ed5564;
 			width: 100%;
 			left: 0;
-			bottom: 100%;
+			top: 100%;
 		}
 		.input-con {
 			width: 100%;

@@ -8,7 +8,7 @@
 				</span>
 			</div>
 			<div class="table-content role-table">
-				<table class="inner-table">
+				<table class="inner-table" ref="roleCon">
 					<thead>
 					<tr>
 						<th><span class="rank-num">序号</span></th>
@@ -24,7 +24,7 @@
 						<td><span class="rank-num">{{index+1}}</span></td>
 						<!--:class="[index==2?'is-picked':'', index==5?'wait-pick':'']"-->
 						<td><span>{{item.name}}</span></td>
-						<td>{{item.desc}}</td>
+						<td><p class="role-desc" :style="{width:tdWidth*0.3+'px'}">{{item.desc}}</p></td>
 						<td>{{item.setter}}</td>
 						<td>{{item.distribute}}</td>
 						<td>
@@ -70,7 +70,8 @@
 				g: g,
 				roleList: [],
 				currId: 0,
-				isShowRolePop: false
+				isShowRolePop: false,
+				tdWidth: 0
 			}
 		},
 		components: {
@@ -93,6 +94,9 @@
 			routerUpdated()
 			{
 				this.roleList = g.data.searchRolePool.list;
+				this.$nextTick(() => {
+					this.tdWidth = this.$refs['roleCon'].clientWidth;
+				})
 			},
 			onClick_addRoleBtn()
 			{

@@ -41,11 +41,11 @@
 			<div class="personal-form">
 				<span class="personal-title left">申请的95业务类别</span>
                  <span class="action-box status-type left" @click="onClick_prodType('客户自带95码号落地')">
-                        <i class="pointer" :class="formData.prodType=='客户自带95码号落地'?'action':''"></i>
+                        <i class="draw-round pointer" :class="formData.prodType=='客户自带95码号落地'?'action':''"></i>
                         <span>客户自带95码号落地</span>
                  </span>
                 <span class="action-box status-type left" @click="onClick_prodType('客户自带95码号落地')">
-                    <i class="pointer" :class="formData.prodType=='客户自带95码号落地'?'action':''"></i>
+                    <i class="draw-round pointer" :class="formData.prodType=='客户自带95码号落地'?'action':''"></i>
                     <span>使用联通已有的95号</span>
                 </span>
 				<input-bar class="personal-content pensonal-input left large-input" placeholder="" type="text"
@@ -65,11 +65,11 @@
 			<div class="personal-form">
 				<span class="personal-title left">接入方式</span>
                  <span class="action-box status-type left" @click="onClick_accessType('API')">
-                        <i class="pointer" :class="formData.accessType == 'API'?'action':''"></i>
+                        <i class="draw-round pointer" :class="formData.accessType == 'API'?'action':''"></i>
                         <span>API</span>
                  </span>
                 <span class="action-box status-type left" @click="onClick_accessType('SIP')">
-                    <i class="pointer" :class="formData.accessType == 'SIP'?'action':''"></i>
+                    <i class="draw-round pointer" :class="formData.accessType == 'SIP'?'action':''"></i>
                     <span>SIP</span>
                 </span>
 				<span class="explain">API/SIP（请选择一种）</span>
@@ -87,11 +87,11 @@
 			<div class="personal-form">
 				<span class="personal-title left">呼入呼出</span>
                  <span class="action-box status-type left" @click="onClick_checkCallInOut('呼入')">
-                        <i class="pointer" :class="formData.callInList.indexOf('呼入')>=0?'action':''"></i>
+                        <i class="draw-round pointer" :class="formData.callInList.indexOf('呼入')>=0?'action':''"></i>
                         <span>是</span>
                  </span>
                 <span class="action-box status-type left" @click="onClick_checkCallInOut('呼出')">
-                    <i class="pointer" :class="formData.callInList.indexOf('呼出')>=0?'action':''?'action':''"></i>
+                    <i class="draw-round pointer" :class="formData.callInList.indexOf('呼出')>=0?'action':''?'action':''"></i>
                     <span>否</span>
                 </span>
 				<span class="explain">呼入呼出</span>

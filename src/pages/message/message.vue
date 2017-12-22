@@ -8,25 +8,15 @@
 						<span>批量删除</span>
 					</i>
 					<div class="action-box left" @click="onClick_msgType(1)">
-						<!--<i class="pointer" :class="typeList.indexOf(1)>=0?'action':''"></i>-->
-						<i class="check-tick">
-							<input type="checkbox" class="mui-check">
-						</i>
+						<i class="draw-tick relative pointer" :class="typeList.indexOf(1)>=0?'action':''"></i>
 						<span>已读</span>
+
 					</div>
 
-					<div class="action-box left" @click="onClick_msgType(1)">
-						<!--<i class="pointer" :class="typeList.indexOf(1)>=0?'action':''"></i>-->
-						<i class="check-tick">
-							<input type="checkbox" class="mui-check">
-						</i>
+					<div class="action-box left" @click="onClick_msgType(0)">
+						<i class="draw-tick relative pointer" :class="typeList.indexOf(0)>=0?'action':''"></i>
 						<span>未读</span>
 					</div>
-					<!--<div class="action-box left" @click="onClick_msgType(0)">-->
-					<!--<i class="pointer" :class="typeList.indexOf(0)>=0?'action':''">-->
-					<!--</i>-->
-					<!--<span>未读</span>-->
-					<!--</div>-->
 					<div class="text-msg right">
 						<p class="msg-txt">开启手机短信提醒</p>
 						<div class="switch-con pointer" @click="onClick_switch">

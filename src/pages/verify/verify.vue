@@ -38,7 +38,7 @@
 						<drop-list :dropList="companyList" :isShowDropList="isShowCompanyList"
 								   @change="onClick_company" ref="company"></drop-list>
 					</div>
-					<span class="required">*</span>
+					<span class="required" v-show="authStatus == 0">*</span>
 				</div>
 				<div class="personal-form diff-personal">
 					<p class="err-msg"> {{errData.currDepartment}}</p>
@@ -51,7 +51,7 @@
 						<drop-list :dropList="departmentList" :isShowDropList="isShowDepartmentList"
 								   @change="onClick_department" ref="depart"></drop-list>
 					</div>
-					<span class="required">*</span>
+					<span class="required" v-show="authStatus == 0">*</span>
 				</div>
 				<div class="personal-form diff-personal">
 					<p class="err-msg"> {{errData.currDuty}}</p>
@@ -64,14 +64,14 @@
 						<drop-list :dropList="dutyList" :isShowDropList="isShowDutyList"
 								   @change="onClick_duty" ref="duty"></drop-list>
 					</div>
-					<span class="required">*</span>
+					<span class="required" v-show="authStatus == 0">*</span>
 				</div>
 				<div class="personal-form">
 					<span class="personal-title left">手机</span>
 					<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
 							   v-model="phone" @focus="onFocus_inputBar('phone')" :errmsg="errData.phone"
 							   :readonly="authStatus != 0"></input-bar>
-					<span class="required">*</span>
+					<span class="required" v-show="authStatus == 0">*</span>
 				</div>
 				<div class="personal-form" v-if="authStatus == 0">
 					<span class="personal-title left">验证码</span>

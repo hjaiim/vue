@@ -22,7 +22,7 @@
 						<ul class="role-list clear">
 							<li class="left" v-for="(item,index) in roleList">
 								<div class="action-box role-item" @click="onClick_roleItem(item.id)">
-									<i class="pointer" :class="roleId == item.id?'action':''"></i>
+									<i class="draw-round pointer" :class="roleId == item.id?'action':''"></i>
 									<span>{{item.name}}</span>
 								</div>
 							</li>

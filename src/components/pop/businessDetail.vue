@@ -49,12 +49,12 @@
 								<span class="form-title left">我的审核</span>
 								<span class="action-box status-type left" @click="onClick_statusItem(1)"
 									  v-if="businessData.hasApproved">
-									<i class="pointer" :class="status == 1?'action':''"></i>
+									<i class="pointer draw-round" :class="status == 1?'action':''"></i>
 									<span>通过</span>
 								</span>
 								<span class="action-box status-type left" @click="onClick_statusItem(2)"
 									  v-if="businessData.hasRejected">
-									<i class="pointer" :class="status == 2?'action':''"></i>
+									<i class="draw-round pointer" :class="status == 2?'action':''"></i>
 									<span>退回</span>
 								</span>
 							</p>
