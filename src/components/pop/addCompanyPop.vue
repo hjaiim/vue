@@ -2,35 +2,39 @@
 	<view-popup @close="onClose_pop"
 				:isShowPopView="isShowPopView" class="mod-company-pop">
 		<div class="mod-company-container">
-			<p class="mod-tit">新建公司信息</p>
+			<p class="mod-tit">{{currId>0?'编辑公司信息':'新建公司信息'}}</p>
 			<div class="mod-company-content">
 				<div class="company-message">
 					<p class="from-group">
 						<span class="form-title">公司名称</span>
-						<input-bar class="form-control company-input" placeholder="" type="text" :readonly="currId != 0"
-								   v-model="name" :errmsg="errData.name"></input-bar>
+						<input-bar class="form-control company-input" placeholder="" type="text" :readonly="currentId != 0"
+								   v-model="name" :errmsg="errData.name" @focus="onFocus_inputBar('name')"></input-bar>
 						<span class="requied">*</span>
 					</p>
 					<p class="from-group">
 						<span class="form-title">公司电话</span>
-						<input-bar class="form-control" placeholder="" type="text" :readonly="currId != 0"
-								   v-model="telphone" :errmsg="errData.telphone"></input-bar>
+						<input-bar class="form-control" placeholder="" type="text" :readonly="currentId != 0"
+								   v-model="telphone" :errmsg="errData.telphone"
+								   @focus="onFocus_inputBar('telphone')"></input-bar>
 						<span class="requied">*</span>
 					</p>
 					<p class="from-group">
 						<span class="form-title">公司负责人</span>
-						<input-bar class="form-control" placeholder="" type="text" :readonly="currId != 0"
-								   v-model="leader" :errmsg="errData.leader"></input-bar>
+						<input-bar class="form-control" placeholder="" type="text" :readonly="currentId != 0"
+								   v-model="leader" :errmsg="errData.leader"
+								   @focus="onFocus_inputBar('leader')"></input-bar>
 						<span class="requied">*</span>
 					</p>
 					<p class="from-group">
 						<span class="form-title">负责人电话</span>
-						<input-bar class="form-control" placeholder="" type="text" :readonly="currId != 0"
-								   v-model="phone" :errmsg="errData.phone"></input-bar>
+						<input-bar class="form-control" placeholder="" type="text" :readonly="currentId != 0"
+								   v-model="phone" :errmsg="errData.phone"
+								   @focus="onFocus_inputBar('phone')"></input-bar>
 						<span class="requied">*</span>
 					</p>
-					<div class="btn-wrap clear" v-if="currId == 0">
-						<div class="pop-btn right pointer" @click="onClick_saveCompany">保存</div>
+					<div class="btn-wrap clear">
+						<div class="pop-btn right pointer" @click="onClick_saveCompany">{{currentId > 0?'编辑':'保存'}}
+						</div>
 					</div>
 				</div>
 				<div class="message-wrap">
@@ -40,7 +44,7 @@
 								 @click="onClick_deleteDepart(item)">
 							<p class="from-group">
 								<span class="form-title">部门名称</span>
-                        <span v-show="currId != 0">
+                        <span v-show="currentId != 0">
 							<input-bar class="form-control" placeholder="" type="text"
 									   v-model="item.name"></input-bar>
                             <img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer"
@@ -50,16 +54,24 @@
 							</p>
 							<p class="from-group" v-for="duty in item.children">
 								<span class="form-title">职务名称</span>
-						<span v-show="currId != 0">
+							<span v-show="currentId != 0">
 							<input-bar class="form-control" placeholder="" type="text"
 									   v-model="duty.name"></input-bar>
 
                             <span class="pointer btn-save  ani-time">保存</span>
-							<img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer"
+								<img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer"
 								 @click="onClick_editDuty(duty)">
-							<img :src="g.path.images+'/del-depart.png'" alt="" class="edit-icon pointer"
+								<img :src="g.path.images+'/del-depart.png'" alt="" class="edit-icon pointer"
 								 @click="onClick_deleteDuty(duty)">
-						</span>
+							</span>
+							</p>
+							<p class="from-group">
+								<span class="form-title">职务名称</span>
+								<span>
+								<input-bar class="form-control" placeholder="" type="text"
+										   v-model="dutyName"></input-bar>
+                            	<span class="pointer btn-save  ani-time" @click="onClick_saveDuty">保存</span>
+								</span>
 							</p>
 						</div>
 						<div class="company-message">
@@ -71,22 +83,9 @@
                         	<span class="pointer btn-save" @click="onClick_saveDepart">保存</span>
 						</span>
 							</p>
-							<p class="from-group">
-								<span class="form-title">职务名称</span>
-						<span>
-							<input-bar class="form-control" placeholder="" type="text"
-									   v-model="dutyName"></input-bar>
-                            <span class="pointer btn-save  ani-time" @click="onClick_saveDuty">保存</span>
-						</span>
-							</p>
 
 						</div>
 
-					</div>
-				</div>
-				<div class="company-action clear">
-					<div class="btn-submit pop-btn top-btn right pointer action-btn ani-time"
-						 @click="onClick_submitBtn">提交
 					</div>
 				</div>
 			</div>
@@ -108,6 +107,7 @@
 			return {
 				g: g,
 				name: "",
+				currentId: "",
 				telphone: "",
 				leader: "",
 				phone: "",
@@ -143,7 +143,7 @@
 			init()
 			{
 				this.authStatus = g.data.userInfo.authStatus;
-				_companyId = this.currId;
+				this.currentId = this.currId;
 				if (this.currId)
 				{
 					this.companyData = g.data.searchCompanyPool.getDataById(this.currId);
@@ -160,10 +160,16 @@
 					this.leader = "";
 					this.phone = "";
 					this.departmentList = [];
+					this.errData = {};
 				}
 			},
 			onClose_pop(){
 				this.$emit('close', false);
+			},
+			onFocus_inputBar($type)
+			{
+				this.errData[$type] = "";
+				this.$forceUpdate();
 			},
 			onClick_saveDepart()
 			{
@@ -174,7 +180,7 @@
 				this.onClick_editDuty({
 					id: 0,
 					parentId: _departId,
-					companyId: _companyId
+					companyId: this.currentId
 				});
 			},
 			onClick_deleteDepart($depart)
@@ -190,7 +196,7 @@
 				_params = {
 					departmentId: $depart.id,
 					departmentName: this.departName,
-					companyId: _companyId
+					companyId: this.currentId
 				};
 				g.net.call("organizeOpt/editDepartment", _params).then(($data) =>
 				{
@@ -252,8 +258,7 @@
 				};
 				g.net.call("organizeOpt/editCompany", _params).then(($data) =>
 				{
-					this.init();
-					_companyId = $data.comId;
+					this.currentId = $data.comId;
 					if (this.currId != 0)
 					{
 						g.data.searchCompanyPool.getDataById(this.currId).update($data);
@@ -294,11 +299,6 @@
 				if (!this.telphone)
 				{
 					this.errData.telphone = "请输入公司电话";
-					_isValid = false;
-				}
-				else if (!g.param.phoneReg.test(this.phone) && !g.param.telphoneReg.test(this.phone))
-				{
-					this.errData.telphone = "号码格式不正确";
 					_isValid = false;
 				}
 				this.$forceUpdate();
