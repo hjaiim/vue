@@ -91,6 +91,7 @@ function createData($dObj)
 	d.businessId = 0;
 	d.title = "";
 	d.source = "";
+	d.sourceDesc = "";
 	d.createTime = "";
 	d.desc = "";
 	d.readStatus = 0;
@@ -108,8 +109,9 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("relationId") && (this.businessId = $dObj.relationId);
 	$dObj.hasOwnProperty("msgTitle") && (this.title = $dObj.msgTitle);
 	$dObj.hasOwnProperty("msgSource") && (this.source = $dObj.msgSource);
+	$dObj.hasOwnProperty("msgSourceDesc") && (this.sourceDesc = $dObj.msgSourceDesc);
 	$dObj.hasOwnProperty("msgContent") && (this.desc = $dObj.msgContent);
-	$dObj.hasOwnProperty("sendTime") && (this.createTime = $dObj.sendTime);
+	$dObj.hasOwnProperty("sendTime") && (this.createTime = g.timeTool.getFullDate($dObj.sendTime),true);
 	$dObj.hasOwnProperty("readStatus") && (this.readStatus = $dObj.readStatus);
 	$dObj.hasOwnProperty("isShow") && (this.isShow = $dObj.isShow);
 };

@@ -2,7 +2,7 @@
 	<view-popup @close="onClose_pop"
 				:isShowPopView="isShowPopView">
 		<div class="detail-container">
-			<p class="note-tit">新增岗位</p>
+			<p class="note-tit">{{currId >0 ?'编辑岗位':'新增岗位'}}</p>
 			<div class="note-content">
 				<div class="company-message no-border add-post">
 					<p class="from-group">

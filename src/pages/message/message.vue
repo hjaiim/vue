@@ -40,12 +40,14 @@
 						<th>发送时间</th>
 						<th><p class="action-menu">操作</p></th>
 					</tr>
+
+
 					</thead>
 					<tbody>
 					<tr v-for="(item,index) in msgList">
 						<td><i class="draw-tick relative pointer"></i><span class="rank-num">{{index+1}}</span></td>
 						<td><span :class="[index==2?'is-picked':'', index==5?'wait-pick':'']">{{item.title}}</span></td>
-						<td>{{item.source}}</td>
+						<td>{{item.sourceDesc}}</td>
 						<td>{{item.createTime}}</td>
 						<td>
 							<p class="action-menu clear">
@@ -137,7 +139,7 @@
 				if ($result)
 				{
 					_params = {msgIds: _delId};
-					g.net.call("message/delMessage", ($data) =>
+					g.net.call("message/delMessage", {msgIds: _delId}).then(($data) =>
 					{
 						g.data.searchMessagePool.remove(_delId);
 						g.ui.toast("消息删除成功！");
@@ -168,8 +170,11 @@
 			},
 			onClick_detailBtn($id)
 			{
-				this.currId = $id;
-				this.isShowDetailPop = true;
+				g.net.call('message/readMessage', {msgId: $id}).then(($data) =>
+				{
+					this.currId = $id;
+					this.isShowDetailPop = true;
+				})
 			},
 			onClose_detailPop()
 			{

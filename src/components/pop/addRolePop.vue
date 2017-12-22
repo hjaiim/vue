@@ -2,7 +2,7 @@
 	<view-popup @close="onClose_pop"
 				:isShowPopView="isShowPopView">
 		<div class="add-role-container">
-			<p class="mod-tit">设置新角色</p>
+			<p class="mod-tit">{{currId>0?'编辑角色':'设置新角色'}}</p>
 			<div class="mod-company-content">
 				<div class="company-message no-border">
 					<p class="from-group">
@@ -83,7 +83,9 @@
 		methods: {
 			init()
 			{
-				this.listData = g.data.staticRightPool.list;
+				var listData = __merge([], g.data.staticRightPool.list);
+				listData.splice(0, 1);
+				this.listData = listData;
 				if (this.currId)
 				{
 					var roleData = g.data.searchRolePool.getDataById(this.currId);

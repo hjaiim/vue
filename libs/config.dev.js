@@ -64,13 +64,13 @@ var WEB_CONFIG = {
 		phoneReg: /^1(3|4|5|7|8)\d{9}$/,
 		accountReg: /^[a-z0-9]{6,16}$/,
 		passwordReg: /^[a-z0-9]{6,16}$/,
-		nameReg:/^[\u2E80-\u9FFF]{2,10}/,
-		compNameReg:/^[\u2E80-\u9FFF]{2,40}/,
-		telphoneReg:/(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,8}/,
-		emailReg:/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
-		codeReg:/\d{4}/,
-		ossUrl:"http://hw-web-test.oss-cn-shanghai.aliyuncs.com/boms/upload/",
-		delPicAccess:"http://192.168.12.219:8001/file/del"
+		nameReg: /^[\u2E80-\u9FFF]{2,10}/,
+		compNameReg: /^[\u2E80-\u9FFF]{2,40}/,
+		telphoneReg: /(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,8}/,
+		emailReg: /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
+		codeReg: /\d{4}/,
+		ossUrl: "http://hw-web-test.oss-cn-shanghai.aliyuncs.com/boms/upload/",
+		delPicAccess: "http://192.168.12.219:8001/file/del"
 	}
 };
 

@@ -123,7 +123,6 @@
 					{
 						g.func.dealErr(err);
 					})
-
 				}
 			},
 			onClose_rolePop($result)
