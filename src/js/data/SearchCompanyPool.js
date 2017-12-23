@@ -1,14 +1,17 @@
 /**
  * Created by Administrator on 2017/12/11.
  */
-
+var _listData = [];
+var _hash = {};
+var _totalNum = 0;
+var _totalPages = 1;
 export default class SearchCompanyPool {
 	constructor()
 	{
-		this.listData = [];
-		this.hash = {};
-		this.totalNum = 0;
-		this.totalPages = 1;
+		_listData = [];
+		_hash = {};
+		_totalNum = 0;
+		_totalPages = 1;
 	}
 
 	update($dObj)
@@ -17,8 +20,8 @@ export default class SearchCompanyPool {
 		{
 			return;
 		}
-		$dObj.hasOwnProperty("total") && (this.totalNum = $dObj.total);
-		$dObj.hasOwnProperty("totalPage") && (this.totalPages = $dObj.totalPage);
+		$dObj.hasOwnProperty("total") && (_totalNum = $dObj.total);
+		$dObj.hasOwnProperty("totalPage") && (_totalPages = $dObj.totalPage);
 		for (var item of $dObj.data)
 		{
 			this.add(item);
@@ -29,80 +32,80 @@ export default class SearchCompanyPool {
 	add($item)
 	{
 		var itemData = createData($item);
-		if (!this.hash[itemData.id])
+		if (!_hash[itemData.id])
 		{
-			this.hash[itemData.id] = itemData;
-			this.listData.push(itemData);
+			_hash[itemData.id] = itemData;
+			_listData.push(itemData);
 		}
 
 	}
 
 	remove($id)
 	{
-		if (this.hash[$id])
+		if (_hash[$id])
 		{
-			var index = this.listData.indexOf(this.hash[$id]);
+			var index = _listData.indexOf(_hash[$id]);
 			if (index >= 0)
 			{
-				this.listData.splice(index, 1);
+				_listData.splice(index, 1);
 			}
 		}
 	}
 
 	addDepartment($id, $department)
 	{
-		if (this.hash[$id])
+		if (_hash[$id])
 		{
-			if (this.hash[$id].children.indexOf($department) < 0)
+			if (_hash[$id].children.indexOf($department) < 0)
 			{
-				this.hash[$id].children.push($department);
+				_hash[$id].children.push($department);
 			}
 		}
 	}
 
 	removeDepartment($id, $department)
 	{
-		if (this.hash[$id])
+		if (_hash[$id])
 		{
-			var index = this.hash[$id].children.indexOf($department);
+			var index = _hash[$id].children.indexOf($department);
 			if (index >= 0)
 			{
-				this.hash[$id].children.splice(index, 1);
+				_hash[$id].children.splice(index, 1);
 			}
 		}
 	}
 
 	getDataById($id)
 	{
-		return this.hash[$id]
+		return _hash[$id]
 	}
 
 	hasDetail($id)
 	{
-		return this.hash[$id] && this.hash[$id].leader;
+		return _hash[$id] && _hash[$id].children.length > 0;
 	}
 
 	get list()
 	{
-		return this.listData;
+		return _listData;
 	}
 
 	get total()
 	{
-		return this.totalNum;
+		return _totalNum;
 	}
 
 	get totalPage()
 	{
-		return this.totalPages;
+		return _totalPages;
 	}
 
 	removeAll()
 	{
-		this.listData = [];
-		this.hash = {};
-		this.totalNum = 0;
-		this.totalPages = 1;
+		_listData = [];
+		_hash = {};
+		_totalNum = 0;
+		_totalPages = 1;
 	}
 }
 

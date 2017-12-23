@@ -34,7 +34,9 @@
 						<span class="requied" v-show="currentId == 0">*</span>
 					</p>
 					<div class="btn-wrap clear">
-						<div class="pop-btn right pointer" @click="onClick_saveCompany">{{currentId > 0?'编辑':'保存'}}
+						<div class="pop-btn right pointer" @click="onClick_saveCompany" v-if="currentId == 0">保存
+						</div>
+						<div class="pop-btn right pointer" @click="onClick_editCompany" v-if="currentId != 0">编辑
 						</div>
 					</div>
 				</div>
@@ -46,22 +48,23 @@
 							<p class="from-group">
 								<span class="form-title">部门名称</span>
                         <span v-show="currentId != 0">
-							<input-bar class="form-control" placeholder="" type="text"
+							<input-bar class="form-control" placeholder="" type="text" :readonly="!item.isEdit"
 									   v-model="item.name"></input-bar>
                             <img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer"
-								 @click="onClick_editDepart(item)">
-                        	<span class="pointer btn-save">保存</span>
+								 @click="onClick_editDepart(item)" v-if="!item.isEdit">
+							<span class="pointer btn-save" @click="onClick_saveDepart(item)"
+								  v-if="item.isEdit">保存</span>
 						</span>
 							</p>
 							<p class="from-group" v-for="duty in item.children">
 								<span class="form-title">职务名称</span>
 							<span v-show="currentId != 0">
-							<input-bar class="form-control" placeholder="" type="text"
-									   v-model="duty.name"></input-bar>
-
-                            <span class="pointer btn-save  ani-time">保存</span>
+								<input-bar class="form-control" placeholder="" type="text"
+										   v-model="duty.name" :readonly="!duty.isEdit"></input-bar>
 								<img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer"
-									 @click="onClick_editDuty(duty)">
+									 @click="onClick_editDuty(duty)" v-if="!duty.isEdit">
+								<span class="pointer btn-save  ani-time" @click="onClick_saveDuty(duty,'duty')"
+									  v-if="duty.isEdit">保存</span>
 								<img :src="g.path.images+'/del-depart.png'" alt="" class="edit-icon pointer"
 									 @click="onClick_deleteDuty(duty)">
 							</span>
@@ -70,8 +73,9 @@
 								<span class="form-title">职务名称</span>
 								<span>
 								<input-bar class="form-control" placeholder="" type="text"
-										   v-model="dutyName"></input-bar>
-                            	<span class="pointer btn-save  ani-time" @click="onClick_saveDuty">保存</span>
+										   v-model="item.dutyName"></input-bar>
+                            	<span class="pointer btn-save  ani-time" @click="onClick_saveDuty(item,'depart')">保存
+								</span>
 								</span>
 							</p>
 						</div>
@@ -81,8 +85,9 @@
                         <span>
 							<input-bar class="form-control" placeholder="" type="text"
 									   v-model="departName"></input-bar>
-                        	<span class="pointer btn-save" @click="onClick_saveDepart">保存</span>
+                        	<span class="pointer btn-save" @click="onClick_saveDepart()">保存</span>
 						</span>
+
 							</p>
 
 						</div>
@@ -164,7 +169,9 @@
 					this.errData = {};
 				}
 			},
-			onClose_pop(){
+			onClose_pop()
+			{
+				this.init();
 				this.$emit('close', false);
 			},
 			onFocus_inputBar($type)
@@ -172,17 +179,68 @@
 				this.errData[$type] = "";
 				this.$forceUpdate();
 			},
-			onClick_saveDepart()
+			onClick_saveDepart($depart)
 			{
-				this.onClick_editDepart({id: 0});
+				if (!$depart)
+				{
+					$depart = {
+						id: 0,
+						name: this.departName,
+						parentId: this.currId
+					}
+				}
+
+				_params = {
+					departmentId: $depart.id,
+					departmentName: $depart.name,
+					companyId: $depart.parentId
+				};
+				g.net.call("organizeOpt/editDepartment", _params).then(($data) =>
+				{
+					_departId = $data.departmentId;
+					if ($depart.id == 0)
+					{
+						g.data.departmentPool.add($data);
+						this.departName = "";
+					}
+					else
+					{
+						g.data.departmentPool.getDataById($depart.id).update($data);
+					}
+					g.data.departmentPool.getDataById($data.departmentId).update({isEdit: false});
+
+				})
 			},
-			onClick_saveDuty()
+			onClick_saveDuty($duty, $type)
 			{
-				this.onClick_editDuty({
-					id: 0,
-					parentId: _departId,
-					companyId: this.currentId
-				});
+				if ($type != "duty")
+				{
+					$duty = {
+						id: 0,
+						name: $duty.dutyName,
+						parentId: $duty.id,
+						companyId: $duty.parentId
+					}
+				}
+				_params = {
+					dutyId: $duty.id,
+					dutyName: $duty.name,
+					departmentId: $duty.parentId,
+					companyId: $duty.companyId
+				};
+				g.net.call("organizeOpt/editDuty", _params).then(($data) =>
+				{
+					if ($duty.id == 0)
+					{
+						g.data.dutyPool.add($data);
+						g.data.departmentPool.getDataById($data.departmentId).update({dutyName: ""});
+					}
+					else
+					{
+						g.data.dutyPool.getDataById($duty.id).update($data);
+					}
+					g.data.dutyPool.getDataById($data.dutyId).update({isEdit: false});
+				})
 			},
 			onClick_deleteDepart($depart)
 			{
@@ -194,43 +252,11 @@
 			},
 			onClick_editDepart($depart)
 			{
-				_params = {
-					departmentId: $depart.id,
-					departmentName: this.departName,
-					companyId: this.currentId
-				};
-				g.net.call("organizeOpt/editDepartment", _params).then(($data) =>
-				{
-					_departId = $data.departmentId;
-					if ($depart.id == 0)
-					{
-						g.data.departmentPool.add($data);
-					}
-					else
-					{
-						g.data.departmentPool.getDataById($depart.id).update($data);
-					}
-				})
+				g.data.departmentPool.getDataById($depart.id).update({isEdit: true})
 			},
 			onClick_editDuty($duty)
 			{
-				_params = {
-					dutyId: $duty.id,
-					dutyName: this.dutyName,
-					departmentId: $duty.parentId,
-					companyId: $duty.companyId
-				};
-				g.net.call("organizeOpt/editDuty", _params).then(($data) =>
-				{
-					if ($duty.id == 0)
-					{
-						g.data.dutyPool.update([$data]);
-					}
-					else
-					{
-						g.data.dutyPool.getDataById($duty.id).update($data);
-					}
-				})
+				g.data.dutyPool.getDataById($duty.id).update({isEdit: true})
 			},
 			onClick_deleteDuty($duty)
 			{
@@ -266,9 +292,9 @@
 					}
 				})
 			},
-			onClick_submitBtn()
+			onClick_editCompany()
 			{
-				this.$emit("close", true);
+				this.currentId = 0;
 			},
 			checkValid()
 			{

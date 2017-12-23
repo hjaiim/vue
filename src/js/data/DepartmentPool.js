@@ -30,6 +30,7 @@ export default class DepartmentPool {
 		{
 			_hash[itemData.id] = itemData;
 			_list.push(itemData);
+			g.data.searchCompanyPool.addDepartment(itemData.parentId, itemData);
 			g.data.companyPool.addDepartment(itemData.parentId, itemData);
 		}
 	}
@@ -42,6 +43,7 @@ export default class DepartmentPool {
 			if (index >= 0)
 			{
 				_list.splice(index, 1);
+				g.data.searchCompanyPool.removeDepartment(_hash[$id].parentId, _hash[$id])
 				g.data.companyPool.removeDepartment(_hash[$id].parentId, _hash[$id])
 			}
 		}
@@ -95,6 +97,7 @@ function createData($dObj)
 	d.parentId = 0;
 	d.isEdit = false;
 	d.creatorId = 0;
+	d.dutyName = "";
 	d.children = [];
 	d.update = updateData.bind(d);
 	d.update($dObj);
@@ -110,12 +113,15 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("companyId") && (this.parentId = $dObj.companyId);
 	$dObj.hasOwnProperty("creatorId") && (this.creatorId = $dObj.creatorId);
 	$dObj.hasOwnProperty("isEdit") && (this.isEdit = $dObj.isEdit);
+	$dObj.hasOwnProperty("dutyName") && (this.dutyName = $dObj.dutyName);
 	if ($dObj.hasOwnProperty("organizeDutyResults"))
 	{
 		var timer = setTimeout(() =>
 		{
+			g.data.dutyPool.removeAll();
+
 			g.data.dutyPool.update($dObj.organizeDutyResults);
-		}, 500);
+		}, 200);
 // 		var duty = new Duty();
 // 		this.children = duty.update($dObj.organizeDutyResults);
 	}

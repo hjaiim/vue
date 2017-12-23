@@ -153,6 +153,7 @@
 						{
 							companyData.update($data.companyResult);
 						}
+						g.data.departmentPool.removeAll();
 						g.data.departmentPool.update($data.departWrapperResults);
 						this.currId = $id;
 						this.isShowCompanyPop = true;

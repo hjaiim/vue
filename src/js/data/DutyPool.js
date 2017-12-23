@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2017/12/11.
  */
-import g from './../../global';
+import g from "./../../global";
 var _list = [];
 var _hash = {};
 var _total = 0;
@@ -45,7 +45,7 @@ export default class DutyPool {
 			if (index >= 0)
 			{
 				_list.splice(index, 1);
-				g.data.departmentPool.removeDuty(itemData.parentId, itemData)
+				g.data.departmentPool.removeDuty(_hash[$id].parentId, _hash[$id])
 			}
 		}
 	}
@@ -78,6 +78,8 @@ function createData($dObj)
 	d.parentId = 0;
 	d.companyId = 0;
 	d.creatorId = 0;
+	d.isEdit = false;
+
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
