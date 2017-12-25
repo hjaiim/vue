@@ -4,35 +4,37 @@
 		<div>
 			<div class="personal-form">
 				<span class="personal-title left">客户公司名称</span>
-				<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
+				<input-bar class="personal-content pensonal-input left apply-input" placeholder="" type="text"
 						   v-model="formData.cusCompName"
 						   :errmsg="errData.cusCompName"
 						   @focus="onFocus_inputBar('cusCompName')"></input-bar>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">客户联系人</span>
-				<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
+				<input-bar class="personal-content pensonal-input left apply-input" placeholder="" type="text"
 						   v-model="formData.customer"
 						   :errmsg="errData.customer"
 						   @focus="onFocus_inputBar('customer')"></input-bar>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">客户联系方式</span>
-				<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
+				<input-bar class="personal-content pensonal-input left apply-input" placeholder="" type="text"
 						   v-model="formData.cusPhone"
 						   :errmsg="errData.cusPhone"
 						   @focus="onFocus_inputBar('cusPhone')"></input-bar>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">客户公司地址</span>
-				<input-bar class="personal-content pensonal-input left large-input" placeholder="" type="text"
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
+						   type="text"
 						   v-model="formData.cusCompAdd"
 						   :errmsg="errData.cusCompAdd"
 						   @focus="onFocus_inputBar('cusCompAdd')"></input-bar>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">客户公司介绍</span>
-				<input-bar class="personal-content pensonal-input left large-input" placeholder="" type="text"
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
+						   type="text"
 						   v-model="formData.cusCompIntro"
 						   :errmsg="errData.cusCompIntro"
 						   @focus="onFocus_inputBar('cusCompIntro')"></input-bar>
@@ -48,7 +50,8 @@
                     <i class="draw-round pointer" :class="formData.prodType=='客户自带95码号落地'?'action':''"></i>
                     <span>使用联通已有的95号</span>
                 </span>
-				<input-bar class="personal-content pensonal-input left large-input" placeholder="" type="text"
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
+						   type="text"
 						   v-model="formData.prodType"
 						   :errmsg="errData.prodType"
 						   @focus="onFocus_inputBar('telNum')"></input-bar>
@@ -56,7 +59,8 @@
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">业务用途及场景</span>
-				<input-bar class="personal-content pensonal-input left large-input" placeholder="" type="text"
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
+						   type="text"
 						   v-model="formData.businessDesc"
 						   :errmsg="errData.businessDesc"
 						   @focus="onFocus_inputBar('businessDesc')"></input-bar>
@@ -76,7 +80,7 @@
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">呼叫范围</span>
-				<input-bar class="personal-content pensonal-input left large-input" placeholder=""
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
 						   type="text" v-model="formData.callRange"
 						   :errmsg="errData.callRange"
 						   @focus="onFocus_inputBar('callRange')"></input-bar>
@@ -91,14 +95,15 @@
                         <span>是</span>
                  </span>
                 <span class="action-box status-type left" @click="onClick_checkCallInOut('呼出')">
-                    <i class="draw-round pointer" :class="formData.callInList.indexOf('呼出')>=0?'action':''?'action':''"></i>
+                    <i class="draw-round pointer"
+					   :class="formData.callInList.indexOf('呼出')>=0?'action':''?'action':''"></i>
                     <span>否</span>
                 </span>
 				<span class="explain">呼入呼出</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">预计业务规模</span>
-				<input-bar class="personal-content pensonal-input left large-input" placeholder=""
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
 						   type="text" v-model="formData.businessScale"
 						   :errmsg="errData.businessScale"
 						   @focus="onFocus_inputBar('businessScale')"></input-bar>
@@ -106,7 +111,7 @@
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">报价</span>
-				<input-bar class="personal-content pensonal-input left large-input" placeholder=""
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
 						   type="text" v-model="formData.budget"
 						   :errmsg="errData.budget"
 						   @focus="onFocus_inputBar('budget')"></input-bar>
@@ -114,7 +119,7 @@
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">其他说明</span>
-				<input-bar class="personal-content pensonal-input left large-input" placeholder=""
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
 						   type="text" v-model="formData.remark"
 						   :errmsg="errData.remark"
 						   @focus="onFocus_inputBar('remark')"></input-bar>
@@ -149,7 +154,7 @@
 				g: g,
 				errData: {},
 				formData: {},
-				hasIframe:true
+				hasIframe: true
 			}
 		},
 		components: {
@@ -207,7 +212,10 @@
 			uploadComplete($data)
 			{
 				this.hasIframe = false;
-				var attach = {size: $data.size, name: $data.fileName};
+				var attach = {
+					size: $data.size,
+					name: $data.fileName
+				};
 				this.attachList.push(attach);
 				setTimeout(()=>
 				{
@@ -232,9 +240,9 @@
 			onClick_checkCallInOut($type)
 			{
 				var index = this.formData.callInList.indexOf($type);
-				if(index >= 0)
+				if (index >= 0)
 				{
-					this.formData.callInList.splice(index,1)
+					this.formData.callInList.splice(index, 1)
 				}
 				else
 				{
@@ -311,5 +319,6 @@
 	.apply-wrap {
 		padding: 20px 44px 50px 44px;
 	}
+
 	@import "../../css/oppApply.scss";
 </style>

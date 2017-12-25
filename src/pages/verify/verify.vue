@@ -9,7 +9,7 @@
 							 alt="">
 						<div class="absolute upload-btn">
 							<p class="load-text">修改头像</p>
-							<iframe name="fileUpload"
+							<iframe class="iframe-btn" name="fileUpload"
 									:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=avatar'"
 									id="avatar" v-show="avatar != 'default.png'"
 							></iframe>

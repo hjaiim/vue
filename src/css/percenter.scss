@@ -52,6 +52,7 @@
 	display: none;
 	@include borderRadius(50%);
 	.iframe-btn {
+	  position: absolute;
 	  left: 0;
 	  opacity: 0;
 	  top: 0;
