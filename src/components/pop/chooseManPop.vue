@@ -22,19 +22,22 @@
 				<div class="list-wrap">
 					<div class="list-wrap" is="scroll-group">
 						<div class="inner-content" v-for="manItem in manList">
-							<p class="deal-staff border-bottom">一级经理
+							<p class="deal-staff border-bottom">{{manItem.name}}
 								<span class="right arrow-wrap center-flex pointer"
 									  @click="onClick_arrowBtn(manItem.id)"><i
 										:class="idList.indexOf(manItem.id)?'arrow-bottom':'arrow-top'"></i></span>
 							</p>
 							<ul class="list-menu border-bottom clear" v-show="idList.indexOf(manItem.id)">
-								<li class="left"><img :src="g.path.images+'/avatar-icon.png'" alt=""></li>
-								<li class="left">张三</li>
-								<li class="left">苏州分公司</li>
-								<li class="left">销售部</li>
-								<li class="left">销售经理</li>
-								<li class="left diff-padding"><span><i class="draw-tick relative action"></i><span
-										class="draw-line choose-txt">选择</span></span></li>
+								<li class="left"
+									v-for="childItem in manItem.children "><img :src="g.path.images+'/avatar-icon.png'"
+																			alt=""></li>
+								<li class="left">{{childItem.name}}</li>
+								<li class="left">{{childItem.companyName}}</li>
+								<li class="left">{{childItem.departmentName}}</li>
+								<li class="left">{{childItem.dutyName}}</li>
+								<li class="left diff-padding">
+									<span @click="onClick_selectBtn(childItem.id)"><i class="draw-tick relative" :class="childItem.checked?'action':''"></i>
+										<span class="draw-line choose-txt">选择</span></span></li>
 							</ul>
 						</div>
 					</div>
@@ -50,29 +53,50 @@
 <script type="text/ecmascript-6">
 	import g from "../../global";
 	import ScrollGroup from "../../components/scrollGroup.vue";
+	var _childList = [];
 	export default{
+		created(){
+			this.init();
+		},
 		data(){
 			return {
 				g: g,
 				idList: [],
 				manList: [],
+				childList:[]
 			}
 		},
-		props:{
-			isShowViewPop:{
-				type:Boolean,
-				default:false
+		props: {
+			isShowViewPop: {
+				type: Boolean,
+				default: false
 			}
 		},
 		components: {
 			ScrollGroup
 		},
 		methods: {
+			init(){
+				this.manList = g.data.staffPool.list;
+			},
+			onClick_selectBtn($id)
+			{
+				var data = g.data.staffPool.getChildById($id);
+				if(data.checked)
+				{
+					data.update({checked:false})
+				}
+				else
+				{_childList.push($id);
+					data.update({checked:true})
+				}
+			},
 			onClick_arrowBtn($id){
-				if (this.idList.indexOf($id) >= 0)
+				var index = this.idList.indexOf($id);
+				if (index >= 0)
 				{
 
-					this.idList.splice($id, 1);
+					this.idList.splice(index, 1);
 				}
 				else
 				{
@@ -81,7 +105,7 @@
 				}
 			},
 			onClick_closeBtn($type){
-				this.$emit('close',$type)
+				this.$emit('close', $type)
 			}
 		}
 	}

@@ -1,4 +1,5 @@
 var _list = [], _hash = {};
+var _childHash = {};
 export default class StaffPool {
 	constructor()
 	{
@@ -46,6 +47,10 @@ export default class StaffPool {
 		return _hash[$id]
 	}
 
+	getChildById($id)
+	{
+		return _childHash[$id];
+	}
 	get list()
 	{
 		return _list;
@@ -82,11 +87,56 @@ function createData($dObj)
 
 function updateData($dObj)
 {
-	$dObj.hasOwnProperty("id") && (this.id = $dObj.id)
+	$dObj.hasOwnProperty("stationId") && (this.id = $dObj.stationId);
+	$dObj.hasOwnProperty("stationName") && (this.name = $dObj.stationName);
+	if($dObj.hasOwnProperty("auditorUserPageResult"))
+	{
+		var staff = new Staff();
+		this.children = staff.update($dObj.auditorUserPageResult);
+	}
 }
 
-class Staff {
 
+class Staff {
+	constructor()
+	{
+		this.listData = [];
+	}
+	update($list)
+	{
+		if (!Array.isArray($list))
+		{
+			return;
+		}
+
+		for (var item of $list)
+		{
+			this.add(item);
+		}
+		return this.listData;
+	}
+
+	add($item)
+	{
+		var itemData = createStaff($item);
+		if (!_staffHash[itemData.id])
+		{
+			_staffHash[itemData.id] = itemData;
+			this.listData.push(itemData);
+		}
+	}
+
+	remove($id)
+	{
+		if (_staffHash[$id])
+		{
+			var index = _list.indexOf(_staffHash[$id]);
+			if (index >= 0)
+			{
+				this.listData.splice(index, 1);
+			}
+		}
+	}
 }
 
 function createStaff($dObj)
@@ -99,7 +149,7 @@ function createStaff($dObj)
 	d.departmentName = "";
 	d.dutyName = "";
 	d.checked = false;
-	d.update = updateData.bind(d);
+	d.update = updateStaff.bind(d);
 	d.update($dObj);
 	return d;
 
@@ -107,6 +157,12 @@ function createStaff($dObj)
 
 function updateStaff($dObj)
 {
-	$dObj.hasOwnProperty("id") && (this.id = $dObj.id)
+	$dObj.hasOwnProperty("id") && (this.id = $dObj.userId)
+	$dObj.hasOwnProperty("name") && (this.name = $dObj.name);
+	$dObj.hasOwnProperty("avatar") && (this.avatar = $dObj.avatar);
+	$dObj.hasOwnProperty("companyName") && (this.companyName = $dObj.companyName);
+	$dObj.hasOwnProperty("departmentName") && (this.departmentName = $dObj.departmentName);
+	$dObj.hasOwnProperty("dutyName") && (this.dutyName = $dObj.dutyName);
 	$dObj.hasOwnProperty("checked") && (this.checked = $dObj.checked);
+
 }
