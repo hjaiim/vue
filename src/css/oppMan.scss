@@ -89,15 +89,33 @@
 
 @media screen and (max-width: 1450px) {
   .p-left {
-	margin-left: 8px;
+	margin-left: 20px;
   }
   .date-box {
-	margin-left: 15px;
+	margin-left: 35px;
 	.date-form {
 	  width: 176px;
+	  padding-left: 14px;
 	}
   }
   .status-form .status-type {
+	margin-left: 16px;
+  }
+}
+
+@media screen and (max-width: 1310px) {
+  .p-left {
+	margin-left: 8px;
+  }
+  .date-box {
 	margin-left: 12px;
+
+	.date-form {
+	  width: 176px;
+	  padding-left: 14px;
+	}
+  }
+  .status-form .status-type {
+	margin-left: 16px;
   }
 }

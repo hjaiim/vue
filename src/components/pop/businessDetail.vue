@@ -17,8 +17,8 @@
 						<div>
 							<p class="from-group">
 								<span class="form-title">附件下载</span>
-								<span class="form-trap file-download pointer">合同文件.doc</span>
-								<span class="form-trap file-download pointer">合同细节.doc</span>
+								<a class="form-trap file-download pointer ani-time" href="###" download>合同文件.doc</a>
+								<a class="form-trap file-download pointer ani-time" href="###" download>合同细节.doc</a>
 							</p>
 						</div>
 					</div>
@@ -66,9 +66,9 @@
 								<span class="exam-btn">选择后续人</span>
 							</p>
 
-							<p class="from-group clear" v-if="businessData.hasAttches">
+							<p class="from-group clear relative" v-if="businessData.hasAttches">
 								<span class="form-title">上传附件</span>
-								<iframe name="fileUpload"
+								<iframe class="iframe-wrap" name="fileUpload"
 										:src="g.path.base+'upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppAudit'"></iframe>
 							</p>
 						</div>
@@ -210,9 +210,12 @@
 			font-size: 12px;
 		}
 		.file-download {
-			color: #2c85d3;
+			color: #61a4de;
 			text-decoration: underline;
 			margin-right: 20px;
+			&:hover {
+				color: #2c85d3;;
+			}
 		}
 
 	}
