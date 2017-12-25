@@ -13,7 +13,9 @@
 					</p>
 					<p class="from-group">
 						<span class="form-title left">角色说明</span>
-						<textarea type="text" class="form-control role-explain ani-time" v-model="desc"></textarea>
+					<div class=""></div>
+						<textarea type="text" class="form-control role-explain ani-time role-textarea"
+								  v-model="desc"></textarea>
 					</p>
 					<div class="from-group clear">
 						<span class="form-title left">平台权限</span>
@@ -33,7 +35,6 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</view-popup>
 </template>

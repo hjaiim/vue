@@ -888,33 +888,33 @@ input {
   height: 30px;
   line-height: 30px;
   .business-title {
-	height: 30px;
-	//line-height: 30px;
+	height: 32px;
+	line-height: 32px;
 	width: auto;
 	margin-right: 10px;
 	width: auto;
   }
   .business-list {
 	width: 150px;
-	height: 30px;
+	height: 32px;
 	li {
-	  height: 30px;
-	  line-height: 30px;
+	  height: 32px;
+	  line-height: 32px;
 	}
   }
 }
 
 .status-form {
   .form-title {
-	line-height: 30px;
+	line-height: 32px;
   }
 
   .status-type {
 	margin-left: 18px;
-	height: 30px;
-	line-height: 30px;
+	height: 32px;
+	line-height: 32px;
 	span {
-	  line-height: 30px;
+	  line-height: 32px;
 	  padding-left: 8px;
 	}
   }
@@ -926,8 +926,8 @@ input {
   }
 
   .date-form {
-	height: 30px;
-	line-height: 30px;
+	height: 32px;
+	line-height: 32px;
 	width: 200px;
 	font-size: 10px;
 	border: 1px solid #dddddd;
@@ -943,8 +943,8 @@ input {
   }
 
   .date-line {
-	line-height: 30px;
-	margin: 0 12px;
+	line-height: 32px;
+	padding: 0 4px;
   }
 }
 

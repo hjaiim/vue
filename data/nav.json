@@ -102,8 +102,8 @@
 		"parentId": "business",
 		"highLightList": ["/oppapply"],
 		"rightId": 11,
-		"icon": "/per1.png",
-		"lightIcon": "/per1-active.png"
+		"icon": "/chance1.png",
+		"lightIcon": "/chance1-active.png"
 	  },
 	  {
 		"name": "商机管理",
@@ -111,8 +111,8 @@
 		"parentId": "business",
 		"highLightList": ["/oppman"],
 		"rightId": 12,
-		"icon": "/per1.png",
-		"lightIcon": "/per1-active.png"
+		"icon": "/chance2.png",
+		"lightIcon": "/chance2-active.png"
 	  },
 	  {
 		"name": "我的商机",
@@ -120,8 +120,8 @@
 		"parentId": "business",
 		"highLightList": ["/myopp"],
 		"rightId": 13,
-		"icon": "/per1.png",
-		"lightIcon": "/per1-active.png"
+		"icon": "/chance3.png",
+		"lightIcon": "/chance3-active.png"
 	  }
 	]
   }

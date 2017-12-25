@@ -24,14 +24,16 @@
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">客户公司地址</span>
-				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder="" type="text"
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
+						   type="text"
 						   v-model="formData.cusCompAdd"
 						   :errmsg="errData.cusCompAdd"
 						   @focus="onFocus_inputBar('cusCompAdd')"></input-bar>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">客户公司介绍</span>
-				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder="" type="text"
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
+						   type="text"
 						   v-model="formData.cusCompIntro"
 						   :errmsg="errData.cusCompIntro"
 						   @focus="onFocus_inputBar('cusCompIntro')"></input-bar>
@@ -46,7 +48,8 @@
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">业务用途及场景</span>
-				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder="" type="text"
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
+						   type="text"
 						   v-model="formData.businessDesc"
 						   :errmsg="errData.businessDesc"
 						   @focus="onFocus_inputBar('businessDesc')"></input-bar>
@@ -130,7 +133,7 @@
 			<div class="personal-form">
 				<span class="personal-title left">上传附件</span>
                 <span class="form-trap up-btn pointer opp-up-btn">点击上传
-               	<iframe name="fileUpload" v-if="hasIframe"
+               	<iframe class="iframe-wrap" name="fileUpload" v-if="hasIframe"
 						:src="g.path.base+'upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
                 </span>
 				<span class="complate-upload-file"
@@ -155,7 +158,7 @@
 				g: g,
 				errData: {},
 				formData: {},
-				hasIframe:true
+				hasIframe: true
 			}
 
 		},
@@ -216,7 +219,10 @@
 			uploadComplete($data)
 			{
 				this.hasIframe = false;
-				var attach = {size: $data.size, name: $data.fileName};
+				var attach = {
+					size: $data.size,
+					name: $data.fileName
+				};
 				this.attachList.push(attach);
 				setTimeout(()=>
 				{

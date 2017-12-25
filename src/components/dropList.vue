@@ -1,6 +1,6 @@
 <template>
 	<ul class="absolute drop-list" v-show="isShowDropList">
-		<li class="pointer ani-time" v-for="item in dropList" @click.stop="onClick_dropItem(item.id)">{{item.name}}</li>
+		<li class="ani-time pointer" v-for="item in dropList" @click.stop="onClick_dropItem(item.id)">{{item.name}}</li>
 	</ul>
 </template>
 <script type="text/ecmascript-6">

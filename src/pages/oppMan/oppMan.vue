@@ -4,12 +4,13 @@
 			<div class="oppman-banner clear">
 				<div class="business-form left" ref="businessType">
 					<span class="personal-title business-title  left">业务名称</span>
-					<div class="personal-content left relative form-list business-list" @click="onClick_dropListBtn">
+					<div class="personal-content left relative form-list business-list pointer"
+						 @click="onClick_dropListBtn">
 						{{currType}}
 						<span :class="['icon-trangle', isShowBusinessList?'rotate':'']"></span>
-						<ul class="absolute drop-list" v-show="isShowBusinessList">
-							<li @click.stop="onClick_typeItem(item.id)" v-for="item in typeList">{{item.name}}</li>
-						</ul>
+						<drop-list class="absolute drop-list" :dropList="typeList"
+								   :isShowDropList="isShowBusinessList"
+								   @change="onClick_typeItem"></drop-list>
 					</div>
 				</div>
 
@@ -127,7 +128,7 @@
 	import BusinessDetailPop from "../../components/pop/businessDetail.vue";
 	import InputBar from "../../components/inputBar.vue";
 	import CommonDate from "../../components/dateBox.vue";
-
+	import DropList from "../../components/dropList.vue"
 	var _dateType = "", _params = null;
 	export default{
 		created(){
@@ -157,7 +158,8 @@
 			CommonPage,
 			BusinessDetailPop,
 			InputBar,
-			CommonDate
+			CommonDate,
+			DropList
 		},
 		computed: {
 			currType()

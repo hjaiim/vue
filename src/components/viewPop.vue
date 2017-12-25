@@ -72,7 +72,7 @@
 			width: 100%;
 			height: 100%;
 			z-index: 99;
-			background: rgba(0, 0, 0, .2);
+			background: rgba(0, 0, 0, .2) none repeat scroll 0 0 !important;
 			-webkit-perspective: 1300px;
 			-moz-perspective: 1300px;
 			perspective: 1300px;
@@ -146,8 +146,9 @@
 	.account-content.md-overlay {
 		position: absolute;
 	}
-	.right-viewPop{
-		.return-btn{
+
+	.right-viewPop {
+		.return-btn {
 			display: none;
 		}
 	}
