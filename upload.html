@@ -25,10 +25,11 @@
 			height: 100%;
 			overflow: hidden;
 		}
-		.file-upload {
+		.file-wrap input {
 			width: 100%;
 			height: 100%;
 			opacity: 0;
+			cursor: pointer;
 		}
 	</style>
 </head>
@@ -36,7 +37,7 @@
 <form id="form1" method="post" action="http://192.168.12.219:8001/file/upload" enctype="multipart/form-data"
 	  name="form1">
 	<div class="none file-wrap">
-		<input type="file" name="btn" id="fileBtn" class="file-upload" onchange="onChange_fileBtn()">
+		<input type="file" name="btn" id="fileBtn" onchange="onChange_fileBtn()">
 		<label id="fileName"></label>
 		<input type="text" style="display: none" name="type" id="type">
 		<input type="text" style="display: none" name="redirectUrl" id="redirectUrl">

@@ -198,4 +198,16 @@
 		}
 	}
 
+	.apply-input {
+		.error-msg {
+			width: auto;
+			height: 38px;
+			padding-left: 10px;
+			line-height: 38px;
+			min-width: 140px;
+			left: 100%;
+			top: 0;
+		}
+	}
+
 </style>
