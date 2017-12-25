@@ -10,7 +10,7 @@
 					</i>
 				</div>
 				<div class="laydate-sety" v-show="pops.isShowYear">
-					<div class="laydate-hmsno ">
+					<div class="laydate-hmsno iscroll-ref">
 						<p v-for="yearNo in yearList" @click="onClick_detailDate('year',yearNo)"
 						   class="year-num" :class="date.year==yearNo? theme:''">{{yearNo}}年</p>
 					</div>
@@ -75,7 +75,7 @@
 				<div class="laydate-hms-title">小时
 					<div class="laydate-hms-close" @click="onClick_dateSelect('Hour')">×</div>
 				</div>
-				<div class="laydate-hmsnox">
+				<div class="laydate-hmsnox clear" :class="weekNum==6?'diff-length':''">
 					<p class="hour-num" v-for="n in 24" @click="onClick_detailDate('hour',(n-1))"
 					   :class="n-1==date.hour? theme:''">{{n-1
 						|addZero}}</p>
@@ -85,7 +85,7 @@
 				<div class="laydate-hms-title">分钟
 					<div class="laydate-hms-close" @click="onClick_dateSelect('Minute')">×</div>
 				</div>
-				<div class="laydate-hmsnox">
+				<div class="laydate-hmsnox clear" :class="weekNum==6?'diff-length':''">
 					<p v-for="n in 60" @click="onClick_detailDate('minute',(n-1))"
 					   :class="n-1==date.minute? theme:''">{{n-1|addZero}}</p>
 				</div>
@@ -94,7 +94,7 @@
 				<div class="laydate-hms-title">秒数
 					<div class="laydate-hms-close" @click="onClick_dateSelect('Second')">×</div>
 				</div>
-				<div class="laydate-hmsnox">
+				<div class="laydate-hmsnox clear" :class="weekNum==6?'diff-length':''">
 					<p v-for="n in 60"
 					   @click="onClick_detailDate('second',(n-1))" :class="n-1==date.second? theme:''">
 						{{n-1|addZero}}</p>
@@ -113,6 +113,7 @@
 		name: "c-date",
 		created(){
 			this.init();
+			trace(this.weekNum);
 		},
 		data(){
 			return {
@@ -156,10 +157,10 @@
 			}
 
 		},
-		watch:{
+		watch: {
 			isShowDatePicker($val)
 			{
-				trace("isShowDatePicker",this.isShowDatePicker)
+				trace("isShowDatePicker", this.isShowDatePicker)
 			}
 		},
 		computed: {
@@ -421,6 +422,18 @@
 	}
 </script>
 <style lang="sass" type="text/css" rel="stylesheet/scss" scoped>
+	.clear {
+		&:before {
+			display: table;
+			content: " ";
+		}
+		&:after {
+			display: table;
+			content: " ";
+			clear: both;
+		}
+	}
+
 	.laydate-box {
 		z-index: 89;
 		position: absolute;
@@ -706,6 +719,7 @@
 		line-height: 26px;
 		text-align: center;
 		position: absolute;
+		cursor: pointer;
 		top: 50%;
 		right: 4px;
 		margin-top: -15px;
@@ -766,6 +780,9 @@
 	}
 
 	.laydate-hmsnox {
+		&.diff-length {
+			min-height: 182px;
+		}
 		p {
 			height: 25px;
 			line-height: 25px;

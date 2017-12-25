@@ -17,8 +17,7 @@
 						<div>
 							<p class="from-group">
 								<span class="form-title">附件下载</span>
-								<span class="form-trap file-download pointer"
-									  v-for="attach in businessData.attachList">{{attach.name}}</span>
+								<a class="form-trap file-download pointer ani-time" v-for="attach in businessData.attachList" href="###" download>{{attach.name}}</a>
 							</p>
 						</div>
 					</div>
@@ -66,11 +65,12 @@
 								<span class="exam-btn" @click="onClick_selectNext">选择后续人</span>
 							</p>
 
-							<p class="from-group clear" v-if="businessData.hasAttaches">
+							<p class="from-group clear relative" v-if="businessData.hasAttaches">
 								<span class="form-title">上传附件</span>
-								<iframe name="fileUpload" v-if="hasIframe"
+								<iframe name="fileUpload" v-if="hasIframe" class="iframe-wrap"
 										:src="g.path.base+'upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
 								<span v-for="attach in attachList">{{attach.name}}/{{attach.size}}KB</span>
+
 							</p>
 						</div>
 
@@ -227,9 +227,12 @@
 			font-size: 12px;
 		}
 		.file-download {
-			color: #2c85d3;
+			color: #61a4de;
 			text-decoration: underline;
 			margin-right: 20px;
+			&:hover {
+				color: #2c85d3;;
+			}
 		}
 
 	}
