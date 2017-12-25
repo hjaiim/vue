@@ -1,7 +1,6 @@
 /**
  * Created by billy on 2016/12/19.
  */
-import g from './../../global';
 var _list = []; //string[]
 
 export default class RightPool {
@@ -68,6 +67,7 @@ export default class RightPool {
 
 		return true;
 	}
+
 	get list()
 	{
 		return _list;
@@ -81,5 +81,5 @@ export default class RightPool {
 
 function createData($item)
 {
-	return 	int($item.permissionId);
+	return int($item.permissionId);
 }

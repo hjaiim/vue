@@ -76,7 +76,6 @@
 			update($url)
 			{
 				g.func.updateRightList();
-
 				this.navItem = g.data.staticNavPool.getDataById(this.currentId);
 				for (var item of this.navItem.children)
 				{

@@ -68,12 +68,10 @@
 		methods: {
 			routerUpdated()
 			{
-
 				this.typeList = g.data.staticTypePool.list;
 				this.type = g.vue.getQuery('type', 1);
 				this.initEvents()
 			},
-
 			onSubmit_formData($data)
 			{
 				_params = {
@@ -84,8 +82,9 @@
 				};
 				g.net.call("/bo/orderApply", _params).then(($data) =>
 				{
-					g.ui.toast("商机提交成功");
+					this.currId = 0;
 					this.routerUpdated();
+					g.ui.toast("商机提交成功");
 				})
 			},
 			initEvents()

@@ -54,7 +54,26 @@
 	  {
 		"其他说明": "remark"
 	  }
-	]
+	],
+	"hash": {
+	  "客户公司名称": "cusCompName",
+	  "客户联系人": "customer",
+	  "客户联系方式": "cusPhone",
+	  "客户公司地址": "cusCompAdd",
+	  "客户公司介绍": "cusCompIntro",
+	  "客户类别": "cusType",
+	  "业务用途及场景": "businessDesc",
+	  "接入方式": "accessType",
+	  "呼叫模式": "callTypeList",
+	  "发起方式": "launchMethod",
+	  "呼叫范围": "callRange",
+	  "是否回呼": "callBack",
+	  "是否转接": "transfer",
+	  "测试号码需求": "testNum",
+	  "预计业务规模": "businessScale",
+	  "报价": "budget",
+	  "其他说明": "remark"
+	}
   },
   {
 	"id": 2,
@@ -96,7 +115,21 @@
 	  {
 		"其他说明": "remark"
 	  }
-	]
+	],
+	"hash": {
+	  "客户公司名称": "cusCompName",
+	  "客户联系人": "customer",
+	  "客户联系方式": "cusPhone",
+	  "客户公司地址": "cusCompAdd",
+	  "客户公司介绍": "cusCompIntro",
+	  "客户类别": "cusType",
+	  "业务用途及场景": "businessDesc",
+	  "对接方式": "accessMethod",
+	  "使用流量类别": "flowType",
+	  "预计入账收入": "income",
+	  "折扣说明": "discount",
+	  "其他说明": "remark"
+	}
   },
   {
 	"id": 3,
@@ -141,7 +174,22 @@
 	  {
 		"其他说明": "remark"
 	  }
-	]
+	],
+	"hash": {
+	  "客户公司名称": "cusCompName",
+	  "客户联系人": "customer",
+	  "客户联系方式": "cusPhone",
+	  "客户公司地址": "cusCompAdd",
+	  "客户公司介绍": "cusCompIntro",
+	  "客户类别": "cusType",
+	  "业务用途及场景": "businessDesc",
+	  "产品类型": "prodType",
+	  "使用数据类别": "dataType",
+	  "预计业务规模": "businessScale",
+	  "报价": "budget",
+	  "付款方式": "payway",
+	  "其他说明": "remark"
+	}
   },
   {
 	"id": 4,
@@ -177,7 +225,19 @@
 	  {
 		"其他说明": "remark"
 	  }
-	]
+	],
+	"hash": {
+	  "客户公司名称": "cusCompName",
+	  "客户联系人": "customer",
+	  "客户联系方式": "cusPhone",
+	  "客户公司地址": "cusCompAdd",
+	  "客户公司介绍": "cusCompIntro",
+	  "客户类别": "cusType",
+	  "业务用途及场景": "businessDesc",
+	  "预计业务规模": "businessScale",
+	  "报价": "budget",
+	  "其他说明": "remark"
+	}
   },
   {
 	"id": 5,
@@ -213,7 +273,19 @@
 	  {
 		"其他说明": "remark"
 	  }
-	]
+	],
+	"hash": {
+	  "客户公司名称": "cusCompName",
+	  "客户联系人": "customer",
+	  "客户联系方式": "cusPhone",
+	  "客户公司地址": "cusCompAdd",
+	  "客户公司介绍": "cusCompIntro",
+	  "业务用途及场景": "businessDesc",
+	  "预计开通数量": "accessNum",
+	  "报价": "budget",
+	  "付款方式": "payway",
+	  "其他说明": "remark"
+	}
   },
   {
 	"id": 6,
@@ -264,7 +336,24 @@
 	  {
 		"其他说明": "remark"
 	  }
-	]
+	],
+	"hash": {
+	  "客户公司名称": "cusCompName",
+	  "客户联系人": "customer",
+	  "客户联系方式": "cusPhone",
+	  "客户公司地址": "cusCompAdd",
+	  "客户公司介绍": "cusCompIntro",
+	  "客户类别": "cusType",
+	  "业务用途及场景": "businessDesc",
+	  "接入方式": "accessType",
+	  "呼叫范围": "callRange",
+	  "是否回呼": "callBack",
+	  "是否转接": "transfer",
+	  "测试号码需求": "testNum",
+	  "预计业务规模": "businessScale",
+	  "报价": "budget",
+	  "其他说明": "remark"
+	}
   },
   {
 	"id": 7,
@@ -309,6 +398,21 @@
 	  {
 		"其他说明": "remark"
 	  }
-	]
+	],
+	"hash": {
+	  "客户公司名称": "cusCompName",
+	  "客户联系人": "customer",
+	  "客户联系方式": "cusPhone",
+	  "客户公司地址": "cusCompAdd",
+	  "客户公司介绍": "cusCompIntro",
+	  "申请的95业务类别": "prodType",
+	  "业务用途及场景": "businessDesc",
+	  "接入方式": "accessType",
+	  "呼叫范围": "callRange",
+	  "呼入呼出": "callInList",
+	  "预计业务规模": "businessScale",
+	  "报价": "budget",
+	  "其他说明": "remark"
+	}
   }
 ]

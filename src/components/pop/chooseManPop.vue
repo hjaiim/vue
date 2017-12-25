@@ -6,8 +6,10 @@
 				<div class="man-wrap clear border-bottom">
 					<span class="left man-tit">已选人员</span>
 					<ul class="man-list left">
-						<li>
-							<span class="relative">张三<i class="close-search-btn absolute pointer"></i></span>
+						<li v-for="item in staffList">
+							<span class="relative">
+								{{item.name}}<i class="close-search-btn absolute pointer"
+												@click="onClick_delBtn(item.id)"></i></span>
 						</li>
 					</ul>
 				</div>
@@ -21,23 +23,24 @@
 				</ul>
 				<div class="list-wrap">
 					<div class="list-wrap" is="scroll-group">
-						<div class="inner-content" v-for="manItem in manList">
-							<p class="deal-staff border-bottom">{{manItem.name}}
-								<span class="right arrow-wrap center-flex pointer"
-									  @click="onClick_arrowBtn(manItem.id)"><i
-										:class="idList.indexOf(manItem.id)?'arrow-bottom':'arrow-top'"></i></span>
+						<div class="inner-content" v-for="item in manList">
+							<p class="deal-staff border-bottom" @click="onClick_arrowBtn(item.id)">{{item.name}}
+								<span class="right arrow-wrap center-flex pointer">
+									<i :class="idList.indexOf(item.id) >= 0?'arrow-bottom':'arrow-top'"></i></span>
 							</p>
-							<ul class="list-menu border-bottom clear" v-show="idList.indexOf(manItem.id)">
-								<li class="left"
-									v-for="childItem in manItem.children "><img :src="g.path.images+'/avatar-icon.png'"
-																			alt=""></li>
+
+							<ul class="list-menu border-bottom clear" v-for="childItem in item.children"
+								v-show="idList.indexOf(item.id) >= 0">
+								<li class="left">
+									<img :src="g.path.images+childItem.avatar" alt=""></li>
 								<li class="left">{{childItem.name}}</li>
 								<li class="left">{{childItem.companyName}}</li>
 								<li class="left">{{childItem.departmentName}}</li>
 								<li class="left">{{childItem.dutyName}}</li>
 								<li class="left diff-padding">
-									<span @click="onClick_selectBtn(childItem.id)"><i class="draw-tick relative" :class="childItem.checked?'action':''"></i>
-										<span class="draw-line choose-txt">选择</span></span></li>
+								<span @click="onClick_selectBtn(childItem.id)">
+								<i class="draw-tick relative" :class="childItem.checked?'action':''"></i>
+								<span class="draw-line choose-txt">选择</span></span></li>
 							</ul>
 						</div>
 					</div>
@@ -63,7 +66,7 @@
 				g: g,
 				idList: [],
 				manList: [],
-				childList:[]
+				childList: []
 			}
 		},
 		props: {
@@ -75,27 +78,63 @@
 		components: {
 			ScrollGroup
 		},
+		computed: {
+			staffList()
+			{
+				var list = [];
+				for (var child of this.childList)
+				{
+					var data = g.data.staffPool.getChildById(child);
+					if (list.indexOf(data) < 0)
+					{
+						list.push(data);
+					}
+				}
+				return list;
+			}
+		},
+		watch:{
+			isShowViewPop($val)
+			{
+				this.init();
+			}
+		},
 		methods: {
-			init(){
+			init()
+			{
 				this.manList = g.data.staffPool.list;
+				for (var id of this.childList)
+				{
+					var data = g.data.staffPool.getChildById(id);
+					data.update({checked: false})
+				}
+				this.childList = [];
+			},
+			onClick_delBtn($id)
+			{
+				var index = this.childList.indexOf($id);
+				this.childList.splice(index, 1);
 			},
 			onClick_selectBtn($id)
 			{
 				var data = g.data.staffPool.getChildById($id);
-				if(data.checked)
+				if (data.checked)
 				{
-					data.update({checked:false})
+					var index = this.childList.indexOf($id);
+					this.childList.splice(index, 1);
+					data.update({checked: false})
 				}
 				else
-				{_childList.push($id);
-					data.update({checked:true})
+				{
+					this.childList.push($id);
+					data.update({checked: true})
 				}
 			},
-			onClick_arrowBtn($id){
+			onClick_arrowBtn($id)
+			{
 				var index = this.idList.indexOf($id);
 				if (index >= 0)
 				{
-
 					this.idList.splice(index, 1);
 				}
 				else
@@ -104,8 +143,9 @@
 
 				}
 			},
-			onClick_closeBtn($type){
-				this.$emit('close', $type)
+			onClick_closeBtn($type)
+			{
+				this.$emit('close', $type, this.childList)
 			}
 		}
 	}

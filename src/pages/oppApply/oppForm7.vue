@@ -154,7 +154,8 @@
 				g: g,
 				errData: {},
 				formData: {},
-				hasIframe: true
+				hasIframe: true,
+				attachList:[]
 			}
 		},
 		components: {
@@ -170,7 +171,14 @@
 			{
 				if (this.currId)
 				{
-					this.formData = JSON.parse(g.data.searchBusinessPool.getDataById(this.currId).formData);
+					var formData = JSON.parse(g.data.searchBusinessPool.getDataById(this.currId).formData);
+					var hash = g.data.staticTypePool.getDataById(_type).hash;
+					for (var key in formData)
+					{
+						this.formData[hash[key]] = formData[key];
+					}
+					this.attachList = JSON.parse(g.data.searchBusinessPool.getDataById(this.currId).attachList);
+					this.$forceUpdate();
 				}
 				else
 				{
@@ -259,7 +267,11 @@
 					return;
 				}
 				this.getFormData();
-				this.$emit("submit", _formData);
+				var data = {
+					formData: _formData,
+					attachList: this.attachList
+				};
+				this.$emit("submit", data);
 			},
 			onClick_delBtn($name, $index)
 			{

@@ -1,5 +1,5 @@
 var _list = [], _hash = {};
-var _childHash = {};
+var _staffHash = {};
 export default class StaffPool {
 	constructor()
 	{
@@ -49,8 +49,18 @@ export default class StaffPool {
 
 	getChildById($id)
 	{
-		return _childHash[$id];
+		return _staffHash[$id];
 	}
+
+	removeChild($id, $childId)
+	{
+		var index = _staffHash[$id].children.indexOf(_staffHash[$childId]);
+		if (index >= 0)
+		{
+			_staffHash[$id].children.splice(index, 1)
+		}
+	}
+
 	get list()
 	{
 		return _list;
@@ -89,19 +99,19 @@ function updateData($dObj)
 {
 	$dObj.hasOwnProperty("stationId") && (this.id = $dObj.stationId);
 	$dObj.hasOwnProperty("stationName") && (this.name = $dObj.stationName);
-	if($dObj.hasOwnProperty("auditorUserPageResult"))
+	if ($dObj.hasOwnProperty("auditorUserPageResult"))
 	{
 		var staff = new Staff();
 		this.children = staff.update($dObj.auditorUserPageResult);
 	}
 }
 
-
 class Staff {
 	constructor()
 	{
 		this.listData = [];
 	}
+
 	update($list)
 	{
 		if (!Array.isArray($list))
@@ -157,7 +167,7 @@ function createStaff($dObj)
 
 function updateStaff($dObj)
 {
-	$dObj.hasOwnProperty("id") && (this.id = $dObj.userId)
+	$dObj.hasOwnProperty("userId") && (this.id = $dObj.userId)
 	$dObj.hasOwnProperty("name") && (this.name = $dObj.name);
 	$dObj.hasOwnProperty("avatar") && (this.avatar = $dObj.avatar);
 	$dObj.hasOwnProperty("companyName") && (this.companyName = $dObj.companyName);
