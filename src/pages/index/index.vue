@@ -153,7 +153,6 @@
 			{
 				g.net.call(g.param.delPicAccess, {fileName: this.avatar}).then(() =>
 				{
-					trace(1111);
 				}, (err) =>
 				{
 					this.avatar = "";
@@ -243,14 +242,6 @@
 				this.errData[$type] = "";
 				this.$forceUpdate();
 			},
-			onChange_upload(e)
-			{
-				var file = e.target.files[0];
-				var fileName = file.name;
-				var fileSize = file.size;
-				fileSize = Math.floor(fileSize / 1048576 * 100) / 100 + "MB";
-				trace(fileName + "（" + fileSize + "）");
-			},
 			checkPhone()
 			{
 				if (!this.phone)
@@ -275,23 +266,18 @@
 				this.checkPhone();
 				if (!this.code)
 				{
-					this.errData.code = "手机号码不能为空";
+					this.errData.code = "验证码不能为空";
 					_isValid = false;
 				}
 				else if (!g.param.codeReg.test(this.code))
 				{
-					this.errData.code = "手机格式有误";
+					this.errData.code = "验证码格式有误";
 					_isValid = false;
 				}
 				this.$forceUpdate();
 			},
 			checkPersonalInfo()
 			{
-//				if (!this.avatar)
-//				{
-//					this.errData.avatar = "请上传头像信息";
-//					_isValid = false;
-//				}
 
 				if (this.telphone && !g.param.telphoneReg.test(this.telphone))
 				{

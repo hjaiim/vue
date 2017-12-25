@@ -2,8 +2,9 @@
  * Created by Administrator on 2017/12/11.
  */
 var _list = [];
-var _allList = [];
 var _hash = {};
+var _allList = [];
+
 export default class StaticRightPool {
 	constructor()
 	{

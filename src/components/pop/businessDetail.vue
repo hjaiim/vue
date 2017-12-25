@@ -17,8 +17,8 @@
 						<div>
 							<p class="from-group">
 								<span class="form-title">附件下载</span>
-								<span class="form-trap file-download pointer">合同文件.doc</span>
-								<span class="form-trap file-download pointer">合同细节.doc</span>
+								<span class="form-trap file-download pointer"
+									  v-for="attach in businessData.attachList">{{attach.name}}</span>
 							</p>
 						</div>
 					</div>
@@ -63,7 +63,7 @@
 								<textarea class="examine left" v-model="opinion"></textarea>
 							</p>
 							<p class="from-group clear" v-if="businessData.hasNext">
-								<span class="exam-btn">选择后续人</span>
+								<span class="exam-btn" @click="onClick_selectNext">选择后续人</span>
 							</p>
 
 							<p class="from-group clear" v-if="businessData.hasAttaches">
@@ -110,7 +110,7 @@
 				formData: {},
 				status: 1,
 				opinion: "",
-				hasIframe:true,
+				hasIframe: true,
 				businessData: {
 					taskProperties: {}
 				}
@@ -176,6 +176,10 @@
 			onClick_closeBtn()
 			{
 				this.$emit("close", false);
+			},
+			onClick_selectNext()
+			{
+
 			},
 			onClick_submitBtn($status)
 			{

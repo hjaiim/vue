@@ -309,6 +309,8 @@
 			},
 			updateUrl()
 			{
+				debugger;
+
 				g.url = {
 					path: "/oppman",
 					query: {

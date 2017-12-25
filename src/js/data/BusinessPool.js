@@ -131,7 +131,7 @@ function updateData($dObj, $recordId)
 	$dObj.hasOwnProperty("auditStatusDesc") && (this.auditStatusDesc = $dObj.auditStatusDesc);
 	$dObj.hasOwnProperty("boFormData") && (this.formData = JSON.parse($dObj.boFormData));
 	$dObj.hasOwnProperty("auditStage") && (this.auditStage = $dObj.auditStage);
-	$dObj.hasOwnProperty("attachs") && (this.attachList = $dObj.attachs);
+	$dObj.hasOwnProperty("attachs") && (this.attachList = JSON.parse($dObj.attachs));
 	$dObj.hasOwnProperty("creatorId") && (this.creatorId = $dObj.creatorId);
 	$dObj.hasOwnProperty("creatorName") && (this.creatorName = $dObj.creatorName);
 	$dObj.hasOwnProperty("comId") && (this.customerId = $dObj.comId);
@@ -221,12 +221,12 @@ function updateRecord($dObj)
 	$dObj.hasOwnProperty("stationName") && (this.positionName = $dObj.stationName);
 	$dObj.hasOwnProperty("auditorTime") && (this.auditorTime = g.timeTool.getFullDate($dObj.auditorTime));
 	$dObj.hasOwnProperty("auditSuggest") && (this.opinion = $dObj.auditSuggest);
-	if($dObj.hasOwnProperty("auditResult"))
+	if ($dObj.hasOwnProperty("auditResult"))
 	{
 		$dObj.auditResult == 1 && (this.result = "已通过" );
 		$dObj.auditResult == 2 && (this.result = "已退回" );
 	}
-	$dObj.hasOwnProperty("attachs") && !!$dObj.attachs && (this.attachList = $dObj.attachs.split(';'));
+	$dObj.hasOwnProperty("attachs") && !!$dObj.attachs && (this.attachList = JSON.parse($dObj.attachs));
 	$dObj.hasOwnProperty("createTime") && (this.createTime = $dObj.createTime);
 	$dObj.hasOwnProperty("orderId") && (this.orderId = $dObj.orderId);
 	$dObj.hasOwnProperty("taskTodoId") && (this.taskTodoId = $dObj.taskTodoId);

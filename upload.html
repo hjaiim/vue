@@ -83,8 +83,8 @@
 			$("#fileBtn").hide();
 			$("#packageBtn").hide();
 			$("#cancelBtn").show();
-			$("#redirectUrl").val(urlData.query.redirectUrl);
-			$("#form1")[0].action = "http://192.168.12.219:8001/file/upload?type" + urlData.query.type
+			$("#form1")[0].action =
+					"http://192.168.12.219:8001/file/upload?type=" + urlData.query.type + "&fileName=" + fileName + "&redirectUrl=" + urlData.query.redirectUrl;
 			$("#submit").click();
 		}
 	}

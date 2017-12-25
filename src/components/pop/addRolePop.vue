@@ -75,7 +75,7 @@
 			}
 		},
 		watch: {
-			currId($val)
+			isShowPopView($val)
 			{
 				this.init();
 			}
@@ -92,7 +92,6 @@
 					this.checkedList = roleData.rights.split(',').map(function (item)
 					{
 						return int(item);
-
 					});
 				}
 				else

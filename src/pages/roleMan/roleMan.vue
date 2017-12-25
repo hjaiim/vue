@@ -59,6 +59,7 @@
 	import CommonPage from "../../components/page.vue";
 	import DeletePop from "../../components/pop/deletePop.vue";
 	import AddRolePop from "../../components/pop/addRolePop.vue";
+	import {searchRoleList} from "./roleMan";
 	var _params = null;
 	var _delId = 0;
 	export default{
@@ -94,7 +95,8 @@
 			routerUpdated()
 			{
 				this.roleList = g.data.searchRolePool.list;
-				this.$nextTick(() => {
+				this.$nextTick(() =>
+				{
 					this.tdWidth = this.$refs['roleCon'].clientWidth;
 				})
 			},
@@ -134,8 +136,14 @@
 				this.isShowRolePop = false;
 				if ($result)
 				{
-					this.currPage = 1;
-					this.updateUrl();
+					_params = {
+						page: 1,
+						pageSize: 10
+					};
+					searchRoleList(_params).then(() =>
+					{
+						this.routerUpdated();
+					})
 				}
 			},
 			onChange_pageCom($page)

@@ -23,7 +23,7 @@
 					<tr v-for="(item,index) in positionList">
 						<td><span class="rank-num">{{index+1}}</span></td>
 						<td>{{item.name}}</td>
-						<td>{{item.type}}</td>
+						<td>{{item.typeDesc}}</td>
 						<td>{{item.creator}}</td>
 						<td>{{item.createTime}}</td>
 						<td>
