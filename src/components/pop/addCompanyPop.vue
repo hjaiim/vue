@@ -7,7 +7,8 @@
 				<div class="company-message">
 					<p class="from-group">
 						<span class="form-title">公司名称</span>
-						<input-bar class="form-control company-input" placeholder="" type="text"
+						<input-bar class="form-control " :class="currentId != 0?'company-input':''" placeholder=""
+								   type="text"
 								   :readonly="currentId != 0"
 								   v-model="name" :errmsg="errData.name" @focus="onFocus_inputBar('name')"></input-bar>
 						<span class="requied" v-show="currentId == 0">*</span>
