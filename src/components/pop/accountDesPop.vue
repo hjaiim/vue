@@ -153,7 +153,7 @@
 			}
 		},
 		watch: {
-			currId($val)
+			isShowPopView($val)
 			{
 				this.init();
 			}
@@ -190,8 +190,8 @@
 				};
 				g.net.call("user/updateUserAuth", _params).then(($data) =>
 				{
-					this.$emit("close", true);
 					g.ui.toast("已认证该用户");
+					this.$emit("close", true);
 				})
 			},
 			onClose_pop()

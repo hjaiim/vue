@@ -26,6 +26,8 @@ var _idCartFront = "";
 var _idCardBack = "";
 var _workCard = "";
 var _msgCount = 0;
+var _msgSwitch = 0;
+var _positionType = -1;
 
 export default class UserInfo {
 	constructor()
@@ -62,8 +64,10 @@ export default class UserInfo {
 		$dObj.hasOwnProperty('authStatus') && (_authStatus = $dObj.authStatus);
 		$dObj.hasOwnProperty('remark') && (_remark = $dObj.remark);
 		$dObj.hasOwnProperty('idcardImgA') && (_idCartFront = $dObj.idcardImgA);
-		$dObj.hasOwnProperty('idcardImgB') && (_idCardBack = $dObj.idcardImgB)		;
+		$dObj.hasOwnProperty('idcardImgB') && (_idCardBack = $dObj.idcardImgB);
 		$dObj.hasOwnProperty('workCardImg') && (_workCard = $dObj.workCardImg);
+		$dObj.hasOwnProperty('msgSwitch') && (_msgSwitch = $dObj.msgSwitch);
+		$dObj.hasOwnProperty('stationType') && (_positionType = $dObj.stationType);
 	}
 
 	get id()
@@ -156,6 +160,11 @@ export default class UserInfo {
 		return _positionName;
 	}
 
+	get positionType()
+	{
+		return _positionType;
+	}
+
 	get authStatus()
 	{
 		return _authStatus;
@@ -186,6 +195,11 @@ export default class UserInfo {
 		return _msgCount;
 	}
 
+	get msgSwitch()
+	{
+		return _msgSwitch;
+	}
+
 	removeAll()
 	{
 		_id = 0;
@@ -211,5 +225,6 @@ export default class UserInfo {
 		_idCartFront = "";
 		_idCardBack = "";
 		_workCard = "";
+		_msgSwitch = 0;
 	}
 }

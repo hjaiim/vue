@@ -64,7 +64,7 @@ function updateData($dObj)
 		return;
 	}
 
-	$dObj.hasOwnProperty("companyName") && (this.comName = $dObj.companyName);
+	$dObj.hasOwnProperty("companyName") && (this.custComName = $dObj.companyName);
 	$dObj.hasOwnProperty("type") && (this.businessId = $dObj.type);
 	$dObj.hasOwnProperty("statusList") && (this.auditStatusList = JSON.parse($dObj.statusList).join(','));
 	$dObj.hasOwnProperty("startTime") && (this.startTime = g.timeTool.getFullDate($dObj.startTime), true );

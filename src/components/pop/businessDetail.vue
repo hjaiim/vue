@@ -69,7 +69,7 @@
 								<span class="form-title">上传附件</span>
 								<iframe name="fileUpload" v-if="hasIframe" class="iframe-wrap"
 										:src="g.path.base+'upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
-								<span v-for="attach in attachList">{{attach.name}}/{{attach.size}}KB</span>
+								<p v-for="attach in attachList">{{attach.name}}/{{attach.size}}KB</p>
 
 							</p>
 						</div>
@@ -111,6 +111,7 @@
 				status: 1,
 				opinion: "",
 				hasIframe: true,
+				attachList:[],
 				businessData: {
 					taskProperties: {}
 				}
@@ -179,7 +180,7 @@
 			},
 			onClick_selectNext()
 			{
-
+				alert("功能欠缺")
 			},
 			onClick_submitBtn($status)
 			{
@@ -187,7 +188,7 @@
 					orderId: this.currId,
 					auditResult: 1,
 					auditSuggest: "可以通过",
-					todoId: this.businessData.engineResult.todoId
+					todoId: this.businessData.todoId
 				};
 				g.net.call("bo/saveAuditRecord", _params).then(($data) =>
 				{

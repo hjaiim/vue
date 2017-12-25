@@ -260,6 +260,7 @@
 			},
 			uploadComplete($data)
 			{
+				trace("$data",$data);
 				this[$data.subType] = $data.fileName;
 			},
 			onClick_doc(e)

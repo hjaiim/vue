@@ -32,7 +32,7 @@
 			}
 		},
 		watch: {
-			currId($val)
+			isShowPopView($val)
 			{
 				this.init();
 			}

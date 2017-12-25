@@ -106,7 +106,7 @@ function createData($dObj)
 	d.customerCompName = "";
 	d.departmentId = "";
 	d.operation = 0;
-	d.engineResult = {};
+	d.todoId = 0;
 	d.taskProperties = {};
 	d.hasApproved = false;
 	d.hasRejected = false;
@@ -140,7 +140,7 @@ function updateData($dObj, $recordId)
 	$dObj.hasOwnProperty("custComName") && (this.customerCompName = $dObj.custComName);
 	$dObj.hasOwnProperty("createTime") && (this.createTime = g.timeTool.getFullDate($dObj.createTime, true));
 	$dObj.hasOwnProperty("optType") && (this.operation = $dObj.optType);
-	$dObj.hasOwnProperty("engineResult") && (this.engineResult = __merge({}, $dObj.engineResult));
+	$dObj.hasOwnProperty("todoId") && (this.todoId = $dObj.todoId);
 	$dObj.hasOwnProperty("taskProperties") && (this.taskProperties = __merge({}, JSON.parse($dObj.taskProperties)));
 	if (this.taskProperties.process_button)
 	{

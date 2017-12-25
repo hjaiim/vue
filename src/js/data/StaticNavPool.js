@@ -95,6 +95,7 @@ function createData($obj)
 	d.name = $obj.name;
 	d.desc = $obj.desc;
 	d.rightId = $obj.rightId;
+	d.positionJudge = $obj.positionJudge;
 	d.highLightList = $obj.highLightList;
 	var child = new Child();
 	d.children = child.update($obj.children);

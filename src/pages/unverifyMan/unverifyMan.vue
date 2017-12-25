@@ -66,6 +66,8 @@
 	import DropList from "../../components/dropList.vue";
 	import InputBar from "../../components/inputBar.vue";
 	import AccountDesPop from "../../components/pop/accountDesPop.vue"
+	import {searchUnverifyList} from "./unverifyMan";
+
 	export default{
 		created(){
 			this.routerUpdated();
@@ -126,9 +128,12 @@
 			onClose_accountDesPop($result)
 			{
 				this.isShowDetailPop = false;
-				if($result)
+				if ($result)
 				{
-					this.updateUrl();
+					searchUnverifyList().then(() =>
+					{
+						this.routerUpdated();
+					})
 				}
 			},
 			onClick_detailBtn($id)

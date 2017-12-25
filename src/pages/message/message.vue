@@ -21,7 +21,7 @@
 						<p class="msg-txt">开启手机短信提醒</p>
 						<div class="switch-con pointer" @click="onClick_switch">
 							<label class="switch-label pointer">
-								<input type="checkbox" class="mui-switch mui-switch-anim pointer">
+								<input type="checkbox" v-model="msgSwitch" class="mui-switch mui-switch-anim pointer">
 							</label>
 						</div>
 					</div>
@@ -98,6 +98,7 @@
 				typeList: [],
 				currPage: 1,
 				delList: [],
+				msgSwitch: true,
 				checkedAll: false,
 				isShowDetailPop: false,
 				isShowAllDeletePop: false
@@ -131,6 +132,7 @@
 			routerUpdated()
 			{
 				this.msgList = g.data.searchMessagePool.list;
+				this.msgSwitch = g.data.userInfo.msgSwitch;
 				var typeList = g.vue.getQuery('typeList', "[0,1]");
 				this.typeList = JSON.parse(typeList).map(function (item)
 				{
@@ -216,17 +218,17 @@
 				if (this.checkedAll)
 				{
 					this.checkedAll = false;
-					for(var item of this.msgList)
+					for (var item of this.msgList)
 					{
-						item.update({checked:false})
+						item.update({checked: false})
 					}
 				}
 				else
 				{
 					this.checkedAll = true;
-					for(var item of this.msgList)
+					for (var item of this.msgList)
 					{
-						item.update({checked:true})
+						item.update({checked: true})
 					}
 				}
 			},
@@ -253,7 +255,7 @@
 				{
 					g.net.call('message/delMessage', {msgIds: this.delList.join(',')}).then(($data) =>
 					{
-						for(var id of this.delList)
+						for (var id of this.delList)
 						{
 							g.data.searchMessagePool.remove(id);
 						}

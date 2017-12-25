@@ -292,11 +292,7 @@
 				var businessData = g.data.searchBusinessPool.getDataById($id);
 				_params = {
 					orderId: $id,
-					todoId: businessData.engineResult.todoId,
-					processTemplateId: businessData.engineResult.processTemplateId,
-					processInstanceId: businessData.engineResult.processInstanceId,
-					taskId: businessData.engineResult.taskId,
-					taskInstanceId: businessData.engineResult.taskInstanceId
+					todoId: businessData.todoId,
 				};
 				g.net.call("bo/auditOrderDetail", _params).then(($data) =>
 				{

@@ -34,7 +34,17 @@
 				{
 					if (g.data.rightPool.hasRight(item.rightId))
 					{
-						this.navList.push(item);
+						if (item.positionJudge)
+						{
+							if(g.data.userInfo.positionType != -1)
+							{
+								this.navList.push(item);
+							}
+						}
+						else
+						{
+							this.navList.push(item);
+						}
 					}
 				}
 			},

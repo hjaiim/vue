@@ -67,7 +67,7 @@
 			}
 		},
 		watch: {
-			currId()
+			isShowPopView()
 			{
 				this.init();
 			}

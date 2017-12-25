@@ -16,7 +16,7 @@
 	var data = {
 		subType:subType,
 		fileName:fileName,
-		size:urlObj.query.size
+		size:(urlObj.query.size/1000).toFixed(2)
 	};
 	window.parent.uploadComplete(data);
 	//	window.dispatchEvent(evt)
