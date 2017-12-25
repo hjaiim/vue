@@ -71,5 +71,6 @@ export function clearAll()
 	searchBusinessPool.removeAll();
 	searchUnverifyPool.removeAll();
 	searchRolePool.removeAll();
+	staticRightPool.removeAll();
 	staffPool.removeAll();
 }

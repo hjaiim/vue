@@ -113,7 +113,6 @@
 				formData: {},
 				status: 1,
 				opinion: "",
-				currId: "",
 				hasIframe: true,
 				attachList: [],
 				isShowOrderManPop: true,
