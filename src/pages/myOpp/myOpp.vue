@@ -96,6 +96,7 @@
 		</div>
 		<business-detail-pop :isShowPopView="isShowDetailPop" @close="onClose_detailPop"
 							 :currId="currId"></business-detail-pop>
+
 	</com-layout>
 
 </template>
@@ -107,7 +108,7 @@
 	import BusinessDetailPop from "../../components/pop/businessDetail.vue";
 	import CommonDate from "../../components/dateBox.vue";
 	import InputBar from "../../components/inputBar.vue";
-
+	import ChooseManPop from "../../components/pop/chooseManPop.vue"
 	var _dateType = "", _params = null;
 	export default{
 		created(){
@@ -136,7 +137,8 @@
 			CommonPage,
 			BusinessDetailPop,
 			CommonDate,
-			InputBar
+			InputBar,
+			ChooseManPop
 		},
 		computed: {
 			currType()

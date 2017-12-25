@@ -17,7 +17,8 @@
 						<div>
 							<p class="from-group">
 								<span class="form-title">附件下载</span>
-								<a class="form-trap file-download pointer ani-time" v-for="attach in businessData.attachList" href="###" download>{{attach.name}}</a>
+								<a class="form-trap file-download pointer ani-time"
+								   v-for="attach in businessData.attachList" href="###" download>{{attach.name}}</a>
 							</p>
 						</div>
 					</div>
@@ -82,6 +83,7 @@
 				<div class="btn-submit pop-btn top-btn right pointer action-btn ani-time" @click="onClick_submitBtn">提交
 				</div>
 			</div>
+			<choose-man-pop :isShowViewPop="isShowOrderManPop" @close="onClose_orderManPop"></choose-man-pop>
 		</div>
 	</view-popup>
 </template>
@@ -96,6 +98,7 @@
 	import BusinessType5 from "../businessDetail/businessType5.vue";
 	import BusinessType6 from "../businessDetail/businessType6.vue";
 	import BusinessType7 from "../businessDetail/businessType7.vue";
+	import ChooseManPop from "./chooseManPop.vue"
 	var _params = null;
 	export default{
 		created()
@@ -111,6 +114,7 @@
 				status: 1,
 				opinion: "",
 				hasIframe: true,
+				isShowOrderManPop: true,
 				businessData: {
 					taskProperties: {}
 				}
@@ -125,7 +129,8 @@
 			BusinessType4,
 			BusinessType5,
 			BusinessType6,
-			BusinessType7
+			BusinessType7,
+			ChooseManPop
 		},
 		props: {
 			isShowPopView: {
@@ -158,7 +163,10 @@
 			uploadComplete($data)
 			{
 				this.hasIframe = false;
-				var attach = {size: $data.size, name: $data.fileName};
+				var attach = {
+					size: $data.size,
+					name: $data.fileName
+				};
 				this.attachList.push(attach);
 				setTimeout(()=>
 				{
@@ -197,6 +205,9 @@
 					g.func.dealErr(err);
 				})
 			},
+			onClose_orderManPop(){
+				this.isShowOrderManPop = false;
+			}
 		}
 	}
 </script>

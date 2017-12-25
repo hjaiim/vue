@@ -991,6 +991,7 @@ input {
   right: 0px;
   border-radius: 3px;
 }
+
 .iframe-wrap {
   position: absolute;
   width: 100%;
@@ -999,5 +1000,66 @@ input {
   top: 0;
   opacity: 0;
   overflow: hidden;
+}
+
+.arrow-top {
+  width: 14px;
+  height: 14px;
+  position: relative;
+  &:after, &:before {
+	width: 0;
+	height: 0;
+	display: block;
+	position: absolute;
+	content: "";
+	left: 0;
+	top: 0;
+	z-index: 1;
+	border-top: 7px transparent dashed;
+	border-left: 7px transparent dashed;
+	border-right: 7px transparent dashed;
+	border-bottom: 7px white solid;
+	overflow: hidden;
+  }
+  &:after {
+	top: 1px;
+	border-bottom: 7px #f7fbfc solid;
+  }
+  &:before {
+	z-index: 2;
+	border-bottom: 7px #333333 solid;
+  }
+
+}
+
+.arrow-bottom {
+  width: 14px;
+  height: 14px;
+  position: relative;
+  top: 4px;
+  &:after, &:before {
+	width: 0;
+	content: "";
+	height: 0;
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 1;
+	border-bottom: 7px transparent dashed;
+	border-left: 7px transparent dashed;
+	border-right: 7px transparent dashed;
+	border-top: 7px white solid;
+	overflow: hidden;
+  }
+  &:before {
+	border-top: 7px #f7fbfc solid;
+	z-index: 2;
+  }
+  &:after {
+	top: 1px;
+	border-top: 7px #333333 solid;
+  }
+
 }
 
