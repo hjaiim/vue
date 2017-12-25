@@ -53,6 +53,7 @@ export function typeOf(obj)
 	};
 	return map[toString.call(obj)];
 }
+
 export function getBase64($fileList, $quality)
 {
 	var list = [], promises = [];
@@ -99,67 +100,28 @@ export function getBase64($fileList, $quality)
 	}
 }
 
-export function looseEqual(a, b)
+export function updateUserInfo()
 {
-	if (typeOf(a) == "object" && typeOf(b) == "object")
+	if (!g.data.userInfo.username && g.data.get("userInfo"))
 	{
-		try
-		{
-			return JSON.stringify(a) === JSON.stringify(b)
-		}
-		catch (e)
-		{
-			// possible circular reference
-			return a === b
-		}
-	}
-	else if (typeOf(a) == "array" && typeOf(b) == "array")
-	{
-
-		a = a.sort(function (x, y)
-		{
-			return x - y;
-		});
-		b = b.sort(function (x, y)
-		{
-			return x - y;
-		});
-
-		try
-		{
-			return JSON.stringify(a) === JSON.stringify(b)
-		}
-		catch (e)
-		{
-			// possible circular reference
-			return a === b
-		}
-// 		if(a.length > 0 && b.length > 0)
-// 		{
-//
-// 		}
-// 		else
-// 		{
-// 			return false;
-// 		}
-
-	}
-	else if (typeOf(a) != "object" && typeOf(b) != "object")
-	{
-		return String(a) === String(b)
-	}
-	else
-	{
-		return false
+		var data = JSON.parse(g.data.get("userInfo"));
+		g.data.userInfo.update(data);
 	}
 }
 
+export function updateRightList()
+{
+	if (!g.data.rightPool.list.length && g.data.get("rightList"))
+	{
+		var data = JSON.parse(g.data.get("rightList"));
+		g.data.rightPool.update(data);
+	}
+}
 
 export function firstUpperCase(str)
 {
 	return str.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase());
 }
-
 
 export function insertOneOrZero($list, $item)
 {

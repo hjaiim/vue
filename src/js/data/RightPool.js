@@ -81,5 +81,5 @@ export default class RightPool {
 
 function createData($item)
 {
-	return 	$item.permissionId;
+	return 	int($item.permissionId);
 }

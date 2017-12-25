@@ -36,11 +36,14 @@ export default class UserInfo {
 	 * 更新用户信息
 	 * @param $dObj 用户信息数据结构
 	 */
+
 	update($dObj)
 	{
 		$dObj.hasOwnProperty('userId') && (_id = $dObj.userId);
 		$dObj.hasOwnProperty('logon') && (_username = $dObj.logon);
 		$dObj.hasOwnProperty('name') && (_name = $dObj.name);
+		$dObj.hasOwnProperty('authStatus') && (_authStatus = $dObj.authStatus);
+		$dObj.hasOwnProperty('msgCount') && (_msgCount = $dObj.msgCount);
 		$dObj.hasOwnProperty('mobile') && (_phone = $dObj.mobile);
 		$dObj.hasOwnProperty('roleId') && (_roleId = $dObj.roleId);
 		$dObj.hasOwnProperty('roleName') && (_roleName = $dObj.roleName);
@@ -61,8 +64,6 @@ export default class UserInfo {
 		$dObj.hasOwnProperty('idcardImgA') && (_idCartFront = $dObj.idcardImgA);
 		$dObj.hasOwnProperty('idcardImgB') && (_idCardBack = $dObj.idcardImgB)		;
 		$dObj.hasOwnProperty('workCardImg') && (_workCard = $dObj.workCardImg);
-		$dObj.hasOwnProperty('authStatus') && (_authStatus = $dObj.authStatus);
-		$dObj.hasOwnProperty('msgCount') && (_msgCount = $dObj.msgCount);
 	}
 
 	get id()

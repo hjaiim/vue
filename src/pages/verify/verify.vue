@@ -136,11 +136,9 @@
 							<img :src="g.path.images+'/upload.png'" alt="">
 							<p class="upload-text">
 								点击上传工作证照片<br>
-                                <span>
-                                    支持jpg/gif/png格式<br>
-                                    不超过10M长<800,<br>
-                                    宽<200
-                                </span>
+								支持jpg/png格式</br>
+								不超过5M</br>
+								</span>
 							</p>
 						</div>
 						<div class="img-contain absolute" v-show="workCard">
@@ -220,6 +218,7 @@
 		methods: {
 			init()
 			{
+
 				this.userInfo = g.data.userInfo;
 				this.authStatus = this.userInfo.authStatus;
 				if (this.authStatus != 0)

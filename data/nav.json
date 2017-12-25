@@ -47,7 +47,7 @@
 		"path": "/companyman",
 		"parentId": "platform",
 		"highLightList": ["/companyman"],
-		"rightId": 7,
+		"rightId": 9,
 		"icon": "/plat1.png",
 		"lightIcon": "/plat1-active.png"
 	  },
@@ -56,7 +56,7 @@
 		"path": "/positionman",
 		"parentId": "platform",
 		"highLightList": ["/positionman"],
-		"rightId": 9,
+		"rightId": 10,
 		"icon": "/plat2.png",
 		"lightIcon": "/plat2-active.png"
 	  },
@@ -65,7 +65,7 @@
 		"path": "/roleman",
 		"parentId": "platform",
 		"highLightList": ["/roleman"],
-		"rightId": 8,
+		"rightId": 11,
 		"icon": "/plat3.png",
 		"lightIcon": "/plat3-active.png"
 	  }
@@ -83,7 +83,7 @@
 		"path": "/accountman",
 		"parentId": "staff",
 		"highLightList": ["/accountman"],
-		"rightId": 10,
+		"rightId": 13,
 		"icon": "/account1.png",
 		"lightIcon": "/account1-active.png"
 	  }
@@ -101,7 +101,7 @@
 		"path": "/oppapply",
 		"parentId": "business",
 		"highLightList": ["/oppapply"],
-		"rightId": 11,
+		"rightId": 14,
 		"icon": "/per1.png",
 		"lightIcon": "/per1-active.png"
 	  },
@@ -110,7 +110,7 @@
 		"path": "/oppman",
 		"parentId": "business",
 		"highLightList": ["/oppman"],
-		"rightId": 12,
+		"rightId": 15,
 		"icon": "/per1.png",
 		"lightIcon": "/per1-active.png"
 	  },
@@ -119,7 +119,7 @@
 		"path": "/myopp",
 		"parentId": "business",
 		"highLightList": ["/myopp"],
-		"rightId": 13,
+		"rightId": 16,
 		"icon": "/per1.png",
 		"lightIcon": "/per1-active.png"
 	  }

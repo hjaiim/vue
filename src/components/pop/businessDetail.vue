@@ -66,10 +66,11 @@
 								<span class="exam-btn">选择后续人</span>
 							</p>
 
-							<p class="from-group clear" v-if="businessData.hasAttches">
+							<p class="from-group clear" v-if="businessData.hasAttaches">
 								<span class="form-title">上传附件</span>
-								<iframe name="fileUpload"
-										:src="g.path.base+'upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppAudit'"></iframe>
+								<iframe name="fileUpload" v-if="hasIframe"
+										:src="g.path.base+'upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
+								<span v-for="attach in attachList">{{attach.name}}/{{attach.size}}KB</span>
 							</p>
 						</div>
 
@@ -109,6 +110,7 @@
 				formData: {},
 				status: 1,
 				opinion: "",
+				hasIframe:true,
 				businessData: {
 					taskProperties: {}
 				}
@@ -151,6 +153,17 @@
 					this.formData = this.businessData.formData;
 					this.oppType = this.businessData.type;
 				}
+				window.uploadComplete = this.uploadComplete;
+			},
+			uploadComplete($data)
+			{
+				this.hasIframe = false;
+				var attach = {size: $data.size, name: $data.fileName};
+				this.attachList.push(attach);
+				setTimeout(()=>
+				{
+					this.hasIframe = true;
+				}, 200)
 			},
 			onClose_pop()
 			{

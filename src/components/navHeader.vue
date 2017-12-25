@@ -18,7 +18,8 @@
 		data(){
 			return {
 				g: g,
-				currId: ""
+				currId: "",
+				navList: []
 			}
 		},
 		components: {
@@ -27,7 +28,15 @@
 		methods: {
 			init()
 			{
-				this.navList = g.data.staticNavPool.list;
+				g.func.updateRightList();
+				var navList = __merge([], g.data.staticNavPool.list);
+				for (var item of navList)
+				{
+					if (g.data.rightPool.hasRight(item.rightId))
+					{
+						this.navList.push(item);
+					}
+				}
 			},
 			update($id)
 			{

@@ -28,6 +28,10 @@
 	import g from "../global";
 	import loginManager from './../js/manager/LoginManager';
 	export default{
+		created()
+		{
+			g.func.updateUserInfo();
+		},
 		data(){
 			return {
 				g: g

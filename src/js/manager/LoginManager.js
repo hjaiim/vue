@@ -7,7 +7,6 @@ var _lastUrl = "";
 
 function init($callback)
 {
-
 	g.addEventListener("APP_IS_LOGIN", onAppLogin_global);
 	g.net.call('user/queryUserIsLogin').then((d) =>
 	{
@@ -23,6 +22,7 @@ function init($callback)
 function checkLogin($to, $next, $callBack)
 {
 	_lastUrl = "";
+	g.func.updateUserInfo();
 	var passUrl = ['/login', '/resetpwd', '/register'];
 	if (_isLogin)
 	{

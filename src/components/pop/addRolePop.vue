@@ -83,9 +83,7 @@
 		methods: {
 			init()
 			{
-				var listData = __merge([], g.data.staticRightPool.list);
-				listData.splice(0, 1);
-				this.listData = listData;
+				this.listData = __merge([], g.data.staticRightPool.list);
 				if (this.currId)
 				{
 					var roleData = g.data.searchRolePool.getDataById(this.currId);

@@ -75,7 +75,17 @@
 			},
 			update($url)
 			{
+				g.func.updateRightList();
 				this.navItem = g.data.staticNavPool.getDataById(this.currentId);
+				for(var item of this.navItem.children)
+				{
+					var index = this.navItem.children.indexOf(item);
+					if(!g.data.rightPool.hasRight(item.rightId))
+					{
+						this.navItem.children.splice(index,1);
+					}
+				}
+
 				if (this.needInit)
 				{
 					g.url = $url || (this.navItem.children && this.navItem.children[0].path);

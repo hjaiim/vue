@@ -13,8 +13,9 @@
 		html, body {
 			height: 100%;
 			cursor: pointer;
-			opacity:0;
+			opacity: 0;
 		}
+
 		form {
 			height: 100%;
 			width: 100%;
@@ -25,6 +26,7 @@
 			height: 100%;
 			overflow: hidden;
 		}
+
 		.file-upload {
 			width: 100%;
 			height: 100%;
@@ -33,12 +35,11 @@
 	</style>
 </head>
 <body>
-<form id="form1" method="post" action="http://192.168.12.219:8001/file/upload" enctype="multipart/form-data"
+<form id="form1" method="post" enctype="multipart/form-data"
 	  name="form1">
 	<div class="none file-wrap">
 		<input type="file" name="btn" id="fileBtn" class="file-upload" onchange="onChange_fileBtn()">
 		<label id="fileName"></label>
-		<input type="text" style="display: none" name="type" id="type">
 		<input type="text" style="display: none" name="redirectUrl" id="redirectUrl">
 		<input type="submit" name="submit" id="submit" style="visibility: hidden;">
 		<!--<input type="button" name="cancel" id="cancelBtn" onclick="onClick_cancelBtn()" value="取消"-->
@@ -48,7 +49,22 @@
 </body>
 <script>
 
-	$("#cancelBtn").hide();
+	var urlData = queryUrl(window.location.href);
+	init();
+	function init()
+	{
+		if (urlData.query.type == "pic")
+		{
+			$("#fileBtn")[0].accept = "image/jpeg,image/x-png";
+		}
+		else
+		{
+			$("#fileBtn")[0].accept =
+					"application/msword,application/pdf,image/jpeg,image/x-png,	application/vnd.ms-excel,application/vnd.ms-powerpoint,text/plain,aplication/zip,aplication/rar"
+		}
+		$("#cancelBtn").hide();
+	}
+
 	function onChange_fileBtn(e)
 	{
 		if ($("#fileBtn")[0].files.length > 0)
@@ -57,26 +73,19 @@
 			var fileName = file.name;
 			var fileSize = file.size;
 			fileSize = Math.floor(fileSize / 1048576 * 100) / 100 + "MB";
+			if (fileSize >= 5)
+			{
+				var event = new Event("UPLOAD_ERROR");
+				window.dispatchEvent(event);
+			}
 			$("#fileName").html(fileName + "（" + fileSize + "）");
 			$("#fileBtn").hide();
 			$("#packageBtn").hide();
 			$("#cancelBtn").show();
-			var urlData = queryUrl(window.location.href);
 			$("#redirectUrl").val(urlData.query.redirectUrl);
-			$("#type").val(urlData.query.type);
-//			var parentWindow = parent.window;
-//			$("#form1").action =
-//					"http://192.168.12.219:8001/file/upload?type" + query.type + "&pictype=" + query.pictype +
-//					"&redirectUrl"+ query.redirectUrl;
-
+			$("#form1")[0].action = "http://192.168.12.219:8001/file/upload?type" + urlData.query.type
 			$("#submit").click();
 		}
-	}
-
-	function getPicType()
-	{
-		var urlData = queryUrl(window.location.href);
-		return urlData.query.picType;
 	}
 
 	function onClick_cancelBtn()
@@ -98,6 +107,11 @@
 		window.location.href = "http://{$host}/upload";
 	}
 
+	function getPicType()
+	{
+		var urlData = queryUrl(window.location.href);
+		return urlData.query.picType;
+	}
 	function queryUrl($query)
 	{
 		var res = {};
