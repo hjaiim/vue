@@ -113,7 +113,6 @@
 				formData: {},
 				status: 1,
 				opinion: "",
-				currId: "",
 				hasIframe: true,
 				attachList: [],
 				isShowOrderManPop: true,
@@ -189,10 +188,10 @@
 			},
 			onClick_selectNext()
 			{
-				this.isShowOrderManPop = true;
-				g.net.call("", orderId).then(($data) =>
+				g.net.call("/organizeQuery/getAuditStationLis", {orderId: this.currId}).then(($data) =>
 				{
 					g.data.staffPool.update($data);
+					this.isShowOrderManPop = true;
 				})
 			},
 			onClick_submitBtn($status)
