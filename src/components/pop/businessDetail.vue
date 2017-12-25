@@ -17,7 +17,8 @@
 						<div>
 							<p class="from-group">
 								<span class="form-title">附件下载</span>
-								<a class="form-trap file-download pointer ani-time" v-for="attach in businessData.attachList" href="###" download>{{attach.name}}</a>
+								<a class="form-trap file-download pointer ani-time"
+								   v-for="attach in businessData.attachList" href="###" download>{{attach.name}}</a>
 							</p>
 						</div>
 					</div>
@@ -69,7 +70,7 @@
 								<span class="form-title">上传附件</span>
 								<iframe name="fileUpload" v-if="hasIframe" class="iframe-wrap"
 										:src="g.path.base+'upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
-								<p v-for="attach in attachList">{{attach.name}}/{{attach.size}}KB</p>
+							<p v-for="attach in attachList">{{attach.name}}/{{attach.size}}KB</p>
 
 							</p>
 						</div>
@@ -82,6 +83,7 @@
 				<div class="btn-submit pop-btn top-btn right pointer action-btn ani-time" @click="onClick_submitBtn">提交
 				</div>
 			</div>
+			<choose-man-pop :isShowViewPop="isShowOrderManPop" @close="onClose_orderManPop"></choose-man-pop>
 		</div>
 	</view-popup>
 </template>
@@ -96,6 +98,7 @@
 	import BusinessType5 from "../businessDetail/businessType5.vue";
 	import BusinessType6 from "../businessDetail/businessType6.vue";
 	import BusinessType7 from "../businessDetail/businessType7.vue";
+	import ChooseManPop from "./chooseManPop.vue"
 	var _params = null;
 	export default{
 		created()
@@ -110,8 +113,10 @@
 				formData: {},
 				status: 1,
 				opinion: "",
+				currId: "",
 				hasIframe: true,
-				attachList:[],
+				attachList: [],
+				isShowOrderManPop: true,
 				businessData: {
 					taskProperties: {}
 				}
@@ -126,7 +131,8 @@
 			BusinessType4,
 			BusinessType5,
 			BusinessType6,
-			BusinessType7
+			BusinessType7,
+			ChooseManPop
 		},
 		props: {
 			isShowPopView: {
@@ -159,7 +165,10 @@
 			uploadComplete($data)
 			{
 				this.hasIframe = false;
-				var attach = {size: $data.size, name: $data.fileName};
+				var attach = {
+					size: $data.size,
+					name: $data.fileName
+				};
 				this.attachList.push(attach);
 				setTimeout(()=>
 				{
@@ -180,7 +189,11 @@
 			},
 			onClick_selectNext()
 			{
-				alert("功能欠缺")
+				this.isShowOrderManPop = true;
+				g.net.call("", orderId).then(($data) =>
+				{
+					g.data.staffPool.update($data);
+				})
 			},
 			onClick_submitBtn($status)
 			{
@@ -198,6 +211,9 @@
 					g.func.dealErr(err);
 				})
 			},
+			onClose_orderManPop(){
+				this.isShowOrderManPop = false;
+			}
 		}
 	}
 </script>

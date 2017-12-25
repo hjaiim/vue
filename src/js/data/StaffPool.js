@@ -61,7 +61,6 @@ export default class StaffPool {
 		return _totalPage;
 	}
 
-
 	removeAll()
 	{
 		_list = [];
@@ -69,16 +68,12 @@ export default class StaffPool {
 	}
 }
 
-
 function createData($dObj)
 {
 	var d = {};
 	d.id = 0;
 	d.name = "";
-	d.company = "";
-	d.department = "";
-	d.position = "";
-	d.status = "";
+	d.children = [];
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -88,4 +83,30 @@ function createData($dObj)
 function updateData($dObj)
 {
 	$dObj.hasOwnProperty("id") && (this.id = $dObj.id)
+}
+
+class Staff {
+
+}
+
+function createStaff($dObj)
+{
+	var d = {};
+	d.id = 0;
+	d.name = "";
+	d.avatar = "";
+	d.companyName = "";
+	d.departmentName = "";
+	d.dutyName = "";
+	d.checked = false;
+	d.update = updateData.bind(d);
+	d.update($dObj);
+	return d;
+
+}
+
+function updateStaff($dObj)
+{
+	$dObj.hasOwnProperty("id") && (this.id = $dObj.id)
+	$dObj.hasOwnProperty("checked") && (this.checked = $dObj.checked);
 }
