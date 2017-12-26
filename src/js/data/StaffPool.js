@@ -80,6 +80,7 @@ export default class StaffPool {
 	{
 		_list = [];
 		_hash = {};
+		_staffHash = {};
 	}
 }
 

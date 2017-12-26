@@ -26,10 +26,10 @@
 						<div class="inner-content" v-for="item in manList">
 							<p class="deal-staff border-bottom" @click="onClick_arrowBtn(item.id)">{{item.name}}
 								<span class="right arrow-wrap center-flex pointer">
-									<i :class="idList.indexOf(item.id) >= 0?'arrow-bottom':'arrow-top'"></i></span>
+									<i :class="checkedList.indexOf(item.id) >= 0?'arrow-bottom':'arrow-top'"></i></span>
 							</p>
 							<ul class="list-menu border-bottom clear" v-for="childItem in item.children"
-								v-show="idList.indexOf(item.id) >= 0">
+								v-show="checkedList.indexOf(item.id) >= 0">
 								<li class="left">
 									<img :src="g.path.images+childItem.avatar" alt=""></li>
 								<li class="left">{{childItem.name}}</li>
@@ -63,7 +63,7 @@
 		data(){
 			return {
 				g: g,
-				idList: [],
+				checkedList: [],
 				manList: [],
 				childList: []
 			}
@@ -72,6 +72,9 @@
 			isShowViewPop: {
 				type: Boolean,
 				default: false
+			},
+			idList: {
+				type: Array
 			}
 		},
 		components: {
@@ -102,17 +105,28 @@
 			init()
 			{
 				this.manList = g.data.staffPool.list;
-				for (var id of this.childList)
+				this.childList = __merge([], this.idList);
+				for (var item of this.manList)
 				{
-					var data = g.data.staffPool.getChildById(id);
-					data.update({checked: false})
+					for (var child of item.children)
+					{
+						if (this.childList.indexOf(child.id) >= 0)
+						{
+							child.update({checked: true})
+						}
+						else
+						{
+							child.update({checked: false})
+						}
+					}
 				}
-				this.childList = [];
 			},
 			onClick_delBtn($id)
 			{
 				var index = this.childList.indexOf($id);
 				this.childList.splice(index, 1);
+				var data = g.data.staffPool.getChildById($id);
+				data.update({checked: false})
 			},
 			onClick_selectBtn($id)
 			{
@@ -131,14 +145,14 @@
 			},
 			onClick_arrowBtn($id)
 			{
-				var index = this.idList.indexOf($id);
+				var index = this.checkedList.indexOf($id);
 				if (index >= 0)
 				{
-					this.idList.splice(index, 1);
+					this.checkedList.splice(index, 1);
 				}
 				else
 				{
-					this.idList.push($id);
+					this.checkedList.push($id);
 
 				}
 			},

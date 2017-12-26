@@ -68,6 +68,9 @@
 							<p class="from-group clear examine-people" v-if="businessData.hasNext">
 								<span class="exam-btn" @click="onClick_selectNext">选择后续人</span>
 							</p>
+							<p>
+								<span v-for="item in childList">{{item.name}}</span>
+							</p>
 
 							<p class="from-group clear relative" v-if="businessData.hasAttaches">
 								<span class="form-title">上传附件</span>
@@ -90,7 +93,8 @@
 				<div class="btn-submit pop-btn top-btn right pointer action-btn ani-time" @click="onClick_submitBtn">提交
 				</div>
 			</div>
-			<choose-man-pop :isShowViewPop="isShowOrderManPop" @close="onClose_orderManPop"></choose-man-pop>
+			<choose-man-pop :isShowViewPop="isShowOrderManPop" @close="onClose_orderManPop"
+							:idList="idList"></choose-man-pop>
 		</div>
 	</view-popup>
 </template>
@@ -106,7 +110,7 @@
 	import BusinessType6 from "../businessDetail/businessType6.vue";
 	import BusinessType7 from "../businessDetail/businessType7.vue";
 	import ChooseManPop from "./chooseManPop.vue"
-	var _params = null, _childList = [], _childName = [];
+	var _params = null, _childName;
 	export default{
 		created()
 		{
@@ -119,6 +123,7 @@
 				oppType: 1,
 				formData: {},
 				status: 1,
+				idList: [],
 				opinion: "",
 				hasIframe: true,
 				attachList: [],
@@ -153,6 +158,18 @@
 			isShowPopView()
 			{
 				this.init();
+			}
+		},
+		computed: {
+			childList()
+			{
+				var list = [];
+				for (var id of this.idList)
+				{
+					var data = g.data.staffPool.getChildById(id);
+					list.push(data);
+				}
+				return list;
 			}
 		},
 		methods: {
@@ -197,6 +214,7 @@
 			{
 				g.net.call("organizeQuery/getAuditStationList", {orderId: this.currId}).then(($data) =>
 				{
+					g.data.staffPool.removeAll();
 					g.data.staffPool.update($data.data);
 					this.isShowOrderManPop = true;
 				})
@@ -207,10 +225,13 @@
 					orderId: this.currId,
 					auditResult: this.status,
 					auditSuggest: this.opinion,
-					todoId: this.businessData.todoId,
-					pendingAuditorId: _childList.join(','),
-					pendingAuditorName: _childName.join(',')
+					todoId: this.businessData.todoId
 				};
+				if (this.idList.length > 0)
+				{
+					_params.pendingAuditorId = this.idList.join(';');
+					_params.pendingAuditorName = _childName.join(';');
+				}
 				g.net.call("bo/saveAuditRecord", _params).then(($data) =>
 				{
 					this.$emit("close", true);
@@ -225,8 +246,8 @@
 				if ($result)
 				{
 					_childName = [];
-					_childList = __merge([], $list);
-					for (var item of _childList)
+					this.idList = __merge([], $list);
+					for (var item of this.idList)
 					{
 						var data = g.data.staffPool.getChildById(item);
 						_childName.push(data.name)

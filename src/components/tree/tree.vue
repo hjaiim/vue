@@ -76,12 +76,7 @@
 			init()
 			{
 				this.list = __merge([], this.listData);
-
 				this.checkedChildren = __merge([], this.checkedList);
-				for (var item of this.list)
-				{
-					this.checkedAllChildren(item)
-				}
 			},
 			onClick_item($item, $event)
 			{
