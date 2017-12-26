@@ -19,13 +19,13 @@
 								<span class="form-title">附件下载</span>
 								<i class="download-wrap clear">
 									<a class="form-trap file-download pointer ani-time left"
-									   v-for="attach in businessData.attachList" href="###" download>{{attach.name}}</a>
+									   v-for="attach in businessData.attachList" :href="g.param.ossUrl + attach.name"
+									   download>{{attach.name}}</a>
 								</i>
 
 							</p>
 						</div>
 					</div>
-
 					<div>
 						<h3 class="opp-title">审核详情</h3>
 						<div v-for="item in businessData.recordList">
@@ -65,24 +65,25 @@
 								<span class="form-title left">  <i class="leader"></i>签批意见</span>
 								<textarea class="examine iscroll-ref left ani-time" v-model="opinion"></textarea>
 							</p>
-							<p class="from-group clear examine-people" v-if="businessData.hasNext">
-								<span class="exam-btn" @click="onClick_selectNext">选择后续人</span>
-							</p>
-							<p>
-								<span v-for="item in childList">{{item.name}}</span>
-							</p>
 
 							<p class="from-group clear relative" v-if="businessData.hasAttaches">
 								<span class="form-title">上传附件</span>
 								 <span class="form-trap up-btn pointer opp-up-btn">点击上传
 								<iframe name="fileUpload" v-if="hasIframe" class="iframe-wrap"
 										:src="g.path.base+'upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
-									 <span class="file-down"
-										   v-for="attach in attachList">{{attach.name}}/{{attach
-										 .size}}KB</span>
 							</span>
 							</p>
-
+							<p class="from-group clear relative file-wrap">
+							<span class="file-down"
+								  v-for="(attach,index) in attachList"><i class="file-name">{{attach.name}}</i><i>/{{attach.size}}KB</i><i
+									class="del-txt pointer" @click="onClick_delBtn(attach.name,index)">删除</i></span>
+							</p>
+							<p class="from-group clear examine-people" v-if="businessData.hasNext">
+								<span class="exam-btn pointer" @click="onClick_selectNext">选择后续人</span>
+								<span v-for="item in childList" class="choose-people">{{item.name}}<i
+										class="close-search-btn absolute pointer"
+										@click="onClick_cancelBtn(item.id)"></i></span>
+							</p>
 						</div>
 
 					</div>
@@ -253,7 +254,25 @@
 						_childName.push(data.name)
 					}
 				}
-			}
+			},
+			onClick_delBtn($name, $index)
+			{
+				g.net.call(g.param.delPicAccess, {fileName: $name}).then(($data) =>
+				{
+				}, (err) =>
+				{
+					this.attachList.splice($index, 1);
+				})
+			},
+			onClick_cancelBtn($id)
+			{
+				trace(this.idList);
+				var index = this.idList.indexOf($id);
+				trace(index);
+				this.idList.splice(index, 1);
+				var data = g.data.staffPool.getChildById($id);
+				data.update({checked: false});
+			},
 		}
 	}
 </script>
@@ -280,17 +299,113 @@
 			line-height: 30px;
 			vertical-align: top;
 		}
+		.status-type {
+			margin-left: 0;
+		}
 		.up-btn {
 			line-height: 22px;
 			font-size: 12px;
-			margin-top: 5px;
+			margin-top: 3px;
 		}
 		.file-down {
+			margin-right: 20px;
+			font-size: 14px;
+			padding-top: 0;
+			display: block;
+			vertical-align: top;
+			i {
+				display: inline-block;
+				vertical-align: middle;
+			}
+			.file-name {
+				max-width: 400px;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+			}
+			.del-txt {
+				padding-left: 15px;
+				color: #fe6e29;
+				&:hover {
+					color: #ec4e08;
+				}
+			}
+		}
+		&.file-wrap {
+			padding-left: 145px;
+			position: relative;
+			margin-bottom: 0;
+			top: -20px;
+		}
+		.file-download {
 			color: #61a4de;
 			text-decoration: underline;
 			margin-right: 20px;
 			&:hover {
 				color: #2c85d3;;
+			}
+		}
+		.close-search-btn {
+			width: 12px;
+			height: 12px;
+			right: -12px;
+			top: 4px;
+			padding: 4px;
+			margin-top: -10px;
+			background: transparent;
+			-moz-border-radius: 50%;
+			-webkit-border-radius: 50%;
+			border-radius: 50%;
+			-moz-transition: ease-in-out 100ms;
+			-o-transition: ease-in-out 100ms;
+			-webkit-transition: ease-in-out 100ms;
+			transition: ease-in-out 100ms;
+			&:before {
+				left: 50%;
+				top: 50%;
+				margin-left: -7px;
+				margin-top: -1px;
+				width: 14px;
+				height: 2px;
+				background-color: #9d9d9d;
+				content: "";
+				position: absolute;
+				-moz-transform: rotate(45deg);
+				-ms-transform: rotate(45deg);
+				-webkit-transform: rotate(45deg);
+				transform: rotate(45deg);
+			}
+			&:after {
+				width: 14px;
+				height: 2px;
+				background-color: #9d9d9d;
+				content: "";
+				left: 50%;
+				top: 50%;
+				margin-left: -7px;
+				margin-top: -1px;
+				position: absolute;
+				-moz-transform: rotate(-45deg);
+				-ms-transform: rotate(-45deg);
+				-webkit-transform: rotate(-45deg);
+				transform: rotate(-45deg);
+			}
+			&:hover {
+				-moz-transform: scale(0.9);
+				-ms-transform: scale(0.9);
+				-webkit-transform: scale(0.9);
+				transform: scale(0.9);
+			}
+			&:active {
+				-moz-transition: ease-in-out 200ms;
+				-o-transition: ease-in-out 200ms;
+				-webkit-transition: ease-in-out 200ms;
+				transition: ease-in-out 200ms;
+				-moz-transform: scale(1.6);
+				-ms-transform: scale(1.6);
+				-webkit-transform: scale(1.6);
+				transform: scale(1.6);
+				opacity: 0;
 			}
 		}
 
