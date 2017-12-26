@@ -204,7 +204,6 @@
 
 .examine-people {
   margin-left: 150px;
-  margin-top: 18px;
   .exam-btn {
 	width: 90px;
 	height: 36px;
@@ -217,25 +216,13 @@
 	margin-right: 20px;
   }
   .choose-people {
-	width: 60px;
 	height: 36px;
 	line-height: 36px;
+	margin-right: 20px;
+	margin-top: 5px;
 	display: inline-block;
 	text-align: center;
 	position: relative;
-	.delete-choose {
-	  position: absolute;
-	  top: 0;
-	  right: 0;
-	  width: 8px;
-	  height: 8px;
-	  display: none;
-	}
-	&:hover {
-	  .delete-choose {
-		display: block;
-	  }
-	}
   }
   .end-exam {
 	background: none;

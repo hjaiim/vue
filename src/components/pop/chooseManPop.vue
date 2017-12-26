@@ -6,7 +6,7 @@
 				<div class="man-wrap clear border-bottom">
 					<span class="left man-tit">已选人员</span>
 					<ul class="man-list left">
-						<li v-for="item in staffList">
+						<li v-for="item in staffList" class="left">
 							<span class="relative">
 								{{item.name}}<i class="close-search-btn absolute pointer"
 												@click="onClick_delBtn(item.id)"></i></span>
@@ -196,12 +196,13 @@
 			font-size: 15px;
 		}
 		.man-wrap {
-			height: 66px;
+			min-height: 66px;
 			padding-left: 52px;
 			.man-tit {
 				line-height: 66px;
 			}
 			.man-list {
+				max-width: 88%;
 				li {
 					line-height: 66px;
 					height: 66px;
