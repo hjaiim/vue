@@ -30,7 +30,7 @@
 								<span class="right arrow-wrap center-flex pointer">
 									<i :class="checkedList.indexOf(item.id) >= 0?'arrow-bottom':'arrow-top'"></i></span>
 							</p>
-							<ul class="list-menu border-bottom clear" v-for="childItem in item.children"
+							<ul class="list-menu border-bottom clear ani-time" v-for="childItem in item.children"
 								v-show="checkedList.indexOf(item.id) >= 0">
 								<li class="left">
 									<img :src="g.path.images+childItem.avatar" alt=""></li>
@@ -179,7 +179,6 @@
 		perspective: 1300px;
 		cursor: default;
 	}
-
 	.choose-wrap {
 		width: 78%;
 		min-width: 996px;
@@ -217,17 +216,21 @@
 			}
 		}
 		.list-menu {
+			min-height: 48px;
+			display: flex;
+			align-items: stretch;
 			li {
-				height: 48px;
-				line-height: 48px;
+				flex: 1;
 				width: 16%;
 				padding: 0 10px;
 				-webkit-box-sizing: border-box;
 				-moz-box-sizing: border-box;
 				box-sizing: border-box;
 				vertical-align: middle;
+				display: flex;
+				align-items: center;
 				&:nth-child(1) {
-					padding-left: 40px;
+					padding-left: 52px;
 				}
 				&:nth-child(3) {
 					width: 19%;
@@ -259,7 +262,9 @@
 				.choose-txt {
 					margin-left: 12px;
 				}
-
+			}
+			&:hover {
+				background: rgba(252, 244, 245, .9);
 			}
 		}
 		.list-wrap {
