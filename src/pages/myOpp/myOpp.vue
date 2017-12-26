@@ -281,6 +281,7 @@
 					path: "/myopp",
 					query: {
 						page: this.currPage,
+						type: this.type,
 						statusList: JSON.stringify(this.statusList),
 						startTime: this.startTime,
 						endTime: this.endTime,

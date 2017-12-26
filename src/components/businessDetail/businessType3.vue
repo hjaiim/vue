@@ -30,7 +30,14 @@
 			init()
 			{
 				this.formInfo = __merge({}, this.formData);
-				trace("this.formInfo", this.formInfo);
+				for(var key in this.formInfo)
+				{
+					if(key == "客户联系方式")
+					{
+						this.formInfo[key] = this.formInfo[key].split("*")[0];
+					}
+				}
+				this.$forceUpdate();
 
 			}
 		}
