@@ -57,6 +57,8 @@
 				var content = this.$refs["scrollContent"];
 				if (mainCon)
 				{
+
+//					debugger;
 					if (parent.clientHeight >= content.scrollHeight)
 					{
 						this.barVisible = false;
@@ -65,6 +67,7 @@
 					}
 					else
 					{
+						trace("parent",parent);
 						bar.style.height = parseInt(parent.clientHeight / content.scrollHeight * parent.clientHeight) + "px";
 
 						if (this.offset < parent.clientHeight - content.scrollHeight)
@@ -101,16 +104,19 @@
 			},
 			updateContent()
 			{
+//				debugger;
 				var content = this.$refs["scrollContent"];
 				var bar = this.$refs["scrollBar"];
 				if (content)
 				{
+
 					var parent = this.$refs["scrollMain"].parentNode;
 					if (parent.clientHeight >= content.scrollHeight)
 					{
 						return;
 					}
 
+					console.dir(parent);
 					this.offset = Math.min(0, this.offset);
 					this.offset = Math.max(parent.clientHeight - content.scrollHeight, this.offset);
 					content.style.marginTop = this.offset + "px";
