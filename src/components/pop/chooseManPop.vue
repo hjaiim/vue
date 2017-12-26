@@ -30,13 +30,14 @@
 							<ul class="list-menu border-bottom clear" v-show="idList.indexOf(manItem.id)">
 								<li class="left"
 									v-for="childItem in manItem.children "><img :src="g.path.images+'/avatar-icon.png'"
-																			alt=""></li>
+																				alt=""></li>
 								<li class="left">{{childItem.name}}</li>
 								<li class="left">{{childItem.companyName}}</li>
 								<li class="left">{{childItem.departmentName}}</li>
 								<li class="left">{{childItem.dutyName}}</li>
 								<li class="left diff-padding">
-									<span @click="onClick_selectBtn(childItem.id)"><i class="draw-tick relative" :class="childItem.checked?'action':''"></i>
+									<span @click="onClick_selectBtn(childItem.id)"><i class="draw-tick relative"
+																					  :class="childItem.checked?'action':''"></i>
 										<span class="draw-line choose-txt">选择</span></span></li>
 							</ul>
 						</div>
@@ -63,7 +64,7 @@
 				g: g,
 				idList: [],
 				manList: [],
-				childList:[]
+				childList: []
 			}
 		},
 		props: {
@@ -82,13 +83,14 @@
 			onClick_selectBtn($id)
 			{
 				var data = g.data.staffPool.getChildById($id);
-				if(data.checked)
+				if (data.checked)
 				{
-					data.update({checked:false})
+					data.update({checked: false})
 				}
 				else
-				{_childList.push($id);
-					data.update({checked:true})
+				{
+					_childList.push($id);
+					data.update({checked: true})
 				}
 			},
 			onClick_arrowBtn($id){
