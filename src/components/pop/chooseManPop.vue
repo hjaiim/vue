@@ -179,10 +179,11 @@
 		perspective: 1300px;
 		cursor: default;
 	}
+
 	.choose-wrap {
 		width: 78%;
 		min-width: 996px;
-		min-height: 450px;
+		min-height: 400px;
 		padding-bottom: 30px;
 		font-size: 15px;
 		background: #ffffff;
