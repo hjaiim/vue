@@ -43,7 +43,7 @@
 						<td><i class="draw-tick relative pointer" :class="item.checked?'action':''"
 							   @click="onClick_checkedItem(item.id)"></i><span
 								class="rank-num">{{index+1}}</span></td>
-						<td><span :class="[index==2?'is-picked':'', index==5?'wait-pick':'']">{{item.title}}</span></td>
+						<td><span :class="[item.readStatus==1?'is-picked':'wait-pick']">{{item.title}}</span></td>
 						<td>{{item.sourceDesc}}</td>
 						<td>{{item.createTime}}</td>
 						<td>
@@ -154,6 +154,9 @@
 					{
 						g.data.searchMessagePool.remove(_delId);
 						g.ui.toast("消息删除成功！");
+					}, (err) =>
+					{
+						g.func.dealErr(err);
 					})
 				}
 			},
@@ -163,6 +166,9 @@
 				g.net.call("message/updateReceiveMobileMsg", _params).then(($data) =>
 				{
 					g.ui.toast("用户消息设置成功!");
+				}, (err) =>
+				{
+					g.func.dealErr(err);
 				})
 			},
 			onClick_msgType($type)

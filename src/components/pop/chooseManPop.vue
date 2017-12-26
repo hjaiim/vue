@@ -12,6 +12,7 @@
 												@click="onClick_delBtn(item.id)"></i></span>
 						</li>
 					</ul>
+
 				</div>
 				<ul class="list-menu border-bottom clear">
 					<li class="left">头像</li>
@@ -21,6 +22,7 @@
 					<li class="left">职务名称</li>
 					<li class="left">状态</li>
 				</ul>
+
 				<div class="list-wrap">
 					<div class="list-wrap" is="scroll-group">
 						<div class="inner-content" v-for="item in manList">

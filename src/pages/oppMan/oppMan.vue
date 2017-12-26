@@ -5,10 +5,10 @@
 				<div class="business-form left" ref="businessType">
 					<span class="personal-title business-title  left">业务名称</span>
 					<div class="personal-content left relative form-list business-list pointer"
-						 @click="onClick_dropListBtn">
+						 @click.stop="onClick_dropListBtn">
 						{{currType}}
 						<span :class="['icon-trangle', isShowBusinessList?'rotate':'']"></span>
-						<drop-list class="absolute drop-list" :dropList="typeList"
+						<drop-list class="absolute drop-list" :dropList="typeList" ref="typeList"
 								   :isShowDropList="isShowBusinessList"
 								   @change="onClick_typeItem"></drop-list>
 					</div>
@@ -30,19 +30,20 @@
 				</div>
 				<div class="date-box p-left left">
 					<span class="create-time left">创建时间</span>
-					<div class="date-form left relative pointer" @click="onClick_dateSelect('Start')">
+					<div class="date-form left relative pointer" @click.stop="onClick_dateSelect('Start')">
 						{{startDate}}
+
 						<img :src="g.path.images+'/date-icon.png'" alt="" class="absolute date-icon">
 						<common-date @change="onChange_date" :isShowDatePicker="isShowStartDate"
-									 type="hour"></common-date>
+									 type="hour" ref="startDate"></common-date>
 
 					</div>
 					<span class="date-line left">-</span>
-					<div class="date-form left relative pointer" @click="onClick_dateSelect('End')">
+					<div class="date-form left relative pointer" @click.stop="onClick_dateSelect('End')">
 						{{endDate}}
 						<img :src="g.path.images+'/date-icon.png'" alt="" class="absolute date-icon">
 						<common-date @change="onChange_date" :isShowDatePicker="isShowEndDate"
-									 type="hour"></common-date>
+									 type="hour" ref="endDate"></common-date>
 					</div>
 				</div>
 				<div class="search-box search-size left clear clearfix">
@@ -204,6 +205,31 @@
 				this.endTime = g.vue.getQuery("endTime", g.timeTool.getNowStamp());
 				this.creatorName = g.vue.getQuery("creatorName", "");
 				this.companyName = g.vue.getQuery("companyName", "");
+				this.initEvents();
+			},
+			initEvents()
+			{
+				document.addEventListener('click', this.onClick_doc)
+			},
+			removeEvents()
+			{
+				document.removeEventListener('click', this.onClick_doc)
+			},
+			onClick_doc(e)
+			{
+				if (this.$refs.startDate && !this.$refs.startDate.$el.contains(e.target))
+				{
+					this.isShowStartDate = false;
+				}
+				if (this.$refs.endDate && !this.$refs.endDate.$el.contains(e.target))
+				{
+					this.isShowEndDate = false;
+				}
+				if (this.$refs.typeList && !this.$refs.typeList.$el.contains(e.target))
+				{
+
+					this.isShowBusinessList = false;
+				}
 			},
 			onClick_dropListBtn()
 			{
@@ -239,6 +265,14 @@
 			{
 				_dateType = $type;
 				this['isShow' + $type + 'Date'] = true;
+				if ($type == "Start")
+				{
+					this.isShowEndDate = false;
+				}
+				else
+				{
+					this.isShowStartDate = false;
+				}
 			},
 			onKeyEnter_searchInput()
 			{
@@ -329,8 +363,14 @@
 				this.isShowEndDate = false;
 				_dateType = "";
 			}
+		},
+		beforeDestroy()
+		{
+			this.removeEvents();
 		}
 	}
+
+
 </script>
 <style type="text/css" lang="sass" rel="stylesheet/css" scoped>
 	@import "../../css/oppMan.scss";

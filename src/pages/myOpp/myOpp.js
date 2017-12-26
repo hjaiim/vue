@@ -64,10 +64,10 @@ function updateData($dObj)
 		return;
 	}
 	$dObj.hasOwnProperty("customerName") && (this.comName = $dObj.customerName);
+	$dObj.hasOwnProperty("type") && (this.businessId = $dObj.type);
 	$dObj.hasOwnProperty("statusList") && (this.auditStatusList =JSON.parse($dObj.statusList).join(','));
 	$dObj.hasOwnProperty("startTime") && (this.startTime = g.timeTool.getFullDate(int($dObj.startTime),true));
 	$dObj.hasOwnProperty("endTime") && (this.endTime = int($dObj.endTime));
-
 	$dObj.hasOwnProperty("creatorName") && (this.creatorName = $dObj.creatorName);
 	$dObj.hasOwnProperty("page") && (this.page = $dObj.page);
 	$dObj.hasOwnProperty("pageSize") && (this.pageSize = $dObj.pageSize);

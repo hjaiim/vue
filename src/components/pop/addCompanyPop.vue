@@ -210,6 +210,9 @@
 					}
 					g.data.departmentPool.getDataById($data.departmentId).update({isEdit: false});
 
+				}, (err) =>
+				{
+					g.func.dealErr(err);
 				})
 			},
 			onClick_saveDuty($duty, $type)
@@ -241,6 +244,9 @@
 						g.data.dutyPool.getDataById($duty.id).update($data);
 					}
 					g.data.dutyPool.getDataById($data.dutyId).update({isEdit: false});
+				}, (err) =>
+				{
+					g.func.dealErr(err);
 				})
 			},
 			onClick_deleteDepart($depart)
@@ -249,6 +255,9 @@
 				g.net.call("organizeOpt/deleteDepartmentById", _params).then(() =>
 				{
 					g.data.departmentPool.remove($depart.id);
+				}, (err) =>
+				{
+					g.func.dealErr(err);
 				})
 			},
 			onClick_editDepart($depart)
@@ -267,6 +276,9 @@
 				g.net.call("organizeOpt/deleteDutyById", _params).then((data) =>
 				{
 					g.data.dutyPool.remove($duty.id);
+				}, (err) =>
+				{
+					g.func.dealErr(err);
 				})
 			},
 			onClick_saveCompany()
@@ -291,6 +303,9 @@
 					{
 						g.data.searchCompanyPool.getDataById(this.currId).update($data);
 					}
+				}, (err) =>
+				{
+					g.func.dealErr(err);
 				})
 			},
 			onClick_editCompany()

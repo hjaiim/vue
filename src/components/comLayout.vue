@@ -94,6 +94,7 @@
 						delList.push(index);
 					}
 				}
+
 				while (delList.length > 0)
 				{
 					navItem.children.splice(delList[0], 1);

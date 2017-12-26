@@ -184,8 +184,7 @@
 				errData: {},
 				formData: {},
 				attachList: [],
-				hasIframe: true,
-				attachList:[]
+				hasIframe: true
 			}
 		},
 		components: {
@@ -213,6 +212,7 @@
 					{
 						this.formData[hash[key]] = formData[key];
 					}
+					this.formData["callTypeList"] = formData.callTypeList.split("和");
 					this.attachList = JSON.parse(g.data.searchBusinessPool.getDataById(this.currId).attachList);
 					this.$forceUpdate();
 				}
@@ -374,6 +374,7 @@
 						}
 					}
 				}
+				return _formData;
 			}
 		}
 	}

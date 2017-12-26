@@ -11,13 +11,13 @@
 							   @change="onChange_typeItem" ref="typeList"></drop-list>
 				</div>
 			</div>
-			<opp-form-1 v-if="type == 1" :currId="currId" @submit="onSubmit_formData"></opp-form-1>
-			<opp-form-2 v-if="type == 2" :currId="currId" @submit="onSubmit_formData"></opp-form-2>
-			<opp-form-3 v-if="type == 3" :currId="currId" @submit="onSubmit_formData"></opp-form-3>
-			<opp-form-4 v-if="type == 4" :currId="currId" @submit="onSubmit_formData"></opp-form-4>
-			<opp-form-5 v-if="type == 5" :currId="currId" @submit="onSubmit_formData"></opp-form-5>
-			<opp-form-6 v-if="type == 6" :currId="currId" @submit="onSubmit_formData"></opp-form-6>
-			<opp-form-7 v-if="type == 7" :currId="currId" @submit="onSubmit_formData"></opp-form-7>
+			<opp-form-1 v-if="type == 1" :currId="currId" @submit="onSubmit_formData" ref="oppForm"></opp-form-1>
+			<opp-form-2 v-if="type == 2" :currId="currId" @submit="onSubmit_formData" ref="oppForm"></opp-form-2>
+			<opp-form-3 v-if="type == 3" :currId="currId" @submit="onSubmit_formData" ref="oppForm"></opp-form-3>
+			<opp-form-4 v-if="type == 4" :currId="currId" @submit="onSubmit_formData" ref="oppForm"></opp-form-4>
+			<opp-form-5 v-if="type == 5" :currId="currId" @submit="onSubmit_formData" ref="oppForm"></opp-form-5>
+			<opp-form-6 v-if="type == 6" :currId="currId" @submit="onSubmit_formData" ref="oppForm"></opp-form-6>
+			<opp-form-7 v-if="type == 7" :currId="currId" @submit="onSubmit_formData" ref="oppForm"></opp-form-7>
 		</div>
 	</com-layout>
 </template>
@@ -82,9 +82,12 @@
 				};
 				g.net.call("/bo/orderApply", _params).then(($data) =>
 				{
-					this.currId = 0;
+					this.$refs.oppForm.init();
 					this.routerUpdated();
 					g.ui.toast("商机提交成功");
+				}, (err) =>
+				{
+					g.func.dealErr(err);
 				})
 			},
 			initEvents()

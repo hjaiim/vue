@@ -38,7 +38,7 @@
 		.right-content {
 			line-height: 180px;
 			text-align: center;
-			font-size: 22px;
+			font-size: 14px;
 
 		}
 	}

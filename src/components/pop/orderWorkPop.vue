@@ -103,7 +103,6 @@
 				this.isShowRoleList = false;
 				var data = g.data.searchPositionPool.getDataById($id);
 				this.positionData = __merge({}, data);
-				trace("this.positionData",this.positionData);
 			},
 			onClick_cancelBtn()
 			{
@@ -122,9 +121,7 @@
 					_params.stationTypeDesc = positionData.name;
 					g.data.searchAccountPool.getDataById(_params.userId).update(_params);
 					g.ui.toast("岗位设置成功！");
-
 					this.$emit('close', true)
-
 				}, (err) =>
 				{
 					g.func.dealErr(err);
