@@ -283,7 +283,6 @@
 	.detail-container {
 		color: #333333;
 		.note-content {
-
 			line-height: 36px;
 			font-size: 14px;
 		}

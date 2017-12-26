@@ -264,12 +264,18 @@
 		}
 		.list-wrap {
 			max-height: 350px;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
 			overflow: hidden;
 		}
 		.deal-staff {
-			height: 57px;
+			/*height: 56px;*/
 			line-height: 56px;
 			border-left: 4px solid #ed5564;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
 			padding-left: 48px;
 			background: #f7fbfc;
 			color: #000000;
@@ -277,7 +283,6 @@
 				width: 65px;
 				height: 56px;
 				border-left: 1px solid #efefef;
-
 			}
 
 		}
