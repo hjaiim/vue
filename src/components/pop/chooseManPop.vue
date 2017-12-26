@@ -268,8 +268,10 @@
 				background: rgba(252, 244, 245, .9);
 			}
 		}
+
+
 		.list-wrap {
-			height: 350px;
+			max-height: 350px;
 			-webkit-box-sizing: border-box;
 			-moz-box-sizing: border-box;
 			box-sizing: border-box;
