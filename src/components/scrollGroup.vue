@@ -79,6 +79,8 @@
 				}
 			},
 			onWheel_doc(e){
+				trace("e.wheelDelta",e.wheelDelta);
+				trace("e.detail",e.detail);
 				e.preventDefault();
 				if (!isNaN(e.wheelDelta - 0))
 				{
