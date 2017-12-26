@@ -263,7 +263,7 @@
 			}
 		}
 		.list-wrap {
-			max-height: 350px;
+			height: 350px;
 			-webkit-box-sizing: border-box;
 			-moz-box-sizing: border-box;
 			box-sizing: border-box;

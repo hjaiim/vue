@@ -51,7 +51,7 @@
 </form>
 </body>
 <script>
-
+	var accessUrl = "http://192.168.12.219:8001/";
 	var urlData = queryUrl(window.location.href);
 	init();
 	function init()
@@ -85,8 +85,8 @@
 			$("#fileBtn").hide();
 			$("#packageBtn").hide();
 			$("#cancelBtn").show();
-			$("#form1")[0].action =
-					"http://192.168.12.219:8001/file/upload?type=" + urlData.query.type + "&fileName=" + fileName + "&redirectUrl=" + urlData.query.redirectUrl;
+			$("#form1")[0].action = accessUrl + "file/upload?type=" + urlData.query.type + "&fileName=" + fileName +
+					"&redirectUrl=" + urlData.query.redirectUrl;
 			$("#submit").click();
 		}
 	}
