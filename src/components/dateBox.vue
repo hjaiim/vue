@@ -11,7 +11,7 @@
 				</div>
 				<div class="laydate-sety" v-show="pops.isShowYear">
 					<div class="laydate-hmsno iscroll-ref">
-						<p v-for="yearNo in yearList" @click="onClick_detailDate('year',yearNo)"
+						<p v-for="yearNo in yearList" @click.stop="onClick_detailDate('year',yearNo)"
 						   class="year-num" :class="date.year==yearNo? theme:''">{{yearNo}}年</p>
 					</div>
 				</div>
@@ -29,7 +29,7 @@
 		<div class="laydate-setm" v-show="pops.isShowMonth">
 			<ul class="ymdropul ">
 				<li v-for="n in 12" :class="[date.month==n? theme:'',checkMonthDisable(n)?'date-disabled':'']"
-					@click="onClick_detailDate('month',n)"
+					@click.stop="onClick_detailDate('month',n)"
 					class="month-num">{{n|addZero}}月
 				</li>
 			</ul>
@@ -58,9 +58,9 @@
 		<div v-if="type==='hour'" class="laydate-bottom">
 			<div class="bot-flex">
 				<ul class="laydate-hms">
-					<li @click="onClick_dateSelect('Hour')"><em>{{date.hour}}</em> <i>:</i></li>
-					<li @click="onClick_dateSelect('Minute')"><em>{{date.minute}}</em><i>:</i></li>
-					<li @click="onClick_dateSelect('Second')"><em>{{date.second}}</em></li>
+					<li @click.stop="onClick_dateSelect('Hour')"><em>{{date.hour}}</em> <i>:</i></li>
+					<li @click.stop="onClick_dateSelect('Minute')"><em>{{date.minute}}</em><i>:</i></li>
+					<li @click.stop="onClick_dateSelect('Second')"><em>{{date.second}}</em></li>
 
 				</ul>
 			</div>
@@ -73,10 +73,10 @@
 		<div class="laydate-prop-hms laydate-props">
 			<div class="laydate-propcon" v-if="pops.isShowHour">
 				<div class="laydate-hms-title">小时
-					<div class="laydate-hms-close" @click="onClick_dateSelect('Hour')">×</div>
+					<div class="laydate-hms-close" @click.stop="onClick_dateSelect('Hour')">×</div>
 				</div>
 				<div class="laydate-hmsnox clear" :class="weekNum==6?'diff-length':''">
-					<p class="hour-num" v-for="n in 24" @click="onClick_detailDate('hour',(n-1))"
+					<p class="hour-num" v-for="n in 24" @click.stop="onClick_detailDate('hour',(n-1))"
 					   :class="n-1==date.hour? theme:''">{{n-1
 						|addZero}}</p>
 				</div>

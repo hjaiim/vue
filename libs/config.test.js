@@ -5,7 +5,7 @@ var WEB_CONFIG = {
 	mode: ["debug"], //工作模式
 
 	path: {
-		domain: "{$host}/milky-tea/mobile",
+		domain: "{$host}/",
 		base: "{$domain}/{$ver}",
 		assets: "{$base}/assets",
 		data: "{$assets}/data",
@@ -26,7 +26,7 @@ var WEB_CONFIG = {
 			result: {
 				name: "code",
 				type: "number",
-				success: 0
+				success: 2000
 			},
 			data: {
 				name: "data"

@@ -217,6 +217,9 @@
 					g.data.staffPool.removeAll();
 					g.data.staffPool.update($data.data);
 					this.isShowOrderManPop = true;
+				}, (err) =>
+				{
+					g.func.dealErr(err);
 				})
 			},
 			onClick_submitBtn($status)

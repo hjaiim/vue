@@ -184,8 +184,7 @@
 				errData: {},
 				formData: {},
 				attachList: [],
-				hasIframe: true,
-				attachList: []
+				hasIframe: true
 			}
 		},
 		components: {
@@ -375,6 +374,7 @@
 						}
 					}
 				}
+				return _formData;
 			}
 		}
 	}

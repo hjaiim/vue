@@ -11,9 +11,9 @@
 							<p class="load-text">修改头像</p>
 							<iframe class="iframe-btn" name="fileUpload"
 									:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=avatar'"
-									id="avatar" v-show="avatar == 'default.png'"
+									id="avatar" v-if="avatar == 'default.png'"
 							></iframe>
-							<img v-show="avatar" :src="g.path.images+'/del-head.png'" alt=""
+							<img v-if="avatar != 'default.png'" :src="g.path.images+'/del-head.png'" alt=""
 								 class="del-head absolute pointer" @click="onClick_deleteImg('avatar')">
 						</div>
 					</div>
@@ -349,6 +349,7 @@
 				}, (err) =>
 				{
 					this[$type] = "";
+					this.avatar = "default.png";
 				})
 			},
 			onFocus_inputBar($type)
