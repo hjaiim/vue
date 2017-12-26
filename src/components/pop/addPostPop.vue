@@ -12,25 +12,26 @@
 					</p>
 					<p class="from-group">
 						<span class="form-title">类型</span>
-                        <span class=" action-box post-type" v-show="currId ==  0" @click="onClick_selectPosition(1)">
+                        <span class="action-box post-type pointer" v-show="currId ==  0"
+							  @click="onClick_selectPosition(1)">
                             <i class="pointer draw-round" :class="type== 1?'action':''"></i>
                             <span>商机提交岗</span>
                         </span>
-                        <span class="action-box post-type" v-show="currId ==  0" @click="onClick_selectPosition(2)">
+                        <span class="action-box post-type pointer" v-show="currId ==  0"
+							  @click="onClick_selectPosition(2)">
                             <i class="pointer draw-round" :class="type== 2?'action':''"></i>
                             <span>商机审核岗</span>
                         </span>
 						<span class="form-trap form-type" v-show="currId !=  0">{{positionData.typeDesc}}</span>
 					</p>
-
 				</div>
-				<div class="btn-wrap clear">
-				<span class="action-btn right pop-del-btn cancel-btn ani-time pointer"
-					  @click.stop="onClick_cancelBtn">取消</span>
-				<span class="action-btn right pop-del-btn delete-btn ani-time pointer"
-					  @click.stop="onClick_confirmBtn">确定
-				</span>
-				</div>
+			</div>
+			<div class="btn-wrap clear">
+					<span class="action-btn right pop-del-btn cancel-btn ani-time pointer"
+						  @click.stop="onClick_cancelBtn">取消</span>
+					<span class="action-btn right pop-del-btn delete-btn ani-time pointer"
+						  @click.stop="onClick_confirmBtn">确定
+					</span>
 			</div>
 		</div>
 	</view-popup>
@@ -126,17 +127,15 @@
 <style lang="sass" rel="stylesheet/scss" type="text/scss" scoped>
 	.detail-container {
 		color: #333333;
-
 		.note-content {
-			padding: 35px 72px 40px;
+			padding: 35px 72px 10px;
 			line-height: 36px;
 			font-size: 14px;
-
 		}
 	}
 
 	.add-post {
-		margin-bottom: 30px;
+		margin-bottom: 15px;
 	}
 
 	.post-type {

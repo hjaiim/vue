@@ -21,10 +21,10 @@
 					<div class="left menu-item">
 						<ul class="role-list clear">
 							<li class="left" v-for="(item,index) in roleList">
-								<div class="action-box role-item" @click="onClick_roleItem(item.id)">
+								<span class="action-box role-item pointer" @click="onClick_roleItem(item.id)">
 									<i class="draw-round pointer" :class="roleId == item.id?'action':''"></i>
-									<span>{{item.name}}</span>
-								</div>
+									<span class="pointer">{{item.name}}</span>
+								</span>
 							</li>
 						</ul>
 					</div>
@@ -101,7 +101,7 @@
 				};
 				g.net.call('user/editUserRole', _params).then(($data) =>
 				{
-					var roleData =  g.data.searchRolePool.getDataById(_params.roleId);
+					var roleData = g.data.searchRolePool.getDataById(_params.roleId);
 					_params.roleName = roleData.name;
 					g.data.searchAccountPool.getDataById(_params.userId).update(_params);
 					g.ui.toast("角色设置成功");
@@ -121,7 +121,6 @@
 			padding-top: 20px;
 			.role-list {
 				font-size: 14px;
-				max-width: 620px;
 				margin-bottom: 15px;
 				color: #666666;
 				p {
@@ -132,7 +131,7 @@
 				}
 				.menu-item {
 					padding-left: 24px;
-					height: 40px;
+					max-width: 440px;
 					line-height: 40px;
 				}
 			}
@@ -155,7 +154,7 @@
 			}
 		}
 		.action-wrap {
-			padding: 18px 34px 0 0;
+			padding: 15px 34px 45px 0;
 			span {
 				width: 88px;
 				line-height: 36px;

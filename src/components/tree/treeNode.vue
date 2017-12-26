@@ -1,15 +1,15 @@
 <template>
 	<li>
 		<div>
-			<span @click="onClick_item(itemData,$event)" v-show="isValid(itemData) && isShowArrow">
+			<span class="pointer" @click="onClick_item(itemData,$event)" v-show="isValid(itemData) && isShowArrow">
 			<i class="diff-trangle"
 			   :class="currIdList.indexOf(itemData.id) >= 0 && isValid(itemData)?'rotateRight':''"></i>
 			</span>
-			<span @click="onClick_icon(itemData)">
+			<span class="pointer" @click="onClick_icon(itemData)">
 				<i class="tick-select relative"
 				   :class="checkedChildren.indexOf(itemData.id) >= 0?'action':''"></i>
 			</span>
-			<span @click="onClick_item(itemData,$event)">{{itemData.name}}</span>
+			<span class="pointer" @click="onClick_item(itemData,$event)">{{itemData.name}}</span>
 		</div>
 		<ul v-show="isValid(itemData) && currIdList.indexOf(itemData.id) >= 0" class="padleft relative tree-diff">
 			<tree-node :data="child" v-for="child in itemData.children"
@@ -88,9 +88,9 @@
 			{
 
 				util.splice(this.checkedChildren, this.tmpItem.id);
-				for(var item of this.tmpItem.children)
+				for (var item of this.tmpItem.children)
 				{
-					if(this.checkedChildren.indexOf(item.id) >= 0)
+					if (this.checkedChildren.indexOf(item.id) >= 0)
 					{
 						util.pushIn(this.checkedChildren, this.tmpItem.id);
 					}
@@ -131,7 +131,8 @@
 		top: -7px;
 		left: 47px;
 	}
-	.tree-diff{
+
+	.tree-diff {
 		top: 0px;
 		left: 25px;
 	}

@@ -17,8 +17,11 @@
 						<div>
 							<p class="from-group">
 								<span class="form-title">附件下载</span>
-								<a class="form-trap file-download pointer ani-time"
-								   v-for="attach in businessData.attachList" href="###" download>{{attach.name}}</a>
+								<i class="download-wrap clear">
+									<a class="form-trap file-download pointer ani-time left"
+									   v-for="attach in businessData.attachList" href="###" download>{{attach.name}}</a>
+								</i>
+
 							</p>
 						</div>
 					</div>
@@ -47,22 +50,22 @@
 						<div class="clear" v-if="businessData.operation == 2">
 							<p class="from-group clear">
 								<span class="form-title left">我的审核</span>
-								<span class="action-box status-type left" @click="onClick_statusItem(1)"
+								<span class="action-box status-type left pointer" @click="onClick_statusItem(1)"
 									  v-if="businessData.hasApproved">
-									<i class="pointer draw-round" :class="status == 1?'action':''"></i>
-									<span>通过</span>
+									<i class="pointer draw-round pointer" :class="status == 1?'action':''"></i>
+									<span class="pointer">通过</span>
 								</span>
-								<span class="action-box status-type left" @click="onClick_statusItem(2)"
+								<span class="action-box status-type left pointer" @click="onClick_statusItem(2)"
 									  v-if="businessData.hasRejected">
 									<i class="draw-round pointer" :class="status == 2?'action':''"></i>
-									<span>退回</span>
+									<span class="pointer">退回</span>
 								</span>
 							</p>
 							<p class="from-group clear" v-if="businessData.hasOpinion">
 								<span class="form-title left">  <i class="leader"></i>签批意见</span>
-								<textarea class="examine left" v-model="opinion"></textarea>
+								<textarea class="examine iscroll-ref left ani-time" v-model="opinion"></textarea>
 							</p>
-							<p class="from-group clear" v-if="businessData.hasNext">
+							<p class="from-group clear examine-people" v-if="businessData.hasNext">
 								<span class="exam-btn" @click="onClick_selectNext">选择后续人</span>
 							</p>
 							<p>
@@ -71,11 +74,15 @@
 
 							<p class="from-group clear relative" v-if="businessData.hasAttaches">
 								<span class="form-title">上传附件</span>
+								 <span class="form-trap up-btn pointer opp-up-btn">点击上传
 								<iframe name="fileUpload" v-if="hasIframe" class="iframe-wrap"
 										:src="g.path.base+'upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
-							<p v-for="attach in attachList">{{attach.name}}/{{attach.size}}KB</p>
-
+									 <span class="file-down"
+										   v-for="attach in attachList">{{attach.name}}/{{attach
+										 .size}}KB</span>
+							</span>
 							</p>
+
 						</div>
 
 					</div>
@@ -271,12 +278,14 @@
 		.form-title, .form-trap {
 			font-weight: normal !important;
 			line-height: 30px;
+			vertical-align: top;
 		}
 		.up-btn {
 			line-height: 22px;
 			font-size: 12px;
+			margin-top: 5px;
 		}
-		.file-download {
+		.file-down {
 			color: #61a4de;
 			text-decoration: underline;
 			margin-right: 20px;
