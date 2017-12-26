@@ -4,13 +4,13 @@
 			<div class="opp-banner clear">
 				<div class="business-form left">
 					<span class="personal-title business-title  left">业务名称</span>
-					<div class="personal-content left relative form-list business-list"
+					<div class="personal-content left relative form-list business-list pointer"
 						 @click.stop="onClick_dropListBtn">
 						{{currType}}
 						<span :class="['icon-trangle', isShowBusinessList?'rotate':'']"></span>
-						<ul class="absolute drop-list" v-show="isShowBusinessList" ref="typeList">
-							<li v-for="item in typeList" @click.stop="onClick_typeItem(item.id)">{{item.name}}</li>
-						</ul>
+						<drop-list :dropList="typeList" :isShowDropList="isShowBusinessList"
+								   @change="onClick_typeItem" ref="typeList"></drop-list>
+
 					</div>
 				</div>
 				<div class="from-group status-form p-left left">
@@ -109,7 +109,8 @@
 	import BusinessDetailPop from "../../components/pop/businessDetail.vue";
 	import CommonDate from "../../components/dateBox.vue";
 	import InputBar from "../../components/inputBar.vue";
-	import ChooseManPop from "../../components/pop/chooseManPop.vue"
+	import ChooseManPop from "../../components/pop/chooseManPop.vue";
+	import DropList from "../../components/dropList.vue"
 	var _dateType = "", _params = null;
 	export default{
 		created(){
@@ -139,7 +140,8 @@
 			BusinessDetailPop,
 			CommonDate,
 			InputBar,
-			ChooseManPop
+			ChooseManPop,
+			DropList
 		},
 		computed: {
 			currType()
@@ -212,7 +214,7 @@
 				{
 					this.isShowEndDate = false;
 				}
-				if (this.$refs.typeList && !this.$refs.typeList.contains(e.target))
+				if (this.$refs.typeList && !this.$refs.typeList.$el.contains(e.target))
 				{
 					this.isShowBusinessList = false;
 				}
