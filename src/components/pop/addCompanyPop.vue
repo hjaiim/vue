@@ -196,8 +196,10 @@
 					departmentName: $depart.name,
 					companyId: $depart.parentId
 				};
+				g.ui.showLoading()
 				g.net.call("organizeOpt/editDepartment", _params).then(($data) =>
 				{
+					g.ui.hideLoading();
 					_departId = $data.departmentId;
 					if ($depart.id == 0)
 					{
@@ -232,8 +234,10 @@
 					departmentId: $duty.parentId,
 					companyId: $duty.companyId
 				};
+				g.ui.showLoading()
 				g.net.call("organizeOpt/editDuty", _params).then(($data) =>
 				{
+					g.ui.hideLoading();
 					if ($duty.id == 0)
 					{
 						g.data.dutyPool.add($data);
@@ -252,8 +256,10 @@
 			onClick_deleteDepart($depart)
 			{
 				_params = {departmentId: $depart.id};
+				g.ui.showLoading()
 				g.net.call("organizeOpt/deleteDepartmentById", _params).then(() =>
 				{
+					g.ui.hideLoading();
 					g.data.departmentPool.remove($depart.id);
 				}, (err) =>
 				{
@@ -273,8 +279,10 @@
 				_params = {
 					dutyId: $duty.id
 				};
+				g.ui.showLoading()
 				g.net.call("organizeOpt/deleteDutyById", _params).then((data) =>
 				{
+					g.ui.hideLoading();
 					g.data.dutyPool.remove($duty.id);
 				}, (err) =>
 				{
@@ -296,8 +304,10 @@
 					comLinkManTel: this.phone,
 					comLinkTel: this.telphone
 				};
+				g.ui.showLoading()
 				g.net.call("organizeOpt/editCompany", _params).then(($data) =>
 				{
+					g.ui.hideLoading();
 					this.currentId = $data.comId;
 					if (this.currId != 0)
 					{

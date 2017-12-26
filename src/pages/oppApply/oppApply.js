@@ -5,7 +5,7 @@ export default function (to, next)
 {
 	loginManager.checkLogin(to, next, () =>
 	{
-		if(to.query.id)
+		if (to.query.id)
 		{
 			getBusinessDetail(to.query).then(() =>
 			{
@@ -33,8 +33,10 @@ export function getBusinessDetail($params)
 	}
 	var promise = new Promise((resolved, rejected) =>
 	{
+		g.ui.showLoading()
 		g.net.call("bo/auditOrderDetail", _params).then(($data) =>
 		{
+			g.ui.hideLoading();
 			g.data.searchCompanyPool.getDataById(_params.id).update($data);
 			resolved();
 		}, (err) =>
@@ -51,7 +53,7 @@ function createData($dObj)
 	var d = {};
 	d.orderId = 0;
 	d.update = updateData.bind(d);
-	$dObj = __merge({},$dObj);
+	$dObj = __merge({}, $dObj);
 	d.update($dObj);
 	return d;
 }

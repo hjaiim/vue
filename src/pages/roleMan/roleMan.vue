@@ -121,8 +121,10 @@
 				if ($result)
 				{
 					_params = {roleId: _delId};
+					g.ui.showLoading()
 					g.net.call("permission/delRole", _params).then(($data) =>
 					{
+						g.ui.hideLoading();
 						g.data.searchRolePool.remove(_delId);
 						g.ui.toast("角色删除成功!")
 					}, (err) =>

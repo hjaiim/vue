@@ -16,8 +16,10 @@ export function getVerifyInfo()
 {
 	var promise = new Promise((resolved, rejected) =>
 	{
+		g.ui.showLoading()
 		g.net.call("user/queryUserAuthInfo").then(($data) =>
 		{
+			g.ui.hideLoading();
 			g.data.userInfo.update($data);
 			if ($data.companyList)
 			{

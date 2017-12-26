@@ -115,9 +115,11 @@
 					stationId: this.positionData.id,
 					stationType: this.positionData.type
 				};
+				g.ui.showLoading()
 				g.net.call("user/editUserStation", _params).then(($data) =>
 				{
-					var positionData =  g.data.searchPositionPool.getDataById(_params.stationId);
+					g.ui.hideLoading();
+					var positionData = g.data.searchPositionPool.getDataById(_params.stationId);
 					_params.stationTypeDesc = positionData.name;
 					g.data.searchAccountPool.getDataById(_params.userId).update(_params);
 					g.ui.toast("岗位设置成功！");

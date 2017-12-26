@@ -20,7 +20,7 @@
 	import g from './../../global';
 	import sha256 from 'sha256';
 	import FormInput from "../../components/formInput.vue"
-	var _params = {},_isValid = true;
+	var _params = {}, _isValid = true;
 	export default {
 		created()
 		{
@@ -61,8 +61,10 @@
 				_params.logon = this.account;
 				_params.name = this.name;
 				_params.password = sha256(this.password);
+				g.ui.showLoading()
 				g.net.call("user/register", _params).then(() =>
 				{
+					g.ui.hideLoading();
 					this.init();
 					this.onClick_loginBtn();
 				})

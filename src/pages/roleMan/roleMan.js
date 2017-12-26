@@ -26,8 +26,10 @@ export function searchRoleList($params)
 	}
 	var promise = new Promise((resolved, rejected) =>
 	{
+		g.ui.showLoading()
 		g.net.call("permission/queryRoleListByPage", _params).then(($data) =>
 		{
+			g.ui.hideLoading();
 			g.data.searchRolePool.removeAll();
 			g.data.searchRolePool.update($data);
 			resolved();
@@ -48,8 +50,10 @@ function getRightList()
 	}
 	else
 	{
+		g.ui.showLoading()
 		g.net.call("permission/queryAllPermission").then(($data) =>
 		{
+			g.ui.hideLoading();
 			g.data.staticRightPool.update($data.data);
 		})
 	}

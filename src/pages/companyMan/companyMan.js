@@ -25,8 +25,10 @@ export function searchCompanyList($params)
 	}
 	var promise = new Promise((resolved, rejected) =>
 	{
+		g.ui.showLoading()
 		g.net.call("organizeQuery/organizePageList", _params).then(($data) =>
 		{
+			g.ui.hideLoading();
 			g.data.searchCompanyPool.removeAll();
 			g.data.searchCompanyPool.update($data);
 			resolved();

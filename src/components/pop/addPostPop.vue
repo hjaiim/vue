@@ -107,8 +107,10 @@
 					stationName: this.positionName,
 					stationType: this.type
 				};
+				g.ui.showLoading()
 				g.net.call("organizeOpt/editStation", _params).then(($data) =>
 				{
+					g.ui.hideLoading();
 					this.init();
 					if (this.currId != 0)
 					{

@@ -68,8 +68,10 @@
 					logon: this.account,
 					mobile: this.phone
 				};
+				g.ui.showLoading()
 				g.net.call("user/resetPasswordSendCode", _params).then(() =>
 				{
+					g.ui.hideLoading();
 					g.ui.toast("发送成功！");
 				})
 			},
@@ -88,9 +90,10 @@
 					code: this.code,
 					password: sha256(this.password)
 				};
-
+				g.ui.showLoading()
 				g.net.call('user/resetPwd', _params).then(() =>
 				{
+					g.ui.hideLoading();
 					g.ui.toast("密码重置成功！");
 					this.init();
 					g.url = "/login";

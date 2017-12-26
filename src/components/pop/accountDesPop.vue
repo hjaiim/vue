@@ -175,8 +175,10 @@
 					authStatus: 3,
 					authRemark: this.opinion
 				};
+				g.ui.showLoading()
 				g.net.call("user/updateUserAuth", _params).then(($data) =>
 				{
+					g.ui.hideLoading();
 					this.$emit("close", true);
 					g.ui.toast("已拒绝该用户");
 				}, (err) =>
@@ -191,12 +193,15 @@
 					authStatus: 2,
 					authRemark: this.opinion
 				};
+				g.ui.showLoading()
 				g.net.call("user/updateUserAuth", _params).then(($data) =>
 				{
+					g.ui.hideLoading();
 					g.ui.toast("已认证该用户");
 					this.$emit("close", true);
 				}, (err) =>
 				{
+
 					g.func.dealErr(err);
 				})
 			},

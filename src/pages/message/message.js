@@ -25,8 +25,10 @@ export function searchMessageList($params)
 	}
 	var promise = new Promise((resolved, rejected) =>
 	{
+		g.ui.showLoading()
 		g.net.call("message/queryMessageListByPage", _params).then(($data) =>
 		{
+			g.ui.hideLoading();
 			g.data.searchMessagePool.removeAll();
 			g.data.searchMessagePool.update($data);
 			resolved();
@@ -43,7 +45,7 @@ export function searchMessageList($params)
 function createData($dObj)
 {
 	var d = {};
-	d.readStatus = [0,1].join(',');
+	d.readStatus = [0, 1].join(',');
 	d.page = 1;
 	d.pageSize = 10;
 	d.update = updateData.bind(d);
