@@ -279,7 +279,7 @@ input {
 .iscroll-ref::-webkit-scrollbar {
   width: 5px;
   height: 6px;
-  background-color: #1d1d1d;
+  background-color: rgba(250, 104, 104, .5);
 }
 
 /*定义滚动条轨道 内阴影+圆角*/
@@ -292,8 +292,8 @@ input {
 /*定义滑块 内阴影+圆角*/
 .iscroll-ref::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px #1d1d1d;
-  background-color: #555555;
+  -webkit-box-shadow: inset 0 0 6px rgba(250, 104, 104, .5);
+  background-color: rgba(250, 104, 104, .5);
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -990,9 +990,9 @@ input {
   &:after {
 	top: 1px;
 	border-bottom: 7px #f7fbfc solid;
+	z-index: 2;
   }
   &:before {
-	z-index: 2;
 	border-bottom: 7px #333333 solid;
   }
 

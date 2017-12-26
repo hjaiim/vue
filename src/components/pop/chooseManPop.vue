@@ -37,7 +37,7 @@
 								<li class="left">{{childItem.departmentName}}</li>
 								<li class="left">{{childItem.dutyName}}</li>
 								<li class="left diff-padding">
-								<span @click="onClick_selectBtn(childItem.id)">
+								<span class="pointer" @click="onClick_selectBtn(childItem.id)">
 								<i class="draw-tick relative" :class="childItem.checked?'action':''"></i>
 								<span class="draw-line choose-txt">选择</span></span></li>
 							</ul>
@@ -167,6 +167,7 @@
 	.choose-wrap {
 		width: 78%;
 		min-width: 996px;
+		min-height: 450px;
 		padding-bottom: 30px;
 		font-size: 15px;
 		background: #ffffff;
@@ -209,7 +210,10 @@
 				box-sizing: border-box;
 				vertical-align: middle;
 				&:nth-child(1) {
-					padding-left: 52px;
+					padding-left: 40px;
+				}
+				&:nth-child(3) {
+					width: 19%;
 				}
 				&:last-child {
 					padding-left: 40px;

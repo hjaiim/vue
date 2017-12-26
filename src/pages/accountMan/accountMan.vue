@@ -3,15 +3,15 @@
 		<div class="staff-wrap">
 			<div class="status-wrap clear">
 				<span class="total-nums left">岗位类别</span>
-				<div class="action-box left" @click="onClick_positionType(-1)">
+				<div class="action-box left pointer" @click="onClick_positionType(-1)">
 					<i class="draw-tick relative pointer" :class="typeList.indexOf(-1) >= 0?'action':''"></i>
 					<span>未分配</span>
 				</div>
-				<div class="action-box left" @click="onClick_positionType(1)">
+				<div class="action-box left pointer" @click="onClick_positionType(1)">
 					<i class="draw-tick relative pointer" :class="typeList.indexOf(1) >= 0?'action':''"></i>
 					<span>提交员</span>
 				</div>
-				<div class="action-box left" @click="onClick_positionType(2)">
+				<div class="action-box left pointer" @click="onClick_positionType(2)">
 					<i class="draw-tick relative pointer" :class="typeList.indexOf(2) >= 0?'action':''"></i>
 					<span>审核员</span>
 				</div>

@@ -16,15 +16,15 @@
 					<span class="form-title left">状态</span>
                     <span class="action-box status-type left" @click="onClick_statusItem(1)">
                         <i class="draw-tick relative pointer" :class="statusList.indexOf(1) >= 0?'action':''"></i>
-                        <span>审核中</span>
+                        <span class="pointer">审核中</span>
                     </span>
                     <span class="action-box status-type left" @click="onClick_statusItem(-1)">
                         <i class="draw-tick relative pointer" :class="statusList.indexOf(-1)>= 0?'action':''"></i>
-                        <span>未通过</span>
+                        <span class="pointer">未通过</span>
                     </span>
                       <span class="action-box status-type left" @click="onClick_statusItem(2)">
                         <i class="draw-tick relative pointer" :class="statusList.indexOf(2)>= 0?'action':''"></i>
-                        <span>已通过</span>
+                        <span class="pointer">已通过</span>
                     </span>
 				</div>
 				<div class="right search-box p-left clear">

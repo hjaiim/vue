@@ -2,15 +2,15 @@
 	<ul class="tree-wrap">
 		<li v-for="itemData in list">
 			<div>
-				<span @click="onClick_item(itemData,$event)" v-show="isShowArrow && isValid(itemData)">
+				<span class="pointer" @click="onClick_item(itemData,$event)" v-show="isShowArrow && isValid(itemData)">
 					<i class="diff-trangle"
 					   :class="currIdList.indexOf(itemData.id) >= 0 && isValid(itemData)?'rotateRight':''"></i>
 				</span>
-				<span @click="onClick_icon(itemData)" v-if="showCheckbox">
+				<span class="pointer" @click="onClick_icon(itemData)" v-if="showCheckbox">
 				<i class="tick-select relative"
 				   :class="checkedChildren.indexOf(itemData.id) >= 0?'action':''"></i>
 				</span>
-				<span @click="onClick_item(itemData,$event)">{{itemData.name}}</span>
+				<span class="pointer" @click="onClick_item(itemData,$event)">{{itemData.name}}</span>
 			</div>
 			<ul v-show="isValid(itemData) && currIdList.indexOf(itemData.id) >= 0" class="padleft relative tree-list">
 				<tree-node :data="child" v-for="child in itemData.children" @change="onChange_list"

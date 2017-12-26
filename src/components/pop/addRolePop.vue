@@ -13,8 +13,7 @@
 					</p>
 					<p class="from-group">
 						<span class="form-title left">角色说明</span>
-					<!--<div class=""></div>-->
-						<textarea type="text" class="form-control role-explain ani-time role-textarea"
+						<textarea type="text" class="form-control role-explain ani-time role-textarea iscroll-ref"
 								  v-model="desc"></textarea>
 					</p>
 					<div class="from-group clear">
@@ -45,7 +44,6 @@
 	import CommonTree from "../tree/tree.vue"
 	import ScrollGroup from "../../jslib/components/scrollGroup.vue"
 	var _params = null;
-
 	export default{
 		created()
 		{
@@ -94,9 +92,9 @@
 					{
 						return int(item);
 					});
-					for(var item of checkedList)
+					for (var item of checkedList)
 					{
-						if(this.checkedList.indexOf(item) < 0 && item <= 17)
+						if (this.checkedList.indexOf(item) < 0 && item <= 17)
 						{
 							this.checkedList.push(item);
 						}
