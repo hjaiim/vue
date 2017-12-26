@@ -245,8 +245,10 @@
 					userId: $item.id,
 					status: $item.status == 1 ? 0 : 1
 				};
+				g.ui.showLoading()
 				g.net.call('user/freezeUser', _params).then(($data) =>
 				{
+					g.ui.hideLoading();
 					g.data.searchAccountPool.getDataById($item.id).update({
 						status: $item.status == 1 ? 0 : 1
 					})

@@ -25,8 +25,10 @@ export function getMyBusinessList($params)
 	}
 	var promise = new Promise((resolved, rejected) =>
 	{
+		g.ui.showLoading()
 		g.net.call("bo/myOrderList", _params).then(($data) =>
 		{
+			g.ui.hideLoading();
 			g.data.searchBusinessPool.removeAll();
 			g.data.searchBusinessPool.update($data);
 			resolved();
@@ -44,9 +46,9 @@ function createData($dObj)
 {
 	var d = {};
 	d.businessId = -1;
-	d.auditStatusList = [-1,1,2].join(',');
-	d.startTime = g.timeTool.getFullDate(1483200000000,true);
-	d.endTime = g.timeTool.getFullDate(Date.now(),true);
+	d.auditStatusList = [-1, 1, 2].join(',');
+	d.startTime = g.timeTool.getFullDate(1483200000000, true);
+	d.endTime = g.timeTool.getFullDate(Date.now(), true);
 	d.custComName = "";
 	d.creatorName = "";
 	d.page = 1;
@@ -65,8 +67,8 @@ function updateData($dObj)
 	}
 	$dObj.hasOwnProperty("customerName") && (this.comName = $dObj.customerName);
 	$dObj.hasOwnProperty("type") && (this.businessId = $dObj.type);
-	$dObj.hasOwnProperty("statusList") && (this.auditStatusList =JSON.parse($dObj.statusList).join(','));
-	$dObj.hasOwnProperty("startTime") && (this.startTime = g.timeTool.getFullDate(int($dObj.startTime),true));
+	$dObj.hasOwnProperty("statusList") && (this.auditStatusList = JSON.parse($dObj.statusList).join(','));
+	$dObj.hasOwnProperty("startTime") && (this.startTime = g.timeTool.getFullDate(int($dObj.startTime), true));
 	$dObj.hasOwnProperty("endTime") && (this.endTime = int($dObj.endTime));
 	$dObj.hasOwnProperty("creatorName") && (this.creatorName = $dObj.creatorName);
 	$dObj.hasOwnProperty("page") && (this.page = $dObj.page);

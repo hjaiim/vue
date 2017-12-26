@@ -15,8 +15,10 @@ export function getUserInfo()
 {
 	var promise = new Promise((resolved, rejected) =>
 	{
+		g.ui.showLoading()
 		g.net.call("user/queryUserInfo").then(($data) =>
 		{
+			g.ui.hideLoading();
 			g.data.userInfo.update($data);
 			resolved()
 		}, (err) =>

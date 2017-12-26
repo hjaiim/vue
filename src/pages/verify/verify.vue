@@ -344,8 +344,10 @@
 			},
 			onClick_deleteImg($type)
 			{
+				g.ui.showLoading()
 				g.net.call(g.param.delPicAccess, {fileName: this[$type]}).then(() =>
 				{
+					g.ui.hideLoading();
 				}, (err) =>
 				{
 					this[$type] = "";
@@ -379,9 +381,10 @@
 					email: this.email,
 					remark: this.remark
 				};
-
+				g.ui.showLoading()
 				g.net.call("user/applyUserAuth", _params).then(($data) =>
 				{
+					g.ui.hideLoading();
 					this.isSubmit = true;
 					g.ui.toast('申请提交成功！');
 				})

@@ -44,8 +44,10 @@ export function searchUserList($params)
 	}
 	var promise = new Promise((resolved, rejected) =>
 	{
+		g.ui.showLoading()
 		Promise.all(list).then(($list) =>
 		{
+			g.ui.hideLoading();
 			g.data.searchAccountPool.removeAll();
 			g.data.searchAccountPool.update($list[0]);
 			g.data.searchRolePool.removeAll();
@@ -53,7 +55,8 @@ export function searchUserList($params)
 			g.data.searchPositionPool.removeAll();
 			g.data.searchPositionPool.update($list[2])
 			resolved();
-		},(err) => {
+		}, (err) =>
+		{
 			rejected();
 		});
 	});

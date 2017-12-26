@@ -213,8 +213,10 @@
 			},
 			onClick_selectNext()
 			{
+				g.ui.showLoading()
 				g.net.call("organizeQuery/getAuditStationList", {orderId: this.currId}).then(($data) =>
 				{
+					g.ui.hideLoading();
 					g.data.staffPool.removeAll();
 					g.data.staffPool.update($data.data);
 					this.isShowOrderManPop = true;
@@ -236,8 +238,10 @@
 					_params.pendingAuditorId = this.idList.join(';');
 					_params.pendingAuditorName = _childName.join(';');
 				}
+				g.ui.showLoading()
 				g.net.call("bo/saveAuditRecord", _params).then(($data) =>
 				{
+					g.ui.hideLoading();
 					this.$emit("close", true);
 				}, (err) =>
 				{
@@ -260,8 +264,10 @@
 			},
 			onClick_delBtn($name, $index)
 			{
+				g.ui.showLoading()
 				g.net.call(g.param.delPicAccess, {fileName: $name}).then(($data) =>
 				{
+					g.ui.hideLoading();
 				}, (err) =>
 				{
 					this.attachList.splice($index, 1);

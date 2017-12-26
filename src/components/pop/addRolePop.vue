@@ -128,8 +128,10 @@
 					_params.roleId = this.currId;
 					postUrl = "permission/editRole";
 				}
+				g.ui.showLoading()
 				g.net.call(postUrl, _params).then(($data) =>
 				{
+					g.ui.hideLoading();
 					this.init();
 					if (this.currId != 0)
 					{

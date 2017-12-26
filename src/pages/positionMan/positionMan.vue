@@ -113,8 +113,10 @@
 				if ($result)
 				{
 					_params = {stationId: _delId};
+					g.ui.showLoading()
 					g.net.call("organizeOpt/deleteStationById", _params).then(($data) =>
 					{
+						g.ui.hideLoading();
 						g.data.searchPositionPool.remove(_delId);
 						g.ui.toast("岗位删除成功!");
 

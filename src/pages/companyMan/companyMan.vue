@@ -105,10 +105,10 @@
 				return Math.ceil(g.data.searchCompanyPool.total / 10);
 			}
 		},
-		watch:{
+		watch: {
 			companyList($val)
 			{
-				if($val.length == 0)
+				if ($val.length == 0)
 				{
 					this.updateUrl();
 				}
@@ -130,8 +130,10 @@
 				if ($result)
 				{
 					_params = {comId: _delId};
+					g.ui.showLoading()
 					g.net.call("organizeOpt/deleteCompanyById", _params).then(($data) =>
 					{
+						g.ui.hideLoading();
 						g.data.searchCompanyPool.remove(_delId);
 						g.ui.toast("公司删除成功！");
 					})
@@ -146,8 +148,10 @@
 				}
 				else
 				{
+					g.ui.showLoading()
 					g.net.call("organizeQuery/organizeDetail", {comId: $id}).then(($data) =>
 					{
+						g.ui.hideLoading();
 						var companyData = g.data.searchCompanyPool.getDataById($id);
 						if (companyData)
 						{

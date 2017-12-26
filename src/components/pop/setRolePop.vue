@@ -99,8 +99,10 @@
 					userId: this.currId,
 					roleId: this.roleId
 				};
+				g.ui.showLoading()
 				g.net.call('user/editUserRole', _params).then(($data) =>
 				{
+					g.ui.hideLoading();
 					var roleData = g.data.searchRolePool.getDataById(_params.roleId);
 					_params.roleName = roleData.name;
 					g.data.searchAccountPool.getDataById(_params.userId).update(_params);

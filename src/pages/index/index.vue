@@ -152,8 +152,10 @@
 			},
 			onClick_delBtn()
 			{
+				g.ui.showLoading()
 				g.net.call(g.param.delPicAccess, {fileName: this.avatar}).then(() =>
 				{
+					g.ui.hideLoading();
 				}, (err) =>
 				{
 					this.avatar = "default.png";
@@ -172,8 +174,10 @@
 					return;
 				}
 				_params = {mobile: this.phone};
+				g.ui.showLoading()
 				g.net.call("user/applyUserAuthSendCode", _params).then(($data) =>
 				{
+					g.ui.hideLoading();
 					g.ui.toast("验证码发送成功");
 				})
 			},
@@ -189,8 +193,10 @@
 					mobile: this.phone,
 					code: this.code
 				};
+				g.ui.showLoading()
 				g.net.call("user/updateUserMobile", _params).then(($data) =>
 				{
+					g.ui.hideLoading();
 					g.data.userInfo.update(_params);
 					g.ui.toast("手机号修改成功")
 					this.readonly = true;
@@ -211,8 +217,10 @@
 					remark: this.remark,
 					avatar: this.avatar
 				};
+				g.ui.showLoading()
 				g.net.call("user/updateUserInfo", _params).then(() =>
 				{
+					g.ui.hideLoading();
 					g.data.userInfo.update(_params);
 					g.ui.toast("用户信息修改成功！");
 				})
@@ -229,8 +237,10 @@
 					oldPassword: sha256(this.password),
 					newPassword: sha256(this.newPwd)
 				};
+				g.ui.showLoading()
 				g.net.call("user/updatePassword", _params).then(() =>
 				{
+					g.ui.hideLoading();
 					g.data.userInfo.update(_params);
 					g.ui.toast("密码修改成功！");
 				}, (err) =>

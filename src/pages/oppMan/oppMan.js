@@ -25,8 +25,10 @@ export function searchBusinessList($params)
 	}
 	var promise = new Promise((resolved, rejected) =>
 	{
+		g.ui.showLoading()
 		g.net.call("bo/auditOrderList", _params).then(($data) =>
 		{
+			g.ui.hideLoading();
 			g.data.searchBusinessPool.removeAll();
 			g.data.searchBusinessPool.update($data);
 			resolved();

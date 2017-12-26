@@ -25,8 +25,10 @@ export function searchPositionList($params)
 	}
 	var promise = new Promise((resolved, rejected) =>
 	{
+		g.ui.showLoading()
 		g.net.call("organizeQuery/stationPageList", _params).then(($data) =>
 		{
+			g.ui.hideLoading();
 			g.data.searchPositionPool.removeAll();
 			g.data.searchPositionPool.update($data);
 			resolved();

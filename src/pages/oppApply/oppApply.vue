@@ -80,8 +80,10 @@
 					boFormData: JSON.stringify($data.formData),
 					attachs: JSON.stringify($data.attachList)
 				};
+				g.ui.showLoading()
 				g.net.call("/bo/orderApply", _params).then(($data) =>
 				{
+					g.ui.hideLoading();
 					this.$refs.oppForm.init();
 					this.routerUpdated();
 					g.ui.toast("商机提交成功");

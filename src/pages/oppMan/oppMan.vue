@@ -303,8 +303,10 @@
 				else
 				{
 					_params = {orderId: $id};
+					g.ui.showLoading()
 					g.net.call("bo/viewOrderDetail", _params).then(($data) =>
 					{
+						g.ui.hideLoading();
 						g.data.searchBusinessPool.getDataById($id).update($data);
 						this.currId = $id;
 						this.isShowDetailPop = true;
@@ -327,8 +329,10 @@
 					orderId: $id,
 					todoId: businessData.todoId,
 				};
+				g.ui.showLoading()
 				g.net.call("bo/auditOrderDetail", _params).then(($data) =>
 				{
+					g.ui.hideLoading();
 					g.data.searchBusinessPool.getDataById($id).update($data);
 					this.currId = $id;
 					this.isShowDetailPop = true;
