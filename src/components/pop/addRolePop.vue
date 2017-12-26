@@ -13,7 +13,7 @@
 					</p>
 					<p class="from-group">
 						<span class="form-title left">角色说明</span>
-					<div class=""></div>
+					<!--<div class=""></div>-->
 						<textarea type="text" class="form-control role-explain ani-time role-textarea"
 								  v-model="desc"></textarea>
 					</p>
@@ -90,10 +90,17 @@
 					var roleData = g.data.searchRolePool.getDataById(this.currId);
 					this.name = roleData.name;
 					this.desc = roleData.desc;
-					this.checkedList = roleData.rights.split(',').map(function (item)
+					var checkedList = roleData.rights.split(',').map(function (item)
 					{
 						return int(item);
 					});
+					for(var item of checkedList)
+					{
+						if(this.checkedList.indexOf(item) < 0 && item <= 17)
+						{
+							this.checkedList.push(item);
+						}
+					}
 				}
 				else
 				{

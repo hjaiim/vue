@@ -138,7 +138,7 @@
 			},
 			uploadComplete($data)
 			{
-				this.avatar = $data.fileName + ";" + $data.size;
+				this.avatar = $data.fileName;
 			},
 			onClick_tabItem($id)
 			{

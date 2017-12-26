@@ -172,11 +172,11 @@
 			},
 			startDate()
 			{
-				return g.timeTool.getFullDate(this.startTime, true);
+				return g.timeTool.getFullDate(int(this.startTime), true);
 			},
 			endDate()
 			{
-				return g.timeTool.getFullDate(this.endTime, true);
+				return g.timeTool.getFullDate(int(this.endTime), true);
 			}
 		},
 		methods: {
@@ -185,7 +185,7 @@
 				this.currPage = 1;
 				this.type = -1;
 				this.statusList = [1, -1, 2];
-				this.startTime = 1400000000;
+				this.startTime = 1483200000000;
 				this.endTime = g.timeTool.getNowStamp();
 				this.creatorName = "";
 				this.companyName = "";
@@ -201,7 +201,7 @@
 				{
 					return int(item);
 				});
-				this.startTime = g.vue.getQuery("startTime", 1400000000);
+				this.startTime = g.vue.getQuery("startTime", 1483200000000);
 				this.endTime = g.vue.getQuery("endTime", g.timeTool.getNowStamp());
 				this.creatorName = g.vue.getQuery("creatorName", "");
 				this.companyName = g.vue.getQuery("companyName", "");
@@ -306,8 +306,6 @@
 			},
 			updateUrl()
 			{
-				debugger;
-
 				g.url = {
 					path: "/oppman",
 					query: {
@@ -324,10 +322,14 @@
 			onChange_date($timeStamp)
 			{
 				this[_dateType.toLowerCase() + 'Time'] = $timeStamp;
+				if (this.endTime < this.startTime)
+				{
+					this.endTime = this.startTime + 86400;
+				}
 				this.isShowStartDate = false;
 				this.isShowEndDate = false;
 				_dateType = "";
-			},
+			}
 		}
 	}
 </script>

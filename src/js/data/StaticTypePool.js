@@ -63,6 +63,7 @@ function createData($obj)
 	d.id = $obj.id;
 	d.name = $obj.name;
 	d.titles = $obj.titles;
+	d.hash = $obj.hash;
 	return d;
 }
 

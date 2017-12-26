@@ -638,10 +638,10 @@ input {
 	}
   }
   .bind-phone {
-	color: #fe6e05;
+	color: #fe6e29;
 	margin-left: 12px;
 	&:hover {
-	  color: #fa7c20;
+	  color: #ec4e08;
 	}
   }
   .note {
@@ -654,6 +654,7 @@ input {
 		min-width: 240px;
 		width: auto;
 		border: 1px solid transparent;
+		padding-left: 0;
 		.icon-trangle {
 		  display: none;
 		}
@@ -673,42 +674,6 @@ input {
   font-size: 14px;
 }
 
-//.personal-content {
-//  font-size: 14px;
-//  height: 40px;
-//  line-height: 40px;
-//}
-//
-//.pensonal-input {
-//  width: 240px;
-//}
-//
-//.code {
-//  width: 124px;
-//}
-//
-//.btn-send {
-//  display: inline-block;
-//  height: 40px;
-//  width: 96px;
-//  line-height: 40px;
-//  text-align: center;
-//  border-radius: 4px;
-//  margin-left: 20px;
-//  color: #666666;
-//  background: #f4f4f4;
-//}
-//
-//.bind-phone {
-//  color: #fe6e05;
-//  margin-left: 12px;
-//}
-//
-//.note {
-//  //width: 948px;
-//  width: 86%;
-//}
-//
 .btn {
   margin: 45px 0 0 128px;
 }
@@ -863,6 +828,7 @@ input {
 	width: 100%;
 	height: 100%;
 	z-index: 1;
+	background: #ffffff;
 	.img-url {
 	  display: block;
 	  width: 100%;

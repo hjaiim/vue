@@ -45,7 +45,7 @@ function createData($dObj)
 	var d = {};
 	d.businessId = -1;
 	d.auditStatusList = [-1, 1, 2].join(',');
-	d.startTime = g.timeTool.getFullDate(1400000000, true);
+	d.startTime = g.timeTool.getFullDate(1483200000000, true);
 	d.endTime = g.timeTool.getFullDate(Date.now(), true);
 	d.custComName = "";
 	d.creatorName = "";
@@ -67,8 +67,8 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("companyName") && (this.custComName = $dObj.companyName);
 	$dObj.hasOwnProperty("type") && (this.businessId = $dObj.type);
 	$dObj.hasOwnProperty("statusList") && (this.auditStatusList = JSON.parse($dObj.statusList).join(','));
-	$dObj.hasOwnProperty("startTime") && (this.startTime = g.timeTool.getFullDate($dObj.startTime), true );
-	$dObj.hasOwnProperty("endTime") && (this.endTime = g.timeTool.getFullDate($dObj.endTime), true);
+	$dObj.hasOwnProperty("startTime") && (this.startTime = g.timeTool.getFullDate(int($dObj.startTime), true));
+	$dObj.hasOwnProperty("endTime") && (this.endTime = g.timeTool.getFullDate(int($dObj.endTime)), true);
 	$dObj.hasOwnProperty("creatorName") && (this.creatorName = $dObj.creatorName);
 	$dObj.hasOwnProperty("page") && (this.page = $dObj.page);
 	$dObj.hasOwnProperty("pageSize") && (this.pageSize = $dObj.pageSize);

@@ -128,6 +128,7 @@
 		.only-read {
 			border: 1px solid transparent;
 			box-shadow: none;
+			padding-left: 0;
 			&:focus {
 				border: 1px solid transparent;
 			}

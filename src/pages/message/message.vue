@@ -7,13 +7,11 @@
 						<img :src="g.path.images+'/delete-icon.png'" alt="">
 						<span>批量删除</span>
 					</i>
-					<div class="action-box left" @click="onClick_msgType(1)">
+					<div class="action-box left pointer" @click="onClick_msgType(1)">
 						<i class="draw-tick relative pointer" :class="typeList.indexOf(1)>=0?'action':''"></i>
 						<span>已读</span>
-
 					</div>
-
-					<div class="action-box left" @click="onClick_msgType(0)">
+					<div class="action-box left pointer" @click="onClick_msgType(0)">
 						<i class="draw-tick relative pointer" :class="typeList.indexOf(0)>=0?'action':''"></i>
 						<span>未读</span>
 					</div>

@@ -99,7 +99,7 @@
 	import BusinessType6 from "../businessDetail/businessType6.vue";
 	import BusinessType7 from "../businessDetail/businessType7.vue";
 	import ChooseManPop from "./chooseManPop.vue"
-	var _params = null;
+	var _params = null, _childList = [], _childName = [];
 	export default{
 		created()
 		{
@@ -115,7 +115,7 @@
 				opinion: "",
 				hasIframe: true,
 				attachList: [],
-				isShowOrderManPop: true,
+				isShowOrderManPop: false,
 				businessData: {
 					taskProperties: {}
 				}
@@ -188,9 +188,9 @@
 			},
 			onClick_selectNext()
 			{
-				g.net.call("/organizeQuery/getAuditStationLis", {orderId: this.currId}).then(($data) =>
+				g.net.call("organizeQuery/getAuditStationList", {orderId: this.currId}).then(($data) =>
 				{
-					g.data.staffPool.update($data);
+					g.data.staffPool.update($data.data);
 					this.isShowOrderManPop = true;
 				})
 			},
@@ -198,9 +198,11 @@
 			{
 				_params = {
 					orderId: this.currId,
-					auditResult: 1,
-					auditSuggest: "可以通过",
-					todoId: this.businessData.todoId
+					auditResult: this.status,
+					auditSuggest: this.opinion,
+					todoId: this.businessData.todoId,
+					pendingAuditorId: _childList.join(','),
+					pendingAuditorName: _childName.join(',')
 				};
 				g.net.call("bo/saveAuditRecord", _params).then(($data) =>
 				{
@@ -210,8 +212,19 @@
 					g.func.dealErr(err);
 				})
 			},
-			onClose_orderManPop(){
+			onClose_orderManPop($result, $list)
+			{
 				this.isShowOrderManPop = false;
+				if ($result)
+				{
+					_childName = [];
+					_childList = __merge([], $list);
+					for (var item of _childList)
+					{
+						var data = g.data.staffPool.getChildById(item);
+						_childName.push(data.name)
+					}
+				}
 			}
 		}
 	}

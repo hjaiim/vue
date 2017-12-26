@@ -147,7 +147,14 @@
 			{
 				if (this.currId)
 				{
-					this.formData = JSON.parse(g.data.searchBusinessPool.getDataById(this.currId).formData);
+					var formData = JSON.parse(g.data.searchBusinessPool.getDataById(this.currId).formData);
+					var hash = g.data.staticTypePool.getDataById(_type).hash;
+					for (var key in formData)
+					{
+						this.formData[hash[key]] = formData[key];
+					}
+					this.attachList = JSON.parse(g.data.searchBusinessPool.getDataById(this.currId).attachList);
+					this.$forceUpdate();
 				}
 				else
 				{
@@ -213,6 +220,7 @@
 					formData: _formData,
 					attachList: this.attachList
 				};
+
 				this.$emit("submit", data);
 			},
 			onClick_delBtn($name, $index)
