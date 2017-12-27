@@ -5,7 +5,7 @@ var WEB_CONFIG = {
 	mode: ["debug"], //工作模式
 
 	path: {
-		domain: "{$host}",
+		domain: "{$host}/boms/web",
 		base: "{$domain}/{$ver}/",
 		assets: "{$base}/assets",
 		data: "{$assets}/data",
@@ -66,8 +66,9 @@ var WEB_CONFIG = {
 		telphoneReg: /(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,8}/,
 		emailReg: /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
 		codeReg: /\d{4}/,
-		ossUrl: "http://hw-web-test.oss-cn-shanghai.aliyuncs.com/boms/upload/",
-		delPicAccess: "http://test.service.boms.huanwuh5.com:8081/file/del"
+		ossUrl: "http://test.boms.huanwuh5.com/boms/upload/",
+// 		uploadAccess: "http://121.41.80.45:8081/file/del",
+		delPicAccess: "http://121.41.80.45:8081/file/del"
 	}
 
 };

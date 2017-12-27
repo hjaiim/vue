@@ -14,8 +14,7 @@
 							<p class="load-text">修改头像</p>
 							<iframe class="iframe-btn" name="fileUpload"
 									:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=avatar'"
-									id="avatar" v-if="avatar == 'default.png'"
-							></iframe>
+									id="avatar" v-if="avatar=='default.png'"></iframe>
 							<img :src="g.path.images+'/del-head.png'" alt=""
 								 class="del-head absolute pointer" @click="onClick_delBtn"
 								 v-if="avatar != 'default.png'">
@@ -124,6 +123,12 @@
 			InputBar,
 			UploadBtn
 		},
+		watch:{
+			avatar($val)
+			{
+				trace("this.avatar",$val);
+			}
+		},
 		methods: {
 			routerUpdated()
 			{
@@ -152,10 +157,8 @@
 			},
 			onClick_delBtn()
 			{
-				g.ui.showLoading()
 				g.net.call(g.param.delPicAccess, {fileName: this.avatar}).then(() =>
 				{
-					g.ui.hideLoading();
 				}, (err) =>
 				{
 					this.avatar = "default.png";
