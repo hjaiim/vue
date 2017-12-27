@@ -2,7 +2,7 @@
  * Created by billy on 2016/11/30.
  */
 var WEB_CONFIG = {
-	mode: ["debug","testData"], //工作模式
+	mode: ["debug"], //工作模式
 
 	path: {
 		domain: "{$host}/boms/web",
@@ -67,8 +67,8 @@ var WEB_CONFIG = {
 		emailReg: /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
 		codeReg: /\d{4}/,
 		ossUrl: "http://test.boms.huanwuh5.com/boms/upload/",
-// 		uploadAccess: "http://121.41.80.45:8081/file/del",
-		delPicAccess: "http://121.41.80.45:8081/file/del",
+		uploadAccess: "http://121.41.80.45:8081/file/upload",
+		delPicAccess: "http://121.41.80.45:8001/file/del",
 		timeoutClock:10
 	}
 

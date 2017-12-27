@@ -24,14 +24,16 @@
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">客户公司地址</span>
-				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder="" type="text"
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
+						   type="text"
 						   v-model="formData.cusCompAdd"
 						   :errmsg="errData.cusCompAdd"
 						   @focus="onFocus_inputBar('cusCompAdd')"></input-bar>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">客户公司介绍</span>
-				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder="" type="text"
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
+						   type="text"
 						   v-model="formData.cusCompIntro"
 						   :errmsg="errData.cusCompIntro"
 						   @focus="onFocus_inputBar('cusCompIntro')"></input-bar>
@@ -46,7 +48,8 @@
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">业务用途及场景</span>
-				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder="" type="text"
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
+						   type="text"
 						   v-model="formData.businessDesc"
 						   :errmsg="errData.businessDesc"
 						   @focus="onFocus_inputBar('businessDesc')"></input-bar>
@@ -128,7 +131,7 @@
 				errData: {},
 				formData: {},
 				hasIframe: true,
-				attachList:[]
+				attachList: []
 			}
 		},
 		components: {
@@ -144,13 +147,17 @@
 			{
 				if (this.currId)
 				{
-					var formData = JSON.parse(g.data.searchBusinessPool.getDataById(this.currId).formData);
+					var formData = g.data.searchBusinessPool.getDataById(this.currId).formData;
 					var hash = g.data.staticTypePool.getDataById(_type).hash;
 					for (var key in formData)
 					{
 						this.formData[hash[key]] = formData[key];
+						if(key =="客户联系方式")
+						{
+							this.formData[hash[key]] = formData[key].split("*")[0];
+						}
 					}
-					this.attachList = JSON.parse(g.data.searchBusinessPool.getDataById(this.currId).attachList);
+					this.attachList = g.data.searchBusinessPool.getDataById(this.currId).attachList;
 					this.$forceUpdate();
 				}
 				else

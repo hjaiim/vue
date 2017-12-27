@@ -4,7 +4,7 @@
 
 
 var WEB_CONFIG = {
-	mode: ["debug", "testData"], //工作模式
+	mode: ["debug"], //工作模式
 
 	path: {
 		domain: "{$host}",
@@ -69,7 +69,7 @@ var WEB_CONFIG = {
 		telphoneReg: /(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,8}/,
 		emailReg: /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
 		codeReg: /\d{4}/,
-		ossUrl: "http://hw-web-test.oss-cn-shanghai.aliyuncs.com/boms/upload/",
+		ossUrl: "http://test.boms.huanwuh5.com/boms/upload/",
 		delPicAccess: "http://192.168.12.219:8001/file/del",
 		timeoutClock:10
 	}

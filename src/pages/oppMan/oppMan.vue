@@ -93,7 +93,7 @@
 
 							<p class="action-menu clear" v-if="item.operation== 1">
                                 <span class="right pointer draw-line ani-time"
-									  @click="onClick_editBtn(item.id)">重新编辑</span>
+									  @click="onClick_editBtn(item)">重新编辑</span>
 							</p>
 
 							<p class="action-menu clear" v-if="item.operation== 2">
@@ -313,18 +313,21 @@
 						g.data.searchBusinessPool.getDataById($id).update($data);
 						this.currId = $id;
 						this.isShowDetailPop = true;
-					},(err) =>
+					}, (err) =>
+
 					{
 						g.func.dealErr(err);
 					})
 				}
 			},
-			onClick_editBtn($id)
+			onClick_editBtn($item)
 			{
+
 				g.url = {
 					path: "/oppapply",
 					query: {
-						id: $id
+						id: $item.id,
+						type:$item.type
 					}
 				}
 			},
@@ -333,9 +336,9 @@
 				var businessData = g.data.searchBusinessPool.getDataById($id);
 				_params = {
 					orderId: $id,
-					todoId: businessData.todoId,
+					todoId: businessData.todoId
 				};
-				g.ui.showLoading()
+				g.ui.showLoading();
 				g.net.call("bo/auditOrderDetail", _params).then(($data) =>
 				{
 					g.ui.hideLoading();

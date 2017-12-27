@@ -54,7 +54,6 @@ export default class SearchCompanyPool {
 
 	addDepartment($id, $department)
 	{
-		debugger;
 		if (_hash[$id])
 		{
 			if (_hash[$id].children.indexOf($department) < 0)
