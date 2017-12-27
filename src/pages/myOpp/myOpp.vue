@@ -76,8 +76,8 @@
 						<td>{{item.auditStatusDesc}}</td>
 						<td>
 							<p class="action-menu clear">
-                                <span class="left pointer draw-line ani-time" v-if="item.operation == 1"
-									  @click="onClick_editBtn(item.id)">重新编辑</span>
+                                <span class="right pointer draw-line ani-time" v-if="item.operation == 1"
+									  @click="onClick_editBtn(item)">重新编辑</span>
                                 <span class="right pointer draw-line ani-time" v-if="item.operation == 0"
 									  @click="onClick_detailBtn(item.id)">详情</span>
 							</p>
@@ -296,7 +296,7 @@
 				else
 				{
 					_params = {orderId: $id};
-					g.ui.showLoading()
+					g.ui.showLoading();
 					g.net.call("bo/viewOrderDetail", _params).then(($data) =>
 					{
 						g.ui.hideLoading();
@@ -309,12 +309,14 @@
 					})
 				}
 			},
-			onClick_editBtn($id)
+			onClick_editBtn($item)
 			{
 				g.url = {
 					path: "/oppapply",
 					query: {
-						id: $id
+						id: $item.id,
+						type: $item.type
+
 					}
 				}
 			},

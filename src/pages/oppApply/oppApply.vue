@@ -43,6 +43,7 @@
 				g: g,
 				typeList: [],
 				type: 1,
+				currId: 0,
 				isShowTypeList: false
 			}
 		},
@@ -68,6 +69,7 @@
 		methods: {
 			routerUpdated()
 			{
+				this.currId = int(g.vue.getQuery("id", 0));
 				this.typeList = g.data.staticTypePool.list;
 				this.type = g.vue.getQuery('type', 1);
 				this.initEvents()
@@ -75,6 +77,7 @@
 			onSubmit_formData($data)
 			{
 				_params = {
+					oldOrderId: this.currId,
 					businessId: this.type,
 					custComName: $data.formData["客户公司名称"],
 					boFormData: JSON.stringify($data.formData),

@@ -206,14 +206,18 @@
 			{
 				if (this.currId)
 				{
-					var formData = JSON.parse(g.data.searchBusinessPool.getDataById(this.currId).formData);
+					var formData = g.data.searchBusinessPool.getDataById(this.currId).formData;
 					var hash = g.data.staticTypePool.getDataById(_type).hash;
 					for (var key in formData)
 					{
 						this.formData[hash[key]] = formData[key];
+						if(key =="客户联系方式")
+						{
+							this.formData[hash[key]] = formData[key].split("*")[0];
+						}
 					}
 					this.formData["callTypeList"] = formData.callTypeList.split("和");
-					this.attachList = JSON.parse(g.data.searchBusinessPool.getDataById(this.currId).attachList);
+					this.attachList = g.data.searchBusinessPool.getDataById(this.currId).attachList;
 					this.$forceUpdate();
 				}
 				else

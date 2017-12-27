@@ -1,7 +1,7 @@
 <template>
 	<com-layout currId="percenter" currPath="/verify">
 		<div class="percenter-wrap">
-			<div class="percenter-inner" :class="authStatus != 0?'disabled':''">
+			<div class="percenter-inner" :class="canEdit?'':'disabled'">
 				<div class="icon-collect clear">
 					{{errData.avatar}}
 					<div class="relative upload-head right pointer">
@@ -31,7 +31,7 @@
 					<span class="personal-title left">所属公司</span>
 					<p class="err-msg absolute"> {{errData.currCompany}}</p>
 					<div class="personal-content left relative form-list pointer"
-						 :class="authStatus != 0 ?'disabled':''"
+						 :class="canEdit?'':'disabled'"
 						 @click.stop="onClick_dropListBtn('Company')">
 						{{currCompanyData.name}}
 						<i :class="['icon-trangle', isShowCompanyList?'rotate':'']"></i>
@@ -44,36 +44,36 @@
 					<span class="personal-title left">所属部门</span>
 					<p class="err-msg absolute"> {{errData.currDepartment}}</p>
 					<div class="personal-content left relative form-list pointer"
-						 :class="authStatus != 0 ?'disabled':''"
+						 :class="canEdit?'':'disabled'"
 						 @click.stop="onClick_dropListBtn('Department')">
 						{{currDepartData.name}}
 						<i class="pointer" :class="['icon-trangle', isShowDepartmentList?'rotate':'']"></i>
 						<drop-list :dropList="departmentList" :isShowDropList="isShowDepartmentList"
 								   @change="onClick_department" ref="depart"></drop-list>
 					</div>
-					<span class="required" v-show="authStatus == 0">*</span>
+					<span class="required" v-show="canEdit">*</span>
 				</div>
 				<div class="personal-form diff-personal relative">
 					<span class="personal-title left">职务名称</span>
 					<p class="err-msg absolute"> {{errData.currDuty}}</p>
 					<div class="personal-content left relative form-list"
-						 :class="authStatus != 0 ?'disabled':''"
+						 :class="canEdit?'':'disabled'"
 						 @click.stop="onClick_dropListBtn('Duty')">
 						{{currDutyData.name}}
 						<span :class="['icon-trangle', isShowDutyList?'rotate':'']"></span>
 						<drop-list :dropList="dutyList" :isShowDropList="isShowDutyList"
 								   @change="onClick_duty" ref="duty"></drop-list>
 					</div>
-					<span class="required" v-show="authStatus == 0">*</span>
+					<span class="required" v-show="canEdit">*</span>
 				</div>
 				<div class="personal-form">
 					<span class="personal-title left">手机</span>
 					<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
 							   v-model="phone" @focus="onFocus_inputBar('phone')" :errmsg="errData.phone"
-							   :readonly="authStatus != 0"></input-bar>
-					<span class="required" v-show="authStatus == 0">*</span>
+							   :readonly="!canEdit"></input-bar>
+					<span class="required" v-show=canEdit>*</span>
 				</div>
-				<div class="personal-form" v-if="authStatus == 0">
+				<div class="personal-form" v-if="canEdit">
 					<span class="personal-title left">验证码</span>
 					<input-bar class="personal-content pensonal-input code left" placeholder="" type="text"
 							   v-model="code" @focus="onFocus_inputBar('code')" :errmsg="errData.code"></input-bar>
@@ -83,19 +83,19 @@
 				</div>
 				<div class="personal-form"><span class="personal-title left">固定电话</span>
 					<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
-							   :readonly="authStatus != 0"
+							   :readonly="!canEdit"
 							   v-model="telphone" @focus="onFocus_inputBar('telphone')"
 							   :errmsg="errData.telphone"></input-bar>
 				</div>
 
 				<div class="personal-form"><span class="personal-title left">电子邮箱</span>
 					<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
-							   :readonly="authStatus != 0"
+							   :readonly="!canEdit"
 							   v-model="email" @focus="onFocus_inputBar('email')" :errmsg="errData.email"></input-bar>
 				</div>
 				<div class="personal-form"><span class="personal-title left">备注</span>
 					<input-bar class="personal-content pensonal-input note left" placeholder="" type="text"
-							   :readonly="authStatus != 0"
+							   :readonly="!canEdit"
 							   v-model="remark" @focus="onFocus_inputBar('remark')"
 							   :errmsg="errData.remark"></input-bar>
 				</div>
@@ -130,6 +130,7 @@
 						<span class="del-img pointer" :class="idCardBack?'hover-img':''"
 							  @click="onClick_deleteImg('idCardBack')"></span>
 					</div>
+
 				</div>
 				<div class="personal-form relative" :class="authStatus != 0 ?'disabled':''">
 					<p class="err-msg absolute"> {{errData.workCard}}</p>
@@ -155,7 +156,7 @@
 					</div>
 				</div>
 				<div class="btn btn-save pointer action-btn ani-time " @click="onClick_submitBtn"
-					 v-if="authStatus == 0 || authStatus == 3">提交
+					 v-if="canEdit">提交
 				</div>
 			</div>
 			<right-pop :isShowPopView="isShowRightPop"></right-pop>
@@ -219,6 +220,10 @@
 					return true;
 				}
 				return this.authStatus == 1;
+			},
+			canEdit()
+			{
+				return this.authStatus == 0 || this.authStatus == 3;
 			}
 		},
 		methods: {
@@ -227,6 +232,9 @@
 
 				this.userInfo = g.data.userInfo;
 				this.authStatus = this.userInfo.authStatus;
+				this.companyList = g.data.companyPool.list;
+				this.departmentList = [];
+				this.dutyList = [];
 				if (this.authStatus != 0)
 				{
 					this.phone = this.userInfo.phone;
@@ -252,13 +260,6 @@
 					this.currCompanyData = "";
 					this.currDepartData = "";
 					this.currDutyData = "";
-					this.companyList = g.data.companyPool.list;
-				}
-				if (g.core.onMode("testData"))
-				{
-					this.idCardBack = "idCardBack.png";
-					this.idCardFront = "idCardBack.png";
-					this.workCard = "idCardBack.png";
 				}
 				this.code = "";
 				this.initEvents();
@@ -292,12 +293,15 @@
 				this.isShowCompanyList = false;
 				this.currCompanyData = g.data.companyPool.getDataById($id);
 				this.departmentList = this.currCompanyData.children;
+				this.currDepartData = {};
+				this.currDutyData = {};
 			},
 			onClick_department($id)
 			{
 				this.isShowDepartmentList = false;
 				this.currDepartData = g.data.departmentPool.getDataById($id);
 				this.dutyList = this.currDepartData.children;
+				this.currDutyData = {};
 			},
 			onClick_duty($id)
 			{
