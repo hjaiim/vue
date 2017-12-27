@@ -95,7 +95,7 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("creatorId") && (this.creatorId = $dObj.creatorId);
 	$dObj.hasOwnProperty("creatorName") && (this.creator = $dObj.creatorName);
 	$dObj.hasOwnProperty("isShow") && (this.isShow = $dObj.isShow);
-	$dObj.hasOwnProperty("createTime") && (this.createTime = g.timeTool.getFullDate($dObj.createTime,true));
+	$dObj.hasOwnProperty("createTime") && (this.createTime = g.timeTool.getFullDate(int($dObj.createTime), true));
 	$dObj.hasOwnProperty("stationType") && (this.type = $dObj.stationType);
 	$dObj.hasOwnProperty("stationTypeDesc") && (this.typeDesc = $dObj.stationTypeDesc);
 }

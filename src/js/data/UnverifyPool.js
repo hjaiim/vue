@@ -127,7 +127,7 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("departmentName") && (this.departmentName = $dObj.departmentName);
 	$dObj.hasOwnProperty("dutyId") && (this.dutyId = $dObj.dutyId);
 	$dObj.hasOwnProperty("dutyName") && (this.dutyName = $dObj.dutyName);
-	$dObj.hasOwnProperty("createTime") && (this.createTime = g.timeTool.getFullDate($dObj.createTime),true);
+	$dObj.hasOwnProperty("createTime") && (this.createTime = g.timeTool.getFullDate(int($dObj.createTime), true));
 	$dObj.hasOwnProperty("status") && (this.status = $dObj.status);
 	$dObj.hasOwnProperty("stationId") && (this.positionId = $dObj.stationId);
 	$dObj.hasOwnProperty("stationName") && (this.positionName = $dObj.stationName);

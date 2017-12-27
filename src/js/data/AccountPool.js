@@ -63,7 +63,6 @@ export default class AccountPool {
 		return _totalPage;
 	}
 
-
 	removeAll()
 	{
 		_list = [];
@@ -72,7 +71,6 @@ export default class AccountPool {
 		_totalPage = 1;
 	}
 }
-
 
 function createData($dObj)
 {
