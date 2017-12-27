@@ -5,7 +5,7 @@
 				<div class="icon-collect clear">
 					{{errData.avatar}}
 					<div class="relative upload-head right pointer">
-						<img class="default-img" :src="avatar?g.param.ossUrl+avatar:g.path.images+'/default.png'"
+						<img class="default-img" :src="g.param.ossUrl+avatar"
 							 alt="">
 						<div class="absolute upload-btn">
 							<p class="load-text">修改头像</p>
@@ -77,7 +77,9 @@
 					<span class="personal-title left">验证码</span>
 					<input-bar class="personal-content pensonal-input code left" placeholder="" type="text"
 							   v-model="code" @focus="onFocus_inputBar('code')" :errmsg="errData.code"></input-bar>
-					<span class="btn-send pointer left ani-time" @click="onClick_sendCodeBtn">发送验证码</span>
+					<span class="btn-send pointer left ani-time" @click="onClick_sendCodeBtn"
+						  :class="isClicked?'disabled':''">{{limit == g.param.timeoutClock ?'获取验证码':'倒计时'+limit+'秒'}}
+					</span>
 				</div>
 				<div class="personal-form"><span class="personal-title left">固定电话</span>
 					<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
@@ -85,6 +87,7 @@
 							   v-model="telphone" @focus="onFocus_inputBar('telphone')"
 							   :errmsg="errData.telphone"></input-bar>
 				</div>
+
 				<div class="personal-form"><span class="personal-title left">电子邮箱</span>
 					<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
 							   :readonly="authStatus != 0"
@@ -166,7 +169,7 @@
 	import InputBar from "../../components/inputBar.vue";
 	import DropList from "../../components/dropList.vue";
 	import RightPop from "../../components/pop/rightPop.vue"
-	var _isValid = true, _params = null, _type = "";
+	var _isValid = true, _params = null, _type = "", _timer = 0;
 	export default{
 		created(){
 			this.init();
@@ -195,7 +198,10 @@
 				isShowDepartmentList: false,
 				isShowCompanyList: false,
 				isShowDutyList: false,
-				isSubmit: false
+				isSubmit: false,
+				limit: g.param.timeoutClock,
+				isClicked: false
+
 			}
 		},
 		components: {
@@ -242,13 +248,17 @@
 					this.email = "";
 					this.telphone = "";
 					this.avatar = "default.png";
-					this.idCardBack = "";
-					this.idCardFront = "";
-					this.workCard = "";
+
 					this.currCompanyData = "";
 					this.currDepartData = "";
 					this.currDutyData = "";
 					this.companyList = g.data.companyPool.list;
+				}
+				if (g.core.onMode("testData"))
+				{
+					this.idCardBack = "idCardBack.png";
+					this.idCardFront = "idCardBack.png";
+					this.workCard = "idCardBack.png";
 				}
 				this.code = "";
 				this.initEvents();
@@ -327,12 +337,15 @@
 
 			onClick_sendCodeBtn()
 			{
+
 				this.checkPhoneData();
 				if (!_isValid)
 				{
 					_isValid = true;
 					return;
 				}
+				this.isClicked = true;
+				this.setClock();
 				_params = {mobile: this.phone};
 				g.net.call("user/applyUserAuthSendCode", _params).then(($data) =>
 				{
@@ -341,6 +354,23 @@
 				{
 					g.func.dealErr(err);
 				})
+			},
+			setClock()
+			{
+				_timer = setTimeout(()=>
+				{
+					this.limit--;
+					if (this.limit == 0)
+					{
+						clearTimeout(_timer);
+						this.isClicked = false;
+						this.limit = g.param.timeoutClock;
+					}
+					else
+					{
+						this.setClock();
+					}
+				}, 1000)
 			},
 			onClick_deleteImg($type)
 			{
@@ -379,12 +409,15 @@
 					email: this.email,
 					remark: this.remark
 				};
-				g.ui.showLoading()
+				g.ui.showLoading();
 				g.net.call("user/applyUserAuth", _params).then(($data) =>
 				{
 					g.ui.hideLoading();
 					this.isSubmit = true;
 					g.ui.toast('申请提交成功！');
+				}, (err) =>
+				{
+					g.func.dealErr(err);
 				})
 
 			},

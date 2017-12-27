@@ -2,11 +2,11 @@
  * Created by billy on 2016/11/30.
  */
 var WEB_CONFIG = {
-	mode: ["debug"], //工作模式
+	mode: ["debug","testData"], //工作模式
 
 	path: {
 		domain: "{$host}/boms/web",
-		base: "{$domain}/{$ver}/",
+		base: "{$domain}/{$ver}",
 		assets: "{$base}/assets",
 		data: "{$assets}/data",
 		images: "{$assets}/images",
@@ -15,7 +15,7 @@ var WEB_CONFIG = {
 
 	url: {
 		domain: "",
-		server: "http://test.service.boms.huanwuh5.com/"
+		server: "http://test.service.boms.huanwuh5.com/boms"
 	},
 
 	http: {
@@ -68,7 +68,8 @@ var WEB_CONFIG = {
 		codeReg: /\d{4}/,
 		ossUrl: "http://test.boms.huanwuh5.com/boms/upload/",
 // 		uploadAccess: "http://121.41.80.45:8081/file/del",
-		delPicAccess: "http://121.41.80.45:8081/file/del"
+		delPicAccess: "http://121.41.80.45:8081/file/del",
+		timeoutClock:10
 	}
 
 };

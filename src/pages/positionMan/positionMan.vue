@@ -122,6 +122,9 @@
 						g.data.searchPositionPool.remove(_delId);
 						g.ui.toast("岗位删除成功!");
 
+					}, (err) =>
+					{
+						g.func.dealErr(err);
 					})
 				}
 			},

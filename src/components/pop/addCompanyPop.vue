@@ -8,36 +8,35 @@
 					<p class="from-group">
 						<span class="form-title">公司名称</span>
 						<input-bar class="form-control " :class="currentId != 0?'company-input':''" placeholder=""
-								   type="text"
-								   :readonly="currentId != 0"
+								   type="text" :readonly="isEdit"
 								   v-model="name" :errmsg="errData.name" @focus="onFocus_inputBar('name')"></input-bar>
-						<span class="requied" v-show="currentId == 0">*</span>
+						<span class="requied" v-show="!isEdit">*</span>
 					</p>
 					<p class="from-group">
 						<span class="form-title">公司电话</span>
-						<input-bar class="form-control" placeholder="" type="text" :readonly="currentId != 0"
+						<input-bar class="form-control" placeholder="" type="text" :readonly="isEdit"
 								   v-model="telphone" :errmsg="errData.telphone"
 								   @focus="onFocus_inputBar('telphone')"></input-bar>
-						<span class="requied" v-show="currentId == 0">*</span>
+						<span class="requied" v-show="!isEdit">*</span>
 					</p>
 					<p class="from-group">
 						<span class="form-title">公司负责人</span>
-						<input-bar class="form-control" placeholder="" type="text" :readonly="currentId != 0"
+						<input-bar class="form-control" placeholder="" type="text" :readonly="isEdit"
 								   v-model="leader" :errmsg="errData.leader"
 								   @focus="onFocus_inputBar('leader')"></input-bar>
-						<span class="requied" v-show="currentId == 0">*</span>
+						<span class="requied" v-show="!isEdit">*</span>
 					</p>
 					<p class="from-group">
 						<span class="form-title">负责人电话</span>
-						<input-bar class="form-control" placeholder="" type="text" :readonly="currentId != 0"
+						<input-bar class="form-control" placeholder="" type="text" :readonly="isEdit"
 								   v-model="phone" :errmsg="errData.phone"
 								   @focus="onFocus_inputBar('phone')"></input-bar>
-						<span class="requied" v-show="currentId == 0">*</span>
+						<span class="requied" v-show="!isEdit">*</span>
 					</p>
 					<div class="btn-wrap clear">
-						<div class="pop-btn right pointer" @click="onClick_saveCompany" v-if="currentId == 0">保存
+						<div class="pop-btn right pointer" @click="onClick_saveCompany" v-if="!isEdit">保存
 						</div>
-						<div class="pop-btn right pointer" @click="onClick_editCompany" v-if="currentId != 0">编辑
+						<div class="pop-btn right pointer" @click="onClick_editCompany" v-if="isEdit">编辑
 						</div>
 					</div>
 				</div>
@@ -48,7 +47,7 @@
 								 @click="onClick_deleteDepart(item)">
 							<p class="from-group">
 								<span class="form-title">部门名称</span>
-                        <span v-show="currentId != 0">
+                        <span>
 							<input-bar class="form-control" placeholder="" type="text" :readonly="!item.isEdit"
 									   v-model="item.name"></input-bar>
                             <img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer"
@@ -59,7 +58,7 @@
 							</p>
 							<p class="from-group" v-for="duty in item.children">
 								<span class="form-title">职务名称</span>
-							<span v-show="currentId != 0">
+							<span>
 								<input-bar class="form-control" placeholder="" type="text"
 										   v-model="duty.name" :readonly="!duty.isEdit"></input-bar>
 								<img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer"
@@ -80,7 +79,7 @@
 								</span>
 							</p>
 						</div>
-						<div class="company-message">
+						<div class="company-message" v-if="currentId != 0">
 							<p class="from-group">
 								<span class="form-title">部门名称</span>
                         <span>
@@ -104,7 +103,7 @@
 	import ViewPopup from "../viewPop.vue";
 	import InputBar from "../inputBar.vue";
 	import ScrollGroup from "../scrollGroup.vue"
-	var _params = null, _isValid = true, _departId = 0, _companyId = 0;
+	var _params = null, _isValid = true, _departId = 0;
 	export default{
 		created()
 		{
@@ -114,7 +113,8 @@
 			return {
 				g: g,
 				name: "",
-				currentId: "",
+				currentId: 0,
+				isEdit: false,
 				telphone: "",
 				leader: "",
 				phone: "",
@@ -141,7 +141,7 @@
 			}
 		},
 		watch: {
-			isShowPopView($val)
+			currId($val)
 			{
 				this.init();
 			}
@@ -150,15 +150,16 @@
 			init()
 			{
 				this.authStatus = g.data.userInfo.authStatus;
-				this.currentId = this.currId;
-				if (this.currId)
+				this.currentId = this.currId || this.currentId;
+				if (this.currentId)
 				{
-					this.companyData = g.data.searchCompanyPool.getDataById(this.currId);
+					this.companyData = g.data.searchCompanyPool.getDataById(this.currentId);
 					this.name = this.companyData.name;
 					this.telphone = this.companyData.telphone;
 					this.leader = this.companyData.leader;
 					this.phone = this.companyData.phone;
 					this.departmentList = this.companyData.children;
+					this.isEdit = true;
 				}
 				else
 				{
@@ -168,12 +169,14 @@
 					this.phone = "";
 					this.departmentList = [];
 					this.errData = {};
+					this.isEdit = false;
 				}
 			},
 			onClose_pop()
 			{
 				this.init();
 				this.$emit('close', false);
+				this.currentId = 0;
 			},
 			onFocus_inputBar($type)
 			{
@@ -187,16 +190,15 @@
 					$depart = {
 						id: 0,
 						name: this.departName,
-						parentId: this.currId
+						parentId: this.currentId
 					}
 				}
-
 				_params = {
 					departmentId: $depart.id,
 					departmentName: $depart.name,
 					companyId: $depart.parentId
 				};
-				g.ui.showLoading()
+				g.ui.showLoading();
 				g.net.call("organizeOpt/editDepartment", _params).then(($data) =>
 				{
 					g.ui.hideLoading();
@@ -211,7 +213,7 @@
 						g.data.departmentPool.getDataById($depart.id).update($data);
 					}
 					g.data.departmentPool.getDataById($data.departmentId).update({isEdit: false});
-
+					this.init();
 				}, (err) =>
 				{
 					g.func.dealErr(err);
@@ -234,7 +236,7 @@
 					departmentId: $duty.parentId,
 					companyId: $duty.companyId
 				};
-				g.ui.showLoading()
+				g.ui.showLoading();
 				g.net.call("organizeOpt/editDuty", _params).then(($data) =>
 				{
 					g.ui.hideLoading();
@@ -248,6 +250,7 @@
 						g.data.dutyPool.getDataById($duty.id).update($data);
 					}
 					g.data.dutyPool.getDataById($data.dutyId).update({isEdit: false});
+					this.init();
 				}, (err) =>
 				{
 					g.func.dealErr(err);
@@ -256,11 +259,12 @@
 			onClick_deleteDepart($depart)
 			{
 				_params = {departmentId: $depart.id};
-				g.ui.showLoading()
+				g.ui.showLoading();
 				g.net.call("organizeOpt/deleteDepartmentById", _params).then(() =>
 				{
 					g.ui.hideLoading();
 					g.data.departmentPool.remove($depart.id);
+					this.init();
 				}, (err) =>
 				{
 					g.func.dealErr(err);
@@ -284,6 +288,7 @@
 				{
 					g.ui.hideLoading();
 					g.data.dutyPool.remove($duty.id);
+					this.init();
 				}, (err) =>
 				{
 					g.func.dealErr(err);
@@ -313,6 +318,11 @@
 					{
 						g.data.searchCompanyPool.getDataById(this.currId).update($data);
 					}
+					else
+					{
+						g.data.searchCompanyPool.add($data);
+					}
+					this.init();
 				}, (err) =>
 				{
 					g.func.dealErr(err);
@@ -320,7 +330,7 @@
 			},
 			onClick_editCompany()
 			{
-				this.currentId = 0;
+				this.isEdit = false;
 			},
 			checkValid()
 			{
