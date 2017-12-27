@@ -344,10 +344,8 @@
 			},
 			onClick_deleteImg($type)
 			{
-				g.ui.showLoading()
 				g.net.call(g.param.delPicAccess, {fileName: this[$type]}).then(() =>
 				{
-					g.ui.hideLoading();
 				}, (err) =>
 				{
 					this[$type] = "";

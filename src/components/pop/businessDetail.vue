@@ -264,7 +264,6 @@
 			},
 			onClick_delBtn($name, $index)
 			{
-				g.ui.showLoading()
 				g.net.call(g.param.delPicAccess, {fileName: $name}).then(($data) =>
 				{
 				}, (err) =>

@@ -39,21 +39,7 @@ function checkLogin($to, $next, $callBack)
 		}
 		else
 		{
-			if (g.data.userInfo.authStatus != 2)
-			{
-				if ($to.path != "/verify")
-				{
-					$next('/verify');
-				}
-				else
-				{
-					$callBack && $callBack();
-				}
-			}
-			else
-			{
-				$callBack && $callBack();
-			}
+			$callBack && $callBack();
 		}
 	}
 	else

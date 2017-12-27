@@ -229,6 +229,7 @@
 					for (var item of this.msgList)
 					{
 						item.update({checked: false})
+						this.delList = [];
 					}
 				}
 				else
@@ -237,6 +238,7 @@
 					for (var item of this.msgList)
 					{
 						item.update({checked: true})
+						this.delList.push(item.id);
 					}
 				}
 			},

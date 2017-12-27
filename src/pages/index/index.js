@@ -4,10 +4,18 @@ export default function (to, next)
 {
 	loginManager.checkLogin(to, next, () =>
 	{
-		getUserInfo().then(() =>
+		if(g.data.userInfo.authStatus == 2)
 		{
-			next();
-		})
+			getUserInfo().then(() =>
+			{
+				next();
+			})
+		}
+		else
+		{
+			next("/verify")
+		}
+
 	})
 }
 
@@ -15,7 +23,7 @@ export function getUserInfo()
 {
 	var promise = new Promise((resolved, rejected) =>
 	{
-		g.ui.showLoading()
+		g.ui.showLoading();
 		g.net.call("user/queryUserInfo").then(($data) =>
 		{
 			g.ui.hideLoading();

@@ -76,34 +76,27 @@
 			update($url)
 			{
 				g.func.updateRightList();
-				var delList = [];
-				var navItem = g.data.staticNavPool.getDataById(this.currentId);
-				for (var item of navItem.children)
+				this.navItem = g.data.staticNavPool.getDataById(this.currentId);
+				for(var i = this.navItem.children.length-1;i>= 0;i--)
 				{
-					var index = navItem.children.indexOf(item);
+					var item = this.navItem.children[i];
 					if (item.rightId == 14 && g.data.userInfo.positionType == 2)
 					{
-						delList.push(index);
+						this.navItem.children.splice(i,1);
 					}
 					else if (item.rightId == 15 && g.data.userInfo.positionType == 2)
 					{
-						delList.push(index);
+						this.navItem.children.splice(i,1);
 					}
 					else if (item.rightId == 16 && g.data.userInfo.positionType == 1)
 					{
-						delList.push(index);
+						this.navItem.children.splice(i,1);
 					}
 				}
 
-				while (delList.length > 0)
-				{
-					navItem.children.splice(delList[0], 1);
-					delList.length--;
-				}
-
-				this.navItem = __merge({}, navItem);
 				for (var item of this.navItem.children)
 				{
+					var index = this.navItem.children.indexOf(item);
 					if (!g.data.rightPool.hasRight(item.rightId))
 					{
 						this.navItem.children.splice(index, 1);
