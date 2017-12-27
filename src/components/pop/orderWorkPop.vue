@@ -85,6 +85,7 @@
 			},
 			onClose_pop()
 			{
+				this.isShowRoleList = false;
 				this.$emit('close', false);
 			},
 			onClick_jobMenu()
@@ -106,10 +107,12 @@
 			},
 			onClick_cancelBtn()
 			{
+				this.isShowRoleList = false;
 				this.$emit('close', false)
 			},
 			onClick_confirmBtn()
 			{
+				this.isShowRoleList = false;
 				_params = {
 					userId: this.currId,
 					stationId: this.positionData.id,
