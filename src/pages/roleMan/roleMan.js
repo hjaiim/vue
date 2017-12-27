@@ -56,6 +56,9 @@ function getRightList()
 		{
 			g.ui.hideLoading();
 			g.data.staticRightPool.update($data.data);
+		},(err) =>
+		{
+			g.func.dealErr(err);
 		})
 	}
 }

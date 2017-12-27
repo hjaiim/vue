@@ -313,6 +313,9 @@
 						g.data.searchBusinessPool.getDataById($id).update($data);
 						this.currId = $id;
 						this.isShowDetailPop = true;
+					},(err) =>
+					{
+						g.func.dealErr(err);
 					})
 				}
 			},
@@ -339,6 +342,9 @@
 					g.data.searchBusinessPool.getDataById($id).update($data);
 					this.currId = $id;
 					this.isShowDetailPop = true;
+				},(err) =>
+				{
+					g.func.dealErr(err);
 				})
 			},
 			onClose_detailPop(){

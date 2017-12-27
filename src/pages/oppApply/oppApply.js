@@ -42,6 +42,7 @@ export function getBusinessDetail($params)
 		}, (err) =>
 		{
 			rejected();
+			g.func.dealErr(err);
 		})
 	});
 	return promise;

@@ -201,7 +201,11 @@
 						g.ui.hideLoading();
 						this.currId = $id;
 						this.isShowDetailPop = true;
+					},(err) =>
+					{
+						g.func.dealErr(err);
 					})
+
 				}
 				else
 				{
@@ -275,6 +279,9 @@
 							g.data.searchMessagePool.remove(id);
 						}
 						g.ui.toast("消息删除成功！");
+					},(err) =>
+					{
+						g.func.dealErr(err);
 					})
 				}
 
