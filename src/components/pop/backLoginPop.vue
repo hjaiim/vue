@@ -3,7 +3,7 @@
 		<div class="login-pop fixed center-flex" v-show="isShowPopView">
 			<div class="login-content relative">
 				<img :src="g.path.images+'/loading.gif'" alt="">
-				<p>登录中,请稍后...</p>
+				<p>注册成功！正在前往登录页...</p>
 			</div>
 		</div>
 	</transition>

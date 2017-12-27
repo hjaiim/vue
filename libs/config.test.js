@@ -67,7 +67,7 @@ var WEB_CONFIG = {
 		emailReg: /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
 		codeReg: /\d{4}/,
 		ossUrl: "http://test.boms.huanwuh5.com/boms/upload/",
-		uploadAccess: "http://121.41.80.45:8081/file/upload",
+		uploadAccess: "http://121.41.80.45:8001/file/upload",
 		delPicAccess: "http://121.41.80.45:8001/file/del",
 		timeoutClock:10
 	}

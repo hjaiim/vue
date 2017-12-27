@@ -105,7 +105,7 @@
 				<span class="personal-title left">上传附件</span>
                 <span class="form-trap up-btn pointer opp-up-btn">点击上传
                	<iframe class="iframe-wrap" name="fileUpload" v-if="hasIframe"
-						:src="g.path.base+'upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
+						:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
                 </span>
 				<span class="complate-upload-file"
 					  v-for="(attach,index) in attachList">{{attach.name}}/{{attach.size}}kB;
@@ -152,7 +152,7 @@
 					for (var key in formData)
 					{
 						this.formData[hash[key]] = formData[key];
-						if(key =="客户联系方式")
+						if (key == "客户联系方式")
 						{
 							this.formData[hash[key]] = formData[key].split("*")[0];
 						}
@@ -162,37 +162,41 @@
 				}
 				else
 				{
-					this.formData = {
-						cusCompName: "全数通业务",
-						customer: "全数通业务",
-						cusPhone: "全数通业务",
-						cusCompAdd: "全数通业务",
-						cusCompIntro: "全数通业务",
-						cusType: "全数通业务",
-						businessDesc: "全数通业务",
-						prodType: "全数通业务",
-						dataType: "全数通业务",
-						businessScale: "全数通业务",
-						budget: "全数通业务",
-						payway: "全数通业务",
-						remark: "全数通业务"
-					};
-					this.errData = {
-						cusCompName: "",
-						customer: "",
-						cusPhone: "",
-						cusCompAdd: "",
-						cusCompIntro: "",
-						cusType: "",
-						businessDesc: "",
-						prodType: "",
-						dataType: "",
-						businessScale: "",
-						budget: "",
-						payway: ""
-					};
+					this.initForm();
 				}
 				window.uploadComplete = this.uploadComplete;
+			},
+			initForm()
+			{
+				this.formData = {
+					cusCompName: "全数通业务",
+					customer: "全数通业务",
+					cusPhone: "全数通业务",
+					cusCompAdd: "全数通业务",
+					cusCompIntro: "全数通业务",
+					cusType: "全数通业务",
+					businessDesc: "全数通业务",
+					prodType: "全数通业务",
+					dataType: "全数通业务",
+					businessScale: "全数通业务",
+					budget: "全数通业务",
+					payway: "全数通业务",
+					remark: "全数通业务"
+				};
+				this.errData = {
+					cusCompName: "",
+					customer: "",
+					cusPhone: "",
+					cusCompAdd: "",
+					cusCompIntro: "",
+					cusType: "",
+					businessDesc: "",
+					prodType: "",
+					dataType: "",
+					businessScale: "",
+					budget: "",
+					payway: ""
+				};
 			},
 			uploadComplete($data)
 			{

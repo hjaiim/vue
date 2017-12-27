@@ -14,8 +14,7 @@
 					<a href="#" class="note-txt">{{g.data.userInfo.username}}</a>
 					<i class="avatar-icon">
 						<img
-								:src="g.param.ossUrl+g.data.userInfo.avatar"
-							 alt="">
+								:src="g.data.userInfo.avatar?g.param.ossUrl+g.data.userInfo.avatar:g.path.images+'/default.png'" alt="">
 					</i>
 				</li>
 				<li class="nav-item pointer" @click="onClick_logoutBtn">

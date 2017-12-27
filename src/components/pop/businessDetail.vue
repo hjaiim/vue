@@ -72,7 +72,7 @@
 								<span class="form-title">上传附件</span>
 								 <span class="form-trap up-btn pointer opp-up-btn">点击上传
 								<iframe name="fileUpload" v-if="hasIframe" class="iframe-wrap"
-										:src="g.path.base+'upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
+										:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
 							</span>
 							</p>
 							<p class="from-group clear relative file-wrap">
@@ -216,7 +216,7 @@
 			},
 			onClick_selectNext()
 			{
-				g.ui.showLoading()
+				g.ui.showLoading();
 				g.net.call("organizeQuery/getAuditStationList", {orderId: this.currId}).then(($data) =>
 				{
 					g.ui.hideLoading();
@@ -241,10 +241,11 @@
 					_params.pendingAuditorId = this.idList.join(';');
 					_params.pendingAuditorName = _childName.join(';');
 				}
-				g.ui.showLoading()
+				g.ui.showLoading();
 				g.net.call("bo/saveAuditRecord", _params).then(($data) =>
 				{
 					g.ui.hideLoading();
+					g.data.searchBusinessPool.getDataById(this.currId).update({optType: 0});
 					this.$emit("close", true);
 				}, (err) =>
 				{

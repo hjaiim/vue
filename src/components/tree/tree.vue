@@ -4,7 +4,7 @@
 			<div>
 				<span class="pointer" @click="onClick_item(itemData,$event)" v-show="isShowArrow && isValid(itemData)">
 					<i class="diff-trangle"
-					   :class="currIdList.indexOf(itemData.id) >= 0 && isValid(itemData)?'rotateRight':''"></i>
+					   :class="currSelectList.indexOf(itemData.id) >= 0 && isValid(itemData)?'rotateRight':''"></i>
 				</span>
 				<span class="pointer" @click="onClick_icon(itemData)" v-if="showCheckbox">
 				<i class="tick-select relative"
@@ -12,7 +12,8 @@
 				</span>
 				<span class="pointer" @click="onClick_item(itemData,$event)">{{itemData.name}}</span>
 			</div>
-			<ul v-show="isValid(itemData) && currIdList.indexOf(itemData.id) >= 0" class="padleft relative tree-list">
+			<ul v-show="isValid(itemData) && currSelectList.indexOf(itemData.id) >= 0"
+				class="padleft relative tree-list">
 				<tree-node :data="child" v-for="child in itemData.children" @change="onChange_list"
 						   :checkedList="checkedChildren" :isShowArrow="isShowArrow"></tree-node>
 			</ul>
@@ -23,6 +24,7 @@
 	const prefixCls = "c-tree";
 	import * as util from '../../js/func';
 	import TreeNode from './treeNode.vue';
+	import treePool from './treePool';
 	export default{
 		name: "c-tree",
 		created(){
@@ -30,9 +32,8 @@
 		},
 		data(){
 			return {
-				currIdList: [],
+				currSelectList: [],
 				list: [],
-				tmpItem: {},
 				checkedChildren: []
 			}
 		},
@@ -76,31 +77,33 @@
 			init()
 			{
 				this.list = __merge([], this.listData);
+				treePool.removeAll();
+				treePool.update(this.list);
 				this.checkedChildren = __merge([], this.checkedList);
 			},
 			onClick_item($item, $event)
 			{
-				util.insertOneOrZero(this.currIdList, $item.id);
-				this.tmpItem = $item;
+				util.insertOneOrZero(this.currSelectList, $item.id);
 			},
 			onClick_icon($item)
 			{
-				this.tmpItem = $item;
 				util.insertOneOrZero(this.checkedChildren, $item.id)
 				this.checkedAllChildren($item);
 				this.$emit('update', this.checkedChildren);
 			},
-			onChange_list($idList)
+			onChange_list($idList, $item)
 			{
 				this.checkedChildren = $idList;
-				util.splice(this.checkedChildren, this.tmpItem.id);
-				for (var item of this.tmpItem.children)
+				util.splice(this.checkedChildren, $item.parentId);
+				var data = treePool.getDataById($item.parentId);
+				for (var item of data.children)
 				{
 					if (this.checkedChildren.indexOf(item.id) >= 0)
 					{
-						util.pushIn(this.checkedChildren, this.tmpItem.id);
+						util.pushIn(this.checkedChildren, data.id);
 					}
 				}
+
 				this.$emit('update', this.checkedChildren);
 			},
 			checkedAllChildren($data)

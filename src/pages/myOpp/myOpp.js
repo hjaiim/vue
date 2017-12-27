@@ -41,13 +41,12 @@ function createData($dObj)
 	$dObj = $dObj || {};
 	d.businessId = $dObj.type || -1;
 	$dObj.statusList = $dObj.statusList || JSON.stringify([-1, 1, 2]);
-	d.auditStatusList = JSON.parse($dObj.statusList).join(',');
-	$dObj.startTime = int($dObj.startTime) || 1483200000000;
+	d.auditStatus = JSON.parse($dObj.statusList).join(',');
+	$dObj.startTime = int($dObj.startTime) || 1483200000;
 	d.startTime = g.timeTool.getFullDate($dObj.startTime, true);
 	$dObj.endTime = int($dObj.endTime) || Date.now();
 	d.endTime = g.timeTool.getFullDate($dObj.endTime, true);
-	d.custComName = $dObj.customerName || "";
-	d.creatorName = $dObj.creatorName || "";
+	d.custComName = $dObj.companyName || "";
 	d.page = $dObj.page || 1;
 	d.pageSize = $dObj.pageSize || 10;
 	return d;

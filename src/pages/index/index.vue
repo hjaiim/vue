@@ -12,7 +12,7 @@
 						<div class="absolute upload-btn">
 							<p class="load-text">修改头像</p>
 							<iframe class="iframe-btn" name="fileUpload"
-									:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=avatar'"
+									:src="g.path.base+'/upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=avatar'"
 									id="avatar" v-if="avatar=='default.png'"></iframe>
 							<img :src="g.path.images+'/del-head.png'" alt=""
 								 class="del-head absolute pointer" @click="onClick_delBtn"
@@ -183,13 +183,13 @@
 				}
 				this.isClicked = true;
 				this.setClock();
-//				_params = {mobile: this.phone};
-//				g.ui.showLoading()
-//				g.net.call("user/applyUserAuthSendCode", _params).then(($data) =>
-//				{
-//					g.ui.hideLoading();
-//					g.ui.toast("验证码发送成功");
-//				})
+				_params = {mobile: this.phone};
+				g.ui.showLoading();
+				g.net.call("user/applyUserAuthSendCode", _params).then(($data) =>
+				{
+					g.ui.hideLoading();
+					g.ui.toast("验证码发送成功");
+				})
 			},
 			setClock()
 			{
@@ -246,7 +246,7 @@
 					remark: this.remark,
 					avatar: this.avatar
 				};
-				g.ui.showLoading()
+				g.ui.showLoading();
 				g.net.call("user/updateUserInfo", _params).then(() =>
 				{
 					g.ui.hideLoading();

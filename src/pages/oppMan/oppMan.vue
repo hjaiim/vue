@@ -188,7 +188,7 @@
 				this.currPage = 1;
 				this.type = -1;
 				this.statusList = [1, -1, 2];
-				this.startTime = 1483200000000;
+				this.startTime = 1483200000;
 				this.endTime = g.timeTool.getNowStamp();
 				this.creatorName = "";
 				this.companyName = "";
@@ -204,7 +204,7 @@
 				{
 					return int(item);
 				});
-				this.startTime = g.vue.getQuery("startTime", 1483200000000);
+				this.startTime = g.vue.getQuery("startTime", 1483200000);
 				this.endTime = g.vue.getQuery("endTime", g.timeTool.getNowStamp());
 				this.creatorName = g.vue.getQuery("creatorName", "");
 				this.companyName = g.vue.getQuery("companyName", "");
@@ -306,7 +306,7 @@
 				else
 				{
 					_params = {orderId: $id};
-					g.ui.showLoading()
+					g.ui.showLoading();
 					g.net.call("bo/viewOrderDetail", _params).then(($data) =>
 					{
 						g.ui.hideLoading();
@@ -314,7 +314,6 @@
 						this.currId = $id;
 						this.isShowDetailPop = true;
 					}, (err) =>
-
 					{
 						g.func.dealErr(err);
 					})
@@ -327,7 +326,7 @@
 					path: "/oppapply",
 					query: {
 						id: $item.id,
-						type:$item.type
+						type: $item.type
 					}
 				}
 			},
@@ -345,7 +344,7 @@
 					g.data.searchBusinessPool.getDataById($id).update($data);
 					this.currId = $id;
 					this.isShowDetailPop = true;
-				},(err) =>
+				}, (err) =>
 				{
 					g.func.dealErr(err);
 				})

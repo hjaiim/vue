@@ -10,7 +10,7 @@
 						<div class="absolute upload-btn">
 							<p class="load-text">修改头像</p>
 							<iframe class="iframe-btn" name="fileUpload"
-									:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=avatar'"
+									:src="g.path.base+'/upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=avatar'"
 									id="avatar" v-if="avatar == 'default.png'"
 							></iframe>
 							<img v-if="avatar != 'default.png'" :src="g.path.images+'/del-head.png'" alt=""
@@ -111,7 +111,7 @@
 							<img class="img-url " :src="idCardFront?g.param.ossUrl+idCardFront:''" alt="">
 						</div>
 						<iframe class="pointer" name="fileUpload"
-								:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=idCardFront'"
+								:src="g.path.base+'/upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=idCardFront'"
 								v-if="!idCardFront" id="idCardFront"></iframe>
 						<span class="del-img pointer" :class="idCardFront?'hover-img':''"
 							  @click="onClick_deleteImg('idCardFront')"></span>
@@ -125,7 +125,7 @@
 							<img class="img-url " :src="idCardBack?g.param.ossUrl+idCardBack:''" alt="">
 						</div>
 						<iframe class="pointer" name="fileUpload"
-								:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=idCardBack'"
+								:src="g.path.base+'/upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=idCardBack'"
 								v-if="!idCardBack" id="idCardBack"></iframe>
 						<span class="del-img pointer" :class="idCardBack?'hover-img':''"
 							  @click="onClick_deleteImg('idCardBack')"></span>
@@ -149,7 +149,7 @@
 							<img class="img-url " :src="workCard?g.param.ossUrl+workCard:''" alt="">
 						</div>
 						<iframe class="pointer" name="fileUpload"
-								:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=workCard'"
+								:src="g.path.base+'/upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=workCard'"
 								id="workCard" v-if="!workCard"></iframe>
 						<span class="del-img pointer" :class="workCard?'hover-img':''"
 							  @click="onClick_deleteImg('workCard')"></span>
@@ -256,7 +256,6 @@
 					this.email = "";
 					this.telphone = "";
 					this.avatar = "default.png";
-
 					this.currCompanyData = "";
 					this.currDepartData = "";
 					this.currDutyData = "";
@@ -272,6 +271,8 @@
 			uploadComplete($data)
 			{
 				this[$data.subType] = $data.fileName;
+				this.errData[$data.subType] = "";
+				this.$forceUpdate();
 			},
 			onClick_doc(e)
 			{
@@ -311,6 +312,7 @@
 			},
 			onClick_dropListBtn($type)
 			{
+
 				if ($type == "Company")
 				{
 					this.isShowDepartmentList = false;
@@ -337,8 +339,9 @@
 				{
 					this["isShow" + $type + "List"] = true;
 				}
+				this.errData["curr" + $type] = "";
+				this.$forceUpdate();
 			},
-
 			onClick_sendCodeBtn()
 			{
 

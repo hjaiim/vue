@@ -18,6 +18,8 @@
 			<opp-form-5 v-if="type == 5" :currId="currId" @submit="onSubmit_formData" ref="oppForm"></opp-form-5>
 			<opp-form-6 v-if="type == 6" :currId="currId" @submit="onSubmit_formData" ref="oppForm"></opp-form-6>
 			<opp-form-7 v-if="type == 7" :currId="currId" @submit="onSubmit_formData" ref="oppForm"></opp-form-7>
+			<system-tip :isShowViewPop="isShowSystemPop" msg="切换分类将清除未提交重要内容，确定切换分类吗？"
+						@close="onClose_systemPop"></system-tip>
 		</div>
 	</com-layout>
 </template>
@@ -26,6 +28,7 @@
 	import ComLayout from "../../components/comLayout.vue";
 	import DropList from "../../components/dropList.vue";
 	import InputBar from "../../components/inputBar.vue";
+	import SystemTip from "../../components/pop/systemTip.vue";
 	import OppForm1 from "./oppForm1.vue";
 	import OppForm2 from "./oppForm2.vue";
 	import OppForm3 from "./oppForm3.vue";
@@ -42,14 +45,15 @@
 			return {
 				g: g,
 				typeList: [],
-				type: 1,
 				currId: 0,
-				isShowTypeList: false
+				isShowTypeList: false,
+				isShowSystemPop: false
 			}
 		},
 		components: {
 			ComLayout,
 			DropList,
+			SystemTip,
 			InputBar,
 			OppForm1,
 			OppForm2,
@@ -74,6 +78,10 @@
 				this.type = g.vue.getQuery('type', 1);
 				this.initEvents()
 			},
+			onClose_systemPop($result)
+			{
+
+			},
 			onSubmit_formData($data)
 			{
 				_params = {
@@ -83,7 +91,7 @@
 					boFormData: JSON.stringify($data.formData),
 					attachs: JSON.stringify($data.attachList)
 				};
-				g.ui.showLoading()
+				g.ui.showLoading();
 				g.net.call("/bo/orderApply", _params).then(($data) =>
 				{
 					g.ui.hideLoading();
@@ -121,6 +129,8 @@
 			{
 				if (this.type != $id)
 				{
+//					var formData = this.$refs.oppForm.getFormData();
+
 					this.type = $id;
 					this.updateUrl();
 					this.isShowTypeList = false;

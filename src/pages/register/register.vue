@@ -38,6 +38,7 @@
 				confirmPwd: '',
 				errData: {},
 				isShowLogin: false
+
 			}
 		},
 		watch: {},
@@ -52,7 +53,6 @@
 				this.name = "";
 				this.password = "";
 				this.confirmPwd = "";
-
 			},
 			onClick_registerBtn()
 			{
@@ -65,15 +65,17 @@
 				_params.logon = this.account;
 				_params.name = this.name;
 				_params.password = sha256(this.password);
-				g.ui.showLoading()
 				g.net.call("user/register", _params).then(() =>
 				{
-					g.ui.hideLoading();
-					this.init();
-					this.onClick_loginBtn();
+					this.isShowLogin = true;
+					setTimeout(() =>
+					{
+						this.isShowLogin = false;
+						this.init();
+						this.onClick_loginBtn();
+					}, 1500);
 				}, (err) =>
 				{
-					g.ui.hideLoading();
 					this.errData.confirmPwd = err.errorMsg;
 					this.$forceUpdate();
 				})

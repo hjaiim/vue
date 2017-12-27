@@ -5,7 +5,6 @@ export default function (to, next)
 {
 	loginManager.checkLogin(to, next, () =>
 	{
-		debugger;
 		searchRoleList(to.query).then(() =>
 		{
 			getRightList();
