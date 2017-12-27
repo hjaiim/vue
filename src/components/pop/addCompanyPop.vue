@@ -196,7 +196,7 @@
 					departmentName: $depart.name,
 					companyId: $depart.parentId
 				};
-				g.ui.showLoading()
+				g.ui.showLoading();
 				g.net.call("organizeOpt/editDepartment", _params).then(($data) =>
 				{
 					g.ui.hideLoading();

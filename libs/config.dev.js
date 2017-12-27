@@ -70,7 +70,8 @@ var WEB_CONFIG = {
 		emailReg: /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
 		codeReg: /\d{4}/,
 		ossUrl: "http://hw-web-test.oss-cn-shanghai.aliyuncs.com/boms/upload/",
-		delPicAccess: "http://192.168.12.219:8001/file/del"
+		delPicAccess: "http://192.168.12.219:8001/file/del",
+		timeoutClock:10
 	}
 };
 

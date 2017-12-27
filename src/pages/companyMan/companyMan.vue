@@ -74,7 +74,8 @@
 	import CommonPage from "../../components/page.vue";
 	import DeletePop from "../../components/pop/deletePop.vue"
 	import AddCompanyPop from "../../components/pop/addCompanyPop.vue"
-	import InputBar from "../../components/inputBar.vue"
+	import InputBar from "../../components/inputBar.vue";
+	import {searchCompanyList} from './companyMan';
 	var _delId = 0;
 	var _params = null;
 	export default{
@@ -130,12 +131,15 @@
 				if ($result)
 				{
 					_params = {comId: _delId};
-					g.ui.showLoading()
+					g.ui.showLoading();
 					g.net.call("organizeOpt/deleteCompanyById", _params).then(($data) =>
 					{
 						g.ui.hideLoading();
 						g.data.searchCompanyPool.remove(_delId);
 						g.ui.toast("公司删除成功！");
+					}, (err) =>
+					{
+						g.func.dealErr(err);
 					})
 				}
 			},
@@ -161,6 +165,9 @@
 						g.data.departmentPool.update($data.departWrapperResults);
 						this.currId = $id;
 						this.isShowCompanyPop = true;
+					}, (err) =>
+					{
+						g.func.dealErr(err);
 					})
 				}
 
@@ -173,10 +180,10 @@
 			onClose_companyPop($result)
 			{
 				this.isShowCompanyPop = false;
-				if ($result)
+				searchCompanyList().then(() =>
 				{
-					this.updateUrl();
-				}
+					this.routerUpdated();
+				});
 			},
 			onKeyEnter_inputBar()
 			{

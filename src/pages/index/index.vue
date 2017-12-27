@@ -8,8 +8,7 @@
 				<div class="icon-collect clear">
 					<div class="relative upload-head right pointer">
 						<img class="default-img"
-							 :src="avatar?g.param.ossUrl+avatar.split(';')[0]:g.path.images+'/default.png'"
-							 alt="">
+							 :src="g.param.ossUrl+avatar" alt="">
 						<div class="absolute upload-btn">
 							<p class="load-text">修改头像</p>
 							<iframe class="iframe-btn" name="fileUpload"
@@ -40,14 +39,18 @@
 				<p class="personal-form">
 					<span class="personal-title">手机</span>
 					<input-bar class="personal-content pensonal-input" placeholder="" type="text"
-							   v-model="phone" :readonly="readonly" :errmsg="errData.phone"></input-bar>
+							   v-model="phone" :readonly="readonly" :errmsg="errData.phone"
+							   @focus="onFocus_inputBar('phone')"></input-bar>
 					<span class="bind-phone pointer ani-time" @click="onClick_unbindBtn">解绑</span>
 				</p>
 				<p class="personal-form" v-if="!readonly">
 					<span class="personal-title">验证码</span>
 					<input-bar class="personal-content pensonal-input code" placeholder="" type="text"
 							   v-model="code" :errmsg="errData.code" @focus="onFocus_inputBar('code')"></input-bar>
-					<span class="btn-send pointer" @click="onClick_sendCodeBtn">发送验证码</span>
+					<span class="btn-send pointer" @click="onClick_sendCodeBtn" :class="isClicked?'disabled':''">{{limit
+						==
+						g.param.timeoutClock
+						?'获取验证码':'倒计时'+limit+'秒'}}</span>
 					<span class="bind-phone pointer ani-time" @click="onClick_savePhoneBtn">保存</span>
 				</p>
 				<p class="personal-form"><span class="personal-title">固定电话</span>
@@ -94,7 +97,7 @@
 	import InputBar from "../../components/inputBar.vue"
 	import UploadBtn from "../../components/upload.vue";
 	import sha256 from "sha256";
-	var _params = null, _isValid = true;
+	var _params = null, _isValid = true, _timer = 0;
 	export default{
 		created(){
 			this.routerUpdated();
@@ -113,7 +116,9 @@
 				password: "",
 				newPwd: "",
 				confirmPwd: "",
-				errData: {}
+				errData: {},
+				limit: g.param.timeoutClock,
+				isClicked: false
 
 			}
 		},
@@ -123,10 +128,10 @@
 			InputBar,
 			UploadBtn
 		},
-		watch:{
+		watch: {
 			avatar($val)
 			{
-				trace("this.avatar",$val);
+				trace("this.avatar", $val);
 			}
 		},
 		methods: {
@@ -176,13 +181,32 @@
 					_isValid = true;
 					return;
 				}
-				_params = {mobile: this.phone};
-				g.ui.showLoading()
-				g.net.call("user/applyUserAuthSendCode", _params).then(($data) =>
+				this.isClicked = true;
+				this.setClock();
+//				_params = {mobile: this.phone};
+//				g.ui.showLoading()
+//				g.net.call("user/applyUserAuthSendCode", _params).then(($data) =>
+//				{
+//					g.ui.hideLoading();
+//					g.ui.toast("验证码发送成功");
+//				})
+			},
+			setClock()
+			{
+				_timer = setTimeout(()=>
 				{
-					g.ui.hideLoading();
-					g.ui.toast("验证码发送成功");
-				})
+					this.limit--;
+					if (this.limit == 0)
+					{
+						clearTimeout(_timer);
+						this.isClicked = false;
+						this.limit = g.param.timeoutClock;
+					}
+					else
+					{
+						this.setClock();
+					}
+				}, 1000)
 			},
 			onClick_savePhoneBtn()
 			{
@@ -203,7 +227,6 @@
 					g.data.userInfo.update(_params);
 					g.ui.toast("手机号修改成功")
 					this.readonly = true;
-
 				})
 			},
 			onClick_savePersonal()
@@ -292,7 +315,6 @@
 			},
 			checkPersonalInfo()
 			{
-
 				if (this.telphone && !g.param.telphoneReg.test(this.telphone))
 				{
 					this.errData.telphone = "固话号码格式不正确";

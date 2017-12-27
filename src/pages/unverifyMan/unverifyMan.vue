@@ -143,10 +143,6 @@
 					this.currId = $id;
 					this.isShowDetailPop = true;
 				}
-				else
-				{
-					trace(11111);
-				}
 			},
 			updateUrl()
 			{

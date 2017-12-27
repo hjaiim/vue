@@ -67,6 +67,11 @@
 					g.ui.hideLoading();
 					this.init();
 					this.onClick_loginBtn();
+				}, (err) =>
+				{
+					g.ui.hideLoading();
+					this.errData.confirmPwd = err.errorMsg;
+					this.$forceUpdate();
 				})
 			},
 			onClick_loginBtn()
