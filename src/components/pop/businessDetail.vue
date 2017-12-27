@@ -267,9 +267,9 @@
 				g.ui.showLoading()
 				g.net.call(g.param.delPicAccess, {fileName: $name}).then(($data) =>
 				{
-					g.ui.hideLoading();
 				}, (err) =>
 				{
+					g.ui.hideLoading();
 					this.attachList.splice($index, 1);
 				})
 			},
