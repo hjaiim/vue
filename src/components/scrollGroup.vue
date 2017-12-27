@@ -68,7 +68,6 @@
 					}
 					else
 					{
-						trace("parent", parent);
 						bar.style.height = parseInt(parent.clientHeight / content.scrollHeight * parent.clientHeight) + "px";
 
 						if (this.offset < parent.clientHeight - content.scrollHeight)
@@ -80,8 +79,6 @@
 				}
 			},
 			onWheel_doc(e){
-				trace("e.wheelDelta", e.wheelDelta);
-				trace("e.detail", e.detail);
 				e.preventDefault();
 				if (!isNaN(e.wheelDelta - 0))
 				{
@@ -118,11 +115,6 @@
 					{
 						return;
 					}
-
-					console.dir(parent);
-					trace("content.scrollHeight",content.scrollHeight);
-
-
 					this.offset = Math.min(0, this.offset);
 					this.offset = Math.max(parent.clientHeight - content.scrollHeight, this.offset);
 					content.style.marginTop = this.offset + "px";

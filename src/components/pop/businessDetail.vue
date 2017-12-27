@@ -17,12 +17,13 @@
 						<div>
 							<p class="from-group">
 								<span class="form-title">附件下载</span>
+								<span class="form-trap empty-txt"
+									  v-show="businessData.attachList&&businessData.attachList.length==0">无</span>
 								<i class="download-wrap clear">
 									<a class="form-trap file-download pointer ani-time left"
 									   v-for="attach in businessData.attachList" :href="g.param.ossUrl + attach.name"
 									   download>{{attach.name}}</a>
 								</i>
-
 							</p>
 						</div>
 					</div>
@@ -40,7 +41,8 @@
 							</p>
 							<p class="from-group  clear">
 								<span class="form-title left">签批意见</span>
-								<span class="form-trap left address-width">{{item.opinion}}</span>
+
+								<span class="form-trap left address-width">{{item.opinion?item.opinion:'无'}}</span>
 							</p>
 							<p class="from-group  clear">
 								<span class="form-title">结果</span>
@@ -110,7 +112,7 @@
 	import BusinessType5 from "../businessDetail/businessType5.vue";
 	import BusinessType6 from "../businessDetail/businessType6.vue";
 	import BusinessType7 from "../businessDetail/businessType7.vue";
-	import ChooseManPop from "./chooseManPop.vue"
+	import ChooseManPop from "./chooseManPop.vue";
 	var _params = null, _childName;
 	export default{
 		created()
@@ -178,6 +180,7 @@
 			{
 				this.opinion = "";
 				this.status = 1;
+				this.idList = [];
 				if (this.currId)
 				{
 					this.businessData = g.data.searchBusinessPool.getDataById(this.currId);
@@ -274,12 +277,7 @@
 			},
 			onClick_cancelBtn($id)
 			{
-				trace(this.idList);
-				var index = this.idList.indexOf($id);
-				trace(index);
-				this.idList.splice(index, 1);
-				var data = g.data.staffPool.getChildById($id);
-				data.update({checked: false});
+				this.$emit("close", false);
 			},
 		}
 	}
@@ -305,6 +303,9 @@
 			font-weight: normal !important;
 			line-height: 30px;
 			vertical-align: top;
+		}
+		.empty-txt {
+			font-weight: bold !important;
 		}
 		.status-type {
 			margin-left: 0;

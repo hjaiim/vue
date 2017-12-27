@@ -113,7 +113,6 @@
 		name: "c-date",
 		created(){
 			this.init();
-			trace(this.weekNum);
 		},
 		data(){
 			return {

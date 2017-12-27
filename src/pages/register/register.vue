@@ -14,12 +14,14 @@
 			<div class="link-keys">已有账号？<span class="ani-time pointer" @click="onClick_loginBtn">登录>></span>
 			</div>
 		</div>
+		<back-login-pop :isShowPopView="isShowLogin"></back-login-pop>
 	</div>
 </template>
 <script type="text/ecmascript-6">
 	import g from './../../global';
 	import sha256 from 'sha256';
-	import FormInput from "../../components/formInput.vue"
+	import FormInput from "../../components/formInput.vue";
+	import BackLoginPop from "../../components/pop/backLoginPop.vue"
 	var _params = {}, _isValid = true;
 	export default {
 		created()
@@ -34,12 +36,14 @@
 				name: '',
 				password: '',
 				confirmPwd: '',
-				errData: {}
+				errData: {},
+				isShowLogin: false
 			}
 		},
 		watch: {},
 		components: {
-			FormInput
+			FormInput,
+			BackLoginPop
 		},
 		methods: {
 			init()
