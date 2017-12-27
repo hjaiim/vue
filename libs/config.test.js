@@ -2,7 +2,7 @@
  * Created by billy on 2016/11/30.
  */
 var WEB_CONFIG = {
-	mode: ["debug","testData"], //工作模式
+	mode: ["debug"], //工作模式
 
 	path: {
 		domain: "{$host}/boms/web",

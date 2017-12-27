@@ -303,7 +303,7 @@
 					return;
 				}
 				_params = {
-					comId: this.currId,
+					comId: this.currentId,
 					comName: this.name,
 					comLinkMan: this.leader,
 					comLinkManTel: this.phone,

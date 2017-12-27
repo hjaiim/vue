@@ -423,7 +423,6 @@
 				{
 					g.func.dealErr(err);
 				})
-
 			},
 			checkPhoneData()
 			{

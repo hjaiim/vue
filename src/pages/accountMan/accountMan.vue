@@ -255,7 +255,10 @@
 					g.data.searchAccountPool.getDataById($item.id).update({
 						status: $item.status == 1 ? 0 : 1
 					})
-				})
+				},(err) =>
+				{
+					g.func.dealErr(err);
+				});
 			},
 			onClose_setRolePop()
 			{

@@ -227,7 +227,10 @@
 					g.data.userInfo.update(_params);
 					g.ui.toast("手机号修改成功")
 					this.readonly = true;
-				})
+				},(err) =>
+				{
+					g.func.dealErr(err);
+				});
 			},
 			onClick_savePersonal()
 			{
@@ -249,6 +252,9 @@
 					g.ui.hideLoading();
 					g.data.userInfo.update(_params);
 					g.ui.toast("用户信息修改成功！");
+				},(err) =>
+				{
+					g.func.dealErr(err);
 				})
 			},
 			onClick_updatePwd()
