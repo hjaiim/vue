@@ -54,6 +54,7 @@ export default class SearchCompanyPool {
 
 	addDepartment($id, $department)
 	{
+		debugger;
 		if (_hash[$id])
 		{
 			if (_hash[$id].children.indexOf($department) < 0)
@@ -123,6 +124,7 @@ function createData($dObj)
 	d.departCount = 0;
 	d.dutyCount = 0;
 	d.isShow = false;
+	d.isEdit = false;
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -140,4 +142,5 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("departmentCount") && (this.departCount = $dObj.departmentCount);
 	$dObj.hasOwnProperty("dutyCount") && (this.dutyCount = $dObj.dutyCount);
 	$dObj.hasOwnProperty("isShow") && (this.isShow = $dObj.isShow);
+	$dObj.hasOwnProperty("isEdit") && (this.isEdit = $dObj.isEdit);
 }

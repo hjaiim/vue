@@ -268,6 +268,7 @@
 				{
 				}, (err) =>
 				{
+					g.ui.hideLoading();
 					this.attachList.splice($index, 1);
 				})
 			},

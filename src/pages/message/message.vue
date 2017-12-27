@@ -1,6 +1,6 @@
 <template>
 	<com-layout currPath="/message">
-		<div class="message-wrap">
+		<div class="message-page">
 			<div class="msg-content">
 				<div class="action-wrap clear">
 					<i class="more-delete left border-gray pointer" @click="onClick_allDeleteBtn">
@@ -61,6 +61,7 @@
 					</tr>
 					</tbody>
 				</table>
+				<empty-pop v-show="msgList.length==0"></empty-pop>
 				<div class="show-page clear" v-if="g.data.searchMessagePool.totalPage > 1">
 					<common-page class="right" :total="g.data.searchMessagePool.total" :currPage="currPage"
 								 :showPageSize="false"
@@ -80,8 +81,9 @@
 	import ComLayout from "../../components/comLayout.vue"
 	import CommonPage from "../../components/page.vue";
 	import DetailPop from "../../components/pop/detailPop.vue";
-	import DeletePop from "../../components/pop/deletePop.vue"
-	import TotalDeletePop from "../../components/pop/totalDeletePop.vue"
+	import DeletePop from "../../components/pop/deletePop.vue";
+	import TotalDeletePop from "../../components/pop/totalDeletePop.vue";
+	import EmptyPop from "../../components/pop/emptyPop.vue"
 	var _delId = 0;
 	var _params = null;
 	export default{
@@ -107,7 +109,8 @@
 			CommonPage,
 			DetailPop,
 			DeletePop,
-			TotalDeletePop
+			TotalDeletePop,
+			EmptyPop
 		},
 		computed: {
 			checkAll()

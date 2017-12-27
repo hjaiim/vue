@@ -597,7 +597,6 @@ input {
 .personal-form {
   margin-top: 25px;
   height: auto;
-
   &:after {
 	content: '';
 	display: block;
@@ -611,6 +610,15 @@ input {
 	display: inline-block;
 	margin-right: 30px;
 	font-size: 14px;
+  }
+  .err-msg {
+	height: 25px;
+	line-height: 25px;
+	font-size: 14px;
+	color: #ed5564;
+	width: 100%;
+	left: 128px;
+	top: 100%;
   }
   .personal-content {
 	font-size: 14px;
@@ -648,7 +656,7 @@ input {
 	width: 85%;
   }
   &.diff-personal {
-	margin-top: 12px;
+	margin-top: 25px;
 	.personal-content {
 	  &.disabled {
 		min-width: 240px;
@@ -661,6 +669,9 @@ input {
 	  }
 	}
 
+  }
+  &.diff-margin{
+	margin-top: 12px;
   }
 }
 
