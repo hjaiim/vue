@@ -20,16 +20,16 @@
 				</div>
 			</div>
 			<div class="personal-message">
-				<div class="personal-form diff-personal"><span class="personal-title ">登录用户名</span><span
+				<div class="personal-form diff-personal diff-margin"><span class="personal-title ">登录用户名</span><span
 						class="personal-content">{{userInfo.username}}
 				</span>
 
 				</div>
-				<div class="personal-form diff-personal"><span class="personal-title">姓名</span><span
+				<div class="personal-form diff-personal diff-margin"><span class="personal-title">姓名</span><span
 						class="personal-content">{{userInfo.name}}</span></div>
-				<div class="personal-form diff-personal">
-					<p class="err-msg"> {{errData.currCompany}}</p>
+				<div class="personal-form diff-personal relative diff-margin">
 					<span class="personal-title left">所属公司</span>
+					<p class="err-msg absolute"> {{errData.currCompany}}</p>
 					<div class="personal-content left relative form-list pointer"
 						 :class="authStatus != 0 ?'disabled':''"
 						 @click.stop="onClick_dropListBtn('Company')">
@@ -40,9 +40,9 @@
 					</div>
 					<span class="required" v-show="authStatus == 0">*</span>
 				</div>
-				<div class="personal-form diff-personal">
-					<p class="err-msg"> {{errData.currDepartment}}</p>
+				<div class="personal-form diff-personal relative">
 					<span class="personal-title left">所属部门</span>
+					<p class="err-msg absolute"> {{errData.currDepartment}}</p>
 					<div class="personal-content left relative form-list pointer"
 						 :class="authStatus != 0 ?'disabled':''"
 						 @click.stop="onClick_dropListBtn('Department')">
@@ -53,9 +53,9 @@
 					</div>
 					<span class="required" v-show="authStatus == 0">*</span>
 				</div>
-				<div class="personal-form diff-personal">
-					<p class="err-msg"> {{errData.currDuty}}</p>
+				<div class="personal-form diff-personal relative">
 					<span class="personal-title left">职务名称</span>
+					<p class="err-msg absolute"> {{errData.currDuty}}</p>
 					<div class="personal-content left relative form-list"
 						 :class="authStatus != 0 ?'disabled':''"
 						 @click.stop="onClick_dropListBtn('Duty')">
@@ -96,9 +96,9 @@
 							   v-model="remark" @focus="onFocus_inputBar('remark')"
 							   :errmsg="errData.remark"></input-bar>
 				</div>
-				<div class="personal-form" :class="authStatus != 0 ?'disabled':''">
-					<p class="err-msg"> {{errData.idCardBack || errData.idCardFront}}</p>
+				<div class="personal-form relative" :class="authStatus != 0 ?'disabled':''">
 					<span class="personal-title left">身份证照</span>
+					<p class="err-msg absolute"> {{errData.idCardBack || errData.idCardFront}}</p>
 					<div class="left relative upload-box pointer">
 						<div class="upload-btn flex">
 							<img :src="g.path.images+'/upload.png'" alt="">
@@ -128,8 +128,8 @@
 							  @click="onClick_deleteImg('idCardBack')"></span>
 					</div>
 				</div>
-				<div class="personal-form" :class="authStatus != 0 ?'disabled':''">
-					<p class="err-msg"> {{errData.workCard}}</p>
+				<div class="personal-form relative" :class="authStatus != 0 ?'disabled':''">
+					<p class="err-msg absolute"> {{errData.workCard}}</p>
 					<span class="personal-title left">工作证照</span>
 					<div class="left relative upload-box pointer">
 						<div class="upload-btn flex">

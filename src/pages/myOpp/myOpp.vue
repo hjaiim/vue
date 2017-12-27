@@ -86,6 +86,7 @@
 					</tr>
 					</tbody>
 				</table>
+				<empty-pop v-show="businessList.length==0"></empty-pop>
 				<div class="show-page clear" v-if="g.data.searchBusinessPool.totalPage > 1">
 					<common-page class="right" :total="g.data.searchBusinessPool.total" :currPage="currPage"
 								 :showPageSize="false" :showTotalCount="true"
@@ -110,7 +111,8 @@
 	import CommonDate from "../../components/dateBox.vue";
 	import InputBar from "../../components/inputBar.vue";
 	import ChooseManPop from "../../components/pop/chooseManPop.vue";
-	import DropList from "../../components/dropList.vue"
+	import DropList from "../../components/dropList.vue";
+	import EmptyPop from "../../components/pop/emptyPop.vue"
 	var _dateType = "", _params = null;
 	export default{
 		created(){
@@ -141,7 +143,8 @@
 			CommonDate,
 			InputBar,
 			ChooseManPop,
-			DropList
+			DropList,
+			EmptyPop
 		},
 		computed: {
 			currType()

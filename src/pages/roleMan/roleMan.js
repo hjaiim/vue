@@ -47,6 +47,7 @@ function getRightList()
 	if (g.data.staticRightPool.list.length > 0)
 	{
 		return;
+
 	}
 	else
 	{

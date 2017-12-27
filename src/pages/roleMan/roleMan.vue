@@ -42,6 +42,7 @@
 					</tr>
 					</tbody>
 				</table>
+				<empty-pop v-show="roleList.length==0"></empty-pop>
 				<div class="show-page clear" v-if="g.data.searchRolePool.totalPage > 1">
 					<common-page class="right" :total="g.data.searchRolePool.total" :currPage="currPage"
 								 :showTotalCount="true"
@@ -60,6 +61,7 @@
 	import DeletePop from "../../components/pop/deletePop.vue";
 	import AddRolePop from "../../components/pop/addRolePop.vue";
 	import {searchRoleList} from "./roleMan";
+	import EmptyPop from "../../components/pop/emptyPop.vue"
 	var _params = null;
 	var _delId = 0;
 	export default{
@@ -79,8 +81,8 @@
 			ComLayout,
 			CommonPage,
 			DeletePop,
-			AddRolePop
-
+			AddRolePop,
+			EmptyPop
 		},
 		watch: {
 			roleList($val)

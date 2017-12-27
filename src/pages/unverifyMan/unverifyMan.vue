@@ -45,6 +45,7 @@
 					</tr>
 					</tbody>
 				</table>
+				<empty-pop v-show="accountList.length==0"></empty-pop>
 				<div class="show-page clear" v-if="g.data.searchUnverifyPool.totalPage > 1">
 					<common-page class="right" :total="g.data.searchUnverifyPool.total" :currPage="currPage"
 								 :showPageSize="false"
@@ -67,7 +68,7 @@
 	import InputBar from "../../components/inputBar.vue";
 	import AccountDesPop from "../../components/pop/accountDesPop.vue"
 	import {searchUnverifyList} from "./unverifyMan";
-
+	import EmptyPop from "../../components/pop/emptyPop.vue"
 	export default{
 		created(){
 			this.routerUpdated();
@@ -87,7 +88,8 @@
 			CommonPage,
 			DropList,
 			InputBar,
-			AccountDesPop
+			AccountDesPop,
+			EmptyPop
 		},
 		methods: {
 			init()

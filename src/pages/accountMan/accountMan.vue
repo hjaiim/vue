@@ -74,6 +74,7 @@
 					</tr>
 					</tbody>
 				</table>
+				<empty-pop v-show="accountList.length==0"></empty-pop>
 				<div class="show-page clear" v-if="g.data.searchAccountPool.totalPage > 1">
 					<common-page class="right" :total="g.data.searchAccountPool.total" :currPage="currPage"
 								 :showPageSize="false" :showTotalCount="true"
@@ -98,6 +99,7 @@
 	import InputBar from "../../components/inputBar.vue";
 	import SetRolePop from "../../components/pop/setRolePop.vue";
 	import OrderWorkPop from "../../components/pop/orderWorkPop.vue";
+	import EmptyPop from "../../components/pop/emptyPop.vue"
 	var _params = null;
 	export default{
 		created(){
@@ -124,7 +126,8 @@
 			DropList,
 			InputBar,
 			SetRolePop,
-			OrderWorkPop
+			OrderWorkPop,
+			EmptyPop
 		},
 		computed: {
 			roleName()
