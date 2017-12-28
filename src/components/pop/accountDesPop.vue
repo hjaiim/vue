@@ -113,7 +113,7 @@
 		<transition name="fade">
 			<div class="slide-img fixed center-flex" v-show="isShowSlidePop">
 				<div class="desc-img relative">
-					<img :src=showUrl alt="">
+					<img class="detail-img" :src=showUrl alt="">
 					<div @click="onClick_closeBtn"
 						 class="return-btn pointer ani-time">
 						<img :src="g.path.images+'/close-popup.png'" alt="">
@@ -324,16 +324,21 @@
 		perspective: 1300px;
 		cursor: default;
 		.desc-img {
-			width: 480px;
-			height: 360px;
+			min-width: 480px;
 			background: #ffffff;
 			-webkit-border-radius: 5px;
 			-moz-border-radius: 5px;
 			border-radius: 5px;
-			img {
-				width: 100%;
-				display: block;
-				height: 100%;
+			/*img {*/
+			/*width: 100%;*/
+			/*display: block;*/
+			/*height: 100%;*/
+			/*}*/
+			.detail-img {
+				-webkit-user-select: none;
+				background-position: 0px 0px, 10px 10px;
+				background-size: 20px 20px;
+				background-image: linear-gradient(45deg, #eeeeee 25%, transparent 25%, transparent 75%, #eeeeee 75%, #eeeeee 100%), linear-gradient(45deg, #eeeeee 25%, white 25%, white 75%, #eeeeee 75%, #eeeeee 100%);
 			}
 			.return-btn {
 				position: absolute;
