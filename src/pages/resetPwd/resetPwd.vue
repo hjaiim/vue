@@ -60,14 +60,14 @@
 			},
 			onClick_getCodeBtn()
 			{
-				this.isClicked = true;
-				this.setClock();
 				this.checkCodeDataValid();
 				if (!_isValid)
 				{
 					_isValid = true;
 					return;
 				}
+				this.isClicked = true;
+				this.setClock();
 				_params = {
 					logon: this.account,
 					mobile: this.phone
@@ -77,6 +77,9 @@
 				{
 					g.ui.hideLoading();
 					g.ui.toast("发送成功！");
+				}, (err) =>
+				{
+					g.func.dealErr(err);
 				})
 			},
 			setClock()

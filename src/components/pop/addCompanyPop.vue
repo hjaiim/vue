@@ -141,7 +141,7 @@
 			}
 		},
 		watch: {
-			currId($val)
+			isShowPopView($val)
 			{
 				this.init();
 			}
@@ -171,12 +171,13 @@
 					this.errData = {};
 					this.isEdit = false;
 				}
+				this.departName = "";
+				this.dutyName = "";
 			},
 			onClose_pop()
 			{
 				this.init();
 				this.$emit('close', false);
-				this.currentId = 0;
 			},
 			onFocus_inputBar($type)
 			{
@@ -212,7 +213,7 @@
 					{
 						g.data.departmentPool.getDataById($depart.id).update($data);
 					}
-					g.data.departmentPool.getDataById($data.departmentId).update({isEdit: false});
+					g.data.departmentPool.getDataById($depart.id).update({isEdit: false});
 					this.init();
 				}, (err) =>
 				{

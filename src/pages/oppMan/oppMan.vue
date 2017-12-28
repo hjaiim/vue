@@ -133,6 +133,8 @@
 	var _dateType = "", _params = null;
 	export default{
 		created(){
+			this.typeList = __merge([], g.data.staticTypePool.list);
+			this.typeList.unshift({name: "全部", id: -1})
 			this.routerUpdated();
 		},
 		data(){
@@ -145,7 +147,7 @@
 				currPage: 1,
 				isShowStartDate: false,
 				isShowEndDate: false,
-				type: 1,
+				type: -1,
 				statusList: [],
 				startTime: 1400000000,
 				endTime: g.timeTool.getNowStamp(),
@@ -195,7 +197,6 @@
 			},
 			routerUpdated()
 			{
-				this.typeList = g.data.staticTypePool.list;
 				this.businessList = g.data.searchBusinessPool.list;
 				this.currPage = int(g.vue.getQuery("page", 1));
 				this.type = g.vue.getQuery("type", -1);

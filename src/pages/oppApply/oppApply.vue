@@ -46,6 +46,7 @@
 				g: g,
 				typeList: [],
 				currId: 0,
+				type: 1,
 				isShowTypeList: false,
 				isShowSystemPop: false
 			}

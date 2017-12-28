@@ -75,11 +75,11 @@
 				<div class="user-item left clear">
 					<span class="user-tit left diff-distancre">身份证照</span>
 					<div class="user-txt left diff-frame">
-						<div class="card-wrap left pointer" @click="onClick_imgBtn()">
+						<div class="card-wrap left pointer" @click="onClick_imgBtn('idCardFront')">
 							<img :src="g.param.ossUrl+accountData.idCardFront" alt="">
 						</div>
 						<div class="card-wrap left pointer">
-							<img :src="g.param.ossUrl+accountData.idCardBack" alt="" @click="onClick_imgBtn()">
+							<img :src="g.param.ossUrl+accountData.idCardBack" alt="" @click="onClick_imgBtn('idCardBack')">
 						</div>
 					</div>
 				</div>

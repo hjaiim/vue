@@ -84,7 +84,7 @@
 				<span class="personal-title left">上传附件</span>
                 <span class="form-trap up-btn pointer opp-up-btn">点击上传
                	<iframe class="iframe-wrap" name="fileUpload" v-if="hasIframe"
-						:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
+						:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'/uploadApi.html?subType=oppApply'"></iframe>
                 </span>
 				<span class="complate-upload-file"
 					  v-for="(attach,index) in attachList">{{attach.name}}/{{attach.size}}kB;

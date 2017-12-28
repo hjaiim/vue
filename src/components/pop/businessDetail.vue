@@ -72,7 +72,7 @@
 								<span class="form-title">上传附件</span>
 								 <span class="form-trap up-btn pointer opp-up-btn">点击上传
 								<iframe name="fileUpload" v-if="hasIframe" class="iframe-wrap"
-										:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
+										:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'/uploadApi.html?subType=oppApply'"></iframe>
 							</span>
 							</p>
 							<p class="from-group clear relative file-wrap">
