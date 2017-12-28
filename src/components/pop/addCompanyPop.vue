@@ -150,16 +150,10 @@
 			init()
 			{
 				this.authStatus = g.data.userInfo.authStatus;
-				this.currentId = this.currId || this.currentId;
+				this.currentId = this.currId;
 				if (this.currentId)
 				{
-					this.companyData = g.data.searchCompanyPool.getDataById(this.currentId);
-					this.name = this.companyData.name;
-					this.telphone = this.companyData.telphone;
-					this.leader = this.companyData.leader;
-					this.phone = this.companyData.phone;
-					this.departmentList = this.companyData.children;
-					this.isEdit = true;
+					this.initData();
 				}
 				else
 				{
@@ -173,6 +167,16 @@
 				}
 				this.departName = "";
 				this.dutyName = "";
+			},
+			initData()
+			{
+				this.companyData = g.data.searchCompanyPool.getDataById(this.currentId);
+				this.name = this.companyData.name;
+				this.telphone = this.companyData.telphone;
+				this.leader = this.companyData.leader;
+				this.phone = this.companyData.phone;
+				this.departmentList = this.companyData.children;
+				this.isEdit = true;
 			},
 			onClose_pop()
 			{
@@ -213,8 +217,8 @@
 					{
 						g.data.departmentPool.getDataById($depart.id).update($data);
 					}
-					g.data.departmentPool.getDataById($depart.id).update({isEdit: false});
-					this.init();
+					g.data.departmentPool.getDataById($data.departmentId).update({isEdit: false});
+					this.initData();
 				}, (err) =>
 				{
 					g.func.dealErr(err);
@@ -251,7 +255,7 @@
 						g.data.dutyPool.getDataById($duty.id).update($data);
 					}
 					g.data.dutyPool.getDataById($data.dutyId).update({isEdit: false});
-					this.init();
+					this.initData();
 				}, (err) =>
 				{
 					g.func.dealErr(err);
@@ -265,7 +269,7 @@
 				{
 					g.ui.hideLoading();
 					g.data.departmentPool.remove($depart.id);
-					this.init();
+					this.initData();
 				}, (err) =>
 				{
 					g.func.dealErr(err);
@@ -289,7 +293,7 @@
 				{
 					g.ui.hideLoading();
 					g.data.dutyPool.remove($duty.id);
-					this.init();
+					this.initData();
 				}, (err) =>
 				{
 					g.func.dealErr(err);
@@ -310,20 +314,20 @@
 					comLinkManTel: this.phone,
 					comLinkTel: this.telphone
 				};
-				g.ui.showLoading()
+				g.ui.showLoading();
 				g.net.call("organizeOpt/editCompany", _params).then(($data) =>
 				{
 					g.ui.hideLoading();
-					this.currentId = $data.comId;
-					if (this.currId != 0)
+					if (this.currentId != 0)
 					{
-						g.data.searchCompanyPool.getDataById(this.currId).update($data);
+						g.data.searchCompanyPool.getDataById(this.currentId).update($data);
 					}
 					else
 					{
 						g.data.searchCompanyPool.add($data);
 					}
-					this.init();
+					this.currentId = $data.comId;
+					this.initData();
 				}, (err) =>
 				{
 					g.func.dealErr(err);
