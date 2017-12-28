@@ -25,21 +25,24 @@
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">客户公司地址</span>
-				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder="" type="text"
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
+						   type="text"
 						   v-model="formData.cusCompAdd"
 						   :errmsg="errData.cusCompAdd"
 						   @focus="onFocus_inputBar('cusCompAdd')"></input-bar>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">客户公司介绍</span>
-				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder="" type="text"
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
+						   type="text"
 						   v-model="formData.cusCompIntro"
 						   :errmsg="errData.cusCompIntro"
 						   @focus="onFocus_inputBar('cusCompIntro')"></input-bar>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">业务用途及场景</span>
-				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder="" type="text"
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
+						   type="text"
 						   v-model="formData.businessDesc"
 						   :errmsg="errData.businessDesc"
 						   @focus="onFocus_inputBar('businessDesc')"></input-bar>
@@ -81,7 +84,7 @@
 				<span class="personal-title left">上传附件</span>
                 <span class="form-trap up-btn pointer opp-up-btn">点击上传
                	<iframe class="iframe-wrap" name="fileUpload" v-if="hasIframe"
-						:src="g.path.base+'upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
+						:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
                 </span>
 				<span class="complate-upload-file"
 					  v-for="(attach,index) in attachList">{{attach.name}}/{{attach.size}}kB;
@@ -105,8 +108,8 @@
 				g: g,
 				errData: {},
 				formData: {},
-				hasIframe:true,
-				attachList:[]
+				hasIframe: true,
+				attachList: []
 			}
 		},
 		components: {
@@ -122,43 +125,51 @@
 			{
 				if (this.currId)
 				{
-					var formData = JSON.parse(g.data.searchBusinessPool.getDataById(this.currId).formData);
+					var formData = g.data.searchBusinessPool.getDataById(this.currId).formData;
 					var hash = g.data.staticTypePool.getDataById(_type).hash;
 					for (var key in formData)
 					{
 						this.formData[hash[key]] = formData[key];
+						if (key == "客户联系方式")
+						{
+							this.formData[hash[key]] = formData[key].split("*")[0];
+						}
 					}
-					this.attachList = JSON.parse(g.data.searchBusinessPool.getDataById(this.currId).attachList);
+					this.attachList = g.data.searchBusinessPool.getDataById(this.currId).attachList;
 					this.$forceUpdate();
 				}
 				else
 				{
-					this.formData = {
-						cusCompName: "声音名片业务",
-						customer: "声音名片业务",
-						cusPhone: "声音名片业务",
-						cusCompAdd: "声音名片业务",
-						cusCompIntro: "声音名片业务",
-						businessDesc: "声音名片业务",
-						accessNum: "声音名片业务",
-						budget: "声音名片业务",
-						payway: "声音名片业务",
-						remark: "声音名片业务"
-					};
-					this.errData = {
-						cusCompName: "",
-						customer: "",
-						cusPhone: "",
-						cusCompAdd: "",
-						cusCompIntro: "",
-						businessDesc: "",
-						accessNum: "",
-						budget: "",
-						payway: "",
-						remark: "",
-					};
+					this.initForm();
 				}
 				window.uploadComplete = this.uploadComplete;
+			},
+			initForm()
+			{
+				this.formData = {
+					cusCompName: "",
+					customer: "",
+					cusPhone: "",
+					cusCompAdd: "",
+					cusCompIntro: "",
+					businessDesc: "",
+					accessNum: "",
+					budget: "",
+					payway: "",
+					remark: ""
+				};
+				this.errData = {
+					cusCompName: "",
+					customer: "",
+					cusPhone: "",
+					cusCompAdd: "",
+					cusCompIntro: "",
+					businessDesc: "",
+					accessNum: "",
+					budget: "",
+					payway: "",
+					remark: "",
+				};
 			},
 			uploadComplete($data)
 			{

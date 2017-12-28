@@ -1,16 +1,16 @@
 <template>
 	<com-layout currId="percenter" currPath="/verify">
 		<div class="percenter-wrap">
-			<div class="percenter-inner" :class="authStatus != 0?'disabled':''">
+			<div class="percenter-inner" :class="canEdit?'':'disabled'">
 				<div class="icon-collect clear">
 					{{errData.avatar}}
 					<div class="relative upload-head right pointer">
-						<img class="default-img" :src="avatar?g.param.ossUrl+avatar:g.path.images+'/default.png'"
+						<img class="default-img" :src="g.param.ossUrl+avatar"
 							 alt="">
 						<div class="absolute upload-btn">
 							<p class="load-text">修改头像</p>
 							<iframe class="iframe-btn" name="fileUpload"
-									:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=avatar'"
+									:src="g.path.base+'/upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=avatar'"
 									id="avatar" v-if="avatar == 'default.png'"
 							></iframe>
 							<img v-if="avatar != 'default.png'" :src="g.path.images+'/del-head.png'" alt=""
@@ -20,18 +20,18 @@
 				</div>
 			</div>
 			<div class="personal-message">
-				<div class="personal-form diff-personal"><span class="personal-title ">登录用户名</span><span
+				<div class="personal-form diff-personal diff-margin"><span class="personal-title ">登录用户名</span><span
 						class="personal-content">{{userInfo.username}}
 				</span>
 
 				</div>
-				<div class="personal-form diff-personal"><span class="personal-title">姓名</span><span
+				<div class="personal-form diff-personal diff-margin"><span class="personal-title">姓名</span><span
 						class="personal-content">{{userInfo.name}}</span></div>
-				<div class="personal-form diff-personal">
-					<p class="err-msg"> {{errData.currCompany}}</p>
+				<div class="personal-form diff-personal relative diff-margin">
 					<span class="personal-title left">所属公司</span>
+					<p class="err-msg absolute"> {{errData.currCompany}}</p>
 					<div class="personal-content left relative form-list pointer"
-						 :class="authStatus != 0 ?'disabled':''"
+						 :class="canEdit?'':'disabled'"
 						 @click.stop="onClick_dropListBtn('Company')">
 						{{currCompanyData.name}}
 						<i :class="['icon-trangle', isShowCompanyList?'rotate':'']"></i>
@@ -40,65 +40,68 @@
 					</div>
 					<span class="required" v-show="authStatus == 0">*</span>
 				</div>
-				<div class="personal-form diff-personal">
-					<p class="err-msg"> {{errData.currDepartment}}</p>
+				<div class="personal-form diff-personal relative">
 					<span class="personal-title left">所属部门</span>
+					<p class="err-msg absolute"> {{errData.currDepartment}}</p>
 					<div class="personal-content left relative form-list pointer"
-						 :class="authStatus != 0 ?'disabled':''"
+						 :class="canEdit?'':'disabled'"
 						 @click.stop="onClick_dropListBtn('Department')">
 						{{currDepartData.name}}
 						<i class="pointer" :class="['icon-trangle', isShowDepartmentList?'rotate':'']"></i>
 						<drop-list :dropList="departmentList" :isShowDropList="isShowDepartmentList"
 								   @change="onClick_department" ref="depart"></drop-list>
 					</div>
-					<span class="required" v-show="authStatus == 0">*</span>
+					<span class="required" v-show="canEdit">*</span>
 				</div>
-				<div class="personal-form diff-personal">
-					<p class="err-msg"> {{errData.currDuty}}</p>
+				<div class="personal-form diff-personal relative">
 					<span class="personal-title left">职务名称</span>
+					<p class="err-msg absolute"> {{errData.currDuty}}</p>
 					<div class="personal-content left relative form-list"
-						 :class="authStatus != 0 ?'disabled':''"
+						 :class="canEdit?'':'disabled'"
 						 @click.stop="onClick_dropListBtn('Duty')">
 						{{currDutyData.name}}
 						<span :class="['icon-trangle', isShowDutyList?'rotate':'']"></span>
 						<drop-list :dropList="dutyList" :isShowDropList="isShowDutyList"
 								   @change="onClick_duty" ref="duty"></drop-list>
 					</div>
-					<span class="required" v-show="authStatus == 0">*</span>
+					<span class="required" v-show="canEdit">*</span>
 				</div>
 				<div class="personal-form">
 					<span class="personal-title left">手机</span>
 					<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
 							   v-model="phone" @focus="onFocus_inputBar('phone')" :errmsg="errData.phone"
-							   :readonly="authStatus != 0"></input-bar>
-					<span class="required" v-show="authStatus == 0">*</span>
+							   :readonly="!canEdit"></input-bar>
+					<span class="required" v-show=canEdit>*</span>
 				</div>
-				<div class="personal-form" v-if="authStatus == 0">
+				<div class="personal-form" v-if="canEdit">
 					<span class="personal-title left">验证码</span>
 					<input-bar class="personal-content pensonal-input code left" placeholder="" type="text"
 							   v-model="code" @focus="onFocus_inputBar('code')" :errmsg="errData.code"></input-bar>
-					<span class="btn-send pointer left ani-time" @click="onClick_sendCodeBtn">发送验证码</span>
+					<span class="btn-send pointer left ani-time" @click="onClick_sendCodeBtn"
+						  :class="isClicked?'disabled':''">{{limit == g.param.timeoutClock ?'获取验证码':'倒计时'+limit+'秒'}}
+					</span>
 				</div>
 				<div class="personal-form"><span class="personal-title left">固定电话</span>
 					<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
-							   :readonly="authStatus != 0"
+							   :readonly="!canEdit"
 							   v-model="telphone" @focus="onFocus_inputBar('telphone')"
 							   :errmsg="errData.telphone"></input-bar>
 				</div>
+
 				<div class="personal-form"><span class="personal-title left">电子邮箱</span>
 					<input-bar class="personal-content pensonal-input left" placeholder="" type="text"
-							   :readonly="authStatus != 0"
+							   :readonly="!canEdit"
 							   v-model="email" @focus="onFocus_inputBar('email')" :errmsg="errData.email"></input-bar>
 				</div>
 				<div class="personal-form"><span class="personal-title left">备注</span>
 					<input-bar class="personal-content pensonal-input note left" placeholder="" type="text"
-							   :readonly="authStatus != 0"
+							   :readonly="!canEdit"
 							   v-model="remark" @focus="onFocus_inputBar('remark')"
 							   :errmsg="errData.remark"></input-bar>
 				</div>
-				<div class="personal-form" :class="authStatus != 0 ?'disabled':''">
-					<p class="err-msg"> {{errData.idCardBack || errData.idCardFront}}</p>
+				<div class="personal-form relative" :class="authStatus != 0 ?'disabled':''">
 					<span class="personal-title left">身份证照</span>
+					<p class="err-msg absolute"> {{errData.idCardBack || errData.idCardFront}}</p>
 					<div class="left relative upload-box pointer">
 						<div class="upload-btn flex">
 							<img :src="g.path.images+'/upload.png'" alt="">
@@ -108,7 +111,7 @@
 							<img class="img-url " :src="idCardFront?g.param.ossUrl+idCardFront:''" alt="">
 						</div>
 						<iframe class="pointer" name="fileUpload"
-								:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=idCardFront'"
+								:src="g.path.base+'/upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=idCardFront'"
 								v-if="!idCardFront" id="idCardFront"></iframe>
 						<span class="del-img pointer" :class="idCardFront?'hover-img':''"
 							  @click="onClick_deleteImg('idCardFront')"></span>
@@ -122,14 +125,15 @@
 							<img class="img-url " :src="idCardBack?g.param.ossUrl+idCardBack:''" alt="">
 						</div>
 						<iframe class="pointer" name="fileUpload"
-								:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=idCardBack'"
+								:src="g.path.base+'/upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=idCardBack'"
 								v-if="!idCardBack" id="idCardBack"></iframe>
 						<span class="del-img pointer" :class="idCardBack?'hover-img':''"
 							  @click="onClick_deleteImg('idCardBack')"></span>
 					</div>
+
 				</div>
-				<div class="personal-form" :class="authStatus != 0 ?'disabled':''">
-					<p class="err-msg"> {{errData.workCard}}</p>
+				<div class="personal-form relative" :class="authStatus != 0 ?'disabled':''">
+					<p class="err-msg absolute"> {{errData.workCard}}</p>
 					<span class="personal-title left">工作证照</span>
 					<div class="left relative upload-box pointer">
 						<div class="upload-btn flex">
@@ -145,14 +149,14 @@
 							<img class="img-url " :src="workCard?g.param.ossUrl+workCard:''" alt="">
 						</div>
 						<iframe class="pointer" name="fileUpload"
-								:src="g.path.base+'upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=workCard'"
+								:src="g.path.base+'/upload.html?type=pic&redirectUrl='+g.path.base+'uploadApi.html?subType=workCard'"
 								id="workCard" v-if="!workCard"></iframe>
 						<span class="del-img pointer" :class="workCard?'hover-img':''"
 							  @click="onClick_deleteImg('workCard')"></span>
 					</div>
 				</div>
 				<div class="btn btn-save pointer action-btn ani-time " @click="onClick_submitBtn"
-					 v-if="authStatus == 0 || authStatus == 3">提交
+					 v-if="canEdit">提交
 				</div>
 			</div>
 			<right-pop :isShowPopView="isShowRightPop"></right-pop>
@@ -166,7 +170,7 @@
 	import InputBar from "../../components/inputBar.vue";
 	import DropList from "../../components/dropList.vue";
 	import RightPop from "../../components/pop/rightPop.vue"
-	var _isValid = true, _params = null, _type = "";
+	var _isValid = true, _params = null, _type = "", _timer = 0;
 	export default{
 		created(){
 			this.init();
@@ -195,7 +199,10 @@
 				isShowDepartmentList: false,
 				isShowCompanyList: false,
 				isShowDutyList: false,
-				isSubmit: false
+				isSubmit: false,
+				limit: g.param.timeoutClock,
+				isClicked: false
+
 			}
 		},
 		components: {
@@ -213,6 +220,10 @@
 					return true;
 				}
 				return this.authStatus == 1;
+			},
+			canEdit()
+			{
+				return this.authStatus == 0 || this.authStatus == 3;
 			}
 		},
 		methods: {
@@ -221,6 +232,9 @@
 
 				this.userInfo = g.data.userInfo;
 				this.authStatus = this.userInfo.authStatus;
+				this.companyList = g.data.companyPool.list;
+				this.departmentList = [];
+				this.dutyList = [];
 				if (this.authStatus != 0)
 				{
 					this.phone = this.userInfo.phone;
@@ -242,13 +256,9 @@
 					this.email = "";
 					this.telphone = "";
 					this.avatar = "default.png";
-					this.idCardBack = "";
-					this.idCardFront = "";
-					this.workCard = "";
 					this.currCompanyData = "";
 					this.currDepartData = "";
 					this.currDutyData = "";
-					this.companyList = g.data.companyPool.list;
 				}
 				this.code = "";
 				this.initEvents();
@@ -261,6 +271,8 @@
 			uploadComplete($data)
 			{
 				this[$data.subType] = $data.fileName;
+				this.errData[$data.subType] = "";
+				this.$forceUpdate();
 			},
 			onClick_doc(e)
 			{
@@ -282,12 +294,15 @@
 				this.isShowCompanyList = false;
 				this.currCompanyData = g.data.companyPool.getDataById($id);
 				this.departmentList = this.currCompanyData.children;
+				this.currDepartData = {};
+				this.currDutyData = {};
 			},
 			onClick_department($id)
 			{
 				this.isShowDepartmentList = false;
 				this.currDepartData = g.data.departmentPool.getDataById($id);
 				this.dutyList = this.currDepartData.children;
+				this.currDutyData = {};
 			},
 			onClick_duty($id)
 			{
@@ -297,6 +312,7 @@
 			},
 			onClick_dropListBtn($type)
 			{
+
 				if ($type == "Company")
 				{
 					this.isShowDepartmentList = false;
@@ -323,16 +339,20 @@
 				{
 					this["isShow" + $type + "List"] = true;
 				}
+				this.errData["curr" + $type] = "";
+				this.$forceUpdate();
 			},
-
 			onClick_sendCodeBtn()
 			{
+
 				this.checkPhoneData();
 				if (!_isValid)
 				{
 					_isValid = true;
 					return;
 				}
+				this.isClicked = true;
+				this.setClock();
 				_params = {mobile: this.phone};
 				g.net.call("user/applyUserAuthSendCode", _params).then(($data) =>
 				{
@@ -341,6 +361,23 @@
 				{
 					g.func.dealErr(err);
 				})
+			},
+			setClock()
+			{
+				_timer = setTimeout(()=>
+				{
+					this.limit--;
+					if (this.limit == 0)
+					{
+						clearTimeout(_timer);
+						this.isClicked = false;
+						this.limit = g.param.timeoutClock;
+					}
+					else
+					{
+						this.setClock();
+					}
+				}, 1000)
 			},
 			onClick_deleteImg($type)
 			{
@@ -379,14 +416,16 @@
 					email: this.email,
 					remark: this.remark
 				};
-				g.ui.showLoading()
+				g.ui.showLoading();
 				g.net.call("user/applyUserAuth", _params).then(($data) =>
 				{
 					g.ui.hideLoading();
 					this.isSubmit = true;
 					g.ui.toast('申请提交成功！');
+				}, (err) =>
+				{
+					g.func.dealErr(err);
 				})
-
 			},
 			checkPhoneData()
 			{

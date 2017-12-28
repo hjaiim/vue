@@ -17,12 +17,13 @@
 						<div>
 							<p class="from-group">
 								<span class="form-title">附件下载</span>
+								<span class="form-trap empty-txt"
+									  v-show="businessData.attachList&&businessData.attachList.length==0">无</span>
 								<i class="download-wrap clear">
 									<a class="form-trap file-download pointer ani-time left"
 									   v-for="attach in businessData.attachList" :href="g.param.ossUrl + attach.name"
 									   download>{{attach.name}}</a>
 								</i>
-
 							</p>
 						</div>
 					</div>
@@ -40,7 +41,8 @@
 							</p>
 							<p class="from-group  clear">
 								<span class="form-title left">签批意见</span>
-								<span class="form-trap left address-width">{{item.opinion}}</span>
+
+								<span class="form-trap left address-width">{{item.opinion?item.opinion:'无'}}</span>
 							</p>
 							<p class="from-group  clear">
 								<span class="form-title">结果</span>
@@ -70,7 +72,7 @@
 								<span class="form-title">上传附件</span>
 								 <span class="form-trap up-btn pointer opp-up-btn">点击上传
 								<iframe name="fileUpload" v-if="hasIframe" class="iframe-wrap"
-										:src="g.path.base+'upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
+										:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
 							</span>
 							</p>
 							<p class="from-group clear relative file-wrap">
@@ -110,7 +112,7 @@
 	import BusinessType5 from "../businessDetail/businessType5.vue";
 	import BusinessType6 from "../businessDetail/businessType6.vue";
 	import BusinessType7 from "../businessDetail/businessType7.vue";
-	import ChooseManPop from "./chooseManPop.vue"
+	import ChooseManPop from "./chooseManPop.vue";
 	var _params = null, _childName;
 	export default{
 		created()
@@ -178,6 +180,7 @@
 			{
 				this.opinion = "";
 				this.status = 1;
+				this.idList = [];
 				if (this.currId)
 				{
 					this.businessData = g.data.searchBusinessPool.getDataById(this.currId);
@@ -213,7 +216,7 @@
 			},
 			onClick_selectNext()
 			{
-				g.ui.showLoading()
+				g.ui.showLoading();
 				g.net.call("organizeQuery/getAuditStationList", {orderId: this.currId}).then(($data) =>
 				{
 					g.ui.hideLoading();
@@ -238,10 +241,11 @@
 					_params.pendingAuditorId = this.idList.join(';');
 					_params.pendingAuditorName = _childName.join(';');
 				}
-				g.ui.showLoading()
+				g.ui.showLoading();
 				g.net.call("bo/saveAuditRecord", _params).then(($data) =>
 				{
 					g.ui.hideLoading();
+					g.data.searchBusinessPool.getDataById(this.currId).update({optType: 0});
 					this.$emit("close", true);
 				}, (err) =>
 				{
@@ -268,17 +272,13 @@
 				{
 				}, (err) =>
 				{
+					g.ui.hideLoading();
 					this.attachList.splice($index, 1);
 				})
 			},
 			onClick_cancelBtn($id)
 			{
-				trace(this.idList);
-				var index = this.idList.indexOf($id);
-				trace(index);
-				this.idList.splice(index, 1);
-				var data = g.data.staffPool.getChildById($id);
-				data.update({checked: false});
+				this.$emit("close", false);
 			},
 		}
 	}
@@ -304,6 +304,9 @@
 			font-weight: normal !important;
 			line-height: 30px;
 			vertical-align: top;
+		}
+		.empty-txt {
+			font-weight: bold !important;
 		}
 		.status-type {
 			margin-left: 0;

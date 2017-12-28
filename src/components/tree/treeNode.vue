@@ -48,9 +48,6 @@
 					return []
 				}
 			},
-			vertical: {
-				type: Boolean
-			},
 			isShowArrow: {
 				type: Boolean,
 				default: true
@@ -81,7 +78,7 @@
 			{
 				util.insertOneOrZero(this.checkedChildren, $item.id)
 				this.checkedAllChildren($item);
-				this.$emit('change', this.checkedChildren);
+				this.$emit('change', this.checkedChildren,this.itemData);
 				this.$forceUpdate();
 			},
 			onChange_list($idList)
@@ -95,7 +92,7 @@
 						util.pushIn(this.checkedChildren, this.tmpItem.id);
 					}
 				}
-				this.$emit('change', this.checkedChildren);
+				this.$emit('change', this.checkedChildren,this.itemData);
 			},
 			checkedAllChildren($data)
 			{

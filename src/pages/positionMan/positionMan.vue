@@ -41,7 +41,7 @@
 					</tr>
 					</tbody>
 				</table>
-
+				<empty-pop v-show="positionList.length==0"></empty-pop>
 				<div class="show-page clear" v-if="g.data.searchPositionPool.totalPage > 1">
 					<common-page class="right" :total="g.data.searchPositionPool.total" :currPage="currPage"
 								 :showTotalCount="true"
@@ -60,6 +60,7 @@
 	import DeletePop from "../../components/pop/deletePop.vue";
 	import AddPostPop from "../../components/pop/addPostPop.vue";
 	import {searchPositionList} from "./positionMan";
+	import EmptyPop from "../../components/pop/emptyPop.vue"
 	var _params = null;
 	var _delId = 0;
 	export default{
@@ -80,7 +81,8 @@
 			ComLayout,
 			CommonPage,
 			DeletePop,
-			AddPostPop
+			AddPostPop,
+			EmptyPop
 		},
 		watch: {
 			positionList($val)
@@ -120,6 +122,9 @@
 						g.data.searchPositionPool.remove(_delId);
 						g.ui.toast("岗位删除成功!");
 
+					}, (err) =>
+					{
+						g.func.dealErr(err);
 					})
 				}
 			},

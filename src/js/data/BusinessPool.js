@@ -219,7 +219,7 @@ function updateRecord($dObj)
 	$dObj.hasOwnProperty("auditorId") && (this.auditorId = $dObj.auditorId);
 	$dObj.hasOwnProperty("auditorName") && (this.auditorName = $dObj.auditorName);
 	$dObj.hasOwnProperty("stationName") && (this.positionName = $dObj.stationName);
-	$dObj.hasOwnProperty("auditorTime") && (this.auditorTime = g.timeTool.getFullDate($dObj.auditorTime));
+	$dObj.hasOwnProperty("auditorTime") && (this.auditorTime = g.timeTool.getFullDate(int($dObj.auditorTime), true));
 	$dObj.hasOwnProperty("auditSuggest") && (this.opinion = $dObj.auditSuggest);
 	if ($dObj.hasOwnProperty("auditResult"))
 	{

@@ -22,7 +22,6 @@
 					<li class="left">职务名称</li>
 					<li class="left">状态</li>
 				</ul>
-
 				<div class="list-wrap">
 					<div class="list-wrap" is="scroll-group">
 						<div class="inner-content" v-for="item in manList">
@@ -160,6 +159,7 @@
 			},
 			onClick_closeBtn($type)
 			{
+				this.checkedList = [];
 				this.$emit('close', $type, this.childList)
 			}
 		}
@@ -268,7 +268,6 @@
 				background: rgba(252, 244, 245, .9);
 			}
 		}
-
 
 		.list-wrap {
 			max-height: 350px;

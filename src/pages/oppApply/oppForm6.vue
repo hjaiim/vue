@@ -134,7 +134,7 @@
 				<span class="personal-title left">上传附件</span>
                 <span class="form-trap up-btn pointer opp-up-btn">点击上传
                	<iframe class="iframe-wrap" name="fileUpload" v-if="hasIframe"
-						:src="g.path.base+'upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
+						:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
                 </span>
 				<span class="complate-upload-file"
 					  v-for="(attach,index) in attachList">{{attach.name}}/{{attach.size}}kB;
@@ -159,7 +159,7 @@
 				errData: {},
 				formData: {},
 				hasIframe: true,
-				attachList:[]
+				attachList: []
 			}
 
 		},
@@ -176,53 +176,61 @@
 			{
 				if (this.currId)
 				{
-					var formData = JSON.parse(g.data.searchBusinessPool.getDataById(this.currId).formData);
+					var formData = g.data.searchBusinessPool.getDataById(this.currId).formData;
 					var hash = g.data.staticTypePool.getDataById(_type).hash;
 					for (var key in formData)
 					{
 						this.formData[hash[key]] = formData[key];
+						if (key == "客户联系方式")
+						{
+							this.formData[hash[key]] = formData[key].split("*")[0];
+						}
 					}
-					this.attachList = JSON.parse(g.data.searchBusinessPool.getDataById(this.currId).attachList);
+					this.attachList = g.data.searchBusinessPool.getDataById(this.currId).attachList
 					this.$forceUpdate();
 				}
 				else
 				{
-					this.formData = {
-						cusCompName: "CTD小号业务",
-						customer: "CTD小号业务",
-						cusPhone: "CTD小号业务",
-						cusCompAdd: "CTD小号业务",
-						cusCompIntro: "CTD小号业务",
-						cusType: "CTD小号业务",
-						businessDesc: "CTD小号业务",
-						accessType: "API",
-						callRange: "CTD小号业务",
-						callBack: "是",
-						transfer: "是",
-						testNum: "CTD小号业务",
-						businessScale: "CTD小号业务",
-						budget: "CTD小号业务",
-						remark: "CTD小号业务"
-					};
-					this.errData = {
-						cusCompName: "",
-						customer: "",
-						cusPhone: "",
-						cusCompAdd: "",
-						cusCompIntro: "",
-						cusType: "",
-						businessDesc: "",
-						accessType: "",
-						callRange: "",
-						callBack: "",
-						transfer: "",
-						testNum: "",
-						businessScale: "",
-						budget: "",
-						remark: ""
-					};
+					this.initForm();
 				}
 				window.uploadComplete = this.uploadComplete;
+			},
+			initForm()
+			{
+				this.formData = {
+					cusCompName: "CTD小号业务",
+					customer: "CTD小号业务",
+					cusPhone: "CTD小号业务",
+					cusCompAdd: "CTD小号业务",
+					cusCompIntro: "CTD小号业务",
+					cusType: "CTD小号业务",
+					businessDesc: "CTD小号业务",
+					accessType: "API",
+					callRange: "CTD小号业务",
+					callBack: "是",
+					transfer: "是",
+					testNum: "CTD小号业务",
+					businessScale: "CTD小号业务",
+					budget: "CTD小号业务",
+					remark: "CTD小号业务"
+				};
+				this.errData = {
+					cusCompName: "",
+					customer: "",
+					cusPhone: "",
+					cusCompAdd: "",
+					cusCompIntro: "",
+					cusType: "",
+					businessDesc: "",
+					accessType: "",
+					callRange: "",
+					callBack: "",
+					transfer: "",
+					testNum: "",
+					businessScale: "",
+					budget: "",
+					remark: ""
+				};
 			},
 			uploadComplete($data)
 			{

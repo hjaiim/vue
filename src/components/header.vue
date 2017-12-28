@@ -13,8 +13,8 @@
 				<li class="nav-item pointer" @click="onClick_perCenter">
 					<a href="#" class="note-txt">{{g.data.userInfo.username}}</a>
 					<i class="avatar-icon">
-						<img :src="g.data.userInfo.avatar?g.data.userInfo.avatar:g.path.images+'/avatar-icon.png'"
-							 alt="">
+						<img
+								:src="g.data.userInfo.avatar?g.param.ossUrl+g.data.userInfo.avatar:g.path.images+'/default.png'" alt="">
 					</i>
 				</li>
 				<li class="nav-item pointer" @click="onClick_logoutBtn">

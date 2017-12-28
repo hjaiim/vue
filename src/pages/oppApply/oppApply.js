@@ -23,24 +23,26 @@ export default function (to, next)
 
 export function getBusinessDetail($params)
 {
-	if (_params)
-	{
-		_params.update($params)
-	}
-	else
-	{
-		_params = createData($params);
-	}
+	_params = createData($params);
 	var promise = new Promise((resolved, rejected) =>
 	{
 		g.ui.showLoading()
-		g.net.call("bo/auditOrderDetail", _params).then(($data) =>
+		g.net.call("bo/viewOrderDetail", _params).then(($data) =>
 		{
 			g.ui.hideLoading();
-			g.data.searchCompanyPool.getDataById(_params.id).update($data);
+			var data = g.data.searchBusinessPool.getDataById(_params.orderId);
+			if (data)
+			{
+				data.update($data);
+			}
+			else
+			{
+				g.data.searchBusinessPool.add($data);
+			}
 			resolved();
 		}, (err) =>
 		{
+			g.func.dealErr(err);
 			rejected();
 		})
 	});
@@ -51,19 +53,8 @@ export function getBusinessDetail($params)
 function createData($dObj)
 {
 	var d = {};
-	d.orderId = 0;
-	d.update = updateData.bind(d);
-	$dObj = __merge({}, $dObj);
-	d.update($dObj);
+	$dObj = $dObj || {};
+	d.orderId = $dObj.id || 0;
 	return d;
-}
-
-function updateData($dObj)
-{
-	if (!$dObj)
-	{
-		return;
-	}
-	$dObj.hasOwnProperty("id") && (this.orderId = $dObj.id);
 }
 

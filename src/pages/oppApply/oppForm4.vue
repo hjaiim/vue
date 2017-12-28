@@ -24,14 +24,16 @@
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">客户公司地址</span>
-				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder="" type="text"
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
+						   type="text"
 						   v-model="formData.cusCompAdd"
 						   :errmsg="errData.cusCompAdd"
 						   @focus="onFocus_inputBar('cusCompAdd')"></input-bar>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">客户公司介绍</span>
-				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder="" type="text"
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
+						   type="text"
 						   v-model="formData.cusCompIntro"
 						   :errmsg="errData.cusCompIntro"
 						   @focus="onFocus_inputBar('cusCompIntro')"></input-bar>
@@ -46,7 +48,8 @@
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">业务用途及场景</span>
-				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder="" type="text"
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
+						   type="text"
 						   v-model="formData.businessDesc"
 						   :errmsg="errData.businessDesc"
 						   @focus="onFocus_inputBar('businessDesc')"></input-bar>
@@ -79,7 +82,7 @@
 				<span class="personal-title left">上传附件</span>
                 <span class="form-trap up-btn pointer opp-up-btn">点击上传
                	<iframe class="iframe-wrap" name="fileUpload" v-if="hasIframe"
-						:src="g.path.base+'upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
+						:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
                 </span>
 				<span class="complate-upload-file"
 					  v-for="(attach,index) in attachList">{{attach.name}}/{{attach.size}}kB;
@@ -103,8 +106,8 @@
 				g: g,
 				errData: {},
 				formData: {},
-				hasIframe:true,
-				attachList:[]
+				hasIframe: true,
+				attachList: []
 			}
 		},
 		components: {
@@ -120,43 +123,51 @@
 			{
 				if (this.currId)
 				{
-					var formData = JSON.parse(g.data.searchBusinessPool.getDataById(this.currId).formData);
+					var formData = g.data.searchBusinessPool.getDataById(this.currId).formData;
 					var hash = g.data.staticTypePool.getDataById(_type).hash;
 					for (var key in formData)
 					{
 						this.formData[hash[key]] = formData[key];
+						if (key == "客户联系方式")
+						{
+							this.formData[hash[key]] = formData[key].split("*")[0];
+						}
 					}
-					this.attachList = JSON.parse(g.data.searchBusinessPool.getDataById(this.currId).attachList);
+					this.attachList = g.data.searchBusinessPool.getDataById(this.currId).attachList;
 					this.$forceUpdate();
 				}
 				else
 				{
-					this.formData = {
-						cusCompName: "许梿业务",
-						customer: "许梿业务",
-						cusPhone: "许梿业务",
-						cusCompAdd: "许梿业务",
-						cusCompIntro: "许梿业务",
-						cusType: "许梿业务",
-						businessDesc: "许梿业务",
-						businessScale: "许梿业务",
-						budget: "许梿业务",
-						remark: "许梿业务",
-					};
-					this.errData = {
-						cusCompName: "",
-						customer: "",
-						cusPhone: "",
-						cusCompAdd: "",
-						cusCompIntro: "",
-						cusType: "",
-						businessDesc: "",
-						businessScale: "",
-						budget: "",
-						remark: ""
-					};
+					this.initForm();
 				}
 				window.uploadComplete = this.uploadComplete;
+			},
+			initForm()
+			{
+				this.formData = {
+					cusCompName: "许梿业务",
+					customer: "许梿业务",
+					cusPhone: "许梿业务",
+					cusCompAdd: "许梿业务",
+					cusCompIntro: "许梿业务",
+					cusType: "许梿业务",
+					businessDesc: "许梿业务",
+					businessScale: "许梿业务",
+					budget: "许梿业务",
+					remark: "许梿业务",
+				};
+				this.errData = {
+					cusCompName: "",
+					customer: "",
+					cusPhone: "",
+					cusCompAdd: "",
+					cusCompIntro: "",
+					cusType: "",
+					businessDesc: "",
+					businessScale: "",
+					budget: "",
+					remark: ""
+				};
 			},
 			uploadComplete($data)
 			{
@@ -247,5 +258,6 @@
 	.apply-wrap {
 		padding: 20px 44px 50px 44px;
 	}
+
 	@import "../../css/oppApply.scss";
 </style>

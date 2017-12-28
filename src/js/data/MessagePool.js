@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2017/12/11.
  */
-var _list = [], _hash = {},_idList = [];
+var _list = [], _hash = {}, _idList = [];
 var _total = 0, _totalPage = 1;
 export default class MessagePool {
 	constructor()
@@ -58,7 +58,6 @@ export default class MessagePool {
 		return _list;
 	}
 
-
 	get idList()
 	{
 		return _idList;
@@ -73,7 +72,6 @@ export default class MessagePool {
 	{
 		return _totalPage;
 	}
-
 
 	removeAll()
 	{
@@ -112,7 +110,7 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("msgSource") && (this.source = $dObj.msgSource);
 	$dObj.hasOwnProperty("msgSourceDesc") && (this.sourceDesc = $dObj.msgSourceDesc);
 	$dObj.hasOwnProperty("msgContent") && (this.desc = $dObj.msgContent);
-	$dObj.hasOwnProperty("sendTime") && (this.createTime = g.timeTool.getFullDate($dObj.sendTime),true);
+	$dObj.hasOwnProperty("sendTime") && (this.createTime = g.timeTool.getFullDate(int($dObj.sendTime), true));
 	$dObj.hasOwnProperty("readStatus") && (this.readStatus = $dObj.readStatus);
 	$dObj.hasOwnProperty("isShow") && (this.isShow = $dObj.isShow);
 	$dObj.hasOwnProperty("checked") && (this.checked = $dObj.checked);

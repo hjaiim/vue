@@ -93,7 +93,7 @@
 
 							<p class="action-menu clear" v-if="item.operation== 1">
                                 <span class="right pointer draw-line ani-time"
-									  @click="onClick_editBtn(item.id)">重新编辑</span>
+									  @click="onClick_editBtn(item)">重新编辑</span>
 							</p>
 
 							<p class="action-menu clear" v-if="item.operation== 2">
@@ -104,6 +104,7 @@
 					</tr>
 					</tbody>
 				</table>
+				<empty-pop v-show="businessList.length==0"></empty-pop>
 				<div class="show-page clear" v-if="g.data.searchBusinessPool.totalPage > 1">
 					<common-page class="right" :total="g.data.searchBusinessPool.total" :currPage="currPage"
 								 :showPageSize="false"
@@ -127,7 +128,8 @@
 	import BusinessDetailPop from "../../components/pop/businessDetail.vue";
 	import InputBar from "../../components/inputBar.vue";
 	import CommonDate from "../../components/dateBox.vue";
-	import DropList from "../../components/dropList.vue"
+	import DropList from "../../components/dropList.vue";
+	import EmptyPop from "../../components/pop/emptyPop.vue"
 	var _dateType = "", _params = null;
 	export default{
 		created(){
@@ -158,7 +160,8 @@
 			BusinessDetailPop,
 			InputBar,
 			CommonDate,
-			DropList
+			DropList,
+			EmptyPop
 		},
 		computed: {
 			currType()
@@ -185,7 +188,7 @@
 				this.currPage = 1;
 				this.type = -1;
 				this.statusList = [1, -1, 2];
-				this.startTime = 1483200000000;
+				this.startTime = 1483200000;
 				this.endTime = g.timeTool.getNowStamp();
 				this.creatorName = "";
 				this.companyName = "";
@@ -201,7 +204,7 @@
 				{
 					return int(item);
 				});
-				this.startTime = g.vue.getQuery("startTime", 1483200000000);
+				this.startTime = g.vue.getQuery("startTime", 1483200000);
 				this.endTime = g.vue.getQuery("endTime", g.timeTool.getNowStamp());
 				this.creatorName = g.vue.getQuery("creatorName", "");
 				this.companyName = g.vue.getQuery("companyName", "");
@@ -303,22 +306,27 @@
 				else
 				{
 					_params = {orderId: $id};
-					g.ui.showLoading()
+					g.ui.showLoading();
 					g.net.call("bo/viewOrderDetail", _params).then(($data) =>
 					{
 						g.ui.hideLoading();
 						g.data.searchBusinessPool.getDataById($id).update($data);
 						this.currId = $id;
 						this.isShowDetailPop = true;
+					}, (err) =>
+					{
+						g.func.dealErr(err);
 					})
 				}
 			},
-			onClick_editBtn($id)
+			onClick_editBtn($item)
 			{
+
 				g.url = {
 					path: "/oppapply",
 					query: {
-						id: $id
+						id: $item.id,
+						type: $item.type
 					}
 				}
 			},
@@ -327,15 +335,18 @@
 				var businessData = g.data.searchBusinessPool.getDataById($id);
 				_params = {
 					orderId: $id,
-					todoId: businessData.todoId,
+					todoId: businessData.todoId
 				};
-				g.ui.showLoading()
+				g.ui.showLoading();
 				g.net.call("bo/auditOrderDetail", _params).then(($data) =>
 				{
 					g.ui.hideLoading();
 					g.data.searchBusinessPool.getDataById($id).update($data);
 					this.currId = $id;
 					this.isShowDetailPop = true;
+				}, (err) =>
+				{
+					g.func.dealErr(err);
 				})
 			},
 			onClose_detailPop(){

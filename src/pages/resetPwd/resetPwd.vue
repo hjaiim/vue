@@ -9,7 +9,8 @@
 			<div class="verify-wrap relative">
 				<form-input type="text" placeholder="请输入验证码" class="send-code" v-model="code"
 							@focus="onFocus_formInput('code')" :errmsg="errData.code"></form-input>
-				<span class="send-btn absolute pointer" @click="onClick_getCodeBtn">获取验证码</span>
+				<span class="send-btn absolute pointer" @click="onClick_getCodeBtn" :class="isClicked?'disabled':''">
+					{{limit == g.param.timeoutClock ?'获取验证码':'倒计时'+limit+'秒'}}</span>
 			</div>
 			<form-input type="password" v-model="password" placeholder="请输入新密码"
 						@focus="onFocus_formInput('password')" :errmsg="errData.password"></form-input>
@@ -26,7 +27,7 @@
 	import g from "../../global";
 	import sha256 from 'sha256';
 	import FormInput from "../../components/formInput.vue";
-	var _params = null, _isValid = true;
+	var _params = null, _isValid = true, _timer = 0;
 	export default{
 		created(){
 			this.init();
@@ -40,7 +41,9 @@
 				errorTip: "",
 				confirmPwd: '',
 				code: '',
-				errData: {}
+				errData: {},
+				limit: g.param.timeoutClock,
+				isClicked: false
 			}
 		},
 		components: {
@@ -54,10 +57,11 @@
 				this.password = "";
 				this.confirmPwd = "";
 				this.code = "";
-
 			},
 			onClick_getCodeBtn()
 			{
+				this.isClicked = true;
+				this.setClock();
 				this.checkCodeDataValid();
 				if (!_isValid)
 				{
@@ -68,12 +72,29 @@
 					logon: this.account,
 					mobile: this.phone
 				};
-				g.ui.showLoading()
+				g.ui.showLoading();
 				g.net.call("user/resetPasswordSendCode", _params).then(() =>
 				{
 					g.ui.hideLoading();
 					g.ui.toast("发送成功！");
 				})
+			},
+			setClock()
+			{
+				_timer = setTimeout(()=>
+				{
+					this.limit--;
+					if (this.limit == 0)
+					{
+						clearTimeout(_timer);
+						this.isClicked = false;
+						this.limit = g.param.timeoutClock;
+					}
+					else
+					{
+						this.setClock();
+					}
+				}, 1000)
 			},
 			onClick_resetBtn()
 			{
@@ -90,13 +111,18 @@
 					code: this.code,
 					password: sha256(this.password)
 				};
-				g.ui.showLoading()
-				g.net.call('user/resetPwd', _params).then(() =>
+				g.ui.showLoading();
+				g.net.call('user/resetPassword', _params).then(() =>
 				{
 					g.ui.hideLoading();
 					g.ui.toast("密码重置成功！");
 					this.init();
 					g.url = "/login";
+				}, (err) =>
+				{
+					g.ui.hideLoading();
+					this.errData.confirmPwd = err.errorMsg;
+					this.$forceUpdate();
 				})
 			},
 			onFocus_formInput($type)

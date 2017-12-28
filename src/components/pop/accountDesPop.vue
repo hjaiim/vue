@@ -99,7 +99,7 @@
 				<div class="user-item left clear">
 					<span class="user-tit left diff-distancre">认证反馈</span>
 					<div class="user-txt left diff-frame">
-						<textarea class="verify-feedback" v-model="opinion"></textarea>
+						<textarea class="verify-feedback iscroll-ref" v-model="opinion"></textarea>
 					</div>
 				</div>
 			</div>
@@ -107,7 +107,6 @@
 				<span class="right cancel-btn ani-time pointer" @click="onClick_rejectedBtn">不通过</span>
 				<span class="right action-btn ani-time pointer" @click="onClick_resolvedBtn">通过</span>
 			</div>
-
 		</div>
 		<transition name="fade">
 			<div class="slide-img fixed center-flex" v-show="isShowSlidePop">
@@ -242,11 +241,12 @@
 					line-height: 77px;
 				}
 				.user-txt {
-					width: 150px;
+					min-width: 172px;
 					margin-left: 25px;
 					span {
 						height: 50px;
 						line-height: 50px;
+						word-break: break-all;
 					}
 					p {
 						max-height: 92px;

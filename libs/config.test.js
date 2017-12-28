@@ -6,7 +6,7 @@ var WEB_CONFIG = {
 
 	path: {
 		domain: "{$host}/boms/web",
-		base: "{$domain}/{$ver}/",
+		base: "{$domain}/{$ver}",
 		assets: "{$base}/assets",
 		data: "{$assets}/data",
 		images: "{$assets}/images",
@@ -15,7 +15,7 @@ var WEB_CONFIG = {
 
 	url: {
 		domain: "",
-		server: "http://test.service.boms.huanwuh5.com/"
+		server: "http://test.service.boms.huanwuh5.com/boms"
 	},
 
 	http: {
@@ -67,8 +67,9 @@ var WEB_CONFIG = {
 		emailReg: /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
 		codeReg: /\d{4}/,
 		ossUrl: "http://test.boms.huanwuh5.com/boms/upload/",
-// 		uploadAccess: "http://121.41.80.45:8081/file/del",
-		delPicAccess: "http://121.41.80.45:8081/file/del"
+		uploadAccess: "http://121.41.80.45:8001/file/upload",
+		delPicAccess: "http://121.41.80.45:8001/file/del",
+		timeoutClock:10
 	}
 
 };

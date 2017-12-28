@@ -159,7 +159,7 @@
 				<span class="personal-title left">上传附件</span>
                 <span class="form-trap up-btn pointer opp-up-btn relative">点击上传
                	<iframe class="iframe-wrap absolute pointer" name="fileUpload" v-if="hasIframe"
-						:src="g.path.base+'upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
+						:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'uploadApi.html?subType=oppApply'"></iframe>
                 </span>
 				<span class="complate-upload-file"
 					  v-for="(attach,index) in attachList">{{attach.name}}/{{attach.size}}kB;
@@ -206,58 +206,66 @@
 			{
 				if (this.currId)
 				{
-					var formData = JSON.parse(g.data.searchBusinessPool.getDataById(this.currId).formData);
+					var formData = g.data.searchBusinessPool.getDataById(this.currId).formData;
 					var hash = g.data.staticTypePool.getDataById(_type).hash;
 					for (var key in formData)
 					{
 						this.formData[hash[key]] = formData[key];
+						if (key == "客户联系方式")
+						{
+							this.formData[hash[key]] = formData[key].split("*")[0];
+						}
 					}
 					this.formData["callTypeList"] = formData.callTypeList.split("和");
-					this.attachList = JSON.parse(g.data.searchBusinessPool.getDataById(this.currId).attachList);
+					this.attachList = g.data.searchBusinessPool.getDataById(this.currId).attachList;
 					this.$forceUpdate();
 				}
 				else
 				{
-					this.formData = {
-						cusCompName: "",
-						customer: "",
-						cusPhone: "",
-						cusCompAdd: "",
-						cusCompIntro: "",
-						cusType: "",
-						businessDesc: "",
-						accessType: "API",
-						callTypeList: ["双呼"],
-						launchMethod: "",
-						callRange: "",
-						callBack: "是",
-						transfer: "是",
-						testNum: "",
-						businessScale: "",
-						budget: "",
-						remark: ""
-					};
-					this.errData = {
-						cusCompName: "",
-						customer: "",
-						cusPhone: "",
-						cusCompAdd: "",
-						cusCompIntro: "",
-						cusType: "",
-						businessDesc: "",
-						accessType: "",
-						callTypeList: "",
-						launchMethod: "",
-						callRange: "",
-						callBack: "",
-						transfer: "",
-						testNum: "",
-						businessScale: "",
-						budget: "",
-						remark: ""
-					};
+					this.initForm();
 				}
 				window.uploadComplete = this.uploadComplete;
+			},
+			initForm()
+			{
+				this.formData = {
+					cusCompName: "",
+					customer: "",
+					cusPhone: "",
+					cusCompAdd: "",
+					cusCompIntro: "",
+					cusType: "",
+					businessDesc: "",
+					accessType: "API",
+					callTypeList: ["双呼"],
+					launchMethod: "",
+					callRange: "",
+					callBack: "是",
+					transfer: "是",
+					testNum: "",
+					businessScale: "",
+					budget: "",
+					remark: ""
+				};
+				this.errData = {
+					cusCompName: "",
+					customer: "",
+					cusPhone: "",
+					cusCompAdd: "",
+					cusCompIntro: "",
+					cusType: "",
+					businessDesc: "",
+					accessType: "",
+					callTypeList: "",
+					launchMethod: "",
+					callRange: "",
+					callBack: "",
+					transfer: "",
+					testNum: "",
+					businessScale: "",
+					budget: "",
+					remark: ""
+				};
 			},
 			uploadComplete($data)
 			{
