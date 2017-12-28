@@ -171,7 +171,7 @@
 				this.formData = {
 					cusCompName: "全数通业务",
 					customer: "全数通业务",
-					cusPhone: "全数通业务",
+					cusPhone: "15841470",
 					cusCompAdd: "全数通业务",
 					cusCompIntro: "全数通业务",
 					cusType: "全数通业务",

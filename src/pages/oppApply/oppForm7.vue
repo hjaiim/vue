@@ -46,11 +46,12 @@
                         <i class="draw-round pointer" :class="formData.prodType=='客户自带95码号落地'?'action':''"></i>
                         <span>客户自带95码号落地</span>
                  </span>
-                <span class="action-box status-type left" @click="onClick_prodType('客户自带95码号落地')">
-                    <i class="draw-round pointer" :class="formData.prodType=='客户自带95码号落地'?'action':''"></i>
+                <span class="action-box status-type left" @click="onClick_prodType('使用联通已有的95号')">
+                    <i class="draw-round pointer" :class="formData.prodType=='使用联通已有的95号'?'action':''"></i>
                     <span>使用联通已有的95号</span>
                 </span>
-				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
+
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder="" v-if="formData.prodType=='客户自带95码号落地'"
 						   type="text"
 						   v-model="formData.prodType"
 						   :errmsg="errData.prodType"
@@ -195,10 +196,10 @@
 				this.formData = {
 					cusCompName: "95业务",
 					customer: "95业务",
-					cusPhone: "95业务",
+					cusPhone: "15414101",
 					cusCompAdd: "95业务",
 					cusCompIntro: "95业务",
-					prodType: "95业务",
+					prodType: "客户自带95码号落地",
 					telNum: "95业务",
 					businessDesc: "95业务",
 					accessType: "API",

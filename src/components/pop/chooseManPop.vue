@@ -27,7 +27,8 @@
 						<div class="inner-content" v-for="item in manList">
 							<p class="deal-staff border-bottom" @click="onClick_arrowBtn(item.id)">{{item.name}}
 								<span class="right arrow-wrap center-flex pointer">
-									<i :class="checkedList.indexOf(item.id) >= 0?'arrow-bottom':'arrow-top'"></i></span>
+									<i class="arrow-top ani-time"
+									   :class="checkedList.indexOf(item.id) >= 0?'arrow-rotate':''"></i></span>
 							</p>
 							<ul class="list-menu border-bottom clear ani-time" v-for="childItem in item.children"
 								v-show="checkedList.indexOf(item.id) >= 0">

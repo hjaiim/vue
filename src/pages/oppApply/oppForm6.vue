@@ -198,21 +198,21 @@
 			initForm()
 			{
 				this.formData = {
-					cusCompName: "CTD小号业务",
-					customer: "CTD小号业务",
-					cusPhone: "CTD小号业务",
-					cusCompAdd: "CTD小号业务",
-					cusCompIntro: "CTD小号业务",
-					cusType: "CTD小号业务",
-					businessDesc: "CTD小号业务",
+					cusCompName: "M-CTD小号业务",
+					customer: "M-CTD小号业务",
+					cusPhone: "54141412",
+					cusCompAdd: "M-CTD小号业务",
+					cusCompIntro: "M-CTD小号业务",
+					cusType: "M-CTD小号业务",
+					businessDesc: "M-CTD小号业务",
 					accessType: "API",
-					callRange: "CTD小号业务",
+					callRange: "M-CTD小号业务",
 					callBack: "是",
 					transfer: "是",
-					testNum: "CTD小号业务",
-					businessScale: "CTD小号业务",
-					budget: "CTD小号业务",
-					remark: "CTD小号业务"
+					testNum: "M-CTD小号业务",
+					businessScale: "M-CTD小号业务",
+					budget: "M-CTD小号业务",
+					remark: "M-CTD小号业务"
 				};
 				this.errData = {
 					cusCompName: "",

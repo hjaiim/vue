@@ -79,7 +79,8 @@
 							<img :src="g.param.ossUrl+accountData.idCardFront" alt="">
 						</div>
 						<div class="card-wrap left pointer">
-							<img :src="g.param.ossUrl+accountData.idCardBack" alt="" @click="onClick_imgBtn('idCardBack')">
+							<img :src="g.param.ossUrl+accountData.idCardBack" alt=""
+								 @click="onClick_imgBtn('idCardBack')">
 						</div>
 					</div>
 				</div>
@@ -89,7 +90,7 @@
 					<span class="user-tit left diff-distancre">工作照</span>
 					<div class="user-txt left diff-frame">
 						<div class="card-wrap left work-wrap">
-							<img :src="g.param.ossUrl+accountData.workCard" alt="">
+							<img :src="g.param.ossUrl+accountData.workCard" alt="" @click="onClick_imgBtn('workCard')">
 						</div>
 					</div>
 				</div>
@@ -109,9 +110,9 @@
 			</div>
 		</div>
 		<transition name="fade">
-			<div class="slide-img fixed center-flex" v-show="isShowSlidePop">
+			<div class="slide-img fixed center-flex" @click="onClick_closeBtn" v-show="isShowSlidePop">
 				<div class="desc-img relative">
-					<img :src=showUrl alt="">
+					<img class="detail-img" :src=showUrl alt="">
 					<div @click="onClick_closeBtn"
 						 class="return-btn pointer ani-time">
 						<img :src="g.path.images+'/close-popup.png'" alt="">
@@ -213,11 +214,10 @@
 			{
 				this.isShowSlidePop = false;
 			},
-			onClick_imgBtn($url)
+			onClick_imgBtn($type)
 			{
-				this.showUrl = $url;
+				this.showUrl = g.param.ossUrl + this.accountData[$type];
 				this.isShowSlidePop = true;
-
 			}
 		}
 	}
@@ -273,7 +273,7 @@
 					.verify-feedback {
 						width: 100%;
 						height: 54px;
-						padding: 5px 0;
+						padding: 6px;
 						border: 1px solid #dedede;
 						text-indent: 1em;
 						outline: none;
@@ -322,16 +322,21 @@
 		perspective: 1300px;
 		cursor: default;
 		.desc-img {
-			width: 480px;
-			height: 360px;
+			min-width: 480px;
 			background: #ffffff;
 			-webkit-border-radius: 5px;
 			-moz-border-radius: 5px;
 			border-radius: 5px;
-			img {
-				width: 100%;
-				display: block;
-				height: 100%;
+			/*img {*/
+			/*width: 100%;*/
+			/*display: block;*/
+			/*height: 100%;*/
+			/*}*/
+			.detail-img {
+				-webkit-user-select: none;
+				background-position: 0px 0px, 10px 10px;
+				background-size: 20px 20px;
+				background-image: linear-gradient(45deg, #eeeeee 25%, transparent 25%, transparent 75%, #eeeeee 75%, #eeeeee 100%), linear-gradient(45deg, #eeeeee 25%, white 25%, white 75%, #eeeeee 75%, #eeeeee 100%);
 			}
 			.return-btn {
 				position: absolute;

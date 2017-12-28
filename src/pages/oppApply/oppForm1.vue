@@ -229,23 +229,23 @@
 			initForm()
 			{
 				this.formData = {
-					cusCompName: "",
-					customer: "",
-					cusPhone: "",
-					cusCompAdd: "",
-					cusCompIntro: "",
-					cusType: "",
-					businessDesc: "",
+					cusCompName: "CTD业务",
+					customer: "CTD业务",
+					cusPhone: "15812471",
+					cusCompAdd: "CTD业务",
+					cusCompIntro: "CTD业务",
+					cusType: "CTD业务",
+					businessDesc: "CTD业务",
 					accessType: "API",
 					callTypeList: ["双呼"],
-					launchMethod: "",
-					callRange: "",
+					launchMethod: "CTD业务",
+					callRange: "CTD业务",
 					callBack: "是",
 					transfer: "是",
-					testNum: "",
-					businessScale: "",
-					budget: "",
-					remark: ""
+					testNum: "CTD业务",
+					businessScale: "CTD业务",
+					budget: "CTD业务",
+					remark: "CTD业务"
 				};
 				this.errData = {
 					cusCompName: "",
