@@ -295,7 +295,11 @@
 			},
 			onClick_cancelBtn($id)
 			{
-				this.$emit("close", false);
+//				this.$emit("close", false);
+				var index = this.idList.indexOf($id);
+				this.idList.splice(index, 1);
+				var data = g.data.staffPool.getChildById($id);
+				data.update({checked: false});
 			},
 		}
 	}

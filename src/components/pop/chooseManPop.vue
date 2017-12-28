@@ -33,7 +33,7 @@
 							<ul class="list-menu border-bottom clear ani-time" v-for="childItem in item.children"
 								v-show="checkedList.indexOf(item.id) >= 0">
 								<li class="left">
-									<img :src="g.path.images+childItem.avatar" alt=""></li>
+									<img :src="g.param.ossUrl+childItem.avatar" alt=""></li>
 								<li class="left">{{childItem.name}}</li>
 								<li class="left">{{childItem.companyName}}</li>
 								<li class="left">{{childItem.departmentName}}</li>
