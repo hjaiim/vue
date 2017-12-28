@@ -75,11 +75,13 @@
 				<div class="user-item left clear">
 					<span class="user-tit left diff-distancre">身份证照</span>
 					<div class="user-txt left diff-frame">
-						<div class="card-wrap left pointer" @click="onClick_imgBtn()">
+						<div class="card-wrap left pointer"
+							 @click="onClick_imgBtn(g.param.ossUrl+accountData.idCardFront)">
 							<img :src="g.param.ossUrl+accountData.idCardFront" alt="">
 						</div>
 						<div class="card-wrap left pointer">
-							<img :src="g.param.ossUrl+accountData.idCardBack" alt="" @click="onClick_imgBtn()">
+							<img :src="g.param.ossUrl+accountData.idCardBack" alt=""
+								 @click="onClick_imgBtn(g.param.ossUrl+accountData.idCardBack)">
 						</div>
 					</div>
 				</div>
@@ -273,7 +275,7 @@
 					.verify-feedback {
 						width: 100%;
 						height: 54px;
-						padding: 5px 0;
+						padding: 6px;
 						border: 1px solid #dedede;
 						text-indent: 1em;
 						outline: none;

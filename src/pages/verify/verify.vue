@@ -56,11 +56,11 @@
 				<div class="personal-form diff-personal relative">
 					<span class="personal-title left">职务名称</span>
 					<p class="err-msg absolute"> {{errData.currDuty}}</p>
-					<div class="personal-content left relative form-list"
+					<div class="personal-content left relative form-list pointer"
 						 :class="canEdit?'':'disabled'"
 						 @click.stop="onClick_dropListBtn('Duty')">
 						{{currDutyData.name}}
-						<span :class="['icon-trangle', isShowDutyList?'rotate':'']"></span>
+						<i class="pointer" :class="['icon-trangle', isShowDutyList?'rotate':'']"></i>
 						<drop-list :dropList="dutyList" :isShowDropList="isShowDutyList"
 								   @change="onClick_duty" ref="duty"></drop-list>
 					</div>
