@@ -11,10 +11,8 @@
 	//	var evt = new Event("UPLOAD_FILE");
 	//	evt.data = "{$fileName}";
 	var urlObj = queryUrl(window.location.href);
-	var subType = urlObj.query.subType.split("?")[0];
-	var fileName  = urlObj.query.subType.split("?")[1].split("=")[1];
+	var fileName  = urlObj.query.fileName;
 	var data = {
-		subType:subType,
 		fileName:fileName,
 		size:(urlObj.query.size/1000).toFixed(2)
 	};

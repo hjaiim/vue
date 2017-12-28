@@ -9,10 +9,11 @@
 					<div class="relative upload-head right pointer">
 						<img class="default-img"
 							 :src="g.param.ossUrl+avatar" alt="">
+						<p class="err-msg absolute">{{errData.avatar}}</p>
 						<div class="absolute upload-btn">
 							<p class="load-text">修改头像</p>
 							<iframe class="iframe-btn" name="fileUpload"
-									:src="g.path.base+'/upload.html?type=pic&redirectUrl='+g.path.base+'/uploadApi.html?subType=avatar'"
+									:src="g.path.base+'/upload.html?type=pic&subType=avatar&redirectUrl='+g.path.base+'/uploadApi.html'"
 									id="avatar" v-if="avatar=='default.png'"></iframe>
 							<img :src="g.path.images+'/del-head.png'" alt=""
 								 class="del-head absolute pointer" @click="onClick_delBtn"
@@ -41,16 +42,14 @@
 					<input-bar class="personal-content pensonal-input" placeholder="" type="text"
 							   v-model="phone" :readonly="readonly" :errmsg="errData.phone"
 							   @focus="onFocus_inputBar('phone')"></input-bar>
-					<span class="bind-phone pointer ani-time" @click="onClick_unbindBtn">解绑</span>
+					<span class="bind-phone pointer ani-time" @click="onClick_unbindBtn" v-if="readonly">解绑</span>
 				</p>
 				<p class="personal-form" v-if="!readonly">
 					<span class="personal-title">验证码</span>
 					<input-bar class="personal-content pensonal-input code" placeholder="" type="text"
 							   v-model="code" :errmsg="errData.code" @focus="onFocus_inputBar('code')"></input-bar>
-					<span class="btn-send pointer" @click="onClick_sendCodeBtn" :class="isClicked?'disabled':''">{{limit
-						==
-						g.param.timeoutClock
-						?'获取验证码':'倒计时'+limit+'秒'}}</span>
+					<span class="btn-send pointer" @click="onClick_sendCodeBtn" :class="isClicked?'disabled':''">
+						{{limit==g.param.timeoutClock?'获取验证码':'倒计时'+limit+'秒'}}</span>
 					<span class="bind-phone pointer ani-time" @click="onClick_savePhoneBtn">保存</span>
 				</p>
 				<p class="personal-form"><span class="personal-title">固定电话</span>
@@ -97,7 +96,7 @@
 	import InputBar from "../../components/inputBar.vue"
 	import UploadBtn from "../../components/upload.vue";
 	import sha256 from "sha256";
-	var _params = null, _isValid = true, _timer = 0;
+	var _params = null, _isValid = true, _timer = 0, _attach = {};
 	export default{
 		created(){
 			this.routerUpdated();
@@ -146,10 +145,27 @@
 				this.readonly = true;
 				this.type = g.vue.getQuery('type', "personal");
 				window.uploadComplete = this.uploadComplete;
+				window.sendMsg = this.sendMsg;
+			},
+			sendMsg($type, $info)
+			{
+				if ($type == "error")
+				{
+					this.errData[$info.type] = $info.msg;
+					this.$forceUpdate();
+				}
+				else
+				{
+					this.errData[$info.type] = "";
+					this.$forceUpdate();
+					_attach.type = $info.type;
+				}
 			},
 			uploadComplete($data)
 			{
-				this.avatar = $data.fileName;
+				this[_attach.type] = $data.fileName;
+				this.errData[_attach.type] = "";
+				this.$forceUpdate();
 			},
 			onClick_tabItem($id)
 			{
@@ -227,7 +243,7 @@
 					g.data.userInfo.update(_params);
 					g.ui.toast("手机号修改成功")
 					this.readonly = true;
-				},(err) =>
+				}, (err) =>
 				{
 					g.func.dealErr(err);
 				});
@@ -252,7 +268,7 @@
 					g.ui.hideLoading();
 					g.data.userInfo.update(_params);
 					g.ui.toast("用户信息修改成功！");
-				},(err) =>
+				}, (err) =>
 				{
 					g.func.dealErr(err);
 				})
@@ -385,5 +401,9 @@
 		left: 0;
 		z-index: 2;
 		opacity: 0;
+	}
+
+	.err-msg {
+		color: #ed5564;
 	}
 </style>

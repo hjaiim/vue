@@ -51,12 +51,13 @@
                     <span>使用联通已有的95号</span>
                 </span>
 
-				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder="" v-if="formData.prodType=='客户自带95码号落地'"
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
+						   v-if="formData.prodType=='客户自带95码号落地'"
 						   type="text"
 						   v-model="formData.prodType"
 						   :errmsg="errData.prodType"
 						   @focus="onFocus_inputBar('telNum')"></input-bar>
-				<span class="explain lang-explain">需要落地的具体号码</span>
+				<span class="explain lang-explain" v-if="formData.prodType=='客户自带95码号落地'">需要落地的具体号码</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">业务用途及场景</span>
@@ -90,7 +91,8 @@
 			<div class="personal-form">
 				<span class="personal-title left">呼入呼出</span>
                  <span class="action-box status-type left" @click="onClick_checkCallInOut('呼入')">
-                        <i class="draw-tick pointer relative" :class="formData.callInList.indexOf('呼入')>=0?'action':''"></i>
+                        <i class="draw-tick pointer relative"
+						   :class="formData.callInList.indexOf('呼入')>=0?'action':''"></i>
                         <span>呼入</span>
                  </span>
                 <span class="action-box status-type left" @click="onClick_checkCallInOut('呼出')">
@@ -129,12 +131,13 @@
 				<span class="personal-title left">上传附件</span>
                 <span class="form-trap up-btn pointer opp-up-btn">点击上传
                	<iframe class="iframe-wrap" name="fileUpload" v-if="hasIframe"
-						:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'/uploadApi.html?subType=oppApply'"></iframe>
+						:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'/uploadApi.html'"></iframe>
                 </span>
 				<span class="complate-upload-file"
 					  v-for="(attach,index) in attachList">{{attach.name}}/{{attach.size}}kB;
 					<i class="del-file pointer"
 					   @click="onClick_delBtn(attach.name,index)">删除</i></span>
+				<span class="err-msg">{{errData.attach}}</span>
 			</div>
 		</div>
 		<div class="btn btn-save pointer action-btn ani-time" @click="onClick_submitBtn">提交</div>
@@ -143,7 +146,7 @@
 <script type="text/ecmascript-6">
 	import g from "../../global";
 	import InputBar from "../../components/inputBar.vue";
-	var _type = 7, _isValid = true, _formData = {};
+	var _type = 7, _isValid = true, _formData = {},_attach = {};
 	export default{
 		created(){
 			this.init();
@@ -179,6 +182,10 @@
 						{
 							this.formData[hash[key]] = formData[key].split("*")[0];
 						}
+						if (key == "呼入呼出")
+						{
+							this.formData[hash[key]] = formData[key].split("和");
+						}
 					}
 					this.attachList = g.data.searchBusinessPool.getDataById(this.currId).attachList;
 					this.$forceUpdate();
@@ -188,6 +195,7 @@
 					this.initForm();
 				}
 				window.uploadComplete = this.uploadComplete;
+				window.sendMsg = this.sendMsg;
 			},
 			initForm()
 			{
@@ -222,15 +230,33 @@
 					businessScale: "",
 					budget: "",
 					remark: "",
+					attach:""
+
 				};
+			},
+			sendMsg($type, $info)
+			{
+				if ($type == "error")
+				{
+					this.errData.attach = $info.msg;
+					this.$forceUpdate();
+				}
+				else
+				{
+					this.errData.attach = "";
+					this.$forceUpdate();
+					_attach.name = $info.name;
+				}
 			},
 			uploadComplete($data)
 			{
 				this.hasIframe = false;
 				var attach = {
-					size: $data.size,
-					name: $data.fileName
+					size:$data.size,
+					fileName:$data.fileName,
+					name:_attach.name
 				};
+				_attach.name = "";
 				this.attachList.push(attach);
 				setTimeout(()=>
 				{
@@ -324,6 +350,11 @@
 						{
 							_formData[key] = this.formData[item[key]] + "*tel";
 						}
+						else if (key == "呼入呼出")
+						{
+							_formData[key] = this.formData[item[key]].join("和");
+						}
+
 						else
 						{
 							_formData[key] = this.formData[item[key]];

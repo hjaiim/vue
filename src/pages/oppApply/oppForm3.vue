@@ -105,12 +105,14 @@
 				<span class="personal-title left">上传附件</span>
                 <span class="form-trap up-btn pointer opp-up-btn">点击上传
                	<iframe class="iframe-wrap" name="fileUpload" v-if="hasIframe"
-						:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'/uploadApi.html?subType=oppApply'"></iframe>
+						:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'/uploadApi.html'"></iframe>
                 </span>
+
 				<span class="complate-upload-file"
 					  v-for="(attach,index) in attachList">{{attach.name}}/{{attach.size}}kB;
 					<i class="del-file pointer"
 					   @click="onClick_delBtn(attach.name,index)">删除</i></span>
+				<span class="err-msg">{{errData.attach}}</span>
 			</div>
 		</div>
 		<div class="btn btn-save pointer action-btn ani-time" @click="onClick_submitBtn">提交</div>
@@ -120,7 +122,7 @@
 <script type="text/ecmascript-6">
 	import g from "../../global";
 	import InputBar from "../../components/inputBar.vue";
-	var _type = 3, _isValid = true, _formData = {};
+	var _type = 3, _isValid = true, _formData = {}, _attach = {};
 	export default{
 		created(){
 			this.init();
@@ -165,6 +167,7 @@
 					this.initForm();
 				}
 				window.uploadComplete = this.uploadComplete;
+				window.sendMsg = this.sendMsg;
 			},
 			initForm()
 			{
@@ -195,16 +198,33 @@
 					dataType: "",
 					businessScale: "",
 					budget: "",
-					payway: ""
+					payway: "",
+					attach:""
 				};
+			},
+			sendMsg($type, $info)
+			{
+				if ($type == "error")
+				{
+					this.errData.attach = $info.msg;
+					this.$forceUpdate();
+				}
+				else
+				{
+					this.errData.attach = "";
+					this.$forceUpdate();
+					_attach.name = $info.name;
+				}
 			},
 			uploadComplete($data)
 			{
 				this.hasIframe = false;
 				var attach = {
-					size: $data.size,
-					name: $data.fileName
+					size:$data.size,
+					fileName:$data.fileName,
+					name:_attach.name
 				};
+				_attach.name = "";
 				this.attachList.push(attach);
 				setTimeout(()=>
 				{

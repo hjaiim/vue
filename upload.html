@@ -45,6 +45,7 @@
 		<label id="fileName"></label>
 		<input type="text" style="display: none" name="redirectUrl" id="redirectUrl">
 		<input type="submit" name="submit" id="submit" style="visibility: hidden;">
+		<input type="reset" name="submit" id="reset" style="visibility: hidden;">
 		<!--<input type="button" name="cancel" id="cancelBtn" onclick="onClick_cancelBtn()" value="取消"-->
 		<!--style="display: none;">-->
 	</div>
@@ -53,6 +54,11 @@
 <script>
 	var accessUrl = "http://121.41.80.45:8001/file/upload";
 	//	var accessUrl = "http://192.168.12.219:8001/file/upload";
+	//  .doc .docx  .xls .xlsx  .ppt .pptx  .txt   .jpg  .png  .rar
+	//  png ,jpg,jpeg
+
+	var picExtList = ["jpeg", "png", "jpg"];
+	var fileExtList = ["doc", "docx", "xls", "xlsx", "ppt", "pptx", "txt", "pdf", "jpg", "png", "jpeg", "rar", "zip"];
 	var urlData = queryUrl(window.location.href);
 	init();
 	function init()
@@ -63,8 +69,7 @@
 		}
 		else
 		{
-			$("#fileBtn")[0].accept =
-					"application/msword,application/pdf,image/jpeg,image/x-png,	application/vnd.ms-excel,application/vnd.ms-powerpoint,text/plain,aplication/zip,aplication/rar"
+			$("#fileBtn")[0].accept = "application/msword,application/pdf,image/jpeg,image/x-png,application/vnd.ms-excel,application/vnd.ms-powerpoint,text/plain,aplication/zip,aplication/rar"
 		}
 		$("#cancelBtn").hide();
 	}
@@ -76,16 +81,40 @@
 			var file = $("#fileBtn")[0].files[0];
 			var fileName = file.name;
 			var fileSize = file.size;
+			var index = file.name.lastIndexOf('.');
+			var fileType = fileName.substr(index + 1);
 			fileSize = Math.floor(fileSize / 1048576 * 100) / 100 + "MB";
-			if (fileSize >= 5)
-			{
-				var event = new Event("UPLOAD_ERROR");
-				window.dispatchEvent(event);
-			}
 			$("#fileName").html(fileName + "（" + fileSize + "）");
 			$("#fileBtn").hide();
 			$("#packageBtn").hide();
 			$("#cancelBtn").show();
+			console.dir(fileType);
+			if (fileSize > 10)
+			{
+				window.parent.sendMsg("error", {msg: "文件限制大小为10M以内",type:urlData.query.subType});
+				window.history.go();
+				return;
+			}
+			if (urlData.query.type == 'file')
+			{
+				if (fileExtList.indexOf(fileType) < 0)
+				{
+					window.parent.sendMsg("error", {msg: "文件类型不正确，请重新上传",type:urlData.query.subType})
+					window.history.go();
+					return;
+				}
+			}
+			else
+			{
+				if (picExtList.indexOf(fileType) < 0)
+				{
+					window.parent.sendMsg("error", {msg: "文件类型不正确，请重新上传",type:urlData.query.subType})
+					window.history.go()
+					return;
+				}
+			}
+
+			window.parent.sendMsg("info", {name: fileName, type: urlData.query.subType});
 			$("#form1")[0].action = accessUrl + "?type=" + urlData.query.type + "&fileName=" + fileName +
 					"&redirectUrl=" + urlData.query.redirectUrl;
 			$("#submit").click();

@@ -3,14 +3,14 @@
 		<div class="percenter-wrap">
 			<div class="percenter-inner" :class="canEdit?'':'disabled'">
 				<div class="icon-collect clear">
-					{{errData.avatar}}
+
 					<div class="relative upload-head right pointer">
-						<img class="default-img" :src="g.param.ossUrl+avatar"
-							 alt="">
+						<img class="default-img" :src="g.param.ossUrl+avatar" alt="">
+						<p class="err-msg absolute">{{errData.avatar}}</p>
 						<div class="absolute upload-btn">
 							<p class="load-text">修改头像</p>
 							<iframe class="iframe-btn" name="fileUpload"
-									:src="g.path.base+'/upload.html?type=pic&redirectUrl='+g.path.base+'/uploadApi.html?subType=avatar'"
+									:src="g.path.base+'/upload.html?type=pic&subType=avatar&redirectUrl='+g.path.base+'/uploadApi.html'"
 									id="avatar" v-if="avatar == 'default.png'"
 							></iframe>
 							<img v-if="avatar != 'default.png'" :src="g.path.images+'/del-head.png'" alt=""
@@ -111,7 +111,7 @@
 							<img class="img-url " :src="idCardFront?g.param.ossUrl+idCardFront:''" alt="">
 						</div>
 						<iframe class="pointer" name="fileUpload"
-								:src="g.path.base+'/upload.html?type=pic&redirectUrl='+g.path.base+'/uploadApi.html?subType=idCardFront'"
+								:src="g.path.base+'/upload.html?type=pic&subType=idCardFront&redirectUrl='+g.path.base+'/uploadApi.html'"
 								v-if="!idCardFront" id="idCardFront"></iframe>
 						<span class="del-img pointer" :class="idCardFront?'hover-img':''"
 							  @click="onClick_deleteImg('idCardFront')"></span>
@@ -125,7 +125,7 @@
 							<img class="img-url " :src="idCardBack?g.param.ossUrl+idCardBack:''" alt="">
 						</div>
 						<iframe class="pointer" name="fileUpload"
-								:src="g.path.base+'/upload.html?type=pic&redirectUrl='+g.path.base+'/uploadApi.html?subType=idCardBack'"
+								:src="g.path.base+'/upload.html?type=pic&subType=idCardBack&redirectUrl='+g.path.base+'/uploadApi.html'"
 								v-if="!idCardBack" id="idCardBack"></iframe>
 						<span class="del-img pointer" :class="idCardBack?'hover-img':''"
 							  @click="onClick_deleteImg('idCardBack')"></span>
@@ -149,7 +149,7 @@
 							<img class="img-url " :src="workCard?g.param.ossUrl+workCard:''" alt="">
 						</div>
 						<iframe class="pointer" name="fileUpload"
-								:src="g.path.base+'/upload.html?type=pic&redirectUrl='+g.path.base+'/uploadApi.html?subType=workCard'"
+								:src="g.path.base+'/upload.html?type=pic&subType=workCard&redirectUrl='+g.path.base+'/uploadApi.html'"
 								id="workCard" v-if="!workCard"></iframe>
 						<span class="del-img pointer" :class="workCard?'hover-img':''"
 							  @click="onClick_deleteImg('workCard')"></span>
@@ -170,7 +170,7 @@
 	import InputBar from "../../components/inputBar.vue";
 	import DropList from "../../components/dropList.vue";
 	import RightPop from "../../components/pop/rightPop.vue"
-	var _isValid = true, _params = null, _type = "", _timer = 0;
+	var _isValid = true, _params = null, _attach = {}, _timer = 0;
 	export default{
 		created(){
 			this.init();
@@ -263,16 +263,32 @@
 				this.code = "";
 				this.initEvents();
 				window.uploadComplete = this.uploadComplete;
+				window.sendMsg = this.sendMsg;
+			},
+			sendMsg($type, $info)
+			{
+				debugger;
+				if ($type == "error")
+				{
+					this.errData[$info.type] = $info.msg;
+					this.$forceUpdate();
+				}
+				else
+				{
+					this.errData[$info.type] = "";
+					this.$forceUpdate();
+					_attach.type = $info.type;
+				}
+			},
+			uploadComplete($data)
+			{
+				this[_attach.type] = $data.fileName;
+				this.errData[_attach.type] = "";
+				this.$forceUpdate();
 			},
 			initEvents()
 			{
 				document.addEventListener('click', this.onClick_doc);
-			},
-			uploadComplete($data)
-			{
-				this[$data.subType] = $data.fileName;
-				this.errData[$data.subType] = "";
-				this.$forceUpdate();
 			},
 			onClick_doc(e)
 			{
@@ -522,5 +538,9 @@
 		height: 100%;
 		opacity: 0;
 		z-index: 1;
+	}
+
+	.err-msg {
+		color: #ed5564;
 	}
 </style>

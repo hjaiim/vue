@@ -72,13 +72,14 @@
 								<span class="form-title">上传附件</span>
 								 <span class="form-trap up-btn pointer opp-up-btn">点击上传
 								<iframe name="fileUpload" v-if="hasIframe" class="iframe-wrap"
-										:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'/uploadApi.html?subType=oppApply'"></iframe>
+										:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'/uploadApi.html'"></iframe>
 							</span>
 							</p>
 							<p class="from-group clear relative file-wrap">
 							<span class="file-down"
 								  v-for="(attach,index) in attachList"><i class="file-name">{{attach.name}}</i><i>/{{attach.size}}KB</i><i
 									class="del-txt pointer" @click="onClick_delBtn(attach.name,index)">删除</i></span>
+								<span class="err-msg">{{errMsg}}</span>
 							</p>
 							<p class="from-group clear examine-people" v-if="businessData.hasNext">
 								<span class="exam-btn pointer" @click="onClick_selectNext">选择后续人</span>
@@ -113,7 +114,7 @@
 	import BusinessType6 from "../businessDetail/businessType6.vue";
 	import BusinessType7 from "../businessDetail/businessType7.vue";
 	import ChooseManPop from "./chooseManPop.vue";
-	var _params = null, _childName;
+	var _params = null, _childName = [],_attach = {};;
 	export default{
 		created()
 		{
@@ -131,6 +132,7 @@
 				hasIframe: true,
 				attachList: [],
 				isShowOrderManPop: false,
+				errMsg:"",
 				businessData: {
 					taskProperties: {}
 				}
@@ -188,14 +190,29 @@
 					this.oppType = this.businessData.type;
 				}
 				window.uploadComplete = this.uploadComplete;
+				window.sendMsg = this.sendMsg;
+			},
+			sendMsg($type, $info)
+			{
+				if ($type == "error")
+				{
+					this.errMsg = $info.msg;
+				}
+				else
+				{
+					this.errMsg = "";
+					_attach.name = $info.name;
+				}
 			},
 			uploadComplete($data)
 			{
 				this.hasIframe = false;
 				var attach = {
-					size: $data.size,
-					name: $data.fileName
+					size:$data.size,
+					fileName:$data.fileName,
+					name:_attach.name
 				};
+				_attach.name = "";
 				this.attachList.push(attach);
 				setTimeout(()=>
 				{
