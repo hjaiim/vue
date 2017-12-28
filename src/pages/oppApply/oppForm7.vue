@@ -86,20 +86,18 @@
 						   @focus="onFocus_inputBar('callRange')"></input-bar>
 				<span class="explain lang-explain">请填写被叫权限（例：全国三网手机和固话，开通本地、长途，不开通国际权限）</span>
 			</div>
-
-
 			<div class="personal-form">
 				<span class="personal-title left">呼入呼出</span>
                  <span class="action-box status-type left" @click="onClick_checkCallInOut('呼入')">
-                        <i class="draw-round pointer" :class="formData.callInList.indexOf('呼入')>=0?'action':''"></i>
-                        <span>是</span>
+                        <i class="draw-tick pointer relative" :class="formData.callInList.indexOf('呼入')>=0?'action':''"></i>
+                        <span>呼入</span>
                  </span>
                 <span class="action-box status-type left" @click="onClick_checkCallInOut('呼出')">
-                    <i class="draw-round pointer"
+                    <i class="draw-tick pointer relative"
 					   :class="formData.callInList.indexOf('呼出')>=0?'action':''?'action':''"></i>
-                    <span>否</span>
+                    <span>呼出</span>
                 </span>
-				<span class="explain">呼入呼出</span>
+				<span class="explain"></span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">预计业务规模</span>
