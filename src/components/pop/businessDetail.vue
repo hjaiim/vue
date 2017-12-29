@@ -222,11 +222,19 @@
 					name: _attach.name
 				};
 				_attach.name = "";
-				this.attachList.push(attach);
-				setTimeout(()=>
+				if (this.attachList.length >= 10)
 				{
-					this.hasIframe = true;
-				}, 200)
+					this.errMsg = "您已到达附件上传上限，无法继续上传";
+					return;
+				}
+				else
+				{
+					this.attachList.push(attach);
+					setTimeout(()=>
+					{
+						this.hasIframe = true;
+					}, 200)
+				}
 			},
 			onClose_pop()
 			{
@@ -306,8 +314,9 @@
 				{
 				}, (err) =>
 				{
-					g.ui.hideLoading();
 					this.attachList.splice($index, 1);
+					this.errMsg = "";
+					this.hasIframe = true;
 				})
 			},
 			onClick_cancelBtn($id)

@@ -95,6 +95,7 @@
 				<span class="explain lang-explain">是否需要配置流量营销活动，如大转盘等</span>
 			</div>
 		</div>
+
 		<div>
 			<div class="personal-form">
 				<span class="personal-title left">上传附件</span>
@@ -102,11 +103,12 @@
                	<iframe class="iframe-wrap" name="fileUpload" v-if="hasIframe"
 						:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"></iframe>
                 </span>
+				<span class="err-msg">{{errData.attach}}</span>
 				<span class="complate-upload-file"
 					  v-for="(attach,index) in attachList">{{attach.name}}/{{attach.size}}kB;
 					<i class="del-file pointer"
 					   @click="onClick_delBtn(attach.name,index)">删除</i></span>
-				<span class="err-msg">{{errData.attach}}</span>
+
 			</div>
 		</div>
 		<div class="btn btn-save pointer action-btn ani-time" @click="onClick_submitBtn">提交</div>
@@ -224,11 +226,20 @@
 					name: _attach.name
 				};
 				_attach.name = "";
-				this.attachList.push(attach);
-				setTimeout(()=>
+				if (this.attachList.length >= 10)
 				{
-					this.hasIframe = true;
-				}, 200)
+					this.errData.attach = "您已到达附件上传上限，无法继续上传";
+					return;
+				}
+				else
+				{
+					this.attachList.push(attach);
+					setTimeout(()=>
+					{
+						this.hasIframe = true;
+					}, 200)
+				}
+
 			},
 			onFocus_inputBar($type)
 			{
@@ -258,6 +269,8 @@
 				}, (err) =>
 				{
 					this.attachList.splice($index, 1);
+					this.errData.attach = "";
+					this.hasIframe = true;
 				})
 			},
 			checkValid()
