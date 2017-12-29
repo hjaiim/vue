@@ -9,7 +9,7 @@
 	border-bottom: 1px solid #eaeaea;
   }
   .mod-company-content {
-	padding: 20px 10px 40px;
+	padding: 20px 10px 39px;
 	line-height: 36px;
 	font-size: 14px;
   }
@@ -31,7 +31,7 @@
 	right: 18px;
   }
   .from-group {
-	margin-bottom: 18px;
+	margin-bottom: 21px;
 	//&:last-child {
 	//  margin-bottom: 0;
 	//}
@@ -77,6 +77,10 @@
 	.form-trap {
 	  font-weight: bold;
 	  color: #000000;
+	  display: inline-block;
+	  vertical-align: top;
+	  max-width: 460px;
+	  word-break: break-all;
 	}
 	.download-wrap{
 	  display: inline-block;
@@ -174,7 +178,7 @@
 }
 
 .detail-custer-msg {
-  width: 49%;
+  width: 90%;
 }
 
 .opp-pop-detail {
