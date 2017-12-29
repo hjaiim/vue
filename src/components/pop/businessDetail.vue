@@ -447,7 +447,7 @@
 				left: 50%;
 				top: 50%;
 				margin-left: -7px;
-				margin-top: -1px;
+				margin-top: 0px;
 				position: absolute;
 				-moz-transform: rotate(-45deg);
 				-ms-transform: rotate(-45deg);
