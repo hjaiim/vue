@@ -1,7 +1,7 @@
 <template>
 	<transition name="sideInTop">
 		<div class="map-view md-overlay ani-time" v-if="isShowPopView">
-			<div class="md-modal md-effect-16 pop-content">
+			<div class="md-modal md-effect-16 pop-content" ref="popCon">
 				<div class="md-content">
 					<div @click="onClick_closeBtn"
 						 class="return-btn pointer ani-time">
@@ -20,7 +20,9 @@
 	export default{
 		created()
 		{
+
 			this.init();
+
 		},
 		data(){
 			return {
@@ -36,11 +38,28 @@
 				type: String
 			}
 		},
+		watch: {
+			isShowPopView($val)
+			{
+				this.init();
+			}
+		},
 		components: {},
 		methods: {
 			init()
 			{
 				this.initEvent();
+				this.$nextTick(()=>
+				{
+					this.initHeight();
+				})
+			},
+			initHeight(){
+				var popCon = this.$refs['popCon'];
+				if (popCon)
+				{
+					popCon.style.height = (popCon.clientHeight + popCon.clientHeight % 2) + 'px';
+				}
 			},
 			initEvent(e)
 			{
