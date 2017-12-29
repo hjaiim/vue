@@ -64,9 +64,11 @@
 						<td>{{item.roleName}}</td>
 						<td>
 							<p class="diff-menu ">
-								<span class="pointer draw-line ani-time" @click="onClick_positionBtn(item)">岗位设置
+								<span class="pointer draw-line ani-time" :class="item.status == 1?'':'disabled'"
+									  @click="onClick_positionBtn(item)">岗位设置
 								</span>
-								<span class=" pointer draw-line ani-time" @click="onClick_roleBtn(item)">角色设置</span>
+								<span class=" pointer draw-line ani-time" :class="item.status == 1?'':'disabled'"
+									  @click="onClick_roleBtn(item)">角色设置</span>
 								<span class=" pointer draw-line ani-time"
 									  @click="onClick_stopBtn(item)">{{item.status == 1?'停用':'启用'}}</span>
 							</p>
@@ -255,7 +257,7 @@
 					g.data.searchAccountPool.getDataById($item.id).update({
 						status: $item.status == 1 ? 0 : 1
 					})
-				},(err) =>
+				}, (err) =>
 				{
 					g.func.dealErr(err);
 				});

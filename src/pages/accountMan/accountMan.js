@@ -16,14 +16,7 @@ export default function (to, next)
 export function searchUserList($params)
 {
 	var list = [], _hash = {};
-	if (_params)
-	{
-		_params.update($params)
-	}
-	else
-	{
-		_params = createData($params);
-	}
+	_params = createData($params);
 	_hash["user/queryUserListByPage"] = _params;
 	_hash["permission/queryAllRole"] = {};
 	_hash["organizeQuery/queryAllStation"] = {};
@@ -66,26 +59,14 @@ export function searchUserList($params)
 function createData($dObj)
 {
 	var d = {};
-	d.name = "";
-	d.stationType = [-1, 1, 2].join(",");
-	d.roleId = 0;
-	d.page = 1;
-	d.pageSize = 10;
-	d.update = updateData.bind(d);
-	$dObj = __merge({}, $dObj);
-	d.update($dObj);
+	$dObj = $dObj || {};
+	d.name = $dObj.name || "";
+	var typeList = $dObj.typeList || "[-1,1,2]";
+	d.stationType = JSON.parse(typeList).join(",");
+	d.roleId = $dObj.roleId || 0;
+	d.page = $dObj.page || 1;
+	d.pageSize = $dObj.pageSize || 10;
 	return d;
 }
 
-function updateData($dObj)
-{
-	if (!$dObj)
-	{
-		return;
-	}
-	$dObj.hasOwnProperty("name") && (this.name = $dObj.name);
-	$dObj.hasOwnProperty("roleId") && (this.roleId = $dObj.roleId);
-	$dObj.hasOwnProperty("typeList") && (this.stationType = JSON.parse($dObj.typeList).join(","));
-	$dObj.hasOwnProperty("page") && (this.page = $dObj.page);
-}
 

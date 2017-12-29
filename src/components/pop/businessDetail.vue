@@ -37,7 +37,9 @@
 
 							<p class="from-group  clear" v-if="item.attachList.length > 0">
 								<span class="form-title">附件下载</span>
-								<span class="form-trap">{{item.attachList}}</span>
+							<p v-for="attach in item.attachList">
+								<span class="form-trap">{{attach.name}}/{{attach.size}}</span>
+							</p>
 							</p>
 							<p class="from-group  clear">
 								<span class="form-title left">签批意见</span>
@@ -79,16 +81,17 @@
 							<span class="file-down"
 								  v-for="(attach,index) in attachList"><i class="file-name">{{attach.name}}</i><i>/{{attach.size}}KB</i><i
 									class="del-txt pointer" @click="onClick_delBtn(attach.name,index)">删除</i></span>
-								<span class="err-msg">{{errMsg}}</span>
+
 							</p>
-							<p class="from-group clear examine-people" v-if="businessData.hasNext">
+							<p class="err-msg">{{errMsg}}</p>
+							<p class="from-group clear examine-people" v-if="businessData.hasNext && status == 1">
 								<span class="exam-btn pointer" @click="onClick_selectNext">选择后续人</span>
 								<span v-for="item in childList" class="choose-people">{{item.name}}<i
 										class="close-search-btn absolute pointer"
 										@click="onClick_cancelBtn(item.id)"></i></span>
 							</p>
-						</div>
 
+						</div>
 					</div>
 				</div>
 			</div>
@@ -114,7 +117,7 @@
 	import BusinessType6 from "../businessDetail/businessType6.vue";
 	import BusinessType7 from "../businessDetail/businessType7.vue";
 	import ChooseManPop from "./chooseManPop.vue";
-	var _params = null, _childName = [],_attach = {};;
+	var _params = null, _childName = [], _attach = {};;
 	export default{
 		created()
 		{
@@ -132,7 +135,7 @@
 				hasIframe: true,
 				attachList: [],
 				isShowOrderManPop: false,
-				errMsg:"",
+				errMsg: "",
 				businessData: {
 					taskProperties: {}
 				}
@@ -183,6 +186,7 @@
 				this.opinion = "";
 				this.status = 1;
 				this.idList = [];
+				this.attachList = [];
 				if (this.currId)
 				{
 					this.businessData = g.data.searchBusinessPool.getDataById(this.currId);
@@ -208,9 +212,9 @@
 			{
 				this.hasIframe = false;
 				var attach = {
-					size:$data.size,
-					fileName:$data.fileName,
-					name:_attach.name
+					size: $data.size,
+					fileName: $data.fileName,
+					name: _attach.name
 				};
 				_attach.name = "";
 				this.attachList.push(attach);
@@ -251,12 +255,19 @@
 					orderId: this.currId,
 					auditResult: this.status,
 					auditSuggest: this.opinion,
-					todoId: this.businessData.todoId
+					todoId: this.businessData.todoId,
+					attachs: JSON.stringify(this.attachList)
 				};
 				if (this.idList.length > 0)
 				{
 					_params.pendingAuditorId = this.idList.join(';');
 					_params.pendingAuditorName = _childName.join(';');
+					this.errMsg = "";
+				}
+				if(this.businessData.mustFill && this.idList.length  == 0)
+				{
+					this.errMsg = "后续选择人员为必填";
+					return ;
 				}
 				g.ui.showLoading();
 				g.net.call("bo/saveAuditRecord", _params).then(($data) =>
@@ -295,7 +306,6 @@
 			},
 			onClick_cancelBtn($id)
 			{
-//				this.$emit("close", false);
 				var index = this.idList.indexOf($id);
 				this.idList.splice(index, 1);
 				var data = g.data.staffPool.getChildById($id);

@@ -130,6 +130,7 @@
 	import CommonDate from "../../components/dateBox.vue";
 	import DropList from "../../components/dropList.vue";
 	import EmptyPop from "../../components/pop/emptyPop.vue"
+	import {searchBusinessList} from "./oppMan"
 	var _dateType = "", _params = null;
 	export default{
 		created(){
@@ -350,8 +351,16 @@
 					g.func.dealErr(err);
 				})
 			},
-			onClose_detailPop(){
+			onClose_detailPop($result){
+
 				this.isShowDetailPop = false;
+				if ($result)
+				{
+					searchBusinessList(g.currentRoute.query).then(($data) =>
+					{
+						this.routerUpdated();
+					})
+				}
 			},
 			updateUrl()
 			{

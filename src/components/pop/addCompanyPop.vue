@@ -61,7 +61,7 @@
 							<span>
 								<input-bar class="form-control" placeholder="" type="text"
 										   v-model="duty.name" :readonly="!duty.isEdit"></input-bar>
-								<img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer"
+								<img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer"cd release
 									 @click="onClick_editDuty(duty)" v-if="!duty.isEdit">
 								<span class="pointer btn-save  ani-time" @click="onClick_saveDuty(duty,'duty')"
 									  v-if="duty.isEdit">保存</span>
@@ -359,7 +359,7 @@
 					this.errData.phone = "请输入负责人电话";
 					_isValid = false;
 				}
-				else if (!g.param.phoneReg.test(this.phone) && !g.param.telphoneReg.test(this.phone))
+				else if (!g.param.phoneReg.test(this.phone) || !g.param.telphoneReg.test(this.phone))
 				{
 					this.errData.phone = "号码格式不正确";
 					_isValid = false;

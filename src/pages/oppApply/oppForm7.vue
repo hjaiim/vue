@@ -100,7 +100,8 @@
 					   :class="formData.callInList.indexOf('呼出')>=0?'action':''?'action':''"></i>
                     <span>呼出</span>
                 </span>
-				<span class="explain"></span>
+				<span>{{errData.callInList}}</span>
+				<span class="explain">呼入呼出</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">预计业务规模</span>
@@ -146,7 +147,7 @@
 <script type="text/ecmascript-6">
 	import g from "../../global";
 	import InputBar from "../../components/inputBar.vue";
-	var _type = 7, _isValid = true, _formData = {},_attach = {};
+	var _type = 7, _isValid = true, _formData = {}, _attach = {};
 	export default{
 		created(){
 			this.init();
@@ -230,7 +231,7 @@
 					businessScale: "",
 					budget: "",
 					remark: "",
-					attach:""
+					attach: ""
 
 				};
 			},
@@ -252,9 +253,9 @@
 			{
 				this.hasIframe = false;
 				var attach = {
-					size:$data.size,
-					fileName:$data.fileName,
-					name:_attach.name
+					size: $data.size,
+					fileName: $data.fileName,
+					name: _attach.name
 				};
 				_attach.name = "";
 				this.attachList.push(attach);
@@ -280,9 +281,20 @@
 			},
 			onClick_checkCallInOut($type)
 			{
+				debugger;
 				var index = this.formData.callInList.indexOf($type);
 				if (index >= 0)
 				{
+					if (this.formData.callInList.length == 1)
+					{
+						this.errData.callInList = "至少选择一种模式";
+						this.$forceUpdate();
+						setTimeout(() =>
+						{
+							this.errData.callInList = "";
+						}, 1500);
+						return;
+					}
 					this.formData.callInList.splice(index, 1)
 				}
 				else

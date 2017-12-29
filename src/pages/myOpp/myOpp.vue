@@ -76,9 +76,9 @@
 						<td>{{item.auditStatusDesc}}</td>
 						<td>
 							<p class="action-menu clear">
-                                <span class="right pointer draw-line ani-time" v-if="item.operation == 1"
+                                <span class="left pointer draw-line ani-time" v-if="item.operation == 1"
 									  @click="onClick_editBtn(item)">重新编辑</span>
-                                <span class="right pointer draw-line ani-time" v-if="item.operation == 0"
+                                <span class="right pointer draw-line ani-time"
 									  @click="onClick_detailBtn(item.id)">详情</span>
 							</p>
 

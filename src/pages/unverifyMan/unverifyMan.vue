@@ -91,6 +91,15 @@
 			AccountDesPop,
 			EmptyPop
 		},
+		watch: {
+			accountList($val)
+			{
+				if ($val.length == 0)
+				{
+					this.onClick_selectAllBtn();
+				}
+			}
+		},
 		methods: {
 			init()
 			{

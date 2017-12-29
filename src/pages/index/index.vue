@@ -13,7 +13,7 @@
 						<div class="absolute upload-btn">
 							<p class="load-text">修改头像</p>
 							<iframe class="iframe-btn" name="fileUpload"
-									:src="g.path.base+'/upload.html?type=pic&subType=avatar&redirectUrl='+g.path.base+'/uploadApi.html'"
+									:src="g.path.base+'/upload.html?type=pic&subType=avatar&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"
 									id="avatar" v-if="avatar=='default.png'"></iframe>
 							<img :src="g.path.images+'/del-head.png'" alt=""
 								 class="del-head absolute pointer" @click="onClick_delBtn"

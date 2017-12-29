@@ -69,7 +69,7 @@
 		}
 		else
 		{
-			$("#fileBtn")[0].accept = "application/msword,application/pdf,image/jpeg,image/x-png,application/vnd.ms-excel,application/vnd.ms-powerpoint,text/plain,aplication/zip,aplication/rar"
+
 		}
 		$("#cancelBtn").hide();
 	}
@@ -115,7 +115,9 @@
 			}
 
 			window.parent.sendMsg("info", {name: fileName, type: urlData.query.subType});
-			$("#form1")[0].action = accessUrl + "?type=" + urlData.query.type + "&fileName=" + fileName +
+			$("#form1")[0].action = (urlData.query.access || accessUrl)  + "?type=" + urlData.query.type +
+		"&fileName=" +
+					fileName +
 					"&redirectUrl=" + urlData.query.redirectUrl;
 			$("#submit").click();
 		}

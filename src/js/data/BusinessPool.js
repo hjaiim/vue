@@ -112,6 +112,7 @@ function createData($dObj)
 	d.hasRejected = false;
 	d.hasOpinion = false;
 	d.hasNext = false;
+	d.mustFill = false;
 	d.hasAttaches = false;
 	d.update = updateData.bind(d);
 	d.update($dObj);
@@ -151,6 +152,7 @@ function updateData($dObj, $recordId)
 	{
 		this.hasOpinion = !!int(this.taskProperties.process_opinion);
 		this.hasNext = !!int(this.taskProperties.process_candidate);
+		this.mustFill = int(this.taskProperties.process_candidate) == 2;
 		this.hasAttaches = !!int(this.taskProperties.process_attachment);
 	}
 	if ($dObj.hasOwnProperty("recordResult"))

@@ -133,7 +133,11 @@ class Staff {
 		if (!_staffHash[itemData.id])
 		{
 			_staffHash[itemData.id] = itemData;
-			this.listData.push(itemData);
+
+			if (itemData.flag == 1)
+			{
+				this.listData.push(itemData);
+			}
 		}
 	}
 
@@ -160,6 +164,7 @@ function createStaff($dObj)
 	d.departmentName = "";
 	d.dutyName = "";
 	d.checked = false;
+	d.flag = 0;
 	d.update = updateStaff.bind(d);
 	d.update($dObj);
 	return d;
@@ -175,5 +180,6 @@ function updateStaff($dObj)
 	$dObj.hasOwnProperty("departmentName") && (this.departmentName = $dObj.departmentName);
 	$dObj.hasOwnProperty("dutyName") && (this.dutyName = $dObj.dutyName);
 	$dObj.hasOwnProperty("checked") && (this.checked = $dObj.checked);
+	$dObj.hasOwnProperty("flag") && (this.flag = $dObj.flag);
 
 }

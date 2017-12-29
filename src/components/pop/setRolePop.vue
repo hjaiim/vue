@@ -19,7 +19,7 @@
 				<div class="role-list radio-show clear">
 					<p class="left">角色选择</p>
 					<div class="left menu-item">
-						<span v-show="roleList.length==0">无</span>
+						<span v-show="roleList.length==0">暂无角色</span>
 						<ul class="role-list clear">
 							<li class="left" v-for="(item,index) in roleList">
 								<span class="action-box role-item pointer" @click="onClick_roleItem(item.id)">

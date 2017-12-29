@@ -89,6 +89,7 @@
 			{
 				if ($val.length == 0)
 				{
+					this.currPage = 1;
 					this.updateUrl();
 				}
 			}

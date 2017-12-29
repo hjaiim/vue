@@ -80,6 +80,7 @@
 					   :class="formData.callTypeList.indexOf('单呼')>=0?'action':''"></i>
                     <span>单呼</span>
                 </span>
+				<span>{{errData.callTypeList}}</span>
 				<span class="explain">双呼/单呼（请选择一种或多种）</span>
 			</div>
 			<div class="personal-form">
@@ -108,6 +109,7 @@
                     <i class="draw-round pointer" :class="formData.callBack=='否'?'action':''"></i>
                     <span>否</span>
                 </span>
+
 				<span class="explain">是否回呼</span>
 			</div>
 			<div class="personal-form">
@@ -216,8 +218,11 @@
 						{
 							this.formData[hash[key]] = formData[key].split("*")[0];
 						}
+						if(key ==="呼叫模式")
+						{
+							this.formData[hash[key]] = formData[key].split("和");
+						}
 					}
-					this.formData["callTypeList"] = formData.callTypeList.split("和");
 					this.attachList = g.data.searchBusinessPool.getDataById(this.currId).attachList;
 					this.$forceUpdate();
 				}
@@ -288,9 +293,9 @@
 			{
 				this.hasIframe = false;
 				var attach = {
-					size:$data.size,
-					fileName:$data.fileName,
-					name:_attach.name
+					size: $data.size,
+					fileName: $data.fileName,
+					name: _attach.name
 				};
 				_attach.name = "";
 				this.attachList.push(attach);
@@ -314,6 +319,16 @@
 				var index = this.formData.callTypeList.indexOf($type);
 				if (index >= 0)
 				{
+					if (this.formData.callTypeList.length == 1)
+					{
+						this.errData.callTypeList = "至少选择一种模式";
+						this.$forceUpdate();
+						setTimeout(() =>
+						{
+							this.errData.callTypeList = "";
+						}, 1500);
+						return;
+					}
 					this.formData.callTypeList.splice(index, 1);
 				}
 				else

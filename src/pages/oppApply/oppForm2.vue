@@ -156,7 +156,8 @@
 						if (key == "客户联系方式")
 						{
 							this.formData[hash[key]] = formData[key].split("*")[0];
-						}
+						};
+
 					}
 					this.attachList = g.data.searchBusinessPool.getDataById(this.currId).attachList;
 					this.$forceUpdate();
