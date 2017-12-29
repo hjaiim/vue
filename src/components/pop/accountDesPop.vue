@@ -298,7 +298,7 @@
 				}
 				.diff-frame {
 					width: 485px;
-					padding: 10px 0 10px;
+					padding: 18px 0 10px;
 				}
 			}
 		}

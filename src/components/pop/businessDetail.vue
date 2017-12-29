@@ -340,7 +340,7 @@
 		.opp-content {
 			margin: 20px 10px 40px;
 			border-bottom: none;
-			max-height: 600px;
+			max-height: 601px;
 			overflow: hidden;
 		}
 		.detail-wrap {
@@ -359,6 +359,9 @@
 			color: #ed5564;
 			width: auto;
 			padding-left: 15px;
+		}
+		.detail-custer-msg {
+			width: 95%;
 		}
 		.empty-txt {
 			font-weight: bold !important;
