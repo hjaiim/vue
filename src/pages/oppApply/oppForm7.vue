@@ -39,7 +39,6 @@
 						   :errmsg="errData.cusCompIntro"
 						   @focus="onFocus_inputBar('cusCompIntro')"></input-bar>
 			</div>
-
 			<div class="personal-form">
 				<span class="personal-title left">申请的95业务类别</span>
                  <span class="action-box status-type left" @click="onClick_prodType('客户自带95码号落地')">
@@ -50,9 +49,10 @@
                     <i class="draw-round pointer" :class="formData.prodType=='使用联通已有的95号'?'action':''"></i>
                     <span>使用联通已有的95号</span>
                 </span>
-
+			</div>
+			<div class="personal-form" v-if="formData.prodType=='客户自带95码号落地'">
+				<span class="personal-title left"></span>
 				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
-						   v-if="formData.prodType=='客户自带95码号落地'"
 						   type="text"
 						   v-model="formData.prodType"
 						   :errmsg="errData.prodType"
@@ -380,7 +380,7 @@
 </script>
 <style type="text/css" lang="sass" rel="stylesheet/css" scoped>
 	.apply-wrap {
-		padding: 20px 44px 50px 44px;
+		padding: 20px 44px 50px 24px;
 	}
 
 	@import "../../css/oppApply.scss";
