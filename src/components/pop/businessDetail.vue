@@ -267,11 +267,11 @@
 				{
 					_params.pendingAuditorId = this.idList.join(';');
 					_params.pendingAuditorName = _childName.join(';');
-					this.errMsg = "";
+
 				}
 				if (this.businessData.mustFill && this.idList.length == 0)
 				{
-					this.errMsg = "后续选择人员为必填";
+					this.errMsg = "请至少选择一名候选人";
 					return;
 				}
 				g.ui.showLoading();
@@ -292,6 +292,7 @@
 				{
 					_childName = [];
 					this.idList = __merge([], $list);
+					this.errMsg = "";
 					for (var item of this.idList)
 					{
 						var data = g.data.staffPool.getChildById(item);
