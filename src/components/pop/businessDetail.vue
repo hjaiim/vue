@@ -27,7 +27,7 @@
 							</p>
 						</div>
 					</div>
-					<div>
+					<div v-if="businessData.recordList.length > 0">
 						<h3 class="opp-title">审核详情</h3>
 						<div v-for="item in businessData.recordList">
 							<p class="from-group  clear">
@@ -42,9 +42,9 @@
 								<i class="download-wrap clear">
 									<a class="form-trap file-download pointer ani-time left"
 									   v-for="attach in item.attachList" :href="g.param.ossUrl + attach.fileName"
-									   download>
-										{{attach.name}}/{{attach.size}}</a>
+									   download>{{attach.name}}</a>
 								</i>
+
 							</p>
 							<p class="from-group  clear">
 								<span class="form-title left">签批意见</span>
@@ -192,6 +192,8 @@
 				this.status = 1;
 				this.idList = [];
 				this.attachList = [];
+				this.errMsg = '';
+
 				if (this.currId)
 				{
 					this.businessData = g.data.searchBusinessPool.getDataById(this.currId);

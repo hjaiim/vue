@@ -328,7 +328,6 @@
 			},
 			onClick_dropListBtn($type)
 			{
-
 				if ($type == "Company")
 				{
 					this.isShowDepartmentList = false;

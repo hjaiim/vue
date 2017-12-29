@@ -99,6 +99,7 @@
 					this.$refs.oppForm.init();
 					this.routerUpdated();
 					g.ui.toast("商机提交成功");
+					g.url = "/myopp";
 				}, (err) =>
 				{
 					g.func.dealErr(err);

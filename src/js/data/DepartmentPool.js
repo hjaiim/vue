@@ -116,10 +116,8 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("dutyName") && (this.dutyName = $dObj.dutyName);
 	if ($dObj.hasOwnProperty("organizeDutyResults"))
 	{
-		var timer = setTimeout(() =>
+		setTimeout(() =>
 		{
-			g.data.dutyPool.removeAll();
-
 			g.data.dutyPool.update($dObj.organizeDutyResults);
 		}, 200);
 // 		var duty = new Duty();

@@ -70,7 +70,7 @@
 					<tr v-for="(item,index) in businessList">
 						<td><span class="rank-num">{{index+1}}</span></td>
 						<td><span>{{item.orderNo}}</span></td>
-						<td>{{item.companyName}}</td>
+						<td>{{item.customerCompName}}</td>
 						<td>{{item.typeName}}</td>
 						<td>{{item.createTime}}</td>
 						<td>{{item.auditStatusDesc}}</td>

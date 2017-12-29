@@ -24,8 +24,15 @@
     line-height: 40px;
   }
 }
+.apply-wrap{
+  .personal-form{
+	.personal-title{
+	  width: 118px;
+	}
+  }
+}
 
-.large-input {
+.personal-form .large-input {
   width: 58%;
 }
 

@@ -23,14 +23,17 @@ export function getVerifyInfo()
 			g.data.userInfo.update($data);
 			if ($data.companyList)
 			{
+				g.data.companyPool.removeAll();
 				g.data.companyPool.update($data.companyList);
 			}
 			if ($data.departmentList)
 			{
+				g.data.departmentPool.removeAll();
 				g.data.departmentPool.update($data.departmentList);
 			}
 			if ($data.dutyList)
 			{
+				g.data.dutyPool.removeAll();
 				g.data.dutyPool.update($data.dutyList);
 			}
 

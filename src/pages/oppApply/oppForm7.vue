@@ -101,7 +101,7 @@
                     <span>呼出</span>
                 </span>
 				<span class="explain">呼入呼出</span>
-				<span class="explain checkbox-errmsg">{{errData.callInList}}</span>
+				<span class="explain  checkbox-errmsg">{{errData.callInList}}</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">预计业务规模</span>

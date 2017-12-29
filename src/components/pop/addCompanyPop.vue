@@ -281,6 +281,7 @@
 			},
 			onClick_editDuty($duty)
 			{
+				debugger;
 				g.data.dutyPool.getDataById($duty.id).update({isEdit: true})
 			},
 			onClick_deleteDuty($duty)
@@ -338,8 +339,7 @@
 				this.isEdit = false;
 			},
 			checkValid()
-			{
-				if (!this.name)
+			{if (!this.name)
 				{
 					this.errData.name = "请输入公司名称";
 					_isValid = false;
@@ -359,7 +359,7 @@
 					this.errData.phone = "请输入负责人电话";
 					_isValid = false;
 				}
-				else if (!g.param.phoneReg.test(this.phone) || !g.param.telphoneReg.test(this.phone))
+				else if (!g.param.phoneReg.test(this.phone) && !g.param.telphoneReg.test(this.phone))
 				{
 					this.errData.phone = "号码格式不正确";
 					_isValid = false;

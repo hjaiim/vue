@@ -81,7 +81,8 @@
                     <span>单呼</span>
                 </span>
 				<span class="explain">双呼/单呼</span>
-				<span class="explain checkbox-errmsg">{{errData.callTypeList}}</span>
+				<span class="explain error-msg">{{errData.callTypeList}}</span>
+
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">发起方式</span>
@@ -434,10 +435,6 @@
 <style type="text/css" lang="sass" rel="stylesheet/css" scoped>
 
 	@import "../../css/oppApply.scss";
-
-	.checkbox-errmsg {
-		color: #ed5564;
-	}
 
 	.apply-wrap {
 		padding: 20px 44px 50px 24px;

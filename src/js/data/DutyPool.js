@@ -4,8 +4,6 @@
 import g from "./../../global";
 var _list = [];
 var _hash = {};
-var _total = 0;
-var _totalPage = 1;
 export default class DutyPool {
 	constructor()
 	{
@@ -64,8 +62,6 @@ export default class DutyPool {
 	{
 		_list = [];
 		_hash = {};
-		_total = 0;
-		_totalPage = 1;
 	}
 }
 
@@ -79,7 +75,6 @@ function createData($dObj)
 	d.companyId = 0;
 	d.creatorId = 0;
 	d.isEdit = false;
-
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
