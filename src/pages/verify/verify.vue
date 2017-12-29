@@ -99,7 +99,7 @@
 							   v-model="remark" @focus="onFocus_inputBar('remark')"
 							   :errmsg="errData.remark"></input-bar>
 				</div>
-				<div class="personal-form relative" :class="authStatus != 0 ?'disabled':''">
+				<div class="personal-form relative" :class="!canEdit ?'disabled':''">
 					<span class="personal-title left">身份证照</span>
 					<p class="err-msg absolute"> {{errData.idCardBack || errData.idCardFront}}</p>
 					<div class="left relative upload-box pointer">
@@ -132,7 +132,7 @@
 					</div>
 
 				</div>
-				<div class="personal-form relative" :class="authStatus != 0 ?'disabled':''">
+				<div class="personal-form relative" :class="!canEdit?'disabled':''">
 					<p class="err-msg absolute"> {{errData.workCard}}</p>
 					<span class="personal-title left">工作证照</span>
 					<div class="left relative upload-box pointer">
@@ -144,6 +144,7 @@
 								不超过5M</br>
 								</span>
 							</p>
+
 						</div>
 						<div class="img-contain absolute" v-show="workCard">
 							<img class="img-url " :src="workCard?g.param.ossUrl+workCard:''" alt="">
@@ -267,7 +268,6 @@
 			},
 			sendMsg($type, $info)
 			{
-				debugger;
 				if ($type == "error")
 				{
 					this.errData[$info.type] = $info.msg;

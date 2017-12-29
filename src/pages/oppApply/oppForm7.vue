@@ -287,7 +287,7 @@
 				{
 					if (this.formData.callInList.length == 1)
 					{
-						this.errData.callInList = "至少选择一种模式";
+						this.errData.callInList = "请至少选择一种或两种";
 						this.$forceUpdate();
 						setTimeout(() =>
 						{
