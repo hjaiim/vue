@@ -159,4 +159,7 @@
 	}
 
 	@import "../../css/oppApply.scss";
+	.personal-form .search-input .input-con{
+		width: 500px;
+	}
 </style>

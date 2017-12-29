@@ -99,7 +99,7 @@
 
 			<div class="personal-form">
 				<span class="personal-title left">测试号码需求</span>
-				<input-bar class="personal-content pensonal-input left large-input" placeholder=""
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
 						   type="text" v-model="formData.testNum"
 						   :errmsg="errData.testNum"
 						   @focus="onFocus_inputBar('testNum')"></input-bar>
@@ -107,7 +107,7 @@
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">预计业务规模</span>
-				<input-bar class="personal-content pensonal-input left large-input" placeholder=""
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
 						   type="text" v-model="formData.businessScale"
 						   :errmsg="errData.businessScale"
 						   @focus="onFocus_inputBar('businessScale')"></input-bar>
@@ -115,7 +115,7 @@
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">报价</span>
-				<input-bar class="personal-content pensonal-input left large-input" placeholder=""
+				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
 						   type="text" v-model="formData.budget"
 						   :errmsg="errData.budget"
 						   @focus="onFocus_inputBar('budget')"></input-bar>
