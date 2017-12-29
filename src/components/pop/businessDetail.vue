@@ -21,8 +21,8 @@
 									  v-show="businessData.attachList&&businessData.attachList.length==0">无</span>
 								<i class="download-wrap clear">
 									<a class="form-trap file-download pointer ani-time left"
-									   v-for="attach in businessData.attachList" :href="g.param.ossUrl + attach.name"
-									   download>{{attach.name}}</a>
+									   v-for="attach in businessData.attachList"
+									   :href="g.param.ossUrl + attach.fileName" download>{{attach.name}}</a>
 								</i>
 							</p>
 						</div>
@@ -79,7 +79,7 @@
 								<span class="form-title">上传附件</span>
 								 <span class="form-trap up-btn pointer opp-up-btn">点击上传
 								<iframe name="fileUpload" v-if="hasIframe" class="iframe-wrap"
-										:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'/uploadApi.html'"></iframe>
+										:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"></iframe>
 								</span>
 								<span class="form-title error-msg">{{errMsg}}</span>
 							</p>
@@ -267,11 +267,11 @@
 				{
 					_params.pendingAuditorId = this.idList.join(';');
 					_params.pendingAuditorName = _childName.join(';');
-					this.errMsg = "";
+
 				}
 				if (this.businessData.mustFill && this.idList.length == 0)
 				{
-					this.errMsg = "后续选择人员为必填";
+					this.errMsg = "请至少选择一名候选人";
 					return;
 				}
 				g.ui.showLoading();
@@ -292,6 +292,7 @@
 				{
 					_childName = [];
 					this.idList = __merge([], $list);
+					this.errMsg = "";
 					for (var item of this.idList)
 					{
 						var data = g.data.staffPool.getChildById(item);

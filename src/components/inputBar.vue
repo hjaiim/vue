@@ -9,6 +9,7 @@
 		   @click="onClick_closeBtn"></i>
 		<p class="error-msg absolute">{{errmsg}}</p>
 	</div>
+
 </template>
 <script type="text/ecmascript-6">
 	import g from "../global";
