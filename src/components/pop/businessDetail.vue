@@ -4,7 +4,7 @@
 		<div class="detail-container">
 			<p class="note-tit">商机详情</p>
 			<div class=" company-message note-content opp-content">
-				<div class="no-border opp-content" is="scroll-group">
+				<div class="no-border" is="scroll-group">
 					<div>
 						<h3 class="opp-title">商机内容</h3>
 						<business-type-1 v-if="oppType==1" :formData="formData"></business-type-1>
@@ -341,6 +341,8 @@
 			font-size: 14px;
 		}
 		.opp-content {
+			margin: 20px 10px 40px;
+			border-bottom: none;
 			max-height: 600px;
 			overflow: hidden;
 		}
@@ -448,7 +450,7 @@
 				left: 50%;
 				top: 50%;
 				margin-left: -7px;
-				margin-top: -1px;
+				margin-top: 0px;
 				position: absolute;
 				-moz-transform: rotate(-45deg);
 				-ms-transform: rotate(-45deg);
