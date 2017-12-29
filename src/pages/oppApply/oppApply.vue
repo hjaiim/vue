@@ -18,6 +18,7 @@
 			<opp-form-5 v-if="type == 5" :currId="currId" @submit="onSubmit_formData" ref="oppForm"></opp-form-5>
 			<opp-form-6 v-if="type == 6" :currId="currId" @submit="onSubmit_formData" ref="oppForm"></opp-form-6>
 			<opp-form-7 v-if="type == 7" :currId="currId" @submit="onSubmit_formData" ref="oppForm"></opp-form-7>
+
 			<system-tip :isShowViewPop="isShowSystemPop" msg="切换分类将清除未提交重要内容，确定切换分类吗？"
 						@close="onClose_systemPop"></system-tip>
 		</div>
