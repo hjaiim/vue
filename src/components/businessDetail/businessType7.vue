@@ -36,6 +36,10 @@
 					{
 						this.formInfo[key] = this.formInfo[key].split("*")[0];
 					}
+					if(key == "申请的95业务类别" && this.formInfo[key] != "使用联通已有的95号")
+					{
+						this.formInfo[key] = this.formInfo[key].split("num*").join("/95号码：");
+					}
 				}
 				this.$forceUpdate();
 

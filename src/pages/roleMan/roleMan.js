@@ -61,7 +61,7 @@ function createData($dObj)
 	var d = {};
 	$dObj = $dObj || {};
 	d.page = $dObj.page || 1;
-	d.pageSize = $dObj.pageSize || 10;
+	d.pageSize = $dObj.pageSize || g.param.pageSize;
 	return d;
 }
 

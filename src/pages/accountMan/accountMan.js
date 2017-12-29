@@ -65,7 +65,7 @@ function createData($dObj)
 	d.stationType = JSON.parse(typeList).join(",");
 	d.roleId = $dObj.roleId || 0;
 	d.page = $dObj.page || 1;
-	d.pageSize = $dObj.pageSize || 10;
+	d.pageSize = $dObj.pageSize || g.param.pageSize;
 	return d;
 }
 

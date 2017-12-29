@@ -41,23 +41,25 @@
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">申请的95业务类别</span>
-                 <span class="action-box status-type left" @click="onClick_prodType('客户自带95码号落地')">
-                        <i class="draw-round pointer" :class="formData.prodType=='客户自带95码号落地'?'action':''"></i>
-                        <span>客户自带95码号落地</span>
+                 <span class="action-box status-type left" @click="onClick_prodType('客户自带95号码落地')">
+                        <i class="draw-round pointer" :class="formData.prodType=='客户自带95号码落地'?'action':''"></i>
+                        <span>客户自带95号码落地</span>
+
                  </span>
+
                 <span class="action-box status-type left" @click="onClick_prodType('使用联通已有的95号')">
                     <i class="draw-round pointer" :class="formData.prodType=='使用联通已有的95号'?'action':''"></i>
                     <span>使用联通已有的95号</span>
                 </span>
 			</div>
-			<div class="personal-form" v-if="formData.prodType=='客户自带95码号落地'">
+			<div class="personal-form" v-if="formData.prodType=='客户自带95号码落地'">
 				<span class="personal-title left"></span>
 				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
 						   type="text"
-						   v-model="formData.prodType"
-						   :errmsg="errData.prodType"
+						   v-model="formData.telNum"
+						   :errmsg="errData.telNum"
 						   @focus="onFocus_inputBar('telNum')"></input-bar>
-				<span class="explain lang-explain" v-if="formData.prodType=='客户自带95码号落地'">需要落地的具体号码</span>
+				<span class="explain lang-explain" v-if="formData.prodType=='客户自带95号码落地'">需要落地的具体号码</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">业务用途及场景</span>
@@ -185,8 +187,12 @@
 						}
 						if (key == "呼入呼出")
 						{
-							debugger;
 							this.formData[hash[key]] = formData[key].split("和");
+						}
+						if (key == "申请的95业务类别" && formData[[key]] != "使用联通已有的95号")
+						{
+							this.formData[hash[key]] = formData[[key]].split("num*")[0];
+							this.formData.telNum = formData[[key]].split("num*")[1];
 						}
 					}
 					this.attachList = g.data.searchBusinessPool.getDataById(this.currId).attachList;
@@ -207,7 +213,7 @@
 					cusPhone: "15414101",
 					cusCompAdd: "95业务",
 					cusCompIntro: "95业务",
-					prodType: "客户自带95码号落地",
+					prodType: "客户自带95号码落地",
 					telNum: "95业务",
 					businessDesc: "95业务",
 					accessType: "API",
@@ -245,6 +251,7 @@
 				}
 				else
 				{
+					g.ui.showLoading();
 					this.errData.attach = "";
 					this.$forceUpdate();
 					_attach.name = $info.name;
@@ -252,6 +259,7 @@
 			},
 			uploadComplete($data)
 			{
+				g.ui.hideLoading();
 				this.hasIframe = false;
 				var attach = {
 					size: $data.size,
@@ -358,7 +366,6 @@
 						}
 					}
 				}
-				trace("this.errData", this.errData);
 				this.$forceUpdate();
 			},
 			getFormData()
@@ -376,7 +383,11 @@
 						{
 							_formData[key] = this.formData[item[key]].join("和");
 						}
+						else if (key == "申请的95业务类别" && this.formData[item[key]] == "客户自带95号码落地")
+						{
 
+							_formData[key] = this.formData[item[key]] + 'num*' + this.formData.telNum;
+						}
 						else
 						{
 							_formData[key] = this.formData[item[key]];

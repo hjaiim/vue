@@ -2,14 +2,13 @@
 	<div class="search-input relative">
 		<input @blur="onBlur_accountInput" :type="type" @focus="onFocus_inputFocus" class="input-con"
 			   :placeholder="placeholder" @input="onInput_value" @keyup.enter="onKeyupEnter_searchInput"
-			   v-model="inputContent" :maxLength="maxLength" :readonly="readonly" autocomplete="off"
+			   v-model="inputContent" :maxLength="maxLength" :disabled="readonly" autocomplete="off"
 			   :class="readonly?'only-read':''">
 		<i v-show="inputContent.length>0 && isShowClearBtn && !readonly"
 		   class="close-search-btn ani-time pointer absolute"
 		   @click="onClick_closeBtn"></i>
 		<p class="error-msg absolute">{{errmsg}}</p>
 	</div>
-
 </template>
 <script type="text/ecmascript-6">
 	import g from "../global";

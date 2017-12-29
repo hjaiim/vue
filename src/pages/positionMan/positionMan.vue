@@ -141,7 +141,7 @@
 				{
 					_params = {
 						page: this.currPage,
-						pageSize: 10
+						pageSize: g.param.pageSize
 					};
 					searchPositionList(_params).then(() =>
 					{

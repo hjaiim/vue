@@ -5,7 +5,7 @@ export default function (to, next)
 {
 	loginManager.checkLogin(to, next, () =>
 	{
-		getVerifyInfo(to.query).then(() =>
+		getVerifyInfo().then(() =>
 		{
 			next();
 		})

@@ -15,14 +15,7 @@ export default function (to, next)
 
 export function searchCompanyList($params)
 {
-	if (_params)
-	{
-		_params.update($params)
-	}
-	else
-	{
-		_params = createData($params);
-	}
+	_params = createData($params);
 	var promise = new Promise((resolved, rejected) =>
 	{
 		g.ui.showLoading()
@@ -45,23 +38,9 @@ export function searchCompanyList($params)
 function createData($dObj)
 {
 	var d = {};
-	d.comName = "";
-	d.page = 1;
-	d.pageSize = 10;
-	d.update = updateData.bind(d);
-	$dObj = __merge({}, $dObj);
-	d.update($dObj);
+	$dObj = $dObj || {};
+	d.comName = $dObj.customerName || "";
+	d.page = $dObj.page || 1;
+	d.pageSize = $dObj.pageSize || g.param.pageSize;
 	return d;
 }
-
-function updateData($dObj)
-{
-	if (!$dObj)
-	{
-		return;
-	}
-	$dObj.hasOwnProperty("customerName") && (this.comName = $dObj.customerName);
-	$dObj.hasOwnProperty("page") && (this.page = $dObj.page);
-	$dObj.hasOwnProperty("pageSize") && (this.pageSize = $dObj.pageSize);
-}
-

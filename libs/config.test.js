@@ -57,7 +57,6 @@ var WEB_CONFIG = {
 		defaultLang: "cn",
 		loginExpires: 10 * 60,
 		sendCodeTime: 5,
-		pageSize: 20,
 		phoneReg: /^1(3|4|5|7|8)\d{9}$/,
 		accountReg: /^[a-z0-9]{6,16}$/,
 		passwordReg: /^[a-z0-9]{6,16}$/,
@@ -69,7 +68,8 @@ var WEB_CONFIG = {
 		ossUrl: "http://test.boms.huanwuh5.com/boms/upload/",
 		uploadAccess: "http://121.41.80.45:8001/file/upload",
 		delPicAccess: "http://121.41.80.45:8001/file/del",
-		timeoutClock:10
+		timeoutClock:10,
+		pageSize: 10
 	}
 
 };

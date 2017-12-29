@@ -15,14 +15,7 @@ export default function (to, next)
 
 export function searchPositionList($params)
 {
-	if (_params)
-	{
-		_params.update($params)
-	}
-	else
-	{
-		_params = createData($params);
-	}
+	_params = createData($params);
 	var promise = new Promise((resolved, rejected) =>
 	{
 		g.ui.showLoading()
@@ -45,22 +38,8 @@ export function searchPositionList($params)
 function createData($dObj)
 {
 	var d = {};
-	d.page = 1;
-	d.pageSize = 10;
-	d.update = updateData.bind(d);
-	$dObj = __merge({}, $dObj);
-	d.update($dObj);
-
+	$dObj = $dObj || {};
+	d.page = $dObj.page || 1;
+	d.pageSize = $dObj.pageSize || g.param.pageSize;
 	return d;
 }
-
-function updateData($dObj)
-{
-	if (!$dObj)
-	{
-		return;
-	}
-	$dObj.hasOwnProperty("page") && (this.page = $dObj.page);
-	$dObj.hasOwnProperty("pageSize") && (this.pageSize = $dObj.pageSize);
-}
-

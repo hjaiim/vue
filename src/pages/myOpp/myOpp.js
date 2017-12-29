@@ -48,7 +48,7 @@ function createData($dObj)
 	d.endTime = g.timeTool.getFullDate($dObj.endTime, true);
 	d.custComName = $dObj.companyName || "";
 	d.page = $dObj.page || 1;
-	d.pageSize = $dObj.pageSize || 10;
+	d.pageSize = $dObj.pageSize || g.param.pageSize;
 	return d;
 }
 

@@ -275,6 +275,7 @@
 				}
 				else
 				{
+					g.ui.showLoading();
 					this.errData[$info.type] = "";
 					this.$forceUpdate();
 					_attach.type = $info.type;
@@ -282,6 +283,7 @@
 			},
 			uploadComplete($data)
 			{
+				g.ui.hideLoading();
 				this[_attach.type] = $data.fileName;
 				this.errData[_attach.type] = "";
 				this.$forceUpdate();

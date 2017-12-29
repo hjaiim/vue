@@ -143,7 +143,7 @@
 				{
 					_params = {
 						page: 1,
-						pageSize: 10
+						pageSize: g.param.pageSize
 					};
 					searchRoleList(_params).then(() =>
 					{

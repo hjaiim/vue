@@ -181,6 +181,7 @@
 				}
 				else
 				{
+					g.ui.showLoading();
 					this.errData.attach = "";
 					this.$forceUpdate();
 					_attach.name = $info.name;
@@ -188,6 +189,7 @@
 			},
 			uploadComplete($data)
 			{
+				g.ui.hideLoading();
 				this.hasIframe = false;
 				var attach = {
 					size: $data.size,

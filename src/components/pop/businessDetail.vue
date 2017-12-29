@@ -27,8 +27,8 @@
 							</p>
 						</div>
 					</div>
-					<div v-if="businessData.recordList.length > 0">
-						<h3 class="opp-title">审核详情</h3>
+					<div>
+						<h3 class="opp-title" v-if="businessData.recordList && businessData.recordList.length > 0">审核详情</h3>
 						<div v-for="item in businessData.recordList">
 							<p class="from-group  clear">
 								<span class="form-title">  <i class="leader"></i>{{item.positionName}}</span>
@@ -211,12 +211,14 @@
 				}
 				else
 				{
+					g.ui.showLoading();
 					this.errMsg = "";
 					_attach.name = $info.name;
 				}
 			},
 			uploadComplete($data)
 			{
+				g.ui.hideLoading();
 				this.hasIframe = false;
 				var attach = {
 					size: $data.size,
