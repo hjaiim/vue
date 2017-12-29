@@ -81,6 +81,8 @@
 				{
 					this.accountData = g.data.searchAccountPool.getDataById(this.currId);
 					this.positionList = g.data.searchPositionPool.list;
+					this.positionData = {};
+
 				}
 			},
 			onClose_pop()
