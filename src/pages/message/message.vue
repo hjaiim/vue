@@ -195,13 +195,14 @@
 				var data = g.data.searchMessagePool.getDataById($id);
 				if (data.readStatus == 0)
 				{
-					g.ui.showLoading()
+					g.ui.showLoading();
 					g.net.call('message/readMessage', {msgId: $id}).then(($data) =>
 					{
 						g.ui.hideLoading();
+						g.data.userInfo.update($data);
 						this.currId = $id;
 						this.isShowDetailPop = true;
-					},(err) =>
+					}, (err) =>
 					{
 						g.func.dealErr(err);
 					})
@@ -279,7 +280,7 @@
 							g.data.searchMessagePool.remove(id);
 						}
 						g.ui.toast("消息删除成功！");
-					},(err) =>
+					}, (err) =>
 					{
 						g.func.dealErr(err);
 					})

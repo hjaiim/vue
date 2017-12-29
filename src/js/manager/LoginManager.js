@@ -19,7 +19,23 @@ function init($callback)
 	});
 }
 
+
 function checkLogin($to, $next, $callBack)
+{
+	g.net.call('user/queryUserIsLogin').then((d) =>
+	{
+		_isLogin = true;
+		g.data.userInfo.update(d);
+		initLogin($to, $next, $callBack);
+	}, (err) =>
+	{
+		_isLogin = false;
+		initLogin($to, $next, $callBack);
+	});
+}
+
+
+function initLogin($to, $next, $callBack)
 {
 	_lastUrl = "";
 	g.func.updateUserInfo();

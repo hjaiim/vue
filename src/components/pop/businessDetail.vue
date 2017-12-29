@@ -28,7 +28,8 @@
 						</div>
 					</div>
 					<div>
-						<h3 class="opp-title" v-if="businessData.recordList && businessData.recordList.length > 0">审核详情</h3>
+						<h3 class="opp-title" v-if="businessData.recordList && businessData.recordList.length > 0">
+							审核详情</h3>
 						<div v-for="item in businessData.recordList">
 							<p class="from-group  clear">
 								<span class="form-title">  <i class="leader"></i>{{item.positionName}}</span>
@@ -352,6 +353,7 @@
 	}
 
 	.company-message .from-group {
+		width: 95%;
 		.form-title, .form-trap {
 			font-weight: normal !important;
 			line-height: 30px;

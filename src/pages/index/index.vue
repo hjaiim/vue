@@ -207,6 +207,10 @@
 				{
 					g.ui.hideLoading();
 					g.ui.toast("验证码发送成功");
+				}, (err) =>
+				{
+					g.func.dealErr(err);
+
 				})
 			},
 			setClock()
