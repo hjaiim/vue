@@ -39,7 +39,7 @@
 								<span class="form-title">附件下载</span>
 								<span class="form-trap empty-txt"
 									  v-show="item.attachList&&item.attachList.length==0">无</span>
-								<i  class="download-wrap clear">
+								<i class="download-wrap clear">
 									<a class="form-trap file-download pointer ani-time left"
 									   v-for="attach in item.attachList" :href="g.param.ossUrl + attach.fileName"
 									   download>
@@ -341,7 +341,7 @@
 			line-height: 30px;
 			vertical-align: top;
 		}
-		.error-msg{
+		.error-msg {
 			font-size: 14px;
 			color: #ed5564;
 			width: auto;

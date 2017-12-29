@@ -8,16 +8,8 @@
 
 .lang-explain {
   display: block;
-  margin-left: 128px;
+  margin-left: 148px;
   clear: both;
-}
-
-@media screen and(max-width: 1880px) {
-  .lang-explain {
-	display: block;
-	margin-left: 128px;
-	clear: both;
-  }
 }
 
 .action-box {
@@ -54,5 +46,5 @@
 
 .del-file {
   color: #fe6e05;
-margin-left: 8px;
+  margin-left: 8px;
 }
