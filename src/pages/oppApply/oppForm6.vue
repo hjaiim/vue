@@ -134,7 +134,7 @@
 				<span class="personal-title left">上传附件</span>
                 <span class="form-trap up-btn pointer opp-up-btn">点击上传
                	<iframe class="iframe-wrap" name="fileUpload" v-if="hasIframe"
-						:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'/uploadApi.html'"></iframe>
+						:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"></iframe>
                 </span>
 				<span class="complate-upload-file"
 					  v-for="(attach,index) in attachList">{{attach.name}}/{{attach.size}}kB;
@@ -317,7 +317,7 @@
 					{
 						if (!this.formData[item[key]] && item[key] != "remark")
 						{
-							this.errData[item[key]] = "请填写" + key;
+							this.errData[item[key]] = "内容不能为空";
 							_isValid = false;
 						}
 						if (item[key] == "cusPhone"
@@ -356,7 +356,7 @@
 </script>
 <style type="text/css" lang="sass" rel="stylesheet/css" scoped>
 	.apply-wrap {
-		padding: 20px 44px 50px 44px;
+		padding: 20px 44px 50px 24px;
 	}
 
 	@import "../../css/oppApply.scss";

@@ -14,9 +14,9 @@
 
 @media screen and(max-width: 1880px) {
   .lang-explain {
-	display: block;
-	margin-left: 128px;
-	clear: both;
+    display: block;
+    margin-left: 128px;
+    clear: both;
   }
 }
 
@@ -24,8 +24,8 @@
   margin-left: 0;
   margin-right: 20px;
   span {
-	height: 40px;
-	line-height: 40px;
+    height: 40px;
+    line-height: 40px;
   }
 }
 
@@ -37,10 +37,10 @@
   margin-top: 9px;
   position: relative;
   .upload-file {
-	position: absolute;
-	left: 0;
-	top: 0;
-	margin-left: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-left: 0;
   }
 }
 
@@ -54,5 +54,5 @@
 
 .del-file {
   color: #fe6e05;
-margin-left: 8px;
+  margin-left: 8px;
 }

@@ -21,8 +21,8 @@
 									  v-show="businessData.attachList&&businessData.attachList.length==0">无</span>
 								<i class="download-wrap clear">
 									<a class="form-trap file-download pointer ani-time left"
-									   v-for="attach in businessData.attachList" :href="g.param.ossUrl + attach.name"
-									   download>{{attach.name}}</a>
+									   v-for="attach in businessData.attachList"
+									   :href="g.param.ossUrl + attach.fileName" download>{{attach.name}}</a>
 								</i>
 							</p>
 						</div>
@@ -35,11 +35,16 @@
 								<span class="form-trap">{{item.auditorName}}</span>
 							</p>
 
-							<p class="from-group  clear" v-if="item.attachList.length > 0">
+							<p class="from-group clear" v-if="item.attachList.length > 0">
 								<span class="form-title">附件下载</span>
-							<p v-for="attach in item.attachList">
-								<span class="form-trap">{{attach.name}}/{{attach.size}}</span>
-							</p>
+								<span class="form-trap empty-txt"
+									  v-show="item.attachList&&item.attachList.length==0">无</span>
+								<i class="download-wrap clear">
+									<a class="form-trap file-download pointer ani-time left"
+									   v-for="attach in item.attachList" :href="g.param.ossUrl + attach.fileName"
+									   download>
+										{{attach.name}}/{{attach.size}}</a>
+								</i>
 							</p>
 							<p class="from-group  clear">
 								<span class="form-title left">签批意见</span>
@@ -74,8 +79,9 @@
 								<span class="form-title">上传附件</span>
 								 <span class="form-trap up-btn pointer opp-up-btn">点击上传
 								<iframe name="fileUpload" v-if="hasIframe" class="iframe-wrap"
-										:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'/uploadApi.html'"></iframe>
-							</span>
+										:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"></iframe>
+								</span>
+								<span class="form-title error-msg">{{errMsg}}</span>
 							</p>
 							<p class="from-group clear relative file-wrap">
 							<span class="file-down"
@@ -83,7 +89,6 @@
 									class="del-txt pointer" @click="onClick_delBtn(attach.name,index)">删除</i></span>
 
 							</p>
-							<p class="err-msg">{{errMsg}}</p>
 							<p class="from-group clear examine-people" v-if="businessData.hasNext && status == 1">
 								<span class="exam-btn pointer" @click="onClick_selectNext">选择后续人</span>
 								<span v-for="item in childList" class="choose-people">{{item.name}}<i
@@ -264,10 +269,10 @@
 					_params.pendingAuditorName = _childName.join(';');
 					this.errMsg = "";
 				}
-				if(this.businessData.mustFill && this.idList.length  == 0)
+				if (this.businessData.mustFill && this.idList.length == 0)
 				{
 					this.errMsg = "后续选择人员为必填";
-					return ;
+					return;
 				}
 				g.ui.showLoading();
 				g.net.call("bo/saveAuditRecord", _params).then(($data) =>
@@ -335,6 +340,12 @@
 			font-weight: normal !important;
 			line-height: 30px;
 			vertical-align: top;
+		}
+		.error-msg {
+			font-size: 14px;
+			color: #ed5564;
+			width: auto;
+			padding-left: 15px;
 		}
 		.empty-txt {
 			font-weight: bold !important;

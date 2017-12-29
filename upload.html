@@ -52,8 +52,6 @@
 </form>
 </body>
 <script>
-	var accessUrl = "http://121.41.80.45:8001/file/upload";
-	//	var accessUrl = "http://192.168.12.219:8001/file/upload";
 	//  .doc .docx  .xls .xlsx  .ppt .pptx  .txt   .jpg  .png  .rar
 	//  png ,jpg,jpeg
 
@@ -91,7 +89,7 @@
 			console.dir(fileType);
 			if (fileSize > 10)
 			{
-				window.parent.sendMsg("error", {msg: "文件限制大小为10M以内",type:urlData.query.subType});
+				window.parent.sendMsg("error", {msg: "文件限制大小为10M以内", type: urlData.query.subType});
 				window.history.go();
 				return;
 			}
@@ -99,7 +97,7 @@
 			{
 				if (fileExtList.indexOf(fileType) < 0)
 				{
-					window.parent.sendMsg("error", {msg: "文件类型不正确，请重新上传",type:urlData.query.subType})
+					window.parent.sendMsg("error", {msg: "文件类型不正确，请重新上传", type: urlData.query.subType})
 					window.history.go();
 					return;
 				}
@@ -108,17 +106,15 @@
 			{
 				if (picExtList.indexOf(fileType) < 0)
 				{
-					window.parent.sendMsg("error", {msg: "文件类型不正确，请重新上传",type:urlData.query.subType})
+					window.parent.sendMsg("error", {msg: "文件类型不正确，请重新上传", type: urlData.query.subType})
 					window.history.go()
 					return;
 				}
 			}
-
+			console.log(urlData.query);
 			window.parent.sendMsg("info", {name: fileName, type: urlData.query.subType});
-			$("#form1")[0].action = (urlData.query.access || accessUrl)  + "?type=" + urlData.query.type +
-		"&fileName=" +
-					fileName +
-					"&redirectUrl=" + urlData.query.redirectUrl;
+			$("#form1")[0].action = urlData.query.access + "?type=" + urlData.query.type +
+					"&fileName=" + fileName + "&redirectUrl=" + urlData.query.redirectUrl;
 			$("#submit").click();
 		}
 	}

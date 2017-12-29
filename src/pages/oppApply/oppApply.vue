@@ -155,11 +155,8 @@
 </script>
 <style type="text/css" lang="sass" rel="stylesheet/css" scoped>
 	.apply-wrap {
-		padding: 20px 44px 50px 44px;
+		padding: 20px 44px 50px 24px;
 	}
 
 	@import "../../css/oppApply.scss";
-	.personal-form .search-input .input-con{
-		width: 500px;
-	}
 </style>

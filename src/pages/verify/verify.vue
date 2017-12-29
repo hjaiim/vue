@@ -10,7 +10,7 @@
 						<div class="absolute upload-btn">
 							<p class="load-text">修改头像</p>
 							<iframe class="iframe-btn" name="fileUpload"
-									:src="g.path.base+'/upload.html?type=pic&subType=avatar&redirectUrl='+g.path.base+'/uploadApi.html'"
+									:src="g.path.base+'/upload.html?type=pic&subType=avatar&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"
 									id="avatar" v-if="avatar == 'default.png'"
 							></iframe>
 							<img v-if="avatar != 'default.png'" :src="g.path.images+'/del-head.png'" alt=""
@@ -99,7 +99,7 @@
 							   v-model="remark" @focus="onFocus_inputBar('remark')"
 							   :errmsg="errData.remark"></input-bar>
 				</div>
-				<div class="personal-form relative" :class="authStatus != 0 ?'disabled':''">
+				<div class="personal-form relative" :class="!canEdit ?'disabled':''">
 					<span class="personal-title left">身份证照</span>
 					<p class="err-msg absolute"> {{errData.idCardBack || errData.idCardFront}}</p>
 					<div class="left relative upload-box pointer">
@@ -111,7 +111,7 @@
 							<img class="img-url " :src="idCardFront?g.param.ossUrl+idCardFront:''" alt="">
 						</div>
 						<iframe class="pointer" name="fileUpload"
-								:src="g.path.base+'/upload.html?type=pic&subType=idCardFront&redirectUrl='+g.path.base+'/uploadApi.html'"
+								:src="g.path.base+'/upload.html?type=pic&subType=idCardFront&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"
 								v-if="!idCardFront" id="idCardFront"></iframe>
 						<span class="del-img pointer" :class="idCardFront?'hover-img':''"
 							  @click="onClick_deleteImg('idCardFront')"></span>
@@ -125,14 +125,14 @@
 							<img class="img-url " :src="idCardBack?g.param.ossUrl+idCardBack:''" alt="">
 						</div>
 						<iframe class="pointer" name="fileUpload"
-								:src="g.path.base+'/upload.html?type=pic&subType=idCardBack&redirectUrl='+g.path.base+'/uploadApi.html'"
+								:src="g.path.base+'/upload.html?type=pic&subType=idCardBack&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"
 								v-if="!idCardBack" id="idCardBack"></iframe>
 						<span class="del-img pointer" :class="idCardBack?'hover-img':''"
 							  @click="onClick_deleteImg('idCardBack')"></span>
 					</div>
 
 				</div>
-				<div class="personal-form relative" :class="authStatus != 0 ?'disabled':''">
+				<div class="personal-form relative" :class="!canEdit?'disabled':''">
 					<p class="err-msg absolute"> {{errData.workCard}}</p>
 					<span class="personal-title left">工作证照</span>
 					<div class="left relative upload-box pointer">
@@ -144,12 +144,13 @@
 								不超过5M</br>
 								</span>
 							</p>
+
 						</div>
 						<div class="img-contain absolute" v-show="workCard">
 							<img class="img-url " :src="workCard?g.param.ossUrl+workCard:''" alt="">
 						</div>
 						<iframe class="pointer" name="fileUpload"
-								:src="g.path.base+'/upload.html?type=pic&subType=workCard&redirectUrl='+g.path.base+'/uploadApi.html'"
+								:src="g.path.base+'/upload.html?type=pic&subType=workCard&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"
 								id="workCard" v-if="!workCard"></iframe>
 						<span class="del-img pointer" :class="workCard?'hover-img':''"
 							  @click="onClick_deleteImg('workCard')"></span>
@@ -267,7 +268,6 @@
 			},
 			sendMsg($type, $info)
 			{
-				debugger;
 				if ($type == "error")
 				{
 					this.errData[$info.type] = $info.msg;
