@@ -82,7 +82,7 @@
 				<div class="personal-form"><span class="personal-title">确认密码</span>
 					<input-bar class="personal-content pensonal-input" placeholder="" type="password"
 							   v-model="confirmPwd" :errmsg="errData.confirmPwd"
-							   @focus="onFocus_inputBar('confirmPwd')"></input-bar>
+							   @focus="onFocus_inputBar('confirmPwd')" @keyenter="onClick_updatePwd"></input-bar>
 				</div>
 				<div class="btn btn-save pointer action-btn ani-time" @click="onClick_updatePwd">保存</div>
 			</div>

@@ -517,7 +517,7 @@ input {
 		color: #8de1c1;
 	  }
 	  .action-menu {
-		padding-right: 32%;
+		padding-right: 30%;
 		text-align: right;
 		span {
 		  color: #61a4de;
@@ -603,7 +603,7 @@ input {
 	clear: both;
   }
   .personal-title {
-	width: 118px;
+	width: 98px;
 	height: 38px;
 	line-height: 38px;
 	text-align: right;
@@ -670,7 +670,7 @@ input {
 	}
 
   }
-  &.diff-margin{
+  &.diff-margin {
 	margin-top: 12px;
   }
 }
@@ -1009,7 +1009,8 @@ input {
   }
 
 }
-.arrow-rotate{
+
+.arrow-rotate {
   -webkit-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);

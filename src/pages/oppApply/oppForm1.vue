@@ -80,8 +80,9 @@
 					   :class="formData.callTypeList.indexOf('单呼')>=0?'action':''"></i>
                     <span>单呼</span>
                 </span>
-				<span>{{errData.callTypeList}}</span>
-				<span class="explain">双呼/单呼（请选择一种或多种）</span>
+				<span class="explain">双呼/单呼</span>
+				<span class="explain error-msg">{{errData.callTypeList}}</span>
+
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">发起方式</span>
@@ -163,11 +164,11 @@
                	<iframe class="iframe-wrap absolute pointer" name="fileUpload" v-if="hasIframe"
 						:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"></iframe>
                 </span>
+				<span class="err-msg">{{errData.attach}}</span>
 				<span class="complate-upload-file"
 					  v-for="(attach,index) in attachList">{{attach.name}}/{{attach.size}}kB;
 					<i class="del-file pointer"
 					   @click="onClick_delBtn(attach.name,index)">删除</i></span>
-				<span class="err-msg">{{errData.attach}}</span>
 			</div>
 		</div>
 		<div class="btn btn-save pointer action-btn ani-time" @click="onClick_submitBtn">提交</div>
@@ -218,7 +219,7 @@
 						{
 							this.formData[hash[key]] = formData[key].split("*")[0];
 						}
-						if(key ==="呼叫模式")
+						if (key === "呼叫模式")
 						{
 							this.formData[hash[key]] = formData[key].split("和");
 						}
@@ -298,11 +299,19 @@
 					name: _attach.name
 				};
 				_attach.name = "";
-				this.attachList.push(attach);
-				setTimeout(()=>
+				if (this.attachList.length >= 10)
 				{
-					this.hasIframe = true;
-				}, 200)
+					this.errData.attach = "您已到达附件上传上限，无法继续上传";
+					return;
+				}
+				else
+				{
+					this.attachList.push(attach);
+					setTimeout(()=>
+					{
+						this.hasIframe = true;
+					}, 200)
+				}
 			},
 			onFocus_inputBar($type)
 			{
@@ -370,6 +379,8 @@
 				}, (err) =>
 				{
 					this.attachList.splice($index, 1);
+					this.errData.attach = "";
+					this.hasIframe = true;
 				})
 			},
 			checkValid()
@@ -422,9 +433,12 @@
 	}
 </script>
 <style type="text/css" lang="sass" rel="stylesheet/css" scoped>
+
+	@import "../../css/oppApply.scss";
+
 	.apply-wrap {
 		padding: 20px 44px 50px 24px;
 	}
 
-	@import "../../css/oppApply.scss";
+
 </style>

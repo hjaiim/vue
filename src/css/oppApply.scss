@@ -4,7 +4,11 @@
   float: left;
   font-size: 12px;
   margin-left: 10px;
+  &.error-msg{
+	color: #ed5564;
+  }
 }
+
 
 .lang-explain {
   display: block;
@@ -20,8 +24,15 @@
     line-height: 40px;
   }
 }
+.apply-wrap{
+  .personal-form{
+	.personal-title{
+	  width: 118px;
+	}
+  }
+}
 
-.large-input {
+.personal-form .large-input {
   width: 58%;
 }
 
