@@ -89,8 +89,8 @@
 				<div class="user-item left clear">
 					<span class="user-tit left diff-distancre">工作照</span>
 					<div class="user-txt left diff-frame">
-						<div class="card-wrap left work-wrap">
-							<img :src="g.param.ossUrl+accountData.workCard" alt="" @click="onClick_imgBtn('workCard')">
+						<div class="card-wrap left work-wrap pointer" @click="onClick_imgBtn('workCard')">
+							<img :src="g.param.ossUrl+accountData.workCard" alt="" >
 						</div>
 					</div>
 				</div>
