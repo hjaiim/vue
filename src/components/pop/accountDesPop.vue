@@ -90,7 +90,7 @@
 					<span class="user-tit left diff-distancre">工作照</span>
 					<div class="user-txt left diff-frame">
 						<div class="card-wrap left work-wrap pointer" @click="onClick_imgBtn('workCard')">
-							<img :src="g.param.ossUrl+accountData.workCard" alt="" >
+							<img :src="g.param.ossUrl+accountData.workCard" alt="">
 						</div>
 					</div>
 				</div>
@@ -252,17 +252,27 @@
 						max-height: 92px;
 
 					}
+					.img-wrap {
+						img {
+							display: block;
+							height: 100%;
+							width: auto;
+						}
+					}
 					.card-wrap {
-						width: 130px;
+						max-width: 200px;
 						height: 92px;
 						overflow: hidden;
 						margin-right: 35px;
 						-webkit-border-radius: 4px;
 						-moz-border-radius: 4px;
 						border-radius: 4px;
+						display: table-cell;
+						text-align: center;
+						vertical-align: middle;
 						img {
-							display: block;
-							width: 100%;
+							vertical-align: text-top;
+							height: 100%;
 						}
 					}
 					.work-wrap {
@@ -287,7 +297,7 @@
 
 				}
 				.diff-frame {
-					width: 418px;
+					width: 485px;
 					padding: 10px 0 10px;
 				}
 			}
