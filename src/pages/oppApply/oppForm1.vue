@@ -80,8 +80,8 @@
 					   :class="formData.callTypeList.indexOf('单呼')>=0?'action':''"></i>
                     <span>单呼</span>
                 </span>
-				<span>{{errData.callTypeList}}</span>
-				<span class="explain">双呼/单呼（请选择一种或多种）</span>
+				<span  class="explain error-msg">{{errData.callTypeList}}</span>
+				<!--<span>双呼/单呼（请选择一种或多种）</span>-->
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">发起方式</span>

@@ -4,7 +4,11 @@
   float: left;
   font-size: 12px;
   margin-left: 10px;
+  &.error-msg{
+	color: #ed5564;
+  }
 }
+
 
 .lang-explain {
   display: block;
