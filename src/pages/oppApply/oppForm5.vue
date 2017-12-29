@@ -240,7 +240,7 @@
 					{
 						if (!this.formData[item[key]] && item[key] != "remark")
 						{
-							this.errData[item[key]] = "请填写" + key;
+							this.errData[item[key]] = "内容不能为空";
 							_isValid = false;
 						}
 						if (item[key] == "cusPhone"
