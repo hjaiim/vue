@@ -1,6 +1,7 @@
 <template>
 	<div class="search-input relative">
-		<input @blur="onBlur_accountInput" :type="type" @focus="onFocus_inputFocus" class="input-con"
+		<input id="inputCon" contenteditable="true" @blur="onBlur_accountInput" :type="type" @focus="onFocus_inputFocus"
+			   class="input-con"
 			   :placeholder="placeholder" @input="onInput_value" @keyup.enter="onKeyupEnter_searchInput"
 			   v-model="inputContent" :maxLength="maxLength" :disabled="readonly" autocomplete="off"
 			   :class="readonly?'only-read':''">
@@ -88,7 +89,7 @@
 			{
 				this.inputContent = "";
 				this.$emit('input', this.inputContent);
-			}
+			},
 		}
 	}
 </script>

@@ -7,28 +7,28 @@
 				<div class="company-message">
 					<p class="from-group">
 						<span class="form-title">公司名称</span>
-						<input-bar class="form-control " :class="currentId != 0?'company-input':''" placeholder=""
+						<input-bar class="form-control " :class="isEdit?'company-input':''" placeholder=""
 								   type="text" :readonly="isEdit"
 								   v-model="name" :errmsg="errData.name" @focus="onFocus_inputBar('name')"></input-bar>
 						<span class="requied" v-show="!isEdit">*</span>
 					</p>
 					<p class="from-group">
 						<span class="form-title">公司电话</span>
-						<input-bar class="form-control" placeholder="" type="text" :readonly="isEdit"
+						<input-bar class="form-control" placeholder=""  :class="isEdit?'company-input':''" type="text" :readonly="isEdit"
 								   v-model="telphone" :errmsg="errData.telphone"
 								   @focus="onFocus_inputBar('telphone')"></input-bar>
 						<span class="requied" v-show="!isEdit">*</span>
 					</p>
 					<p class="from-group">
 						<span class="form-title">公司负责人</span>
-						<input-bar class="form-control" placeholder="" type="text" :readonly="isEdit"
+						<input-bar class="form-control"  :class="isEdit?'company-input':''" placeholder="" type="text" :readonly="isEdit"
 								   v-model="leader" :errmsg="errData.leader"
 								   @focus="onFocus_inputBar('leader')"></input-bar>
 						<span class="requied" v-show="!isEdit">*</span>
 					</p>
 					<p class="from-group">
 						<span class="form-title">负责人电话</span>
-						<input-bar class="form-control" placeholder="" type="text" :readonly="isEdit"
+						<input-bar class="form-control"  :class="isEdit?'company-input':''" placeholder="" type="text" :readonly="isEdit"
 								   v-model="phone" :errmsg="errData.phone"
 								   @focus="onFocus_inputBar('phone')"></input-bar>
 						<span class="requied" v-show="!isEdit">*</span>
