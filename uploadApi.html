@@ -11,10 +11,10 @@
 	//	var evt = new Event("UPLOAD_FILE");
 	//	evt.data = "{$fileName}";
 	var urlObj = queryUrl(window.location.href);
-	var fileName  = urlObj.query.fileName;
+	var fileName = urlObj.query.fileName;
 	var data = {
-		fileName:fileName,
-		size:(urlObj.query.size/1000).toFixed(2)
+		fileName: fileName,
+		size: (urlObj.query.size / 1000).toFixed(2)
 	};
 	window.parent.uploadComplete(data);
 	//	window.dispatchEvent(evt)
