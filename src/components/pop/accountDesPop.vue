@@ -341,8 +341,9 @@
 			border-radius: 5px;
 			.detail-img {
 				-webkit-user-select: none;
+				min-width: 480px;
+				max-height: 70%;
 				max-width: 100%;
-				max-height: 100%;
 				background-position: 0px 0px, 10px 10px;
 				background-size: 20px 20px;
 				background-image: linear-gradient(45deg, #eeeeee 25%, transparent 25%, transparent 75%, #eeeeee 75%, #eeeeee 100%), linear-gradient(45deg, #eeeeee 25%, white 25%, white 75%, #eeeeee 75%, #eeeeee 100%);
