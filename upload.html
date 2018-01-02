@@ -115,6 +115,7 @@
 			window.parent.sendMsg("info", {name: fileName, type: urlData.query.subType});
 			$("#form1")[0].action = urlData.query.access + "?type=" + urlData.query.type +
 					"&fileName=" + fileName + "&redirectUrl=" + urlData.query.redirectUrl;
+			debugger;
 			$("#submit").click();
 		}
 	}

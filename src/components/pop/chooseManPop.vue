@@ -23,7 +23,7 @@
 					<li class="left">状态</li>
 				</ul>
 				<div class="list-wrap">
-					<div class="list-wrap" is="scroll-group">
+					<div class="list-wrap" is="scroll-group" ref="scrollCon">
 						<div class="inner-content" v-for="item in manList">
 							<p class="deal-staff border-bottom" @click="onClick_arrowBtn(item.id)">{{item.name}}
 								<span class="right arrow-wrap center-flex pointer">
@@ -61,6 +61,10 @@
 	export default{
 		created(){
 			this.init();
+			this.$nextTick(() =>
+			{
+				this.$refs['scrollCon'].refresh('0px');
+			})
 		},
 		data(){
 			return {

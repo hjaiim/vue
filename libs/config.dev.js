@@ -68,7 +68,7 @@ var WEB_CONFIG = {
 		telphoneReg: /(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,8}/,
 		emailReg: /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
 		codeReg: /\d{4}/,
-		ossUrl: "http://test.boms.huanwuh5.com/boms/upload/2018-1-2/",
+		ossUrl: "http://test.boms.huanwuh5.com/boms/upload/",
 		uploadAccess: "http://192.168.12.219:8001/file/upload",
 		delPicAccess: "http://192.168.12.219:8001/file/del",
 		timeoutClock:10,

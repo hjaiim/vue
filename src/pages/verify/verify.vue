@@ -93,11 +93,14 @@
 							   :readonly="!canEdit"
 							   v-model="email" @focus="onFocus_inputBar('email')" :errmsg="errData.email"></input-bar>
 				</div>
-				<div class="personal-form"><span class="personal-title left">备注</span>
-					<input-bar class="personal-content pensonal-input note left" placeholder="" type="text"
-							   :readonly="!canEdit"
-							   v-model="remark" @focus="onFocus_inputBar('remark')"
-							   :errmsg="errData.remark"></input-bar>
+				<div class="personal-form relative"><span class="personal-title left relative">备注</span>
+					<textarea id="textarea" contenteditable="true"
+							  class="pensonal-input note left"
+							  placeholder=""
+							  v-model="remark"
+							  :readonly="!canEdit"
+							  @focus="onFocus_inputBar('remark')" :class="!canEdit?'disbaled-pointer':''"></textarea>
+					<p class="err-msg absolute"> {{errData.remark}}</p>
 				</div>
 				<div class="personal-form relative" :class="!canEdit ?'disabled':''">
 					<span class="personal-title left">身份证照</span>
@@ -154,6 +157,7 @@
 								id="workCard" v-if="!workCard"></iframe>
 						<span class="del-img pointer" :class="workCard?'hover-img':''"
 							  @click="onClick_deleteImg('workCard')"></span>
+
 					</div>
 				</div>
 				<div class="btn btn-save pointer action-btn ani-time " @click="onClick_submitBtn"
@@ -166,6 +170,7 @@
 </template>
 <script type="text/ecmascript-6">
 	import g from "../../global";
+	import * as util from '../../js/func'
 	import ComLayout from "../../components/comLayout.vue";
 	import UploadBtn from "../../components/upload.vue";
 	import InputBar from "../../components/inputBar.vue";
@@ -175,6 +180,11 @@
 	export default{
 		created(){
 			this.init();
+			this.$nextTick(()=>
+			{
+				var text = document.getElementById("textarea");
+				util.autoTextarea(text);// 调用
+			})
 		},
 		data(){
 			return {
@@ -521,7 +531,7 @@
 					this.errData.email = "邮箱格式不正确";
 					_isValid = false;
 				}
-				if(this.remark && this.remark.length >= 200)
+				if (this.remark && this.remark.length >= 200)
 				{
 					this.errData.remark = "字符长度超出限制，最多可输入200字符";
 					_isValid = false;

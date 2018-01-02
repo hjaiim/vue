@@ -14,7 +14,8 @@
 		created(){
 			this.$nextTick(() =>
 			{
-				this.initBar()
+				this.initBar();
+//				this.refresh(0);
 			})
 		},
 		data(){

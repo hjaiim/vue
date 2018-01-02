@@ -61,13 +61,15 @@
 					<input-bar class="personal-content pensonal-input" placeholder="" type="text"
 							   v-model="email" :errmsg="errData.email" @focus="onFocus_inputBar('email')"></input-bar>
 				</p>
-				<p class="personal-form"><span class="personal-title">备注</span>
-					<input-bar class="personal-content pensonal-input note" placeholder="" type="text"
-							   v-model="remark" :errmsg="errData.remark"
-							   @focus="onFocus_inputBar('remark')"></input-bar>
+				<div class="personal-form relative">
+					<span class="personal-title">备注</span>
+					<textarea id="textarea" contenteditable="true" class="pensonal-input note" placeholder=""
+							  v-model="remark"
+							  @focus="onFocus_inputBar('remark')"></textarea>
+					<p class="err-msg absolute"> {{errData.remark}}</p>
+				</div>
 				<div class="btn btn-save pointer action-btn ani-time" @click="onClick_savePersonal">保存</div>
 			</div>
-
 			<div class="personal-message" v-show="type=='modpwd'">
 				<div class="personal-form"><span class="personal-title">原密码</span>
 					<input-bar class="personal-content pensonal-input" placeholder="" type="password"
@@ -83,6 +85,7 @@
 					<input-bar class="personal-content pensonal-input" placeholder="" type="password"
 							   v-model="confirmPwd" :errmsg="errData.confirmPwd"
 							   @focus="onFocus_inputBar('confirmPwd')" @keyenter="onClick_updatePwd"></input-bar>
+
 				</div>
 				<div class="btn btn-save pointer action-btn ani-time" @click="onClick_updatePwd">保存</div>
 			</div>
@@ -91,6 +94,7 @@
 </template>
 <script type="text/ecmascript-6">
 	import g from "../../global";
+	import * as util from '../../js/func'
 	import ComLayout from "../../components/comLayout.vue"
 	import PercenterTab from "../../components/percenterTab.vue"
 	import InputBar from "../../components/inputBar.vue"
@@ -100,6 +104,11 @@
 	export default{
 		created(){
 			this.routerUpdated();
+			this.$nextTick(()=>
+			{
+				var text = document.getElementById("textarea");
+				util.autoTextarea(text);// 调用
+			})
 		},
 		data(){
 			return {
@@ -349,7 +358,7 @@
 					_isValid = false;
 				}
 
-				if(this.remark && this.remark.length >= 200)
+				if (this.remark && this.remark.length >= 200)
 				{
 					this.errData.remark = "字符长度超出限制，最多可输入200字符";
 					_isValid = false;

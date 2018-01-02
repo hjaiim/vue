@@ -64,7 +64,7 @@ var WEB_CONFIG = {
 		telReg:/(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,8}/,
 		emailReg:/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
 		codeReg:/\d{4}/,
-		ossUrl: "http://boms.ourpaas.com/file/download//2018-1-2/",
+		ossUrl: "http://boms.ourpaas.com/file/download/2018-1-2/",
 		uploadAccess: "http://boms.ourpaas.com/file/upload",
 		delPicAccess: "http://boms.ourpaas.com/file/del",
 		timeoutClock:10,
