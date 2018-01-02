@@ -1,6 +1,6 @@
 <template>
 	<transition name="fade">
-		<div class="select-wrap center-flex fixed" v-if="isShowViewPop">
+		<div class="select-wrap center-flex fixed" v-show="isShowViewPop">
 			<div class="choose-wrap">
 				<p class="pop-tit border-bottom">选择人员</p>
 				<div class="man-wrap clear border-bottom">
@@ -22,7 +22,6 @@
 					<li class="left">状态</li>
 				</ul>
 				<div class="list-wrap">
-					{{manList}}
 					<div class="list-wrap" is="scroll-group" ref="scrollCon">
 						<div class="inner-content" v-for="item in manList">
 							<p class="deal-staff border-bottom" @click="onClick_arrowBtn(item.id)">{{item.name}}
@@ -99,15 +98,14 @@
 			}
 		},
 		watch: {
-//			isShowViewPop($val)
-//			{
-//				this.init();
-//			}
+			isShowViewPop($val)
+			{
+				this.init();
+			}
 		},
 		methods: {
 			init()
 			{
-				debugger;
 				this.manList = g.data.staffPool.list;
 				this.childList = __merge([], this.idList);
 				for (var item of this.manList)

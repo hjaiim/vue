@@ -404,6 +404,12 @@
 							this.errData[item[key]] = "联系电话格式有误";
 							_isValid = false;
 						}
+
+						if (item[key] == "cusCompName" && this.formData[item[key]].length > 30)
+						{
+							this.errData[item[key]] = "公司名称过长";
+							_isValid = false;
+						}
 					}
 				}
 				this.$forceUpdate();

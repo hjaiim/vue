@@ -72,7 +72,7 @@ var WEB_CONFIG = {
 		uploadAccess: "http://192.168.12.219:8001/file/upload",
 		delPicAccess: "http://192.168.12.219:8001/file/del",
 		timeoutClock:10,
-		pageSize:1
+		pageSize:10
 	}
 };
 

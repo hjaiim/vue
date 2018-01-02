@@ -70,6 +70,11 @@
 									<i class="draw-round pointer" :class="status == 2?'action':''"></i>
 									<span class="pointer">退回</span>
 								</span>
+									<span class="action-box status-type left pointer" @click="onClick_statusItem(3)"
+										  v-if="businessData.hasFinished">
+									<i class="draw-round pointer" :class="status == 3?'action':''"></i>
+									<span class="pointer">结束</span>
+								</span>
 							</p>
 							<p class="from-group clear" v-if="businessData.hasOpinion">
 								<span class="form-title left">  <i class="leader"></i>签批意见</span>
@@ -96,7 +101,6 @@
 										class="close-search-btn absolute pointer"
 										@click="onClick_cancelBtn(item.id)"></i></span>
 							</p>
-
 						</div>
 					</div>
 				</div>
@@ -194,7 +198,7 @@
 				this.idList = [];
 				this.attachList = [];
 				this.errMsg = '';
-
+				this.isShowOrderManPop = false;
 				if (this.currId)
 				{
 					this.businessData = g.data.searchBusinessPool.getDataById(this.currId);
@@ -331,7 +335,7 @@
 				this.idList.splice(index, 1);
 				var data = g.data.staffPool.getChildById($id);
 				data.update({checked: false});
-			},
+			}
 		}
 	}
 </script>

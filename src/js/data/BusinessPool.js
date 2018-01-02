@@ -1,7 +1,7 @@
 var _list = [], _hash = {};
 var _total = 0, _totalPage = 1;
 var _recordHash = {};
-import g from './../../global';
+import g from "./../../global";
 export default class BusinessPool {
 	constructor()
 	{
@@ -111,6 +111,7 @@ function createData($dObj)
 	d.hasApproved = false;
 	d.hasRejected = false;
 	d.hasOpinion = false;
+	d.hasFinished = false;
 	d.hasNext = false;
 	d.mustFill = false;
 	d.hasAttaches = false;
@@ -145,9 +146,13 @@ function updateData($dObj, $recordId)
 	$dObj.hasOwnProperty("taskProperties") && (this.taskProperties = __merge({}, JSON.parse($dObj.taskProperties)));
 	if (this.taskProperties.process_button)
 	{
-		this.hasApproved = !!this.taskProperties.process_button.split(";")[0];
-		this.hasRejected = !!this.taskProperties.process_button.split(";")[1];
+		var btnList = this.taskProperties.process_button.split(";");
+		this.hasApproved = btnList.indexOf("approve") >= 0;
+		this.hasRejected = btnList.indexOf("rollback") >= 0;
+		this.hasFinished = btnList.indexOf("reject_finish") >= 0;
 	}
+
+
 	if (this.taskProperties)
 	{
 		this.hasOpinion = !!int(this.taskProperties.process_opinion);

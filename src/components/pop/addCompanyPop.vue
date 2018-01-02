@@ -61,7 +61,7 @@
 							<span>
 								<input-bar class="form-control" placeholder="" type="text"
 										   v-model="duty.name" :readonly="!duty.isEdit"></input-bar>
-								<img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer"cd release
+								<img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer" cd release
 									 @click="onClick_editDuty(duty)" v-if="!duty.isEdit">
 								<span class="pointer btn-save  ani-time" @click="onClick_saveDuty(duty,'duty')"
 									  v-if="duty.isEdit">保存</span>
@@ -339,9 +339,15 @@
 				this.isEdit = false;
 			},
 			checkValid()
-			{if (!this.name)
+			{
+				if (!this.name)
 				{
 					this.errData.name = "请输入公司名称";
+					_isValid = false;
+				}
+				if (this.name.length > 30)
+				{
+					this.errData.name = "公司名称过长";
 					_isValid = false;
 				}
 				if (!this.leader)
