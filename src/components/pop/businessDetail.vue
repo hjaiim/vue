@@ -282,11 +282,12 @@
 					_params.pendingAuditorName = _childName.join(';');
 
 				}
-				if (this.businessData.mustFill && this.idList.length == 0)
+				if (this.status == 1 && this.businessData.mustFill && this.idList.length == 0)
 				{
 					this.errMsg = "请至少选择一名候选人";
 					return;
 				}
+
 				g.ui.showLoading();
 				g.net.call("bo/saveAuditRecord", _params).then(($data) =>
 				{

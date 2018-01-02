@@ -141,11 +141,7 @@
 				this.isShowRolePop = false;
 				if ($result)
 				{
-					_params = {
-						page: 1,
-						pageSize: g.param.pageSize
-					};
-					searchRoleList(_params).then(() =>
+					searchRoleList(g.currentRoute.query).then(() =>
 					{
 						this.routerUpdated();
 					})

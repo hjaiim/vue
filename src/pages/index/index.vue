@@ -349,6 +349,11 @@
 					_isValid = false;
 				}
 
+				if(this.remark && this.remark.length >= 200)
+				{
+					this.errData.remark = "字符长度超出限制，最多可输入200字符";
+					_isValid = false;
+				}
 				if (this.email && !g.param.emailReg.test(this.email))
 				{
 					this.errData.email = "邮箱格式不正确";

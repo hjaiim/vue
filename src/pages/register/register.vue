@@ -9,7 +9,8 @@
 			<form-input type="password" placeholder="请输入密码" v-model="password" :errmsg="errData.password"
 						@focus="onFocus_formInput('password')"></form-input>
 			<form-input type="password" placeholder="请再次确认输入" v-model="confirmPwd"
-						@focus="onFocus_formInput('confirmPwd')" :errmsg="errData.confirmPwd" @keyenter="onClick_registerBtn"></form-input>
+						@focus="onFocus_formInput('confirmPwd')" :errmsg="errData.confirmPwd"
+						@keyenter="onClick_registerBtn"></form-input>
 			<div class="pointer login-btn resetPwd-top ani-time" @click="onClick_registerBtn">注册</div>
 			<div class="link-keys">已有账号？<span class="ani-time pointer" @click="onClick_loginBtn">登录>></span>
 			</div>
@@ -77,6 +78,12 @@
 				}, (err) =>
 				{
 					this.errData.confirmPwd = err.errorMsg;
+					setTimeout(() =>
+					{
+						this.errData.confirmPwd = "";
+					}, 1500);
+
+
 					this.$forceUpdate();
 				})
 			},

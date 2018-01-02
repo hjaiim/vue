@@ -185,7 +185,7 @@
 			onClose_companyPop($result)
 			{
 				this.isShowCompanyPop = false;
-				searchCompanyList().then(() =>
+				searchCompanyList(g.currentRoute.query).then(() =>
 				{
 					this.routerUpdated();
 				});

@@ -125,6 +125,10 @@
 				{
 					g.ui.hideLoading();
 					this.errData.confirmPwd = err.errorMsg;
+					setTimeout(() =>
+					{
+						this.errData.confirmPwd = "";
+					}, 1500);
 					this.$forceUpdate();
 				})
 			},

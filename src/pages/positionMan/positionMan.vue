@@ -139,11 +139,7 @@
 				this.isShowPostPop = false;
 				if ($result)
 				{
-					_params = {
-						page: this.currPage,
-						pageSize: g.param.pageSize
-					};
-					searchPositionList(_params).then(() =>
+					searchPositionList(g.currentRoute.query).then(() =>
 					{
 						this.routerUpdated();
 					})

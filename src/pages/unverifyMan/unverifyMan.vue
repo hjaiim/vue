@@ -141,7 +141,7 @@
 				this.isShowDetailPop = false;
 				if ($result)
 				{
-					searchUnverifyList().then(() =>
+					searchUnverifyList(g.currentRoute.query).then(() =>
 					{
 						this.routerUpdated();
 					})
