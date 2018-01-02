@@ -1,6 +1,6 @@
 <template>
 	<transition name="fade">
-		<div class="select-wrap center-flex fixed" v-show="isShowViewPop">
+		<div class="select-wrap center-flex fixed" v-if="isShowViewPop">
 			<div class="choose-wrap">
 				<p class="pop-tit border-bottom">选择人员</p>
 				<div class="man-wrap clear border-bottom">
@@ -12,7 +12,6 @@
 												@click="onClick_delBtn(item.id)"></i></span>
 						</li>
 					</ul>
-
 				</div>
 				<ul class="list-menu border-bottom clear">
 					<li class="left">头像</li>
@@ -23,6 +22,7 @@
 					<li class="left">状态</li>
 				</ul>
 				<div class="list-wrap">
+					{{manList}}
 					<div class="list-wrap" is="scroll-group" ref="scrollCon">
 						<div class="inner-content" v-for="item in manList">
 							<p class="deal-staff border-bottom" @click="onClick_arrowBtn(item.id)">{{item.name}}
@@ -61,10 +61,7 @@
 	export default{
 		created(){
 			this.init();
-			this.$nextTick(() =>
-			{
-				this.$refs['scrollCon'].refresh('0px');
-			})
+			trace(111111);
 		},
 		data(){
 			return {
@@ -102,14 +99,15 @@
 			}
 		},
 		watch: {
-			isShowViewPop($val)
-			{
-				this.init();
-			}
+//			isShowViewPop($val)
+//			{
+//				this.init();
+//			}
 		},
 		methods: {
 			init()
 			{
+				debugger;
 				this.manList = g.data.staffPool.list;
 				this.childList = __merge([], this.idList);
 				for (var item of this.manList)
@@ -126,6 +124,10 @@
 						}
 					}
 				}
+				this.$nextTick(() =>
+				{
+					this.$refs['scrollCon'] && this.$refs['scrollCon'].refresh(0);
+				})
 			},
 			onClick_delBtn($id)
 			{
