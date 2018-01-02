@@ -107,7 +107,6 @@
 		methods: {
 			init()
 			{
-				debugger;
 				this.manList = g.data.staffPool.list;
 				this.childList = __merge([], this.idList);
 				for (var item of this.manList)
