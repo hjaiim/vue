@@ -3,7 +3,7 @@
  */
 var _list = [], _hash = {}, _idList = [];
 var _total = 0, _totalPage = 1;
-import g from './../../global';
+import g from "./../../global";
 export default class MessagePool {
 	constructor()
 	{
@@ -88,6 +88,7 @@ function createData($dObj)
 	d.id = 0;
 	d.userId = 0;
 	d.businessId = 0;
+	d.msgType = 0;
 	d.title = "";
 	d.source = "";
 	d.sourceDesc = "";
@@ -109,11 +110,15 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("relationId") && (this.businessId = $dObj.relationId);
 	$dObj.hasOwnProperty("msgTitle") && (this.title = $dObj.msgTitle);
 	$dObj.hasOwnProperty("msgSource") && (this.source = $dObj.msgSource);
+	$dObj.hasOwnProperty("msgType") && (this.msgType = $dObj.msgType);
 	$dObj.hasOwnProperty("msgSourceDesc") && (this.sourceDesc = $dObj.msgSourceDesc);
-	$dObj.hasOwnProperty("msgContent") && (this.desc = $dObj.msgContent);
 	$dObj.hasOwnProperty("sendTime") && (this.createTime = g.timeTool.getFullDate(int($dObj.sendTime), true));
 	$dObj.hasOwnProperty("readStatus") && (this.readStatus = $dObj.readStatus);
 	$dObj.hasOwnProperty("isShow") && (this.isShow = $dObj.isShow);
 	$dObj.hasOwnProperty("checked") && (this.checked = $dObj.checked);
-};
-
+	if ($dObj.hasOwnProperty("msgContent"))
+	{
+		var msgContent = $dObj.msgContent.split(" /*这里/* ");
+		this.desc = msgContent.join("<span class='pointer' onclick='onClick_msgItem(\"" + g.param.msgHash[this.msgType] + "\")'>这里</span>");
+	}
+}

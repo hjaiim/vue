@@ -196,7 +196,7 @@
 						this.selectPage = this.totalPage;
 					}
 				}
-				if ($val == 0)
+				if ($val === 0)
 				{
 					this.selectPage = 1;
 				}

@@ -56,19 +56,23 @@ var WEB_CONFIG = {
 	param: {
 		defaultLang: "cn",
 		loginExpires: 10 * 60,
-		sendCodeTime: 5,
 		phoneReg: /^1(3|4|5|7|8)\d{9}$/,
 		accountReg: /^[a-z0-9]{6,16}$/,
 		passwordReg: /^[a-z0-9]{6,16}$/,
 		nameReg:/^[\u2E80-\u9FFF]{2,10}/,
-		telReg:/(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,8}/,
+		telphoneReg:/(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,8}/,
 		emailReg:/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
 		codeReg:/\d{4}/,
-		ossUrl: "http://boms.ourpaas.com/file/download/2018-1-2/",
+		ossUrl: "http://boms.ourpaas.com/file/download/",
 		uploadAccess: "http://boms.ourpaas.com/file/upload",
 		delPicAccess: "http://boms.ourpaas.com/file/del",
-		timeoutClock:10,
-		pageSize:10
+		timeoutClock:60,
+		pageSize:10,
+		msgHash: {
+			"1002":"/oppman",
+			"1003":"/myopp",
+			"1004":"/myopp"
+		}
 	}
 }
 

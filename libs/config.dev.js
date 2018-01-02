@@ -68,11 +68,16 @@ var WEB_CONFIG = {
 		telphoneReg: /(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,8}/,
 		emailReg: /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
 		codeReg: /\d{4}/,
-		ossUrl: "http://test.boms.huanwuh5.com/boms/upload/",
+		ossUrl: "http://192.168.12.219:50001/",
 		uploadAccess: "http://192.168.12.219:8001/file/upload",
 		delPicAccess: "http://192.168.12.219:8001/file/del",
-		timeoutClock:10,
-		pageSize:10
+		timeoutClock: 10,
+		pageSize: 10,
+		msgHash: {
+			"1002":"/oppman",
+			"1003":"/myopp",
+			"1004":"/myopp"
+		}
 	}
 };
 

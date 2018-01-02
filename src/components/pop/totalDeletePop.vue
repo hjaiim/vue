@@ -6,7 +6,7 @@
 			<div class="sure-content absolute">
 				<div class="quesiton-txt">
 					<img :src="g.path.images+'/quesiton-icon.png'" alt="">
-					<span>您确定要删除全部消息？</span>
+					<span>您确定删除选中消息？</span>
 				</div>
 				<div class="btn-wrap clear">
 					<i class="action-btn right cancel-btn ani-time pointer"

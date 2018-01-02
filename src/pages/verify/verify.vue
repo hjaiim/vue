@@ -3,27 +3,27 @@
 		<div class="percenter-wrap">
 			<div class="percenter-inner" :class="canEdit?'':'disabled'">
 				<div class="icon-collect clear">
-
 					<div class="relative upload-head right pointer">
-						<img class="default-img" :src="g.param.ossUrl+avatar" alt="">
+						<img class="default-img" :src="avatar?g.param.ossUrl+avatar:g.path.images+'/default.png'"
+							 alt="">
 						<p class="err-msg absolute">{{errData.avatar}}</p>
 						<div class="absolute upload-btn">
-							<p class="load-text">修改头像</p>
+							<p class="load-text" v-if="!avatar">修改头像</p>
 							<iframe class="iframe-btn" name="fileUpload"
 									:src="g.path.base+'/upload.html?type=pic&subType=avatar&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"
-									id="avatar" v-if="avatar == 'default.png'"
+									id="avatar" v-if="!avatar"
 							></iframe>
-							<img v-if="avatar != 'default.png'" :src="g.path.images+'/del-head.png'" alt=""
+							<img v-if="avatar" :src="g.path.images+'/del-head.png'" alt=""
 								 class="del-head absolute pointer" @click="onClick_deleteImg('avatar')">
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="personal-message">
-				<div class="personal-form diff-personal diff-margin"><span class="personal-title ">登录用户名</span><span
+				<div class="personal-form diff-personal diff-margin">
+					<span class="personal-title ">登录用户名</span><span
 						class="personal-content">{{userInfo.username}}
-				</span>
-
+					</span>
 				</div>
 				<div class="personal-form diff-personal diff-margin"><span class="personal-title">姓名</span><span
 						class="personal-content">{{userInfo.name}}</span></div>
@@ -177,6 +177,12 @@
 	import DropList from "../../components/dropList.vue";
 	import RightPop from "../../components/pop/rightPop.vue"
 	var _isValid = true, _params = null, _attach = {}, _timer = 0;
+	var _picData = {
+		avatar: "",
+		idCardBack: "",
+		idCardFront: "",
+		workCard: ""
+	};
 	export default{
 		created(){
 			this.init();
@@ -266,7 +272,7 @@
 					this.remark = "";
 					this.email = "";
 					this.telphone = "";
-					this.avatar = "default.png";
+					this.avatar = "";
 					this.currCompanyData = "";
 					this.currDepartData = "";
 					this.currDutyData = "";
@@ -289,12 +295,24 @@
 					this.errData[$info.type] = "";
 					this.$forceUpdate();
 					_attach.type = $info.type;
+					if (_picData[_attach.type])
+					{
+						g.net.call(g.param.delPicAccess, {fileName: _picData[_attach.type]}).then(() =>
+						{
+						}, (err) =>
+						{
+						});
+					}
 				}
 			},
 			uploadComplete($data)
 			{
 				g.ui.hideLoading();
 				this[_attach.type] = $data.fileName;
+				if (_picData[_attach.type] != this[_attach.type])
+				{
+					_picData[_attach.type] = this[_attach.type]
+				}
 				this.errData[_attach.type] = "";
 				this.$forceUpdate();
 			},
@@ -408,13 +426,7 @@
 			},
 			onClick_deleteImg($type)
 			{
-				g.net.call(g.param.delPicAccess, {fileName: this[$type]}).then(() =>
-				{
-				}, (err) =>
-				{
-					this[$type] = "";
-					this.avatar = "default.png";
-				})
+				this[$type] = "";
 			},
 			onFocus_inputBar($type)
 			{
@@ -447,6 +459,12 @@
 				g.net.call("user/applyUserAuth", _params).then(($data) =>
 				{
 					g.ui.hideLoading();
+					_picData = {
+						avatar: "",
+						idCardBack: "",
+						idCardFront: "",
+						workCard: ""
+					};
 					this.isSubmit = true;
 					g.ui.toast('申请提交成功！');
 				}, (err) =>
@@ -472,12 +490,6 @@
 			checkValid()
 			{
 				this.checkPhoneData();
-				if (!this.avatar)
-				{
-					this.errData.avatar = "请选择用户头像";
-					_isValid = false;
-				}
-
 				if (!this.code)
 				{
 					this.errData.code = "请输入验证码";

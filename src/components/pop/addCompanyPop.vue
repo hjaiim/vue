@@ -96,6 +96,7 @@
 				</div>
 			</div>
 		</div>
+
 	</view-popup>
 </template>
 <script type="text/ecmascript-6">

@@ -1,11 +1,8 @@
 <template>
-	<view-popup @close="onClose_pop"
-				:isShowPopView="isShowPopView">
+	<view-popup @close="onClose_pop" :isShowPopView="isShowPopView">
 		<div class="detail-container">
 			<p class="note-tit">通知</p>
-			<div class="note-content">
-				{{msgData.desc}}
-			</div>
+			<div class="note-content" v-html="msgData.desc"></div>
 		</div>
 	</view-popup>
 </template>
@@ -13,6 +10,10 @@
 	import g from "../../global";
 	import ViewPopup from "../viewPop.vue"
 	export default{
+		created()
+		{
+			window.onClick_msgItem = this.onClick_msgItem;
+		},
 		data(){
 			return {
 				g: g,
@@ -47,6 +48,10 @@
 			},
 			onClose_pop(){
 				this.$emit('close');
+			},
+			onClick_msgItem($type)
+			{
+				g.url = $type;
 			}
 		}
 	}

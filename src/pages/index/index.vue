@@ -8,20 +8,20 @@
 				<div class="icon-collect clear">
 					<div class="relative upload-head right pointer">
 						<img class="default-img"
-							 :src="g.param.ossUrl+avatar" alt="">
+							 :src="avatar?g.param.ossUrl+avatar:g.path.images+'/default.png'" alt="">
 						<p class="err-msg absolute">{{errData.avatar}}</p>
 						<div class="absolute upload-btn">
-							<p class="load-text">修改头像</p>
+							<p class="load-text" v-if="!avatar">修改头像</p>
 							<iframe class="iframe-btn" name="fileUpload"
 									:src="g.path.base+'/upload.html?type=pic&subType=avatar&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"
-									id="avatar" v-if="avatar=='default.png'"></iframe>
+									id="avatar" v-if="!avatar"></iframe>
 							<img :src="g.path.images+'/del-head.png'" alt=""
-								 class="del-head absolute pointer" @click="onClick_delBtn"
-								 v-if="avatar != 'default.png'">
+								 class="del-head absolute pointer" @click="onClick_delBtn" v-if="avatar">
 						</div>
 					</div>
 				</div>
 			</div>
+
 			<div class="personal-message" v-show="type=='personal'">
 				<p class="personal-form diff-personal"><span class="personal-title">所属公司</span><span
 						class="personal-content">{{userInfo.companyName}}</span></p>
@@ -64,8 +64,7 @@
 				<div class="personal-form relative">
 					<span class="personal-title">备注</span>
 					<textarea id="textarea" contenteditable="true" class="pensonal-input note" placeholder=""
-							  v-model="remark"
-							  @focus="onFocus_inputBar('remark')"></textarea>
+							  v-model="remark" @focus="onFocus_inputBar('remark')"></textarea>
 					<p class="err-msg absolute"> {{errData.remark}}</p>
 				</div>
 				<div class="btn btn-save pointer action-btn ani-time" @click="onClick_savePersonal">保存</div>
@@ -100,7 +99,7 @@
 	import InputBar from "../../components/inputBar.vue"
 	import UploadBtn from "../../components/upload.vue";
 	import sha256 from "sha256";
-	var _params = null, _isValid = true, _timer = 0, _attach = {};
+	var _params = null, _isValid = true, _timer = 0, _attach = {}, _avatar = "";
 	export default{
 		created(){
 			this.routerUpdated();
@@ -116,7 +115,7 @@
 				type: "personal",
 				readonly: true,
 				userInfo: {},
-				avatar: 'default.png',
+				avatar: '',
 				phone: "",
 				telphone: "",
 				email: "",
@@ -136,12 +135,7 @@
 			InputBar,
 			UploadBtn
 		},
-		watch: {
-			avatar($val)
-			{
-				trace("this.avatar", $val);
-			}
-		},
+
 		methods: {
 			routerUpdated()
 			{
@@ -169,12 +163,24 @@
 					this.errData[$info.type] = "";
 					this.$forceUpdate();
 					_attach.type = $info.type;
+					if (_avatar)
+					{
+						g.net.call(g.param.delPicAccess, {fileName: _avatar}).then(() =>
+						{
+						}, (err) =>
+						{
+						});
+					}
 				}
 			},
 			uploadComplete($data)
 			{
 				g.ui.hideLoading();
 				this[_attach.type] = $data.fileName;
+				if (_avatar != this[_attach.type])
+				{
+					_avatar = this[_attach.type];
+				}
 				this.errData[_attach.type] = "";
 				this.$forceUpdate();
 			},
@@ -189,12 +195,7 @@
 			},
 			onClick_delBtn()
 			{
-				g.net.call(g.param.delPicAccess, {fileName: this.avatar}).then(() =>
-				{
-				}, (err) =>
-				{
-					this.avatar = "default.png";
-				})
+				this.avatar = "";
 			},
 			onClick_unbindBtn()
 			{
@@ -277,9 +278,11 @@
 					remark: this.remark,
 					avatar: this.avatar
 				};
+
 				g.ui.showLoading();
 				g.net.call("user/updateUserInfo", _params).then(() =>
 				{
+					_avatar = "";
 					g.ui.hideLoading();
 					g.data.userInfo.update(_params);
 					g.ui.toast("用户信息修改成功！");
