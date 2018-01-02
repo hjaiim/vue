@@ -1,7 +1,7 @@
 <template>
 	<div class="wrap-page wrap-container clear relative">
 		<div class="header-wrap fixed">
-			<com-header></com-header>
+			<com-header ref="header"></com-header>
 			<nav-header @click="onClick_navItem" ref="navHeader"></nav-header>
 		</div>
 		<div class="wrap-col relative">
@@ -76,20 +76,20 @@
 			{
 				g.func.updateRightList();
 				this.navItem = g.data.staticNavPool.getDataById(this.currentId);
-				for(var i = this.navItem.children.length-1;i>= 0;i--)
+				for (var i = this.navItem.children.length - 1; i >= 0; i--)
 				{
 					var item = this.navItem.children[i];
 					if (item.rightId == 14 && g.data.userInfo.positionType == 2)
 					{
-						this.navItem.children.splice(i,1);
+						this.navItem.children.splice(i, 1);
 					}
 					else if (item.rightId == 15 && g.data.userInfo.positionType == 2)
 					{
-						this.navItem.children.splice(i,1);
+						this.navItem.children.splice(i, 1);
 					}
 					else if (item.rightId == 16 && g.data.userInfo.positionType == 1)
 					{
-						this.navItem.children.splice(i,1);
+						this.navItem.children.splice(i, 1);
 					}
 				}
 
@@ -116,6 +116,10 @@
 			onClick_childItem($path)
 			{
 				g.url = $path;
+			},
+			updateHeader()
+			{
+				this.$refs.header.init();
 			}
 
 		}

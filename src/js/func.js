@@ -1,4 +1,5 @@
 import loginManager from "./../js/manager/LoginManager";
+import g from './../global';
 export function dealErr($err)
 {
 	g.ui.hideLoading();

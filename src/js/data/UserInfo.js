@@ -28,7 +28,7 @@ var _workCard = "";
 var _msgCount = 0;
 var _msgSwitch = 0;
 var _positionType = -1;
-
+import g from './../../global';
 export default class UserInfo {
 	constructor()
 	{

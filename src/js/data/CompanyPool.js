@@ -3,6 +3,7 @@
  */
 
 var _list = [], _hash = {};
+import g from './../../global';
 export default class CompanyPool {
 	constructor()
 	{

@@ -2,6 +2,7 @@
  * Created by Administrator on 2017/12/11.
  */
 var _list = [], _hash = {};
+import g from './../../global';
 export default class DepartmentPool {
 
 	constructor()

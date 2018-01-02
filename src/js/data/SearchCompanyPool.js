@@ -5,6 +5,7 @@ var _listData = [];
 var _hash = {};
 var _totalNum = 0;
 var _totalPages = 1;
+import g from './../../global';
 export default class SearchCompanyPool {
 	constructor()
 	{

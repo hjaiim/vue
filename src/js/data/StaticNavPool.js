@@ -5,7 +5,7 @@
 var _hash = {};
 var _list = [];
 var _childHash = {};
-
+import g from './../../global';
 export default class StaticNavPool {
 	constructor()
 	{

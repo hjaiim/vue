@@ -1,5 +1,6 @@
 var _list = [], _hash = {};
 var _staffHash = {};
+import g from './../../global';
 export default class StaffPool {
 	constructor()
 	{

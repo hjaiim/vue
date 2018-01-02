@@ -2,7 +2,7 @@
  * Created by billy on 2016/12/19.
  */
 var _list = []; //string[]
-
+import g from './../../global';
 export default class RightPool {
 	constructor()
 	{

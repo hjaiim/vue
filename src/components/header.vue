@@ -7,14 +7,14 @@
 					<i class="note-txt">通知</i>
 					<i class="note-icon relative">
 						<img :src="g.path.images+'/note-icon.png'" alt="">
-						<span class="badeg absolute">{{g.data.userInfo.msgCount}}</span>
+						<span class="badeg absolute">{{userInfo.msgCount}}</span>
 					</i>
 				</li>
 				<li class="nav-item pointer" @click="onClick_perCenter">
-					<i class="note-txt">{{g.data.userInfo.username}}</i>
+					<i class="note-txt">{{userInfo.username}}</i>
 					<i class="avatar-icon">
 						<img
-								:src="g.data.userInfo.avatar?g.param.ossUrl+g.data.userInfo.avatar:g.path.images+'/default.png'"
+								:src="userInfo.avatar?g.param.ossUrl+userInfo.avatar:g.path.images+'/default.png'"
 								alt="">
 					</i>
 				</li>
@@ -32,14 +32,21 @@
 		created()
 		{
 			g.func.updateUserInfo();
+			this.init();
 		},
 		data(){
 			return {
-				g: g
+				g: g,
+				userInfo:{}
 			}
 		},
 		components: {},
 		methods: {
+			init()
+			{
+				this.userInfo = g.data.userInfo;
+				this.$forceUpdate();
+			},
 			onClick_logoutBtn()
 			{
 				loginManager.logout();

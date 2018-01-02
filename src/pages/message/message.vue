@@ -1,5 +1,5 @@
 <template>
-	<com-layout currPath="/message">
+	<com-layout currPath="/message" ref="layout">
 		<div class="message-page">
 			<div class="msg-content">
 				<div class="action-wrap clear">
@@ -200,6 +200,8 @@
 					{
 						g.ui.hideLoading();
 						g.data.userInfo.update($data);
+						g.data.searchMessagePool.getDataById($id).update({readStatus: 1});
+						this.$refs.layout.updateHeader();
 						this.currId = $id;
 						this.isShowDetailPop = true;
 					}, (err) =>

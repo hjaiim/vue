@@ -3,6 +3,7 @@
  */
 var _list = [], _hash = {}, _idList = [];
 var _total = 0, _totalPage = 1;
+import g from './../../global';
 export default class MessagePool {
 	constructor()
 	{

@@ -4,6 +4,7 @@
 var _currLang;
 var _list;
 var _hash
+import g from './../../global';
 export default class LangPool {
 	constructor()
 	{

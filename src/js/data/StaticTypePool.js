@@ -4,7 +4,7 @@
 
 var _hash = {};
 var _list = [];
-
+import g from './../../global';
 export default class StaticTypePool {
 	constructor()
 	{

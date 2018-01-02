@@ -4,7 +4,7 @@
 var _list = [];
 var _hash = {};
 var _allList = [];
-
+import g from './../../global';
 export default class StaticRightPool {
 	constructor()
 	{

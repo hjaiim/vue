@@ -1,5 +1,6 @@
 var _list = [], _hash = {};
 var _total = 0, _totalPage = 1;
+import g from './../../global';
 export default class UnverifyPool {
 	constructor()
 	{

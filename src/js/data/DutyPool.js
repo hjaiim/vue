@@ -4,6 +4,7 @@
 import g from "./../../global";
 var _list = [];
 var _hash = {};
+
 export default class DutyPool {
 	constructor()
 	{
