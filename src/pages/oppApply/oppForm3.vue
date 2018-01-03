@@ -278,7 +278,7 @@
 				{
 					for (var key in item)
 					{
-						if (!this.formData[item[key]] && item[key] != "remark")
+						if (!trim(this.formData[item[key]]) && item[key] != "remark")
 						{
 							this.errData[item[key]] = "内容不能为空";
 							_isValid = false;

@@ -76,6 +76,7 @@ function createData($dObj)
 	d.companyId = 0;
 	d.creatorId = 0;
 	d.isEdit = false;
+	d.errMsg = "";
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -89,4 +90,5 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("departmentId") && (this.parentId = $dObj.departmentId);
 	$dObj.hasOwnProperty("creatorId") && (this.creatorId = $dObj.creatorId);
 	$dObj.hasOwnProperty("isEdit") && (this.isEdit = $dObj.isEdit);
+	$dObj.hasOwnProperty("errMsg") && (this.errMsg = $dObj.errMsg);
 }

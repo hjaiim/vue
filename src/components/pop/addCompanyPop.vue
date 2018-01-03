@@ -14,21 +14,24 @@
 					</p>
 					<p class="from-group">
 						<span class="form-title">公司电话</span>
-						<input-bar class="form-control" placeholder=""  :class="isEdit?'company-input':''" type="text" :readonly="isEdit"
+						<input-bar class="form-control" placeholder="" :class="isEdit?'company-input':''" type="text"
+								   :readonly="isEdit"
 								   v-model="telphone" :errmsg="errData.telphone"
 								   @focus="onFocus_inputBar('telphone')"></input-bar>
 						<span class="requied" v-show="!isEdit">*</span>
 					</p>
 					<p class="from-group">
 						<span class="form-title">公司负责人</span>
-						<input-bar class="form-control"  :class="isEdit?'company-input':''" placeholder="" type="text" :readonly="isEdit"
+						<input-bar class="form-control" :class="isEdit?'company-input':''" placeholder="" type="text"
+								   :readonly="isEdit"
 								   v-model="leader" :errmsg="errData.leader"
 								   @focus="onFocus_inputBar('leader')"></input-bar>
 						<span class="requied" v-show="!isEdit">*</span>
 					</p>
 					<p class="from-group">
 						<span class="form-title">负责人电话</span>
-						<input-bar class="form-control"  :class="isEdit?'company-input':''" placeholder="" type="text" :readonly="isEdit"
+						<input-bar class="form-control" :class="isEdit?'company-input':''" placeholder="" type="text"
+								   :readonly="isEdit"
 								   v-model="phone" :errmsg="errData.phone"
 								   @focus="onFocus_inputBar('phone')"></input-bar>
 						<span class="requied" v-show="!isEdit">*</span>
@@ -49,7 +52,7 @@
 								<span class="form-title">部门名称</span>
                         <span>
 							<input-bar class="form-control" placeholder="" type="text" :readonly="!item.isEdit"
-									   v-model="item.name"></input-bar>
+									   v-model="item.name" @focus="onFocus_inputDepart(item)" :errmsg="item.departMsg"></input-bar>
                             <img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer"
 								 @click="onClick_editDepart(item)" v-if="!item.isEdit">
 							<span class="pointer btn-save" @click="onClick_saveDepart(item)"
@@ -60,7 +63,9 @@
 								<span class="form-title">职务名称</span>
 							<span>
 								<input-bar class="form-control" placeholder="" type="text"
-										   v-model="duty.name" :readonly="!duty.isEdit"></input-bar>
+										   v-model="duty.name" :readonly="!duty.isEdit"
+										   :errmsg="duty.errMsg"
+										   @focus="onFocus_inputDuty(duty,'duty')"></input-bar>
 								<img :src="g.path.images+'/edit.png'" alt="" class="edit-icon pointer" cd release
 									 @click="onClick_editDuty(duty)" v-if="!duty.isEdit">
 								<span class="pointer btn-save  ani-time" @click="onClick_saveDuty(duty,'duty')"
@@ -72,22 +77,22 @@
 							<p class="from-group">
 								<span class="form-title">职务名称</span>
 								<span>
-								<input-bar class="form-control" placeholder="" type="text"
-										   v-model="item.dutyName"></input-bar>
-                            	<span class="pointer btn-save  ani-time" @click="onClick_saveDuty(item,'depart')">保存
-								</span>
+									<input-bar class="form-control" placeholder="" type="text"
+											   v-model="item.dutyName" :errmsg="item.errMsg"
+											   @focus="onFocus_inputDuty(item,'depart')"></input-bar>
+                            		<span class="pointer btn-save  ani-time"
+										  @click="onClick_saveDuty(item,'depart')">保存</span>
 								</span>
 							</p>
 						</div>
 						<div class="company-message" v-if="currentId != 0">
 							<p class="from-group">
 								<span class="form-title">部门名称</span>
-                        <span>
-							<input-bar class="form-control" placeholder="" type="text"
-									   v-model="departName"></input-bar>
-                        	<span class="pointer btn-save" @click="onClick_saveDepart()">保存</span>
-						</span>
-
+                        	<span>
+								<input-bar class="form-control" placeholder="" type="text"  :errmsg="errData.departName"
+										   v-model="departName" @focus="onFocus_inputBar('departName')"></input-bar>
+                        		<span class="pointer btn-save" @click="onClick_saveDepart()">保存</span>
+							</span>
 							</p>
 
 						</div>
@@ -104,7 +109,7 @@
 	import ViewPopup from "../viewPop.vue";
 	import InputBar from "../inputBar.vue";
 	import ScrollGroup from "../scrollGroup.vue"
-	var _params = null, _isValid = true, _departId = 0;
+	var _params = null, _isValid = true;
 	export default{
 		created()
 		{
@@ -191,6 +196,13 @@
 			},
 			onClick_saveDepart($depart)
 			{
+				this.checkDepart($depart);
+				if (!_isValid)
+				{
+					_isValid = true;
+					return;
+				}
+
 				if (!$depart)
 				{
 					$depart = {
@@ -208,7 +220,6 @@
 				g.net.call("organizeOpt/editDepartment", _params).then(($data) =>
 				{
 					g.ui.hideLoading();
-					_departId = $data.departmentId;
 					if ($depart.id == 0)
 					{
 						g.data.departmentPool.add($data);
@@ -227,6 +238,12 @@
 			},
 			onClick_saveDuty($duty, $type)
 			{
+				this.checkDuty($duty, $type);
+				if (!_isValid)
+				{
+					_isValid = true;
+					return;
+				}
 				if ($type != "duty")
 				{
 					$duty = {
@@ -262,6 +279,22 @@
 					g.func.dealErr(err);
 				})
 			},
+			onFocus_inputDuty($duty, $type)
+			{
+				if ($type != "duty")
+				{
+					g.data.departmentPool.getDataById($duty.id).update({errMsg: ""});
+				}
+				else
+				{
+					g.data.dutyPool.getDataById($duty.id).update({errMsg: ""})
+				}
+				this.initData();
+			},
+			onFocus_inputDepart($depart)
+			{
+				g.data.departmentPool.getDataById($depart.id).update({departMsg: ""})
+			},
 			onClick_deleteDepart($depart)
 			{
 				_params = {departmentId: $depart.id};
@@ -282,7 +315,6 @@
 			},
 			onClick_editDuty($duty)
 			{
-				debugger;
 				g.data.dutyPool.getDataById($duty.id).update({isEdit: true})
 			},
 			onClick_deleteDuty($duty)
@@ -290,7 +322,7 @@
 				_params = {
 					dutyId: $duty.id
 				};
-				g.ui.showLoading()
+				g.ui.showLoading();
 				g.net.call("organizeOpt/deleteDutyById", _params).then((data) =>
 				{
 					g.ui.hideLoading();
@@ -339,9 +371,51 @@
 			{
 				this.isEdit = false;
 			},
+			checkDuty($duty, $type)
+			{
+				if ($type != "duty")
+				{
+					if (!trim($duty.dutyName))
+					{
+						g.data.departmentPool.getDataById($duty.id).update({errMsg: "职务名称不能为空"});
+						_isValid = false
+					}
+				}
+				else
+				{
+					if (!trim($duty.name))
+					{
+						g.data.dutyPool.getDataById($duty.id).update({errMsg: "职务名称不能为空"});
+						_isValid = false
+					}
+				}
+				this.initData();
+
+			},
+			checkDepart($depart)
+			{
+				if (!$depart)
+				{
+					if (!trim(this.departName))
+					{
+						this.errData.departName = "部门名称不能为空";
+						_isValid = false;
+						this.$forceUpdate();
+					}
+				}
+				else
+				{
+					if (!trim($depart.name))
+					{
+						g.data.departmentPool.getDataById($depart.id).update({departMsg: "部门名称不能为空"});
+						_isValid = false;
+						this.initData();
+					}
+				}
+			},
 			checkValid()
 			{
-				if (!this.name)
+				if (!trim(this.name))
 				{
 					this.errData.name = "请输入公司名称";
 					_isValid = false;
@@ -351,7 +425,7 @@
 					this.errData.name = "公司名称过长";
 					_isValid = false;
 				}
-				if (!this.leader)
+				if (!trim(this.leader))
 				{
 					this.errData.leader = "请输入负责人姓名";
 					_isValid = false;
@@ -361,7 +435,7 @@
 					this.errData.leader = "负责人格式不正确";
 					_isValid = false;
 				}
-				if (!this.phone)
+				if (!trim(this.phone))
 				{
 					this.errData.phone = "请输入负责人电话";
 					_isValid = false;
@@ -371,7 +445,7 @@
 					this.errData.phone = "号码格式不正确";
 					_isValid = false;
 				}
-				if (!this.telphone)
+				if (!trim(this.telphone))
 				{
 					this.errData.telphone = "请输入公司电话";
 					_isValid = false;
@@ -384,4 +458,8 @@
 </script>
 <style lang="sass" rel="stylesheet/scss" type="text/scss">
 	@import "../../css/pop.scss";
+
+	.err-msg {
+		color: rgb(250, 104, 104)
+	}
 </style>
