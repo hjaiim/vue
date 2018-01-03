@@ -201,7 +201,6 @@
 					this.$emit("close", true);
 				}, (err) =>
 				{
-
 					g.func.dealErr(err);
 				})
 			},

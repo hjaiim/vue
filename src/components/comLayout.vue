@@ -79,6 +79,10 @@
 				for (var i = this.navItem.children.length - 1; i >= 0; i--)
 				{
 					var item = this.navItem.children[i];
+					if (g.data.userInfo.id == 1)
+					{
+						break;
+					}
 					if (item.rightId == 14 && g.data.userInfo.positionType == 2)
 					{
 						this.navItem.children.splice(i, 1);

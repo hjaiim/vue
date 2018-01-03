@@ -226,15 +226,15 @@ function updateRecord($dObj)
 	$dObj.hasOwnProperty("auditorId") && (this.auditorId = $dObj.auditorId);
 	$dObj.hasOwnProperty("auditorName") && (this.auditorName = $dObj.auditorName);
 	$dObj.hasOwnProperty("stationName") && (this.positionName = $dObj.stationName);
-	$dObj.hasOwnProperty("auditorTime") && (this.auditorTime = g.timeTool.getFullDate(int($dObj.auditorTime), true));
 	$dObj.hasOwnProperty("auditSuggest") && (this.opinion = $dObj.auditSuggest);
 	if ($dObj.hasOwnProperty("auditResult"))
 	{
 		$dObj.auditResult == 1 && (this.result = "已通过" );
 		$dObj.auditResult == 2 && (this.result = "已退回" );
+		$dObj.auditResult == 3 && (this.result = "未通过" );
 	}
 	$dObj.hasOwnProperty("attachs") && !!$dObj.attachs && (this.attachList = JSON.parse($dObj.attachs));
-	$dObj.hasOwnProperty("createTime") && (this.createTime = $dObj.createTime);
+	$dObj.hasOwnProperty("createTime") && (this.createTime = g.timeTool.getFullDate($dObj.createTime,true));
 	$dObj.hasOwnProperty("orderId") && (this.orderId = $dObj.orderId);
 	$dObj.hasOwnProperty("taskTodoId") && (this.taskTodoId = $dObj.taskTodoId);
 }

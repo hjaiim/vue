@@ -8,7 +8,7 @@
 					<p class="from-group">
 						<span class="form-title">名称</span>
 						<input-bar class="form-control" placeholder="" type="text"
-								   v-model="positionName"></input-bar>
+								   v-model="positionName" :errmsg="errMsg" @focus="onFocus_inputBar"></input-bar>
 					</p>
 					<p class="from-group">
 						<span class="form-title">类型</span>
@@ -40,7 +40,7 @@
 	import g from "../../global";
 	import ViewPopup from "../viewPop.vue";
 	import InputBar from "../inputBar.vue";
-	var _params = null;
+	var _params = null, _isValid = true;
 	export default{
 		created()
 		{
@@ -50,6 +50,7 @@
 			return {
 				g: g,
 				positionName: "",
+				errMsg: "",
 				type: 1,
 				positionData: {}
 			}
@@ -102,6 +103,12 @@
 			},
 			onClick_confirmBtn()
 			{
+				this.checkValid();
+				if (!_isValid)
+				{
+					_isValid = true;
+					return;
+				}
 				_params = {
 					stationId: this.currId,
 					stationName: this.positionName,
@@ -122,6 +129,18 @@
 				{
 					g.func.dealErr(err);
 				})
+			},
+			onFocus_inputBar()
+			{
+				this.errMsg = "";
+			},
+			checkValid()
+			{
+				if (!trim(this.positionName))
+				{
+					this.errMsg = "岗位名称不能为空";
+					_isValid = false;
+				}
 			}
 		}
 	}

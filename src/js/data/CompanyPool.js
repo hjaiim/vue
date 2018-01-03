@@ -120,15 +120,3 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("isEdit") && (this.isEdit = $dObj.isEdit);
 }
 
-function ab()
-{
-	a = [1234, 325, 65, 367, 4578, 5, 3, 345623, 521, 34, 5, 645, 6745];
-
-	while (a.length > 0)
-	{
-		var i = parseInt(Math.random() * a.length);
-		var x = a.splice(i, 1);
-		console.log(x);
-		b.push(x[0]);
-	}
-}

@@ -125,7 +125,6 @@
 				leader: "",
 				phone: "",
 				departName: '',
-				dutyName: "",
 				departmentList: [],
 				authStatus: 0,
 				errData: {}
@@ -172,7 +171,6 @@
 					this.isEdit = false;
 				}
 				this.departName = "";
-				this.dutyName = "";
 			},
 			initData()
 			{

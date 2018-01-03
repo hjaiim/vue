@@ -54,7 +54,7 @@
 							</p>
 							<p class="from-group  clear">
 								<span class="form-title">结果</span>
-								<span class="form-trap">{{item.result}} {{item.auditTime}}</span>
+								<span class="form-trap">{{item.result}} &nbsp;&nbsp;&nbsp; {{item.createTime}}</span>
 							</p>
 						</div>
 						<div class="clear" v-if="businessData.operation == 2">
