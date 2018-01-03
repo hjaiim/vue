@@ -1,6 +1,6 @@
 <template>
 	<div class="absolute drop-list drop-ref" v-show="isShowDropList">
-		<div class="drop-ref" is="ScrollGroup">
+		<div class="drop-ref" is="ScrollGroup" :autoHide="true">
 			<ul>
 				<li class="ani-time pointer" v-for="item in dropList" @click.stop="onClick_dropItem(item.id)">
 					{{item.name}}
@@ -10,7 +10,7 @@
 	</div>
 </template>
 <script type="text/ecmascript-6">
-	import ScrollGroup from "./scrollGroup.vue"
+	import ScrollGroup from "../../src/jslib/components/scrollGroup.vue"
 	export default{
 		data(){
 			return {}
