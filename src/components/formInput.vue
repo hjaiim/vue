@@ -106,7 +106,7 @@
 		.g-input {
 			display: block;
 			height: 42px;
-			line-height: 42px;
+			line-height: 28px;
 			padding: 6px 40px 6px 23px;
 			width: 320px;
 			font-size: 14px;

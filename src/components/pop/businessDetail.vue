@@ -1,6 +1,6 @@
 <template>
 	<view-popup @close="onClose_pop"
-				:isShowPopView="isShowPopView">
+				:isShowPopView="isShowPopView" class="diff-content-pop">
 		<div class="detail-container">
 			<p class="note-tit">商机详情</p>
 			<div class=" company-message note-content opp-content">

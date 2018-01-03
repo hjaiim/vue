@@ -78,7 +78,7 @@
 			{
 				util.insertOneOrZero(this.checkedChildren, $item.id)
 				this.checkedAllChildren($item);
-				this.$emit('change', this.checkedChildren,this.itemData);
+				this.$emit('change', this.checkedChildren, this.itemData);
 				this.$forceUpdate();
 			},
 			onChange_list($idList)
@@ -92,7 +92,7 @@
 						util.pushIn(this.checkedChildren, this.tmpItem.id);
 					}
 				}
-				this.$emit('change', this.checkedChildren,this.itemData);
+				this.$emit('change', this.checkedChildren, this.itemData);
 			},
 			checkedAllChildren($data)
 			{
@@ -139,10 +139,18 @@
 		border-left: 10px solid #666666;
 		border-bottom: 5px solid transparent;
 		border-top: 5px solid transparent;
+		-webkit-transition: transform .2s;
+		-moz-transition: transform .2s;
+		-ms-transition: transform .2s;
+		-o-transition: transform .2s;
 		transition: transform .2s;
 	}
 
 	.rotateRight {
+		-webkit-transform: rotate(90deg);
+		-moz-transform: rotate(90deg);
+		-ms-transform: rotate(90deg);
+		-o-transform: rotate(90deg);
 		transform: rotate(90deg);
 	}
 
@@ -154,7 +162,6 @@
 		margin: 0 15px 0 0;
 		&:after, &:before {
 			content: '';
-			font-family: helvetica;
 			display: inline-block;
 			width: 14px;
 			height: 14px;

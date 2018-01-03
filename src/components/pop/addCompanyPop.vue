@@ -1,6 +1,6 @@
 <template>
 	<view-popup @close="onClose_pop"
-				:isShowPopView="isShowPopView" class="mod-company-pop">
+				:isShowPopView="isShowPopView" class="mod-company-pop diff-content-pop">
 		<div class="mod-company-container">
 			<p class="mod-tit">{{currId>0?'编辑公司信息':'新建公司信息'}}</p>
 			<div class="mod-company-content">
