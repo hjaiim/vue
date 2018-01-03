@@ -149,15 +149,15 @@
 			initForm()
 			{
 				this.formData = {
-					cusCompName: "声音名片业务",
-					customer: "声音名片业务",
-					cusPhone: "15868054",
-					cusCompAdd: "声音名片业务",
-					cusCompIntro: "声音名片业务",
-					businessDesc: "声音名片业务",
-					accessNum: "声音名片业务",
-					budget: "声音名片业务",
-					payway: "声音名片业务"
+					cusCompName: "",
+					customer: "",
+					cusPhone: "",
+					cusCompAdd: "",
+					cusCompIntro: "",
+					businessDesc: "",
+					accessNum: "",
+					budget: "",
+					payway: ""
 				};
 				this.errData = {
 					cusCompName: "",

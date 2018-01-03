@@ -5,7 +5,7 @@ var WEB_CONFIG = {
 	mode: ["debug"], //工作模式
 
 	path: {
-		domain: "{$host}",
+		domain: "{$host}/boms/web",
 		base: "{$domain}/{$ver}",
 		assets: "{$base}/assets",
 		data: "{$assets}/data",

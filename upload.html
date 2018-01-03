@@ -3,7 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
-	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
 	<style>
 		* {
 			padding: 0;
@@ -46,8 +45,6 @@
 		<input type="text" style="display: none" name="redirectUrl" id="redirectUrl">
 		<input type="submit" name="submit" id="submit" style="visibility: hidden;">
 		<input type="reset" name="submit" id="reset" style="visibility: hidden;">
-		<!--<input type="button" name="cancel" id="cancelBtn" onclick="onClick_cancelBtn()" value="取消"-->
-		<!--style="display: none;">-->
 	</div>
 </form>
 </body>
@@ -59,38 +56,33 @@
 	var fileExtList = ["doc", "docx", "xls", "xlsx", "ppt", "pptx", "txt", "pdf", "jpg", "png", "jpeg", "rar", "zip"];
 	var urlData = queryUrl(window.location.href);
 	init();
+	function $($el)
+	{
+		return document.querySelector($el);
+	}
+
 	function init()
 	{
 		if (urlData.query.type == "pic")
 		{
-			$("#fileBtn")[0].accept = "image/jpeg,image/x-png";
+			$("#fileBtn").accept = "image/jpeg,image/x-png";
 		}
-		else
-		{
-
-		}
-		$("#cancelBtn").hide();
 	}
 
 	function onChange_fileBtn(e)
 	{
-		if ($("#fileBtn")[0].files.length > 0)
+		if ($("#fileBtn").files.length > 0)
 		{
-			var file = $("#fileBtn")[0].files[0];
+			var file = $("#fileBtn").files[0];
 			var fileName = file.name;
 			var fileSize = file.size;
 			var index = file.name.lastIndexOf('.');
 			var fileType = fileName.substr(index + 1);
 			fileSize = Math.floor(fileSize / 1048576 * 100) / 100 + "MB";
-			$("#fileName").html(fileName + "（" + fileSize + "）");
-			$("#fileBtn").hide();
-			$("#packageBtn").hide();
-			$("#cancelBtn").show();
-			console.dir(fileType);
 			if (fileSize > 10)
 			{
 				window.parent.sendMsg("error", {msg: "文件限制大小为10M以内", type: urlData.query.subType});
-				window.history.go();
+				$("#reset").click();
 				return;
 			}
 			if (urlData.query.type == 'file')
@@ -98,7 +90,7 @@
 				if (fileExtList.indexOf(fileType) < 0)
 				{
 					window.parent.sendMsg("error", {msg: "文件类型不正确，请重新上传", type: urlData.query.subType})
-					window.history.go();
+					$("#reset").click();
 					return;
 				}
 			}
@@ -107,42 +99,26 @@
 				if (picExtList.indexOf(fileType) < 0)
 				{
 					window.parent.sendMsg("error", {msg: "文件类型不正确，请重新上传", type: urlData.query.subType})
-					window.history.go()
+					$("#reset").click();
 					return;
 				}
 			}
-			console.log(urlData.query);
 			window.parent.sendMsg("info", {name: fileName, type: urlData.query.subType});
-			$("#form1")[0].action = urlData.query.access + "?type=" + urlData.query.type +
+			$("#form1").action = urlData.query.access + "?type=" + urlData.query.type +
 					"&fileName=" + fileName + "&redirectUrl=" + urlData.query.redirectUrl;
 			$("#submit").click();
 		}
 	}
 
-	function onClick_cancelBtn()
-	{
-		$("#fileName").html("请选择文件");
-		$("#submit").hide();
-		$("#cancelBtn").hide();
-		$("#fileBtn").show();
-		$("#packageBtn").show();
-		$("#form1")[0].reset();
-	}
+	//	function onClick_packageBtn()
+	//	{
+	//		$.ajax({
+	//			url: "http://{$host}/publish/package",
+	//			type: "get"
+	//		});
+	//		window.location.href = "http://{$host}/upload";
+	//	}
 
-	function onClick_packageBtn()
-	{
-		$.ajax({
-			url: "http://{$host}/publish/package",
-			type: "get"
-		});
-		window.location.href = "http://{$host}/upload";
-	}
-
-	function getPicType()
-	{
-		var urlData = queryUrl(window.location.href);
-		return urlData.query.picType;
-	}
 	function queryUrl($query)
 	{
 		var res = {};

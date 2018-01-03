@@ -149,7 +149,7 @@
 <script type="text/ecmascript-6">
 	import g from "../../global";
 	import InputBar from "../../components/inputBar.vue";
-	var _type = 6, _isValid = true, _formData = {},_attach = {};
+	var _type = 6, _isValid = true, _formData = {}, _attach = {};
 	export default{
 		created(){
 			this.init();
@@ -200,21 +200,21 @@
 			initForm()
 			{
 				this.formData = {
-					cusCompName: "M-CTD小号业务",
-					customer: "M-CTD小号业务",
-					cusPhone: "54141412",
-					cusCompAdd: "M-CTD小号业务",
-					cusCompIntro: "M-CTD小号业务",
-					cusType: "M-CTD小号业务",
-					businessDesc: "M-CTD小号业务",
+					cusCompName: "",
+					customer: "",
+					cusPhone: "",
+					cusCompAdd: "",
+					cusCompIntro: "",
+					cusType: "",
+					businessDesc: "",
 					accessType: "API",
-					callRange: "M-CTD小号业务",
+					callRange: "",
 					callBack: "是",
 					transfer: "是",
-					testNum: "M-CTD小号业务",
-					businessScale: "M-CTD小号业务",
-					budget: "M-CTD小号业务",
-					remark: "M-CTD小号业务"
+					testNum: "",
+					businessScale: "",
+					budget: "",
+					remark: ""
 				};
 				this.errData = {
 					cusCompName: "",
@@ -232,7 +232,7 @@
 					businessScale: "",
 					budget: "",
 					remark: "",
-					attach:""
+					attach: ""
 				};
 			},
 			sendMsg($type, $info)
@@ -327,7 +327,7 @@
 				{
 					for (var key in item)
 					{
-						if (typeof this.formData[item[key]] == "string" && !trim(this.formData[item[key]])  && item[key] != "remark")
+						if (typeof this.formData[item[key]] == "string" && !trim(this.formData[item[key]]) && item[key] != "remark")
 						{
 							this.errData[item[key]] = "内容不能为空";
 							_isValid = false;

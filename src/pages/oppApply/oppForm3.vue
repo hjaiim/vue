@@ -171,19 +171,19 @@
 			initForm()
 			{
 				this.formData = {
-					cusCompName: "全数通业务",
-					customer: "全数通业务",
-					cusPhone: "15841470",
-					cusCompAdd: "全数通业务",
-					cusCompIntro: "全数通业务",
-					cusType: "全数通业务",
-					businessDesc: "全数通业务",
-					prodType: "全数通业务",
-					dataType: "全数通业务",
-					businessScale: "全数通业务",
-					budget: "全数通业务",
-					payway: "全数通业务",
-					remark: "全数通业务"
+					cusCompName: "",
+					customer: "",
+					cusPhone: "",
+					cusCompAdd: "",
+					cusCompIntro: "",
+					cusType: "",
+					businessDesc: "",
+					prodType: "",
+					dataType: "",
+					businessScale: "",
+					budget: "",
+					payway: "",
+					remark: ""
 				};
 				this.errData = {
 					cusCompName: "",

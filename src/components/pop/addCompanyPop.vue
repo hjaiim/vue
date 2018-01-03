@@ -167,9 +167,9 @@
 					this.leader = "";
 					this.phone = "";
 					this.departmentList = [];
-					this.errData = {};
 					this.isEdit = false;
 				}
+				this.errData = {};
 				this.departName = "";
 			},
 			initData()
