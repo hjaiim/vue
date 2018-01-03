@@ -62,20 +62,22 @@
 }
 
 .p-left {
-  margin-left: 50px;
+  margin-left: 40px;
 }
 
-@media screen and (max-width: 1880px) {
+
+@media screen and (max-width: 1886px) {
   .p-left {
-	margin-left: 40px;
+	margin-left: 50px;
   }
   .date-box {
-	float: left;
+	//float: left;
 	margin-top: 22px;
+	margin-right: 40px;
 	margin-left: 0;
 	.date-form {
 	  padding-left: 10px;
-	  width: 200px;
+	  width: 210px;
 	}
   }
   .search-box {
@@ -83,31 +85,37 @@
 	margin-left: 0;
 	.search-input {
 	  width: 200px;
-
 	}
   }
-
   .search-box .active-btn {
 	margin-left: 24px;
   }
 }
-
-@media screen and (max-width: 1340px) {
+@media screen and (max-width: 1360px) {
   .p-left {
 	margin-left: 10px;
   }
   .date-box {
+	//float: left;
 	margin-top: 22px;
+	margin-right: 40px;
 	margin-left: 0;
 	.date-form {
 	  padding-left: 10px;
+	  width: 210px;
+	}
+  }
+  .search-box {
+	float: right;
+	margin-left: 0;
+	.search-input {
 	  width: 200px;
 	}
   }
-  .search-box .search-input {
-	width: 200px;
-  }
   .search-box .active-btn {
+	margin-left: 24px;
+  }
+  .status-form .status-type{
 	margin-left: 10px;
   }
 }
