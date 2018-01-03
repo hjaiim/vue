@@ -279,7 +279,7 @@ input {
 .iscroll-ref::-webkit-scrollbar {
   width: 5px;
   height: 6px;
-  background-color: rgba(250, 104, 104, .5);
+  background-color: rgba(0, 0, 0, .6);
 }
 
 /*定义滚动条轨道 内阴影+圆角*/
@@ -292,8 +292,8 @@ input {
 /*定义滑块 内阴影+圆角*/
 .iscroll-ref::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(250, 104, 104, .5);
-  background-color: rgba(250, 104, 104, .5);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .6);
+  background-color:rgba(0, 0, 0, .6);
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -989,7 +989,7 @@ input {
 .gui-scrollgroup-bar {
   display: block;
   width: 4px !important;
-  background-color: rgba(250, 104, 104, .5) !important;
+  background-color: rgba(0, 0, 0, .6) !important;
   position: absolute;
   opacity: 0.8;
   right: 0px;
