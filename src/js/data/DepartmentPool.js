@@ -99,6 +99,8 @@ function createData($dObj)
 	d.isEdit = false;
 	d.creatorId = 0;
 	d.dutyName = "";
+	d.errMsg = "";
+	d.departMsg = "";
 	d.children = [];
 	d.update = updateData.bind(d);
 	d.update($dObj);
@@ -115,6 +117,8 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("creatorId") && (this.creatorId = $dObj.creatorId);
 	$dObj.hasOwnProperty("isEdit") && (this.isEdit = $dObj.isEdit);
 	$dObj.hasOwnProperty("dutyName") && (this.dutyName = $dObj.dutyName);
+	$dObj.hasOwnProperty("errMsg") && (this.errMsg = $dObj.errMsg);
+	$dObj.hasOwnProperty("departMsg") && (this.departMsg = $dObj.departMsg);
 	if ($dObj.hasOwnProperty("organizeDutyResults"))
 	{
 		setTimeout(() =>
