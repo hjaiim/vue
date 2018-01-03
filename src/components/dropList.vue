@@ -30,7 +30,7 @@
 	.drop-list {
 		top: 100%;
 		left: -1px;
-		width: 100%;
+		min-width: 100%;
 		border: 1px solid #dddddd;
 		border-radius: 4px;
 		z-index: 2;

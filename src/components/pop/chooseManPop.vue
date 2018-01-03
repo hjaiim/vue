@@ -13,7 +13,7 @@
 						</li>
 					</ul>
 				</div>
-				<ul class="list-menu border-bottom clear">
+				<ul class="list-menu border-bottom clear disabled-hover">
 					<li class="left">头像</li>
 					<li class="left">名字</li>
 					<li class="left">所属公司</li>
@@ -271,6 +271,12 @@
 			}
 			&:hover {
 				background: rgba(252, 244, 245, .9);
+			}
+
+		}
+		.disabled-hover {
+			&:hover {
+				background: transparent;
 			}
 		}
 

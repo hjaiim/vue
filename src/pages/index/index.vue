@@ -21,7 +21,6 @@
 					</div>
 				</div>
 			</div>
-
 			<div class="personal-message" v-show="type=='personal'">
 				<p class="personal-form diff-personal"><span class="personal-title">所属公司</span><span
 						class="personal-content">{{userInfo.companyName}}</span></p>

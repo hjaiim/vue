@@ -66,6 +66,9 @@
 }
 
 @media screen and (max-width: 1880px) {
+  .p-left {
+	margin-left: 40px;
+  }
   .date-box {
 	float: left;
 	margin-top: 22px;
@@ -89,7 +92,7 @@
   }
 }
 
-@media screen and (max-width: 1330px) {
+@media screen and (max-width: 1340px) {
   .p-left {
 	margin-left: 10px;
   }
