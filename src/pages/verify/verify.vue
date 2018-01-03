@@ -30,7 +30,7 @@
 				<div class="personal-form diff-personal relative diff-margin">
 					<span class="personal-title left">所属公司</span>
 					<p class="err-msg absolute"> {{errData.currCompany}}</p>
-					<div class="personal-content left relative form-list pointer"
+					<div class="personal-content left relative form-list pointer diff-list"
 						 :class="canEdit?'':'disabled'"
 						 @click.stop="onClick_dropListBtn('Company')">
 						{{currCompanyData.name}}
