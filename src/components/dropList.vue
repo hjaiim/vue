@@ -1,9 +1,16 @@
 <template>
-	<ul class="absolute drop-list" v-show="isShowDropList">
-		<li class="ani-time pointer" v-for="item in dropList" @click.stop="onClick_dropItem(item.id)">{{item.name}}</li>
-	</ul>
+	<div class="absolute drop-list drop-ref" v-show="isShowDropList">
+		<div class="drop-ref" is="ScrollGroup">
+			<ul>
+				<li class="ani-time pointer" v-for="item in dropList" @click.stop="onClick_dropItem(item.id)">
+					{{item.name}}
+				</li>
+			</ul>
+		</div>
+	</div>
 </template>
 <script type="text/ecmascript-6">
+	import ScrollGroup from "./scrollGroup.vue"
 	export default{
 		data(){
 			return {}
@@ -17,7 +24,9 @@
 				type: Array
 			}
 		},
-		components: {},
+		components: {
+			ScrollGroup
+		},
 		methods: {
 			onClick_dropItem($id)
 			{
@@ -54,7 +63,12 @@
 
 	.order-workList {
 		max-height: 123px;
-		overflow: auto;
+		overflow: hidden;
+	}
+
+	.drop-ref {
+		max-height: 204px;
+		overflow: hidden;
 	}
 
 </style>

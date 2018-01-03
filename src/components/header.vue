@@ -37,7 +37,7 @@
 		data(){
 			return {
 				g: g,
-				userInfo:{}
+				userInfo: {}
 			}
 		},
 		components: {},
@@ -149,6 +149,7 @@
 						img {
 							display: block;
 							width: 28px;
+							height: 28px;
 						}
 					}
 				}
