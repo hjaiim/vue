@@ -1,5 +1,5 @@
 <template>
-	<com-layout currPath="/oppman">
+	<com-layout currPath="/oppman" class="diff-oppman-wrap">
 		<div class="oppman-wrap">
 			<div class="oppman-banner clear">
 				<div class="business-form left" ref="businessType">
@@ -115,9 +115,10 @@
 					></common-page>
 				</div>
 			</div>
+			<business-detail-pop :isShowPopView="isShowDetailPop" :currId="currId"
+								 @close="onClose_detailPop"></business-detail-pop>
 		</div>
-		<business-detail-pop :isShowPopView="isShowDetailPop" :currId="currId"
-							 @close="onClose_detailPop"></business-detail-pop>
+
 	</com-layout>
 </template>
 <script type="text/ecmascript-6">

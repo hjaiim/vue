@@ -58,7 +58,7 @@
 				var popCon = this.$refs['popCon'];
 				if (popCon)
 				{
-					popCon.style.height = (popCon.clientHeight + popCon.clientHeight % 2) + 'px';
+					popCon.style.height = (popCon.clientHeight - popCon.clientHeight % 2) + 'px';
 				}
 			},
 			initEvent(e)
@@ -165,6 +165,14 @@
 	.account-content.md-overlay {
 		position: absolute;
 	}
+	.diff-content-pop .md-modal {
+		position: absolute;
+	}
+
+	.diff-content-pop.md-overlay {
+		position: absolute;
+	}
+
 
 	.right-viewPop {
 		.return-btn {

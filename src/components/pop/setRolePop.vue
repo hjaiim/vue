@@ -157,7 +157,7 @@
 			}
 		}
 		.action-wrap {
-			padding: 15px 34px 45px 0;
+			padding: 10px 34px 40px 0;
 			span {
 				width: 88px;
 				line-height: 36px;

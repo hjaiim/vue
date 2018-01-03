@@ -1,5 +1,5 @@
 <template>
-	<com-layout currPath="/companyman">
+	<com-layout currPath="/companyman" class="diff-content-wrap">
 		<div class="plat-wrap">
 			<div class="action-wrap clear">
 				<span class="add-btn action-btn ani-time left pointer" @click="onClick_addCompanyBtn">
@@ -62,12 +62,10 @@
 								 @change="onChange_pageCom"></common-page>
 				</div>
 			</div>
+			<add-company-pop :isShowPopView="isShowCompanyPop"
+							 @close="onClose_companyPop"
+							 :currId="currId"></add-company-pop>
 		</div>
-
-		<add-company-pop :isShowPopView="isShowCompanyPop"
-						 @close="onClose_companyPop"
-						 :currId="currId"></add-company-pop>
-
 	</com-layout>
 </template>
 <script type="text/ecmascript-6">
