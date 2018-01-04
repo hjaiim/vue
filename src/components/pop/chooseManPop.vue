@@ -60,7 +60,6 @@
 	export default{
 		created(){
 			this.init();
-			trace(111111);
 		},
 		data(){
 			return {

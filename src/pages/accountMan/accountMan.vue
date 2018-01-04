@@ -250,7 +250,7 @@
 					userId: $item.id,
 					status: $item.status == 1 ? 0 : 1
 				};
-				g.ui.showLoading()
+				g.ui.showLoading();
 				g.net.call('user/freezeUser', _params).then(($data) =>
 				{
 					g.ui.hideLoading();

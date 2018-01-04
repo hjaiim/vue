@@ -157,6 +157,8 @@
 					g.net.call("message/delMessage", {msgIds: _delId}).then(($data) =>
 					{
 						g.ui.hideLoading();
+						g.data.userInfo.update($data);
+						this.$refs.layout.updateHeader();
 						g.data.searchMessagePool.remove(_delId);
 						g.ui.toast("消息删除成功！");
 					}, (err) =>
@@ -200,8 +202,8 @@
 					{
 						g.ui.hideLoading();
 						g.data.userInfo.update($data);
-						g.data.searchMessagePool.getDataById($id).update({readStatus: 1});
 						this.$refs.layout.updateHeader();
+						g.data.searchMessagePool.getDataById($id).update({readStatus: 1});
 						this.currId = $id;
 						this.isShowDetailPop = true;
 					}, (err) =>
@@ -281,6 +283,8 @@
 						{
 							g.data.searchMessagePool.remove(id);
 						}
+						g.data.userInfo.update($data);
+						this.$refs.layout.updateHeader();
 						g.ui.toast("消息删除成功！");
 					}, (err) =>
 					{

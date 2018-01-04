@@ -119,6 +119,6 @@ function updateData($dObj)
 	if ($dObj.hasOwnProperty("msgContent"))
 	{
 		var msgContent = $dObj.msgContent.split(" /*这里/* ");
-		this.desc = msgContent.join("<span class='pointer' onclick='onClick_msgItem(\"" + g.param.msgHash[this.msgType] + "\")'>这里</span>");
+		this.desc = msgContent.join("<span class='pointer padding-5' onclick='onClick_msgItem(\"" + g.param.msgHash[this.msgType] + "\")'>这里</span>");
 	}
 }

@@ -174,18 +174,18 @@
 			initForm()
 			{
 				this.formData = {
-					cusCompName: "全流通业务",
-					customer: "全流通业务",
-					cusPhone: "15812471",
-					cusCompAdd: "全流通业务",
-					cusCompIntro: "全流通业务",
-					cusType: "全流通业务",
-					businessDesc: "全流通业务",
-					accessMethod: "全流通业务",
-					flowType: "全流通业务",
-					income: "全流通业务",
-					discount: "全流通业务",
-					remark: "全流通业务"
+					cusCompName: "",
+					customer: "",
+					cusPhone: "",
+					cusCompAdd: "",
+					cusCompIntro: "",
+					cusType: "",
+					businessDesc: "",
+					accessMethod: "",
+					flowType: "",
+					income: "",
+					discount: "",
+					remark: ""
 				};
 				this.errData = {
 					cusCompName: "",
@@ -282,7 +282,7 @@
 				{
 					for (var key in item)
 					{
-						if (!trim(this.formData[item[key]]) && item[key] != "remark")
+						if (typeof this.formData[item[key]] == "string" && !trim(this.formData[item[key]])  && item[key] != "remark")
 						{
 							this.errData[item[key]] = "内容不能为空";
 							_isValid = false;

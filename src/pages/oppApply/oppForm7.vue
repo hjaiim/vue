@@ -208,20 +208,20 @@
 			initForm()
 			{
 				this.formData = {
-					cusCompName: "95业务",
-					customer: "95业务",
-					cusPhone: "15414101",
-					cusCompAdd: "95业务",
-					cusCompIntro: "95业务",
+					cusCompName: "",
+					customer: "",
+					cusPhone: "",
+					cusCompAdd: "",
+					cusCompIntro: "",
 					prodType: "客户自带95号码落地",
-					telNum: "95业务",
-					businessDesc: "95业务",
+					telNum: "",
+					businessDesc: "",
 					accessType: "API",
-					callRange: "95业务",
+					callRange: "",
 					callInList: ["呼入"],
-					businessScale: "95业务",
-					budget: "95业务",
-					remark: "95业务"
+					businessScale: "",
+					budget: "",
+					remark: ""
 				};
 				this.errData = {
 					cusCompName: "",
@@ -352,9 +352,14 @@
 				{
 					for (var key in item)
 					{
-						if (!trim(this.formData[item[key]]) && item[key] != "remark")
+						if (typeof this.formData[item[key]] == "string" && !trim(this.formData[item[key]])  && item[key] != "remark")
 						{
 							this.errData[item[key]] = "内容不能为空";
+							_isValid = false;
+						}
+						if(this.formData[item[key]] == "客户自带95号码落地" && !trim(this.formData.telNum))
+						{
+							this.errData.telNum = "内容不能为空";
 							_isValid = false;
 						}
 						if (item[key] == "cusPhone"

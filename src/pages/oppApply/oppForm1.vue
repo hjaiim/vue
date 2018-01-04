@@ -237,23 +237,23 @@
 			initForm()
 			{
 				this.formData = {
-					cusCompName: "CTD业务",
-					customer: "CTD业务",
-					cusPhone: "15812471",
-					cusCompAdd: "CTD业务",
-					cusCompIntro: "CTD业务",
-					cusType: "CTD业务",
-					businessDesc: "CTD业务",
+					cusCompName: "",
+					customer: "",
+					cusPhone: "",
+					cusCompAdd: "",
+					cusCompIntro: "",
+					cusType: "",
+					businessDesc: "",
 					accessType: "API",
 					callTypeList: ["双呼"],
-					launchMethod: "CTD业务",
-					callRange: "CTD业务",
+					launchMethod: "",
+					callRange: "",
 					callBack: "是",
 					transfer: "是",
-					testNum: "CTD业务",
-					businessScale: "CTD业务",
-					budget: "CTD业务",
-					remark: "CTD业务"
+					testNum: "",
+					businessScale: "",
+					budget: "",
+					remark: ""
 				};
 				this.errData = {
 					cusCompName: "",
@@ -392,7 +392,7 @@
 				{
 					for (var key in item)
 					{
-						if (!trim(this.formData[item[key]]) && item[key] != "remark")
+						if (typeof this.formData[item[key]] == "string" && !trim(this.formData[item[key]]) && item[key] != "remark")
 						{
 							this.errData[item[key]] = "内容不能为空";
 							_isValid = false;

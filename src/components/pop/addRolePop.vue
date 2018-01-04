@@ -8,7 +8,7 @@
 					<p class="from-group">
 						<span class="form-title left">角色名称</span>
 						<input-bar class="form-control" placeholder="" type="text"
-								   v-model="name"></input-bar>
+								   v-model="name" :errmsg="errData.name" @focus="onFocus_inputBar('name')"></input-bar>
 						<span class="requied">*</span>
 					</p>
 					<p class="from-group">
@@ -43,7 +43,7 @@
 	import InputBar from "../inputBar.vue";
 	import CommonTree from "../tree/tree.vue"
 	import ScrollGroup from "../../jslib/components/scrollGroup.vue"
-	var _params = null;
+	var _params = null, _isValid = true;
 	export default{
 		created()
 		{
@@ -54,6 +54,7 @@
 				g: g,
 				name: "",
 				desc: [],
+				errData: {},
 				listData: [],
 				checkedList: []
 			}
@@ -117,6 +118,12 @@
 			},
 			onClick_confirmBtn()
 			{
+				this.checkValid();
+				if (!_isValid)
+				{
+					_isValid = true;
+					return;
+				}
 				var postUrl = "permission/addRole";
 				_params = {
 					roleName: this.name,
@@ -128,7 +135,7 @@
 					_params.roleId = this.currId;
 					postUrl = "permission/editRole";
 				}
-				g.ui.showLoading()
+				g.ui.showLoading();
 				g.net.call(postUrl, _params).then(($data) =>
 				{
 					g.ui.hideLoading();
@@ -146,8 +153,22 @@
 			},
 			onUpdate_treeMenu($list)
 			{
-				trace("$list", $list);
 				this.checkedList = $list;
+			},
+			onFocus_inputBar($type)
+			{
+				this.errData[$type] = "";
+				this.$forceUpdate();
+			},
+			checkValid()
+			{
+				if (!trim(this.name))
+				{
+					this.errData.name = "角色名不能为空";
+					_isValid = false;
+					this.$forceUpdate();
+
+				}
 			}
 		}
 	}

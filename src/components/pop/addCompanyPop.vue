@@ -125,7 +125,6 @@
 				leader: "",
 				phone: "",
 				departName: '',
-				dutyName: "",
 				departmentList: [],
 				authStatus: 0,
 				errData: {}
@@ -168,11 +167,10 @@
 					this.leader = "";
 					this.phone = "";
 					this.departmentList = [];
-					this.errData = {};
 					this.isEdit = false;
 				}
+				this.errData = {};
 				this.departName = "";
-				this.dutyName = "";
 			},
 			initData()
 			{

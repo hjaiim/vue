@@ -6,13 +6,13 @@
 					<div class="relative upload-head right pointer">
 						<img class="default-img" :src="avatar?g.param.ossUrl+avatar:g.path.images+'/default.png'"
 							 alt="">
+						<iframe class="default-avatar" name="fileUpload"
+								:src="g.path.base+'/upload.html?type=pic&subType=avatar&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"
+								v-if="!avatar"
+						></iframe>
 						<p class="err-msg absolute">{{errData.avatar}}</p>
 						<div class="absolute upload-btn">
 							<p class="load-text" v-if="!avatar">修改头像</p>
-							<iframe class="iframe-btn" name="fileUpload"
-									:src="g.path.base+'/upload.html?type=pic&subType=avatar&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"
-									id="avatar" v-if="!avatar"
-							></iframe>
 							<img v-if="avatar" :src="g.path.images+'/del-head.png'" alt=""
 								 class="del-head absolute pointer" @click="onClick_deleteImg('avatar')">
 						</div>
