@@ -18,8 +18,9 @@
 					<div class="text-msg right">
 						<p class="msg-txt">开启手机短信提醒</p>
 						<div class="switch-con pointer" @click="onClick_switch">
-							<label class="switch-label pointer">
-								<input type="checkbox" v-model="msgSwitch" class="mui-switch mui-switch-anim pointer">
+							<label class="switch-label pointer relative">
+								<input type="checkbox" v-model="msgSwitch" class="mui-switch absolute">
+								<span class="mui-switch-core mui-switch-anim pointer"></span>
 							</label>
 						</div>
 					</div>

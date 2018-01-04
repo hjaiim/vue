@@ -78,7 +78,10 @@
 							</p>
 							<p class="from-group clear" v-if="businessData.hasOpinion">
 								<span class="form-title left">  <i class="leader"></i>签批意见</span>
-								<textarea class="examine iscroll-ref left ani-time" v-model="opinion"></textarea>
+								<!--<textarea class="examine iscroll-ref left ani-time" v-model="opinion"></textarea>-->
+								<textarea id="textarea" contenteditable="true" class="examine left ani-time"
+										  placeholder=""
+										  v-model="opinion"></textarea>
 							</p>
 
 							<p class="from-group clear relative" v-if="businessData.hasAttaches">
@@ -117,6 +120,7 @@
 </template>
 <script type="text/ecmascript-6">
 	import g from "../../global";
+	import * as util from '../../js/func'
 	import ViewPopup from "../viewPop.vue";
 	import ScrollGroup from "../scrollGroup.vue";
 	import BusinessType1 from "../businessDetail/businessType1.vue";
@@ -127,11 +131,13 @@
 	import BusinessType6 from "../businessDetail/businessType6.vue";
 	import BusinessType7 from "../businessDetail/businessType7.vue";
 	import ChooseManPop from "./chooseManPop.vue";
-	var _params = null, _childName = [], _attach = {};;
+	var _params = null, _childName = [], _attach = {};
+
 	export default{
 		created()
 		{
 			this.init();
+
 		},
 		data(){
 			return {
@@ -173,7 +179,7 @@
 			}
 		},
 		watch: {
-			isShowPopView()
+			isShowPopView($val)
 			{
 				this.init();
 			}
@@ -207,6 +213,11 @@
 				}
 				window.uploadComplete = this.uploadComplete;
 				window.sendMsg = this.sendMsg;
+				this.$nextTick(()=>
+				{
+					var text = document.getElementById("textarea");
+					util.autoTextarea(text);// 调用
+				})
 			},
 			sendMsg($type, $info)
 			{

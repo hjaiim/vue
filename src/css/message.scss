@@ -131,6 +131,13 @@
 .mui-switch {
   width: 32px;
   height: 18px;
+  top: 0px;
+  opacity: 0;
+}
+
+.mui-switch-core {
+  width: 32px;
+  height: 18px;
   position: relative;
   top: 7px;
   border: 1px solid #dfdfdf;
@@ -148,28 +155,28 @@
   outline: none;
 }
 
-.mui-switch:checked {
+.mui-switch:checked + .mui-switch-core {
   border-color: #f36478;
   box-shadow: #f36478 0 0 0 16px inset;
   background-color: #f36478;
 }
 
-.mui-switch.mui-switch-anim:checked {
+.mui-switch:checked + .mui-switch-core.mui-switch-anim {
   box-shadow: #f36478 0 0 0 16px inset;
   background-color: #f36478;
   transition: border ease 0.4s, box-shadow ease 0.4s, background-color ease 1.2s;
 }
 
-.mui-switch.mui-switch-anim {
+.mui-switch-core.mui-switch-anim {
   transition: border cubic-bezier(0, 0, 0, 1) 0.4s, box-shadow cubic-bezier(0, 0, 0, 1) 0.4s;
 }
 
-.mui-switch:before {
+.mui-switch-core:before {
   content: '';
-  width: 14px;
-  height: 14px;
+  width: 17px;
+  height: 17px;
   position: absolute;
-  top: 1px;
+  top: 0px;
   left: 0;
   border-radius: 12px;
   border-top-left-radius: 12px;
@@ -180,11 +187,11 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
-.mui-switch.mui-switch-anim:before {
+.mui-switch-core.mui-switch-anim:before {
   transition: left 0.3s;
 }
 
-.mui-switch:checked:before {
+.mui-switch:checked + .mui-switch-core:before {
   left: 16px;
 }
 
