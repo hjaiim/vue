@@ -167,9 +167,9 @@
 					})
 				}
 			},
-			onClick_switch($status)
+			onClick_switch()
 			{
-				_params = {msgSwitch: $status == 1 ? 0 : 1};
+				_params = {msgSwitch: this.msgSwitch ? 0 : 1};
 				g.net.call("message/updateReceiveMobileMsg", _params).then(($data) =>
 				{
 					g.ui.toast("用户消息设置成功!");

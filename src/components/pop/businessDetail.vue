@@ -352,7 +352,7 @@
 			{
 				if (trim(this.opinion) && trim(this.opinion).length > 250)
 				{
-					this.errMsg = "字符数超出限制,审批内容限定250个字;"
+					this.errMsg = "字符数超出限制,审批内容限定250个字"
 					_isValid = false;
 				}
 			}
