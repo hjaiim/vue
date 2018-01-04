@@ -1,5 +1,5 @@
 import loginManager from "./../js/manager/LoginManager";
-import g from './../global';
+import g from "./../global";
 export function dealErr($err)
 {
 	g.ui.hideLoading();
@@ -101,12 +101,26 @@ export function getBase64($fileList, $quality)
 	}
 }
 
-export function updateUserInfo()
+export function getUserInfo()
 {
 	if (!g.data.userInfo.username && g.data.get("userInfo"))
 	{
 		var data = JSON.parse(g.data.get("userInfo"));
 		g.data.userInfo.update(data);
+	}
+}
+
+export function updateUserInfo($data)
+{
+	if(g.data.get("userInfo"))
+	{
+		var data = JSON.parse(g.data.get("userInfo"));
+		data = __merge(data, $data, true);
+		g.data.save("userInfo", JSON.stringify(data));
+	}
+	else
+	{
+		g.data.save("userInfo", JSON.stringify($data));
 	}
 }
 

@@ -38,7 +38,7 @@ function checkLogin($to, $next, $callBack)
 function initLogin($to, $next, $callBack)
 {
 	_lastUrl = "";
-	g.func.updateUserInfo();
+	g.func.getUserInfo();
 	var passUrl = ['/login', '/resetpwd', '/register'];
 	if (_isLogin)
 	{

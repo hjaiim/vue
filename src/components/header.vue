@@ -31,7 +31,7 @@
 	export default{
 		created()
 		{
-			g.func.updateUserInfo();
+			g.func.getUserInfo();
 			this.init();
 		},
 		data(){

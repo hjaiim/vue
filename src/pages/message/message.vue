@@ -153,7 +153,7 @@
 				if ($result)
 				{
 					_params = {msgIds: _delId};
-					g.ui.showLoading()
+					g.ui.showLoading();
 					g.net.call("message/delMessage", {msgIds: _delId}).then(($data) =>
 					{
 						g.ui.hideLoading();
@@ -172,6 +172,8 @@
 				_params = {msgSwitch: this.msgSwitch ? 0 : 1};
 				g.net.call("message/updateReceiveMobileMsg", _params).then(($data) =>
 				{
+					g.data.userInfo.update(_params);
+					g.func.updateUserInfo(_params);
 					g.ui.toast("用户消息设置成功!");
 				}, (err) =>
 				{
