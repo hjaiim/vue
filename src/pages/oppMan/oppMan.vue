@@ -84,7 +84,7 @@
 						<td>{{item.customerCompName}}</td>
 						<td>{{item.typeName}}</td>
 						<td>{{item.createTime}}</td>
-						<td>{{item.auditStatusDesc}}</td>
+						<td :class="item.operation== 2?'font-bold':''">{{item.auditStatusDesc}}</td>
 						<td>
 							<p class="action-menu clear" v-if="item.operation== 0">
                                 <span class="right pointer draw-line ani-time"
@@ -136,7 +136,10 @@
 	export default{
 		created(){
 			this.typeList = __merge([], g.data.staticTypePool.list);
-			this.typeList.unshift({name: "全部", id: -1})
+			this.typeList.unshift({
+				name: "全部",
+				id: -1
+			})
 			this.routerUpdated();
 		},
 		data(){

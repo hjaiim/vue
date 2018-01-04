@@ -48,7 +48,8 @@
 		-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 		li {
-			height: 40px;
+			min-height: 40px;
+			white-space: nowrap;
 			line-height: 40px;
 			padding: 0 12px;
 			border-bottom: 1px solid #dddddd;
@@ -63,12 +64,12 @@
 
 	.order-workList {
 		max-height: 123px;
-		overflow: hidden;
+		overflow-y: hidden;
 	}
 
 	.drop-ref {
 		max-height: 204px;
-		overflow: hidden;
+		overflow-y: hidden;
 	}
 
 </style>

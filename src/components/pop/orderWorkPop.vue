@@ -155,6 +155,7 @@
 					}
 					ul {
 						left: -16px;
+						max-width: 605px;
 						li {
 							line-height: 40px;
 							font-size: 14px;
