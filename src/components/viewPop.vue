@@ -92,9 +92,9 @@
 			height: 100%;
 			z-index: 99;
 			background: rgba(0, 0, 0, .2) none repeat scroll 0 0 !important;
-			-webkit-perspective: 1300px;
-			-moz-perspective: 1300px;
-			perspective: 1300px;
+			/*-webkit-perspective: 1300px;*/
+			/*-moz-perspective: 1300px;*/
+			/*perspective: 1300px;*/
 			cursor: default;
 		}
 		.md-modal {
@@ -102,10 +102,10 @@
 			top: 50%;
 			left: 50%;
 			z-index: 2000;
-			-webkit-transform: translate3d(-50%, -50%, 0);
-			-moz-transform: translate3d(-50%, -50%, 0);
-			-ms-transform: translate3d(-50%, -50%, 0);
-			transform: translate3d(-50%, -50%, 0);
+			-webkit-transform: translate(-50%, -50%);
+			-moz-transform: translate(-50%, -50%);
+			-ms-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
 			-webkit-transform-origin: 50% 50%;
 			-moz-transform-origin: 50% 50%;
 			-ms-transform-origin: 50% 50%;
@@ -113,11 +113,11 @@
 			transform-origin: 50% 50%;
 		}
 
-		.md-effect-16::after {
-			-webkit-perspective: 1300px;
-			-moz-perspective: 1300px;
-			perspective: 1300px;
-		}
+		/*.md-effect-16::after {*/
+		/*-webkit-perspective: 1300px;*/
+		/*-moz-perspective: 1300px;*/
+		/*perspective: 1300px;*/
+		/*}*/
 		.md-content {
 			color: #333333;
 			position: relative;
@@ -165,6 +165,7 @@
 	.account-content.md-overlay {
 		position: absolute;
 	}
+
 	.diff-content-pop .md-modal {
 		position: absolute;
 	}
@@ -172,7 +173,6 @@
 	.diff-content-pop.md-overlay {
 		position: absolute;
 	}
-
 
 	.right-viewPop {
 		.return-btn {

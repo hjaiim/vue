@@ -78,10 +78,7 @@
 							</p>
 							<p class="from-group clear" v-if="businessData.hasOpinion">
 								<span class="form-title left">  <i class="leader"></i>签批意见</span>
-								<!--<textarea class="examine iscroll-ref left ani-time" v-model="opinion"></textarea>-->
-								<textarea id="textarea" contenteditable="true" class="examine left ani-time"
-										  placeholder=""
-										  v-model="opinion"></textarea>
+								<textarea class="examine iscroll-ref left ani-time" v-model="opinion"></textarea>
 							</p>
 
 							<p class="from-group clear relative" v-if="businessData.hasAttaches">
@@ -213,11 +210,6 @@
 				}
 				window.uploadComplete = this.uploadComplete;
 				window.sendMsg = this.sendMsg;
-				this.$nextTick(()=>
-				{
-					var text = document.getElementById("textarea");
-					util.autoTextarea(text);// 调用
-				})
 			},
 			sendMsg($type, $info)
 			{
