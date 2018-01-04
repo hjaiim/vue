@@ -227,7 +227,7 @@
 			li {
 				flex: 1;
 				width: 16%;
-				padding: 0 10px;
+				padding: 2px 10px;
 				-webkit-box-sizing: border-box;
 				-moz-box-sizing: border-box;
 				box-sizing: border-box;
@@ -280,7 +280,7 @@
 		}
 
 		.list-wrap {
-			max-height: 350px;
+			max-height: 280px;
 			-webkit-box-sizing: border-box;
 			-moz-box-sizing: border-box;
 			box-sizing: border-box;
@@ -304,7 +304,7 @@
 
 		}
 		.btn-wrap {
-			padding-top: 65px;
+			padding-top: 32px;
 			margin-right: 35px;
 			span {
 				width: 88px;

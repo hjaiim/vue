@@ -228,7 +228,7 @@
 		.user-list {
 			font-size: 14px;
 			color: #000000;
-			padding: 30px 0 0 30px;
+			padding: 28px 0 0 28px;
 			.user-item {
 				.user-tit {
 					line-height: 50px;
@@ -303,7 +303,7 @@
 			}
 		}
 		.diff-padding {
-			padding: 0 0 0 30px;
+			padding: 0 0 0 28px;
 		}
 	}
 
