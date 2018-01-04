@@ -151,13 +151,13 @@
 					p {
 						line-height: 40px;
 						height: 40px;
-
 					}
 					ul {
 						left: -16px;
-						max-width: 605px;
+						max-width: 454px;
 						li {
 							line-height: 40px;
+							white-space: nowrap;
 							font-size: 14px;
 							height: 40px;
 							span {

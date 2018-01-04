@@ -84,7 +84,7 @@
 						<td>{{item.customerCompName}}</td>
 						<td>{{item.typeName}}</td>
 						<td>{{item.createTime}}</td>
-						<td :class="item.operation== 2?'font-bold':''">{{item.auditStatusDesc}}</td>
+						<td :class="item.operation== 2?'font-weight':''">{{item.auditStatusDesc}}</td>
 						<td>
 							<p class="action-menu clear" v-if="item.operation== 0">
                                 <span class="right pointer draw-line ani-time"
