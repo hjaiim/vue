@@ -66,7 +66,8 @@
 					<span class="user-tit left diff-distancre">头像</span>
 					<div class="user-txt left diff-frame">
 						<div class="img-wrap">
-							<img :src="g.param.ossUrl+accountData.avatar" alt="">
+							<img
+									:src="accountData.avatar?g.param.ossUrl+accountData.avatar:g.path.images+'/default.png'" alt="">
 						</div>
 					</div>
 				</div>

@@ -78,7 +78,7 @@
 			var fileSize = file.size;
 			var index = file.name.lastIndexOf('.');
 			var fileType = fileName.substr(index + 1);
-			fileSize = Math.floor(fileSize / 1048576 * 100) / 100 + "MB";
+			fileSize = Math.floor(fileSize / 1048576 * 100) / 100;
 			if (fileSize > 10)
 			{
 				window.parent.sendMsg("error", {msg: "文件限制大小为10M以内", type: urlData.query.subType});
@@ -89,7 +89,7 @@
 			{
 				if (fileExtList.indexOf(fileType) < 0)
 				{
-					window.parent.sendMsg("error", {msg: "文件类型不正确，请重新上传", type: urlData.query.subType})
+					window.parent.sendMsg("error", {msg: "文件类型不正确，请重新上传", type: urlData.query.subType});
 					$("#reset").click();
 					return;
 				}

@@ -78,7 +78,8 @@
 							</p>
 							<p class="from-group clear" v-if="businessData.hasOpinion">
 								<span class="form-title left">  <i class="leader"></i>签批意见</span>
-								<textarea class="examine iscroll-ref left ani-time" v-model="opinion"></textarea>
+								<textarea class="examine iscroll-ref left ani-time" v-model="opinion"
+										  @focus="onFocus_textArea"></textarea>
 							</p>
 
 							<p class="from-group clear relative" v-if="businessData.hasAttaches">
@@ -127,7 +128,7 @@
 	import BusinessType6 from "../businessDetail/businessType6.vue";
 	import BusinessType7 from "../businessDetail/businessType7.vue";
 	import ChooseManPop from "./chooseManPop.vue";
-	var _params = null, _childName = [], _attach = {};;
+	var _params = null, _childName = [], _attach = {}, _isValid = true;;
 	export default{
 		created()
 		{
@@ -251,6 +252,7 @@
 			},
 			onClick_statusItem($status)
 			{
+				this.errMsg = "";
 				this.status = $status;
 			},
 			onClick_closeBtn()
@@ -273,6 +275,12 @@
 			},
 			onClick_submitBtn($status)
 			{
+				this.checkValid();
+				if (!_isValid)
+				{
+					_isValid = true;
+					return;
+				}
 				_params = {
 					orderId: this.currId,
 					auditResult: this.status,
@@ -318,6 +326,10 @@
 					}
 				}
 			},
+			onFocus_textArea()
+			{
+				this.errMsg = "";
+			},
 			onClick_delBtn($name, $index)
 			{
 				g.net.call(g.param.delPicAccess, {fileName: $name}).then(($data) =>
@@ -335,6 +347,14 @@
 				this.idList.splice(index, 1);
 				var data = g.data.staffPool.getChildById($id);
 				data.update({checked: false});
+			},
+			checkValid()
+			{
+				if (trim(this.opinion) && trim(this.opinion).length > 250)
+				{
+					this.errMsg = "字符数超出限制,审批内容限定250个字;"
+					_isValid = false;
+				}
 			}
 		}
 	}
