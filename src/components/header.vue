@@ -95,20 +95,6 @@
 					height: 28px;
 					border-right: 1px dashed #ffffff;
 					display: table;
-					/*-ms-flex-pack: center;*/
-					/*display: -webkit-flex;*/
-					/*display: -moz-box;*/
-					/*display: -ms-flexbox;*/
-					/*display: -webkit-box;*/
-					/*display: flex;*/
-					/*-webkit-box-align: center;*/
-					/*-moz-box-align: center;*/
-					/*-ms-flex-align: center;*/
-					/*-webkit-align-items: center;*/
-					/*align-items: center;*/
-					/*-webkit-box-pack: center;*/
-					/*-moz-box-pack: center;*/
-					/*-ms-flex-pack: center;*/
 
 					&:last-child {
 						border: none;
@@ -134,8 +120,8 @@
 						}
 						.badeg {
 							top: -3px;
-							right: 13px;
-							width: 16px;
+							left: 20px;
+							min-width: 16px;
 							padding: 3px 0;
 							height: 10px;
 							line-height: 10px;
