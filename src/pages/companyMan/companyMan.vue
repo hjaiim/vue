@@ -62,10 +62,11 @@
 								 @change="onChange_pageCom"></common-page>
 				</div>
 			</div>
-			<add-company-pop :isShowPopView="isShowCompanyPop"
-							 @close="onClose_companyPop"
-							 :currId="currId"></add-company-pop>
 		</div>
+		<add-company-pop :isShowPopView="isShowCompanyPop"
+						 @close="onClose_companyPop"
+						 :currId="currId"></add-company-pop>
+
 	</com-layout>
 </template>
 <script type="text/ecmascript-6">

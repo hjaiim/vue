@@ -104,7 +104,6 @@
 			},
 			updateContent()
 			{
-//				debugger;
 				var content = this.$refs["scrollContent"];
 				var bar = this.$refs["scrollBar"];
 				if (content)
@@ -145,6 +144,7 @@
 		background-color: #bababa;
 		position: absolute;
 		opacity: 0.8;
+		filter:alpha(opacity=80);
 		right: 0px;
 		border-radius: 3px;
 	}
@@ -163,10 +163,12 @@
 	}
 
 	.gui-scrollgroup-show-bar-enter {
-		opacity: 0;
+		filter:alpha(opacity=0);
+		opacity:0;
 	}
 
 	.gui-scrollgroup-show-bar-leave-active {
-		opacity: 0;
+		filter:alpha(opacity=0);
+		opacity:0;
 	}
 </style>

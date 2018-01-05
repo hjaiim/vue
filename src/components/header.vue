@@ -4,22 +4,22 @@
 		<div class="navBar-right right">
 			<ul>
 				<li class="nav-item pointer" @click="onClick_msgCenter">
-					<i class="note-txt">通知</i>
-					<i class="note-icon relative">
+					<span class="note-txt diff-padding">通知</span>
+					<span class="note-icon relative">
 						<img :src="g.path.images+'/note-icon.png'" alt="">
-						<span class="badeg absolute">{{userInfo.msgCount}}</span>
-					</i>
+						<i class="badeg absolute">{{userInfo.msgCount}}</i>
+					</span>
 				</li>
 				<li class="nav-item pointer" @click="onClick_perCenter">
-					<i class="note-txt">{{userInfo.username}}</i>
-					<i class="avatar-icon">
+					<span class="note-txt">{{userInfo.username}}</span>
+					<span class="avatar-icon">
 						<img
 								:src="userInfo.avatar?g.param.ossUrl+userInfo.avatar:g.path.images+'/default.png'"
 								alt="">
-					</i>
+					</span>
 				</li>
 				<li class="nav-item pointer" @click="onClick_logoutBtn">
-					<p class="note-txt ">退出</p>
+					<span class="note-txt ">退出</span>
 				</li>
 			</ul>
 		</div>
@@ -94,26 +94,37 @@
 					padding: 0 24px;
 					height: 28px;
 					border-right: 1px dashed #ffffff;
-					-ms-flex-pack: center;
-					display: -webkit-flex;
-					display: -moz-box;
-					display: -ms-flexbox;
-					display: -webkit-box;
-					display: flex;
-					-webkit-box-align: center;
-					-moz-box-align: center;
-					-ms-flex-align: center;
-					-webkit-align-items: center;
-					align-items: center;
-					-webkit-box-pack: center;
-					-moz-box-pack: center;
-					-ms-flex-pack: center;
+					display: table;
+					/*-ms-flex-pack: center;*/
+					/*display: -webkit-flex;*/
+					/*display: -moz-box;*/
+					/*display: -ms-flexbox;*/
+					/*display: -webkit-box;*/
+					/*display: flex;*/
+					/*-webkit-box-align: center;*/
+					/*-moz-box-align: center;*/
+					/*-ms-flex-align: center;*/
+					/*-webkit-align-items: center;*/
+					/*align-items: center;*/
+					/*-webkit-box-pack: center;*/
+					/*-moz-box-pack: center;*/
+					/*-ms-flex-pack: center;*/
+
 					&:last-child {
 						border: none;
 					}
+					span {
+						display: table-cell;
+						vertical-align: middle;
+						text-align: center;
+					}
 					.note-txt {
 						color: #ffffff;
+						padding-right: 14px;
 						font-size: 14px;
+					}
+					.diff-padding {
+						padding-right: 0;
 					}
 					.note-icon {
 						padding: 0 19px 0 12px;
@@ -122,7 +133,7 @@
 							height: 14px;
 						}
 						.badeg {
-							bottom: 11px;
+							top: -3px;
 							right: 13px;
 							width: 16px;
 							padding: 3px 0;
@@ -138,7 +149,6 @@
 						}
 					}
 					.avatar-icon {
-						margin-left: 14px;
 						width: 28px;
 						height: 28px;
 						background: #ffffff;

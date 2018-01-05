@@ -14,30 +14,32 @@
 					</ul>
 				</div>
 				<ul class="list-menu border-bottom clear disabled-hover">
-					<li class="left">头像</li>
-					<li class="left">名字</li>
-					<li class="left">所属公司</li>
-					<li class="left">所属部门</li>
-					<li class="left">职务名称</li>
-					<li class="left">状态</li>
+					<li>头像</li>
+					<li>名字</li>
+					<li>所属公司</li>
+					<li>所属部门</li>
+					<li>职务名称</li>
+					<li>状态</li>
 				</ul>
 				<div class="list-wrap">
-					<div class="list-wrap" is="scroll-group" ref="scrollCon">
-						<div class="inner-content" v-for="item in manList">
-							<p class="deal-staff border-bottom" @click="onClick_arrowBtn(item.id)">{{item.name}}
+					<div class="list-wrap" is="scroll-group" ref="scrollCon"
+						 @change="onChange_scroll">
+						<div class="inner-content" v-for="(item,index) in manList">
+							<p class="deal-staff border-bottom"
+							   @click="onClick_arrowBtn(item.id,index)">{{item.name}}
 								<span class="right arrow-wrap center-flex pointer">
 									<i class="arrow-top ani-time"
 									   :class="checkedList.indexOf(item.id) >= 0?'arrow-rotate':''"></i></span>
 							</p>
 							<ul class="list-menu border-bottom clear ani-time" v-for="childItem in item.children"
 								v-show="checkedList.indexOf(item.id) >= 0">
-								<li class="left">
+								<li>
 									<img :src="g.param.ossUrl+childItem.avatar" alt=""></li>
-								<li class="left">{{childItem.name}}</li>
-								<li class="left">{{childItem.companyName}}</li>
-								<li class="left">{{childItem.departmentName}}</li>
-								<li class="left">{{childItem.dutyName}}</li>
-								<li class="left diff-padding">
+								<li>{{childItem.name}}</li>
+								<li>{{childItem.companyName}}</li>
+								<li>{{childItem.departmentName}}</li>
+								<li>{{childItem.dutyName}}</li>
+								<li class="diff-padding">
 								<span class="pointer" @click="onClick_selectBtn(childItem.id)">
 								<i class="draw-tick relative" :class="childItem.checked?'action':''"></i>
 								<span class="draw-line choose-txt">选择</span></span></li>
@@ -56,7 +58,7 @@
 <script type="text/ecmascript-6">
 	import g from "../../global";
 	import ScrollGroup from "../../components/scrollGroup.vue";
-	var _childList = [];
+	var _childList = [], _offset = 0;
 	export default{
 		created(){
 			this.init();
@@ -66,7 +68,8 @@
 				g: g,
 				checkedList: [],
 				manList: [],
-				childList: []
+				childList: [],
+
 			}
 		},
 		props: {
@@ -121,11 +124,21 @@
 						}
 					}
 				}
+				this.initScrollHeight();
+
+			},
+			onChange_scroll($offset)
+			{
+				_offset = $offset;
+			},
+			initScrollHeight(){
 				this.$nextTick(() =>
 				{
 					this.$refs['scrollCon'] && this.$refs['scrollCon'].refresh(0);
+
 				})
 			},
+
 			onClick_delBtn($id)
 			{
 				var index = this.childList.indexOf($id);
@@ -135,6 +148,7 @@
 			},
 			onClick_selectBtn($id)
 			{
+
 				var data = g.data.staffPool.getChildById($id);
 				if (data.checked)
 				{
@@ -148,12 +162,19 @@
 					data.update({checked: true})
 				}
 			},
-			onClick_arrowBtn($id)
+			onClick_arrowBtn($id, $index)
 			{
+//				this.initScrollHeight();
+//				this.$refs.scrollCon.updateContent();
 				var index = this.checkedList.indexOf($id);
 				if (index >= 0)
 				{
 					this.checkedList.splice(index, 1);
+//					if ($index == this.manList.length - 1)
+//					{
+					this.initScrollHeight();
+//					}
+
 				}
 				else
 				{
@@ -165,7 +186,7 @@
 			{
 				this.checkedList = [];
 				this.$emit('close', $type, this.childList)
-			}
+			},
 		}
 	}
 </script>
@@ -221,19 +242,18 @@
 			}
 		}
 		.list-menu {
-			min-height: 48px;
-			display: flex;
-			align-items: stretch;
+			height: 48px;
+			display: table;
+			width: 100%;
 			li {
-				flex: 1;
+				display: table-cell;
+				min-height: 48px;
 				width: 16%;
 				padding: 2px 10px;
+				vertical-align: middle;
 				-webkit-box-sizing: border-box;
 				-moz-box-sizing: border-box;
 				box-sizing: border-box;
-				vertical-align: middle;
-				display: flex;
-				align-items: center;
 				&:nth-child(1) {
 					padding-left: 52px;
 				}
@@ -287,7 +307,7 @@
 			overflow: hidden;
 		}
 		.deal-staff {
-			/*height: 56px;*/
+			height: 56px;
 			line-height: 56px;
 			border-left: 4px solid #ed5564;
 			-webkit-box-sizing: border-box;
@@ -383,7 +403,10 @@
 			-ms-transform: scale(1.6);
 			-webkit-transform: scale(1.6);
 			transform: scale(1.6);
-			opacity: 0;
+			filter:alpha(opacity=0);
+			filter:alpha(opacity=0);
+			opacity:0;
+
 		}
 	}
 

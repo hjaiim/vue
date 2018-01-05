@@ -36,7 +36,7 @@
 					{
 						if (item.positionJudge)
 						{
-							if(g.data.userInfo.positionType != -1)
+							if (g.data.userInfo.positionType != -1)
 							{
 								this.navList.push(item);
 							}
