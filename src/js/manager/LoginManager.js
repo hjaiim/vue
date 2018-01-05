@@ -19,7 +19,6 @@ function init($callback)
 	});
 }
 
-
 function checkLogin($to, $next, $callBack)
 {
 	g.net.call('user/queryUserIsLogin').then((d) =>
@@ -30,10 +29,13 @@ function checkLogin($to, $next, $callBack)
 	}, (err) =>
 	{
 		_isLogin = false;
+		g.func.dealErr(err);
 		initLogin($to, $next, $callBack);
+// 		setTimeout(() =>
+// 		{
+// 		}, 2000)
 	});
 }
-
 
 function initLogin($to, $next, $callBack)
 {
@@ -115,7 +117,8 @@ function clearLoginInfo()
 var d = {
 	init: init,
 	logout: logout,
-	checkLogin: checkLogin
+	checkLogin: checkLogin,
+	initLogin: initLogin
 
 };
 defineProperty(d, "isLogin", () =>

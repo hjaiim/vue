@@ -80,6 +80,13 @@
 								<span class="form-title left">  <i class="leader"></i>签批意见</span>
 								<textarea class="examine iscroll-ref left ani-time" v-model="opinion"
 										  @focus="onFocus_textArea"></textarea>
+
+								<!--=======-->
+								<!--&lt;!&ndash;<textarea class="examine iscroll-ref left ani-time" v-model="opinion"></textarea>&ndash;&gt;-->
+								<!--<textarea id="textarea" contenteditable="true" class="examine left ani-time"-->
+										  <!--placeholder=""-->
+										  <!--v-model="opinion"></textarea>-->
+<!--&gt;>>>>>> 29d8a0ac5e73922857ec9ba5c37c10dbd7b30b28-->
 							</p>
 
 							<p class="from-group clear relative" v-if="businessData.hasAttaches">
@@ -118,6 +125,7 @@
 </template>
 <script type="text/ecmascript-6">
 	import g from "../../global";
+	import * as util from '../../js/func'
 	import ViewPopup from "../viewPop.vue";
 	import ScrollGroup from "../scrollGroup.vue";
 	import BusinessType1 from "../businessDetail/businessType1.vue";
@@ -133,6 +141,7 @@
 		created()
 		{
 			this.init();
+
 		},
 		data(){
 			return {
@@ -174,7 +183,7 @@
 			}
 		},
 		watch: {
-			isShowPopView()
+			isShowPopView($val)
 			{
 				this.init();
 			}
@@ -208,6 +217,11 @@
 				}
 				window.uploadComplete = this.uploadComplete;
 				window.sendMsg = this.sendMsg;
+//				this.$nextTick(()=>
+//				{
+//					var text = document.getElementById("textarea");
+//					util.autoTextarea(text);// 调用
+//				})
 			},
 			sendMsg($type, $info)
 			{
@@ -352,7 +366,7 @@
 			{
 				if (trim(this.opinion) && trim(this.opinion).length > 250)
 				{
-					this.errMsg = "字符数超出限制,审批内容限定250个字"
+					this.errMsg = "字符数超出限制,审批内容限定250个字";
 					_isValid = false;
 				}
 			}

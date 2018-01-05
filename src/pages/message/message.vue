@@ -18,8 +18,9 @@
 					<div class="text-msg right">
 						<p class="msg-txt">开启手机短信提醒</p>
 						<div class="switch-con pointer" @click="onClick_switch">
-							<label class="switch-label pointer">
-								<input type="checkbox" v-model="msgSwitch" class="mui-switch mui-switch-anim pointer">
+							<label class="switch-label pointer relative">
+								<input type="checkbox" v-model="msgSwitch" class="mui-switch absolute">
+								<span class="mui-switch-core mui-switch-anim pointer"></span>
 							</label>
 						</div>
 					</div>
@@ -112,6 +113,16 @@
 			TotalDeletePop,
 			EmptyPop
 		},
+		watch: {
+			msgList($val)
+			{
+				if ($val.length == 0)
+				{
+					this.currPage = 1;
+					this.updateUrl();
+				}
+			}
+		},
 		computed: {
 			checkAll()
 			{
@@ -135,6 +146,7 @@
 				this.msgList = g.data.searchMessagePool.list;
 				this.msgSwitch = g.data.userInfo.msgSwitch;
 				var typeList = g.vue.getQuery('typeList', "[0,1]");
+				this.checkedAll = false;
 				this.typeList = JSON.parse(typeList).map(function (item)
 				{
 					return int(item);

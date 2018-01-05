@@ -7,7 +7,7 @@
 					<i class="note-txt">通知</i>
 					<i class="note-icon relative">
 						<img :src="g.path.images+'/note-icon.png'" alt="">
-						<span class="badeg absolute">{{userInfo.msgCount}}</span>
+						<span class="badeg absolute">{{userInfo.msgCount>99?'99+':userInfo.msgCount}}</span>
 					</i>
 				</li>
 				<li class="nav-item pointer" @click="onClick_perCenter">
