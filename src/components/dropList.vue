@@ -62,14 +62,14 @@
 		}
 	}
 
+	.drop-ref {
+		max-height: 204px;
+		overflow-y: hidden;
+	}
 	.order-workList {
 		max-height: 123px;
 		overflow-y: hidden;
 	}
 
-	.drop-ref {
-		max-height: 204px;
-		overflow-y: hidden;
-	}
 
 </style>

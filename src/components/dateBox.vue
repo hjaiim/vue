@@ -643,6 +643,7 @@
 				transition: all .3s ease;
 				&:hover {
 					opacity: 0.9;
+					filter:alpha(opacity=90);
 
 				}
 			}

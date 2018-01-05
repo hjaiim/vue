@@ -88,13 +88,14 @@
 			position: fixed;
 			left: 0;
 			top: 0;
+			bottom: 0;
+			right: 0;
 			width: 100%;
-			height: 100%;
+			min-height: 100%;
 			z-index: 99;
-			background: rgba(0, 0, 0, .2) none repeat scroll 0 0 !important;
-			-webkit-perspective: 1300px;
-			-moz-perspective: 1300px;
-			perspective: 1300px;
+			background: rgba(0, 0, 0, .2) none repeat 0 0 !important;
+			background-size: 1920px 1080px;
+			background-attachment: fixed;
 			cursor: default;
 		}
 		.md-modal {
@@ -102,33 +103,24 @@
 			top: 50%;
 			left: 50%;
 			z-index: 2000;
-			-webkit-transform: translate3d(-50%, -50%, 0);
-			-moz-transform: translate3d(-50%, -50%, 0);
-			-ms-transform: translate3d(-50%, -50%, 0);
-			transform: translate3d(-50%, -50%, 0);
+			-webkit-transform: translate(-50%, -50%);
+			-moz-transform: translate(-50%, -50%);
+			-ms-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
 			-webkit-transform-origin: 50% 50%;
 			-moz-transform-origin: 50% 50%;
 			-ms-transform-origin: 50% 50%;
 			-o-transform-origin: 50% 50%;
 			transform-origin: 50% 50%;
 		}
-
-		.md-effect-16::after {
-			-webkit-perspective: 1300px;
-			-moz-perspective: 1300px;
-			perspective: 1300px;
-		}
 		.md-content {
 			color: #333333;
 			position: relative;
 			margin: 0 auto;
 			width: 720px;
-			/*height: 288px;*/
 			border: 1px solid #e8e8e8;
 			background: #ffffff;
-			/*-webkit-box-shadow: 0 0 10px  rgba(0, 0, 0, 0.25);*/
-			/*-moz-box-shadow: 0 0 10px  rgba(0, 0, 0, 0.25);*/
-			/*box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);*/
+
 			-webkit-border-radius: 5px;
 			-moz-border-radius: 5px;
 			border-radius: 5px;
@@ -150,11 +142,11 @@
 		padding: 10px;
 		background: transparent;
 		&:hover {
-			-webkit-transform: translate3d(0, 5px, 0);
-			-moz-transform: translate3d(0, 5px, 0);
-			-ms-transform: translate3d(0, 5px, 0);
-			-o-transform: translate3d(0, 5px, 0);
-			transform: translate3d(0, 5px, 0);
+			-webkit-transform: translate(0, 5px);
+			-moz-transform: translate(0, 5px);
+			-ms-transform: translate(0, 5px);
+			-o-transform: translate(0, 5px);
+			transform: translate(0, 5px);
 		}
 	}
 
@@ -165,6 +157,7 @@
 	.account-content.md-overlay {
 		position: absolute;
 	}
+
 	.diff-content-pop .md-modal {
 		position: absolute;
 	}
@@ -172,7 +165,6 @@
 	.diff-content-pop.md-overlay {
 		position: absolute;
 	}
-
 
 	.right-viewPop {
 		.return-btn {

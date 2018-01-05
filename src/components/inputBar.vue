@@ -195,7 +195,8 @@
 				-ms-transform: scale(1.6);
 				-webkit-transform: scale(1.6);
 				transform: scale(1.6);
-				opacity: 0;
+				filter:alpha(opacity=0);
+				opacity:0;
 			}
 		}
 	}

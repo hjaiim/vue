@@ -106,6 +106,7 @@
 		}
 		&:last-child {
 		  min-width: 210px;
+		  width: 16%;
 		}
 	  }
 	  td {
@@ -133,9 +134,11 @@
 		}
 		&:nth-of-type(8) {
 		  width: 14%;
+
 		}
 		&:last-child {
 		  min-width: 210px;
+		  width: 16%;
 		}
 	  }
 	  .action-menu {
@@ -143,14 +146,13 @@
 	  }
 	  .diff-menu {
 		padding-right: 14%;
-		text-align: right;
-		display: -webkit-flex;
-		display: -moz-box;
-		display: -ms-flexbox;
-		display: -webkit-box;
-		display: flex;
-		flex-wrap: nowrap;
-		justify-content: space-between;
+		display: table;
+		width: 86%;
+		span {
+		  display: table-cell;
+		  vertical-align: middle;
+		  text-align: center;
+		}
 	  }
 	  .diff-action {
 		padding-right: 32%;

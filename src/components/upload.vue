@@ -102,7 +102,8 @@
 		}
 
 		.upload-input {
-			opacity: 0;
+			filter:alpha(opacity=0);
+			opacity:0;
 			@extend .upload-label;
 			z-index: 1;
 		}
