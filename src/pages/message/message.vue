@@ -113,6 +113,16 @@
 			TotalDeletePop,
 			EmptyPop
 		},
+		watch: {
+			msgList($val)
+			{
+				if ($val.length == 0)
+				{
+					this.currPage = 1;
+					this.updateUrl();
+				}
+			}
+		},
 		computed: {
 			checkAll()
 			{
@@ -136,6 +146,7 @@
 				this.msgList = g.data.searchMessagePool.list;
 				this.msgSwitch = g.data.userInfo.msgSwitch;
 				var typeList = g.vue.getQuery('typeList', "[0,1]");
+				this.checkedAll = false;
 				this.typeList = JSON.parse(typeList).map(function (item)
 				{
 					return int(item);
@@ -154,7 +165,7 @@
 				if ($result)
 				{
 					_params = {msgIds: _delId};
-					g.ui.showLoading()
+					g.ui.showLoading();
 					g.net.call("message/delMessage", {msgIds: _delId}).then(($data) =>
 					{
 						g.ui.hideLoading();
@@ -168,11 +179,13 @@
 					})
 				}
 			},
-			onClick_switch($status)
+			onClick_switch()
 			{
-				_params = {msgSwitch: $status == 1 ? 0 : 1};
+				_params = {msgSwitch: this.msgSwitch ? 0 : 1};
 				g.net.call("message/updateReceiveMobileMsg", _params).then(($data) =>
 				{
+					g.data.userInfo.update(_params);
+					g.func.updateUserInfo(_params);
 					g.ui.toast("用户消息设置成功!");
 				}, (err) =>
 				{

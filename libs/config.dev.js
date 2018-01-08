@@ -19,8 +19,8 @@ var WEB_CONFIG = {
 	url: {
 		domain: "",
 // 		server: "http://192.168.12.4:8080/"
-//		server: "http://192.168.12.5:8080/",
-		server: "http://test.service.boms.huanwuh5.com/boms"
+		server: "http://192.168.12.5:8080/",
+// 		server: "http://test.service.boms.huanwuh5.com/boms"
 	},
 	http: {
 		method: "post",

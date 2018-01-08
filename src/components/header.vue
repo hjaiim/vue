@@ -7,7 +7,7 @@
 					<span class="note-txt diff-padding">通知</span>
 					<span class="note-icon relative">
 						<img :src="g.path.images+'/note-icon.png'" alt="">
-						<i class="badeg absolute">{{userInfo.msgCount}}</i>
+						<i class="badeg absolute">{{userInfo.msgCount>99?'99+':userInfo.msgCount}}</i>
 					</span>
 				</li>
 				<li class="nav-item pointer" @click="onClick_perCenter">
@@ -31,7 +31,7 @@
 	export default{
 		created()
 		{
-			g.func.updateUserInfo();
+			g.func.getUserInfo();
 			this.init();
 		},
 		data(){
@@ -122,7 +122,7 @@
 							top: -3px;
 							left: 20px;
 							min-width: 16px;
-							padding: 3px 0;
+							padding: 3px 1px;
 							height: 10px;
 							line-height: 10px;
 							-webkit-border-radius: 50%;
