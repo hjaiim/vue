@@ -251,6 +251,7 @@
 			-moz-box-sizing: border-box;
 			box-sizing: border-box;
 			padding: 124px 0 0 200px;
+			overflow: hidden;
 		}
 		.right-col {
 			min-height: 100%;
