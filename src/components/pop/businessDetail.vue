@@ -78,7 +78,8 @@
 							</p>
 							<p class="from-group clear" v-if="businessData.hasOpinion">
 								<span class="form-title left">  <i class="leader"></i>签批意见</span>
-								<textarea class="examine iscroll-ref left ani-time" v-model="opinion" @focus="onFocus_textArea"></textarea>
+								<textarea class="examine iscroll-ref left ani-time" v-model="opinion"
+										  @focus="onFocus_textArea"></textarea>
 							</p>
 
 							<p class="from-group clear relative" v-if="businessData.hasAttaches">
@@ -99,7 +100,7 @@
 								<span class="exam-btn pointer" @click="onClick_selectNext">选择后续人</span>
 								<span v-for="item in childList" class="choose-people">{{item.name}}<i
 										class="close-search-btn absolute pointer"
-										@click="onClick_cancelBtn(item.id)"></i></span>
+										@click="onClick_delChild(item.id)"></i></span>
 							</p>
 						</div>
 					</div>
@@ -128,7 +129,7 @@
 	import BusinessType6 from "../businessDetail/businessType6.vue";
 	import BusinessType7 from "../businessDetail/businessType7.vue";
 	import ChooseManPop from "./chooseManPop.vue";
-	var _params = null, _childName = [], _attach = {}, _isValid = true;;
+	var _params = null, _childName = [], _attach = {}, _isValid = true;
 	export default{
 		created()
 		{
@@ -282,6 +283,7 @@
 					_isValid = true;
 					return;
 				}
+				this.getChildName();
 				_params = {
 					orderId: this.currId,
 					auditResult: this.status,
@@ -300,7 +302,6 @@
 					this.errMsg = "请至少选择一名候选人";
 					return;
 				}
-
 				g.ui.showLoading();
 				g.net.call("bo/saveAuditRecord", _params).then(($data) =>
 				{
@@ -317,14 +318,8 @@
 				this.isShowOrderManPop = false;
 				if ($result)
 				{
-					_childName = [];
 					this.idList = __merge([], $list);
 					this.errMsg = "";
-					for (var item of this.idList)
-					{
-						var data = g.data.staffPool.getChildById(item);
-						_childName.push(data.name)
-					}
 				}
 			},
 			onFocus_textArea()
@@ -342,7 +337,7 @@
 					this.hasIframe = true;
 				})
 			},
-			onClick_cancelBtn($id)
+			onClick_delChild($id)
 			{
 				var index = this.idList.indexOf($id);
 				this.idList.splice(index, 1);
@@ -355,6 +350,15 @@
 				{
 					this.errMsg = "字符数超出限制,审批内容限定250个字";
 					_isValid = false;
+				}
+			},
+			getChildName()
+			{
+				_childName = [];
+				for (var id of this.idList)
+				{
+					var data = g.data.staffPool.getChildById(id);
+					_childName.push(data.name);
 				}
 			}
 		}
@@ -503,8 +507,8 @@
 				-ms-transform: scale(1.6);
 				-webkit-transform: scale(1.6);
 				transform: scale(1.6);
-				filter:alpha(opacity=0);
-				opacity:0;
+				filter: alpha(opacity=0);
+				opacity: 0;
 			}
 		}
 
