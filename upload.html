@@ -92,7 +92,7 @@
 			var fileName = file.name;
 			var fileSize = file.size;
 			var index = file.name.lastIndexOf('.');
-			var fileType = fileName.substr(index + 1);
+			var fileType = fileName.substr(index + 1).toLowerCase();
 			fileSize = Math.floor(fileSize / 1048576 * 100) / 100;
 			if (fileSize > 10)
 			{
@@ -132,7 +132,7 @@
 				type: urlData.query.subType
 			});
 			$("#form1").action = urlData.query.access + "?type=" + urlData.query.type +
-					"&fileName=" + fileName + "&redirectUrl=" + urlData.query.redirectUrl;
+					"&fileName=" + encodeURIComponent(fileName) + "&redirectUrl=" + urlData.query.redirectUrl;
 			$("#submit").click();
 		}
 	}

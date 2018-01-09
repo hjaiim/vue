@@ -104,7 +104,8 @@
 			<div class="personal-form">
 				<span class="personal-title left">上传附件</span>
                 <span class="form-trap up-btn pointer opp-up-btn">点击上传
-               	<iframe class="iframe-wrap" name="fileUpload" v-if="hasIframe"
+               	<iframe class="iframe-wrap absolute pointer" name="fileUpload" v-if="hasIframe"
+						:class="isUpload?'disabled':''"
 						:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"></iframe>
                 </span>
 				<span class="err-msg">{{errData.attach}}</span>
@@ -132,7 +133,8 @@
 				errData: {},
 				formData: {},
 				hasIframe: true,
-				attachList: []
+				attachList: [],
+				isUpload:false
 			}
 		},
 		components: {
@@ -165,6 +167,7 @@
 				{
 					this.initForm();
 				}
+				this.isUpload = false;
 				window.uploadComplete = this.uploadComplete;
 				window.sendMsg = this.sendMsg;
 			},
@@ -198,7 +201,7 @@
 					businessScale: "",
 					budget: "",
 					payway: "",
-					attach:""
+					attach: ""
 				};
 			},
 			sendMsg($type, $info)
@@ -211,6 +214,7 @@
 				else
 				{
 					g.ui.showLoading();
+					this.isUpload = true;
 					this.errData.attach = "";
 					this.$forceUpdate();
 					_attach.name = $info.name;
@@ -219,6 +223,7 @@
 			uploadComplete($data)
 			{
 				g.ui.hideLoading();
+				this.isUpload = false;
 				this.hasIframe = false;
 				var attach = {
 					size: $data.size,
@@ -278,7 +283,7 @@
 				{
 					for (var key in item)
 					{
-						if (typeof this.formData[item[key]] == "string" && !trim(this.formData[item[key]])  && item[key] != "remark")
+						if (typeof this.formData[item[key]] == "string" && !trim(this.formData[item[key]]) && item[key] != "remark")
 						{
 							this.errData[item[key]] = "内容不能为空";
 							_isValid = false;

@@ -11,7 +11,7 @@
 							 :src="avatar?g.param.ossUrl+avatar:g.path.images+'/default.png'" alt="">
 						<iframe class="default-avatar" name="fileUpload"
 								:src="g.path.base+'/upload.html?type=pic&subType=avatar&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"
-								v-if="!avatar"></iframe>
+								v-if="!avatar" :class="isUpload?'disabled':''"></iframe>
 						<p class="err-msg absolute">{{errData.avatar}}</p>
 						<div class="absolute upload-btn">
 							<p class="load-text" v-if="!avatar">修改头像</p>
@@ -125,8 +125,8 @@
 				confirmPwd: "",
 				errData: {},
 				limit: g.param.timeoutClock,
-				isClicked: false
-
+				isClicked: false,
+				isUpload: false
 			}
 		},
 		components: {
@@ -147,6 +147,7 @@
 				this.remark = this.userInfo.remark;
 				this.readonly = true;
 				this.type = g.vue.getQuery('type', "personal");
+				this.isUpload = false;
 				window.uploadComplete = this.uploadComplete;
 				window.sendMsg = this.sendMsg;
 			},
@@ -160,6 +161,7 @@
 				else
 				{
 					g.ui.showLoading();
+					this.isUpload = true;
 					this.errData[$info.type] = "";
 					this.$forceUpdate();
 					_attach.type = $info.type;
@@ -176,6 +178,8 @@
 			uploadComplete($data)
 			{
 				g.ui.hideLoading();
+				this.isUpload = false;
+
 				this[_attach.type] = $data.fileName;
 				if (_avatar != this[_attach.type])
 				{

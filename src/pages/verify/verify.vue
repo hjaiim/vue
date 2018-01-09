@@ -8,7 +8,7 @@
 							 alt="">
 						<iframe class="default-avatar" name="fileUpload"
 								:src="g.path.base+'/upload.html?type=pic&subType=avatar&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"
-								v-if="!avatar"
+								v-if="!avatar" :class="isUpload?'disabled':''"
 						></iframe>
 						<p class="err-msg absolute">{{errData.avatar}}</p>
 						<div class="absolute upload-btn">
@@ -113,7 +113,7 @@
 						<div class="img-contain absolute" v-show="idCardFront">
 							<img class="img-url " :src="idCardFront?g.param.ossUrl+idCardFront:''" alt="">
 						</div>
-						<iframe class="pointer" name="fileUpload"
+						<iframe class="pointer" name="fileUpload" :class="isUpload?'disabled':''"
 								:src="g.path.base+'/upload.html?type=pic&subType=idCardFront&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"
 								v-if="!idCardFront" id="idCardFront"></iframe>
 						<span class="del-img pointer" :class="idCardFront?'hover-img':''"
@@ -129,7 +129,7 @@
 						<div class="img-contain absolute" v-show="idCardBack">
 							<img class="img-url " :src="idCardBack?g.param.ossUrl+idCardBack:''" alt="">
 						</div>
-						<iframe class="pointer" name="fileUpload"
+						<iframe class="pointer" name="fileUpload" :class="isUpload?'disabled':''"
 								:src="g.path.base+'/upload.html?type=pic&subType=idCardBack&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"
 								v-if="!idCardBack" id="idCardBack"></iframe>
 						<span class="del-img pointer" :class="idCardBack?'hover-img':''"
@@ -154,7 +154,7 @@
 						<div class="img-contain absolute" v-show="workCard">
 							<img class="img-url " :src="workCard?g.param.ossUrl+workCard:''" alt="">
 						</div>
-						<iframe class="pointer" name="fileUpload"
+						<iframe class="pointer" name="fileUpload" :class="isUpload?'disabled':''"
 								:src="g.path.base+'/upload.html?type=pic&subType=workCard&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"
 								id="workCard" v-if="!workCard"></iframe>
 						<span class="del-img pointer" :class="workCard?'hover-img':''"
@@ -221,7 +221,8 @@
 				isShowDutyList: false,
 				isSubmit: false,
 				limit: g.param.timeoutClock,
-				isClicked: false
+				isClicked: false,
+				isUpload: false
 
 			}
 		},
@@ -281,6 +282,7 @@
 					this.currDutyData = "";
 				}
 				this.code = "";
+				this.isUpload = false;
 				this.initEvents();
 				window.uploadComplete = this.uploadComplete;
 				window.sendMsg = this.sendMsg;
@@ -295,6 +297,7 @@
 				else
 				{
 					g.ui.showLoading();
+					this.isUpload = true;
 					this.errData[$info.type] = "";
 					this.$forceUpdate();
 					_attach.type = $info.type;
@@ -311,6 +314,7 @@
 			uploadComplete($data)
 			{
 				g.ui.hideLoading();
+				this.isUpload = false;
 				this[_attach.type] = $data.fileName;
 				if (_picData[_attach.type] != this[_attach.type])
 				{

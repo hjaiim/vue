@@ -304,6 +304,7 @@
 							g.data.searchMessagePool.remove(id);
 							this.msgList = g.data.searchMessagePool.list;
 						}
+						this.delList = [];
 						g.data.userInfo.update($data);
 						this.$refs.layout.updateHeader();
 						g.ui.toast("消息删除成功！");
