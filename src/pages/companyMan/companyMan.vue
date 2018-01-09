@@ -1,5 +1,5 @@
 <template>
-	<com-layout currPath="/companyman" class="diff-content-wrap">
+	<com-layout currPath="/companyman" :class="isShowCompanyPop?'diff-content-wrap':''">
 		<div class="plat-wrap">
 			<div class="action-wrap clear">
 				<span class="add-btn action-btn ani-time left pointer" @click="onClick_addCompanyBtn">

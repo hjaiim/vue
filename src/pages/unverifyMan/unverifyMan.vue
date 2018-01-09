@@ -1,5 +1,5 @@
 <template>
-	<com-layout class="unverify-wrap" currPath="/accountman" :isInited="false">
+	<com-layout :class="isShowDetailPop?'unverify-wrap':''" currPath="/accountman" :isInited="false">
 		<div class="staff-wrap">
 			<div class="status-wrap clear">
 				<div class="verify-btn total-btn right pointer" @click="onClick_verifyBtn">已认证</div>
