@@ -9,7 +9,7 @@
 					<div class="relative upload-head right pointer">
 						<img class="default-img"
 							 :src="avatar?g.param.ossUrl+avatar:g.path.images+'/default.png'" alt="">
-						<iframe class="default-avatar" name="fileUpload"
+						<iframe class="default-avatar" name="fileUpload"   :disabled="isUpload"
 								:src="g.path.base+'/upload.html?type=pic&subType=avatar&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"
 								v-if="!avatar" :class="isUpload?'disabled':''"></iframe>
 						<p class="err-msg absolute">{{errData.avatar}}</p>

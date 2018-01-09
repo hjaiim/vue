@@ -1135,3 +1135,13 @@ input {
   z-index: 999;
 }
 
+iframe {
+  font-size: 100px;
+}
+
+iframe[disabled] {
+  width: 0;
+  overflow: hidden;
+  cursor: none !important;
+  font-size: 0px !important;
+}
