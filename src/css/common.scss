@@ -221,6 +221,7 @@ input {
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
+  -ms-border-radius: 50%;
   img {
 	display: block;
 	width: 100%;
@@ -246,11 +247,13 @@ input {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
+	overflow: hidden;
   }
   &:before {
 	border: 1px solid #cccccc;
 	background-color: #ffffff;
 	-moz-transition: all 0.1s ease-in-out;
+	-ms-transition: all 0.1s ease-in-out;
 	-o-transition: all 0.1s ease-in-out;
 	-webkit-transition: all 0.1s ease-in-out;
 	transition: all 0.1s ease-in-out;
@@ -272,6 +275,7 @@ input {
 	  -moz-box-shadow: inset 0 0 0 9px #f36478;
 	  -webkit-box-shadow: inset 0 0 0 9px #f36478;
 	  box-shadow: inset 0 0 0 9px #f36478;
+	  -ms-shadow: inset 0 0 0 9px #f36478;
 	}
 	&:after {
 	  color: #ffffff;
@@ -315,8 +319,8 @@ input {
 
 .sideInTop-enter, .sideInTop-leave-to /* .fade-leave-active in below version 2.1.8 */
 {
-  filter:alpha(opacity=0);
-  opacity:0;
+  filter: alpha(opacity=0);
+  opacity: 0;
 }
 
 .sideInTop-enter-active .pop-content {
@@ -333,16 +337,16 @@ input {
 
 @keyframes sideInTop-in {
   0% {
-	filter:alpha(opacity=0);
-	opacity:0;
+	filter: alpha(opacity=0);
+	opacity: 0;
 	-webkit-transform: translate3d(-50%, -100%, 0);
 	-moz-transform: translate3d(-50%, -100%, 0);
 	-ms-transform: translate3d(-50%, -100%, 0);
 	transform: translate3d(-50%, -100%, 0);
   }
   100% {
-	filter:alpha(opacity=100);
-	opacity:1;
+	filter: alpha(opacity=100);
+	opacity: 1;
 	-webkit-transform: translate3d(-50%, -50%, 0);
 	-moz-transform: translate3d(-50%, -50%, 0);
 	-ms-transform: translate3d(-50%, -50%, 0);
@@ -352,16 +356,16 @@ input {
 
 @-webkit-keyframes sideInTop-in {
   0% {
-	filter:alpha(opacity=0);
-	opacity:0;
+	filter: alpha(opacity=0);
+	opacity: 0;
 	-webkit-transform: translate3d(-50%, -100%, 0);
 	-moz-transform: translate3d(-50%, -100%, 0);
 	-ms-transform: translate3d(-50%, -100%, 0);
 	transform: translate3d(-50%, -100%, 0);
   }
   100% {
-	filter:alpha(opacity=100);
-	opacity:1;
+	filter: alpha(opacity=100);
+	opacity: 1;
 	-webkit-transform: translate3d(-50%, -50%, 0);
 	-moz-transform: translate3d(-50%, -50%, 0);
 	-ms-transform: translate3d(-50%, -50%, 0);
@@ -371,16 +375,16 @@ input {
 
 @keyframes sideInTop-out {
   0% {
-	filter:alpha(opacity=100);
-	opacity:1;
+	filter: alpha(opacity=100);
+	opacity: 1;
 	-webkit-transform: translate3d(-50%, -50%, 0);
 	-moz-transform: translate3d(-50%, -50%, 0);
 	-ms-transform: translate3d(-50%, -50%, 0);
 	transform: translate3d(-50%, -50%, 0);
   }
   100% {
-	filter:alpha(opacity=0);
-	opacity:0;
+	filter: alpha(opacity=0);
+	opacity: 0;
 	-webkit-transform: translate3d(-50%, -100%, 0);
 	-moz-transform: translate3d(-50%, -100%, 0);
 	-ms-transform: translate3d(-50%, -100%, 0);
@@ -390,16 +394,16 @@ input {
 
 @-webkit-keyframes sideInTop-out {
   0% {
-	filter:alpha(opacity=100);
-	opacity:1;
+	filter: alpha(opacity=100);
+	opacity: 1;
 	-webkit-transform: translate3d(-50%, -50%, 0);
 	-moz-transform: translate3d(-50%, -50%, 0);
 	-ms-transform: translate3d(-50%, -50%, 0);
 	transform: translate3d(-50%, -50%, 0);
   }
   100% {
-	filter:alpha(opacity=0);
-	opacity:0;
+	filter: alpha(opacity=0);
+	opacity: 0;
 	-webkit-transform: translate3d(-50%, -100%, 0);
 	-moz-transform: translate3d(-50%, -100%, 0);
 	-ms-transform: translate3d(-50%, -100%, 0);
@@ -539,7 +543,6 @@ input {
 		text-align: right;
 		span {
 		  color: #61a4de;
-		  overflow: hidden;
 		  position: relative;
 		  &:hover {
 			color: #2c85d3;
@@ -675,16 +678,18 @@ input {
 	width: 85%;
 	max-width: 85%;
 	height: auto;
+	margin-top: 2px;
 	display: inline-block;
 	overflow-x: hidden;
 	vertical-align: top;
 	box-shadow: 0 0 2px #f5f5f5 inset;
 	border: 1px solid #dedede;
 	padding: 6px;
-	line-height: 20px;
+	line-height: 16px;
 	overflow-y: hidden;
 	resize: none;
 	border-radius: 4px;
+	color: #000000;
 	&:focus {
 	  border: 1px solid #dddddd;
 	}
@@ -750,8 +755,6 @@ input {
 
 }
 
-//}
-
 .form-list {
   width: 240px;
   height: 40px;
@@ -792,8 +795,8 @@ input {
 	width: 240px;
 	height: 180px;
 	color: transparent;
-	filter:alpha(opacity=0);
-	opacity:0;
+	filter: alpha(opacity=0);
+	opacity: 0;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -803,6 +806,15 @@ input {
   .upload-btn {
 	width: 100%;
 	height: 100%;
+	display: table;
+	.upload-inner {
+	  display: table-cell;
+	  vertical-align: middle;
+	}
+	.upload-add {
+	  display: block;
+	  margin: 0 auto;
+	}
 	.upload-text {
 	  color: #666666;
 	  margin-top: 15px;
@@ -877,8 +889,8 @@ input {
 	  -ms-transform: scale(1.6);
 	  -webkit-transform: scale(1.6);
 	  transform: scale(1.6);
-	  filter:alpha(opacity=0);
-	  opacity:0;
+	  filter: alpha(opacity=0);
+	  opacity: 0;
 	}
   }
   .img-contain {
@@ -894,10 +906,25 @@ input {
 	  height: 100%;
 	}
   }
+}
 
-  &:hover {
-	.hover-img {
-	  display: block;
+.card-box {
+  .upload-box {
+	&:hover {
+	  .hover-img {
+		display: block;
+	  }
+	}
+  }
+}
+
+.card-box[disabled] {
+  .upload-box {
+	cursor: default;
+	&:hover {
+	  .hover-img {
+		display: none;
+	  }
 	}
   }
 }
@@ -1008,8 +1035,8 @@ input {
   width: 4px !important;
   background-color: rgba(0, 0, 0, .6) !important;
   position: absolute;
-  filter:alpha(opacity=80);
-  opacity:.8;
+  filter: alpha(opacity=80);
+  opacity: .8;
   right: 0px;
   border-radius: 3px;
 }
@@ -1020,16 +1047,20 @@ input {
   height: 100%;
   left: 0;
   top: 0;
-  filter:alpha(opacity=0);
-  opacity:0;
+  filter: alpha(opacity=0);
+  opacity: 0;
   overflow: hidden;
 }
 
 .arrow-top {
   width: 14px;
   height: 14px;
-  position: relative;
-  top: -3px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
   &:after, &:before {
 	width: 0;
 	height: 0;
@@ -1063,6 +1094,7 @@ input {
   -o-transform: rotate(180deg);
   transform: rotate(180deg);
   top: 5px;
+  left: 0;
 }
 
 .arrow-bottom {
@@ -1098,5 +1130,9 @@ input {
 .padding-5 {
   padding: 0 5px;
   color: #ed5564;
+}
+
+.mint-indicator-wrapper {
+  z-index: 999;
 }
 

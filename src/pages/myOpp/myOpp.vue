@@ -10,7 +10,6 @@
 						<span :class="['icon-trangle', isShowBusinessList?'rotate':'']"></span>
 						<drop-list :dropList="typeList" :isShowDropList="isShowBusinessList"
 								   @change="onClick_typeItem" ref="typeList"></drop-list>
-
 					</div>
 				</div>
 				<div class="from-group status-form p-left left">
@@ -165,12 +164,6 @@
 			endDate()
 			{
 				return g.timeTool.getFullDate(int(this.endTime), true);
-			}
-		},
-		watch: {
-			isShowStartDate($val)
-			{
-				trace("$val", $val);
 			}
 		},
 		methods: {

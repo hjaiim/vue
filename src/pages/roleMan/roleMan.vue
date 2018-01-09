@@ -74,7 +74,8 @@
 				roleList: [],
 				currId: 0,
 				isShowRolePop: false,
-				tdWidth: 0
+				tdWidth: 0,
+				currPage: 1,
 			}
 		},
 		components: {
@@ -97,6 +98,7 @@
 		methods: {
 			routerUpdated()
 			{
+				this.currPage = int(g.vue.getQuery("page",1));
 				this.roleList = g.data.searchRolePool.list;
 				this.$nextTick(() =>
 				{
@@ -129,6 +131,7 @@
 					{
 						g.ui.hideLoading();
 						g.data.searchRolePool.remove(_delId);
+						this.roleList = g.data.searchRolePool.list;
 						g.ui.toast("角色删除成功!")
 					}, (err) =>
 					{
@@ -157,7 +160,8 @@
 				g.url = {
 					path: "/roleman",
 					query: {
-						page: this.currPage
+						page: this.currPage,
+						timeStamp:g.timeTool.getNowStamp()
 					}
 				}
 			}

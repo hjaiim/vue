@@ -1,7 +1,7 @@
 <template>
 	<com-layout currId="percenter" currPath="/verify">
 		<div class="percenter-wrap">
-			<div class="percenter-inner" :class="canEdit?'':'disabled'">
+			<div class="percenter-inner avatar-box" :class="canEdit?'':'disabled'" :disabled="!canEdit">
 				<div class="icon-collect clear">
 					<div class="relative upload-head right pointer">
 						<img class="default-img" :src="avatar?g.param.ossUrl+avatar:g.path.images+'/default.png'"
@@ -31,7 +31,7 @@
 					<span class="personal-title left">所属公司</span>
 					<p class="err-msg absolute"> {{errData.currCompany}}</p>
 					<div class="personal-content left relative form-list pointer diff-list"
-						 :class="canEdit?'':'disabled'"
+						 :class="canEdit?'':'disabled'" :disabled="!canEdit"
 						 @click.stop="onClick_dropListBtn('Company')">
 						{{currCompanyData.name}}
 						<i :class="['icon-trangle', isShowCompanyList?'rotate':'']"></i>
@@ -44,7 +44,7 @@
 					<span class="personal-title left">所属部门</span>
 					<p class="err-msg absolute"> {{errData.currDepartment}}</p>
 					<div class="personal-content left relative form-list pointer"
-						 :class="canEdit?'':'disabled'"
+						 :class="canEdit?'':'disabled'" :disabled="!canEdit"
 						 @click.stop="onClick_dropListBtn('Department')">
 						{{currDepartData.name}}
 						<i class="pointer" :class="['icon-trangle', isShowDepartmentList?'rotate':'']"></i>
@@ -57,7 +57,7 @@
 					<span class="personal-title left">职务名称</span>
 					<p class="err-msg absolute"> {{errData.currDuty}}</p>
 					<div class="personal-content left relative form-list pointer"
-						 :class="canEdit?'':'disabled'"
+						 :class="canEdit?'':'disabled'" :disabled="!canEdit"
 						 @click.stop="onClick_dropListBtn('Duty')">
 						{{currDutyData.name}}
 						<i class="pointer" :class="['icon-trangle', isShowDutyList?'rotate':'']"></i>
@@ -94,21 +94,21 @@
 							   v-model="email" @focus="onFocus_inputBar('email')" :errmsg="errData.email"></input-bar>
 				</div>
 				<div class="personal-form relative"><span class="personal-title left relative">备注</span>
-					<textarea id="textarea" contenteditable="true"
-							  class="pensonal-input note left"
+					<textarea id="textarea" :disabled="!canEdit" contenteditable="true" class="pensonal-input note"
 							  placeholder=""
-							  v-model="remark"
-							  :readonly="!canEdit"
-							  @focus="onFocus_inputBar('remark')" :class="!canEdit?'disbaled-pointer':''"></textarea>
+							  v-model="remark" @focus="onFocus_inputBar('remark')"
+							  :class="!canEdit?'disbaled-pointer':''"></textarea>
 					<p class="err-msg absolute"> {{errData.remark}}</p>
 				</div>
-				<div class="personal-form relative" :class="!canEdit ?'disabled':''">
+				<div class="personal-form relative card-box" :class="!canEdit ?'disabled':''" :disabled="!canEdit">
 					<span class="personal-title left">身份证照</span>
 					<p class="err-msg absolute"> {{errData.idCardBack || errData.idCardFront}}</p>
 					<div class="left relative upload-box pointer">
-						<div class="upload-btn flex">
-							<img :src="g.path.images+'/upload.png'" alt="">
-							<p class="upload-text">正面</p>
+						<div class="upload-btn">
+							<div class="upload-inner">
+								<img class="upload-add" :src="g.path.images+'/upload.png'" alt="">
+								<p class="upload-text">正面</p>
+							</div>
 						</div>
 						<div class="img-contain absolute" v-show="idCardFront">
 							<img class="img-url " :src="idCardFront?g.param.ossUrl+idCardFront:''" alt="">
@@ -120,9 +120,11 @@
 							  @click="onClick_deleteImg('idCardFront')"></span>
 					</div>
 					<div class="left relative upload-box pointer">
-						<div class="upload-btn flex">
-							<img :src="g.path.images+'/upload.png'" alt="">
-							<p class="upload-text">反面</p>
+						<div class="upload-btn">
+							<div class="upload-inner">
+								<img class="upload-add" :src="g.path.images+'/upload.png'" alt="">
+								<p class="upload-text">反面</p>
+							</div>
 						</div>
 						<div class="img-contain absolute" v-show="idCardBack">
 							<img class="img-url " :src="idCardBack?g.param.ossUrl+idCardBack:''" alt="">
@@ -133,21 +135,21 @@
 						<span class="del-img pointer" :class="idCardBack?'hover-img':''"
 							  @click="onClick_deleteImg('idCardBack')"></span>
 					</div>
-
 				</div>
-				<div class="personal-form relative" :class="!canEdit?'disabled':''">
+				<div class="personal-form relative card-box" :class="!canEdit?'disabled':''" :disabled="!canEdit">
 					<p class="err-msg absolute"> {{errData.workCard}}</p>
 					<span class="personal-title left">工作证照</span>
 					<div class="left relative upload-box pointer">
-						<div class="upload-btn flex">
-							<img :src="g.path.images+'/upload.png'" alt="">
-							<p class="upload-text">
-								点击上传工作证照片<br>
-								支持jpg/png格式</br>
-								不超过5M</br>
-								</span>
-							</p>
-
+						<div class="upload-btn">
+							<div class="upload-inner">
+								<img class="upload-add" :src="g.path.images+'/upload.png'" alt="">
+								<p class="upload-text">
+									点击上传工作证照片<br>
+									支持jpg/png格式</br>
+									不超过5M</br>
+									</span>
+								</p>
+							</div>
 						</div>
 						<div class="img-contain absolute" v-show="workCard">
 							<img class="img-url " :src="workCard?g.param.ossUrl+workCard:''" alt="">
@@ -164,7 +166,7 @@
 					 v-if="canEdit">提交
 				</div>
 			</div>
-			<right-pop :isShowPopView="isShowRightPop"></right-pop>
+			<right-pop :isShowPopView="isShowRightPop" ref="rightCon"></right-pop>
 		</div>
 	</com-layout>
 </template>
@@ -175,7 +177,8 @@
 	import UploadBtn from "../../components/upload.vue";
 	import InputBar from "../../components/inputBar.vue";
 	import DropList from "../../components/dropList.vue";
-	import RightPop from "../../components/pop/rightPop.vue"
+	import RightPop from "../../components/pop/rightPop.vue";
+	import loginManager from '../../js/manager/LoginManager';
 	var _isValid = true, _params = null, _attach = {}, _timer = 0;
 	var _picData = {
 		avatar: "",
@@ -319,6 +322,7 @@
 			initEvents()
 			{
 				document.addEventListener('click', this.onClick_doc);
+
 			},
 			onClick_doc(e)
 			{
@@ -333,6 +337,11 @@
 				if (this.$refs.duty && !this.$refs.duty.$el.contains(e.target))
 				{
 					this.isShowDutyList = false;
+				}
+				if (this.$refs.rightCon && this.$refs.rightCon.$el.contains(e.target))
+				{
+
+					loginManager.logout();
 				}
 			},
 			onClick_company($id)
@@ -564,8 +573,8 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		filter:alpha(opacity=0);
-		opacity:0;
+		filter: alpha(opacity=0);
+		opacity: 0;
 		z-index: 1;
 	}
 

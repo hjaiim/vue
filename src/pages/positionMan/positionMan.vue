@@ -121,6 +121,7 @@
 					{
 						g.ui.hideLoading();
 						g.data.searchPositionPool.remove(_delId);
+						this.positionList = g.data.searchPositionPool.list;
 						g.ui.toast("岗位删除成功!");
 
 					}, (err) =>
@@ -155,7 +156,8 @@
 				g.url = {
 					path: '/positionman',
 					query: {
-						page: this.currPage
+						page: this.currPage,
+						timeStamp:g.timeTool.getNowStamp()
 					}
 				}
 			}

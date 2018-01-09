@@ -1,6 +1,6 @@
 <template>
 	<div class="absolute drop-list drop-ref" v-show="isShowDropList">
-		<div class="drop-ref" is="ScrollGroup" :autoHide="true">
+		<div class="drop-ref" is="ScrollGroup" :autoHide="false">
 			<ul>
 				<li class="ani-time pointer" v-for="item in dropList" @click.stop="onClick_dropItem(item.id)">
 					{{item.name}}

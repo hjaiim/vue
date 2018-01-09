@@ -9,7 +9,8 @@
 			<div class="verify-wrap relative">
 				<form-input type="text" placeholder="请输入验证码" class="send-code" v-model="code"
 							@focus="onFocus_formInput('code')" :errmsg="errData.code"></form-input>
-				<span class="send-btn absolute pointer" @click="onClick_getCodeBtn" :class="isClicked?'disabled':''">
+				<span class="send-btn absolute pointer" @click="onClick_getCodeBtn" :class="isClicked?'disabled':''"
+					  :disabled="isClicked">
 					{{limit == g.param.timeoutClock ?'获取验证码':'倒计时'+limit+'秒'}}</span>
 			</div>
 			<form-input type="password" v-model="password" placeholder="请输入新密码"

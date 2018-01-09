@@ -19,7 +19,7 @@
 					<li>所属公司</li>
 					<li>所属部门</li>
 					<li>职务名称</li>
-					<li>状态</li>
+					<li class="diff-padding">状态</li>
 				</ul>
 				<div class="list-wrap">
 					<div class="list-wrap" is="scroll-group" ref="scrollCon"
@@ -27,7 +27,7 @@
 						<div class="inner-content" v-for="(item,index) in manList">
 							<p class="deal-staff border-bottom"
 							   @click="onClick_arrowBtn(item.id,index)">{{item.name}}
-								<span class="right arrow-wrap center-flex pointer">
+								<span class="right arrow-wrap  pointer">
 									<i class="arrow-top ani-time"
 									   :class="checkedList.indexOf(item.id) >= 0?'arrow-rotate':''"></i></span>
 							</p>
@@ -40,9 +40,11 @@
 								<li>{{childItem.departmentName}}</li>
 								<li>{{childItem.dutyName}}</li>
 								<li class="diff-padding">
-								<span class="pointer" @click="onClick_selectBtn(childItem.id)">
-								<i class="draw-tick relative" :class="childItem.checked?'action':''"></i>
-								<span class="draw-line choose-txt">选择</span></span></li>
+									<div class="pointer choose-box" @click="onClick_selectBtn(childItem.id)">
+										<i class="draw-tick relative" :class="childItem.checked?'action':''"></i>
+										<span class="draw-line choose-txt">选择</span>
+									</div>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -265,6 +267,18 @@
 				}
 				&.diff-padding {
 					padding-left: 10px;
+					width: 180px;
+					.choose-box {
+						display: inline-block;
+						.choose-txt {
+							width: 34px;
+							&:hover{
+								&:after{
+									width: 34px;
+								}
+							}
+						}
+					}
 				}
 				img {
 					display: inline-block;
@@ -320,6 +334,7 @@
 				width: 65px;
 				height: 56px;
 				border-left: 1px solid #efefef;
+				position: relative;
 			}
 
 		}
@@ -403,9 +418,9 @@
 			-ms-transform: scale(1.6);
 			-webkit-transform: scale(1.6);
 			transform: scale(1.6);
-			filter:alpha(opacity=0);
-			filter:alpha(opacity=0);
-			opacity:0;
+			filter: alpha(opacity=0);
+			filter: alpha(opacity=0);
+			opacity: 0;
 
 		}
 	}

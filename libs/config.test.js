@@ -69,7 +69,7 @@ var WEB_CONFIG = {
 		uploadAccess: "http://121.41.80.45:8001/file/upload",
 		delPicAccess: "http://121.41.80.45:8001/file/del",
 		timeoutClock:10,
-		pageSize: 10,
+		pageSize: 2,
 		msgHash: {
 			"1002":"/oppman",
 			"1003":"/myopp",

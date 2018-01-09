@@ -5,7 +5,7 @@ export function dealErr($err)
 	g.ui.hideLoading();
 	if ($err.status == 4005)
 	{
-		loginManager.logout();
+		loginManager.forceExit();
 	}
 	if ($err.errorMsg)
 	{

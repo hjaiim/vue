@@ -172,6 +172,7 @@
 						g.data.userInfo.update($data);
 						this.$refs.layout.updateHeader();
 						g.data.searchMessagePool.remove(_delId);
+						this.msgList = g.data.searchMessagePool.list;
 						g.ui.toast("消息删除成功！");
 					}, (err) =>
 					{
@@ -289,13 +290,14 @@
 				this.isShowAllDeletePop = false;
 				if ($result)
 				{
-					g.ui.showLoading()
+					g.ui.showLoading();
 					g.net.call('message/delMessage', {msgIds: this.delList.join(',')}).then(($data) =>
 					{
 						g.ui.hideLoading();
 						for (var id of this.delList)
 						{
 							g.data.searchMessagePool.remove(id);
+							this.msgList = g.data.searchMessagePool.list;
 						}
 						g.data.userInfo.update($data);
 						this.$refs.layout.updateHeader();
@@ -305,7 +307,6 @@
 						g.func.dealErr(err);
 					})
 				}
-
 			},
 			onChange_pageCom($page)
 			{
@@ -318,7 +319,8 @@
 					path: "/message",
 					query: {
 						page: this.currPage,
-						typeList: JSON.stringify(this.typeList)
+						typeList: JSON.stringify(this.typeList),
+						timeStamp:g.timeTool.getNowStamp()
 					}
 				};
 			}

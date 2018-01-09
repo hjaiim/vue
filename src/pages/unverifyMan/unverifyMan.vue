@@ -161,7 +161,8 @@
 					path: "/unverifyman",
 					query: {
 						page: this.currPage,
-						name: this.name
+						name: this.name,
+						timeStamp:g.timeTool.getNowStamp()
 					}
 				}
 			}

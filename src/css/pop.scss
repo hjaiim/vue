@@ -207,6 +207,7 @@
 
 .examine-people {
   margin-left: 150px;
+  width: auto;
   .exam-btn {
 	width: 90px;
 	height: 36px;
@@ -226,6 +227,7 @@
 	display: inline-block;
 	text-align: center;
 	position: relative;
+	white-space: nowrap;
   }
   .end-exam {
 	background: none;

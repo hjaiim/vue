@@ -30,7 +30,7 @@
 			<ul class="ymdropul ">
 				<li v-for="n in 12" :class="[date.month==n? theme:'',checkMonthDisable(n)?'date-disabled':'']"
 					@click.stop="onClick_detailDate('month',n)"
-					class="month-num">{{n|addZero}}月
+					class="month-num" :disabeld="checkMonthDisable(n)">{{n|addZero}}月
 				</li>
 			</ul>
 		</div>
@@ -50,7 +50,7 @@
 			<tr v-for="n in weekNum">
 				<td v-for="item in dateList.list.slice((n-1)*7,n*7)"
 					:class="[date.day==item[2] && (item[1] + 1) == date.month? theme :'', checkDisable(item)?'date-disabled':'cursor','']"
-					@click.stop="onClick_dayDate(item)">{{item[2]}}
+					@click.stop="onClick_dayDate(item)" :disabled="checkDisable(item)">{{item[2]}}
 				</td>
 			</tr>
 			</tbody>

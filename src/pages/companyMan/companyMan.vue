@@ -140,6 +140,7 @@
 					{
 						g.ui.hideLoading();
 						g.data.searchCompanyPool.remove(_delId);
+						this.companyList = g.data.searchCompanyPool.list;
 						g.ui.toast("公司删除成功！");
 					}, (err) =>
 					{
@@ -210,7 +211,8 @@
 					path: "/companyman",
 					query: {
 						page: this.currPage,
-						customerName: this.customerName
+						customerName: this.customerName,
+						timeStamp:g.timeTool.getNowStamp()
 					}
 				}
 			}

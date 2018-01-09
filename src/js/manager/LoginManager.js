@@ -92,6 +92,13 @@ export function logout()
 	});
 }
 
+export function forceExit()
+{
+	_isLogin = false;
+	clearLoginInfo();
+	g.url = "/login";
+}
+
 function onAppLogin_global(e)
 {
 	_isLogin = true;
@@ -117,6 +124,7 @@ function clearLoginInfo()
 var d = {
 	init: init,
 	logout: logout,
+	forceExit: forceExit,
 	checkLogin: checkLogin,
 	initLogin: initLogin
 

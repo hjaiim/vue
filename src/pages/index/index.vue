@@ -4,20 +4,19 @@
 			<div class="menu-wrap">
 				<percenter-tab @click="onClick_tabItem" :type="type"></percenter-tab>
 			</div>
-			<div class="percenter-inner" v-show="type=='personal'">
+			<div class="percenter-inner avatar-box" v-show="type=='personal'">
 				<div class="icon-collect clear">
 					<div class="relative upload-head right pointer">
 						<img class="default-img"
 							 :src="avatar?g.param.ossUrl+avatar:g.path.images+'/default.png'" alt="">
 						<iframe class="default-avatar" name="fileUpload"
-								:src="g.path.base+'/upload.html?type=pic&subType=avatar&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess" v-if="!avatar"></iframe>
+								:src="g.path.base+'/upload.html?type=pic&subType=avatar&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"
+								v-if="!avatar"></iframe>
 						<p class="err-msg absolute">{{errData.avatar}}</p>
 						<div class="absolute upload-btn">
 							<p class="load-text" v-if="!avatar">修改头像</p>
 							<img :src="g.path.images+'/del-head.png'" alt=""
 								 class="del-head absolute pointer" @click="onClick_delBtn" v-if="avatar">
-							<!--<iframe class="iframe-wrap absolute pointer" name="fileUpload" v-if="hasIframe"-->
-									<!--:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"></iframe>-->
 						</div>
 					</div>
 				</div>
@@ -48,7 +47,8 @@
 					<span class="personal-title">验证码</span>
 					<input-bar class="personal-content pensonal-input code" placeholder="" type="text"
 							   v-model="code" :errmsg="errData.code" @focus="onFocus_inputBar('code')"></input-bar>
-					<span class="btn-send pointer" @click="onClick_sendCodeBtn" :class="isClicked?'disabled':''">
+					<span class="btn-send pointer" @click="onClick_sendCodeBtn" :class="isClicked?'disabled':''"
+						  :disabled="isClicked">
 						{{limit==g.param.timeoutClock?'获取验证码':'倒计时'+limit+'秒'}}</span>
 					<span class="bind-phone pointer ani-time" @click="onClick_savePhoneBtn">保存</span>
 				</p>
@@ -425,8 +425,8 @@
 		top: 0;
 		left: 0;
 		z-index: 2;
-		filter:alpha(opacity=0);
-		opacity:0;
+		filter: alpha(opacity=0);
+		opacity: 0;
 	}
 
 	.err-msg {
