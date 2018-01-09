@@ -1,5 +1,5 @@
 <template>
-	<div class="wrap-page relative">
+	<div class="wrap-page relative login-page">
 		<div class="login-wrap is-transformed gray-shadow register-wrap">
 			<p class="login-tit">注册</p>
 			<form-input placeholder="请输入登录名" type="text" v-model="account"
