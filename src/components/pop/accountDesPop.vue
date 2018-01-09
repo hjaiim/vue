@@ -67,7 +67,8 @@
 					<div class="user-txt left diff-frame">
 						<div class="img-wrap">
 							<img
-									:src="accountData.avatar?g.param.ossUrl+accountData.avatar:g.path.images+'/default.png'" alt="">
+									:src="accountData.avatar?g.param.ossUrl+accountData.avatar:g.path.images+'/default.png'"
+									alt="">
 						</div>
 					</div>
 				</div>

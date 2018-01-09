@@ -1,5 +1,5 @@
 <template>
-	<com-layout currPath="/oppman" class="diff-oppman-wrap">
+	<com-layout currPath="/oppman" :class="isShowDetailPop?'diff-oppman-wrap':''">
 		<div class="oppman-wrap">
 			<div class="oppman-banner clear">
 				<div class="business-form left" ref="businessType">
