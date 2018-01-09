@@ -112,6 +112,7 @@ export function getUserInfo()
 
 export function updateUserInfo($data)
 {
+	debugger;
 	if(g.data.get("userInfo"))
 	{
 		var data = JSON.parse(g.data.get("userInfo"));
