@@ -86,6 +86,7 @@
 								<span class="form-title">上传附件</span>
 								 <span class="form-trap up-btn pointer opp-up-btn">点击上传
 								<iframe name="fileUpload" v-if="hasIframe" class="iframe-wrap"
+										:class="isUpload?'disabled':''"        :disabled="isUpload"
 										:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"></iframe>
 								</span>
 								<span class="form-title error-msg">{{errMsg}}</span>

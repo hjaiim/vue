@@ -161,8 +161,9 @@
 			<div class="personal-form">
 				<span class="personal-title left">上传附件</span>
                 <span class="form-trap up-btn pointer opp-up-btn relative">点击上传
+
                	<iframe class="iframe-wrap absolute pointer" name="fileUpload" v-if="hasIframe"
-						:class="isUpload?'disabled':''"
+						:class="isUpload?'disabled':''" :disabled="isUpload"
 						:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"></iframe>
                 </span>
 				<span class="err-msg">{{errData.attach}}</span>
@@ -190,7 +191,7 @@
 				formData: {},
 				attachList: [],
 				hasIframe: true,
-				isUpload:false
+				isUpload: false
 			}
 		},
 		components: {

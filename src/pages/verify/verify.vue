@@ -8,7 +8,7 @@
 							 alt="">
 						<iframe class="default-avatar" name="fileUpload"
 								:src="g.path.base+'/upload.html?type=pic&subType=avatar&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"
-								v-if="!avatar" :class="isUpload?'disabled':''"
+								v-if="!avatar" :class="isUpload?'disabled':''" :disabled="isUpload"
 						></iframe>
 						<p class="err-msg absolute">{{errData.avatar}}</p>
 						<div class="absolute upload-btn">
@@ -113,7 +113,7 @@
 						<div class="img-contain absolute" v-show="idCardFront">
 							<img class="img-url " :src="idCardFront?g.param.ossUrl+idCardFront:''" alt="">
 						</div>
-						<iframe class="pointer" name="fileUpload" :class="isUpload?'disabled':''"
+						<iframe class="pointer" name="fileUpload" :class="isUpload?'disabled':''" :disabled="isUpload"
 								:src="g.path.base+'/upload.html?type=pic&subType=idCardFront&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"
 								v-if="!idCardFront" id="idCardFront"></iframe>
 						<span class="del-img pointer" :class="idCardFront?'hover-img':''"
@@ -129,7 +129,7 @@
 						<div class="img-contain absolute" v-show="idCardBack">
 							<img class="img-url " :src="idCardBack?g.param.ossUrl+idCardBack:''" alt="">
 						</div>
-						<iframe class="pointer" name="fileUpload" :class="isUpload?'disabled':''"
+						<iframe class="pointer" name="fileUpload" :class="isUpload?'disabled':''" :disabled="isUpload"
 								:src="g.path.base+'/upload.html?type=pic&subType=idCardBack&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"
 								v-if="!idCardBack" id="idCardBack"></iframe>
 						<span class="del-img pointer" :class="idCardBack?'hover-img':''"
@@ -154,7 +154,7 @@
 						<div class="img-contain absolute" v-show="workCard">
 							<img class="img-url " :src="workCard?g.param.ossUrl+workCard:''" alt="">
 						</div>
-						<iframe class="pointer" name="fileUpload" :class="isUpload?'disabled':''"
+						<iframe class="pointer" name="fileUpload" :class="isUpload?'disabled':''" :disabled="isUpload"
 								:src="g.path.base+'/upload.html?type=pic&subType=workCard&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"
 								id="workCard" v-if="!workCard"></iframe>
 						<span class="del-img pointer" :class="workCard?'hover-img':''"
