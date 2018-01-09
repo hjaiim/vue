@@ -161,6 +161,7 @@
 						{
 							this.formData[hash[key]] = formData[key].split("*")[0];
 						}
+
 					}
 					this.attachList = g.data.searchBusinessPool.getDataById(this.currId).attachList;
 					this.$forceUpdate();

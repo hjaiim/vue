@@ -58,7 +58,6 @@
 		},
 		data(){
 			return {
-				g: g,
 				selectPage: 1,
 				indexPage: this.currPage,
 				isShowAdjustSize: false
@@ -93,7 +92,7 @@
 			},
 			pageSize: {
 				type: Number,
-				default: 2
+				default: 10
 			},
 			pageSizeList: {
 				type: Array,

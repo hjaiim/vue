@@ -131,6 +131,7 @@
 				name: fileName,
 				type: urlData.query.subType
 			});
+
 			$("#form1").action = urlData.query.access + "?type=" + urlData.query.type +
 					"&fileName=" + encodeURIComponent(fileName) + "&redirectUrl=" + urlData.query.redirectUrl;
 			$("#submit").click();
