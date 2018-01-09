@@ -1,7 +1,6 @@
 .unverify-wrap {
-  min-height: 1000px !important;
+  min-height: 1080px !important;
 }
-
 .staff-wrap {
   padding: 45px 35px 50px 44px;
   .status-wrap {
@@ -79,9 +78,12 @@
 .staff-table {
   .inner-table {
 	tr {
+	  .rank-num {
+		padding-left: 25px;
+	  }
 	  th {
 		&:nth-of-type(1) {
-		  width: 9%;
+		  width: 10%;
 		}
 		&:nth-of-type(2) {
 		  width: 10%;
@@ -106,13 +108,13 @@
 		}
 		&:last-child {
 		  min-width: 220px;
-		  width: 16%;
+		  width: 15%;
 		}
 	  }
 	  td {
 		color: #404040;
 		&:nth-of-type(1) {
-		  width: 9%;
+		  width: 10%;
 		}
 		&:nth-of-type(2) {
 		  width: 10%;
@@ -138,7 +140,7 @@
 		}
 		&:last-child {
 		  min-width: 220px;
-		  width: 16%;
+		  width: 15%;
 		}
 	  }
 	  .action-menu {

@@ -17,9 +17,11 @@
 					</div>
 					<div class="text-msg right">
 						<p class="msg-txt">开启手机短信提醒</p>
-						<div class="switch-con pointer" @click="onClick_switch">
+						<div class="switch-con pointer">
 							<label class="switch-label pointer relative">
-								<input type="checkbox" v-model="msgSwitch" class="mui-switch absolute">
+								<!--:checked="msgSwitch" :defaultChecked="msgSwitch"-->
+								<input type="checkbox" v-model="msgSwitch"
+									   class="mui-switch absolute" @change="onChange_switch">
 								<span class="mui-switch-core mui-switch-anim pointer"></span>
 							</label>
 						</div>
@@ -144,7 +146,7 @@
 			routerUpdated()
 			{
 				this.msgList = g.data.searchMessagePool.list;
-				this.msgSwitch = g.data.userInfo.msgSwitch;
+				this.msgSwitch = !!g.data.userInfo.msgSwitch;
 				var typeList = g.vue.getQuery('typeList', "[0,1]");
 				this.checkedAll = false;
 				this.typeList = JSON.parse(typeList).map(function (item)
@@ -180,12 +182,15 @@
 					})
 				}
 			},
-			onClick_switch()
+			onChange_switch()
 			{
-				_params = {msgSwitch: this.msgSwitch ? 0 : 1};
+				var self = this;
+				_params = {msgSwitch: self.msgSwitch ? 1 : 0};
 				g.net.call("message/updateReceiveMobileMsg", _params).then(($data) =>
 				{
 					g.data.userInfo.update(_params);
+					trace("params", _params);
+
 					g.func.updateUserInfo(_params);
 					g.ui.toast("用户消息设置成功!");
 				}, (err) =>
