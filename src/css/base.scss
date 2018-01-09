@@ -288,4 +288,10 @@ body, textarea, input, button, select, keygen, legend {
 
 .disabled {
   pointer-events: none;
+  cursor: default;
+}
+
+*[disabled]{
+  pointer-events: none;
+  cursor: default !important;
 }

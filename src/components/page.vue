@@ -18,10 +18,11 @@
 		</div>
 		<ul class="pager" :class="innerClass" style="float: left">
 			<li class="number" @click="onClick_pageBtn(1)" :class="indexPage== 1 ?'page-disabled':''"
-				v-if="showFirstAndEnd">
+				v-if="showFirstAndEnd" :disabled="indexPage== 1 ">
 				{{defaultTextList[0]}}
 			</li>
-			<li class="number" :class="indexPage== 1 ?'page-disabled':''" @click="onClick_prevBtn">
+			<li class="number" :class="indexPage== 1 ?'page-disabled':''" @click="onClick_prevBtn"
+				:disabled="indexPage== 1">
 				{{defaultTextList[1]}}
 			</li>
 			<li class="number" v-for="page in pageList" @click="onClick_pageBtn(page)"
@@ -29,14 +30,15 @@
 				{{page}}
 			</li>
 
-			<li class="number" @click="onClick_nextBtn" :class="indexPage== totalPage ?'page-disabled':''">
+			<li class="number" @click="onClick_nextBtn" :class="indexPage== totalPage ?'page-disabled':''"
+				:disabled="indexPage== totalPage ">
 				{{defaultTextList[2
 				]}}
 			</li>
 			<li class="number" @click="onClick_pageBtn(totalPage)" v-if="showFirstAndEnd"
-				:class="indexPage== totalPage ?'page-disabled':''">{{defaultTextList[3]}}
+				:class="indexPage== totalPage ?'page-disabled':''" :disabled="indexPage== totalPage">
+				{{defaultTextList[3]}}
 			</li>
-
 			<span class="to-page" v-if="showElevator">到第
 				<input type="text" class="to" v-model.number.trim="selectPage"
 					   @keyup.enter="onKeyUpEnter_pageBtn"
@@ -386,7 +388,6 @@
 			cursor: pointer;
 			float: left;
 			font-size: 14px;
-
 			-webkit-transition: all .3s ease;
 			-moz-transition: all .3s ease;
 			-ms-transition: all .3s ease;
@@ -399,7 +400,15 @@
 				background-color: #f36478;
 			}
 		}
-
+		.page-disabled {
+			pointer-events: none;
+			background-color: #fafafa;
+			&:hover {
+				background: #fafafa;
+				border: 1px solid #dddddd;
+				color: #6c6c6c;
+			}
+		}
 		.active-page {
 			color: #ffffff;
 			background-color: #f36478;
@@ -474,10 +483,7 @@
 		z-index: 10000;
 	}
 
-	.page-disabled {
-		pointer-events: none;
-		background-color: #cccccc;
-	}
+
 
 	.absolute-icon {
 		position: absolute;

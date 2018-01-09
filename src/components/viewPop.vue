@@ -102,7 +102,7 @@
 			position: fixed;
 			top: 50%;
 			left: 50%;
-			z-index: 2000;
+			z-index: 99;
 			-webkit-transform: translate(-50%, -50%);
 			-moz-transform: translate(-50%, -50%);
 			-ms-transform: translate(-50%, -50%);

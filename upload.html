@@ -12,8 +12,9 @@
 		html, body {
 			height: 100%;
 			cursor: pointer;
-			filter:alpha(opacity=0);
-			opacity:0;
+			width: 100%;
+			filter: alpha(opacity=0);
+			opacity: 0;
 		}
 
 		form {
@@ -24,6 +25,7 @@
 		.file-wrap {
 			width: 100%;
 			height: 100%;
+			position: relative;
 			overflow: hidden;
 		}
 
@@ -31,9 +33,21 @@
 			width: 100%;
 			height: 100%;
 			opacity: 0;
-			cursor: pointer;
+			cursor: pointer !important;
 			color: transparent;
 			filter: alpha(opacity=0);
+		}
+
+		input {
+			color: transparent;
+			text-shadow: 0 0 0 transparent;
+		}
+
+		.file-btn {
+			position: absolute;
+			left: 0;
+			top: 0;
+			font-size: 100px;
 		}
 	</style>
 </head>
@@ -41,9 +55,9 @@
 <form id="form1" method="post" enctype="multipart/form-data"
 	  name="form1">
 	<div class="none file-wrap">
-		<input type="file" name="btn" id="fileBtn" onchange="onChange_fileBtn()">
+		<input type="file" class="file-btn" name="btn" id="fileBtn" onchange="onChange_fileBtn()">
 		<label id="fileName"></label>
-		<input type="text" style="display: none" name="redirectUrl" id="redirectUrl">
+		<input type="text" readonlyunselectable="on" readonly="true" style="display: none;" name="redirectUrl" id="redirectUrl">
 		<input type="submit" name="submit" id="submit" style="visibility: hidden;">
 		<input type="reset" name="submit" id="reset" style="visibility: hidden;">
 	</div>
@@ -82,7 +96,10 @@
 			fileSize = Math.floor(fileSize / 1048576 * 100) / 100;
 			if (fileSize > 10)
 			{
-				window.parent.sendMsg("error", {msg: "文件限制大小为10M以内", type: urlData.query.subType});
+				window.parent.sendMsg("error", {
+					msg: "文件限制大小为10M以内",
+					type: urlData.query.subType
+				});
 				$("#reset").click();
 				return;
 			}
@@ -90,7 +107,10 @@
 			{
 				if (fileExtList.indexOf(fileType) < 0)
 				{
-					window.parent.sendMsg("error", {msg: "文件类型不正确，请重新上传", type: urlData.query.subType});
+					window.parent.sendMsg("error", {
+						msg: "文件类型不正确，请重新上传",
+						type: urlData.query.subType
+					});
 					$("#reset").click();
 					return;
 				}
@@ -99,12 +119,18 @@
 			{
 				if (picExtList.indexOf(fileType) < 0)
 				{
-					window.parent.sendMsg("error", {msg: "文件类型不正确，请重新上传", type: urlData.query.subType})
+					window.parent.sendMsg("error", {
+						msg: "文件类型不正确，请重新上传",
+						type: urlData.query.subType
+					})
 					$("#reset").click();
 					return;
 				}
 			}
-			window.parent.sendMsg("info", {name: fileName, type: urlData.query.subType});
+			window.parent.sendMsg("info", {
+				name: fileName,
+				type: urlData.query.subType
+			});
 			$("#form1").action = urlData.query.access + "?type=" + urlData.query.type +
 					"&fileName=" + fileName + "&redirectUrl=" + urlData.query.redirectUrl;
 			$("#submit").click();

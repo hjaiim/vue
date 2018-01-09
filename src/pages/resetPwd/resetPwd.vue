@@ -9,14 +9,15 @@
 			<div class="verify-wrap relative">
 				<form-input type="text" placeholder="请输入验证码" class="send-code" v-model="code"
 							@focus="onFocus_formInput('code')" :errmsg="errData.code"></form-input>
-				<span class="send-btn absolute pointer" @click="onClick_getCodeBtn" :class="isClicked?'disabled':''">
+				<span class="send-btn absolute pointer" @click="onClick_getCodeBtn" :class="isClicked?'disabled':''"
+					  :disabled="isClicked">
 					{{limit == g.param.timeoutClock ?'获取验证码':'倒计时'+limit+'秒'}}</span>
 			</div>
 			<form-input type="password" v-model="password" placeholder="请输入新密码"
 						@focus="onFocus_formInput('password')" :errmsg="errData.password"></form-input>
 			<form-input type="password" v-model="confirmPwd" placeholder="请再次确认输入"
 						@focus="onFocus_formInput('confirmPwd')" :errmsg="errData.confirmPwd"
-						@keyenter="onClick_registerBtn"></form-input>
+						@keyenter="onClick_resetBtn"></form-input>
 			<div class="pointer login-btn ani-time resetPwd-top" @click="onClick_resetBtn">确定</div>
 			<div class="link-keys diff-margin ">已有账号？<span class="ani-time pointer"
 														   @click="onClick_loginBtn">登录>></span>

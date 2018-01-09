@@ -83,7 +83,6 @@
 						this.errData.confirmPwd = "";
 					}, 1500);
 
-
 					this.$forceUpdate();
 				})
 			},

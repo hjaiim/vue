@@ -74,7 +74,8 @@
 				roleList: [],
 				currId: 0,
 				isShowRolePop: false,
-				tdWidth: 0
+				tdWidth: 0,
+				currPage: 1,
 			}
 		},
 		components: {
