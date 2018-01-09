@@ -16,7 +16,7 @@
 						@focus="onFocus_formInput('password')" :errmsg="errData.password"></form-input>
 			<form-input type="password" v-model="confirmPwd" placeholder="请再次确认输入"
 						@focus="onFocus_formInput('confirmPwd')" :errmsg="errData.confirmPwd"
-						@keyenter="onClick_registerBtn"></form-input>
+						@keyenter="onClick_resetBtn"></form-input>
 			<div class="pointer login-btn ani-time resetPwd-top" @click="onClick_resetBtn">确定</div>
 			<div class="link-keys diff-margin ">已有账号？<span class="ani-time pointer"
 														   @click="onClick_loginBtn">登录>></span>
