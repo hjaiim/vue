@@ -249,6 +249,7 @@
 				{
 				}, (err) =>
 				{
+					_hash[$name] = "";
 					this.attachList.splice($index, 1);
 					this.errData.attach = "";
 					this.hasIframe = true;

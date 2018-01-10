@@ -130,7 +130,7 @@
 	import BusinessType6 from "../businessDetail/businessType6.vue";
 	import BusinessType7 from "../businessDetail/businessType7.vue";
 	import ChooseManPop from "./chooseManPop.vue";
-	var _params = null, _childName = [], _attach = {}, _isValid = true,_hash = {};
+	var _params = null, _childName = [], _attach = {}, _isValid = true, _hash = {};
 	export default{
 		created()
 		{
@@ -153,7 +153,7 @@
 				businessData: {
 					taskProperties: {}
 				},
-				isUpload:false
+				isUpload: false
 			}
 		},
 		components: {
@@ -343,6 +343,7 @@
 				{
 				}, (err) =>
 				{
+					_hash[$name] = "";
 					this.attachList.splice($index, 1);
 					this.errMsg = "";
 					this.hasIframe = true;
