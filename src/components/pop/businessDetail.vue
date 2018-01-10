@@ -86,7 +86,7 @@
 								<span class="form-title">上传附件</span>
 								 <span class="form-trap up-btn pointer opp-up-btn">点击上传
 								<iframe name="fileUpload" v-if="hasIframe" class="iframe-wrap"
-										:class="isUpload?'disabled':''"        :disabled="isUpload"
+										:class="isUpload?'disabled':''" :disabled="isUpload"
 										:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"></iframe>
 								</span>
 								<span class="form-title error-msg">{{errMsg}}</span>
@@ -130,7 +130,7 @@
 	import BusinessType6 from "../businessDetail/businessType6.vue";
 	import BusinessType7 from "../businessDetail/businessType7.vue";
 	import ChooseManPop from "./chooseManPop.vue";
-	var _params = null, _childName = [], _attach = {}, _isValid = true;
+	var _params = null, _childName = [], _attach = {}, _isValid = true,_hash = {};
 	export default{
 		created()
 		{
@@ -152,7 +152,8 @@
 				errMsg: "",
 				businessData: {
 					taskProperties: {}
-				}
+				},
+				isUpload:false
 			}
 		},
 		components: {
@@ -202,6 +203,7 @@
 				this.idList = [];
 				this.attachList = [];
 				this.errMsg = '';
+				this.isUpload = false;
 				this.isShowOrderManPop = false;
 				if (this.currId)
 				{
@@ -209,6 +211,7 @@
 					this.formData = this.businessData.formData;
 					this.oppType = this.businessData.type;
 				}
+				_hash = {};
 				window.uploadComplete = this.uploadComplete;
 				window.sendMsg = this.sendMsg;
 			},
@@ -221,6 +224,7 @@
 				else
 				{
 					g.ui.showLoading();
+					this.isUpload = true;
 					this.errMsg = "";
 					_attach.name = $info.name;
 				}
@@ -229,6 +233,7 @@
 			{
 				g.ui.hideLoading();
 				this.hasIframe = false;
+				this.isUpload = false;
 				var attach = {
 					size: $data.size,
 					fileName: $data.fileName,
@@ -240,14 +245,19 @@
 					this.errMsg = "您已到达附件上传上限，无法继续上传";
 					return;
 				}
+				else if (!_hash[attach.name])
+				{
+					_hash[attach.name] = attach;
+					this.attachList.push(attach);
+				}
 				else
 				{
-					this.attachList.push(attach);
-					setTimeout(()=>
-					{
-						this.hasIframe = true;
-					}, 200)
+					this.errMsg = "该文件已上传，请勿重复上传";
 				}
+				setTimeout(()=>
+				{
+					this.hasIframe = true;
+				}, 200)
 			},
 			onClose_pop()
 			{

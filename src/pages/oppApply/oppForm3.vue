@@ -105,7 +105,7 @@
 				<span class="personal-title left">上传附件</span>
                 <span class="form-trap up-btn pointer opp-up-btn">点击上传
                	<iframe class="iframe-wrap absolute pointer" name="fileUpload" v-if="hasIframe"
-						:class="isUpload?'disabled':''"        :disabled="isUpload"
+						:class="isUpload?'disabled':''" :disabled="isUpload"
 						:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"></iframe>
                 </span>
 				<span class="err-msg">{{errData.attach}}</span>
@@ -122,7 +122,7 @@
 <script type="text/ecmascript-6">
 	import g from "../../global";
 	import InputBar from "../../components/inputBar.vue";
-	var _type = 3, _isValid = true, _formData = {}, _attach = {};
+	var _type = 3, _isValid = true, _formData = {}, _attach = {}, _hash = {};
 	export default{
 		created(){
 			this.init();
@@ -134,7 +134,7 @@
 				formData: {},
 				hasIframe: true,
 				attachList: [],
-				isUpload:false
+				isUpload: false
 			}
 		},
 		components: {
@@ -167,6 +167,7 @@
 				{
 					this.initForm();
 				}
+				_hash = {};
 				this.isUpload = false;
 				window.uploadComplete = this.uploadComplete;
 				window.sendMsg = this.sendMsg;
@@ -231,19 +232,25 @@
 					name: _attach.name
 				};
 				_attach.name = "";
+
 				if (this.attachList.length >= 10)
 				{
 					this.errData.attach = "您已到达附件上传上限，无法继续上传";
 					return;
 				}
+				else if (!_hash[attach.name])
+				{
+					_hash[attach.name] = attach;
+					this.attachList.push(attach);
+				}
 				else
 				{
-					this.attachList.push(attach);
-					setTimeout(()=>
-					{
-						this.hasIframe = true;
-					}, 200)
+					this.errData.attach = "该文件已上传，请勿重复上传";
 				}
+				setTimeout(()=>
+				{
+					this.hasIframe = true;
+				}, 200)
 			},
 			onFocus_inputBar($type)
 			{
