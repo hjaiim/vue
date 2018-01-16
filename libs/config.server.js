@@ -32,7 +32,7 @@ var WEB_CONFIG = {
 				name: "data"
 			},
 			error: {
-				name: "error",
+				name: "code",
 				type: "number"
 			},
 			errorMsg: {

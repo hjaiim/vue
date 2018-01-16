@@ -3,7 +3,7 @@ import g from "./../global";
 export function dealErr($err)
 {
 	g.ui.hideLoading();
-	if ($err.status == 4005)
+	if ($err.status == 4005||$err.status == 4007)
 	{
 		loginManager.forceExit();
 	}
@@ -112,7 +112,7 @@ export function getUserInfo()
 
 export function updateUserInfo($data)
 {
-	debugger;
+	
 	if(g.data.get("userInfo"))
 	{
 		var data = JSON.parse(g.data.get("userInfo"));

@@ -79,7 +79,10 @@
 					<tr v-for="(item,index) in businessList">
 						<td><span class="rank-num">{{index+1}}</span></td>
 						<td><span>{{item.orderNo}}</span></td>
-						<td>{{item.creatorName}}</td>
+						<td @click="onClick_creatorName" style="position: relative">
+							<common-tip :isCommonTip="isShowCommonTip" @close="onClick_closeBtn">{{item.mobile}}</common-tip>
+							{{item.creatorName}}
+						</td>
 						<td>{{item.companyName}}</td>
 						<td>{{item.customerCompName}}</td>
 						<td>{{item.typeName}}</td>
@@ -131,6 +134,7 @@
 	import CommonDate from "../../components/dateBox.vue";
 	import DropList from "../../components/dropList.vue";
 	import EmptyPop from "../../components/pop/emptyPop.vue"
+	import CommonTip from "../../components/pop/commonTip.vue"
 	import {searchBusinessList} from "./oppMan"
 	var _dateType = "", _params = null;
 	export default{
@@ -152,6 +156,7 @@
 				currPage: 1,
 				isShowStartDate: false,
 				isShowEndDate: false,
+				isShowCommonTip:false,
 				type: -1,
 				statusList: [],
 				startTime: 1483200000,
@@ -168,7 +173,8 @@
 			InputBar,
 			CommonDate,
 			DropList,
-			EmptyPop
+			EmptyPop,
+			CommonTip
 		},
 		computed: {
 			currType()
@@ -365,6 +371,12 @@
 						this.routerUpdated();
 					})
 				}
+			},
+			onClick_closeBtn(){
+
+			},
+			onClick_creatorName(){
+				// this.isShowCommonTip = true
 			},
 			updateUrl()
 			{

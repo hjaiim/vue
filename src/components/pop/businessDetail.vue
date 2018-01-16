@@ -308,6 +308,10 @@
 					_params.pendingAuditorName = _childName.join(';');
 
 				}
+				if(this.businessData.hasOpinion&&this.opinion.trim()==""){
+					this.errMsg = "请填写签批意见";
+					return;
+				}
 				if (this.status == 1 && this.businessData.mustFill && this.idList.length == 0)
 				{
 					this.errMsg = "请至少选择一名候选人";

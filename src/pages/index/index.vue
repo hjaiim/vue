@@ -135,7 +135,15 @@
 			InputBar,
 			UploadBtn
 		},
-
+		watch:{
+			type($val){
+				if($val=='modpwd'){
+					this.password= "";
+					this.newPwd= "";
+					this.confirmPwd= "";
+				}
+			}
+		},
 		methods: {
 			routerUpdated()
 			{

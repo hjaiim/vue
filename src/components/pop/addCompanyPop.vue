@@ -18,7 +18,7 @@
 								   :readonly="isEdit"
 								   v-model="telphone" :errmsg="errData.telphone"
 								   @focus="onFocus_inputBar('telphone')"></input-bar>
-						<span class="requied" v-show="!isEdit">*</span>
+						<!--<span class="requied" v-show="!isEdit">*</span>-->
 					</p>
 					<p class="from-group">
 						<span class="form-title">公司负责人</span>
@@ -26,7 +26,7 @@
 								   :readonly="isEdit"
 								   v-model="leader" :errmsg="errData.leader"
 								   @focus="onFocus_inputBar('leader')"></input-bar>
-						<span class="requied" v-show="!isEdit">*</span>
+						<!--<span class="requied" v-show="!isEdit">*</span>-->
 					</p>
 					<p class="from-group">
 						<span class="form-title">负责人电话</span>
@@ -34,7 +34,7 @@
 								   :readonly="isEdit"
 								   v-model="phone" :errmsg="errData.phone"
 								   @focus="onFocus_inputBar('phone')"></input-bar>
-						<span class="requied" v-show="!isEdit">*</span>
+						<!--<span class="requied" v-show="!isEdit">*</span>-->
 					</p>
 					<div class="btn-wrap clear">
 						<div class="pop-btn right pointer" @click="onClick_saveCompany" v-if="!isEdit">保存
@@ -423,31 +423,32 @@
 					this.errData.name = "公司名称过长";
 					_isValid = false;
 				}
-				if (!trim(this.leader))
-				{
-					this.errData.leader = "请输入负责人姓名";
-					_isValid = false;
-				}
-				else if (!g.param.nameReg.test(this.leader))
+				// if (!trim(this.leader))
+				// {
+				// 	this.errData.leader = "请输入负责人姓名";
+				// 	_isValid = false;
+				// }
+				if (trim(this.leader)&&!g.param.nameReg.test(this.leader))
 				{
 					this.errData.leader = "负责人格式不正确";
 					_isValid = false;
 				}
-				if (!trim(this.phone))
-				{
-					this.errData.phone = "请输入负责人电话";
-					_isValid = false;
-				}
-				else if (!g.param.phoneReg.test(this.phone) && !g.param.telphoneReg.test(this.phone))
+				// if (!trim(this.phone))
+				// {
+				// 	this.errData.phone = "请输入负责人电话";
+				// 	_isValid = false;
+				// }
+				// else
+				if (trim(this.phone)&&!g.param.phoneReg.test(this.phone) && !g.param.telphoneReg.test(this.phone))
 				{
 					this.errData.phone = "号码格式不正确";
 					_isValid = false;
 				}
-				if (!trim(this.telphone))
-				{
-					this.errData.telphone = "请输入公司电话";
-					_isValid = false;
-				}
+				// if (!trim(this.telphone))
+				// {
+				// 	this.errData.telphone = "请输入公司电话";
+				// 	_isValid = false;
+				// }
 				this.$forceUpdate();
 //
 			}
