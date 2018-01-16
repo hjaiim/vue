@@ -27,8 +27,8 @@
 							</p>
 						</div>
 					</div>
-					<div>
-						<h3 class="opp-title" v-if="businessData.recordList && businessData.recordList.length > 0">
+					<div class="dashed-border" v-if="businessData.recordList && businessData.recordList.length > 0">
+						<h3 class="opp-title">
 							审核详情</h3>
 						<div v-for="item in businessData.recordList">
 							<p class="from-group  clear">
