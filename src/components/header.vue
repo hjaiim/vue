@@ -13,9 +13,7 @@
 				<li class="nav-item pointer" @click="onClick_perCenter">
 					<span class="note-txt">{{userInfo.username}}</span>
 					<span class="avatar-icon">
-						<img
-								:src="userInfo.avatar?g.param.ossUrl+userInfo.avatar:g.path.images+'/default.png'"
-								alt="">
+						<img :src="userInfo.avatar?g.param.ossUrl+userInfo.avatar:g.path.images+'/default.png'" alt="">
 					</span>
 				</li>
 				<li class="nav-item pointer" @click="onClick_logoutBtn">

@@ -110,22 +110,20 @@
 			}
 		},
 		watch: {
-			companyList($val)
-			{
-				if ($val.length == 0)
-				{
-					this.currPage = 1;
-					this.updateUrl();
-				}
-			}
+
 		},
 		methods: {
 			routerUpdated()
 			{
+				this.currPage=int(g.vue.getQuery('page', 1))
+				this.customerName=g.vue.getQuery('customerName', "");
 				this.companyList = g.data.searchCompanyPool.list;
 			},
 			onClick_deleteBtn($id)
 			{
+				if(_delId){
+					g.data.searchCompanyPool.getDataById(_delId)&&g.data.searchCompanyPool.getDataById(_delId).update({isShow: false})
+				}
 				_delId = $id;
 				g.data.searchCompanyPool.getDataById(_delId).update({isShow: true})
 			},
@@ -142,6 +140,7 @@
 						g.data.searchCompanyPool.remove(_delId);
 						this.companyList = g.data.searchCompanyPool.list;
 						g.ui.toast("公司删除成功！");
+						this.updateUrl();
 					}, (err) =>
 					{
 						g.func.dealErr(err);

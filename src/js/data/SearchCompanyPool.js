@@ -17,6 +17,7 @@ export default class SearchCompanyPool {
 
 	update($dObj)
 	{
+	
 		if (!$dObj)
 		{
 			return;

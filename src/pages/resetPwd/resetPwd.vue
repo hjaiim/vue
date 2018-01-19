@@ -69,7 +69,7 @@
 					return;
 				}
 				this.isClicked = true;
-				this.setClock();
+
 				_params = {
 					logon: this.account,
 					mobile: this.phone
@@ -77,10 +77,12 @@
 				g.ui.showLoading();
 				g.net.call("user/resetPasswordSendCode", _params).then(() =>
 				{
+					this.setClock();
 					g.ui.hideLoading();
 					g.ui.toast("发送成功！");
 				}, (err) =>
 				{
+					this.isClicked = false;
 					g.func.dealErr(err);
 				})
 			},

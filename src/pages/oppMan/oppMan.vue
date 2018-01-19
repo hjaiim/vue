@@ -46,10 +46,15 @@
 									 type="hour" ref="endDate"></common-date>
 					</div>
 				</div>
-				<div class="search-box search-size left clear clearfix">
+				<div class="search-box search-size left clearfix">
 					<span class="customer-name left">客户经理</span>
 					<input-bar class="search-input left relative" placeholder="" type="text"
 							   v-model="creatorName"></input-bar>
+				</div>
+				<div class="search-box search-size left p-left">
+					<span class="customer-name left">所属公司</span>
+					<input-bar class="search-input left relative " placeholder="" type="text"
+							   v-model="comName"></input-bar>
 				</div>
 				<div class=" search-box search-size p-left left">
 					<span class="customer-name">客户公司名称</span>
@@ -79,15 +84,16 @@
 					<tr v-for="(item,index) in businessList">
 						<td><span class="rank-num">{{index+1}}</span></td>
 						<td><span>{{item.orderNo}}</span></td>
-						<td @click="onClick_creatorName" style="position: relative">
-							<common-tip :isCommonTip="isShowCommonTip" @close="onClick_closeBtn">{{item.mobile}}</common-tip>
+						<td @click="onClick_creatorName($event)" style="position: relative">
+							<!--<common-tip :isCommonTip="isShowCommonTip" @close="onClick_closeBtn">{{item.mobile}}</common-tip>-->
 							{{item.creatorName}}
 						</td>
 						<td>{{item.companyName}}</td>
 						<td>{{item.customerCompName}}</td>
+
 						<td>{{item.typeName}}</td>
 						<td>{{item.createTime}}</td>
-						<td :class="item.operation== 2?'font-weight':''">{{item.auditStatusDesc}}</td>
+						<td :class="{'is-picked':item.auditStatusDesc=='审核退回','font-weight':item.operation== 2&&item.auditStatusDesc!='审核退回'}">{{item.auditStatusDesc}}</td>
 						<td>
 							<p class="action-menu clear" v-if="item.operation== 0">
                                 <span class="right pointer draw-line ani-time"
@@ -161,8 +167,9 @@
 				statusList: [],
 				startTime: 1483200000,
 				endTime: g.timeTool.getNowStamp(),
-				creatorName: '',
+				creatorName: "",
 				companyName: "",
+				comName:"",
 				currId: 0
 			}
 		},
@@ -205,6 +212,7 @@
 				this.endTime = g.timeTool.getNowStamp();
 				this.creatorName = "";
 				this.companyName = "";
+				this.comName = "";
 			},
 			routerUpdated()
 			{
@@ -306,6 +314,7 @@
 			onChange_pageCom($page)
 			{
 				this.currPage = $page;
+				this.currPage = $page;
 				this.updateUrl();
 			},
 			onClick_detailBtn($id)
@@ -375,8 +384,9 @@
 			onClick_closeBtn(){
 
 			},
-			onClick_creatorName(){
-				// this.isShowCommonTip = true
+			onClick_creatorName($event){
+				this.isShowCommonTip = false;
+				this.isShowCommonTip = true
 			},
 			updateUrl()
 			{
@@ -389,7 +399,8 @@
 						startTime: this.startTime,
 						endTime: this.endTime,
 						creatorName: this.creatorName,
-						companyName: this.companyName
+						companyName: this.companyName,
+						comName:this.comName
 					}
 				};
 			},

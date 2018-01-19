@@ -22,6 +22,7 @@
 
 .oppman-table {
   .inner-table {
+	  color: #404040;
 	tr {
 	  th {
 		&:nth-of-type(1) {
@@ -51,7 +52,7 @@
 
 	  }
 	  td {
-		color: #404040;
+
 		&:nth-of-type(1) {
 		  width: 9%;
 		}

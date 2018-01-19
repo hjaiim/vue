@@ -8,9 +8,10 @@ var _lastUrl = "";
 function init($callback)
 {
 	g.addEventListener("APP_IS_LOGIN", onAppLogin_global);
-	g.net.call('user/queryUserIsLogin').then((d) =>
+	g.net.calls('user/queryUserIsLogin',"user/getUserInfoByRefresh").then(($list) =>
 	{
 		_isLogin = true;
+		g.data.userInfo.update($list[1]);
 		$callback && $callback();
 	}, (err) =>
 	{

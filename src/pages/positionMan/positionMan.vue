@@ -85,14 +85,7 @@
 			EmptyPop
 		},
 		watch: {
-			positionList($val)
-			{
-				if ($val.length == 0)
-				{
-					this.currPage = 1;
-					this.updateUrl();
-				}
-			}
+
 		},
 		methods: {
 			routerUpdated()
@@ -107,6 +100,9 @@
 			},
 			onClick_deleteBtn($id)
 			{
+				if(_delId){
+					g.data.searchPositionPool.getDataById(_delId)&&g.data.searchPositionPool.getDataById(_delId).update({isShow: false});
+				}
 				_delId = $id;
 				g.data.searchPositionPool.getDataById(_delId).update({isShow: true});
 			},
@@ -123,6 +119,7 @@
 						g.data.searchPositionPool.remove(_delId);
 						this.positionList = g.data.searchPositionPool.list;
 						g.ui.toast("岗位删除成功!");
+						this.updateUrl();
 
 					}, (err) =>
 					{

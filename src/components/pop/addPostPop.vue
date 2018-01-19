@@ -95,6 +95,7 @@
 			},
 			onClose_pop()
 			{
+				this.errMsg = "";
 				this.$emit('close', false);
 			},
 			onClick_cancelBtn()

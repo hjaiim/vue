@@ -229,7 +229,7 @@
 						{
 							this.formData[hash[key]] = formData[key].split("*")[0];
 						}
-						if (key === "呼叫模式")
+						if (key === "呼叫模式"||key === "接入方式")
 						{
 							this.formData[hash[key]] = formData[key].split("和");
 						}

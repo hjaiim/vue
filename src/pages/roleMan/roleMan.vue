@@ -86,14 +86,6 @@
 			EmptyPop
 		},
 		watch: {
-			roleList($val)
-			{
-				if ($val.length == 0)
-				{
-					this.currPage = 1;
-					this.updateUrl();
-				}
-			}
 		},
 		methods: {
 			routerUpdated()
@@ -117,6 +109,9 @@
 			},
 			onClick_deleteBtn($id)
 			{
+				if(_delId){
+					g.data.searchRolePool.getDataById(_delId)&&g.data.searchRolePool.getDataById(_delId).update({isShow: false});
+				}
 				_delId = $id;
 				g.data.searchRolePool.getDataById(_delId).update({isShow: true});
 			},
@@ -133,6 +128,7 @@
 						g.data.searchRolePool.remove(_delId);
 						this.roleList = g.data.searchRolePool.list;
 						g.ui.toast("角色删除成功!")
+						this.updateUrl();
 					}, (err) =>
 					{
 						g.func.dealErr(err);

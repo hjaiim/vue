@@ -144,7 +144,6 @@
 				{
 					return g.data.searchRolePool.getDataById(this.currRole) &&
 							g.data.searchRolePool.getDataById(this.currRole).name
-
 				}
 				return "全部";
 			}
@@ -160,7 +159,7 @@
 				});
 				this.currPage = int(g.vue.getQuery("page", 1));
 				this.name = g.vue.getQuery("name", "");
-				this.currRole = g.vue.getQuery("roleId", 0);
+				this.currRole = int(g.vue.getQuery("roleId", 0));
 				this.roleList = g.data.searchRolePool.list.concat();
 				this.roleList.unshift({
 					name: "全部",

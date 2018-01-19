@@ -182,6 +182,7 @@
 				{
 					g.ui.hideLoading();
 					this.$emit("close", true);
+					this.opinion="";
 					g.ui.toast("已拒绝该用户");
 				}, (err) =>
 				{
@@ -200,6 +201,7 @@
 				{
 					g.ui.hideLoading();
 					g.ui.toast("已认证该用户");
+					this.opinion="";
 					this.$emit("close", true);
 				}, (err) =>
 				{
@@ -208,6 +210,7 @@
 			},
 			onClose_pop()
 			{
+				this.opinion="";
 				this.$emit('close', false);
 
 			},

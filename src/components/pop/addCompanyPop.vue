@@ -356,7 +356,7 @@
 					}
 					else
 					{
-						g.data.searchCompanyPool.add($data);
+					 g.data.searchCompanyPool.add($data);
 					}
 					this.currentId = $data.comId;
 					this.initData();

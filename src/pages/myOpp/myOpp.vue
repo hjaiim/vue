@@ -72,7 +72,7 @@
 						<td>{{item.customerCompName}}</td>
 						<td>{{item.typeName}}</td>
 						<td>{{item.createTime}}</td>
-						<td>{{item.auditStatusDesc}}</td>
+						<td><span :class="getColorByStatus(item.auditStatus)">{{item.auditStatusDesc}}</span></td>
 						<td>
 							<p class="action-menu clear">
                                 <span class="left pointer draw-line ani-time" v-if="item.operation == 1"
@@ -80,7 +80,6 @@
                                 <span class="right pointer draw-line ani-time"
 									  @click="onClick_detailBtn(item.id)">详情</span>
 							</p>
-
 						</td>
 					</tr>
 					</tbody>
@@ -339,6 +338,13 @@
 				this.isShowStartDate = false;
 				this.isShowEndDate = false;
 				_dateType = "";
+			},
+			getColorByStatus($status){
+				if($status==2){
+					return "wait-pick"
+				}else if($status==-1){
+					return "is-picked"
+				}
 			}
 		},
 		beforeDestroy()

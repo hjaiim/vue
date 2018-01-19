@@ -34,7 +34,7 @@
 							<ul class="list-menu border-bottom clear ani-time" v-for="childItem in item.children"
 								v-show="checkedList.indexOf(item.id) >= 0">
 								<li>
-									<img :src="g.param.ossUrl+childItem.avatar" alt=""></li>
+									<img :src="logo(childItem.avatar)" alt=""></li>
 								<li>{{childItem.name}}</li>
 								<li>{{childItem.companyName}}</li>
 								<li>{{childItem.departmentName}}</li>
@@ -189,6 +189,14 @@
 				this.checkedList = [];
 				this.$emit('close', $type, this.childList)
 			},
+			logo($avatar){
+				if($avatar){
+					return g.param.ossUrl+$avatar
+				}else{
+					return g.path.images+'/default.png'
+				}
+
+			}
 		}
 	}
 </script>
