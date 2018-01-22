@@ -163,7 +163,7 @@
 	}
 
 	.diff-content-pop.md-overlay {
-		position: absolute;
+		/*position: absolute;*/
 	}
 
 	.right-viewPop {

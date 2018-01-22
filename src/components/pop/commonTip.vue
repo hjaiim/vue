@@ -1,6 +1,6 @@
 <template>
 	<div class="delete-pop absolute gray-shadow" v-show="isCommonTip">
-		<div class="sure-content absolute">
+		<div class="sure-content">
 			<div class="quesiton-txt">
 				<slot></slot>
 			</div>
@@ -38,7 +38,7 @@
 		top: -132px;
 		z-index: 5;
 		width: 268px;
-		height: 118px;
+		/*height: 118px;*/
 		background: #ffffff;
 		-webkit-border-radius: 4px;
 		-moz-border-radius: 4px;
@@ -60,20 +60,18 @@
 			box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 		}
 		.sure-content {
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
+			padding: 20px;
 			cursor: default;
+			box-sizing: border-box;
 			background-color: #ffffff;
 			.quesiton-txt {
-				height: 62px;
-				line-height: 62px;
-				padding: 0 0 6px 28px;
+				line-height: 30px;
+				/*padding: 0 0 6px 28px;*/
 				vertical-align: middle;
 				text-align: left;
 				color:#404040;
 				font-weight: 100;
+				margin-bottom: 10px;
 				img {
 					display: inline-block;
 					vertical-align: middle;
@@ -90,6 +88,9 @@
 
 			}
 
+		}
+		.btn-wrap{
+			padding-bottom: 0;
 		}
 	}
 </style>
