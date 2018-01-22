@@ -99,6 +99,8 @@ function createData($dObj) {
     d.hasNext = false;
     d.mustFill = false;
     d.hasAttaches = false;
+    d.isShowTel = false;
+    d.isShowNextExamine=false;
     d.update = updateData.bind(d);
     d.update($dObj);
     return d;
@@ -127,6 +129,8 @@ function updateData($dObj, $recordId) {
     $dObj.hasOwnProperty("optType") && (this.operation = $dObj.optType);
     $dObj.hasOwnProperty("todoId") && (this.todoId = $dObj.todoId);
     $dObj.hasOwnProperty("mobile") && (this.mobile = $dObj.mobile);
+    $dObj.hasOwnProperty("isShowTel") && (this.isShowTel = $dObj.isShowTel);
+    $dObj.hasOwnProperty("isShowNextExamine") && (this.isShowNextExamine= $dObj.isShowNextExamine);
     $dObj.hasOwnProperty("taskProperties") && (this.taskProperties = __merge({}, JSON.parse($dObj.taskProperties)));
     if (this.taskProperties.process_button) {
         var btnList = this.taskProperties.process_button.split(";");

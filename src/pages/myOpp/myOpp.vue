@@ -72,7 +72,10 @@
 						<td>{{item.customerCompName}}</td>
 						<td>{{item.typeName}}</td>
 						<td>{{item.createTime}}</td>
-						<td><span :class="getColorByStatus(item.auditStatus)">{{item.auditStatusDesc}}</span></td>
+						<td  class="audit-status-desc pointer" @click.stop="onClick_auditStatus(item.id,item.auditStatus)">
+							<span :class="getColorByStatus(item.auditStatus)">{{item.auditStatusDesc}}</span>
+							<common-tip :isCommonTip="item.isShowNextExamine" @close="onClick_closeBtn('auditor')" ref="auditorStatus" >下级审核人：{{nextExamine}}</common-tip>
+						</td>
 						<td>
 							<p class="action-menu clear">
                                 <span class="left pointer draw-line ani-time" v-if="item.operation == 1"
@@ -110,8 +113,9 @@
 	import InputBar from "../../components/inputBar.vue";
 	import ChooseManPop from "../../components/pop/chooseManPop.vue";
 	import DropList from "../../components/dropList.vue";
-	import EmptyPop from "../../components/pop/emptyPop.vue"
-	var _dateType = "", _params = null;
+	import EmptyPop from "../../components/pop/emptyPop.vue";
+	import CommonTip from "../../components/pop/commonTip.vue";
+	var _dateType = "", _params = null,_showNextExamineId="";
 	export default{
 		created(){
 			this.typeList = __merge([], g.data.staticTypePool.list);
@@ -127,6 +131,7 @@
 				isShowStartDate: false,
 				isShowEndDate: false,
 				isShowBusinessList: false,
+				nextExamine:"",
 				currPage: 1,
 				type: -1,
 				statusList: [],
@@ -144,7 +149,8 @@
 			InputBar,
 			ChooseManPop,
 			DropList,
-			EmptyPop
+			EmptyPop,
+			CommonTip
 		},
 		computed: {
 			currType()
@@ -214,6 +220,11 @@
 				{
 					this.isShowBusinessList = false;
 				}
+				if (this.$refs.auditorStatus )
+				{
+					let content = g.data.searchBusinessPool.getDataById(_showNextExamineId);
+					content&&content.update({isShowNextExamine: false});
+				}
 			},
 			onClose_detailPop()
 			{
@@ -232,6 +243,12 @@
 				this.isShowEndDate = false;
 				this.isShowStartDate = false;
 
+			},
+			onClick_closeBtn($type){
+
+				if($type == "auditor"){
+					g.data.searchBusinessPool.getDataById(_showNextExamineId).update({isShowNextExamine: false});
+				}
 			},
 			onClick_typeItem($type)
 			{
@@ -345,7 +362,34 @@
 				}else if($status==-1){
 					return "is-picked"
 				}
-			}
+			},
+			onClick_auditStatus($id,$auditStatus){
+				if($id == _showNextExamineId){
+					g.data.searchBusinessPool.getDataById($id).update({isShowNextExamine: true});
+					return
+				}
+				if($auditStatus ==-1||$auditStatus ==2){
+					return ;
+				}
+				g.ui.showLoading()
+				g.net.call("bo/getOrderAuditUser", {
+					orderId : $id
+				}).then(($data) =>
+				{
+					g.ui.hideLoading();
+					this.nextExamine = $data.auditNames;
+					if(_showNextExamineId){
+						let content = g.data.searchBusinessPool.getDataById(_showNextExamineId)
+						content&&content.update({isShowNextExamine: false});
+					}
+					g.data.searchBusinessPool.getDataById($id).update({isShowNextExamine: true});
+					_showNextExamineId = $id;
+				}, (err) =>
+				{
+					g.func.dealErr(err);
+				})
+			},
+
 		},
 		beforeDestroy()
 		{
@@ -355,4 +399,5 @@
 </script>
 <style type="text/css" lang="sass" rel="stylesheet/css" scoped>
 	@import "../../css/oppList.scss";
+
 </style>

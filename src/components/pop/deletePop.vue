@@ -77,6 +77,9 @@
 				padding: 0 0 6px 28px;
 				vertical-align: middle;
 				text-align: left;
+				color:#404040;
+				font-weight: 100;
+
 				img {
 					display: inline-block;
 					vertical-align: middle;

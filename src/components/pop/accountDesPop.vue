@@ -260,7 +260,7 @@
 						img {
 							display: block;
 							height: 100%;
-							width: auto;
+							width: 100%;
 						}
 					}
 					.card-wrap {

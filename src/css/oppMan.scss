@@ -79,10 +79,16 @@
 		}
 
 	  }
+		.creator-name{
+			position: relative;
+			color:#61a4de;
+		}
+		.audit-status-desc{
+			position: relative;
+		}
 	}
   }
 }
-
 .clearfix {
   clear: both;
 }
@@ -123,3 +129,4 @@
 	margin-left: 16px;
   }
 }
+
