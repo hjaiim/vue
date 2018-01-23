@@ -123,6 +123,12 @@
 				default: 0
 			}
 		},
+		watch: {
+			currId($val)
+			{
+				this.init();
+			}
+		},
 		methods: {
 			init()
 			{

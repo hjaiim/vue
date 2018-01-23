@@ -350,18 +350,13 @@
                 }
             },
             onClick_auditStatus($id, $auditStatus){
-                if ($id == _showNextExamineId) {
-                    g.data.searchBusinessPool.getDataById($id).update({isShowNextExamine: true});
-                    return
-                }
+
                 if ($auditStatus == -1 || $auditStatus == 2) {
                     return;
                 }
-                g.ui.showLoading()
                 g.net.call("bo/getOrderAuditUser", {
                     orderId: $id
                 }).then(($data) => {
-                    g.ui.hideLoading();
                     this.nextExamine = $data.auditNames;
                     if (_showNextExamineId) {
                         let content = g.data.searchBusinessPool.getDataById(_showNextExamineId)

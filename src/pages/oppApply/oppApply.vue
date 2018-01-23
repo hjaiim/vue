@@ -74,9 +74,9 @@
 		},
 		watch:{
 			type(){
-				this.$nextTick(function(){
-					this.$refs.oppForm.attachList =[];
-				})
+				// this.$nextTick(function(){
+				// 	this.$refs.oppForm.attachList =[];
+				// })
 
 			}
 		},
@@ -138,13 +138,14 @@
 			},
 			onChange_typeItem($id)
 			{
+
 				if (this.type != $id)
 				{
-//					var formData = this.$refs.oppForm.getFormData();
-
+					// var formData = this.$refs.oppForm.getFormData();
 					this.type = $id;
 					this.updateUrl();
 					this.isShowTypeList = false;
+					this.routerUpdated();
 				}
 			},
 			updateUrl()

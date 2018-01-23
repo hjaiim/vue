@@ -145,9 +145,20 @@
 				default: 0
 			}
 		},
+		watch: {
+			currId($val)
+			{
+				this.init();
+			}
+		},
 		methods: {
 			init()
 			{
+				debugger
+
+
+
+
 				if (this.currId)
 				{
 					var formData = g.data.searchBusinessPool.getDataById(this.currId).formData;

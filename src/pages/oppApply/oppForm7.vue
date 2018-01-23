@@ -173,9 +173,16 @@
 				default: 0
 			}
 		},
+		watch: {
+			currId($val)
+			{
+				this.init();
+			}
+		},
 		methods: {
 			init()
 			{
+
 				if (this.currId)
 				{
 					var formData = g.data.searchBusinessPool.getDataById(this.currId).formData;

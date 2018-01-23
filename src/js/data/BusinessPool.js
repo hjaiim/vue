@@ -128,7 +128,7 @@ function updateData($dObj, $recordId) {
     $dObj.hasOwnProperty("createTime") && (this.createTime = g.timeTool.getFullDate($dObj.createTime, true));
     $dObj.hasOwnProperty("optType") && (this.operation = $dObj.optType);
     $dObj.hasOwnProperty("todoId") && (this.todoId = $dObj.todoId);
-    $dObj.hasOwnProperty("mobile") && (this.mobile = $dObj.mobile);
+    $dObj.hasOwnProperty("mobile") && $dObj.mobile && (this.mobile = $dObj.mobile);
     $dObj.hasOwnProperty("isShowTel") && (this.isShowTel = $dObj.isShowTel);
     $dObj.hasOwnProperty("isShowNextExamine") && (this.isShowNextExamine= $dObj.isShowNextExamine);
     $dObj.hasOwnProperty("taskProperties") && (this.taskProperties = __merge({}, JSON.parse($dObj.taskProperties)));

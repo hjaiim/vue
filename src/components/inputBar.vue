@@ -110,7 +110,7 @@
 		.input-con {
 			width: 100%;
 			height: 100%;
-			display: block;
+			/*display: block;*/
 			-webkit-box-sizing: border-box;
 			-moz-box-sizing: border-box;
 			box-sizing: border-box;
