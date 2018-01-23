@@ -46,12 +46,12 @@
 					<div class="personal-content left relative form-list pointer"
 						 :class="canEdit?'':'disabled'" :disabled="!canEdit"
 						 @click.stop="onClick_dropListBtn('Department')">
-						{{currDepartData.name}}
+						{{currDepartDataName}}
 						<i class="pointer" :class="['icon-trangle', isShowDepartmentList?'rotate':'']"></i>
 						<drop-list :dropList="departmentList" :isShowDropList="isShowDepartmentList"
 								   @change="onClick_department" ref="depart"></drop-list>
 					</div>
-					<span class="required" v-show="canEdit">*</span>
+					<!--<span class="required" v-show="canEdit">*</span>-->
 				</div>
 				<div class="personal-form diff-personal relative">
 					<span class="personal-title left">职务名称</span>
@@ -59,12 +59,12 @@
 					<div class="personal-content left relative form-list pointer"
 						 :class="canEdit?'':'disabled'" :disabled="!canEdit"
 						 @click.stop="onClick_dropListBtn('Duty')">
-						{{currDutyData.name}}
+						{{currDutyDataName}}
 						<i class="pointer" :class="['icon-trangle', isShowDutyList?'rotate':'']"></i>
 						<drop-list :dropList="dutyList" :isShowDropList="isShowDutyList"
 								   @change="onClick_duty" ref="duty"></drop-list>
 					</div>
-					<span class="required" v-show="canEdit">*</span>
+					<!--<span class="required" v-show="canEdit">*</span>-->
 				</div>
 				<div class="personal-form">
 					<span class="personal-title left">手机</span>
@@ -147,7 +147,7 @@
 									点击上传工作证照片<br>
 									支持jpg/png格式</br>
 									不超过5M</br>
-									</span>
+									<!--</span>-->
 								</p>
 							</div>
 						</div>
@@ -245,6 +245,15 @@
 			canEdit()
 			{
 				return this.authStatus == 0 || this.authStatus == 3;
+			},
+			currDepartDataName()
+			{
+				return this.currDepartData&&this.currDepartData.name?this.currDepartData.name:""
+			},
+			currDutyDataName()
+			{
+				return this.currDutyData&&this.currDutyData.name?this.currDutyData.name:""
+
 			}
 		},
 		methods: {
@@ -267,8 +276,14 @@
 					this.idCardFront = this.userInfo.idCardFront;
 					this.workCard = this.userInfo.workCard;
 					this.currCompanyData = g.data.companyPool.getDataById(this.userInfo.companyId);
-					this.currDepartData = g.data.departmentPool.getDataById(this.userInfo.departmentId);
-					this.currDutyData = g.data.dutyPool.getDataById(this.userInfo.dutyId);
+					this.currDepartData = this.userInfo.departmentId?g.data.departmentPool.getDataById(this.userInfo.departmentId):{};
+					this.currDutyData = this.userInfo.dutyId?g.data.dutyPool.getDataById(this.userInfo.dutyId):{};
+					if(this.currCompanyData){
+						this.departmentList = this.currCompanyData.children;
+					}
+					if(this.currDepartData){
+						this.dutyList = this.currDepartData.children;
+					}
 				}
 				else
 				{
@@ -355,6 +370,8 @@
 				this.departmentList = this.currCompanyData.children;
 				this.currDepartData = {};
 				this.currDutyData = {};
+				this.dutyList = [];
+				this.errData.currDuty = "";
 			},
 			onClick_department($id)
 			{
@@ -410,13 +427,15 @@
 					return;
 				}
 				this.isClicked = true;
-				this.setClock();
+
 				_params = {mobile: this.phone};
 				g.net.call("user/applyUserAuthSendCode", _params).then(($data) =>
 				{
+					this.setClock();
 					g.ui.toast("验证码发送成功!");
 				}, (err) =>
 				{
+					this.isClicked = false;
 					g.func.dealErr(err);
 				})
 			},
@@ -456,8 +475,8 @@
 				}
 				_params = {
 					companyId: this.currCompanyData.id,
-					departmentId: this.currDepartData.id,
-					dutyId: this.currDutyData.id,
+					departmentId: this.currDepartData&&this.currDepartData.id ? this.currDepartData.id : "",
+					dutyId: this.currDutyData&&this.currDutyData.id ? this.currDutyData.id : "",
 					avatar: this.avatar,
 					idcardImgA: this.idCardFront,
 					idcardImgB: this.idCardBack,
@@ -529,21 +548,25 @@
 					this.errData.workCard = "请上传工作证件照";
 					_isValid = false;
 				}
+
 				if (!this.currCompanyData.name)
 				{
 					this.errData.currCompany = "请选择所属公司";
 					_isValid = false;
 				}
-				if (!this.currDepartData.name)
-				{
-					this.errData.currDepartment = "请选择所属部门";
-					_isValid = false;
+				// if (!this.currDepartData.name)
+				// {
+				// 	this.errData.currDepartment = "请选择所属部门";
+				// 	_isValid = false;
+				// }
+				if(this.currDepartData&&this.currDepartData.name){
+					if (!this.currDutyData||!this.currDutyData.name)
+					{
+						this.errData.currDuty = "请选择所属职务";
+						_isValid = false;
+					}
 				}
-				if (!this.currDutyData.name)
-				{
-					this.errData.currDuty = "请选择所属职务";
-					_isValid = false;
-				}
+
 
 				if (this.telphone && !g.param.telphoneReg.test(this.telphone))
 				{

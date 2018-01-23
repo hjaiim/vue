@@ -32,7 +32,7 @@ var WEB_CONFIG = {
 				name: "data"
 			},
 			error: {
-				name: "error",
+				name: "code",
 				type: "number"
 			},
 			errorMsg: {
@@ -57,8 +57,8 @@ var WEB_CONFIG = {
 		defaultLang: "cn",
 		loginExpires: 10 * 60,
 		phoneReg: /^1(3|4|5|7|8)\d{9}$/,
-		accountReg: /^[a-z0-9]{6,16}$/,
-		passwordReg: /^[a-z0-9]{6,16}$/,
+		accountReg: /^[A-Za-z0-9]{6,16}$/,
+		passwordReg: /^[A-Za-z0-9]{6,16}$/,
 		nameReg:/^[\u2E80-\u9FFF]{2,10}/,
 		telphoneReg:/(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,8}/,
 		emailReg:/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,

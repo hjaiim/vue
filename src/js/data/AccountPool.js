@@ -94,6 +94,7 @@ function createData($dObj)
 	d.positionTypeDesc = "";
 	d.authStatus = 0;
 	d.status = 0;
+	d.avatar = "";
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -120,4 +121,5 @@ function updateData($dObj)
 	$dObj.hasOwnProperty("stationName") && (this.positionName = $dObj.stationName);
 	$dObj.hasOwnProperty("stationType") && (this.positionType = $dObj.stationType);
 	$dObj.hasOwnProperty("stationTypeDesc") && (this.positionTypeDesc = $dObj.stationTypeDesc);
+	$dObj.hasOwnProperty("avatar") && (this.avatar = $dObj.avatar);
 }

@@ -6,18 +6,20 @@
 			<div class="work-menu">
 				<div class="role-wrap clear">
 					<div class="img-wrap left">
-						<img :src="g.path.images+'/default.png'" alt="">
+						<img :src="accountData.avatar?g.param.ossUrl+accountData.avatar:g.path.images+'/default.png'" alt="">
 					</div>
 					<div class="role-detail left">
 						<p>{{accountData.name}}</p>
 						<ul class="role-box relative clear">
 							<li class="left">
 								<span>{{accountData.companyName}}</span></li>
-							<li class="left">
+							<li class="left" v-show="accountData.departmentName">
 								<span>{{accountData.departmentName}}</span></li>
-							<li class="left">
+							<li class="left" v-show="accountData.dutyName">
 								<span>{{accountData.dutyName}}</span></li>
+							<li class="left" v-show="!accountData.departmentName&&!accountData.dutyName"><span>直属人员</span></li>
 						</ul>
+
 					</div>
 				</div>
 				<div class="work-detail clear">

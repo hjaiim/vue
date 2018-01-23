@@ -110,6 +110,7 @@
 			},
 			onClose_pop()
 			{
+				this.errData = {};
 				this.$emit('close', false);
 			},
 			onClick_cancelBtn()
@@ -122,6 +123,7 @@
 				if (!_isValid)
 				{
 					_isValid = true;
+
 					return;
 				}
 				var postUrl = "permission/addRole";

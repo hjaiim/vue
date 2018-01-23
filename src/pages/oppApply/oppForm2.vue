@@ -121,7 +121,7 @@
 	var _type = 2, _isValid = true, _formData = {}, _attach = {},_hash = {};
 	export default{
 		created(){
-			this.init();
+				this.init();
 		},
 		data(){
 			return {
@@ -150,6 +150,10 @@
 		methods: {
 			init()
 			{
+
+
+
+
 				if (this.currId)
 				{
 					var formData = g.data.searchBusinessPool.getDataById(this.currId).formData;

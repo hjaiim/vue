@@ -46,7 +46,7 @@
 						<td><i class="draw-tick relative pointer" :class="item.checked?'action':''"
 							   @click="onClick_checkedItem(item.id)"></i><span
 								class="rank-num">{{index+1}}</span></td>
-						<td><span :class="[item.readStatus==1?'is-picked':'wait-pick']">{{item.title}}</span></td>
+						<td ><span :class="[item.readStatus==0?'is-picked':'']">{{item.title}}</span></td>
 						<td>{{item.sourceDesc}}</td>
 						<td>{{item.createTime}}</td>
 						<td>
@@ -128,17 +128,16 @@
 		computed: {
 			checkAll()
 			{
-				if (this.checkedAll)
-				{
-					return true;
-				}
 				for (var item of this.msgList)
 				{
 					if (!item.checked)
 					{
+						this.checkedAll = false;
 						return false;
+
 					}
 				}
+				this.checkedAll = true;
 				return true;
 			}
 		},
@@ -158,6 +157,9 @@
 			},
 			onClick_deleteBtn($id)
 			{
+				if(_delId){
+					g.data.searchMessagePool.getDataById(_delId)&&g.data.searchMessagePool.getDataById(_delId).update({isShow: false});
+				}
 				_delId = $id;
 				g.data.searchMessagePool.getDataById(_delId).update({isShow: true});
 			},
@@ -176,6 +178,8 @@
 						g.data.searchMessagePool.remove(_delId);
 						this.msgList = g.data.searchMessagePool.list;
 						g.ui.toast("消息删除成功！");
+						this.delList = [];
+						this.updateUrl();
 					}, (err) =>
 					{
 						g.func.dealErr(err);
@@ -189,8 +193,6 @@
 				g.net.call("message/updateReceiveMobileMsg", _params).then(($data) =>
 				{
 					g.data.userInfo.update(_params);
-					trace("params", _params);
-
 					g.func.updateUserInfo(_params);
 					g.ui.toast("用户消息设置成功!");
 				}, (err) =>
@@ -283,7 +285,6 @@
 				if (this.delList.length > 0)
 				{
 					this.isShowAllDeletePop = true;
-
 				}
 				else
 				{
@@ -308,6 +309,7 @@
 						g.data.userInfo.update($data);
 						this.$refs.layout.updateHeader();
 						g.ui.toast("消息删除成功！");
+						this.updateUrl();
 					}, (err) =>
 					{
 						g.func.dealErr(err);

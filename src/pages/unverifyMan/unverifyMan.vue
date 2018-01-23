@@ -94,10 +94,11 @@
 		watch: {
 			accountList($val)
 			{
-				if ($val.length == 0)
-				{
-					this.onClick_selectAllBtn();
-				}
+				// if ($val.length == 0)
+				// {
+				// 	this.onClick_selectAllBtn();
+				// }
+
 			}
 		},
 		methods: {

@@ -225,6 +225,7 @@ input {
   img {
 	display: block;
 	width: 100%;
+	height:100%;
   }
 }
 
@@ -527,17 +528,21 @@ input {
 		.draw-tick {
 		  margin-left: 15px;
 		}
-	  }
 
+	  }
+		.wait-pick {
+			color: #8de1c1;
+		}
+		.is-picked {
+			color: #f2808b;
+		}
 	  .rank-num {
 		display: inline-block;
 		padding-left: 30px;
 		height: 18px;
 		line-height: 18px;
 	  }
-	  .wait-pick {
-		color: #8de1c1;
-	  }
+
 	  .action-menu {
 		padding-right: 30%;
 		text-align: right;
@@ -553,9 +558,7 @@ input {
 
 		}
 	  }
-	  .is-picked {
-		color: #f2808b;
-	  }
+
 	}
 	thead {
 	  tr {
@@ -563,6 +566,9 @@ input {
 		&:hover {
 		  background: #f7fbfc;
 		}
+
+
+
 
 	  }
 	}
@@ -1149,4 +1155,7 @@ iframe[disabled] {
 
 .dashed-border {
   border-top: 10px solid #eaeaea;
+}
+.mint-indicator-mask{
+	z-index: 999;
 }

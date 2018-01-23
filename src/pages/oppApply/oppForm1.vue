@@ -45,7 +45,7 @@
 						   v-model="formData.cusType"
 						   :errmsg="errData.cusType"
 						   @focus="onFocus_inputBar('cusType')"></input-bar>
-				<span class="explain lang-explain">直客/平台类客户</span>
+				<span class="explain lang-explain">直客/平台类客户/最终客户</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">业务用途及场景</span>
@@ -59,14 +59,21 @@
 			<div class="personal-form">
 				<span class="personal-title left">接入方式</span>
                  <span class="action-box status-type left" @click="onClick_accessType('API')">
-                        <i class="draw-round pointer" :class="formData.accessType == 'API'?'action':''"></i>
+					 <i class="draw-tick pointer relative"
+						:class="formData.accessType.indexOf('API')>=0?'action':''"></i>
+
+                        <!--<i class="draw-round pointer" :class="formData.accessTypeList == 'API'?'action':''"></i>-->
                         <span>API</span>
                  </span>
                 <span class="action-box status-type left" @click="onClick_accessType('SIP')">
-                    <i class="draw-round pointer" :class="formData.accessType == 'SIP'?'action':''"></i>
+					 <i class="draw-tick pointer relative"
+						:class="formData.accessType.indexOf('SIP')>=0?'action':''"></i>
+
+                    <!--<i class="draw-round pointer" :class="formData.accessType == 'SIP'?'action':''"></i>-->
                     <span>SIP</span>
                 </span>
-				<span class="explain">API/SIP（请选择一种）</span>
+				<span class="explain">API/SIP</span>
+				<span class="explain error-msg">{{errData.accessType}}</span>
 			</div>
 			<div class="personal-form">
 				<span class="personal-title left">呼叫模式</span>
@@ -222,7 +229,7 @@
 						{
 							this.formData[hash[key]] = formData[key].split("*")[0];
 						}
-						if (key === "呼叫模式")
+						if (key === "呼叫模式"||key === "接入方式")
 						{
 							this.formData[hash[key]] = formData[key].split("和");
 						}
@@ -249,7 +256,7 @@
 					cusCompIntro: "",
 					cusType: "",
 					businessDesc: "",
-					accessType: "API",
+					accessType: ["API"],
 					callTypeList: ["双呼"],
 					launchMethod: "",
 					callRange: "",
@@ -335,7 +342,25 @@
 			},
 			onClick_accessType($type)
 			{
-				this.formData.accessType = $type;
+				var index = this.formData.accessType.indexOf($type);
+				if (index >= 0)
+				{
+					if (this.formData.accessType.length == 1)
+					{
+						this.errData.accessType = "请至少选择一种或两种";
+						this.$forceUpdate();
+						setTimeout(() =>
+						{
+							this.errData.accessType = "";
+						}, 1500);
+						return;
+					}
+					this.formData.accessType.splice(index, 1);
+				}
+				else
+				{
+					this.formData.accessType.push($type)
+				}
 				this.$forceUpdate();
 			},
 			onClick_callType($type)
@@ -439,7 +464,7 @@
 						{
 							_formData[key] = this.formData[item[key]] + "*tel";
 						}
-						else if (key == "呼叫模式")
+						else if (key == "呼叫模式"||key=="接入方式")
 						{
 							_formData[key] = this.formData[item[key]].join("和");
 						}

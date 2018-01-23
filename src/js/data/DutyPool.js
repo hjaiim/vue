@@ -71,7 +71,6 @@ function createData($dObj)
 	var d = {};
 	d.id = 0;
 	d.name = "";
-	d.isEdit = false;
 	d.parentId = 0;
 	d.companyId = 0;
 	d.creatorId = 0;

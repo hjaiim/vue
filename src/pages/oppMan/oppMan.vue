@@ -46,10 +46,15 @@
 									 type="hour" ref="endDate"></common-date>
 					</div>
 				</div>
-				<div class="search-box search-size left clear clearfix">
+				<div class="search-box search-size left clearfix">
 					<span class="customer-name left">客户经理</span>
 					<input-bar class="search-input left relative" placeholder="" type="text"
 							   v-model="creatorName"></input-bar>
+				</div>
+				<div class="search-box search-size left p-left">
+					<span class="customer-name left">所属公司</span>
+					<input-bar class="search-input left relative " placeholder="" type="text"
+							   v-model="comName"></input-bar>
 				</div>
 				<div class=" search-box search-size p-left left">
 					<span class="customer-name">客户公司名称</span>
@@ -79,12 +84,21 @@
 					<tr v-for="(item,index) in businessList">
 						<td><span class="rank-num">{{index+1}}</span></td>
 						<td><span>{{item.orderNo}}</span></td>
-						<td>{{item.creatorName}}</td>
+						<td class="creator-name pointer" @click.stop="onClick_creatorName(item.id)">
+							<common-tip :isCommonTip="item.isShowTel" @close="onClick_closeBtn('tel')" ref="telTip">电话：{{item.mobile}}</common-tip>
+							{{item.creatorName}}
+						</td>
+
 						<td>{{item.companyName}}</td>
 						<td>{{item.customerCompName}}</td>
+
 						<td>{{item.typeName}}</td>
 						<td>{{item.createTime}}</td>
-						<td :class="item.operation== 2?'font-weight':''">{{item.auditStatusDesc}}</td>
+						<td class="audit-status-desc pointer" :class="{'is-picked':item.auditStatusDesc=='审核退回','font-weight':item.operation== 2&&item.auditStatusDesc!='审核退回'}"
+							@click.stop="onClick_auditStatus(item.id,item.auditStatus)">
+							<common-tip :isCommonTip="item.isShowNextExamine" @close="onClick_closeBtn('auditor')" ref="auditorStatus" >下级审核人：{{nextExamine}}</common-tip>
+							{{item.auditStatusDesc}}
+						</td>
 						<td>
 							<p class="action-menu clear" v-if="item.operation== 0">
                                 <span class="right pointer draw-line ani-time"
@@ -130,9 +144,10 @@
 	import InputBar from "../../components/inputBar.vue";
 	import CommonDate from "../../components/dateBox.vue";
 	import DropList from "../../components/dropList.vue";
-	import EmptyPop from "../../components/pop/emptyPop.vue"
+	import EmptyPop from "../../components/pop/emptyPop.vue";
+	import CommonTip from "../../components/pop/commonTip.vue";
 	import {searchBusinessList} from "./oppMan"
-	var _dateType = "", _params = null;
+	var _dateType = "", _params = null,_showTelId = "",_showNextExamineId="";
 	export default{
 		created(){
 			this.typeList = __merge([], g.data.staticTypePool.list);
@@ -156,8 +171,10 @@
 				statusList: [],
 				startTime: 1483200000,
 				endTime: g.timeTool.getNowStamp(),
-				creatorName: '',
+				creatorName: "",
 				companyName: "",
+				comName:"",
+				nextExamine:"",
 				currId: 0
 			}
 		},
@@ -168,7 +185,8 @@
 			InputBar,
 			CommonDate,
 			DropList,
-			EmptyPop
+			EmptyPop,
+			CommonTip
 		},
 		computed: {
 			currType()
@@ -199,6 +217,7 @@
 				this.endTime = g.timeTool.getNowStamp();
 				this.creatorName = "";
 				this.companyName = "";
+				this.comName = "";
 			},
 			routerUpdated()
 			{
@@ -238,6 +257,16 @@
 				{
 
 					this.isShowBusinessList = false;
+				}
+				if (this.$refs.telTip )
+				{
+					let content = g.data.searchBusinessPool.getDataById(_showTelId);
+					content&&content.update({isShowTel: false});
+				}
+				if (this.$refs.auditorStatus )
+				{
+					let content = g.data.searchBusinessPool.getDataById(_showNextExamineId);
+					content&&content.update({isShowNextExamine: false});
 				}
 			},
 			onClick_dropListBtn()
@@ -299,6 +328,7 @@
 			},
 			onChange_pageCom($page)
 			{
+				this.currPage = $page;
 				this.currPage = $page;
 				this.updateUrl();
 			},
@@ -366,6 +396,22 @@
 					})
 				}
 			},
+			onClick_closeBtn($type){
+				if($type == "tel"){
+					g.data.searchBusinessPool.getDataById(_showTelId).update({isShowTel: false});
+				}
+				if($type == "auditor"){
+					g.data.searchBusinessPool.getDataById(_showNextExamineId).update({isShowNextExamine: false});
+				}
+			},
+			onClick_creatorName($id){
+				if(_showTelId){
+					let content = g.data.searchBusinessPool.getDataById(_showTelId)
+					content&&content.update({isShowTel: false});
+				}
+				_showTelId = $id;
+				g.data.searchBusinessPool.getDataById(_showTelId).update({isShowTel: true});
+			},
 			updateUrl()
 			{
 				g.url = {
@@ -377,7 +423,8 @@
 						startTime: this.startTime,
 						endTime: this.endTime,
 						creatorName: this.creatorName,
-						companyName: this.companyName
+						companyName: this.companyName,
+						comName:this.comName
 					}
 				};
 			},
@@ -391,7 +438,29 @@
 				this.isShowStartDate = false;
 				this.isShowEndDate = false;
 				_dateType = "";
-			}
+			},
+			onClick_auditStatus($id,$auditStatus){
+
+				if($auditStatus ==-1||$auditStatus ==2){
+					return ;
+				}
+				g.net.call("bo/getOrderAuditUser", {
+					orderId : $id
+				}).then(($data) =>
+				{
+					this.nextExamine = $data.auditNames;
+					if(_showNextExamineId){
+						let content = g.data.searchBusinessPool.getDataById(_showNextExamineId)
+						content&&content.update({isShowNextExamine: false});
+					}
+					g.data.searchBusinessPool.getDataById($id).update({isShowNextExamine: true});
+					_showNextExamineId = $id;
+				}, (err) =>
+				{
+					g.func.dealErr(err);
+				})
+			},
+
 		},
 		beforeDestroy()
 		{
@@ -399,8 +468,8 @@
 		}
 	}
 
-
 </script>
 <style type="text/css" lang="sass" rel="stylesheet/css" scoped>
 	@import "../../css/oppMan.scss";
+
 </style>

@@ -182,6 +182,7 @@
 				{
 					g.ui.hideLoading();
 					this.$emit("close", true);
+					this.opinion="";
 					g.ui.toast("已拒绝该用户");
 				}, (err) =>
 				{
@@ -200,6 +201,7 @@
 				{
 					g.ui.hideLoading();
 					g.ui.toast("已认证该用户");
+					this.opinion="";
 					this.$emit("close", true);
 				}, (err) =>
 				{
@@ -208,6 +210,7 @@
 			},
 			onClose_pop()
 			{
+				this.opinion="";
 				this.$emit('close', false);
 
 			},
@@ -257,7 +260,7 @@
 						img {
 							display: block;
 							height: 100%;
-							width: auto;
+							width: 100%;
 						}
 					}
 					.card-wrap {
@@ -343,8 +346,7 @@
 			.detail-img {
 				-webkit-user-select: none;
 				min-width: 480px;
-				max-height: 70%;
-				max-width: 100%;
+				max-height:700px;
 				background-position: 0px 0px, 10px 10px;
 				background-size: 20px 20px;
 				background-image: linear-gradient(45deg, #eeeeee 25%, transparent 25%, transparent 75%, #eeeeee 75%, #eeeeee 100%), linear-gradient(45deg, #eeeeee 25%, white 25%, white 75%, #eeeeee 75%, #eeeeee 100%);

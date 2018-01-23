@@ -27,51 +27,52 @@
 							</p>
 						</div>
 					</div>
-					<div class="dashed-border" v-if="businessData.recordList && businessData.recordList.length > 0">
-						<h3 class="opp-title">
-							审核详情</h3>
+					<div>
+						<h3 class="opp-title dashed-border"  v-if="businessData.recordList && businessData.recordList.length > 0">
+								审核详情</h3>
 						<div v-for="item in businessData.recordList">
-							<p class="from-group  clear">
-								<span class="form-title">  <i class="leader"></i>{{item.positionName}}</span>
-								<span class="form-trap">{{item.auditorName}}</span>
-							</p>
+								<p class="from-group  clear">
+									<span class="form-title">  <i class="leader"></i>{{item.positionName}}</span>
+									<span class="form-trap">{{item.auditorName}}</span>
+								</p>
 
-							<p class="from-group clear" v-if="item.attachList.length > 0">
-								<span class="form-title">附件下载</span>
+								<p class="from-group clear" v-if="item.attachList.length > 0">
+									<span class="form-title">附件下载</span>
 								<span class="form-trap empty-txt"
 									  v-show="item.attachList&&item.attachList.length==0">无</span>
-								<i class="download-wrap clear">
-									<a class="form-trap file-download pointer ani-time left"
-									   v-for="attach in item.attachList" :href="g.param.ossUrl + attach.fileName"
-									   download>{{attach.name}}</a>
-								</i>
+									<i class="download-wrap clear">
+										<a class="form-trap file-download pointer ani-time left"
+										   v-for="attach in item.attachList" :href="g.param.ossUrl + attach.fileName"
+										   download>{{attach.name}}</a>
+									</i>
 
-							</p>
-							<p class="from-group  clear">
-								<span class="form-title left">签批意见</span>
+								</p>
+								<p class="from-group  clear">
+									<span class="form-title left">签批意见</span>
 
-								<span class="form-trap left address-width">{{item.opinion?item.opinion:'无'}}</span>
-							</p>
-							<p class="from-group  clear">
-								<span class="form-title">结果</span>
-								<span class="form-trap">{{item.result}} &nbsp;&nbsp;&nbsp; {{item.createTime}}</span>
-							</p>
-						</div>
+									<span class="form-trap left address-width">{{item.opinion?item.opinion:'无'}}</span>
+								</p>
+								<p class="from-group  clear">
+									<span class="form-title">结果</span>
+									<span class="form-trap">{{item.result}} &nbsp;&nbsp;&nbsp; {{item.createTime}}</span>
+								</p>
+							</div>
 						<div class="clear" v-if="businessData.operation == 2">
 							<p class="from-group clear">
 								<span class="form-title left">我的审核</span>
 								<span class="action-box status-type left pointer" @click="onClick_statusItem(1)"
-									  v-if="businessData.hasApproved">
-									<i class="pointer draw-round pointer" :class="status == 1?'action':''"></i>
+									  v-if="businessData.hasApproved&&businessData.auditStatusDesc!='审核退回'">
+
+									<i class="pointer draw-round" :class="status == 1?'action':''"></i>
 									<span class="pointer">通过</span>
 								</span>
 								<span class="action-box status-type left pointer" @click="onClick_statusItem(2)"
-									  v-if="businessData.hasRejected">
+									  v-if="businessData.hasRejected&&businessData.auditStatusDesc!='审核退回'">
 									<i class="draw-round pointer" :class="status == 2?'action':''"></i>
 									<span class="pointer">退回</span>
 								</span>
-									<span class="action-box status-type left pointer" @click="onClick_statusItem(3)"
-										  v-if="businessData.hasFinished">
+								<span class="action-box status-type left pointer" @click="onClick_statusItem(3)"
+										  v-if="businessData.hasFinished||businessData.auditStatusDesc=='审核退回'">
 									<i class="draw-round pointer" :class="status == 3?'action':''"></i>
 									<span class="pointer">结束</span>
 								</span>
@@ -199,7 +200,7 @@
 			init()
 			{
 				this.opinion = "";
-				this.status = 1;
+
 				this.idList = [];
 				this.attachList = [];
 				this.errMsg = '';
@@ -210,6 +211,10 @@
 					this.businessData = g.data.searchBusinessPool.getDataById(this.currId);
 					this.formData = this.businessData.formData;
 					this.oppType = this.businessData.type;
+				}
+				this.status = 1;
+				if(this.businessData.auditStatusDesc=="审核退回"){
+					this.status = 3;
 				}
 				_hash = {};
 				window.uploadComplete = this.uploadComplete;
@@ -307,6 +312,10 @@
 					_params.pendingAuditorId = this.idList.join(';');
 					_params.pendingAuditorName = _childName.join(';');
 
+				}
+				if(this.businessData.hasOpinion&&this.opinion.trim()==""){
+					this.errMsg = "请填写签批意见";
+					return;
 				}
 				if (this.status == 1 && this.businessData.mustFill && this.idList.length == 0)
 				{
