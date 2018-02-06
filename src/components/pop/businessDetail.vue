@@ -395,7 +395,7 @@
 		.opp-content {
 			margin: 20px 10px 40px;
 			border-bottom: none;
-			max-height: 601px;
+			max-height: 450px;
 			overflow: hidden;
 		}
 		.detail-wrap {
