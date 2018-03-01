@@ -51,7 +51,7 @@
 						<drop-list :dropList="departmentList" :isShowDropList="isShowDepartmentList"
 								   @change="onClick_department" ref="depart"></drop-list>
 					</div>
-					<!--<span class="required" v-show="canEdit">*</span>-->
+					<span class="required" v-show="canEdit">*</span>
 				</div>
 				<div class="personal-form diff-personal relative">
 					<span class="personal-title left">职务名称</span>
@@ -64,7 +64,8 @@
 						<drop-list :dropList="dutyList" :isShowDropList="isShowDutyList"
 								   @change="onClick_duty" ref="duty"></drop-list>
 					</div>
-					<!--<span class="required" v-show="canEdit">*</span>-->
+					<span class="required" v-show="canEdit">*</span>
+
 				</div>
 				<div class="personal-form">
 					<span class="personal-title left">手机</span>
@@ -475,8 +476,8 @@
 				}
 				_params = {
 					companyId: this.currCompanyData.id,
-					departmentId: this.currDepartData&&this.currDepartData.id ? this.currDepartData.id : "",
-					dutyId: this.currDutyData&&this.currDutyData.id ? this.currDutyData.id : "",
+					departmentId:  this.currDepartData.id ,
+					dutyId:  this.currDutyData.id ,
 					avatar: this.avatar,
 					idcardImgA: this.idCardFront,
 					idcardImgB: this.idCardBack,
@@ -554,17 +555,15 @@
 					this.errData.currCompany = "请选择所属公司";
 					_isValid = false;
 				}
-				// if (!this.currDepartData.name)
-				// {
-				// 	this.errData.currDepartment = "请选择所属部门";
-				// 	_isValid = false;
-				// }
-				if(this.currDepartData&&this.currDepartData.name){
-					if (!this.currDutyData||!this.currDutyData.name)
-					{
-						this.errData.currDuty = "请选择所属职务";
-						_isValid = false;
-					}
+				if (!this.currDepartData.name)
+				{
+					this.errData.currDepartment = "请选择所属部门";
+					_isValid = false;
+				}
+				if (!this.currDutyData.name)
+				{
+					this.errData.currDuty = "请选择所属职务";
+					_isValid = false;
 				}
 
 

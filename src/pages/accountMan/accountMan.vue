@@ -91,10 +91,11 @@
 								 @change="onChange_pageCom"></common-page>
 				</div>
 			</div>
-			<set-role-pop @close="onClose_setRolePop" :currId="currId"
-						  :isShowPopView="isShowSetRolePop"></set-role-pop>
+			<set-role-pop @close="onClose_setRolePop" :currOrderId="currId" :currRoleId = "currRoleId"
+						  :isShowPopView="isShowSetRolePop" ></set-role-pop>
 			<order-work-pop @close="onClose_orderWorkPop"
-							:currId="currId"
+							:currOrderId="currId"
+							:currWorkId="currWorkId"
 							:isShowPopView="isShowOrderWorkPop"></order-work-pop>
 		</div>
 	</com-layout>
@@ -120,6 +121,8 @@
 				roleList: [],
 				currPage: 1,
 				currRole: 0,
+				currWorkId:0,
+				currRoleId:0,
 				name: "",
 				typeList: [-1, 1, 2],
 				isShowRoleList: false,
@@ -241,11 +244,13 @@
 			},
 			onClick_positionBtn($item)
 			{
+				this.currWorkId = $item.positionId;
 				this.currId = $item.id;
 				this.isShowOrderWorkPop = true;
 			},
 			onClick_roleBtn($item)
 			{
+				this.currRoleId = $item.roleId;
 				this.currId = $item.id;
 				this.isShowSetRolePop = true;
 			},

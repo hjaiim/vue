@@ -120,6 +120,10 @@ if (dirList.length > 3)
  */
 
 cp('-R', 'assets', OUTPUT_PATH + '/assets/');
+cp('-R', 'upload.html', OUTPUT_PATH);
+cp('-R', 'uploadApi.html', OUTPUT_PATH);
+
+
 //-----------------------------------------------------------------------
 var indexHtml = fs.readFileSync("./index.html");
 indexHtml = indexHtml.toString();

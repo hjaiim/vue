@@ -66,7 +66,10 @@
 				type: Boolean,
 				default: false
 			},
-			currId: {
+			currOrderId: {
+				default: 0
+			},
+			currWorkId:{
 				default: 0
 			}
 		},
@@ -79,11 +82,11 @@
 		methods: {
 			init()
 			{
-				if (this.currId)
+				if (this.currOrderId)
 				{
-					this.accountData = g.data.searchAccountPool.getDataById(this.currId);
+					this.accountData = g.data.searchAccountPool.getDataById(this.currOrderId);
 					this.positionList = g.data.searchPositionPool.list;
-					this.positionData = {};
+					this.positionData = this.currWorkId!=-1?g.data.searchPositionPool.getDataById(this.currWorkId):{};
 
 				}
 			},
@@ -118,7 +121,7 @@
 			{
 				this.isShowRoleList = false;
 				_params = {
-					userId: this.currId,
+					userId: this.currOrderId,
 					stationId: this.positionData.id,
 					stationType: this.positionData.type
 				};

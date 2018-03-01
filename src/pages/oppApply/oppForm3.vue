@@ -154,10 +154,6 @@
 		methods: {
 			init()
 			{
-				debugger
-
-
-
 
 				if (this.currId)
 				{
