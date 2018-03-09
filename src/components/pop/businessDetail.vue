@@ -56,6 +56,12 @@
 									<span class="form-title">结果</span>
 									<span class="form-trap">{{item.result}} &nbsp;&nbsp;&nbsp; {{item.createTime}}</span>
 								</p>
+									<!--初审员不显示-->
+								<p class="from-group  clear" v-if="item.auditorId !=2">
+									<span class="form-title left">已选审核人员</span>
+
+									<span class="form-trap left address-width">{{item.pendingAuditorName?item.pendingAuditorName:'无'}}</span>
+								</p>
 							</div>
 						<div class="clear" v-if="businessData.operation == 2">
 							<p class="from-group clear">

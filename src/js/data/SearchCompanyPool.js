@@ -124,6 +124,7 @@ function createData($dObj)
 	d.telphone = "";
 	d.departCount = 0;
 	d.dutyCount = 0;
+	d.businessData = "";
 	d.isShow = false;
 	d.isEdit = false;
 	d.update = updateData.bind(d);

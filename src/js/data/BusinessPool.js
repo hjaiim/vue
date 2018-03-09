@@ -190,6 +190,7 @@ function createRecord($dObj) {
     d.opinion = "";
     d.result = "";
     d.attachList = [];
+    d.pendingAuditorName = "";
     d.createTime = g.timeTool.getNowStamp();
     d.orderId = 0;
     d.taskTodoId = "";
@@ -204,6 +205,7 @@ function updateRecord($dObj) {
     $dObj.hasOwnProperty("auditorName") && (this.auditorName = $dObj.auditorName);
     $dObj.hasOwnProperty("stationName") && (this.positionName = $dObj.stationName);
     $dObj.hasOwnProperty("auditSuggest") && (this.opinion = $dObj.auditSuggest);
+    $dObj.hasOwnProperty("pendingAuditorName") && (this.pendingAuditorName = $dObj.pendingAuditorName);
     if ($dObj.hasOwnProperty("auditResult")) {
         $dObj.auditResult == 1 && (this.result = "已通过" );
         $dObj.auditResult == 2 && (this.result = "已退回" );
