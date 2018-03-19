@@ -7,13 +7,33 @@
 				<div class="no-border" is="scroll-group">
 					<div>
 						<h3 class="opp-title">商机内容</h3>
-						<business-type-1 v-if="oppType==1" :formData="formData"></business-type-1>
-						<business-type-2 v-if="oppType==2" :formData="formData"></business-type-2>
-						<business-type-3 v-if="oppType==3" :formData="formData"></business-type-3>
-						<business-type-4 v-if="oppType==4" :formData="formData"></business-type-4>
-						<business-type-5 v-if="oppType==5" :formData="formData"></business-type-5>
-						<business-type-6 v-if="oppType==6" :formData="formData"></business-type-6>
-						<business-type-7 v-if="oppType==7" :formData="formData"></business-type-7>
+						<!--<business-type-1 v-if="oppType==1" :formData="formData"></business-type-1>-->
+						<!--<business-type-2 v-if="oppType==2" :formData="formData"></business-type-2>-->
+						<!--<business-type-3 v-if="oppType==3" :formData="formData"></business-type-3>-->
+						<!--<business-type-4 v-if="oppType==4" :formData="formData"></business-type-4>-->
+						<!--<business-type-5 v-if="oppType==5" :formData="formData"></business-type-5>-->
+						<!--<business-type-6 v-if="oppType==6" :formData="formData"></business-type-6>-->
+						<!--<business-type-7 v-if="oppType==7" :formData="formData"></business-type-7>-->
+						<div>
+							<p class="from-group detail-custer-msg">
+								<span class="form-title">商机类型</span>
+								<span class="form-trap">{{businessData.typeName}}</span>
+							</p>
+							<p class="from-group detail-custer-msg">
+								<span class="form-title">业务小类</span>
+								<span class="form-trap">{{businessData.childBusinessName}}</span>
+							</p>
+							<p class="from-group detail-custer-msg">
+								<span class="form-title">商机行业类型</span>
+								<span class="form-trap">{{businessData.boTradeName}}</span>
+							</p>
+
+							<p class="from-group detail-custer-msg" v-for="(value,key) in formInfo">
+								<span class="form-title">{{key}}</span>
+								<span class="form-trap">{{value}}</span>
+							</p>
+
+						</div>
 						<div>
 							<p class="from-group">
 								<span class="form-title">附件下载</span>
@@ -136,6 +156,7 @@
 	import BusinessType5 from "../businessDetail/businessType5.vue";
 	import BusinessType6 from "../businessDetail/businessType6.vue";
 	import BusinessType7 from "../businessDetail/businessType7.vue";
+	import BusinessType from "../businessDetail/businessType.vue";
 	import ChooseManPop from "./chooseManPop.vue";
 	var _params = null, _childName = [], _attach = {}, _isValid = true, _hash = {};
 	export default{
@@ -149,7 +170,6 @@
 				g: g,
 				type: 1,
 				oppType: 1,
-				formData: {},
 				status: 1,
 				idList: [],
 				opinion: "",
@@ -160,7 +180,8 @@
 				businessData: {
 					taskProperties: {}
 				},
-				isUpload: false
+				isUpload: false,
+				formInfo: {},
 			}
 		},
 		components: {
@@ -173,6 +194,7 @@
 			BusinessType5,
 			BusinessType6,
 			BusinessType7,
+			BusinessType,
 			ChooseManPop
 		},
 		props: {
@@ -215,7 +237,16 @@
 				if (this.currId)
 				{
 					this.businessData = g.data.searchBusinessPool.getDataById(this.currId);
-					this.formData = this.businessData.formData;
+					let formData = this.businessData.formData;
+					this.formInfo = __merge({}, formData);
+					for (var key in this.formInfo) {
+						if (key == "客户联系方式") {
+							this.formInfo[key] = this.formInfo[key].split("*")[0];
+						}
+						if (key == "申请的95业务类别" && this.formInfo[key] != "使用联通已有的95号") {
+							this.formInfo[key] = this.formInfo[key].split("num*").join("/95号码：");
+						}
+					}
 					this.oppType = this.businessData.type;
 				}
 				this.status = 1;

@@ -109,12 +109,13 @@
 		}
 		.input-con {
 			width: 100%;
+			/*width: 240px;*/
 			height: 100%;
 			/*display: block;*/
 			-webkit-box-sizing: border-box;
 			-moz-box-sizing: border-box;
 			box-sizing: border-box;
-			padding: 6px 20px 6px 6px;
+			padding: 6px 55px 6px 6px;
 			border: 1px solid #dedede;
 			-webkit-border-radius: 4px;
 			-moz-border-radius: 4px;

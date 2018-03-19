@@ -1,11 +1,16 @@
 import g from "./../../global";
 import loginManager from "./../../js/manager/LoginManager";
+import {getOppTypeList} from "./../oppApply/oppApply"
 var _params = null;
 export default function (to, next)
 {
 	loginManager.checkLogin(to, next, () =>
 	{
-		searchBusinessList(to.query).then(() =>
+		let requestArr = [searchBusinessList(to.query)];
+		if(g.data.oppTypePool.list.length==0){
+			requestArr.push(getOppTypeList())
+		}
+		Promise.all(requestArr).then(() =>
 		{
 			next();
 		})
@@ -40,7 +45,8 @@ function createData($dObj)
 {
 	var d = {};
 	$dObj = $dObj || {};
-	d.businessId = $dObj.type || -1;
+	d.businessId = $dObj.busId || -1;
+	d.childBusinessId = $dObj.type || -1;
 	$dObj.statusList = $dObj.statusList || JSON.stringify([-1, 1, 2]);
 	d.auditStatus = JSON.parse($dObj.statusList).join(',');
 	$dObj.startTime = int($dObj.startTime) || 1483200000;

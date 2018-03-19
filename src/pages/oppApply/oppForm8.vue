@@ -1,4 +1,5 @@
 <template>
+
 	<div>
 		<div>
 			<div class="personal-form">
@@ -38,49 +39,30 @@
 						   :errmsg="errData.cusCompIntro"
 						   @focus="onFocus_inputBar('cusCompIntro')"></input-bar>
 			</div>
-			<div class="personal-form">
-				<span class="personal-title left">客户类别</span>
-				<input-bar class="personal-content pensonal-input left apply-input" placeholder="" type="text"
-						   v-model="formData.cusType"
-						   :errmsg="errData.cusType"
-						   @focus="onFocus_inputBar('cusType')"></input-bar>
-				<span class="explain lang-explain">直客/平台类客户</span>
-			</div>
-			<div class="personal-form">
-				<span class="personal-title left">业务用途及场景</span>
-				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
-						   type="text"
-						   v-model="formData.businessDesc"
-						   :errmsg="errData.businessDesc"
-						   @focus="onFocus_inputBar('businessDesc')"></input-bar>
-			</div>
-			<div class="personal-form">
-				<span class="personal-title left">预计业务规模</span>
-				<input-bar class="personal-content pensonal-input left apply-input" placeholder=""
-						   type="text" v-model="formData.businessScale"
-						   :errmsg="errData.businessScale"
-						   @focus="onFocus_inputBar('businessScale')"></input-bar>
-			</div>
-			<div class="personal-form">
-				<span class="personal-title left">报价</span>
+			<div class="personal-form relative">
+				<span class="personal-title left">预估金额</span>
 				<input-bar class="personal-content pensonal-input left apply-input" placeholder=""
 						   type="text" v-model="formData.budget"
 						   :errmsg="errData.budget"
 						   @focus="onFocus_inputBar('budget')"></input-bar>
-				<span class="explain lang-explain">续联使用费和CTD分开报价（续联使用费：5元/次；CTD指导报价：本地0.1元/分钟，异地0.15元/分钟）</span>
+				<span class="money-cash  absolute">万元</span>
 			</div>
 			<div class="personal-form">
-				<span class="personal-title left">其他说明</span>
-				<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""
-						   type="text" v-model="formData.remark"
-						   :errmsg="errData.remark"
-						   @focus="onFocus_inputBar('remark')"></input-bar>
+				<span class="personal-title left">商机描述</span>
+				<!--<input-bar class="personal-content pensonal-input left large-input apply-input" placeholder=""-->
+						   <!--type="textarea" v-model="formData.remark"-->
+						   <!--:errmsg="errData.remark"-->
+						   <!--@focus="onFocus_inputBar('remark')"></input-bar>-->
+
+				<textarea class="" cols="100" rows="30" v-model="formData.remark" class="text-area left" @focus="onFocus_inputBar('remark')"></textarea>
+				<span class="error-message">{{errData.remark}}</span>
 			</div>
 		</div>
 		<div>
 			<div class="personal-form">
 				<span class="personal-title left">上传附件</span>
-                <span class="form-trap up-btn pointer opp-up-btn">点击上传
+                <span class="form-trap up-btn pointer opp-up-btn relative">点击上传
+
                	<iframe class="iframe-wrap absolute pointer" name="fileUpload" v-if="hasIframe"
 						:class="isUpload?'disabled':''" :disabled="isUpload"
 						:src="g.path.base+'/upload.html?type=file&redirectUrl='+g.path.base+'/uploadApi.html&access='+g.param.uploadAccess"></iframe>
@@ -98,7 +80,7 @@
 <script type="text/ecmascript-6">
 	import g from "../../global";
 	import InputBar from "../../components/inputBar.vue";
-	var _type = 14, _isValid = true, _formData = {}, _attach = {}, _hash = {};
+	var _formData = {}, _isValid = true, _type = 8, _attach = {}, _hash = {};
 	export default{
 		created(){
 			this.init();
@@ -108,8 +90,8 @@
 				g: g,
 				errData: {},
 				formData: {},
-				hasIframe: true,
 				attachList: [],
+				hasIframe: true,
 				isUpload: false
 			}
 		},
@@ -141,6 +123,10 @@
 						{
 							this.formData[hash[key]] = formData[key].split("*")[0];
 						}
+						if (key == "预估金额")
+						{
+							this.formData[hash[key]] = formData[key].split("万元")[0];
+						}
 					}
 					this.attachList = g.data.searchBusinessPool.getDataById(this.currId).attachList;
 					this.$forceUpdate();
@@ -148,7 +134,6 @@
 				else
 				{
 					this.initForm();
-					this.attachList = [] ;
 				}
 				this.isUpload = false;
 				_hash = {};
@@ -163,21 +148,18 @@
 					cusPhone: "",
 					cusCompAdd: "",
 					cusCompIntro: "",
-					cusType: "",
-					businessDesc: "",
-					businessScale: "",
 					budget: "",
 					remark: ""
 				};
+				this.initError();
+			},
+			initError(){
 				this.errData = {
 					cusCompName: "",
 					customer: "",
 					cusPhone: "",
 					cusCompAdd: "",
 					cusCompIntro: "",
-					cusType: "",
-					businessDesc: "",
-					businessScale: "",
 					budget: "",
 					remark: "",
 					attach: ""
@@ -235,8 +217,10 @@
 				this.errData[$type] = "";
 				this.$forceUpdate();
 			},
+
 			onClick_submitBtn()
 			{
+
 				this.checkValid();
 				if (!_isValid)
 				{
@@ -269,7 +253,7 @@
 				{
 					for (var key in item)
 					{
-						if (typeof this.formData[item[key]] == "string" && !trim(this.formData[item[key]]) && item[key] != "remark")
+						if (typeof this.formData[item[key]] == "string"&& !trim(this.formData[item[key]]) )
 						{
 							this.errData[item[key]] = "内容不能为空";
 							_isValid = false;
@@ -288,7 +272,6 @@
 						}
 					}
 				}
-				trace("this.errData", this.errData);
 				this.$forceUpdate();
 			},
 			getFormData()
@@ -302,6 +285,10 @@
 						{
 							_formData[key] = this.formData[item[key]] + "*tel";
 						}
+						if (key == "预估金额")
+						{
+							_formData[key] = this.formData[item[key]] + "万元";
+						}
 						else
 						{
 							_formData[key] = this.formData[item[key]];
@@ -309,14 +296,37 @@
 					}
 				}
 				return _formData;
-			},
+			}
 		}
 	}
 </script>
-<style type="text/css" lang="sass" rel="stylesheet/css" scoped>
+<style type="text/scss" lang="sass" rel="stylesheet/scss" scoped>
+
+	@import "../../css/oppApply.scss";
+
 	.apply-wrap {
 		padding: 20px 44px 50px 24px;
 	}
-
-	@import "../../css/oppApply.scss";
+	.money-cash{
+		line-height: 38px;
+		margin-left: 10px;
+		left: 325px;
+		}
+	.text-area{
+		width: 58%;
+		height: 200px;
+		outline: none;
+		resize: none;
+		padding: 10px 6px;
+		border: 1px solid #dedede;
+		box-sizing: border-box;
+		border-radius: 4px;
+		}
+	.error-message{
+		height: 25px;
+		line-height: 25px;
+		font-size: 14px;
+		color: #ed5564;
+		margin-left: 10px;
+		}
 </style>

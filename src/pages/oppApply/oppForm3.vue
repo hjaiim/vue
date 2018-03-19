@@ -122,7 +122,7 @@
 <script type="text/ecmascript-6">
 	import g from "../../global";
 	import InputBar from "../../components/inputBar.vue";
-	var _type = 3, _isValid = true, _formData = {}, _attach = {}, _hash = {};
+	var _type = 13, _isValid = true, _formData = {}, _attach = {}, _hash = {};
 	export default{
 		created(){
 			this.init();
@@ -157,7 +157,9 @@
 
 				if (this.currId)
 				{
+
 					var formData = g.data.searchBusinessPool.getDataById(this.currId).formData;
+
 					var hash = g.data.staticTypePool.getDataById(_type).hash;
 					for (var key in formData)
 					{
@@ -167,13 +169,16 @@
 							this.formData[hash[key]] = formData[key].split("*")[0];
 						}
 					}
+
 					this.attachList = g.data.searchBusinessPool.getDataById(this.currId).attachList;
 					this.$forceUpdate();
 				}
 				else
 				{
 					this.initForm();
+					this.attachList = [] ;
 				}
+				trace(this.formData)
 				_hash = {};
 				this.isUpload = false;
 				window.uploadComplete = this.uploadComplete;

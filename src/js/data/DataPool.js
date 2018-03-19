@@ -19,6 +19,7 @@ import BusinessPool from "./BusinessPool";
 import RolePool from "./RolePool";
 import StaffPool from "./StaffPool";
 import UnverifyPool from "./UnverifyPool";
+import OppTypePool from "./OppTypePool";
 
 export var userInfo = new UserInfo(); //用户信息
 export var langPool = new LangPool(); //语言包数据池
@@ -37,6 +38,7 @@ export var searchUnverifyPool = new UnverifyPool();
 export var searchRolePool = new RolePool();
 export var staticRightPool = new StaticRightPool();
 export var staffPool = new StaffPool();
+export var oppTypePool = new OppTypePool();
 export function initStaticData()
 {
 	var staticData = g.data.staticData;
@@ -73,4 +75,5 @@ export function clearAll()
 	searchRolePool.removeAll();
 	staticRightPool.removeAll();
 	staffPool.removeAll();
+	oppTypePool.removeAll();
 }

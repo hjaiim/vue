@@ -186,7 +186,7 @@
 <script type="text/ecmascript-6">
 	import g from "../../global";
 	import InputBar from "../../components/inputBar.vue";
-	var _formData = {}, _isValid = true, _type = 1, _attach = {}, _hash = {};
+	var _formData = {}, _isValid = true, _type = 11, _attach = {}, _hash = {};
 	export default{
 		created(){
 			this.init();
@@ -240,6 +240,7 @@
 				else
 				{
 					this.initForm();
+					this.attachList = [] ;
 				}
 				this.isUpload = false;
 				_hash = {};

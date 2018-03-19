@@ -103,7 +103,7 @@
 				}
 				else if (!g.param.accountReg.test(this.account))
 				{
-					this.errData.account = "登录名是6-16位的字母或数字";
+					this.errData.account = "登录名是4-16位的字母或数字";
 					_isValid = false;
 				}
 

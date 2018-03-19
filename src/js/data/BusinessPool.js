@@ -73,6 +73,10 @@ function createData($dObj) {
     d.id = 0;
     d.type = "";
     d.typeName = "";
+    d.boTradeName = "";
+    d.boTradeId = "";
+    d.childBusinessId = "";
+    d.childBusinessName = "";
     d.orderNo = "";
     d.formData = "";
     d.attachList = [];
@@ -112,6 +116,10 @@ function updateData($dObj, $recordId) {
     $dObj.hasOwnProperty("orderNo") && (this.orderNo = $dObj.orderNo);
     $dObj.hasOwnProperty("businessId") && (this.type = $dObj.businessId);
     $dObj.hasOwnProperty("businessName") && (this.typeName = $dObj.businessName);
+    $dObj.hasOwnProperty("boTradeName") && (this.boTradeName = $dObj.boTradeName);
+    $dObj.hasOwnProperty("boTradeId") && (this.boTradeId = $dObj.boTradeId);
+    $dObj.hasOwnProperty("childBusinessName") && (this.childBusinessName = $dObj.childBusinessName);
+    $dObj.hasOwnProperty("childBusinessId") && (this.childBusinessId = $dObj.childBusinessId);
     $dObj.hasOwnProperty("flowId") && (this.flowId = $dObj.flowId);
     $dObj.hasOwnProperty("flowName") && (this.flowName = $dObj.flowName);
     $dObj.hasOwnProperty("auditStatus") && (this.auditStatus = $dObj.auditStatus);

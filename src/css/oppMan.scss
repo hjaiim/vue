@@ -29,7 +29,7 @@
 		  width: 9%;
 		}
 		&:nth-of-type(2) {
-		  width: 15%;
+		  width: 12%;
 		}
 		&:nth-of-type(3) {
 		  width: 9%;
@@ -44,39 +44,45 @@
 		  width: 12%;
 		}
 		&:nth-of-type(7) {
-		  width: 14%;
+		  width: 8%;
 		}
 		&:nth-of-type(8) {
+		  width: 12%;
+		}
+		 &:nth-of-type(9) {
 		  width: 9%;
 		}
 
 	  }
 	  td {
 
-		&:nth-of-type(1) {
-		  width: 9%;
-		}
-		&:nth-of-type(2) {
-		  width: 15%;
-		}
-		&:nth-of-type(3) {
-		  width: 9%;
-		}
-		&:nth-of-type(4) {
-		  width: 12%;
-		}
-		&:nth-of-type(5) {
-		  width: 12%;
-		}
-		&:nth-of-type(6) {
-		  width: 12%;
-		}
-		&:nth-of-type(7) {
-		  width: 14%;
-		}
-		&:nth-of-type(8) {
-		  width: 9%;
-		}
+		  &:nth-of-type(1) {
+			  width: 9%;
+		  }
+		  &:nth-of-type(2) {
+			  width: 12%;
+		  }
+		  &:nth-of-type(3) {
+			  width: 9%;
+		  }
+		  &:nth-of-type(4) {
+			  width: 12%;
+		  }
+		  &:nth-of-type(5) {
+			  width: 12%;
+		  }
+		  &:nth-of-type(6) {
+			  width: 12%;
+		  }
+		  &:nth-of-type(7) {
+			  width: 8%;
+		  }
+		  &:nth-of-type(8) {
+			  width: 12%;
+		  }
+		  &:nth-of-type(9) {
+			  width: 9%;
+		  }
 
 	  }
 		.creator-name{
@@ -94,39 +100,51 @@
 }
 
 .p-left {
-  margin-left: 50px;
+  margin-left: 40px;
+}
+.date-box{
+	margin-left: 40px;
+}
+@media screen and (max-width: 1650px) {
+  .p-left {
+	margin-left: 15px;
+  }
+  .date-box {
+	margin-left: 15px;
+	.date-form {
+	  width: 172px;
+	  padding-left: 10px;
+	}
+  }
+  .status-form .status-type {
+	  margin-left: 10px;
+	  margin-right: 0;
+  }
 }
 
 @media screen and (max-width: 1450px) {
-  .p-left {
-	margin-left: 20px;
-  }
-  .date-box {
-	margin-left: 35px;
-	.date-form {
-	  width: 176px;
-	  padding-left: 14px;
+	.date-box {
+		margin-left: 0;
+		margin-top: 20px;
+		.date-form {
+			width: 172px;
+			padding-left: 10px;
+		}
 	}
-  }
-  .status-form .status-type {
-	margin-left: 16px;
-  }
+	.left-width{
+		margin-left: 15px;
+		clear: none;
+	}
+	.custom-company{
+		margin-left: 0px;
+	}
 }
-
 @media screen and (max-width: 1330px) {
   .p-left {
-	margin-left: 8px;
+	margin-left: 15px;
   }
-  .date-box {
-	float: right;
-	margin-left: 12px;
-	.date-form {
-	  width: 176px;
-	  padding-left: 14px;
+	.custom-company{
+		margin-left: 0px;
 	}
-  }
-  .status-form .status-type {
-	margin-left: 16px;
-  }
 }
 

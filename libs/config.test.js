@@ -58,7 +58,7 @@ var WEB_CONFIG = {
 		loginExpires: 10 * 60,
 		sendCodeTime: 5,
 		phoneReg: /^1(3|4|5|7|8)\d{9}$/,
-		accountReg: /^[A-Za-z0-9]{6,16}$/,
+		accountReg: /^[A-Za-z0-9]{4,16}$/,
 		passwordReg: /^[A-Za-z0-9]{6,16}$/,
 		nameReg: /^[\u2E80-\u9FFF]{2,10}/,
 		compNameReg: /^[\u2E80-\u9FFF]{2,40}/,

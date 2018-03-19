@@ -118,7 +118,7 @@
 <script type="text/ecmascript-6">
 	import g from "../../global";
 	import InputBar from "../../components/inputBar.vue";
-	var _type = 2, _isValid = true, _formData = {}, _attach = {},_hash = {};
+	var _type = 12, _isValid = true, _formData = {}, _attach = {},_hash = {};
 	export default{
 		created(){
 				this.init();
@@ -151,9 +151,6 @@
 			init()
 			{
 
-
-
-
 				if (this.currId)
 				{
 					var formData = g.data.searchBusinessPool.getDataById(this.currId).formData;
@@ -173,6 +170,7 @@
 				else
 				{
 					this.initForm();
+					this.attachList = [] ;
 				}
 				_hash = {};
 				this.isUpload = false;

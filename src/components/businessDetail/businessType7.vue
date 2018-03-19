@@ -5,6 +5,14 @@
 			<span class="form-title">业务名称</span>
 			<span class="form-trap">95业务</span>
 		</p>
+		<p class="from-group detail-custer-msg">
+			<span class="form-title">业务小类</span>
+			<span class="form-trap">95业务</span>
+		</p>
+		<p class="from-group detail-custer-msg">
+			<span class="form-title">商机行业类型</span>
+			<span class="form-trap">95业务</span>
+		</p>
 
 		<p class="from-group detail-custer-msg" v-for="(value,key) in formInfo">
 			<span class="form-title">{{key}}</span>
@@ -26,7 +34,7 @@
 		props: {
 			formData: {}
 		},
-		methods: {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           		methods: {
 			init()
 			{
 				this.formInfo = __merge({}, this.formData);
