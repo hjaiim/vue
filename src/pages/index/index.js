@@ -4,18 +4,12 @@ export default function (to, next)
 {
 	loginManager.checkLogin(to, next, () =>
 	{
-		if(g.data.userInfo.authStatus == 2)
-		{
-			getUserInfo().then(() =>
-			{
-				next();
-			})
-		}
-		else
-		{
-			next("/verify")
-		}
+		next();
 
+//		getUserInfo().then(() =>
+//		{
+//			next();
+//		})
 	})
 }
 

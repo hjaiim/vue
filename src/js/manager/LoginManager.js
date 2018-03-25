@@ -8,57 +8,54 @@ var _lastUrl = "";
 function init($callback)
 {
 	g.addEventListener("APP_IS_LOGIN", onAppLogin_global);
-	g.net.calls('user/queryUserIsLogin',"user/getUserInfoByRefresh").then(($list) =>
-	{
-		_isLogin = true;
-		g.data.userInfo.update($list[1]);
-		$callback && $callback();
-	}, (err) =>
-	{
-		_isLogin = false;
-		$callback && $callback()
-	});
+
+	//假装登录了
+	_isLogin = true;
+	$callback && $callback();
+
+//	g.net.calls('user/queryUserIsLogin',"user/getUserInfoByRefresh").then(($list) =>
+//	{
+//		_isLogin = true;
+//		g.data.userInfo.update($list[1]);
+//		$callback && $callback();
+//	}, (err) =>
+//	{
+//		_isLogin = false;
+//		$callback && $callback()
+//	});
 }
 
 function checkLogin($to, $next, $callBack)
 {
-	g.net.call('user/queryUserIsLogin').then((d) =>
-	{
-		_isLogin = true;
-		g.data.userInfo.update(d);
-		initLogin($to, $next, $callBack);
-	}, (err) =>
-	{
-		_isLogin = false;
-		g.func.dealErr(err);
-		initLogin($to, $next, $callBack);
-// 		setTimeout(() =>
-// 		{
-// 		}, 2000)
-	});
+
+	_isLogin = true;
+	initLogin($to, $next, $callBack);
+//	g.net.call('user/queryUserIsLogin').then((d) =>
+//	{
+//		_isLogin = true;
+//		g.data.userInfo.update(d);
+//		initLogin($to, $next, $callBack);
+//	}, (err) =>
+//	{
+//		_isLogin = false;
+//		g.func.dealErr(err);
+//		initLogin($to, $next, $callBack);
+//	});
 }
 
 function initLogin($to, $next, $callBack)
 {
 	_lastUrl = "";
-	g.func.getUserInfo();
-	var passUrl = ['/login', '/resetpwd', '/register'];
+	var passUrl = ['/login'];
 	if (_isLogin)
 	{
 		if (passUrl.indexOf($to.path) >= 0) //判断当前页面是否是login页面
 		{
-			if (g.data.userInfo.authStatus != 2)
-			{
-				$next('/verify');
-			}
-			else
-			{
-				$next("/")
-			}
+			$next("/");
 		}
 		else
 		{
-			$callBack && $callBack();
+			$callBack && $callBack();//去'当前页'
 		}
 	}
 	else
