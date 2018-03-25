@@ -21,6 +21,9 @@
                 <span>我是父组件footer内容1</span>
             </div>
         </test-slot2>
+
+        <!--组件传值-->
+        <pass-value :age="27" @change="onCLik_getValue"><span>父组件的值为27</span></pass-value>
     </div>
 </template>
 <script type="text/ecmascript-6">
@@ -28,6 +31,7 @@
     import hjTestIs from "../../components/hjai-test/is/hjTestIs.vue"
     import testSlot1 from "../../components/hjai-test/slot/testSlot1.vue"
     import testSlot2 from "../../components/hjai-test/slot/testSlot2.vue"
+    import passValue from "../../components/hjai-test/passValue/passValue.vue"
     export default{
         created(){
 
@@ -40,12 +44,15 @@
         components: {
             hjTestIs,
             testSlot1,
-            testSlot2
+            testSlot2,
+            passValue
         },
         watch: {
         },
         methods:{
-
+            onCLik_getValue($v){
+                console.log($v);
+            }
         }
     }
 
