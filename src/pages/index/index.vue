@@ -1,10 +1,15 @@
 <template>
     <div>
-        我是首页
+        <h1>我是首页</h1>
+        <!--vue,is-->
+        <di is="hjTestIs" class="test-is">
+            我是内容
+        </di>
     </div>
 </template>
 <script type="text/ecmascript-6">
     import g from "../../global";
+    import hjTestIs from "../../components/hjai-test/is/hjTestIs.vue"
     export default{
         created(){
 
@@ -15,7 +20,7 @@
             }
         },
         components: {
-
+            hjTestIs
         },
         watch: {
         },
