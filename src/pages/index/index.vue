@@ -28,6 +28,9 @@
 		<!--ref-->
 		<button @click="onClick_changeName">ref按钮</button>
 		<test-ref ref="refExample"></test-ref>
+
+		<!--props-->
+		<test-props	:name="name" :age="age" :custom="customType"></test-props>
 	</div>
 </template>
 <script type="text/ecmascript-6">
@@ -37,13 +40,17 @@
 	import testSlot2 from "../../components/hjai-test/slot/testSlot2.vue"
 	import passValue from "../../components/hjai-test/passValue/passValue.vue"
 	import testRef from "../../components/hjai-test/ref/testRef.vue"
+	import testProps from "../../components/hjai-test/props/testProps.vue"
 	export default{
 		created(){
 
 		},
 		data(){
 			return {
-				g: g
+				g: g,
+				name:'hj',
+				age:26,
+				customType:23
 			}
 		},
 		components: {
@@ -51,7 +58,8 @@
 			testSlot1,
 			testSlot2,
 			passValue,
-			testRef
+			testRef,
+			testProps
 		},
 		watch: {},
 		methods: {

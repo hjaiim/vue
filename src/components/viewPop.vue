@@ -20,9 +20,7 @@
 	export default{
 		created()
 		{
-
 			this.init();
-
 		},
 		data(){
 			return {
